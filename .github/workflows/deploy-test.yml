@@ -29,6 +29,6 @@ jobs:
           aws ssm send-command \
             --document-name "AWS-RunShellScript" \
             --targets "Key=InstanceIds,Values=mi-06856330d84cefc91" \
-            --parameters 'commands=["echo \"[SUKSES] OIDC Workflow Berjalan!\"", "echo \"Dieksekusi oleh: $(whoami)\"", "echo \"Hostname Server: $(hostname)\"", "uptime"]' \
+            --parameters 'commands=["cd /home/serverusus", "if [ ! -d testing-workflow-oidc ]; then sudo -u serverusus git clone https://github.com/RefoFebrian/testing-workflow-oidc.git; else cd testing-workflow-oidc && sudo -u serverusus git pull origin main; fi", "echo \"[SUKSES] Cek isi folder:\"", "ls -la /home/serverusus/testing-workflow-oidc"]' \
             --region ap-southeast-1 \
-            --comment "Testing OIDC Deployment from GitHub Actions"
+            --comment "Smart Deploy: Clone or Pull"
