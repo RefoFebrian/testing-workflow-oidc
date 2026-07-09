@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_boom_category_list" model="ir.ui.view">
+            <field name="name">tw.boom.category.list</field>
+            <field name="model">tw.boom.category</field>
+            <field name="arch" type="xml">
+                <list string="TW Boom Category" delete="0">
+                    <field name="main_category_id"/>
+                    <field name="sub_category_id"/>
+                    <field name="classification"/>
+                    <field name="name"/>
+                    <field name="periode"/>
+                    <field name="escalation_periode"/>
+                    <field name="job_id"/>
+                    <field name="due_date_day"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_tw_boom_category_form" model="ir.ui.view">
+            <field name="name">tw.boom.category.form</field>
+            <field name="model">tw.boom.category</field>
+            <field name="arch" type="xml">
+                <form string="TW Boom Category" delete="0">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                                <field name="dealer_category" required="1"/>
+                                <field name="escalation_periode" required="1"/>
+                                <field name="classification" required="1"/>
+                                <field name="periode" required="1"/>
+                            </group>
+                            <group>
+                                <field name="active" invisible="1"/>
+                                <field name="job_id" options="{'no_create': True, 'no_open': True}" required="1"/>
+                                <field name="job_delegation_id" options="{'no_create': True, 'no_open': True}" required="1"/>
+                                <field name="main_category_id" options="{'no_create': True, 'no_open': True}" required="1"/>
+                                <field name="sub_category_id" options="{'no_create': True, 'no_open': True}" required="1"/>
+                                <label for="due_date_day" string="Due Date"/>
+                                <div>
+                                    <field name="due_date_day" class="oe_inline" required="1"/>Hari :
+                                    <field name="due_date_hour" class="oe_inline" required="1"/>JAM
+                                </div>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1" />
+                                        <field name="create_date" readonly="1" />
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1" />
+                                        <field name="write_date" readonly="1" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_tw_boom_category_filter" model="ir.ui.view">
+            <field name="name">tw.boom.category.filter.view</field>
+            <field name="model">tw.boom.category</field>
+            <field name="arch" type="xml">
+                <search string="Search Boom Category">
+                    <field name="name"/>
+                    <field name="classification"/>
+                    <field name="main_category_id"/>
+                    <field name="sub_category_id"/>
+                    <field name="dealer_category"/>
+                    <field name="periode"/>
+                    <field name="job_id"/>
+                    <group>
+                        <filter name="filter_by_main_category" string="Main Kategori" context="{'group_by':'main_category_id'}"/>
+                        <filter name="filter_by_sub_category" string="Sub Kategori" context="{'group_by':'sub_category_id'}"/>
+                        <filter name="filter_by_classification" string="Klasifikasi" context="{'group_by':'classification'}"/>
+                        <filter name="filter_by_periode" string="Periode" context="{'group_by':'periode'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_tw_boom_category" model="ir.actions.act_window">
+            <field name="name">TW Boom Category</field>
+            <field name="path">master-boom-category</field>
+            <field name="res_model">tw.boom.category</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{
+                'search_default_filter_by_main_category': 1,
+                'search_default_filter_by_sub_category': 1,
+            }</field>
+            <field name="domain"></field>
+            <field name="search_view_id" ref="view_tw_boom_category_filter"/>
+        </record>
+
+        <record id="action_tw_boom_category_list" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="view_tw_boom_category_list"/>
+            <field name="act_window_id" ref="action_tw_boom_category"/>
+        </record>
+
+        <record id="action_tw_boom_category_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_tw_boom_category_form"/>
+            <field name="act_window_id" ref="action_tw_boom_category"/>
+        </record>
+    </data>
+</odoo>

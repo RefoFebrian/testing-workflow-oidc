@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="tw_settlement_rule" model="ir.rule">
+            <field name="name">tw.p2p rule</field>
+            <field name="model_id" ref="model_tw_p2p_purchase_order"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record id="tw_p2p_product_rule" model="ir.rule">
+            <field name="name">tw.p2p.product company rule</field>
+            <field name="model_id" ref="model_tw_p2p_product"/>
+            <field name="domain_force">['|', '|', ('company_ids', 'in', company_ids), ('company_ids', 'parent_of', company_ids), ('company_ids', '=', False)]</field>
+        </record>
+    </data>
+</odoo>

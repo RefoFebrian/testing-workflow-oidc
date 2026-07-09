@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--
+        =============================================================
+        DGI BAST Response Mappings
+
+        Response mappings for BAST endpoint.
+        The header-level fields (dealerId, deliveryDocumentId, tanggalPengiriman)
+        are mapped via engine. The `detail` array containing SPK/lot data
+        is processed in custom wizard logic (_create_record_from_response).
+
+        Actual Response:
+        {
+            "deliveryDocumentId": "07327-SLO-2602134",
+            "tanggalPengiriman": "24/04/2026",
+            "dealerId": "07327",
+            "detail": [{
+                "idSPK": "07327-SPK-26002987",
+                "noMesin": "JMK1E1131253",
+                "noRangka": "JMK111TK131193",
+                ...
+            }]
+        }
+        =============================================================
+        -->
+
+        <!--
+        ==================== HSO Response Mappings ====================
+        -->
+
+        <record id="mapping_bast_hso_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_hso"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_bast_hso_delivery_doc_id" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_hso"/>
+            <field name="json_path">deliveryDocumentId</field>
+            <field name="target_field">_delivery_document_id</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">deliveryDocumentId → context (used in wizard for batch creation)</field>
+        </record>
+
+        <record id="mapping_bast_hso_tanggal" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_hso"/>
+            <field name="json_path">tanggalPengiriman</field>
+            <field name="target_field">_tanggal_pengiriman</field>
+            <field name="field_type">direct</field>
+            <field name="notes">tanggalPengiriman → context (parsed in wizard)</field>
+        </record>
+
+        <record id="mapping_bast_hso_detail" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_hso"/>
+            <field name="json_path">detail</field>
+            <field name="target_field">_detail_items</field>
+            <field name="field_type">direct</field>
+            <field name="notes">detail array → context (iterated in wizard logic)</field>
+        </record>
+
+        <!--
+        ==================== ASP Response Mappings ====================
+        -->
+
+        <record id="mapping_bast_asp_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_asp"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_bast_asp_delivery_doc_id" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_asp"/>
+            <field name="json_path">deliveryDocumentId</field>
+            <field name="target_field">_delivery_document_id</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">deliveryDocumentId → context</field>
+        </record>
+
+        <record id="mapping_bast_asp_tanggal" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_asp"/>
+            <field name="json_path">tanggalPengiriman</field>
+            <field name="target_field">_tanggal_pengiriman</field>
+            <field name="field_type">direct</field>
+            <field name="notes">tanggalPengiriman → context</field>
+        </record>
+
+        <record id="mapping_bast_asp_detail" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_asp"/>
+            <field name="json_path">detail</field>
+            <field name="target_field">_detail_items</field>
+            <field name="field_type">direct</field>
+            <field name="notes">detail array → context</field>
+        </record>
+
+        <!--
+        ==================== DAM Response Mappings ====================
+        -->
+
+        <record id="mapping_bast_dam_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_dam"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_bast_dam_delivery_doc_id" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_dam"/>
+            <field name="json_path">deliveryDocumentId</field>
+            <field name="target_field">_delivery_document_id</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">deliveryDocumentId → context</field>
+        </record>
+
+        <record id="mapping_bast_dam_tanggal" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_dam"/>
+            <field name="json_path">tanggalPengiriman</field>
+            <field name="target_field">_tanggal_pengiriman</field>
+            <field name="field_type">direct</field>
+            <field name="notes">tanggalPengiriman → context</field>
+        </record>
+
+        <record id="mapping_bast_dam_detail" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_dam"/>
+            <field name="json_path">detail</field>
+            <field name="target_field">_detail_items</field>
+            <field name="field_type">direct</field>
+            <field name="notes">detail array → context</field>
+        </record>
+
+        <!--
+        ==================== DAW Response Mappings ====================
+        -->
+
+        <record id="mapping_bast_daw_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_daw"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_bast_daw_delivery_doc_id" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_daw"/>
+            <field name="json_path">deliveryDocumentId</field>
+            <field name="target_field">_delivery_document_id</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">deliveryDocumentId → context</field>
+        </record>
+
+        <record id="mapping_bast_daw_tanggal" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_daw"/>
+            <field name="json_path">tanggalPengiriman</field>
+            <field name="target_field">_tanggal_pengiriman</field>
+            <field name="field_type">direct</field>
+            <field name="notes">tanggalPengiriman → context</field>
+        </record>
+
+        <record id="mapping_bast_daw_detail" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_daw"/>
+            <field name="json_path">detail</field>
+            <field name="target_field">_detail_items</field>
+            <field name="field_type">direct</field>
+            <field name="notes">detail array → context</field>
+        </record>
+
+        <!--
+        ==================== NPM Response Mappings ====================
+        -->
+
+        <record id="mapping_bast_npm_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_npm"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_bast_npm_delivery_doc_id" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_npm"/>
+            <field name="json_path">deliveryDocumentId</field>
+            <field name="target_field">_delivery_document_id</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">deliveryDocumentId → context</field>
+        </record>
+
+        <record id="mapping_bast_npm_tanggal" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_npm"/>
+            <field name="json_path">tanggalPengiriman</field>
+            <field name="target_field">_tanggal_pengiriman</field>
+            <field name="field_type">direct</field>
+            <field name="notes">tanggalPengiriman → context</field>
+        </record>
+
+        <record id="mapping_bast_npm_detail" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_npm"/>
+            <field name="json_path">detail</field>
+            <field name="target_field">_detail_items</field>
+            <field name="field_type">direct</field>
+            <field name="notes">detail array → context</field>
+        </record>
+
+        <!--
+        ==================== SINSEN Response Mappings ====================
+        -->
+
+        <record id="mapping_bast_sinsen_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_sinsen"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_bast_sinsen_delivery_doc_id" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_sinsen"/>
+            <field name="json_path">deliveryDocumentId</field>
+            <field name="target_field">_delivery_document_id</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">deliveryDocumentId → context</field>
+        </record>
+
+        <record id="mapping_bast_sinsen_tanggal" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_sinsen"/>
+            <field name="json_path">tanggalPengiriman</field>
+            <field name="target_field">_tanggal_pengiriman</field>
+            <field name="field_type">direct</field>
+            <field name="notes">tanggalPengiriman → context</field>
+        </record>
+
+        <record id="mapping_bast_sinsen_detail" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_sinsen"/>
+            <field name="json_path">detail</field>
+            <field name="target_field">_detail_items</field>
+            <field name="field_type">direct</field>
+            <field name="notes">detail array → context</field>
+        </record>
+
+        <!--
+        ==================== WAHANA Response Mappings ====================
+        -->
+
+        <record id="mapping_bast_wahana_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_wahana"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">0</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id (optional: Wahana does not send dealerId)</field>
+        </record>
+
+        <record id="mapping_bast_wahana_delivery_doc_id" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_wahana"/>
+            <field name="json_path">deliveryDocumentId</field>
+            <field name="target_field">_delivery_document_id</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">deliveryDocumentId → context</field>
+        </record>
+
+        <record id="mapping_bast_wahana_tanggal" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_wahana"/>
+            <field name="json_path">tanggalPengiriman</field>
+            <field name="target_field">_tanggal_pengiriman</field>
+            <field name="field_type">direct</field>
+            <field name="notes">tanggalPengiriman → context</field>
+        </record>
+
+        <record id="mapping_bast_wahana_detail" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_bast.tw_endpoint_dgi_bast_wahana"/>
+            <field name="json_path">detail</field>
+            <field name="target_field">_detail_items</field>
+            <field name="field_type">direct</field>
+            <field name="notes">detail array → context</field>
+        </record>
+
+    </data>
+</odoo>

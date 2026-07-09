@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_cash_count,tw_cash_count.tw_cash_count,model_tw_cash_count,base.group_user,1,1,1,1
+access_tw_cash_count_line,tw_cash_count.tw_cash_count_line,model_tw_cash_count_line,base.group_user,1,0,0,0
+access_tw_cash_count_other,tw_cash_count.tw_cash_count_other,model_tw_cash_count_other,base.group_user,1,1,1,1
+access_tw_cash_count_validation,tw_cash_count.tw_cash_count_validation,model_tw_cash_count_validation,base.group_user,1,0,0,0
+access_tw_cash_count_berita_acara,tw_cash_count.tw_cash_count_berita_acara,model_tw_cash_count_berita_acara_wizard,base.group_user,1,1,1,1

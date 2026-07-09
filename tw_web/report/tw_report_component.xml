@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+    
+        <!-- Define the reusable partner address template -->
+        <template id="teto_report_partner_address" name="Teto Report Partner Address">
+            <!-- Access passed variables directly -->
+            <div class="partner-address">
+                <t t-if="hide_name">
+                </t>
+                <t t-else="">
+                    <span t-esc="partner.name" style="font-size: 1rem;font-weight: bolder"/><br />
+                </t>
+                <t t-if="partner.street" t-esc="partner.street.title()"/>
+                <t t-if="partner.street2 or partner.rt or partner.rw">
+                    <t t-if="partner.street2">
+                        , <t t-esc="partner.street2.title()" />
+                    </t>
+                    <t t-else="">
+                        , RT <t t-esc="partner.rt" />/RW <t t-esc="partner.rt" />
+                    </t>
+                </t>
+                <t t-if="partner.sub_district_id or partner.district_id">
+                    <t t-if="partner.sub_district_id">
+                        <br />Kel. <t t-esc="partner.sub_district_id.name.title()"/>, Kec. <t t-esc="partner.district_id.name.title()"/>
+                    </t>
+                    <t t-else="">
+                        <br />Kec. <t t-esc="partner.district_id.name.title()"/>
+                    </t>
+                </t>
+                <t t-if="partner.city_id or partner.state_id or partner.zip">
+                    <t t-if="partner.city_id">
+                        <br /><t t-esc="partner.city_id.name.title()"/>, <t t-esc="partner.state_id.name.title()"/> <t t-esc="partner.zip"/>
+                    </t>
+                    <t t-elif="not partner.city_id and partner.state_id">
+                        <br /><t t-esc="partner.state_id.name.title()"/> <t t-esc="partner.zip"/>
+                    </t>
+                </t>
+                <t t-if="show_phone"><br />Telp. <t t-esc="partner.phone" /></t>
+                <t t-if="show_mail"><br />Email: &#160;<t t-esc="partner.fax" /></t>
+            </div>
+        </template>
+
+    </data>
+</odoo>

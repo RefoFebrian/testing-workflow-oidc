@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+    <!-- Master Matrix Lead CRM Group Read -->
+        <record id="group_tw_lead_crm_master_matrix_assignment_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">Master Matrix Lead CRM Read</field>
+        </record>
+        <record id="access_tw_lead_crm_master_matrix_assignment_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_lead_crm_matrix_assignment"/>
+            <field name="name">tw_lead_crm_master_matrix_assignment read</field>
+            <field name="group_id" ref="group_tw_lead_crm_master_matrix_assignment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+        <record id="access_tw_lead_crm_master_matrix_assignment_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_lead_crm_matrix_assignment_line"/>
+            <field name="name">tw_lead_crm_master_matrix_assignment_line read</field>
+            <field name="group_id" ref="group_tw_lead_crm_master_matrix_assignment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+    <!-- Master Matrix Lead CRM Group Update -->
+        <record id="group_tw_lead_crm_master_matrix_assignment_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">Master Matrix Lead CRM Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_lead_crm_master_matrix_assignment_read'))]"/>
+        </record>
+        <record id="access_tw_lead_crm_master_matrix_assignment_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_lead_crm_matrix_assignment"/>
+            <field name="name">tw_lead_crm_master_matrix_assignment update</field>
+            <field name="group_id" ref="group_tw_lead_crm_master_matrix_assignment_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        <record id="access_tw_lead_crm_master_matrix_assignment_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_lead_crm_matrix_assignment_line"/>
+            <field name="name">tw_lead_crm_master_matrix_assignment_line update</field>
+            <field name="group_id" ref="group_tw_lead_crm_master_matrix_assignment_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+    <!-- Master Matrix Lead CRM Group Delete -->
+        <record id="group_tw_lead_crm_master_matrix_assignment_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">Master Matrix Lead CRM Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_lead_crm_master_matrix_assignment_read'))]"/>
+        </record>
+        <record id="access_tw_lead_crm_master_matrix_assignment_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_lead_crm_matrix_assignment"/>
+            <field name="name">tw_lead_crm_master_matrix_assignment delete</field>
+            <field name="group_id" ref="group_tw_lead_crm_master_matrix_assignment_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+        <record id="access_tw_lead_crm_master_matrix_assignment_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_lead_crm_matrix_assignment_line"/>
+            <field name="name">tw_lead_crm_master_matrix_assignment_line delete</field>
+            <field name="group_id" ref="group_tw_lead_crm_master_matrix_assignment_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+    
+    <!-- Data Raw Lead CRM Group Read -->
+        <record id="group_tw_lead_crm_raw_data_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">Data Raw Lead CRM Read</field>
+        </record>
+        <record id="access_tw_lead_crm_raw_data_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_lead_crm"/>
+            <field name="name">tw_lead_crm_raw_data read</field>
+            <field name="group_id" ref="group_tw_lead_crm_raw_data_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+    <!-- Data Raw Lead CRM Group Update -->
+        <record id="group_tw_lead_crm_raw_data_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">Data Raw Lead CRM Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_lead_crm_raw_data_read'))]"/>
+        </record>
+        <record id="access_tw_lead_crm_raw_data_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_lead_crm"/>
+            <field name="name">tw_lead_crm_raw_data update</field>
+            <field name="group_id" ref="group_tw_lead_crm_raw_data_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+    <!-- Data Raw Lead CRM Group Delete -->
+        <record id="group_tw_lead_crm_raw_data_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">Data Raw Lead CRM Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_lead_crm_raw_data_read'))]"/>
+        </record>
+        <record id="access_tw_lead_crm_raw_data_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_lead_crm"/>
+            <field name="name">tw_lead_crm_raw_data delete</field>
+            <field name="group_id" ref="group_tw_lead_crm_raw_data_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+    
+    <!-- Data Lead Assign CRM Group Read -->
+        <record id="group_tw_lead_crm_lead_assign_data_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">Data Lead Assign CRM Read</field>
+        </record>
+        <record id="access_tw_lead_crm_lead_assign_data_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_lead_crm"/>
+            <field name="name">tw_lead_crm_lead_assign_data read</field>
+            <field name="group_id" ref="group_tw_lead_crm_lead_assign_data_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+    <!-- Data Lead Assign Group Update -->
+        <record id="group_tw_lead_crm_lead_assign_data_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">Data Lead Assign CRM Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_lead_crm_lead_assign_data_read'))]"/>
+        </record>
+        <record id="access_tw_lead_crm_lead_assign_data_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_lead_crm"/>
+            <field name="name">tw_lead_crm_lead_assign_data update</field>
+            <field name="group_id" ref="group_tw_lead_crm_lead_assign_data_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+    <!-- Data Lead Assign CRM Group Delete -->
+        <record id="group_tw_lead_crm_lead_assign_data_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">Data Lead Assign CRM Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_lead_crm_lead_assign_data_read'))]"/>
+        </record>
+        <record id="access_tw_lead_crm_lead_assign_data_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_lead_crm"/>
+            <field name="name">tw_lead_crm_lead_assign_data delete</field>
+            <field name="group_id" ref="group_tw_lead_crm_lead_assign_data_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    <!-- Lead CRM Report -->
+		<record id="group_tw_lead_crm_report_all" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_role" />
+			<field name="name">Lead CRM Report All</field>
+		</record>
+		<record id="access_tw_lead_crm_report_all" model="ir.model.access">
+			<field name="model_id" ref="model_tw_lead_crm_report"/>
+			<field name="name">tw_lead_crm_report all</field>
+			<field name="group_id" ref="group_tw_lead_crm_report_all" />
+			<field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_tw_lead_crm_master_matrix_assignment_read')),
+                (4,ref('group_tw_lead_crm_master_matrix_assignment_update')),
+                (4,ref('group_tw_lead_crm_master_matrix_assignment_delete')),
+                (4,ref('group_tw_lead_crm_raw_data_read')),
+                (4,ref('group_tw_lead_crm_raw_data_update')),
+                (4,ref('group_tw_lead_crm_raw_data_delete')),
+                (4,ref('group_tw_lead_crm_lead_assign_data_read')),
+                (4,ref('group_tw_lead_crm_lead_assign_data_update')),
+                (4,ref('group_tw_lead_crm_lead_assign_data_delete')),
+                (4,ref('group_tw_lead_crm_report_all')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

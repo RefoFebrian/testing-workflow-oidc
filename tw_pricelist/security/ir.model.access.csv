@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_product_pricelist_version,tw_pricelist.access_tw_product_pricelist_version,model_tw_product_pricelist_version,base.group_user,1,0,0,0
+access_tw_product_pricelist_new_item,tw_pricelist.access_tw_product_pricelist_new_item,model_tw_product_pricelist_new_item,base.group_user,1,1,1,1
+access_tw_upload_pricelist_version,tw_pricelist.tw_upload_pricelist_version,model_tw_upload_pricelist_version,base.group_user,1,0,0,0

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tw_product_pricelist_item_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.product.pricelist.item.inherit.form</field>
+        <field name="model">product.pricelist.item</field>
+        <field name="inherit_id" ref="tw_pricelist.tw_product_pricelist_item_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Add type field for invisible condition evaluation -->
+            <xpath expr="//field[@name='pricelist_id']" position="after">
+                <field name="type" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='cost_based_on_id']" position="attributes">
+                <attribute name="invisible">type != 'expedition' or display_applied_on not in ['1_product','2_product_category']</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

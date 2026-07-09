@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+        <!--
+        =============================================================
+        DGI Part Sales Response Mapping Configuration
+
+        Mapping field dari DGI API response ke Odoo model tw.part.sales.
+        Setiap endpoint (HSO, ASP, DAM, DAW, NPM, SINSEN) memiliki
+        mapping yang identik karena struktur response DGI seragam.
+
+        Field Types:
+        - direct    : Salin nilai langsung tanpa transformasi
+        - relation  : Lookup ke model Odoo lain (with/without create)
+        - validation: Filter record berdasarkan nilai tertentu
+
+        Key JSON paths from DGI response:
+        - dealerId          → company_id (res.company via atpm_code)
+        - namaCustomer      → partner_id (res.partner via name, create if not found)
+        - noSO              → md_reference_ps (direct)
+        - tglSO             → date_order (direct)
+        - parts[].partsNumber → order_line.product_id (product.product via default_code)
+        =============================================================
+        -->
+
+        <!-- ==================== HSO ==================== -->
+        <record id="mapping_dgi_part_sales_hso_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_hso"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_dgi_part_sales_hso_partner" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_hso"/>
+            <field name="json_path">namaCustomer</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{"name": "namaCustomer", "customer_rank": 1}</field>
+            <field name="notes">Nama Customer → partner_id (auto-create jika belum ada)</field>
+        </record>
+
+        <record id="mapping_dgi_part_sales_hso_product" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_hso"/>
+            <field name="json_path">parts.partsNumber</field>
+            <field name="target_field">product_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('division', '=', 'Sparepart')]</field>
+            <field name="notes">Parts Number → product_id (lookup by default_code, Sparepart division)</field>
+        </record>
+
+        <!-- ==================== ASP ==================== -->
+        <record id="mapping_dgi_part_sales_asp_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_asp"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_dgi_part_sales_asp_partner" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_asp"/>
+            <field name="json_path">namaCustomer</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{"name": "namaCustomer", "customer_rank": 1}</field>
+            <field name="notes">Nama Customer → partner_id (auto-create jika belum ada)</field>
+        </record>
+
+        <record id="mapping_dgi_part_sales_asp_product" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_asp"/>
+            <field name="json_path">parts.partsNumber</field>
+            <field name="target_field">product_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('division', '=', 'Sparepart')]</field>
+            <field name="notes">Parts Number → product_id (lookup by default_code, Sparepart division)</field>
+        </record>
+
+        <!-- ==================== DAM ==================== -->
+        <record id="mapping_dgi_part_sales_dam_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_dam"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_dgi_part_sales_dam_partner" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_dam"/>
+            <field name="json_path">namaCustomer</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{"name": "namaCustomer", "customer_rank": 1}</field>
+            <field name="notes">Nama Customer → partner_id (auto-create jika belum ada)</field>
+        </record>
+
+        <record id="mapping_dgi_part_sales_dam_product" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_dam"/>
+            <field name="json_path">parts.partsNumber</field>
+            <field name="target_field">product_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('division', '=', 'Sparepart')]</field>
+            <field name="notes">Parts Number → product_id (lookup by default_code, Sparepart division)</field>
+        </record>
+
+        <!-- ==================== DAW ==================== -->
+        <record id="mapping_dgi_part_sales_daw_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_daw"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_dgi_part_sales_daw_partner" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_daw"/>
+            <field name="json_path">namaCustomer</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{"name": "namaCustomer", "customer_rank": 1}</field>
+            <field name="notes">Nama Customer → partner_id (auto-create jika belum ada)</field>
+        </record>
+
+        <record id="mapping_dgi_part_sales_daw_product" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_daw"/>
+            <field name="json_path">parts.partsNumber</field>
+            <field name="target_field">product_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('division', '=', 'Sparepart')]</field>
+            <field name="notes">Parts Number → product_id (lookup by default_code, Sparepart division)</field>
+        </record>
+
+        <!-- ==================== NPM ==================== -->
+        <record id="mapping_dgi_part_sales_npm_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_npm"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_dgi_part_sales_npm_partner" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_npm"/>
+            <field name="json_path">namaCustomer</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{"name": "namaCustomer", "customer_rank": 1}</field>
+            <field name="notes">Nama Customer → partner_id (auto-create jika belum ada)</field>
+        </record>
+
+        <record id="mapping_dgi_part_sales_npm_product" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_npm"/>
+            <field name="json_path">parts.partsNumber</field>
+            <field name="target_field">product_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('division', '=', 'Sparepart')]</field>
+            <field name="notes">Parts Number → product_id (lookup by default_code, Sparepart division)</field>
+        </record>
+
+        <!-- ==================== SINSEN ==================== -->
+        <record id="mapping_dgi_part_sales_sinsen_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_sinsen"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_dgi_part_sales_sinsen_partner" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_sinsen"/>
+            <field name="json_path">namaCustomer</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{"name": "namaCustomer", "customer_rank": 1}</field>
+            <field name="notes">Nama Customer → partner_id (auto-create jika belum ada)</field>
+        </record>
+
+        <record id="mapping_dgi_part_sales_sinsen_product" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_sinsen"/>
+            <field name="json_path">parts.partsNumber</field>
+            <field name="target_field">product_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('division', '=', 'Sparepart')]</field>
+            <field name="notes">Parts Number → product_id (lookup by default_code, Sparepart division)</field>
+        </record>
+
+        <!-- ==================== WAHANA ==================== -->
+        <record id="mapping_dgi_part_sales_wahana_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_wahana"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_dgi_part_sales_wahana_partner" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_wahana"/>
+            <field name="json_path">namaCustomer</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{"name": "namaCustomer", "customer_rank": 1}</field>
+            <field name="notes">Nama Customer → partner_id (auto-create jika belum ada)</field>
+        </record>
+
+        <record id="mapping_dgi_part_sales_wahana_product" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_part_sales.tw_endpoint_dgi_part_sales_wahana"/>
+            <field name="json_path">parts.partsNumber</field>
+            <field name="target_field">product_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('division', '=', 'Sparepart')]</field>
+            <field name="notes">Parts Number → product_id (lookup by default_code, Sparepart division)</field>
+        </record>
+
+    </data>
+
+
+</odoo>

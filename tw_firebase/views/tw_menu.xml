@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <menuitem id="tw_api_configuration_menu"
+            name="Firebase API Configuration"
+            parent="tw_menu.tw_doodool_configuration_sub_menu"
+            action="action_tw_firebase_api_configuration"
+            sequence="300"
+            groups="tw_firebase.tw_firebase_api_configuration_group_read" />
+        
+        <menuitem id="tw_firebase_content_template_menu" 
+            name="Firebase content template" 
+            parent="tw_menu.tw_doodool_configuration_sub_menu" 
+            action="tw_firebase_content_template_action" 
+            sequence="300" 
+            groups="tw_firebase.tw_firebase_content_template_group_read"/>
+
+        <menuitem id="tw_firebase_message_menu" 
+            name="Firebase message" 
+            parent="tw_menu.tw_doodool_firebase_sub_menu" 
+            action="tw_firebase_message_action" 
+            sequence="10" 
+            groups="tw_firebase.tw_firebase_message_group_read"/>
+
+        <menuitem id="tw_firebase_notification_category_menu" 
+            name="Firebase Notification Category" 
+            parent="tw_menu.tw_doodool_configuration_sub_menu" 
+            action="tw_firebase_notification_category_action" 
+            sequence="290" 
+            groups="tw_firebase.tw_firebase_notification_category_group_read"/>
+
+        <menuitem id="tw_firebase_notification_menu" 
+            name="Firebase Notification" 
+            parent="tw_menu.tw_doodool_firebase_sub_menu" 
+            action="tw_firebase_notification_action" 
+            sequence="9" 
+            groups="tw_firebase.tw_firebase_notification_group_read"/>
+
+        <menuitem id="tw_firebase_user_menu" 
+            name="Firebase user" 
+            parent="tw_menu.tw_doodool_firebase_sub_menu" 
+            action="tw_firebase_user_action" 
+            sequence="1" 
+            groups="tw_firebase.tw_firebase_user_group_read"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+        
+        <!-- Master Sales Program -->
+        <menuitem id="tw_sales_program_config_menuitem" parent="tw_menu.submenu_tw_showroom_configuration" name="Master Sales Program" sequence="03"/>
+        <menuitem id="tw_sales_program_subsidi_barang_showroom_menuitem"
+            name="Subsidi Barang"
+            parent="tw_sales_program_config_menuitem"
+            action="tw_sales_program_subsidi_barang_action"
+            sequence="01"
+            groups="group_tw_sales_program_subsidi_barang_read"
+        />
+        <menuitem id="tw_sales_program_program_subsidi_showroom_menuitem"
+            name="Program Subsidi"
+            parent="tw_sales_program_config_menuitem"
+            action="tw_sales_program_program_subsidi_action"
+            sequence="02"
+            groups="group_tw_sales_program_program_subsidi_read"
+        />
+        <menuitem id="tw_sales_program_program_voucher_showroom_menuitem"
+            name="Program Voucher"
+            parent="tw_sales_program_config_menuitem"
+            action="tw_sales_program_program_voucher_action"
+            sequence="03"
+            groups="group_tw_sales_program_program_voucher_read"
+        />
+
+        <menuitem
+            id="menuitem_tw_sales_program_master_sales_program"
+            name="Master Sales Program"
+            parent="tw_selection.submenu_tw_selection"
+            action="tw_selection_master_sales_program_action"
+            sequence="12"
+            groups="tw_sales_program.group_tw_selection_master_sales_program"
+        />
+
+    </data>
+</odoo>

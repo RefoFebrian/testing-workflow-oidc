@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+        <record id="tw_module_category_boom" model="ir.module.category">
+            <field name="name">TW BOOM</field>
+        </record>
+
+        <!-- TW BOOM -->
+        <record id="group_tw_boom" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Menu</field>
+        </record>
+
+        <!-- TW BOOM Task SUPER USER -->
+        <record id="group_tw_boom_task_super_user" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Task SUPER USER</field>
+        </record>
+
+        <!-- TW Master Main Kategori Read -->
+        <record id="group_tw_master_main_kategori_read" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW Master Main Kategori Read</field>
+        </record>
+        <record id="access_tw_master_main_kategori_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_main_category"/>
+            <field name="name">tw_boom_main_category read</field>
+            <field name="group_id" ref="group_tw_master_main_kategori_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- TW Master Main Kategori Update -->
+        <record id="group_tw_master_main_kategori_update" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW Master Main Kategori Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_master_main_kategori_read'))]" />
+        </record>
+        <record id="access_tw_master_main_kategori_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_main_category"/>
+            <field name="name">tw_boom_main_category update</field>
+            <field name="group_id" ref="group_tw_master_main_kategori_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- TW Master Main Kategori Delete -->
+        <record id="group_tw_master_main_kategori_delete" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW Master Main Kategori Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_master_main_kategori_read'))]" />
+        </record>
+        <record id="access_tw_master_main_kategori_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_main_category"/>
+            <field name="name">tw_boom_main_category delete</field>
+            <field name="group_id" ref="group_tw_master_main_kategori_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- TW master Sub Category -->
+        <record id="group_tw_master_sub_kategori_read" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW Master Sub Kategori Read</field>
+        </record>
+
+        <record id="access_tw_master_sub_kategori_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_sub_category"/>
+            <field name="name">tw_boom_sub_category read</field>
+            <field name="group_id" ref="group_tw_master_sub_kategori_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- TW master Sub Category Update -->
+        <record id="group_tw_master_sub_kategori_update" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW Master Sub Kategori Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_master_sub_kategori_read'))]" />
+        </record>
+
+        <record id="access_tw_master_sub_kategori_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_sub_category"/>
+            <field name="name">tw_boom_sub_category update</field>
+            <field name="group_id" ref="group_tw_master_sub_kategori_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- TW master Sub Category Delete -->
+        <record id="group_tw_master_sub_kategori_delete" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW Master Sub Kategori Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_master_sub_kategori_read'))]" />
+        </record>
+
+        <record id="access_tw_master_sub_kategori_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_sub_category"/>
+            <field name="name">tw_boom_sub_category delete</field>
+            <field name="group_id" ref="group_tw_master_sub_kategori_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>    
+
+        <!-- TW master Category -->
+        <record id="group_tw_master_category_read" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW Master Category Read</field>
+        </record>
+
+        <record id="access_tw_master_category_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_category"/>
+            <field name="name">tw_boom_category read</field>
+            <field name="group_id" ref="group_tw_master_category_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- TW master Category Update -->    
+        <record id="group_tw_master_category_update" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW Master Category Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_master_category_read'))]" />
+        </record>
+        
+        <record id="access_tw_master_category_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_category"/>
+            <field name="name">tw_boom_category update</field>
+            <field name="group_id" ref="group_tw_master_category_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- TW master Category Delete -->    
+        <record id="group_tw_master_category_delete" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW Master Category Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_master_category_read'))]" />
+        </record>
+
+        <record id="access_tw_master_category_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_category"/>
+            <field name="name">tw_boom_category delete</field>
+            <field name="group_id" ref="group_tw_master_category_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+
+        <!-- TW Master Escalation -->
+        <record id="group_tw_master_escalation_read" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW Master Escalation Read</field>
+        </record>
+
+        <record id="access_tw_master_escalation_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_master_escalation"/>
+            <field name="name">tw_boom_master_escalation read</field>
+            <field name="group_id" ref="group_tw_master_escalation_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- TW Master Escalation Update -->
+        <record id="group_tw_master_escalation_update" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW Master Escalation Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_master_escalation_read'))]" />
+        </record>
+
+        <record id="access_tw_master_escalation_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_master_escalation"/>
+            <field name="name">tw_boom_master_escalation update</field>
+            <field name="group_id" ref="group_tw_master_escalation_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- TW Master Escalation Delete -->
+        <record id="group_tw_master_escalation_delete" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW Master Escalation Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_master_escalation_read'))]" />
+        </record>
+
+        <record id="access_tw_master_escalation_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_master_escalation"/>
+            <field name="name">tw_boom_master_escalation delete</field>
+            <field name="group_id" ref="group_tw_master_escalation_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    <!-- TW BOOM Master Quotes -->
+        <record id="group_tw_boom_master_quotes_read" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Master Quotes Read</field>
+        </record>
+
+        <record id="access_tw_boom_master_quotes_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_master_quotes"/>
+            <field name="name">tw_boom_master_quotes read</field>
+            <field name="group_id" ref="group_tw_boom_master_quotes_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_boom_master_quotes_update" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Master Quotes Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_boom_master_quotes_read'))]" />
+        </record>
+
+        <record id="access_tw_boom_master_quotes_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_master_quotes"/>
+            <field name="name">tw_boom_master_quotes update</field>
+            <field name="group_id" ref="group_tw_boom_master_quotes_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_boom_master_quotes_delete" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Master Quotes Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_boom_master_quotes_read'))]" />
+        </record>
+
+        <record id="access_tw_boom_master_quotes_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_master_quotes"/>
+            <field name="name">tw_boom_master_quotes delete</field>
+            <field name="group_id" ref="group_tw_boom_master_quotes_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- TW BOOM Task -->
+        <record id="group_tw_boom_task_read" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Task Read</field>
+        </record>
+
+        <record id="access_tw_boom_task_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_task"/>
+            <field name="name">tw_boom_task read</field>
+            <field name="group_id" ref="group_tw_boom_task_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_boom_task_history_log_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_task_history"/>
+            <field name="name">tw_boom_task_history_log read</field>
+            <field name="group_id" ref="group_tw_boom_task_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_boom_task_update" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Task Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_boom_task_read'))]" />
+        </record>
+
+        <record id="access_tw_boom_task_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_task"/>
+            <field name="name">tw_boom_task update</field>
+            <field name="group_id" ref="group_tw_boom_task_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_boom_task_history_log_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_task_history"/>
+            <field name="name">tw_boom_task_history_log update</field>
+            <field name="group_id" ref="group_tw_boom_task_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_boom_task_delete" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Task Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_boom_task_read'))]" />
+        </record>
+
+        <record id="access_tw_boom_task_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_task"/>
+            <field name="name">tw_boom_task delete</field>
+            <field name="group_id" ref="group_tw_boom_task_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_boom_task_history_log_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_task_history"/>
+            <field name="name">tw_boom_task_history_log delete</field>
+            <field name="group_id" ref="group_tw_boom_task_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- TW BOOM Task Eskalasi -->
+        <record id="group_tw_boom_task_escalation_read" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Task Eskalasi Read</field>
+        </record>
+
+        <record id="access_tw_boom_task_escalation_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_task_escalation"/>
+            <field name="name">tw_boom_task_escalation read</field>
+            <field name="group_id" ref="group_tw_boom_task_escalation_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_boom_task_escalation_update" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Task Eskalasi Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_boom_task_escalation_read'))]" />
+        </record>
+
+        <record id="access_tw_boom_task_escalation_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_task_escalation"/>
+            <field name="name">tw_boom_task_escalation update</field>
+            <field name="group_id" ref="group_tw_boom_task_escalation_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_boom_task_escalation_delete" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Task Eskalasi Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_boom_task_escalation_read'))]" />
+        </record>
+
+        <record id="access_tw_boom_task_escalation_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_task_escalation"/>
+            <field name="name">tw_boom_task_escalation delete</field>
+            <field name="group_id" ref="group_tw_boom_task_escalation_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- TW BOOM Task History User-->
+        <record id="group_tw_boom_task_history_user_read" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Task History User Read</field>
+        </record>
+
+        <record id="access_tw_boom_task_history_user_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_task_history_user"/>
+            <field name="name">tw_boom_task_history_user read</field>
+            <field name="group_id" ref="group_tw_boom_task_history_user_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_boom_task_history_user_update" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Task History User Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_boom_task_history_user_read'))]" />
+        </record>
+
+        <record id="access_tw_boom_task_history_user_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_task_history_user"/>
+            <field name="name">tw_boom_task_history_user update</field>
+            <field name="group_id" ref="group_tw_boom_task_history_user_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_boom_task_history_user_delete" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Task History User Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_boom_task_history_user_read'))]" />
+        </record>
+
+        <record id="access_tw_boom_task_history_user_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_task_history_user"/>
+            <field name="name">tw_boom_task_history_user delete</field>
+            <field name="group_id" ref="group_tw_boom_task_history_user_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- TW BOOM Task Delegation-->
+        <record id="group_tw_boom_delegation_task_read" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Delegation Task Read</field>
+        </record>
+
+        <record id="access_tw_boom_delegation_task_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_delegation_task"/>
+            <field name="name">tw_boom_delegation_task read</field>
+            <field name="group_id" ref="group_tw_boom_delegation_task_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_boom_delegation_task_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_delegation_task_line"/>
+            <field name="name">tw_boom_delegation_task_line read</field>
+            <field name="group_id" ref="group_tw_boom_delegation_task_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_boom_delegation_task_update" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Delegation Task Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_boom_delegation_task_read'))]" />
+        </record>
+
+        <record id="access_tw_boom_delegation_task_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_delegation_task"/>
+            <field name="name">tw_boom_delegation_task update</field>
+            <field name="group_id" ref="group_tw_boom_delegation_task_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_boom_delegation_task_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_delegation_task_line"/>
+            <field name="name">tw_boom_delegation_task_line update</field>
+            <field name="group_id" ref="group_tw_boom_delegation_task_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_boom_delegation_task_delete" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Delegation Task Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_boom_delegation_task_read'))]" />
+        </record>
+
+        <record id="access_tw_boom_delegation_task_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_delegation_task"/>
+            <field name="name">tw_boom_delegation_task delete</field>
+            <field name="group_id" ref="group_tw_boom_delegation_task_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_boom_delegation_task_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_delegation_task_line"/>
+            <field name="name">tw_boom_delegation_task_line delete</field>
+            <field name="group_id" ref="group_tw_boom_delegation_task_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    <!-- Laporan BOOM Task -->
+        <record id="group_tw_boom_task_report_read" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Task Report Read</field>
+        </record>
+
+        <record id="access_tw_boom_task_report_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_task_report"/>
+            <field name="name">tw_boom_task_report read</field>
+            <field name="group_id" ref="group_tw_boom_task_report_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+    <!-- Laporan Delegasi BOOM Task -->
+        <record id="group_tw_boom_task_delegate_report_read" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Task Delegate Report Read</field>
+        </record>
+
+        <record id="access_tw_boom_task_delegate_report_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_boom_task_delegate_report"/>
+            <field name="name">tw_boom_task_delegate_report read</field>
+            <field name="group_id" ref="group_tw_boom_task_delegate_report_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('tw_boom.group_tw_boom_task_super_user')),
+                (4, ref('tw_boom.group_tw_master_main_kategori_read')),
+                (4, ref('tw_boom.group_tw_master_main_kategori_update')),
+                (4, ref('tw_boom.group_tw_master_main_kategori_delete')),
+                (4, ref('tw_boom.group_tw_master_sub_kategori_read')),
+                (4, ref('tw_boom.group_tw_master_sub_kategori_update')),
+                (4, ref('tw_boom.group_tw_master_sub_kategori_delete')),
+                (4, ref('tw_boom.group_tw_master_category_read')),
+                (4, ref('tw_boom.group_tw_master_category_update')),
+                (4, ref('tw_boom.group_tw_master_category_delete')),
+                (4, ref('tw_boom.group_tw_master_escalation_read')),
+                (4, ref('tw_boom.group_tw_master_escalation_update')),
+                (4, ref('tw_boom.group_tw_master_escalation_delete')),
+                (4, ref('tw_boom.group_tw_boom_task_read')),
+                (4, ref('tw_boom.group_tw_boom_task_update')),
+                (4, ref('tw_boom.group_tw_boom_task_delete')),
+                (4, ref('tw_boom.group_tw_boom_task_escalation_read')),
+                (4, ref('tw_boom.group_tw_boom_task_escalation_update')),
+                (4, ref('tw_boom.group_tw_boom_task_escalation_delete')),
+                (4, ref('tw_boom.group_tw_boom_task_history_user_read')),
+                (4, ref('tw_boom.group_tw_boom_task_history_user_update')),
+                (4, ref('tw_boom.group_tw_boom_task_history_user_delete')),
+                (4, ref('tw_boom.group_tw_boom_delegation_task_read')),
+                (4, ref('tw_boom.group_tw_boom_delegation_task_update')),
+                (4, ref('tw_boom.group_tw_boom_delegation_task_delete')),
+                (4, ref('tw_boom.group_tw_boom_task_report_read')),
+                (4, ref('tw_boom.group_tw_boom_task_delegate_report_read')),
+                (4, ref('tw_boom.group_tw_boom_master_quotes_read')),
+                (4, ref('tw_boom.group_tw_boom_master_quotes_update')),
+                (4, ref('tw_boom.group_tw_boom_master_quotes_delete')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

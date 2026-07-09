@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Inherit stock.lot form to add smart button for stock documents -->
+    <record id="tw_stock_lot_form_inherit_stock_document" model="ir.ui.view">
+        <field name="name">stock.lot.form.inherit.stock.document</field>
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_stock_documents"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-file-text-o"
+                    invisible="stock_document_count == 0">
+                    <field name="stock_document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

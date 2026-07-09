@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="submenu_tw_part_sales" name="Part Sales" parent="tw_menu.submenu_tw_workshop_h3" sequence="40" />
+    <menuitem id="menu_tw_part_sales_workshop" name="Part Sales" action="tw_part_sales.tw_part_sales_action_workshop" parent="tw_part_sales.submenu_tw_part_sales" sequence="10" groups="tw_part_sales.group_tw_part_sales_read"/>
+
+</odoo>

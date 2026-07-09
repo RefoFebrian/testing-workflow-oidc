@@ -1,0 +1,56 @@
+<odoo>
+    <data>
+        <record id="tw_sales_program_approval_form_view" model="ir.ui.view">
+            <field name="name">tw.sales.program.approval.form</field>
+            <field name="model">tw.sales.program</field>
+            <field name="inherit_id" ref="tw_sales_program.tw_sales_program_form_view"/>
+            <field name="arch" type="xml">
+                <field name="state" position="before">
+                    <button name="action_rfa" invisible="state not in ('draft', 'editable', 'on_revision')" string="RFA" type="object" class="oe_highlight" groups="tw_sales_program_approval.group_tw_sales_program_rfa"/>
+                    <button name="action_approve" invisible="state != 'waiting_for_approval'" string="Approve" type="object" class="oe_highlight"/>
+                    <button name="action_revise" invisible="state not in ('rejected', 'approved')" string="Revise" type="object" class="oe_highlight"/>
+                    <button name="action_reject_or_cancel" invisible="state != 'waiting_for_approval'" string="Reject" type="object" context="{'window_title': 'Reject'}" groups="tw_sales_program_approval.group_tw_sales_program_reject_button"/>
+				    <button name="action_reject_or_cancel" invisible="state not in ('waiting_for_approval', 'approved')" string="Cancel Approval" type="object" context="{'window_title': 'Cancel'}" groups="tw_sales_program_approval.group_tw_sales_program_cancel_button"/>
+                </field>
+
+                <field name="note" position="after">
+				    <field name="approval_state" readonly="1"/>
+			    </field>
+
+                <page name="sales_program_lines" position="after">
+                    <page string="Approval">
+                        <field name="approval_ids"/>
+                    </page>
+                </page>
+
+                <field name="create_date" position="after">
+                    <field name="confirm_uid" invisible="confirm_uid == False" readonly="1"/>
+                    <field name="confirm_date" invisible="confirm_date == False" readonly="1"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="inherit_tw_sales_program_search_add_group_by_state" model="ir.ui.view">
+            <field name="name">tw.sales.program.search.inherit.add.group.by.state</field>
+            <field name="model">tw.sales.program</field>
+            <field name="inherit_id" ref="tw_sales_program.tw_sales_program_search_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='area_id']" position="after">
+                    <filter string="Draft" name="group_by_draft" 
+                            icon="terp-go-month" 
+                            domain="[('state', '=', 'draft')]" 
+                           />
+                    <filter string="Waiting for Approval" name="group_by_rfa" 
+                            icon="terp-go-month" 
+                            domain="[('state', '=', 'waiting_for_approval')]" 
+                           />
+                    <filter string="Approved" name="group_by_approved" 
+                            icon="terp-go-month" 
+                            domain="[('state', '=', 'approved')]" 
+                           /> 
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

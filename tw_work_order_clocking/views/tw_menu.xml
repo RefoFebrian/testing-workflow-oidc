@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <menuitem name="Start Stop Work Order" parent="tw_work_order.submenu_tw_work_order" sequence="4" id="tw_start_stop_wo_menuitem" action="tw_start_stop_wo_form_action" groups="tw_work_order_clocking.tw_start_stop_wo_group_read"/>
+    
+    </data>
+    
+
+</odoo>

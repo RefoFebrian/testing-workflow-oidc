@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- list view -->
+        <record id="tw_firebase_message_view_list" model="ir.ui.view">
+            <field name="name">tw.firebase.message.list</field>
+            <field name="model">tw.firebase.message</field>
+            <field name="type">list</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="Firebase message">
+                    <field name="name" />
+                    <field name="state" />
+                    <field name="employee_sender_id" />
+                </list>
+            </field>
+        </record>
+        <!-- form view -->
+        <record id="tw_firebase_message_view_form" model="ir.ui.view">
+            <field name="name">tw.firebase.message.form</field>
+            <field name="model">tw.firebase.message</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Send Messages">
+                    <header>
+                        <button name="action_send" invisible="state != 'draft'"  type="object"  string="Send" class="oe_highlight" />
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                    <h1>
+                        <field name="name"  readonly="state != 'draft'"  placeholder="Subject"  required="1"/>
+                    </h1>
+                        <group>
+                            <field name="employee_sender_id" readonly="1"/>
+                            <field name="send_all_user" readonly="state != 'draft'" />
+                            <field name="content_template_id"/>
+                         </group>
+                        <field name="message" required="1" readonly="state != 'draft'" />
+                        <notebook>
+                            <page string="Penerima" >
+                                <field name="firebase_message_line_ids" nolabel="1" readonly="state != 'draft'">
+                                    <list editable="top" >
+                                        <field name="employee_receiver_id" required="1" options="{'no_open':True,'no_create':True}"/>
+                                        <field name="send_date" readonly="1"/>
+                                        <field name="state" readonly="1"/>
+                                    </list>
+                                    <form>
+                                        <group>
+                                            <field name="employee_receiver_id" readonly="1" options="{'no_open':True,'no_create':True}"/>
+                                        </group>
+                                    </form>
+                                </field>
+                    
+                                </page>
+                         </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- search -->
+        <record id="tw_firebase_message_view_search" model="ir.ui.view">
+            <field name="name">tw.firebase.message.search</field>
+            <field name="model">tw.firebase.message</field>
+            <field name="arch" type="xml">
+                <search string="Firebase message">
+
+                    <filter string="Name" name="filter_by_name" domain="[('name','=','')]" />
+                    <filter string="Send all users" name="filter_by_send_all_user" domain="[('send_all_user','=','')]" />
+                    <filter string="Transaction" name="filter_by_transaction_id" domain="[('transaction_id','=','')]" />
+                    <filter string="Model name" name="filter_by_model_name" domain="[('model_name','=','')]" />
+                    <filter string="State" name="filter_by_state" domain="[('state','=','')]" />
+                    <field name="name" select="True"/>
+                    <field name="message" select="True"/>
+                    <field name="send_all_user" select="True"/>
+                    <field name="transaction_id" select="True"/>
+                    <field name="model_name" select="True"/>
+                    <field name="state" select="True"/>
+                    <field name="reply_to_message_id" select="True"/>
+                    <field name="employee_sender_id" select="True"/>
+                    <field name="content_template_id" select="True"/>
+                    <group string="Group By..">
+                        <filter string="Reply to message" domain="[]" name="group_by_reply_to_message_id" context="{'group_by':'reply_to_message_id'}"/>
+                        <filter string="Employee sender" domain="[]" name="group_by_employee_sender_id" context="{'group_by':'employee_sender_id'}"/>
+                        <filter string="Firebase content" domain="[]" name="group_by_content_template_id" context="{'group_by':'content_template_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <!-- kanban , to show image, please add image_small in the model -->
+        <record id="tw_firebase_message_view_kanban" model="ir.ui.view" >
+            <field name="name">tw.firebase.message.kanban</field>
+            <field name="model">tw.firebase.message</field>
+            <field name="arch" type="xml">
+                <kanban version="7.0">
+                    <field name="id" />
+                    <field name="name" />
+                    <field name="send_all_user" readonly="state != 'draft'"/>
+                    <field name="transaction_id" readonly="state != 'draft'"/>
+                    <field name="model_name" readonly="state != 'draft'"/>
+                    <field name="state" />
+                    <field name="reply_to_message_id" readonly="state != 'draft'"/>
+                    <field name="employee_sender_id" readonly="state != 'draft'"/>
+                    <field name="content_template_id" readonly="state != 'draft'"/>
+                    <templates>
+                        <t t-name="card">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <a type="open"><field name="name"/></a>
+                                    </h4>
+                                    <ul>
+                                        <li>
+                                            Field1: <field name="name"></field>
+                                        </li>
+                                        <li>
+                                            Field2: <field name="name"></field>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- calendar if a date field exists -->
+        <!-- graph -->
+        <record id="tw_firebase_message_view_graph" model="ir.ui.view">
+            <field name="name">tw.firebase.message.graph</field>
+            <field name="model">tw.firebase.message</field>
+            <field name="arch" type="xml">
+                <graph string="Firebase message" type="bar">
+                    <field name="reply_to_message_id"/>
+                </graph>
+            </field>
+        </record>
+        <!-- action window -->
+        <record id="tw_firebase_message_action" model="ir.actions.act_window">
+            <field name="name">Firebase message</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.firebase.message</field>
+            <field name="view_mode">list,kanban,form,graph</field>
+            <field name="context">{"search_default_fieldname":1}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Firebase message
+                </p><p>
+                Click the Create button to add a new Firebase message
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

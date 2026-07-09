@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem
+            id="menu_tw_approval_delegation"
+            parent="tw_approval.ma_approval_menu"
+            name="Approval Delegation"
+            action="action_tw_approval_delegation"
+            sequence="40"
+        />
+    </data>
+</odoo>

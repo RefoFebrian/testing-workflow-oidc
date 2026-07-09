@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>         
+        <record id="tw_stock_picking_inbound_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.picking.inbound.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_picking_inherit_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='scheduled_date']" position="before">
+                    <field name="is_return_picking" invisible="1"/>
+                    <field name="stock_inbound_id" placeholder="e.g. Stock Inbound" 
+                        options="{'no_create': True,'no_open': True}" 
+                        domain="[('state' ,'=','open'),('division','=',division)]" 
+                        required="picking_type_code == 'incoming' and branch_type == 'MD' and division in ('Unit','Sparepart') and use_existing_lots and not is_return_picking"
+                        invisible="picking_type_code != 'incoming' or branch_type != 'MD' or division not in ('Unit', 'Sparepart', 'Umum') or use_create_lots or is_return_picking"
+                        readonly="state == 'done'" 
+                        force_save="1"
+                    />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

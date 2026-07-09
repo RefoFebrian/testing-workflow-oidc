@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="view_tw_download_net_margin_wizard" model="ir.ui.view">
+			<field name="name">tw.download.profit.before.tax.wizard</field>
+			<field name="model">tw.download.profit.before.tax</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Download Input Net Margin">
+                    <group invisible="state_x == 'get'">
+                        <group>
+                            <field name="company_id" required="1" options="{'no_open': True, 'no_create': True}"/>
+							<field name="start_date"
+								   string="Period"
+								   required="1"
+								   widget="daterange"
+								   options="{'end_date_field': 'end_date'}" />
+							<field name="end_date" invisible="1" />
+                        </group>
+                    </group>
+					
+                	<field invisible="1" name="state_x"/>                
+                	<newline/>    
+                	<group col="4" fill="0" invisible="state_x != 'get'">
+	                    <separator colspan="4" string="Excel Export Generated. Click link below to download ..." invisible="state_x == 'choose'"/>
+	                    <field name="file" width="100" invisible="state_x == 'choose'" />
+	                    <field name="data_x" nolabel="1" readonly="0" width="100" filename="file" invisible="state_x == 'choose'"/>
+	                </group> 
+	                <footer>
+	                    <button name="excel_report" string="DOWNLOAD TO XLS" type="object" class="oe_highlight" invisible="state_x == 'get'"/>
+	                    <button string="Cancel" special="cancel" class="btn btn-default" invisible="state_x == 'get'"/>
+	                </footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_tw_download_net_margin_wizard" model="ir.actions.act_window">
+			<field name="name">Download Input Net Margin</field> 
+			<field name="res_model">tw.download.profit.before.tax</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_tw_download_net_margin_wizard"/>
+			<field name="target">new</field>
+		</record>
+
+	</data>
+</odoo>

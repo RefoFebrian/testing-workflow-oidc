@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+    
+        <!-- Stamp Customer Payment Button -->
+		<record id="group_tw_account_payment_customer_payment_button_stamp" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Stamp Customer Payment</field>
+        </record>
+        <record id="access_tw_account_payment_customer_payment_button_stamp" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment"/>
+            <field name="name">tw_account_payment_customer_payment_button_stamp update</field>
+            <field name="group_id" ref="group_tw_account_payment_customer_payment_button_stamp"/>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <!-- Stamp Hutang Lain Button -->
+		<record id="group_tw_account_payment_receive_payment_button_stamp" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Stamp Hutang Lain</field>
+        </record>
+        <record id="access_tw_account_payment_receive_payment_button_stamp" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment"/>
+            <field name="name">tw_account_payment_receive_payment_button_stamp update</field>
+            <field name="group_id" ref="group_tw_account_payment_receive_payment_button_stamp"/>
+            <field name="perm_write">1</field>
+        </record>
+
+	</data>
+    <data>
+		<record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_tw_account_payment_customer_payment_button_stamp')),
+                (4,ref('group_tw_account_payment_receive_payment_button_stamp')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

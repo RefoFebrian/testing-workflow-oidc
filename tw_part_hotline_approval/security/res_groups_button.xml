@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- RFA -->
+        <record id="group_button_rfa_part_hotline" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">RFA Part Hotline</field>
+            <field name="implied_ids" eval="[(4, ref('tw_part_hotline.group_tw_part_hotline_read'))]"/>
+        </record>
+        
+        <record id="access_button_rfa_part_hotline_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_part_hotline"/>
+            <field name="name">button_rfa_part_hotline read</field>
+            <field name="group_id" ref="group_button_rfa_part_hotline"/>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Approved -->
+        <record id="group_button_approved_part_hotline" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">Approved Part Hotline</field>
+            <field name="implied_ids" eval="[(4, ref('tw_part_hotline.group_tw_part_hotline_read'))]"/>
+        </record>
+        
+        <record id="access_button_approved_part_hotline_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_part_hotline"/>
+            <field name="name">button_approved_part_hotline read</field>
+            <field name="group_id" ref="group_button_approved_part_hotline"/>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_part_hotline_cancel_button" model="res.groups">
+            <field name="name">TW Button Cancel Part Hotline</field>
+            <field name="category_id" ref="tw_base.tw_role"/>
+        </record>
+        <record id="access_tw_part_hotline_cancel_button" model="ir.model.access">
+                <field name="model_id" ref="tw_part_hotline.model_tw_part_hotline"/>
+                <field name="name">tw_part_hotline_cancel_button update</field>
+                <field name="group_id" ref="group_tw_part_hotline_cancel_button"/>
+                <field name="perm_write">1</field>
+        </record>
+
+        
+        <record id="group_tw_part_hotline_reject_button" model="res.groups">
+            <field name="name">TW Button Reject Part Hotline</field>
+            <field name="category_id" ref="tw_base.tw_role"/>
+        </record>
+        <record id="access_tw_part_hotline_reject_button" model="ir.model.access">
+                <field name="model_id" ref="tw_part_hotline.model_tw_part_hotline"/>
+                <field name="name">tw_part_hotline_reject_button update</field>
+                <field name="group_id" ref="group_tw_part_hotline_reject_button"/>
+                <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_button_rfa_part_hotline')),
+                (4,ref('group_button_approved_part_hotline')),
+                (4,ref('group_tw_part_hotline_cancel_button')),
+                (4,ref('group_tw_part_hotline_reject_button')),
+            ]"/> 
+            </record> 
+    </data>
+</odoo>

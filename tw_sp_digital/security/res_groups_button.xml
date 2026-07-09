@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+
+		<!-- RFA Button -->
+		<record id="group_tw_sp_digital_button_rfa" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button SP Digital RFA</field>
+        </record>
+        <record id="access_tw_sp_digital_button_rfa" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sp_digital"/>
+            <field name="name">tw_sp_digital_button_rfa update</field>
+            <field name="group_id" ref="group_tw_sp_digital_button_rfa"/>
+            <field name="perm_write">1</field>
+        </record>
+		
+        <!-- Approve Button -->
+        <record id="group_tw_sp_digital_button_approve" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button SP Digital Approve</field>
+        </record>
+        <record id="access_tw_sp_digital_button_approve" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sp_digital"/>
+            <field name="name">tw_sp_digital_button_approve update</field>
+            <field name="group_id" ref="group_tw_sp_digital_button_approve"/>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <!-- Reject Button -->
+        <record id="group_tw_sp_digital_button_reject" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button SP Digital Reject</field>
+        </record>
+        <record id="access_tw_sp_digital_button_reject" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sp_digital"/>
+            <field name="name">tw_sp_digital_button_reject update</field>
+            <field name="group_id" ref="group_tw_sp_digital_button_reject"/>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <!-- Confirm Button -->
+        <record id="group_tw_sp_digital_button_confirm" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button SP Digital Confirm</field>
+        </record>
+        <record id="access_tw_sp_digital_button_confirm" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sp_digital"/>
+            <field name="name">tw_sp_digital_button_confirm update</field>
+            <field name="group_id" ref="group_tw_sp_digital_button_confirm"/>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <!-- Done Button -->
+        <record id="group_tw_sp_digital_button_done" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button SP Digital Done</field>
+        </record>
+        <record id="access_tw_sp_digital_button_done" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sp_digital"/>
+            <field name="name">tw_sp_digital_button_done update</field>
+            <field name="group_id" ref="group_tw_sp_digital_button_done"/>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <!-- Draft Button -->
+        <record id="group_tw_sp_digital_button_draft" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button SP Digital Draft</field>
+        </record>
+        <record id="access_tw_sp_digital_button_draft" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sp_digital"/>
+            <field name="name">tw_sp_digital_button_draft update</field>
+            <field name="group_id" ref="group_tw_sp_digital_button_draft"/>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <!-- Unsuspend Employee Button -->
+        <record id="group_tw_sp_digital_employee_button_unsuspend" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button SP Digital Employee Unsuspend</field>
+        </record>
+        <record id="access_tw_sp_digital_employee_button_unsuspend" model="ir.model.access">
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="name">tw_sp_digital_employee_button_unsuspend update</field>
+            <field name="group_id" ref="group_tw_sp_digital_employee_button_unsuspend"/>
+            <field name="perm_write">1</field>
+        </record>
+
+		<record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_tw_sp_digital_button_draft')),
+                (4,ref('group_tw_sp_digital_button_rfa')),
+                (4,ref('group_tw_sp_digital_button_approve')),
+                (4,ref('group_tw_sp_digital_button_reject')),
+                (4,ref('group_tw_sp_digital_button_confirm')),
+                (4,ref('group_tw_sp_digital_button_done')),
+                (4,ref('group_tw_sp_digital_employee_button_unsuspend')),
+            ]"/>
+        </record>
+
+	</data>
+</odoo>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <!-- Wizard View -->
+        <record id="tw_upload_pricelist_version_view_wizard" model="ir.ui.view">
+            <field name="name">tw.upload.pricelist.version.wizard</field>
+            <field name="model">tw.upload.pricelist.version</field>
+            <field name="arch" type="xml">
+                <form>
+                	<sheet>
+						<group colspan="4" col="4">
+                            <group colspan="2">
+								<field name="file" filename="filename" string="Upload File"/>
+                            </group>
+                            <group colspan="2">
+                                <label for="action_download_format_file" string="Contoh File"/>
+                                <div>                   
+                                    <button name="action_download_format_file" type="object" class="oe_highlight" icon="fa-download" string="Download Contoh"/>
+                                </div>
+                            </group>
+                        </group>
+                        <div>
+                            <h5 style="color: red;">
+                                Pastikan file yang diupload sesuai format file yang diberikan.
+                            </h5>
+                        </div>
+		                <footer>
+		                    <button name="action_import" required="1" string="Import" type="object" class="oe_highlight"/>
+		                    <button string="Cancel" class="oe_link" special="cancel" />
+		                </footer>
+	                </sheet>
+	            </form>
+            </field>
+        </record>
+
+        <record id="tw_upload_pricelist_version_message_view_wizard" model="ir.ui.view">
+            <field name="name">tw.upload.pricelist.version.message.wizard</field>
+            <field name="model">tw.upload.pricelist.version</field>
+            <field name="arch" type="xml">
+                <form string="Upload Result">
+                    <sheet>
+                        <group>
+                            <field name="message" readonly="1" nolabel="1"/>
+                        </group>
+                        <footer>
+                            <button string="Close" class="btn-primary" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+	     
+	</data>
+</odoo>

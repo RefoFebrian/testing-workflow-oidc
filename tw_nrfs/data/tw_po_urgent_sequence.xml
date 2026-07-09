@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="po_urgent_sequence" model="ir.sequence">
+            <field name="name">URG</field>
+            <field name="code">po_sparepart_urgent</field>
+            <field name="active" eval="True" />
+            <field name="suffix">/%(month)s/%(year)s/URG/TDMPART</field>
+            <field name="padding">5</field>
+            <field name="implementation">no_gap</field>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+        </record>
+    </data>
+</odoo>

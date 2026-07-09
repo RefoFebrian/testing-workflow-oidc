@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- TW Lead Activity -->
+            <record id="group_tw_lead_activity_read" model="res.groups">
+                <field name="category_id" ref="tw_lead.tw_module_category_lead" />
+                <field name="name">TW Lead Activity Read</field>
+            </record>
+            <record id="access_tw_lead_activity_read" model="ir.model.access">
+                <field name="model_id" ref="model_tw_lead_activity" />
+                <field name="name">tw_lead_activity read</field>
+                <field name="group_id" ref="group_tw_lead_activity_read" />
+                <field name="perm_read">1</field>
+            </record>
+
+            <record id="group_tw_lead_activity_update" model="res.groups">
+                <field name="category_id" ref="tw_lead.tw_module_category_lead" />
+                <field name="name">TW Lead Activity Update</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_lead_activity_read'))]" />
+            </record>
+            <record id="access_tw_lead_activity_update" model="ir.model.access">
+                <field name="model_id" ref="model_tw_lead_activity" />
+                <field name="name">tw_lead_activity update</field>
+                <field name="group_id" ref="group_tw_lead_activity_update" />
+                <field name="perm_create">1</field>
+                <field name="perm_write">1</field>
+            </record>
+
+            <record id="group_tw_lead_activity_delete" model="res.groups">
+                <field name="category_id" ref="tw_lead.tw_module_category_lead" />
+                <field name="name">TW Lead Activity Delete</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_lead_activity_read'))]" />
+            </record>
+            <record id="access_tw_lead_activity_delete" model="ir.model.access">
+                <field name="model_id" ref="model_tw_lead_activity" />
+                <field name="name">tw_lead_activity delete</field>
+                <field name="group_id" ref="group_tw_lead_activity_delete" />
+                <field name="perm_unlink">1</field>
+            </record>
+        <!-- TW Lead Activity -->
+
+        <!-- TW Lead Activity Result -->
+            <record id="group_tw_lead_activity_result_read" model="res.groups">
+                <field name="category_id" ref="tw_lead.tw_module_category_lead" />
+                <field name="name">TW Lead Activity Result Read</field>
+            </record>
+            <record id="access_tw_lead_activity_result_read" model="ir.model.access">
+                <field name="model_id" ref="model_tw_lead_activity_result" />
+                <field name="name">tw_lead_activity_result read</field>
+                <field name="group_id" ref="group_tw_lead_activity_result_read" />
+            </record>
+
+            <record id="group_tw_lead_activity_result_update" model="res.groups">
+                <field name="category_id" ref="tw_lead.tw_module_category_lead" />
+                <field name="name">TW Lead Activity Result Update</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_lead_activity_result_read'))]" />
+            </record>
+            <record id="access_tw_lead_activity_result_update" model="ir.model.access">
+                <field name="model_id" ref="model_tw_lead_activity_result" />
+                <field name="name">tw_lead_activity_result update</field>
+                <field name="group_id" ref="group_tw_lead_activity_result_update" />
+                <field name="perm_create">1</field>
+                <field name="perm_write">1</field>
+            </record>
+
+            <record id="group_tw_lead_activity_result_delete" model="res.groups">
+                <field name="category_id" ref="tw_lead.tw_module_category_lead" />
+                <field name="name">TW Lead Activity Result Delete</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_lead_activity_result_read'))]" />
+            </record>
+            <record id="access_tw_lead_activity_result_delete" model="ir.model.access">
+                <field name="model_id" ref="model_tw_lead_activity_result" />
+                <field name="name">tw_lead_activity_result delete</field>
+                <field name="group_id" ref="group_tw_lead_activity_result_delete" />
+                <field name="perm_unlink">1</field>
+            </record>
+        <!-- TW Lead Activity Result -->
+        
+    </data>
+
+    <data>
+
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+               	(4, ref('group_tw_lead_activity_read')),
+                (4, ref('group_tw_lead_activity_update')),
+                (4, ref('group_tw_lead_activity_delete')),
+                (4, ref('group_tw_lead_activity_result_read')),
+                (4, ref('group_tw_lead_activity_result_update')),
+                (4, ref('group_tw_lead_activity_result_delete')),
+				]" />
+        </record>
+
+    </data>
+</odoo>

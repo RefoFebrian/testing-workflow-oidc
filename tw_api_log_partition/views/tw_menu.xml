@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+            <menuitem id="menuitem_tw_api_log_partition"
+                  name="API Log Partitions"
+                  parent="tw_api.menuitem_tw_api"
+                  action="tw_api_log_partition_action"
+                  sequence="17"
+                  groups="tw_api.group_tw_api_log_read"/>
+
+</odoo>

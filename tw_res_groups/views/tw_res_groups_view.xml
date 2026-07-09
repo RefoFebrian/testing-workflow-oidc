@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id='view_tw_res_groups_wizard' model='ir.ui.view'>
+            <field name='name'>tw.res.groups.form</field>
+            <field name='model'>tw.res.groups.wizard</field>
+            <field name='arch' type='xml'>
+            	<form>
+            		<sheet>
+            			<group>
+            				<field name="group_id" options="{'no_open':True,'no_create':True}"/>
+            				<field name="file"/>
+                            <button name="print_template_access" string="Download Template" type="object" class="oe_highlight"/>
+            			</group>
+            		</sheet>
+            		<footer>
+                        <button name="action_upload" string="Upload" type="object" class="oe_highlight"/>
+                        <button string="Cancel" special="cancel"/>
+                    </footer>
+            	</form>
+            </field>
+        </record>
+
+        <record id="actions_tw_res_groups_wizard" model="ir.actions.act_window">
+	        <field name="name">Res Groups Upload</field>
+	        <field name="type">ir.actions.act_window</field>
+	        <field name="res_model">tw.res.groups.wizard</field>
+	        <field name="view_mode">form</field>
+	        <field name="view_id" ref="view_tw_res_groups_wizard"/>
+	        <field name="target">new</field>
+	    </record>
+
+
+    </data>
+</odoo>

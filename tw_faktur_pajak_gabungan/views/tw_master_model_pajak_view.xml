@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_master_model_pajak_view_search" model="ir.ui.view">
+            <field name="name">tw.master.model.pajak.search</field>
+            <field name="model">tw.master.model.pajak</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="module_name"/>
+					<filter name="group_by_name" string="Group by Nama Model" context="{'group_by':'name'}"/>
+                </search>
+            </field>
+        </record>
+        <record id="tw_master_model_pajak_view_form" model="ir.ui.view">
+            <field name="name">tw.master.model.pajak.form</field>
+            <field name="model">tw.master.model.pajak</field>
+            <field name="arch" type="xml">
+                <form string="Master Model Pajak">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="model_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="model_name" readonly="1"/>
+                            <field name="module_name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_master_model_pajak_view_list" model="ir.ui.view">
+            <field name="name">tw.master.model.pajak.list</field>
+            <field name="model">tw.master.model.pajak</field>
+            <field name="arch" type="xml">
+                <list string="Master Model Pajak" editable="bottom">
+                    <field name="name"/>
+                    <field name="model_id" options="{'no_create': True, 'no_open': True}"/>
+                    <field name="model_name" readonly="1"/>
+                    <field name="module_name"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_master_model_pajak_action" model="ir.actions.act_window">
+            <field name="name">Master Model Pajak Gabungan</field>
+            <field name="res_model">tw.master.model.pajak</field>
+            <field name="view_mode">list,form</field>
+        </record>
+    </data>
+</odoo>

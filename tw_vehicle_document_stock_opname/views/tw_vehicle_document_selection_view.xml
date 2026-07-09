@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Action Selection -->
+        <record id="action_tw_ceklis_fisik_stnk" model="ir.actions.act_window">
+            <field name="name">Ceklis Fisik STNK</field>
+            <field name="res_model">tw.selection</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('type', '=', 'CekFisikStnk')]</field>
+            <field name="context">{'default_type': 'CekFisikStnk','search_default_active': True}</field>
+        </record>
+
+        <record id="action_tw_ceklis_fisik_bpkb" model="ir.actions.act_window">
+            <field name="name">Ceklis Fisik BPKB</field>
+            <field name="res_model">tw.selection</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('type', '=', 'CekFisikBpkb')]</field>
+            <field name="context">{'default_type': 'CekFisikBpkb'}</field>
+        </record>
+
+        <record id="action_tw_validasi_nama_stnk" model="ir.actions.act_window">
+            <field name="name">Validasi Nama STNK</field>
+            <field name="res_model">tw.selection</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('type', '=', 'ValNamaStnk')]</field>
+            <field name="context">{'default_type': 'ValNamaStnk'}</field>
+        </record>
+
+        <record id="action_tw_validasi_nama_bpkb" model="ir.actions.act_window">
+            <field name="name">Validasi Nama BPKB</field>
+            <field name="res_model">tw.selection</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('type', '=', 'ValNamaBpkb')]</field>
+            <field name="context">{'default_type': 'ValNamaBpkb'}</field>
+        </record>
+
+        <record id="action_tw_validasi_no_bpkb" model="ir.actions.act_window">
+            <field name="name">Validasi No BPKB</field>
+            <field name="res_model">tw.selection</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('type', '=', 'ValNoBpkb')]</field>
+            <field name="context">{'default_type': 'ValNoBpkb'}</field>
+        </record>
+
+        <record id="action_tw_validasi_no_engine_stnk" model="ir.actions.act_window">
+            <field name="name">Validasi No Engine STNK</field>
+            <field name="res_model">tw.selection</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('type', '=', 'ValNoEngStnk')]</field>
+            <field name="context">{'default_type': 'ValNoEngStnk'}</field>
+        </record>
+
+        <record id="action_tw_validasi_no_engine_bpkb" model="ir.actions.act_window">
+            <field name="name">Validasi No Engine BPKB</field>
+            <field name="res_model">tw.selection</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('type', '=', 'ValNoEngBpkb')]</field>
+            <field name="context">{'default_type': 'ValNoEngBpkb'}</field>
+        </record>
+
+        <record id="action_tw_validasi_no_polisi" model="ir.actions.act_window">
+            <field name="name">Validasi No Polisi</field>
+            <field name="res_model">tw.selection</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('type', '=', 'ValNoPolisi')]</field>
+            <field name="context">{'default_type': 'ValNoPolisi'}</field>
+        </record>
+
+        <!-- Master List View -->
+        <record id="action_tw_ceklis_fisik_stnk_list_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_selection.tw_selection_master_list_view"/>
+            <field name="act_window_id" ref="action_tw_ceklis_fisik_stnk"/>
+        </record>
+
+        <record id="action_tw_ceklis_fisik_bpkb_list_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_selection.tw_selection_master_list_view"/>
+            <field name="act_window_id" ref="action_tw_ceklis_fisik_bpkb"/>
+        </record>
+
+        <record id="action_tw_validasi_nama_stnk_list_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_selection.tw_selection_master_list_view"/>
+            <field name="act_window_id" ref="action_tw_validasi_nama_stnk"/>
+        </record>
+
+        <record id="action_tw_validasi_nama_bpkb_list_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_selection.tw_selection_master_list_view"/>
+            <field name="act_window_id" ref="action_tw_validasi_nama_bpkb"/>
+        </record>
+
+        <record id="action_tw_validasi_no_bpkb_list_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_selection.tw_selection_master_list_view"/>
+            <field name="act_window_id" ref="action_tw_validasi_no_bpkb"/>
+        </record>
+
+        <record id="action_tw_validasi_no_engine_stnk_list_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_selection.tw_selection_master_list_view"/>
+            <field name="act_window_id" ref="action_tw_validasi_no_engine_stnk"/>
+        </record>
+
+        <record id="action_tw_validasi_no_engine_bpkb_list_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_selection.tw_selection_master_list_view"/>
+            <field name="act_window_id" ref="action_tw_validasi_no_engine_bpkb"/>
+        </record>
+
+        <record id="action_tw_validasi_no_polisi_list_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_selection.tw_selection_master_list_view"/>
+            <field name="act_window_id" ref="action_tw_validasi_no_polisi"/>
+        </record>
+
+    </data>
+</odoo>

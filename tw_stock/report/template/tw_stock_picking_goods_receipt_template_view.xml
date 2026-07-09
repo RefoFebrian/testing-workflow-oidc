@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="batch_goods_receipt_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="batch">
+                    <t t-foreach="batch.picking_ids" t-as="o">
+                        <t t-call="tw_web.teto_report_layout">
+                            <t t-call="tw_web.teto_report_styles_base" />
+                            <div class="page">
+                                <div class="oe_structure"/>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <t t-call="tw_web.teto_report_partner_address">
+                                            <t t-set="partner" t-value="o.company_id.partner_id"/>
+                                        </t>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-12 bolder">BUKTI PENERIMAAN BARANG</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-2">No</div>
+                                            <div class="col">: &#160;<span t-esc="batch.name"/></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-2"><span>Tanggal</span></div>
+                                            <div class="col">: &#160;<span t-field="o.date" t-options="{'format': 'dd-MM-yyyy'}"/></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        <br/>
+                                <div class="row" style="border: 1px solid;">
+                                    <div class="col-12">
+                                        <table class="teto-table-header table-borderless" width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td width="15%">Tanggal</td>
+                                                    <td width="1%">:</td>
+                                                    <td width="84%"><span t-field="o.date" t-options='{"format": "dd-MM-yyyy"}'/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Supplier</td>
+                                                    <td>:</td>
+                                                    <td><span t-field="o.partner_id.name"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lokasi Gudang</td>
+                                                    <td>:</td>
+                                                    <td><span t-field="o.picking_type_id.warehouse_id.name"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Keterangan</td>
+                                                    <td>:</td>
+                                                    <td><span t-field="o.date" t-options='{"format": "dd-MM-yyyy"}'/></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <table width="100%" class="table table-bordered table-sm" style="border: 1px solid black;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 5%;">No</th>
+                                                            <th>Kode Barang</th>
+                                                            <th>Nama Barang</th>
+                                                            <th>Kondisi</th>
+                                                            <th>Jml</th>
+                                                            <th>Jml Pack</th>
+                                                            <th>No Picking</th>
+                                                            <th>No SO</th>
+                                                            <th>Lokasi</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr t-foreach="doc_line(o.move_ids_without_package)" t-as="line">
+                                                            <td class="text-center"><span t-esc="line[0]"/></td>
+                                                            <td><span t-esc="line[1].product_id.default_code"/></td>
+                                                            <td><span t-esc="line[1].product_id.product_tmpl_id.name"/></td>
+                                                            <td>OK</td>
+                                                            <td><span t-esc="int(line[1].quantity)"/></td>
+                                                            <td><span t-esc="int(line[1].quantity)"/></td>
+                                                            <td><span t-esc="o.name"/></td>
+                                                            <td><span t-esc="o.origin"/></td>
+                                                            <td><span t-esc="line[1].location_dest_id.name"/></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div t-if="o.division != 'Sparepart'" class="row mt-1">
+                                    <div class="col-12">Note: Barang sudah diserahkan dengan keadaan baik dan lengkap</div>
+                                </div>
+                                
+                                <div class="row mt-1">
+                                    <div class="col-3">
+                                        <div class="row mb-5">
+                                            <div class="col">
+                                                <span>Pengirim</span>
+                                                <br/><br/><br/><br/>
+                                                ____________________
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="row mb-5">
+                                            <div class="col">
+                                                <t>Kepala Gudang</t>
+                                                <br/><br/><br/><br/>
+                                                ____________________
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="row">
+                                            <div class="col">
+                                                <br/><br/><br/><br/>
+                                                <span t-esc="print_user()"/>, <span t-esc="time_date(o.date)"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <t>Cetakan Ke: &#160;<span t-esc="print_counter(batch)"/></t>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col">
+                                        <t>Lembar ke-1 Pengirim / Lembar ke-2 Gudang / Lembar ke-3 Finance</t>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

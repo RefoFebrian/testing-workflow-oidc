@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="print_lending">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <!-- Header Area -->
+                        <table style="width: 100%; border: none; border-collapse: collapse;border-spacing: 0;">
+                            <tr>
+                                <td style="width: 5%;">
+                                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 30px;" alt="Logo"/>
+                                </td>
+                                <td style="font-size: 15px; font-weight: bold; vertical-align: middle;">PT Tunas Dwipa Matra</td>
+                            </tr>
+                        </table>
+                        <table style="margin-top: 18px; width: 100%; border: 1px solid black; border-collapse: collapse;">
+                            <tr>
+                                <td style="width: 10%; padding-left: 3px; border: 1px solid black; font-size: 10px;">DEPT</td>
+                                <td colspan="2" style="width: 20%; border: 1px solid black; font-size: 10px; text-align: center;">
+                                    <t t-esc="o.employee_id.department_id.name" />
+                                </td>
+                                <td colspan="5" rowspan="2" style="width: 70%; border: 1px solid black; font-size: 20px; font-weight: bold; text-align: center; vertical-align: middle;">FORM PEMINJAMAN ASET</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 10%; border: 1px solid black; font-size: 10px; padding-left: 3px;">BRANCH</td>
+                                <td colspan="2" style="width: 20%; border: 1px solid black; font-size: 10px; text-align: center;">
+                                    <t t-esc="o.company_id.code" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 10%; padding-left: 3px; border: 1px solid black; font-size: 10px;">TANGGAL</td>
+                                <td colspan="2" style="width: 20%; border: 1px solid black; font-size: 10px; text-align: center;">
+                                    <t t-esc="o.date.strftime('%d-%b-%Y')" />
+                                </td>
+                                <td colspan="2" style="width: 24%; border: 1px solid black; font-size: 10px; text-align: center;">PREPARED</td>
+                                <td colspan="2" style="width: 23%; border: 1px solid black; font-size: 10px; text-align: center;">REVIEWED</td>
+                                <td style="width: 23%; border: 1px solid black; font-size: 10px; text-align: center;">APPROVED</td>
+                            </tr>
+                            <tr style="height: 70px;">
+                                <td style="width: 13%; padding-left: 3px; border-left: 1px solid black; border-right: 1px solid black;">
+                                    <p style="font-size: 30px; margin: 0;"></p>
+                                </td>
+                                <td style="width: 11%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 11%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 11%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 15%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 13%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 12%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 14%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 13%; padding-left: 3px; border-left: 1px solid black; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 11%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 11%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 11%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 15%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 13%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 12%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 14%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 13%; padding-left: 3px; border-left: 1px solid black; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 11%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 11%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 11%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 15%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 13%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 12%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 14%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 13%; padding-left: 3px; border-left: 1px solid black; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 11%; border-bottom: 1px solid black; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 11%; border-bottom: 1px solid black; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 11%; border-bottom: 1px solid black; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 15%; border-bottom: 1px solid black; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 13%; border-bottom: 1px solid black; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 12%; border-bottom: 1px solid black; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 14%; border-bottom: 1px solid black; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 13%; border: 1px solid black; font-size: 10px; text-align: center; vertical-align: middle;">
+                                    <t t-esc="o.create_uid.partner_id.name" />
+                                </td>
+                                <td style="width: 11%; border: 1px solid black; font-size: 10px; text-align: center; vertical-align: middle;">GA</td>
+                                <td style="width: 11%; border: 1px solid black; font-size: 10px; text-align: center; vertical-align: middle;">HRD</td>
+                                <td style="width: 11%; border: 1px solid black; font-size: 10px; text-align: center; vertical-align: middle;">ADH / SOH</td>
+                                <td style="width: 15%; border: 1px solid black; font-size: 10px; text-align: center; vertical-align: middle;">Area Manager</td>
+                                <td style="width: 13%; border: 1px solid black; font-size: 10px; text-align: center; vertical-align: middle;">Admin Manager</td>
+                                <td style="width: 12%; border: 1px solid black; font-size: 10px; text-align: center; vertical-align: middle;">ASS Manager</td>
+                                <td style="width: 14%; border: 1px solid black; font-size: 10px; text-align: center; vertical-align: middle;">General Manager</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 13%; border-left: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 11%;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 11%;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 11%;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 15%;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 13%;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 12%;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                                <td style="width: 14%; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                            </tr>
+                            <tr style="height: 14px">
+                                <td colspan="8" style="border-left: 1px solid black; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="8" style="padding-left: 3px; font-size: 11px; border-left: 1px solid black; border-right: 1px solid black;">Kepada Yth. Pimpinan PT Tunas Dwipa Matra,</td>
+                            </tr>
+                            <tr>
+                                <td colspan="8" style="padding-left: 3px; font-size: 11px; border-left: 1px solid black; border-right: 1px solid black;">Bersama dengan surat ini kami bermaksud untuk mengajukan pemakaian aset dengan data sebagai berikut:</td>
+                            </tr>
+                            <tr style="height: 14px">
+                                <td colspan="8" style="border-left: 1px solid black; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="8" style="padding-left: 3px; font-size: 11px; border-left: 1px solid black; border-right: 1px solid black; font-weight: bold; text-decoration: underline;">Data Pengguna / PIC</td>
+                            </tr>
+                            <tr>
+                                <td colspan="8" style="border-left: 1px solid black; border-right: 1px solid black;">
+                                    <table style="width: 100%;">
+                                        <tr>
+                                            <td style="width: 15%; padding-left: 3px; font-size: 11px;">NIK</td>
+                                            <td style="width: 85%; font-size: 11px;">: &#160;<span style="font-weight: bold;">
+                                                    <t t-esc="o.employee_id.identification_id" />
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 15%; padding-left: 3px; font-size: 11px;">Nama</td>
+                                            <td style="width: 85%; font-size: 11px;">: &#160;<span style="font-weight: bold;">
+                                                    <t t-esc="o.employee_id.name" />
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 15%; padding-left: 3px; font-size: 11px;">Jabatan</td>
+                                            <td style="width: 85%; font-size: 11px;">: &#160;<span style="font-weight: bold;">
+                                                    <t t-esc="o.employee_id.job_id.name" />
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 15%; padding-left: 3px; font-size: 11px;">Periode Pinjam</td>
+                                            <td style="width: 85%; font-size: 11px;">: &#160;<span style="font-weight: bold;">
+                                                    <t t-esc="o.start_date.strftime('%d-%m-%Y')" />
+ s/d <t t-esc="o.end_date.strftime('%d-%m-%Y')" />
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr style="height:15px">
+                                <td colspan="8" style="border-left: 1px solid black; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="8" style="padding-left: 3px; font-size: 11px; border-left: 1px solid black; border-right: 1px solid black; font-weight: bold; text-decoration: underline;">Data Aset</td>
+                            </tr>
+                            <tr>
+                                <td colspan="8" style="border-left: 1px solid black; border-right: 1px solid black;">
+                                    <table style="width: 100%; height: 100%; padding: 2px; border: 0.5px solid black; border-collapse: collapse; font-size: 11px; margin-top: 2px; margin-bottom: 2px;">
+                                        <tr>
+                                            <th style="width: 3%; text-align: center; vertical-align: middle; border: 0.5px solid black;">No</th>
+                                            <th style="width: 17%; text-align: center; vertical-align: middle; border: 0.5px solid black;">Nama Aset</th>
+                                            <th style="width: 10%; text-align: center; vertical-align: middle; border: 0.5px solid black;">Kode Aset</th>
+                                            <th style="width: 10%; text-align: center; vertical-align: middle; border: 0.5px solid black;">No Register</th>
+                                            <th style="width: 15%; text-align: center; vertical-align: middle; border: 0.5px solid black;">Kategori</th>
+                                            <th style="width: 5%; text-align: center; vertical-align: middle; border: 0.5px solid black;">Tahun</th>
+                                            <th style="width: 7%; text-align: center; vertical-align: middle; border: 0.5px solid black;">Nomor Mesin</th>
+                                            <th style="width: 10%; text-align: center; vertical-align: middle; border: 0.5px solid black;">Nomor Rangka</th>
+                                            <th style="width: 6%; text-align: center; vertical-align: middle; border: 0.5px solid black;">KM Awal</th>
+                                            <th style="width: 5%; text-align: center; vertical-align: middle; border: 0.5px solid black;">Kondisi</th>
+                                            <th style="width: 12%; text-align: center; vertical-align: middle; border: 0.5px solid black;">Alasan Pinjam</th>
+                                        </tr>
+                                        <t t-set="i" t-value="1" />
+                                        <t t-foreach="o.item_ids" t-as="x">
+                                            <tr>
+                                                <td style="font-size: 10px; text-align: center; border: 0.5px solid black;">
+                                                    <t t-esc="i" />
+                                                </td>
+                                                <td style="padding-left: 3px; font-size: 10px; border: 0.5px solid black;">
+                                                    <t t-esc="x.asset_id.product_id.name" />
+                                                </td>
+                                                <td style="font-size: 10px; text-align: center; border: 0.5px solid black;">
+                                                    <t t-esc="x.asset_id.code" />
+                                                </td>
+                                                <td style="font-size: 10px; text-align: center; border: 0.5px solid black;">
+                                                    <t t-esc="x.asset_id.name" />
+                                                </td>
+                                                <td style="font-size: 10px; text-align: center; border: 0.5px solid black;">
+                                                    <t t-esc="x.asset_id.category_id.name" />
+                                                </td>
+                                                <td style="font-size: 10px; text-align: center; border: 0.5px solid black;">
+                                                    <t t-esc="x.asset_year" />
+                                                </td>
+                                                <td style="font-size: 10px; text-align: center; border: 0.5px solid black;">
+                                                    <t t-esc="x.asset_engine_no" />
+                                                </td>
+                                                <td style="font-size: 10px; text-align: center; border: 0.5px solid black;">
+                                                    <t t-esc="x.asset_chassis_no" />
+                                                </td>
+                                                <td style="font-size: 10px; text-align: center; border: 0.5px solid black;">
+                                                    <p style="margin: 0;"></p>
+                                                </td>
+                                                <td style="font-size: 10px; text-align: center; border: 0.5px solid black;">
+                                                    <t t-if="x.condition_rent">
+                                                        <t t-esc="str(x.condition_rent).replace('_', ' ').title()" />
+                                                    </t>
+                                                </td>
+                                                <td style="font-size: 10px; text-align: center; border: 0.5px solid black;">
+                                                    <t t-esc="x.reason_id.name" />
+                                                </td>
+                                            </tr>
+                                            <t t-set="i" t-value="i + 1" />
+                                        </t>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr style="height:15px">
+                                <td colspan="8" style="border-left: 1px solid black; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="8" style="padding-left: 3px; font-size: 11px; border-left: 1px solid black; border-right: 1px solid black; font-weight: bold; text-decoration: underline;">Penjelasan Peminjaman Aset</td>
+                            </tr>
+                            <tr style="height: 140px">
+                                <td colspan="8" style="border-left: 1px solid black; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 3px; font-size: 11px; text-align: center; border-left: 1px solid black;">__________________________</td>
+                                <td colspan="7" style="border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 3px; font-size: 11px; text-align: center; border-left: 1px solid black;">
+                                    <t t-esc="o.employee_id.name" />
+                                </td>
+                                <td colspan="7" style="border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                            </tr>
+                            <tr style="height: 14px;">
+                                <td colspan="8" style="border-left: 1px solid black; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="8" style="padding-left: 3px; font-size: 12px; border-left: 1px solid black; border-right: 1px solid black;">Demikian permohonan ini kami ajukan. Atas perhatiannya kami ucapkan terima kasih.</td>
+                            </tr>
+                            <tr style="height: 14px;">
+                                <td colspan="8" style="border-left: 1px solid black; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="8" style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black;">
+                                    <p style="margin: 0;"></p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <!-- Paper Format -->
+        <record id="paperformat_asset_lending_return_print" model="report.paperformat">
+            <field name="name">Peminjaman Aset</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <!-- Report Action -->
+        <record id="action_report_asset_lending_return_print" model="ir.actions.report">
+            <field name="name">Print Peminjaman</field>
+            <field name="model">tw.asset.lending</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_asset_lending_return_approval.print_lending</field>
+            <field name="report_file">tw_asset_lending_return_approval.print_lending</field>
+            <field name="print_report_name">'Form Peminjaman Aset - %s' % object.name</field>
+            <field name="paperformat_id" ref="paperformat_asset_lending_return_print"/>
+        </record>
+
+    </data>
+</odoo>

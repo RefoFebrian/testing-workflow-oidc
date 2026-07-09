@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- model_tw_progress_pbt_report
+        model_tw_summary_forecast_report
+        model_tw_target_net_margin_report -->
+
+        <record id="tw_module_category_profit_before_tax" model="ir.module.category">
+            <field name="name">TW Profit Before Tax</field>
+        </record>
+
+        <!-- Download Profit Before Tax -->
+        <record id="group_tw_download_profit_before_tax_group_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_profit_before_tax" />
+            <field name="name">TW Download Profit Before Tax Read</field>
+        </record>
+
+        <record id="access_tw_download_profit_before_tax_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_download_profit_before_tax" />
+            <field name="name">tw_download_profit_before_tax update</field>
+            <field name="group_id" ref="group_tw_download_profit_before_tax_group_read" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_download_profit_before_tax_branch_setting_read" model="ir.model.access">
+            <field name="model_id" ref="tw_branch_setting.model_tw_branch_setting" />
+            <field name="name">tw_download_profit_before_tax branch_setting read</field>
+            <field name="group_id" ref="group_tw_download_profit_before_tax_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- UPLOAD Profit Before Tax -->
+        <record id="group_tw_upload_profit_before_tax_group_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_profit_before_tax" />
+            <field name="name">TW Upload Profit Before Tax</field>
+        </record>
+
+        <record id="access_tw_upload_profit_before_tax_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_upload_profit_before_tax" />
+            <field name="name">tw_upload_profit_before_tax update</field>
+            <field name="group_id" ref="group_tw_upload_profit_before_tax_group_read" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Upload Period Profit Before Tax -->
+        <record id="group_tw_upload_period_profit_before_tax_group_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_profit_before_tax" />
+            <field name="name">TW Upload Period Profit Before Tax</field>
+        </record>
+
+        <record id="access_tw_upload_period_profit_before_tax_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_upload_period_profit_before_tax" />
+            <field name="name">tw_upload_period_profit_before_tax update</field>
+            <field name="group_id" ref="group_tw_upload_period_profit_before_tax_group_read" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Profit Before Tax Group Admin -->
+        <record id="tw_profit_before_tax_group_admin" model="res.groups">
+            <field name="category_id" ref="tw_module_category_profit_before_tax" />
+            <field name="name">TW Profit Before Tax Admin</field>
+        </record>
+
+        <record id="tw_profit_before_tax_access_admin" model="ir.model.access">
+            <field name="model_id" ref="model_tw_profit_before_tax" />
+            <field name="name">tw_profit_before_tax admin</field>
+            <field name="group_id" ref="tw_profit_before_tax_group_admin" />
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="tw_profit_before_tax_line_access_admin" model="ir.model.access">
+            <field name="model_id" ref="model_tw_profit_before_tax_line" />
+            <field name="name">tw_profit_before_tax_line admin</field>
+            <field name="group_id" ref="tw_profit_before_tax_group_admin" />
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Profit Before Tax Group Read -->
+        <record id="tw_profit_before_tax_group_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_profit_before_tax" />
+            <field name="name">TW Profit Before Tax Read</field>
+        </record>
+
+        <record id="tw_profit_before_tax_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_profit_before_tax" />
+            <field name="name">tw_profit_before_tax read</field>
+            <field name="group_id" ref="tw_profit_before_tax_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="tw_profit_before_tax_line_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_profit_before_tax_line" />
+            <field name="name">tw_profit_before_tax_line read</field>
+            <field name="group_id" ref="tw_profit_before_tax_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Profit Before Tax Group Update -->
+        <!-- TODO: ganti id dari master target margin ke input sisa margin [update dan delete] -->
+        <record id="tw_profit_before_tax_group_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_profit_before_tax" />
+            <field name="name">TW Profit Before Tax Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_profit_before_tax_group_read'))]" />
+        </record>
+
+        <record id="tw_profit_before_tax_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_profit_before_tax" />
+            <field name="name">tw_profit_before_tax update</field>
+            <field name="group_id" ref="tw_profit_before_tax_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_profit_before_tax_line_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_profit_before_tax_line" />
+            <field name="name">tw_profit_before_tax_line update</field>
+            <field name="group_id" ref="tw_profit_before_tax_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Profit Before Tax Group Delete -->
+        <record id="tw_profit_before_tax_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_profit_before_tax" />
+            <field name="name">TW Profit Before Tax Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_profit_before_tax_group_read'))]" />
+        </record>
+
+        <record id="tw_profit_before_tax_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_profit_before_tax" />
+            <field name="name">tw_profit_before_tax delete</field>
+            <field name="group_id" ref="tw_profit_before_tax_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="tw_profit_before_tax_line_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_profit_before_tax_line" />
+            <field name="name">tw_profit_before_tax_line delete</field>
+            <field name="group_id" ref="tw_profit_before_tax_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Period Profit Before Tax Group Read -->
+        <record id="tw_period_profit_before_tax_group_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_profit_before_tax" />
+            <field name="name">TW Period Profit Before Tax Read</field>
+        </record>
+
+        <record id="tw_period_profit_before_tax_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_period_profit_before_tax" />
+            <field name="name">tw_period_profit_before_tax read</field>
+            <field name="group_id" ref="tw_period_profit_before_tax_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Period Profit Before Tax Group Update -->
+        <record id="tw_period_profit_before_tax_group_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_profit_before_tax" />
+            <field name="name">TW Period Profit Before Tax Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_period_profit_before_tax_group_read'))]" />
+        </record>
+
+        <record id="tw_period_profit_before_tax_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_period_profit_before_tax" />
+            <field name="name">tw_period_profit_before_tax update</field>
+            <field name="group_id" ref="tw_period_profit_before_tax_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Period Profit Before Tax Group Delete -->
+        <record id="tw_period_profit_before_tax_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_profit_before_tax" />
+            <field name="name">TW Period Profit Before Tax Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_period_profit_before_tax_group_read'))]" />
+        </record>
+
+        <record id="tw_period_profit_before_tax_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_period_profit_before_tax" />
+            <field name="name">tw_period_profit_before_tax delete</field>
+            <field name="group_id" ref="tw_period_profit_before_tax_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Report PBT -->
+        
+        <record id="group_tw_laporan_pbt_group_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_profit_before_tax" />
+            <field name="name">TW Laporan PBT Read</field>
+        </record>
+
+        <record id="access_tw_laporan_progress_pbt_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_progress_pbt_report" />
+            <field name="name">tw_progress_pbt_laporan read</field>
+            <field name="group_id" ref="group_tw_laporan_pbt_group_read" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_laporan_summary_pbt_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_summary_forecast_report" />
+            <field name="name">tw_summary_forecast_laporan read</field>
+            <field name="group_id" ref="group_tw_laporan_pbt_group_read" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_target_profit_before_tax_laporan_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_target_net_margin_report" />
+            <field name="name">TW_target_profit_before_tax_laporan read</field>
+            <field name="group_id" ref="group_tw_laporan_pbt_group_read" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    </data>
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_download_profit_before_tax_group_read')),
+                (4, ref('group_tw_upload_profit_before_tax_group_read')),
+                (4, ref('group_tw_upload_period_profit_before_tax_group_read')),
+                (4, ref('tw_profit_before_tax_group_admin')),
+                (4, ref('tw_profit_before_tax_group_read')),
+                (4, ref('tw_profit_before_tax_group_update')),
+                (4, ref('tw_profit_before_tax_group_delete')),
+                (4, ref('tw_period_profit_before_tax_group_read')),
+                (4, ref('tw_period_profit_before_tax_group_update')),
+                (4, ref('tw_period_profit_before_tax_group_delete'))
+            ]" />
+        </record>
+    </data>
+</odoo>

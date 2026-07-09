@@ -1,0 +1,40 @@
+<odoo>
+    <record id="tw_generate_df_form_view" model="ir.ui.view">
+        <field name="name">tw.generate.df.form</field>
+        <field name="model">tw.generate.df</field>
+        <field name="arch" type="xml">
+            <form string="Generate DF">
+                <group>
+                    <field name="date"/>
+                    <field name="bank_type"/>
+                </group>
+
+                <group invisible="1">
+                    <field name="name"/>
+                    <field name="file" filename="name"/>
+                </group>
+                <footer>
+                    <button string="Generate"
+                            type="object"
+                            name="action_generate"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_generate_df" model="ir.actions.act_window">
+        <field name="name">Generate DF</field>
+        <field name="res_model">tw.generate.df</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_generate_df"
+              name="Generate DF"
+              parent="tw_menu.submenu_tw_showroom_report"
+              sequence="8"
+              action="action_generate_df"
+              groups="tw_generate_df.group_tw_generate_df_read"/>
+</odoo>

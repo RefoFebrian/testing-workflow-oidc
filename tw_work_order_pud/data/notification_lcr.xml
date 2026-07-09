@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_work_order_pud_lcr_check_data" model="tw.selection">
+            <field name="name">LCR Check</field>
+            <field name="type">LCRNotification</field>
+            <field name="value">LCR Check</field>
+            <field name="internal_value">LCR Check</field>
+        </record>
+        <record id="tw_work_order_pud_lcr_treatment_data" model="tw.selection">
+            <field name="name">LCR Treatment</field>
+            <field name="type">LCRNotification</field>
+            <field name="value">LCR Treatment</field>
+            <field name="internal_value">LCR Treatment</field>
+        </record>
+        <record id="tw_work_order_pud_lcr_treatment_2_data" model="tw.selection">
+            <field name="name">LCR Treatment 2</field>
+            <field name="type">LCRNotification</field>
+            <field name="value">LCR Treatment 2</field>
+            <field name="internal_value">LCR Treatment 2</field>
+        </record>
+        <record id="tw_work_order_pud_lcr_penggantian_data" model="tw.selection">
+            <field name="name">LCR Penggantian</field>
+            <field name="type">LCRNotification</field>
+            <field name="value">LCR Penggantian</field>
+            <field name="internal_value">LCR Penggantian</field>
+        </record>
+    </data>
+</odoo>

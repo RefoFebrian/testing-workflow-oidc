@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+        
+        <!-- B2B e-Meterai Menu -->
+        <menuitem id="tw_b2b_emeterai_menu" name="e-Meterai" parent="tw_menu.submenu_tw_api" sequence="15"/>
+        <menuitem id="tw_b2b_emeterai_master_coordinate_menuitem"
+            name="Master Koordinat e-Meterai"
+            parent="tw_b2b_emeterai_menu"
+            action="tw_b2b_emeterai_master_coordinate_action"
+            sequence="01"
+            groups="group_tw_b2b_emeterai_master_coordinate_read"
+        />
+        <menuitem id="tw_b2b_emeterai_master_quota_menuitem"
+            name="Master Kuota e-Meterai"
+            parent="tw_b2b_emeterai_menu"
+            action="tw_b2b_emeterai_master_quota_action"
+            sequence="02"
+            groups="group_tw_b2b_emeterai_master_quota_read"
+        />
+        <menuitem id="tw_b2b_emeterai_menuitem"
+            name="e-Meterai"
+            parent="tw_b2b_emeterai_menu"
+            action="tw_b2b_emeterai_action"
+            sequence="03"
+            groups="group_tw_b2b_emeterai_read"
+        />
+        <menuitem id="tw_b2b_emeterai_report_menuitem"
+            name="Laporan Penggunaan e-Meterai"
+            parent="tw_b2b_emeterai_menu"
+            action="tw_b2b_emeterai_report_action"
+            sequence="04"
+            groups="group_tw_b2b_emeterai_report_read"
+        />
+
+    </data>
+</odoo>

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="tw_activity_atl_btl_print">
+            <t t-call="web.html_container">
+
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div style="width: 100%;">
+                        <table style="border:0;font-size:10px; width: 100%;">
+                            <tr>
+                                <td style="border: 0; font-weight: bold; letter-spacing: 1px;" colspan="3"><strong>PT.TUNAS DWIPA MATRA</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="border:0;" width="10%">Cabang</td>
+                                <td style="border:0;" width="2%">:</td>
+                                <td style="border:0;"><span t-out="company_id"/></td>
+                            </tr>
+                            <tr>
+                                <td style="border:0;" width="3%">Periode</td>
+                                <td style="border:0;" width="1%">:</td>
+                                <td style="border:0;"><span t-esc="periode"/></td>
+                            </tr>
+                        </table>
+                        <p style="text-align: center; font-size: 10px; margin-top: 10px;">PROPOSAL PERPANJANGAN &amp; PENGAJUAN PAMERAN</p>
+                        <table style="width:100%; border-collapse: collapse; border: 1px solid black; font-size: 8px;">
+                            <tr>
+                                <th style="border: 1px solid black; padding: 3px;background-color: #f2f2f2;">No</th>
+                                <th style="border: 1px solid black; padding: 3px;background-color: #f2f2f2;">Lokasi</th>
+                                <th style="border: 1px solid black; padding: 3px;background-color: #f2f2f2;">Periode</th>
+                                <th style="border: 1px solid black; padding: 3px;background-color: #f2f2f2;">Pic Lokasi</th>
+                                <th style="border: 1px solid black; padding: 3px;background-color: #f2f2f2;">Market</th>
+                                <th style="border: 1px solid black; padding: 3px;background-color: #f2f2f2;">Evaluasi BTL</th>
+                                <th style="border: 1px solid black; padding: 3px;background-color: #f2f2f2;">Foto Lokasi BTL</th>
+                                <th style="border: 1px solid black; padding: 3px;background-color: #f2f2f2;">Biaya</th>
+                            </tr>
+                            <tr t-foreach="detail_ids" t-as="detail" style="page-break-inside: avoid !important;font-size: 8px;">
+                                <td style="border: 1px solid black; padding: 3px;"><span t-esc="no_urut"/></td>
+                                <td style="border: 1px solid black; padding: 3px;">
+                                    <table style="border:0; font-size:8px; width:100%; line-height:200%">
+                                        <tr>
+                                            <td style="border:0;">Nama</td>
+                                            <td style="border:0;">:</td>
+                                            <td style="border:0;"><span t-esc="detail['name']"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:0;">Jarak</td>
+                                            <td style="border:0;">:</td>
+                                            <td style="border:0;"><span t-esc="detail['jarak']"/> Km</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:0;">Alamat</td>
+                                            <td style="border:0;">:</td>
+                                            <td style="border:0;">
+                                                <span t-esc="detail['alamat']"/>, RT/RW: &#160;<span t-esc="detail['rt']"/> / <span t-esc="detail['rw']"/><br/>
+                                                Kota: &#160;<span t-esc="detail['city']"/><br/>
+                                                Kec: &#160;<span t-esc="detail['kecamatan']"/>, Kel: &#160;<span t-esc="detail['kelurahan']"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:0;">Waktu</td>
+                                            <td style="border:0;">:</td>
+                                            <td style="border:0;"><span t-esc="detail['waktu']"/> Menit</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: 1px solid black; ">
+                                    <table style="border:0; font-size:8px; width:100%; line-height:200%">
+                                        <tr>
+                                            <th style="text-align:left; border:0;background-color:rgb(255, 255, 255);">Tgl Awal</th>
+                                            <td style="border:0;" width="5%">: </td>
+                                            <td style="border:0;"><span t-esc="detail.get(\'start_date\').strftime(\'%d-%m-%Y\') if detail.get(\'start_date\') and hasattr(detail.get(\'start_date\'), \'strftime\') else detail.get(\'start_date\')"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align:left;border:0;background-color:rgb(255, 255, 255);">Tgl Akhir</th>
+                                            <td style="border:0;">:</td>
+                                            <td style="border:0;"><span t-esc="detail.get(\'end_date\').strftime(\'%d-%m-%Y\') if detail.get(\'end_date\') and hasattr(detail.get(\'end_date\'), \'strftime\') else detail.get(\'end_date\')"/></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: 1px solid black; ">
+                                    <table style="border:0;font-size:8px; width:100%; line-height:200%">
+                                        <tr>
+                                            <th style="text-align:left;border:0;background-color:rgb(255, 255, 255);">Nama</th>
+                                            <td style="border:0;">:</td>
+                                            <td style="border:0;"><span t-esc="detail['pic']"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align:left;border:0;background-color:rgb(255, 255, 255);">NIK</th>
+                                            <td style="border:0;" width="5%">: </td>
+                                            <td style="border:0;"><span t-esc="detail['nik']"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align:left;border:0;background-color:rgb(255, 255, 255);">Jabatan</th>
+                                            <td style="border:0;" width="5%">: </td>
+                                            <td style="border:0;"><span t-esc="detail['jabatan']"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align:left;border:0;background-color:rgb(255, 255, 255);">No Telp</th>
+                                            <td style="border:0;" width="5%">: </td>
+                                            <td style="border:0;"><span t-esc="detail['no_telp']"/></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: 1px solid black; ">
+                                    <table style="border:0;font-size:8px; width:100%; line-height:200%">
+                                        <tr>
+                                            <th style="text-align:left;border:0;background-color:rgb(255, 255, 255);">Display (Unit)</th>
+                                            <td style="border:0;" width="5%">: </td>
+                                            <td style="border:0;"><span t-esc="detail['display_unit']"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align:left;border:0;background-color:rgb(255, 255, 255);">Target (Unit)</th>
+                                            <td style="border:0;" width="5%">: </td>
+                                            <td style="border:0;"><span t-esc="detail['target_unit']"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:0;">
+                                                <t t-if="detail['history_ids'] != []">
+                                                    <b><u>Pencapaian Bulan</u></b>
+                                                    <table style="border:0;font-size:8px; width:100%; line-height:200%">
+                                                        <tr t-foreach="detail['history_ids']" style="page-break-inside: avoid !important;font-size: 8px;" t-as="history">
+                                                            <td style="border:0;">
+                                                                <table style="font-size:8px; width:100%; line-height:200%">
+                                                                    <tr>
+                                                                        <th style="text-align:left;border:0;background-color:rgb(255, 255, 255);">- <span t-esc="history['month']"/></th>
+                                                                        <td style="border:0;" width="5%">: </td>
+                                                                        <td style="border:0;"><span t-esc="history['qty']"/></td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: 1px solid black; ">
+                                    <table style="border:0;font-size:8px; width:100%; line-height:200%">
+                                        <tr>
+                                            <th style="text-align:left;border:0;background-color:rgb(255, 255, 255);">Pencapaian (Unit)</th>
+                                            <td style="border:0;" width="5%">: </td>
+                                            <td style="border:0;"><span t-esc="detail['pencapaian_unit']"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:0;">
+                                                <t t-if="detail['detail_unit_ids'] != False">
+                                                    <b><u>Pencapaian Bulan Terakhir</u></b>
+                                                    <table style="border:0;font-size:8px; width:100%; line-height:200%">
+                                                        <tr t-foreach="detail['detail_unit_ids']" style="page-break-inside: avoid !important;font-size: 8px;" t-as="history_detail">
+                                                            <td style="border:0;">
+                                                                <table style="font-size:8px; width:100%; line-height:200%">
+                                                                    <tr>
+                                                                        <th style="text-align:left;border:0;background-color:rgb(255, 255, 255);">- <span t-esc="history_detail['categ_id']"/></th>
+                                                                        <td style="border:0;" width="5%">: </td>
+                                                                        <td style="border:0;"><span t-esc="history_detail['qty']"/></td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="border: 1px solid black; text-align:center;">
+                                    <img t-attf-src="data:image/*;base64,{{detail['foto']}}" width="100px" height="70px"/>
+                                </td>
+                                <td style="border: 1px solid black; ">
+                                    <table style="border:0;font-size:8px; width:100%; line-height:200%">
+                                        <tr t-foreach="detail['biaya_ids']" style="page-break-inside: avoid !important;font-size: 8px;" t-as="biaya">
+                                            <td style="border:0;">
+                                                <table style="border:0;font-size:8px; width:100%; line-height:200%">
+                                                    <tr>
+                                                        <th style="text-align:left;border:0;background-color:rgb(255, 255, 255);">Jenis Pengajuan</th>
+                                                        <td style="border:0;" width="5%">: </td>
+                                                        <td style="border:0;"><span t-esc="biaya['submission_type']"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="text-align:left;border:0;background-color:rgb(255, 255, 255);">Vendor</th>
+                                                        <td style="border:0;" width="5%">: </td>
+                                                        <td style="border:0;"><span t-esc="biaya['partner_id']"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="text-align:left;border:0;background-color:rgb(255, 255, 255);">DPP</th>
+                                                        <td style="border:0;" width="5%">: </td>
+                                                        <td style="border:0;"><span t-esc="'{0:,.2f}'.format(biaya['amount'])"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="text-align:left;border:0;background-color:rgb(255, 255, 255);"><span t-esc="biaya['tax_name']"/></th>
+                                                        <td style="border:0;" width="5%">: </td>
+                                                        <td style="border:0;"><span t-esc="'{0:,.2f}'.format(biaya['subtotal'] - biaya['amount'])"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="text-align:left;border:0;background-color:rgb(255, 255, 255);">Total</th>
+                                                        <td style="border:0;" width="5%">: </td>
+                                                        <td style="border:0;"><span t-esc="'{0:,.2f}'.format(biaya['subtotal'])"/></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="8">
+                                    <b><u>Summary</u></b><br/>
+                                    <table style="width: 100%; margin-top: 10px;">
+                                        <tr>
+                                            <td style="width: 50%; vertical-align: top;">
+                                                <table style="width: 100%; border: 0px solid black; border-collapse: collapse; font-size: 8px;">
+                                                    <tr>
+                                                        <th colspan="4" style="border: 1px solid black; padding: 3px; text-align: left;background-color: #f2f2f2;">A. Biaya Aktivitas BTL</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="border: 1px solid black; padding: 3px;background-color: #f2f2f2;">Biaya</th>
+                                                        <th style="border: 1px solid black; padding: 3px;background-color: #f2f2f2;">Total DPP</th>
+                                                        <th style="border: 1px solid black; padding: 3px;background-color: #f2f2f2;">Total PPH</th>
+                                                        <th style="border: 1px solid black; padding: 3px;background-color: #f2f2f2;">Subtotal</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border: 1px solid black; padding: 3px;">Beban TDM</td>
+                                                        <td style="border: 1px solid black; padding: 3px;">Rp <span t-esc="'{0:,.2f}'.format(total_biaya_tdm)"/></td>
+                                                        <td style="border: 1px solid black; padding: 3px;">Rp <span t-esc="'{0:,.2f}'.format(total_biaya_tdm_ppn - total_biaya_tdm)"/></td>
+                                                        <td style="border: 1px solid black; padding: 3px;">Rp <span t-esc="'{0:,.2f}'.format(total_biaya_tdm_ppn)"/></td>
+                                                    </tr>
+                                                    <!-- TODO: butuh di confirm apakah di perlukan untuk leasing -->
+                                                    <!-- <tr>
+                                                        <td style="border: 1px solid black; padding: 3px;">Beban Leasing</td>
+                                                        <td style="border: 1px solid black; padding: 3px;">Rp <span t-esc="'{0:,.2f}'.format(total_biaya_leasing)"/></td>
+                                                        <td style="border: 1px solid black; padding: 3px;">Rp <span t-esc="'{0:,.2f}'.format(total_biaya_leasing_ppn - total_biaya_leasing)"/></td>
+                                                        <td style="border: 1px solid black; padding: 3px;">Rp <span t-esc="'{0:,.2f}'.format(total_biaya_leasing_ppn)"/></td>
+                                                    </tr> -->
+                                                    <tr>
+                                                        <th style="text-align:left; border: 1px solid black; padding: 3px; background-color: #f2f2f2;" width="50%" colspan="2">Subtotal DPP</th>
+                                                        <!-- <th style="border: 1px solid black; padding: 3px;" colspan="2">Rp <span t-esc="'{0:,.2f}'.format(total_biaya_tdm + total_biaya_leasing)"/></th> -->
+                                                        <th style="text-align:left; border: 1px solid black; padding: 3px; background-color: #f2f2f2;" colspan="2">Rp <span t-esc="'{0:,.2f}'.format(total_biaya_tdm + 0)"/></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="text-align:left; border: 1px solid black; padding: 3px; background-color: #f2f2f2;" width="50%" colspan="2">Subtotal PPH (11%/12%)</th>
+                                                        <!-- <th style="border: 1px solid black; padding: 3px;" colspan="2">Rp <span t-esc="'{0:,.2f}'.format((total_biaya_tdm_ppn - total_biaya_tdm)  + ( total_biaya_leasing_ppn - total_biaya_leasing))"/></th> -->
+                                                        <th style="text-align:left; border: 1px solid black; padding: 3px; background-color: #f2f2f2;" colspan="2">Rp <span t-esc="'{0:,.2f}'.format((total_biaya_tdm_ppn - total_biaya_tdm)  + (0))"/></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="text-align:left; border: 1px solid black; padding: 3px; background-color: #f2f2f2;" width="50%" colspan="2">Subtotal</th>
+                                                        <!-- <th style="border: 1px solid black; padding: 3px;" colspan="2">Rp <span t-esc="'{0:,.2f}'.format(total_biaya_tdm_ppn  + total_biaya_leasing_ppn)"/></th> -->
+                                                        <th style="text-align:left; border: 1px solid black; padding: 3px; background-color: #f2f2f2;" colspan="2">Rp <span t-esc="'{0:,.2f}'.format(total_biaya_tdm_ppn  + 0)"/></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="4" style="border: 1px solid black; padding: 3px;"><span t-esc="create_uid"/>, <span t-esc="create_date.strftime('%d-%m-%Y') if create_date else ''"/></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td style="width: 33%; vertical-align: top;">
+                                                <table style="width: 100%; border: 1px solid black; border-collapse: collapse; font-size: 8px;">
+                                                    <tr>
+                                                        <th style="border: 1px solid black; padding: 3px; text-align: center;">Area Manager</th>
+                                                        <th style="border: 1px solid black; padding: 3px; text-align: center;">GM Operational</th>
+                                                    </tr>
+                                                    <tr height="40">
+                                                        <td style="border: 1px solid black; text-align: center; vertical-align: top; font-weight: bold;">
+                                                            APPROVED<br/>
+                                                            <span style="font-size: 6px" t-esc="approved_uid"/><br/>
+                                                            <span style="font-size: 6px" t-esc="approved_date.strftime('%d-%m-%Y') if approved_date else ''"/>
+                                                        </td>
+                                                        <td style="border: 1px solid black; text-align: center; vertical-align: top; font-weight: bold;">
+                                                            APPROVED<br/>
+                                                            <span style="font-size: 6px" t-esc="open_uid or approved_uid"/><br/>
+                                                            <span style="font-size: 6px" t-esc="(open_date or approved_date).strftime(\'%d-%m-%Y\') if hasattr((open_date or approved_date), \'strftime\') else (open_date or approved_date)"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr height="10">
+                                                        <td style="border:0;"></td>
+                                                        <td style="border:0;"></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                <div class="oe_structure"/>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

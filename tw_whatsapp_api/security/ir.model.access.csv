@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_whatsapp_message,tw_whatsapp_message,model_tw_whatsapp_message,base.group_user,1,0,0,0
+access_tw_whatsapp_message_detail,tw_whatsapp_message_detail,model_tw_whatsapp_message_detail,base.group_user,1,0,0,0
+access_tw_whatsapp_content_template,tw_whatsapp_content_template,model_tw_whatsapp_content_template,base.group_user,1,0,0,0

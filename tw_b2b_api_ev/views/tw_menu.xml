@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <!-- WORKSHOP -->
+        <menuitem id="submenu_workshop_b2b_api" parent="tw_menu.submenu_tw_workshop_purchase" name="B2B API EV" sequence="400"/>
+            <menuitem id="workshop_tw_b2b_api_ev_menuitem" parent="submenu_workshop_b2b_api" action="tw_b2b_api_ev_action" sequence="10" groups="tw_b2b_api_ev.tw_b2b_api_ev_group_workshop_read"/>
+            <menuitem id="workshop_tw_b2b_api_monitoring_menuitem" parent="submenu_workshop_b2b_api" action="tw_b2b_api_monitoring_ev_action" sequence="20" groups="tw_b2b_api_ev.tw_b2b_api_monitoring_ev_group_workshop_read"/>
+            <menuitem id="workshop_tw_b2b_api_monitoring_reject_menuitem" parent="submenu_workshop_b2b_api" action="tw_b2b_api_monitoring_reject_ev_action" sequence="30" groups="tw_b2b_api_ev.tw_b2b_api_monitoring_reject_ev_group_workshop_read"/>
+
+        <!-- SHOWROOM -->
+        <menuitem id="submenu_showroom_b2b_api" parent="tw_menu.submenu_tw_showroom_purchase" name="B2B API EV" sequence="400"/>
+            <menuitem id="showroom_tw_b2b_api_ev_menuitem" parent="submenu_showroom_b2b_api" action="tw_b2b_api_ev_action" sequence="10" groups="tw_b2b_api_ev.tw_b2b_api_ev_group_read"/>
+            <menuitem id="showroom_tw_b2b_api_monitoring_menuitem" parent="submenu_showroom_b2b_api" action="tw_b2b_api_monitoring_ev_action" sequence="20" groups="tw_b2b_api_ev.tw_b2b_api_monitoring_ev_group_read"/>
+            <menuitem id="showroom_tw_b2b_api_monitoring_reject_menuitem" parent="submenu_showroom_b2b_api" action="tw_b2b_api_monitoring_reject_ev_action" sequence="30" groups="tw_b2b_api_ev.tw_b2b_api_monitoring_reject_ev_group_read"/>
+    </data>
+</odoo>

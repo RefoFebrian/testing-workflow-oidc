@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+        <!-- MFT File Upload -->
+        <record id="tw_b2b_file_upload_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Upload MFT File Read</field>
+        </record>
+
+        <record id="tw_b2b_file_upload_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_file_upload"/>
+            <field name="name">tw_b2b_file_upload read</field> 
+            <field name="group_id" ref="tw_b2b_file_upload_group_read"/>  
+            <field name="perm_read">1</field> 
+        </record>
+
+        <record id="tw_b2b_file_upload_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Upload MFT File Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_b2b_file_upload_group_read'))]"/>
+        </record>
+
+        <record id="tw_b2b_file_upload_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_file_upload"/>
+            <field name="name">tw_b2b_file_upload update</field> 
+            <field name="group_id" ref="tw_b2b_file_upload_group_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>
+
+        <record id="tw_b2b_file_upload_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Upload MFT File Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_b2b_file_upload_group_read'))]"/>
+        </record>
+        
+        <record id="tw_b2b_file_upload_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_file_upload"/>
+            <field name="name">tw_b2b_file_upload delete</field> 
+            <field name="group_id" ref="tw_b2b_file_upload_group_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+        <!-- MFT File Monitoring -->
+        <record id="tw_b2b_file_monitoring_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Monitoring MFT File Read</field>
+        </record>
+
+        <record id="tw_b2b_file_monitoring_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_file_monitoring"/>
+            <field name="name">tw_b2b_file_monitoring read</field> 
+            <field name="group_id" ref="tw_b2b_file_monitoring_group_read"/>  
+            <field name="perm_read">1</field> 
+        </record>
+        <record id="tw_b2b_file_monitoring_line_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_file_monitoring_line"/>
+            <field name="name">tw_b2b_file_monitoring_line read</field> 
+            <field name="group_id" ref="tw_b2b_file_monitoring_group_read"/>  
+            <field name="perm_read">1</field> 
+        </record>
+
+        <record id="tw_b2b_file_monitoring_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Monitoring MFT File Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_b2b_file_monitoring_group_read'))]"/>
+        </record>
+
+        <record id="tw_b2b_file_monitoring_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_file_monitoring"/>
+            <field name="name">tw_b2b_file_monitoring update</field> 
+            <field name="group_id" ref="tw_b2b_file_monitoring_group_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>
+        <record id="tw_b2b_file_monitoring_line_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_file_monitoring_line"/>
+            <field name="name">tw_b2b_file_monitoring_line update</field> 
+            <field name="group_id" ref="tw_b2b_file_monitoring_group_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>
+
+        <record id="tw_b2b_file_monitoring_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Monitoring MFT File Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_b2b_file_monitoring_group_read'))]"/>
+        </record>
+        
+        <record id="tw_b2b_file_monitoring_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_file_monitoring"/>
+            <field name="name">tw_b2b_file_monitoring delete</field> 
+            <field name="group_id" ref="tw_b2b_file_monitoring_group_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+        <record id="tw_b2b_file_monitoring_line_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_file_monitoring_line"/>
+            <field name="name">tw_b2b_file_monitoring_line delete</field> 
+            <field name="group_id" ref="tw_b2b_file_monitoring_group_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+        <!-- MFT File Server Configuration -->
+        <record id="tw_b2b_file_server_configuration_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Configuration MFT File Server Read</field>
+        </record>
+
+        <record id="tw_b2b_file_server_configuration_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_api_configuration"/>
+            <field name="name">tw_b2b_file_server_configuration read</field> 
+            <field name="group_id" ref="tw_b2b_file_server_configuration_group_read"/>  
+            <field name="perm_read">1</field> 
+        </record>
+
+        <record id="tw_b2b_file_server_configuration_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Configuration MFT File Server Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_b2b_file_server_configuration_group_read'))]"/>
+        </record>
+
+        <record id="tw_b2b_file_server_configuration_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_api_configuration"/>
+            <field name="name">tw_b2b_file_server_configuration update</field> 
+            <field name="group_id" ref="tw_b2b_file_server_configuration_group_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>
+
+        <record id="tw_b2b_file_server_configuration_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Configuration MFT File Server Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_b2b_file_server_configuration_group_read'))]"/>
+        </record>
+        
+        <record id="tw_b2b_file_server_configuration_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_api_configuration"/>
+            <field name="name">tw_b2b_file_server_configuration delete</field> 
+            <field name="group_id" ref="tw_b2b_file_server_configuration_group_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+	</data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('tw_b2b_file_upload_group_read')),
+                (4,ref('tw_b2b_file_upload_group_update')),
+                (4,ref('tw_b2b_file_upload_group_delete')),
+                (4,ref('tw_b2b_file_monitoring_group_read')),
+                (4,ref('tw_b2b_file_monitoring_group_update')),
+                (4,ref('tw_b2b_file_monitoring_group_delete')),
+                (4,ref('tw_b2b_file_server_configuration_group_read')),
+                (4,ref('tw_b2b_file_server_configuration_group_update')),
+                (4,ref('tw_b2b_file_server_configuration_group_delete')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

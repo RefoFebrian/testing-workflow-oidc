@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    <!-- Confirm -->
+        <record id="tw_nrfs_confirm_group_button_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Confirm NRFS</field>
+            <field name="implied_ids" eval="[(4, ref('tw_nrfs_vendor_group_read'))]"/>
+        </record>
+
+        <record id="tw_nrfs_confirm_access_button_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs"/>
+            <field name="name">button_confirm_nrfs read</field>
+            <field name="group_id" ref="tw_nrfs_confirm_group_button_read"/>
+            <field name="perm_write">1</field>
+        </record>
+    
+    <!-- Cancel-->
+     <record id="tw_nrfs_cancel_group_button_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Cancel NRFS</field>
+            <field name="implied_ids" eval="[(4, ref('tw_nrfs_vendor_group_read'))]"/>
+        </record>
+
+        <record id="tw_nrfs_cancel_access_button_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs"/>
+            <field name="name">button_cancel_nrfs read</field>
+            <field name="group_id" ref="tw_nrfs_cancel_group_button_read"/>
+            <field name="perm_write">1</field>
+        </record>
+
+    <!-- Confirm Administrator -->
+        <record id="tw_nrfs_admin_confirm_group_button_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Confirm NRFS Administrator</field>
+            <field name="implied_ids" eval="[(4, ref('tw_nrfs_admin_group_read'))]"/>
+        </record>
+
+        <record id="tw_nrfs_admin_confirm_access_button_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs"/>
+            <field name="name">button_confirm_nrfs_admin read</field>
+            <field name="group_id" ref="tw_nrfs_admin_confirm_group_button_read"/>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_nrfs_admin_check_availability_group_button_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Check Availability</field>
+            <field name="implied_ids" eval="[(4, ref('tw_nrfs_admin_group_read'))]"/>
+        </record>
+
+        <record id="tw_nrfs_admin_check_availability_access_button_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs"/>
+            <field name="name">button_check_availability_nrfs_admin read</field>
+            <field name="group_id" ref="tw_nrfs_admin_check_availability_group_button_read"/>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_nrfs_admin_check_availability_group_button_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Check Availability</field>
+            <field name="implied_ids" eval="[(4, ref('tw_nrfs_admin_group_read'))]"/>
+        </record>
+
+        <record id="tw_nrfs_admin_check_availability_access_button_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs"/>
+            <field name="name">button_check_availability_nrfs_admin read</field>
+            <field name="group_id" ref="tw_nrfs_admin_check_availability_group_button_read"/>
+            <field name="perm_write">1</field>
+        </record>
+        
+    <!-- Include in admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('tw_nrfs_confirm_group_button_read')),
+                (4,ref('tw_nrfs_admin_confirm_group_button_read')),
+                (4,ref('tw_nrfs_admin_check_availability_group_button_read')),
+                (4,ref('tw_nrfs_cancel_group_button_read')),
+            ]"/> 
+        </record> 
+    </data>
+</odoo>

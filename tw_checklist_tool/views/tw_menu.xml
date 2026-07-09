@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <menuitem id="submenu_checklist_tool_workshop" name="Checklist Tool" parent="tw_menu.menu_tw_workshop" sequence="5" groups="group_checklist_tool_read"/>
+        <menuitem id="menu_checklist_tool" name="Checklist Tool" parent="submenu_checklist_tool_workshop" action="tw_checklist_tools_action" sequence="1" groups="group_checklist_tool_read"/>
+
+        <menuitem id="submenu_tw_checklist_tool" name="Checklist Tool Master" parent="tw_menu.submenu_tw_workshop_configuration" sequence="30"/>
+        <menuitem id="menu_master_tools" name="Master Tools" parent="submenu_tw_checklist_tool" action="tw_master_tools_action" sequence="1" groups="group_checklist_tool_master_read"/>
+        <menuitem id="menu_category_master_tools" name="Category Master Tools" parent="submenu_tw_checklist_tool" action="tw_master_tools_category_action" sequence="2" groups="group_checklist_tool_master_read"/>
+        <menuitem id="menu_master_tools_location" name="Master Tools Location" parent="submenu_tw_checklist_tool" action="action_tw_master_tools_location_selection" sequence="3" groups="group_checklist_tool_master_read"/>
+    </data>
+</odoo>

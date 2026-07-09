@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="tw_vehicle_document_report_menu_sub" name="Laporan" parent="tw_vehicle_document.tw_document_handling_menu_root" sequence="250"/>
+        <menuitem id="tw_vehicle_document_report_menu" name="Laporan STNK BPKB" parent="tw_vehicle_document_report_menu_sub" action="tw_vehicle_document_report_action" sequence="10" groups="tw_vehicle_document_report.tw_group_tw_vehicle_document_laporan"/>
+        <menuitem id="tw_birojasa_billing_process_report_menu" name="Laporan PRBJ" parent="tw_vehicle_document_report_menu_sub" action="tw_birojasa_billing_process_report_action" sequence="10" groups="tw_vehicle_document_report.tw_group_tw_birojasa_billing_process_laporan"/>
+    </data>
+</odoo>

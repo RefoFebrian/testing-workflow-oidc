@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="tw_nrfs_sparepart_menuitem" action="tw_nrfs_sparepart.tw_nrfs_sparepart_action" name="Outstanding NRFS Sparepart" parent="tw_nrfs.menu_tw_workshop_nrfs" sequence="10" groups="tw_nrfs_sparepart.tw_nrfs_sparepart_group_read"/>
+    </data>
+</odoo>

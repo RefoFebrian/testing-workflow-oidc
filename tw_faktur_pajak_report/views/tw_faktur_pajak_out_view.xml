@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Inherit Form View to add Print Button -->
+		<record id="tw_faktur_pajak_out_form_view_inherit_report" model="ir.ui.view">
+			<field name="name">tw.faktur.pajak.out.form.inherit.report</field>
+			<field name="model">tw.faktur.pajak.out</field>
+			<field name="inherit_id" ref="tw_faktur_pajak.tw_faktur_pajak_out_form_view"/>
+			<field name="arch" type="xml">
+				<header position="inside">
+					<button name="action_print_faktur_pajak" 
+						type="object" 
+						string="Print Faktur Pajak" 
+						class="btn-primary"
+						invisible="state not in ('close', 'print')"
+						groups="tw_faktur_pajak_report.group_tw_faktur_pajak_report_print"/>
+				</header>
+			</field>
+		</record>
+
+		<!-- Add transaction_code and note fields to form -->
+		<record id="tw_faktur_pajak_out_form_view_inherit_report_fields" model="ir.ui.view">
+			<field name="name">tw.faktur.pajak.out.form.inherit.report.fields</field>
+			<field name="model">tw.faktur.pajak.out</field>
+			<field name="inherit_id" ref="tw_faktur_pajak.tw_faktur_pajak_out_form_view"/>
+			<field name="priority">20</field>
+			<field name="arch" type="xml">
+				<field name="printed_count" position="after">
+					<field name="transaction_code" readonly="1"/>
+					<field name="note" readonly="1"/>
+				</field>
+			</field>
+		</record>
+	</data>
+</odoo>

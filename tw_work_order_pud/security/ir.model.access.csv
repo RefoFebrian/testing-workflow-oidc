@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_work_order_lcr_tw_work_order_lcr,tw_work_order_lcr.tw_work_order_lcr,model_tw_work_order_lcr_tw_work_order_lcr,base.group_user,1,1,1,1

@@ -1,0 +1,1 @@
+from . import tw_wo_invoice_print_inherit

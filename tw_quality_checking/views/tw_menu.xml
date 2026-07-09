@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="tw_quality_checking_menuitem"
+            name="Print Thermal (QC)"
+            parent="tw_stock.submenu_tw_stock_outgoing_workshop"
+            action="tw_quality_checking.action_tw_quality_checking"
+            sequence="50"
+            groups="tw_quality_checking.group_tw_quality_checking_read"
+        />
+
+        <menuitem id="submenu_tw_quality_checking_master" name="Quality Checking" parent="tw_menu.submenu_tw_workshop_configuration" sequence="21"/>
+        
+        <menuitem id="tw_cardboard_dimensions_menuitem" 
+            name="Master Dimensi Kardus"
+            parent="submenu_tw_quality_checking_master"
+            action="tw_quality_checking.action_tw_cardboard_dimensions"
+            sequence="1"
+            groups="tw_quality_checking.group_tw_cardboard_dimensions_read"
+        />
+    
+    </data>
+</odoo>

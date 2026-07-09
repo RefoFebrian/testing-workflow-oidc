@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_boom_task_list" model="ir.ui.view">
+            <field name="name">tw.boom.task.list</field>
+            <field name="model">tw.boom.task</field>
+            <field name="arch" type="xml">
+                <list string="BOOM Task" create="0" decoration-success="task_status == 'current'"
+                        decoration-warning="task_status == 'potensi_overdue'"
+                        decoration-danger="task_status == 'overdue_1'"
+                        decoration-info="task_status == 'overdue_2'">
+                    <field name="no_transaction"/>
+                    <field name="main_category_id" options="{'no_open':True,'no_create':True}"/>
+                    <field name="sub_category_id" options="{'no_open':True,'no_create':True}"/>
+                    <field name="category_id" options="{'no_open':True,'no_create':True}"/>
+                    <field name="company_id" options="{'no_open':True,'no_create':True}"/>
+                    <field name="employee_id" options="{'no_open':True,'no_create':True}"/>
+                    <field name="job_id" options="{'no_open':True,'no_create':True}"/>
+                    <field name="state"/>
+                    <field name="task_status"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_tw_boom_task_form" model="ir.ui.view">
+            <field name="name">tw.boom.task.form</field>
+            <field name="model">tw.boom.task</field>
+            <field name="arch" type="xml">
+                <form string="BOOM Task" create="0" edit="0">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="open,done"/>
+                    </header>
+                    <header>
+                        <field name="pic_status" widget="statusbar" statusbar_visible="current_pic,delegated"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box" groups="tw_boom.group_tw_boom_task_view_transaction">
+                            <button name="action_open_transaction" string="Open Transaction" type="object" class="oe_stat_button" icon="fa-eye"/>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="category_id" options="{'no_open':True,'no_create':True}" class="oe_inline" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Informasi">
+                                <field name="company_id" options="{'no_open':True,'no_create':True}"/>
+                                <field name="main_category_id" options="{'no_open':True,'no_create':True}"/>
+                                <field name="sub_category_id" options="{'no_open':True,'no_create':True}"/>
+                                <field name="category_id" options="{'no_open':True,'no_create':True}"/>
+                                <field name="category_name" readonly="1" invisible="1"/>
+                            </group>
+                            <group string="PIC">
+                                <field name="employee_id" options="{'no_open':True,'no_create':True}"/>
+                                <field name="job_id" string="Job Title PIC" options="{'no_open':True,'no_create':True}"/>
+                                <field name="previous_employee_id" options="{'no_open':True,'no_create':True}"/>
+                                <field name="job_delegation_id" string="Job Title Delegation" options="{'no_open':True,'no_create':True}"/>
+                            </group>
+                            <group string="Informasi Transaksi">
+                                <field name="no_transaction"/>
+                                <field name="source_transaction"/>
+                                <field name="transaction_date"/>
+                                <field name="due_date"/>
+                                <field name="done_date" string="Tgl Selesai Transaksi"/>
+                                <field name="transaction_value" string="Nilai Transaksi (Rp.)"/>
+                                <field name="customer_name" readonly="1" invisible="not customer_name"/>
+                                <field name="finco_id" options="{'no_open':True,'no_create':True}" readonly="1" invisible="not finco_id"/>
+                                <!-- Field for Dashboard BOOM
+                                TODO: 11/26/2025 Dashboard boom is still TBD (to be discussed)
+                                <field name="bill_date" readonly="1" invisible="not bill_date"/> -->
+                                <field name="id_transaction" readonly="1" invisible="1"/>
+                                <field name="model_id" options="{'no_open':True,'no_create':True}" readonly="1" invisible="1"/>
+                            </group>
+                            <group string="Product">
+                                <field name="product_id" options="{'no_open':True,'no_create':True}" readonly="1" invisible="not product_id"/>
+                                <field name="product_color_id" options="{'no_open':True,'no_create':True}" readonly="1" invisible="not product_color_id"/>
+                                <field name="lot_id" options="{'no_open':True,'no_create':True}" readonly="1" invisible="not lot_id"/>
+                            </group>
+                            <group string="Eskalasi">
+                                <field name="current_escalation" readonly="1"/>
+                                <field name="last_escalation_date"/>
+                            </group>
+                            <group string="Additional Information" invisible="0">
+                                <field name="area_id" readonly="1" options="{'no_open':True,'no_create':True}"/>
+                                <field name="admin_spv_id" readonly="1" options="{'no_open':True,'no_create':True}"/>
+                                <field name="area_manager_id" readonly="1" options="{'no_open':True,'no_create':True}"/>
+                                <field name="admin_manager_id" readonly="1" options="{'no_open':True,'no_create':True}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="escalation" string="Eskalasi">
+                                <field name="escalation_transaction_ids">
+                                    <list decoration-danger="note">
+                                        <field name="unit"/>
+                                        <field name="interval"/>
+                                        <field name="pic_id"/>
+                                        <field name="job_id"/>
+                                        <field name="state"/>
+                                        <field name="note"/>
+                                    </list>
+                                    <form string="Eskalasi Transaksi">
+                                        <group>
+                                            <field name="unit"/>
+                                            <field name="interval"/>
+                                            <field name="pic_id" options="{'no_open':True,'no_create':True}"/>
+                                            <field name="job_id" options="{'no_open':True,'no_create':True}"/>
+                                        </group>
+                                        <group>
+                                            <field name="state" />
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            <page name="history_user" string="History User">
+                                <field name="history_user_ids" options="{'no_open':True,'no_create':True}">
+                                    <list editable="top">
+                                        <field name="employee_id" options="{'no_open':True,'no_create':True}"/>
+                                        <field name="job_id" options="{'no_open':True,'no_create':True}"/>
+                                        <field name="company_id" options="{'no_open':True,'no_create':True}"/>
+                                        <field name="reason"/>
+                                        <field name="assign_date"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page name="audit_trail" string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1" />
+                                        <field name="create_date" readonly="1" />
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1" />
+                                        <field name="write_date" readonly="1" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_tw_boom_task_filter" model="ir.ui.view">
+            <field name="name">tw.boom.task.filter</field>
+            <field name="model">tw.boom.task</field>
+            <field name="arch" type="xml">
+                <search string="BOOM Task">
+                    <field name="no_transaction"/>
+                    <field name="source_transaction"/>
+                    <field name="main_category_id"/>
+                    <field name="sub_category_id"/>
+                    <field name="category_id"/>
+                    <field name="company_id"/>
+                    <field name="job_id"/>
+                    <group string="Group By..">
+                        <filter name="group_by_state" string="Status" context="{'group_by': 'state'}" />
+                        <filter name="group_by_task_status" string="Task Status" context="{'group_by': 'task_status'}" />
+                        <filter name="group_by_pic_status" string="PIC Status" context="{'group_by': 'pic_status'}" />
+                        <filter name="group_by_company" string="Branch" context="{'group_by': 'company_id'}" />
+                        <filter name="group_by_main_category_id" string="Main Category" context="{'group_by': 'main_category_id'}" />
+                        <filter name="group_by_sub_category_id" string="Sub Category" context="{'group_by': 'sub_category_id'}" />
+                        <filter name="group_by_category_id" string="Category" context="{'group_by': 'category_id'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_tw_boom_task_all" model="ir.actions.server">
+            <field name="name">BOOM Task</field>
+            <field name="path">boom-task</field>
+            <field name="model_id" ref="tw_boom.model_tw_boom_task"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.boom.task'].action_tw_boom_task()
+            </field>
+        </record>
+
+    </data>
+</odoo>

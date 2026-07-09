@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- Tree View -->
+        <record id="tw_lead_crm_list_view" model="ir.ui.view">
+            <field name="name">tw.lead.crm.list</field>
+            <field name="model">tw.lead.crm</field>
+            <field name="type">list</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="Lead CRM" create="false" edit="false" delete="false">
+                    <field name="name"/>
+                    <field name="customer_name"/>
+                    <field name="md_id"/>
+                    <field name="date"/>
+                    <field name="latest_date_purchase"/>
+                    <field name="next_date_purchase"/>
+                    <field name="average_lead_time_months"/>
+                    <field name="state" widget="badge" decoration-info="state == 'open'" decoration-warning="state == 'outstanding'" decoration-success="state == 'done'" decoration-danger="state == 'error'"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="tw_lead_crm_form_view" model="ir.ui.view">
+            <field name="name">tw.lead.crm.form</field>
+            <field name="model">tw.lead.crm</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Lead CRM" create="false" edit="false" delete="false">
+                    <header>
+                        <button name="action_assign" invisible="state != 'open'" type="object" class="oe_highlight" string="Assign"/>
+                        <field name="state" readonly="1" widget="statusbar" statusbar_visible="open,done"/>
+                    </header>
+                    <sheet>
+                        <div align="right">
+                            <h1 style="font-weight: bold; color: blue">
+                                <div class="label label-danger" style="font-size: 14px;"> 
+                                    <field name="data_source" readonly="1" force_save="1"/>
+                                    <br/>
+                                </div>
+                            </h1>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1" force_save="1" style="font-weight: bold; color: green"/><br/>
+                            </h1>
+                            <label for="customer_name" string="Customer Name" class="oe_inline" invisible="state == 'draft'"/><br/>
+                            <field name="customer_name" class="oe_inline" readonly="1" invisible="state == 'draft'"/><br/>
+                            <label for="identification_number" string="KTP" class="oe_inline" invisible="state == 'draft'"/><br/>
+                            <field name="identification_number" class="oe_inline" readonly="1" invisible="state == 'draft'"/> 
+                        </div>
+                        <div align="right">
+                            <label for="repurchase" string="Repurchase"/>
+                            <field name="repurchase" readonly="1"/>
+                        </div>
+                        <div align="right">
+                            <label for="mediator_customer" string="Mediator Customer"/>
+                            <field name="mediator_customer" readonly="1"/>
+                        </div>
+                        <group>
+                            <group>
+                                <h3 colspan="2"><span class="label label-success" style="font-weight: bold; color: green" invisible="state == 'draft'">Assign Dealer</span></h3>
+                                <field name="company_id" readonly="1" options="{'no_open': True, 'no_create': True}" invisible="state == 'draft'"/>
+                                <field name="employee_id" readonly="1" options="{'no_open': True, 'no_create': True}" invisible="state == 'draft'"/>
+                                <field name="sales_coordinator_id" readonly="1" options="{'no_open': True, 'no_create': True}" invisible="state == 'draft'"/>
+                                <field name="lead_id" readonly="1" options="{'no_open': True, 'no_create': True}" invisible="state == 'draft'"/>
+
+                                <br/><h3 colspan="2"><span class="label label-success" style="font-weight: bold; color: green">History Information</span></h3>
+                                <field name="md_id" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="branch_resource_id" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="product_type" readonly="1"/>
+                                <field name="price_unit_on_road" readonly="1"/>
+                                <field name="down_payment" readonly="1"/>
+                                <label for="down_payment_percent" string="Down Payment(%)" readonly="1"/>
+                                <div><field name="down_payment_percent" readonly="1"/>%</div>
+                                <field name="cash" string="Cash Frequency" readonly="1"/>
+                                <field name="credit" string="Credit Frequency" readonly="1"/>
+
+                                <br/><h3 colspan="2"><span class="label label-success" style="font-weight: bold; color: green">History Order and Service</span></h3>
+                                <field name="last_branch_service_id" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="last_date_order" readonly="1"/>
+                                <field name="last_employee_id" readonly="1"/>
+                                <field name="down_payment_sistem" readonly="1"/>
+                                <label for="down_payment_sistem_percent" string="Down Payment Sistem(%)" readonly="1"/>
+                                <div><field name="down_payment_sistem_percent" readonly="1"/>%</div>
+                            </group>
+                            <group>
+                                <br/><h3 colspan="2"><span class="label label-success" style="font-weight: bold; color: green">Predictive</span></h3>
+                                <field name="date" string="Tanggal Generate"/>
+                                <field name="purchase_frequency" readonly="1"/>
+                                <field name="next_date_purchase" string="Next Date Purchase (Predictive)" readonly="1"/>
+                                <field name="average_lead_time_months" readonly="1"/>
+                                
+                                <br/><h3 colspan="2"><span class="label label-success" style="font-weight: bold; color: green">Personal Information</span></h3>
+                                <field name="village" readonly="1"/>
+                                <field name="profession" readonly="1"/>
+
+                                <br/><h3 colspan="2"><span class="label label-success" style="font-weight: bold; color: green">Reference</span></h3>
+                                <field name="periode" readonly="1"/>
+                                <field name="encryption_identification_number" readonly="1"/>
+                                <field name="source_document" readonly="1"/>
+                                <field name="unique_code" readonly="1"/>
+                            </group>
+                            <group string="Data Leads Konsumen" invisible="state == 'draft'">
+                                <field name="nearest_company_id" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                <label for="birthdate" string="Tgl Lahir"/>
+                                <div>         
+                                    <field name="birthdate" readonly="1"/>
+                                </div>
+                                <field name="gender_id" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                                <field name="identification_family_number" readonly="1"/>
+                                <field name="mobile" readonly="1"/>
+                                <field name="no_wa" readonly="1"/>
+                                <field name="email" readonly="1"/>
+                                <field name="religion_id" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                                <field name="blood_type_id" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                                <field name="hobby_id" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                                <field name="education_id" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                                <field name="occupation_id" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                                <field name="unit_operator_id" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                                <field name="unit_usage_id" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                                <field name="motor_brand_id" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                                <field name="motor_type_id" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                                <field name="mobile_plan_status_id" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                                <field name="housing_tenure_id" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                            </group>
+                            <group string="Alamat Sesuai KTP" invisible="state == 'draft'">
+                                <field name="street" placeholder="Alamat" string="Alamat" readonly="1"/>
+                                <label for="rt" string="RT/RW"/>
+                                <div>                               
+                                    <field name="rt" placeholder="RT" style="width: 25%%" readonly="1"/>
+                                    <field name="rw" placeholder="RW" style="width: 25%%" readonly="1"/>
+                                </div>
+                                <field name="state_id" string="Provinsi" placeholder="Provinsi" options="{'no_open': True, 'no_create': True}" domain="[('id','>',1000),('country_id','=',100)]" readonly="1"/>
+                                <field name="city_id" string="Kab / Kota" placeholder="Kab / Kota" options="{'no_open': True, 'no_create': True}" readonly="1"/>
+                                <label for="district_id" string="Kecamatan"/>
+                                <div>
+                                    <field name="district_id" placeholder="Kecamatan" options="{'no_open': True, 'no_create': True}" readonly="1"/>
+                                </div> 
+                                <label for="sub_district_id" string="Kelurahan"/>
+                                <div>                   
+                                    <field name="sub_district_id" placeholder="Kelurahan" options="{'no_open': True, 'no_create': True}" readonly="1"/> 
+                                </div>
+                                <field name="zip_code" string="Kode Pos" readonly="1" force_save="1"/>
+                            </group>
+                            <group string="Log Note" invisible="state == 'draft'">
+                                <field name="log_note" readonly="1" force_save="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"/>
+                                        <field name="write_uid" readonly="1"/>
+                                        <field name="open_uid" readonly="1"/>
+                                        <field name="outstanding_uid" readonly="1"/>
+                                        <field name="assign_uid" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="create_date" readonly="1"/>
+                                        <field name="write_date" readonly="1"/>
+                                        <field name="open_date" readonly="1"/>
+                                        <field name="outstanding_date" readonly="1"/>
+                                        <field name="assign_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Form Assign -->
+         <record id="tw_lead_crm_assign_form_view" model="ir.ui.view">
+            <field name="name">tw.lead.crm.assign.form</field>
+            <field name="model">tw.lead.crm</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Assign">
+                   <sheet>
+                        <group>
+                            <field name="company_id" required="1"/>
+                            <field name="employee_id" required="1"/>
+                            <field name="sales_coordinator_id" required="1"/>
+                        </group>
+                        <footer>
+                            <button name="action_assign_form" string="Assign" type="object" class="oe_highlight"/>
+                            <button string="Cancel" special="cancel"/>
+                        </footer>
+                   </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="tw_lead_crm_search_view" model="ir.ui.view">
+            <field name="name">tw.lead.crm.search</field>
+            <field name="model">tw.lead.crm</field>
+            <field name="arch" type="xml">
+                <search string="Lead CRM">
+                    <filter string="No CRM" name="filter_by_name" domain="[('name','=','')]"/>
+                    <filter string="Open" name="filter_by_open" domain="[('state','=','open')]"/>
+                    <filter string="Outstanding" name="filter_by_outstanding" domain="[('state','=','outstanding')]"/>
+                    <filter string="Done" name="filter_by_done" domain="[('state','=','done')]"/>
+                    <field string="No CRM" name="name" select="True"/>
+                    <field string="Tanggal Pembelian Terakhir" name="latest_date_purchase" select="True"/>
+                    <field string="Tanggal Pembelian Selanjutnya" name="next_date_purchase" select="True"/>
+                    <field string="Tanggal" name="date" select="True"/>
+                    <field string="Product Type" name="product_type" select="True"/>
+                    <field string="MD Resource" name="md_id" select="True"/>
+                    <field string="Branch Resource" name="branch_resource_id" select="True"/>
+                    <field string="Status" name="state" select="True"/>
+                    <group string="Group By..">
+                        <filter string="MD Resource" domain="[]" name="group_by_md_id" context="{'group_by': 'md_id'}"/>
+                        <filter string="Branch Resource" domain="[]" name="group_by_branch_resource_id" context="{'group_by': 'branch_resource_id'}"/>
+                        <filter string="Status" domain="[]" name="group_by_state" context="{'group_by': 'state'}"/>
+                        <filter string="Repurchase" domain="[]" name="group_by_respurchase" context="{'group_by': 'repurchase'}"/>
+                        <filter string="Tanggal" domain="[]" name="group_by_date" context="{'group_by': 'date'}"/>
+                        <filter string="Tanggal Pembelian Selanjutnya" domain="[]" name="group_by_next_date" context="{'group_by': 'next_date_purchase'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action View -->
+        <record id="tw_lead_crm_raw_data_action" model="ir.actions.server">
+            <field name="name">Data Raw CRM</field>
+            <field name="model_id" ref="tw_lead_crm.model_tw_lead_crm"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.lead.crm'].action_lead_crm_tree()
+            </field>
+        </record>
+        
+        <!-- Action View -->
+        <record id="tw_lead_crm_lead_assign_data_action" model="ir.actions.server">
+            <field name="name">Lead Assignment</field>
+            <field name="model_id" ref="tw_lead_crm.model_tw_lead_crm"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.lead.crm'].action_lead_crm_tree('lead_assign')
+            </field>
+        </record>
+        
+    </data>
+</odoo>

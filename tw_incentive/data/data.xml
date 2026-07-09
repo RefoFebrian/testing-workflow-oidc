@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Incentive Category Selection -->
+            <record id="tw_selection_incentive_category_sales_partner" model="tw.selection">
+                <field name="name">Sales Partner</field>
+                <field name="value">sales_partner</field>
+                <field name="type">IncentiveCategory</field>
+            </record>
+
+            <record id="tw_selection_incentive_category_sales_counter" model="tw.selection">
+                <field name="name">Sales Counter</field>
+                <field name="value">sales_counter</field>
+                <field name="type">IncentiveCategory</field>
+            </record>
+
+            <record id="tw_selection_incentive_category_sales_payroll" model="tw.selection">
+                <field name="name">Sales Payroll</field>
+                <field name="value">sales_payroll</field>
+                <field name="type">IncentiveCategory</field>
+            </record>
+
+            <record id="tw_selection_incentive_category_sales_coordinator" model="tw.selection">
+                <field name="name">Sales Coordinator</field>
+                <field name="value">sales_coordinator</field>
+                <field name="type">IncentiveCategory</field>
+            </record>
+
+            <record id="tw_selection_incentive_category_sales_team_leader" model="tw.selection">
+                <field name="name">Sales Team Leader</field>
+                <field name="value">sales_team_leader</field>
+                <field name="type">IncentiveCategory</field>
+            </record>
+
+            <record id="tw_selection_incentive_category_sales_digital" model="tw.selection">
+                <field name="name">Sales Digital</field>
+                <field name="value">sales_digital</field>
+                <field name="type">IncentiveCategory</field>
+            </record>
+        <!-- Incentive Category Selection -->
+
+        <!-- Dealer Category Selection -->
+            <record id="tw_selection_branch_class_other" model="tw.selection">
+                <field name="name">-</field>
+                <field name="value">-</field>
+                <field name="type">BranchClass</field>
+            </record>
+
+            <record id="tw_selection_branch_class_A" model="tw.selection">
+                <field name="name">A</field>
+                <field name="value">A</field>
+                <field name="type">BranchClass</field>
+            </record>
+            
+            <record id="tw_selection_branch_class_B" model="tw.selection">
+                <field name="name">B</field>
+                <field name="value">B</field>
+                <field name="type">BranchClass</field>
+            </record>
+            
+            <record id="tw_selection_branch_class_C" model="tw.selection">
+                <field name="name">C</field>
+                <field name="value">C</field>
+                <field name="type">BranchClass</field>
+            </record>
+        <!-- Dealer Category Selection -->
+
+
+        <!-- Upload Master Incentive -->
+            <record id="tw_config_file_master_incentive" model="tw.config.files">
+                <field name="name">MASTER INCENTIVE</field>
+                <field name="type_id" ref="tw_config_files.selection_umum_type_configfiles" />
+                <field name="local_path">/opt/local/file/path/MASTER_INCENTIVE</field>
+            </record>
+
+            <record id="tw_format_upload_master_incentive" model="tw.format.upload">
+                <field name="name">master incentive</field>
+                <field name="active">1</field>
+            </record>
+        <!-- Upload Master Incentive -->
+        
+        <!-- Upload Master Target Margin -->
+            <record id="tw_config_file_master_target_margin" model="tw.config.files">
+                <field name="name">MASTER TARGET MARGIN</field>
+                <field name="type_id" ref="tw_config_files.selection_umum_type_configfiles" />
+                <field name="local_path">/opt/local/file/path/MASTER_TARGET_MARGIN</field>
+            </record>
+
+            <record id="tw_format_upload_master_target_margin" model="tw.format.upload">
+                <field name="name">master target margin</field>
+                <field name="active">1</field>
+            </record>
+        <!-- Upload Master Target Margin -->
+        
+    </data>
+</odoo>

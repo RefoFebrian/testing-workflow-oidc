@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--Customer Payment -->
+        <record id="group_tw_customer_payment_confirm_button" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Customer Payment Confirm</field>
+        </record>
+
+        <record id="group_tw_customer_payment_validate_button" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Customer Payment Validate</field>
+        </record>
+
+        <record id="group_tw_customer_payment_cancel_button" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Customer Payment Cancel</field>
+        </record>
+
+        <!--Supplier Payment -->
+        <record id="group_tw_supplier_payment_confirm_button" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Supplier Payment Confirm</field>
+        </record>
+
+        <record id="group_tw_supplier_payment_validate_button" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Supplier Payment Validate</field>
+        </record>
+
+        <record id="group_tw_supplier_payment_cancel_button" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Supplier Payment Cancel</field>
+        </record>
+
+        <!-- Recieve Payment -->
+    
+        <record id="group_tw_receive_payment_confirm_button" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Hutang Lain Confirm</field>
+            <field name="implied_ids" eval="[(4, ref('group_account_payment_receive_payment_read'))]"/>
+        </record>
+        
+        <record id="group_tw_receive_payment_validate_button" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Hutang Lain Validate</field>
+            <field name="implied_ids" eval="[(4, ref('group_account_payment_receive_payment_read'))]"/>
+        </record>
+
+        <record id="group_tw_payment_customer_report_button" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Customer Payment Report</field>
+        </record>
+
+        <record id="group_tw_payment_supplier_report_button" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Supplier Payment Report</field>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_customer_payment_confirm_button')),
+                (4, ref('group_tw_customer_payment_validate_button')),
+                (4, ref('group_tw_customer_payment_cancel_button')),
+                (4, ref('group_tw_supplier_payment_confirm_button')),
+                (4, ref('group_tw_supplier_payment_validate_button')),
+                (4, ref('group_tw_supplier_payment_cancel_button')),
+                (4, ref('group_tw_receive_payment_confirm_button')),
+                (4, ref('group_tw_receive_payment_validate_button')),
+                (4, ref('group_tw_payment_customer_report_button')),
+                (4, ref('group_tw_payment_supplier_report_button')),
+            ]"/>
+        </record>
+    </data>
+
+</odoo>

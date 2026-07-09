@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <menuitem id="menuitem_report_intransit_purchase_showroom"
+    parent="tw_menu.submenu_tw_showroom_report"
+    sequence="2"
+    action="action_report_intransit_purchase_wizard_showroom"
+    groups="tw_report_intransit_purchase.group_tw_report_intransit_purchase_showroom"
+  />
+
+  <menuitem id="menuitem_report_intransit_purchase_workshop"
+    parent="tw_menu.submenu_tw_workshop_report"
+    sequence="2"
+    action="action_report_intransit_purchase_wizard_workshop"
+    groups="tw_report_intransit_purchase.group_tw_report_intransit_purchase_workshop"
+  />
+
+</odoo>

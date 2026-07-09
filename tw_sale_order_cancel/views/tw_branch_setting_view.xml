@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_sale_order_cancel_branch_setting_config_view" model="ir.ui.view">
+            <field name="name">tw.sale.order.cancel.branch.setting.config.form</field>
+            <field name="model">tw.branch.setting</field>
+            <field name="inherit_id" ref="tw_branch_setting.tw_branch_setting_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='general_information']/group/group[1]" position="inside">
+                    <field name="allow_cancel_so_with_payment"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

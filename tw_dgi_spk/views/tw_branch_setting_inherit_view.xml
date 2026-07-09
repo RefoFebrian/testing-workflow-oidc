@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_dgi_spk_branch_setting_form_view" model="ir.ui.view">
+            <field name="name">tw.dgi.spk.branch.setting.form.view</field>
+            <field name="model">tw.branch.setting</field>
+            <field name="inherit_id" ref="tw_dgi.view_branch_setting_form_inherit_dgi_config"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='dgi_config_page']" position="inside">
+                    <group>
+                        <group>
+                            <field name="is_dgi_dso_required"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

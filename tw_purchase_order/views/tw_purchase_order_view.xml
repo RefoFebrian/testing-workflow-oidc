@@ -1,0 +1,374 @@
+<odoo>
+	<data>
+
+		<!-- New List View -->
+			<record id="tw_purchase_order_list_view" model="ir.ui.view">
+				<field name="name">tw.purchase.order.list.view</field>
+				<field name="model">purchase.order</field>
+				<!-- <field name="priority" eval="2" /> -->
+				<field name="arch" type="xml">
+					<list string="Purchase Order" decoration-muted="state=='cancel'" sample="1">
+						<field name="company_id" optional="hide" />
+						<field name="name" string="Reference" decoration-info="state in ('draft','sent')" optional="show" />
+						<field name="date_order" optional="show" />
+						<field name="partner_id" optional="show" />
+						<field name="date_planned" optional="show" />
+						<field name="origin" optional="show" />
+						<field name="amount_untaxed" sum="Total Untaxed amount" string="Untaxed" widget="monetary" optional="show" />
+						<field name="amount_total" sum="Total amount" widget="monetary" optional="show" />
+						<field name="state" widget="badge" decoration-success="state == 'purchase' or state == 'done'" decoration-warning="state == 'to approve'" decoration-info="state == 'draft' or state == 'sent'" optional="show" />
+						<field name="company_id" string="Branch" readonly="1" options="{'no_create': True}" groups="base.group_multi_company" optional="hide" />
+						<field name="priority" widget="priority" nolabel="1" optional="hide" />
+						<field name="partner_ref" optional="hide" />
+						<field name="date_approve" optional="hide" />
+						<field name="user_id" optional="hide" />
+						<field name="currency_id" readonly="state in ['cancel', 'done', 'purchase']" optional="hide" />
+						<field name="invoice_status" widget="badge" decoration-success="invoice_status == 'invoiced'" decoration-warning="invoice_status == 'to invoice'" decoration-info="invoice_status == 'no'" optional="hide" />
+						<field name="activity_exception_decoration" widget="activity_exception" />
+					</list>
+				</field>
+			</record>
+
+		<!-- Inherited Search View -->
+		<record id="tw_inherit_purchase_order_search_view" model="ir.ui.view">
+            <field name="name">tw.inherit.purchase.order.search.view</field>
+            <field name="model">purchase.order</field>
+			<field name="inherit_id" ref="purchase.purchase_order_view_search" />
+            <field name="arch" type="xml">
+                <field name="name" position="after" >
+					<field name="company_id" string="Branch"/>
+					<field name="partner_id" string="Supplier"/>
+					<field name="date_order" string="Date"/>
+					<field name="origin" string="Source Document"/>
+					<filter name="draft" string="draft" domain="[('state', '=', 'draft')]" />
+					<filter name="sent" string="sent" domain="[('state', '=', 'sent')]" />
+					<filter name="purchase" string="purchase" domain="[('state', '=', 'purchase')]" />
+					<filter name="outstanding" string="outstanding" domain="[('state', 'not in', ['purchase', 'done'])]" />
+				</field>
+
+				<filter name="vendor" position="after">
+					<filter string="Branch" name="group_by_branch"
+							context="{'group_by': 'company_id'}"/>
+
+					<filter string="Date" name="group_by_date"
+							context="{'group_by': 'date_order:year'}"/>
+					<filter string="State" name="group_by_state"
+							context="{'group_by': 'state'}"/>
+				</filter>
+            </field>
+        </record>
+		
+		<!-- Inherited List View -->
+			<record id="tw_inherit_purchase_order_tree_view" model="ir.ui.view">
+				<field name="name">tw.purchase.order.tree.view</field>
+				<field name="model">purchase.order</field>
+				<field name="inherit_id" ref="purchase.purchase_order_tree"/>
+				<field name="arch" type="xml">
+					<field name="priority" position="after">
+				<field name="company_id" optional="show"/>
+				</field>
+				</field>
+			</record>
+
+			<record id="tw_inherit_purchase_order_kpis_tree_view" model="ir.ui.view">
+				<field name="name">tw.purchase.order.kpis.tree.view</field>
+				<field name="model">purchase.order</field>
+				<field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+				<field name="arch" type="xml">
+				<field name="priority" position="after">
+					<field name="company_id" optional="show"/>
+				</field>
+				<xpath expr="//field[@name='company_id']" position="attributes">
+					<attribute name="optional">hide</attribute>
+				</xpath>
+				</field>
+			</record>
+
+		<!-- Inherited Form View -->
+			<record id="tw_inherit_purchase_order_form_view" model="ir.ui.view">
+				<field name="name">tw.purchase.order.form</field>
+				<field name="model">purchase.order</field>
+				<field name="inherit_id" ref="purchase.purchase_order_form" />
+				<field name="arch" type="xml">
+
+					<!--
+					because button action_rfq_send is defined more than once in the parent view
+					we use xpath to hide all of them
+					 -->
+					<xpath expr="//button[@name='action_rfq_send'][1]" position="attributes">
+						<attribute name="invisible">1</attribute>
+					</xpath>
+					
+					<xpath expr="//button[@name='action_rfq_send'][2]" position="attributes">
+						<attribute name="invisible">1</attribute>
+					</xpath>
+					
+					<xpath expr="//button[@name='action_rfq_send'][3]" position="attributes">
+						<attribute name="invisible">1</attribute>
+					</xpath>
+					
+					<button name="button_cancel" position="attributes">
+						<attribute name="invisible">state != 'draft'</attribute>
+					</button>
+
+					<xpath expr="//button[@name='button_confirm']" position="attributes">
+						<attribute name="groups">tw_purchase_order.group_tw_purchase_order_confirm</attribute>
+					</xpath>
+
+					<xpath expr="//button[@name='action_create_invoice']" position="attributes">
+						<attribute name="groups">tw_purchase_order.group_tw_purchase_order_create_invoice</attribute>
+					</xpath>
+
+					<xpath expr="//button[@name='confirm_reminder_mail']" position="attributes">
+						<attribute name="groups">tw_purchase_order.group_tw_purchase_order_confirm_reminder_mail</attribute>
+					</xpath>
+
+					<xpath expr="//button[@name='button_draft']" position="attributes">
+						<attribute name="invisible">1</attribute>
+						<attribute name="groups">tw_purchase_order.group_tw_purchase_order_button_draft</attribute>
+					</xpath>
+
+					<xpath expr="//button[@name='button_unlock']" position="attributes">
+						<attribute name="groups">tw_purchase_order.group_tw_purchase_order_button_unlock</attribute>
+					</xpath>
+
+					<xpath expr="//button[@name='print_quotation']" position="attributes">
+						<attribute name="groups">tw_purchase_order.group_tw_purchase_order_print_quotation</attribute>
+					</xpath>
+
+					<field name="currency_id" position="attributes">
+						<attribute name="invisible">1</attribute>
+					</field>
+					<!--? Readonly when state not Draft -->
+
+					<field name="partner_id" position="attributes">
+						<attribute name="readonly">state != 'draft'</attribute>
+					</field>
+					
+					<field name="partner_ref" position="attributes">
+						<attribute name="readonly">state != 'draft'</attribute>
+					</field>
+
+					<field name="partner_ref" position="after">
+						<field name="is_blank_po" invisible="not partner_ref or division != 'Sparepart'" readonly="state != 'draft'"/>
+					</field>
+					
+					<field name="date_order" position="attributes">
+						<attribute name="readonly">state != 'draft'</attribute>
+					</field>
+					
+					<field name="date_planned" position="attributes">
+						<attribute name="readonly">state != 'draft'</attribute>
+					</field>
+					
+					<field name="picking_type_id" position="attributes">
+						<attribute name="readonly">state != 'draft'</attribute>
+						<attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+						<attribute name="domain">[('code','=','incoming'), '|', ('warehouse_id', '=', False), ('warehouse_id.company_id', '=', company_id), '|', ('division', '=', division), ('division', '=', False)]</attribute>
+					</field>
+					
+					<field name="user_id" position="attributes">
+						<attribute name="invisible">1</attribute>
+						<attribute name="readonly">state != 'draft'</attribute>
+					</field>
+					
+					<field name="origin" position="attributes">
+						<attribute name="readonly">state != 'draft'</attribute>
+					</field>
+
+					<field name="incoterm_id" position="attributes">
+						<attribute name="invisible">1</attribute>
+						<attribute name="readonly">state != 'draft'</attribute>
+					</field>
+					
+					<field name="incoterm_location" position="attributes">
+						<attribute name="invisible">1</attribute>
+						<attribute name="readonly">state != 'draft'</attribute>
+					</field>
+					
+					<field name="payment_term_id" position="attributes">
+						<attribute name="readonly">state != 'draft'</attribute>
+						<attribute name="invisible">1</attribute>
+					</field>
+					
+					<field name="fiscal_position_id" position="attributes">
+						<attribute name="invisible">1</attribute>
+						<attribute name="readonly">state != 'draft'</attribute>
+					</field>
+					
+					<!--
+					because button action_create_invoice is defined more than once in the parent view
+					we use xpath to hide specific one of them permanently
+					 -->
+					<!-- <xpath expr="//button[@name='action_create_invoice'][2]" position="attributes">
+						<attribute name="invisible">1</attribute>
+					</xpath> -->
+
+					<button name="button_done" position="attributes">
+						<attribute name="invisible">1</attribute>
+						<attribute name="string">Done</attribute>
+					</button>
+
+					<xpath expr="//page[@name='purchase_delivery_invoice']/group/group/field[@name='company_id']" position="attributes">
+						<attribute name="invisible">1</attribute>
+						<attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+					</xpath>
+
+					<field name="partner_id" position="attributes">
+						<attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+					</field>
+
+					<field name="partner_id" position="before">
+						<field name="company_id" string="Branch" widget="res_partner_many2one" options="{ 'no_create': True, 'no_open': True }" readonly="state != 'draft' or create_date" required="1" />
+					</field>
+
+					<field name="date_order" position="before">
+						<field name="division" required="1" readonly="(context.get('default_po_type') != 'general' and context.get('default_po_type')) or state != 'draft'" />
+						<field name="date" readonly="1"/>
+					</field>
+					
+					<field name="tax_calculation_rounding_method" position="after">
+						<field name="purchase_order_type_id"
+							   options="{'no_create': True, 'no_open': True}"
+							   readonly="state != 'draft'"
+							   domain="[('division', '=', division)]"
+							   required="division in ('Unit', 'Sparepart')"
+							   invisible="division not in ('Unit', 'Sparepart','Umum')" />
+						
+						<field name="payment_term_id" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'"/>
+
+						<field name="start_date"
+							string="Effective Date"
+							widget="daterange"
+							options="{'end_date_field': 'end_date'}"
+							readonly="state != 'draft'"
+							required="1" />
+						<field name="end_date" invisible="1"/>
+					</field>
+
+
+					<div name="reminder" position="after">
+						<!-- TODO: Jika digunakan, pindahkan ke modul baru / modul terkait -->
+						<!-- <field name="md_reference_po" readonly="1" invisible="division != 'Unit'" /> -->
+						<!-- <field name="md_reference_sl" readonly="1" invisible="division != 'Unit'" /> -->
+						<!-- TODO: Pindahkan ke modul purchase_order_ev -->
+						<!-- <field name="is_ev" readonly="1" invisible="division != 'Unit'" /> -->
+						<field name="product_category_ids" widget="many2many_tags" invisible="1"/>
+					</div>
+
+					<field name="product_id" position="attributes">
+						<attribute name="domain">[('purchase_ok', '=', True), ('division', '=', parent.division)]</attribute>
+						<attribute name="option">{'no_open':True,'no_create':True}</attribute>
+					</field>
+
+					<xpath expr="//field[@name='order_line']/list//field[@name='product_id']" position="attributes">
+						<attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+					</xpath>
+
+					<xpath expr="//field[@name='order_line']/list//field[@name='product_uom']" position="attributes">
+						<attribute name="invisible">1</attribute>
+					</xpath>
+
+					<xpath expr="//field[@name='order_line']/list//field[@name='price_unit']" position="before">
+						<field name="original_price_unit" readonly="1" column_invisible="parent.invoice_count == 0"/>
+					</xpath>
+
+					<xpath expr="//field[@name='order_line']/form//field[@name='product_id']" position="attributes">
+						<attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+					</xpath>
+
+					
+
+					<field name="order_line" position="attributes">
+						<attribute name="readonly">state not in ('draft')</attribute>
+					</field>
+					<field name="product_packaging_qty" position="attributes">
+						<attribute name="column_invisible">1</attribute>
+					</field>
+					<field name="product_packaging_id" position="attributes">
+						<attribute name="column_invisible">1</attribute>
+					</field>
+
+					<xpath expr="//page[@name='purchase_delivery_invoice']" position="after">
+						<page string="Audit Trail">
+							<group>
+                                    <group>
+                                        <field name="create_uid" options="{'no_open': True}" readonly="1"/>
+                                        <field name="create_date" options="{'no_open': True}" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" options="{'no_open': True}" readonly="1"/>
+                                        <field name="write_date" options="{'no_open': True}" readonly="1"/>
+                                    </group>
+                            </group>
+						</page>
+					</xpath>
+
+				</field>
+			</record>
+
+			<record id="tw_inherit_purchase_order_stock_form_view" model="ir.ui.view">
+				<field name="name">tw.purchase.order.form</field>
+				<field name="model">purchase.order</field>
+				<field name="inherit_id" ref="purchase_stock.purchase_order_view_form_inherit" />
+				<field name="arch" type="xml">
+					<xpath expr="//header/button[@name='action_view_picking']" position="attributes">
+						<attribute name="groups">tw_purchase_order.group_tw_purchase_order_receive_product</attribute>
+					</xpath>
+					<xpath expr="//div[hasclass('oe_button_box')]/button[@name='action_view_picking']" position="attributes">
+						<attribute name="groups">tw_purchase_order.group_tw_purchase_order_receive_product</attribute>
+					</xpath>
+				</field>
+			</record>
+
+        <!-- Action View -->
+			<record id="tw_purchase_order_showroom_action_server" model="ir.actions.server">
+				<field name="name">Purchase Order</field>
+				<field name="path">purchase-order-showroom</field>
+				<field name="model_id" ref="purchase.model_purchase_order"/>
+				<field name="binding_model_id" ref="purchase.model_purchase_order" />
+				<field name="binding_view_types">form,list</field>
+				<field name="state">code</field>
+				<field name="code">
+					action = env['purchase.order'].action_purchase_order_list('Showroom')
+				</field>
+			</record>
+
+			<record id="tw_purchase_order_showroom_umum_action_server" model="ir.actions.server">
+				<field name="name">Purchase Order</field>
+				<field name="path">purchase-order-showroom-umum</field>
+				<field name="model_id" ref="purchase.model_purchase_order"/>
+				<field name="binding_model_id" ref="purchase.model_purchase_order" />
+				<field name="binding_view_types">form,list</field>
+				<field name="state">code</field>
+				<field name="code">
+					action = env['purchase.order'].action_purchase_order_list('Umum')
+				</field>
+			</record>
+
+			<record id="tw_purchase_order_workshop_action_server" model="ir.actions.server">
+				<field name="name">Purchase Order</field>
+				<field name="path">purchase-order-workshop</field>
+				<field name="model_id" ref="purchase.model_purchase_order"/>
+				<field name="binding_model_id" ref="purchase.model_purchase_order" />
+				<field name="binding_view_types">form,list</field>
+				<field name="state">code</field>
+				<field name="code">
+					action = env['purchase.order'].action_purchase_order_list('Workshop')
+				</field>
+			</record>
+
+			<record id="tw_purchase_order_general_action_server" model="ir.actions.server">
+				<field name="name">Purchase Order</field>
+				<field name="path">purchase-order-general</field>
+				<field name="model_id" ref="purchase.model_purchase_order"/>
+				<field name="binding_model_id" ref="purchase.model_purchase_order" />
+				<field name="binding_view_types">form,list</field>
+				<field name="state">code</field>
+				<field name="code">
+					action = env['purchase.order'].action_purchase_order_list('General')
+				</field>
+			</record>
+
+	</data>
+</odoo>

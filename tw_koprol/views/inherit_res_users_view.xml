@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_res_users_koprol_form" model="ir.ui.view" >
+		    <field name="name">res.users.koprol.form</field>
+		    <field name="model">res.users</field>
+		    <field name="inherit_id" ref="tw_branch.res_user_branch_form_view"/>
+		    <field name="arch" type="xml">
+				<!-- Azure Settings moved to tw.api.configuration (tw_koprol module) -->
+		    </field>
+		</record>
+	</data>
+</odoo>

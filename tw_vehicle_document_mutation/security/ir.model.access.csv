@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_document_mutation,tw.document.mutation,model_tw_document_mutation,base.group_user,1,0,0,0
+access_tw_document_mutation_line,tw.document.mutation.line,model_tw_document_mutation_line,base.group_user,1,0,0,0
+access_tw_ownership_mutation_request,tw.ownership.mutation.request,model_tw_ownership_mutation_request,base.group_user,1,0,0,0
+access_tw_ownership_mutation_request_line,tw.ownership.mutation.request.line,model_tw_ownership_mutation_request_line,base.group_user,1,0,0,0

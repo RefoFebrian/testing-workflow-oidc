@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+      <record id="tw_business_trip_account_setting_inherit_form_view" model="ir.ui.view">
+          <field name="name">tw.business.trip.account.setting.inherit.view.form</field>
+          <field name="model">tw.account.setting</field>
+          <field name="inherit_id" ref="tw_payment_request.tw_payment_request_account_setting_inherit_form_view"/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='journal_payment_request_id']" position="after">                  
+                  <field name="account_payment_request_saku_id" options="{'no_create': True}"/>
+                  <field name="account_payment_request_akomondasi_id" options="{'no_create': True}"/>
+              </xpath>
+          </field>
+      </record>
+    </data>
+  </odoo>
+  

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Dashboard Menu Item -->
+
+        <menuitem id="tw_boom_dashboards_menu"
+            name="Dashboard"
+            parent="tw_menu.menu_tw_boom_top"
+            sequence="0"
+            groups="tw_boom_dashboard.group_tw_boom_dashboard" />
+
+        <menuitem id="menu_dashboard_font"
+            name="Dashboard Fonts"
+            action="tw_boom_dashboard.action_dashboard_font"
+            parent="tw_boom.tw_boom_configuration_menu"
+            sequence="100"/>
+    </data>
+
+    <record id="synconics_bi_dashboard.parent_dashboard_menu" model="ir.ui.menu">
+        <!-- This adds your new group to the menu without removing existing ones -->
+        <field name="groups_id" eval="[(4, ref('tw_boom_dashboard.group_tw_boom_access_bi_dashboard_menu'))]"/>
+    </record>
+</odoo>

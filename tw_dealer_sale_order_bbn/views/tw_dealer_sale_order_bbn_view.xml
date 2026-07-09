@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="tw_dealer_order_bbn_inherit_view_form" model="ir.ui.view">
+			<field name="name">tw.dealer.order.bbn.inherit.view.form</field>
+			<field name="model">tw.dealer.sale.order</field>
+			<field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_order_view_form" />
+			<field name="arch" type="xml">
+
+				<group name="note_group" position="after">
+					<!-- In case bbn line tidak terbentuk -->
+					<button name="action_set_bbn_lines" string="Set BBN Lines" invisible="1" type="object" class="oe_highlight"/>
+				</group>
+
+				<field name="partner_id" position="after">
+					<field name="city_ids" string="Kabupaten" readonly="1" widget="many2many_tags"/>
+					<field name="district_ids" string="Kecamatan" readonly="1" widget="many2many_tags"/>
+				</field>
+				<field name="amount_selling_price" position="after">
+					<field name="amount_bbn" readonly="1" />
+					<field name="amount_bbn_notice_pnbp" string="BBN Notice + PNBP" readonly="1" />
+				</field>
+				<field name="amount_gp_unit" position="after">
+					<field name="amount_gp_bbn" readonly="1" />
+					<field name="amount_vat_gp_bbn" readonly="1" />
+				</field>
+
+				<field name="order_line" position="attributes">
+					<attribute name="context">
+						{
+							'default_company_id': company_id,
+							'default_division': division,
+							'default_partner_stnk_id': partner_id,
+						}
+					</attribute>
+				</field>
+
+				<xpath expr="//field[@name='summary_discount_ids']/list//field[@name='price_unit_purchase']" position="after">
+					<field name="bbn_amount" readonly="1" optional="hide"/>
+					<field name="bbn_purchase_amount" readonly="1" optional="hide"/>
+					<field name="bbn_taxed_amount" readonly="1" optional="hide"/>
+					<field name="gross_profit_bbn" readonly="1" optional="hide"/>
+				</xpath>
+
+				<xpath expr="//field[@name='summary_discount_ids']/form//field[@name='price_unit_purchase']" position="after">
+					<field name="bbn_amount" readonly="1"/>
+					<field name="bbn_purchase_amount" readonly="1"/>
+					<field name="bbn_taxed_amount" readonly="1"/>
+					<field name="gross_profit_bbn" readonly="1"/>
+				</xpath>
+
+			</field>
+		</record>
+
+		<record id="tw_dealer_order_line_bbn_inherit_view_form" model="ir.ui.view">
+			<field name="name">tw.dealer.order.line.bbn.inherit.view.form</field>
+			<field name="model">tw.dealer.sale.order.line</field>
+			<field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_sale_order_line_view_form" />
+			<field name="arch" type="xml">
+				<group name="product_details" position="after">
+					<group name="customer_details" string="Customer">
+						<field name="partner_stnk_id"
+								options="{'no_quick_create': True}"
+								readonly="parent.state != 'draft'"
+								required="item_type == 'main'"
+								placeholder="Type to find a customer STNK..."
+								context="{ 'show_address': True, 'show_vat': False }" />
+						<field name="is_city_changed" invisible="1"/>
+						<field name="is_bbn" readonly="parent.state != 'draft'"/>
+						<field name="state_id" options="{'no_create': True, 'no_open': True}" invisible="1"/>
+						<field name="city_id" options="{'no_create': True, 'no_open': True}" domain="[('state_id', '=', state_id)]" required="is_bbn" invisible="not is_bbn"/>
+						<field name="district_id" options="{'no_create': True, 'no_open': True}" domain="[('city_id', '=', city_id)]" required="is_bbn" invisible="not is_bbn or not is_city_changed"/>
+						<field name="sub_district_id" options="{'no_create': True, 'no_open': True}" domain="[('district_id', '=', district_id)]" required="is_bbn" invisible="not is_bbn or not is_city_changed"/>
+						<field name="biro_jasa_id"
+								options="{'no_create': True, 'no_open': True}"
+								readonly="parent.state != 'draft' or not is_bbn"
+								required="is_bbn"
+								invisible="not is_bbn"
+								placeholder="Type to find a service agent..."
+								context="{ 'show_address': False, 'show_vat': False }" />
+						<field name="plate_id" 
+								string="Plat"
+								readonly="parent.state != 'draft'"
+								required="biro_jasa_id != False"
+								invisible="not is_bbn"
+								options="{'no_create': True, 'no_open': True}" />
+					</group>
+				</group>
+
+				<group name="price_detail" position="after">
+					<group name="bbn_price_detail" string="BBN Detail" invisible="biro_jasa_id == False">
+						<field name="bbn_notice_amount" readonly="1" force_save="1"/>
+						<field name="bbn_process_amount" readonly="1" force_save="1"/>
+						<field name="bbn_serv_amount" readonly="1" force_save="1"/>
+						<field name="bbn_serv_area_amount" readonly="1" force_save="1"/>
+						<field name="bbn_capital_fee_amount" readonly="1" force_save="1"/>
+						<field name="bbn_notice_pnbp_amount" readonly="1" force_save="1"/>
+						<field name="bbn_serv_margin_amount" readonly="1" force_save="1"/>
+						<field name="bbn_force_cogs" readonly="1" force_save="1"/>
+						<field name="accrue_bbn_process" readonly="1" force_save="1"/>
+					</group>
+					<group name="bbn_price_detail_summary" string="BBN Summary">
+						<field name="bbn_amount" readonly="1" force_save="1"/>
+						<field name="bbn_purchase_amount" readonly="1" force_save="1"/>
+						<field name="bbn_taxed_amount" readonly="1" force_save="1"/>
+						<field name="gross_profit_bbn" readonly="1" force_save="1"/>
+						<field name="net_margin" readonly="1" force_save="1"/>
+					</group>
+				</group>
+			</field>
+		</record>
+
+		<record id="tw_dealer_order_line_bbn_inherit_view_list" model="ir.ui.view">
+			<field name="name">tw.dealer.order.line.bbn.inherit.view.list</field>
+			<field name="model">tw.dealer.sale.order.line</field>
+			<field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_sale_order_line_view_list" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='price_unit']" position="after">
+					<field name="bbn_amount" readonly="1" optional="hide"/>
+					<field name="bbn_notice_pnbp_amount" readonly="1" optional="hide"/>
+					<field name="bbn_serv_margin_amount" readonly="1" optional="hide"/>
+				</xpath>
+
+			</field>
+		</record>
+
+	</data>
+</odoo>

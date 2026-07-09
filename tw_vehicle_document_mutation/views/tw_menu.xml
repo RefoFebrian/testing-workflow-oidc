@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Menu Items -->
+        <menuitem id="menu_document_mutation_root" name="Mutation" parent="tw_vehicle_document.tw_document_handling_menu_root" sequence="25"/>
+        <menuitem id="menu_document_mutation_request" name="Request Mutation" parent="menu_document_mutation_root" sequence="10"/>
+        
+        <menuitem id="menu_request_document_mutation" name="Permohonan Mutasi BPKB" parent="menu_document_mutation_request" sequence="5" action="tw_ownership_mutation_request_action" groups="tw_vehicle_document_mutation.group_vehicle_request_bpkb_read"/>
+        
+        <!-- Outgoing/Incoming Document Menus -->
+        <menuitem id="menu_document_mutation_outgoing" name="On Outgoing Document" parent="menu_document_mutation_root" action="tw_document_mutation_outgoing_action" sequence="15" groups="tw_vehicle_document_mutation.group_tw_document_mutation_read"/>
+        <menuitem id="menu_document_mutation_incoming" name="On Incoming Document" parent="menu_document_mutation_root" action="tw_document_mutation_incoming_action" sequence="16" groups="tw_vehicle_document_mutation.group_tw_document_mutation_read"/>
+        
+        <!-- Internal Mutation Menus -->
+        <menuitem id="menu_tw_document_mutation" name="Mutasi STNK" parent="menu_document_mutation_root" action="action_tw_document_mutation" sequence="20" groups="tw_vehicle_document_mutation.group_tw_document_mutation_read"/>
+        <menuitem id="menu_tw_document_mutation_bpkb" name="Mutasi BPKB" parent="menu_document_mutation_root" action="action_tw_document_mutation_bpkb" sequence="25" groups="tw_vehicle_document_mutation.group_tw_document_mutation_read"/>
+    </data>
+</odoo>

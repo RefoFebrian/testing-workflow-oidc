@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <!-- List view for many2many popup selection on picking_ids -->
+        <record id="tw_stock_picking_assign_driver_list_view" model="ir.ui.view">
+            <field name="name">stock.picking.assign.driver.list</field>
+            <field name="model">stock.picking</field>
+            <field name="priority">999</field>
+            <field name="arch" type="xml">
+                <list string="Source Picking" create="0" edit="0" delete="0" default_order="validate_date asc">
+                    <field name="name" readonly="1"/>
+                    <field name="origin" readonly="1"/>
+                    <field name="company_id" string="Branch" readonly="1"/>
+                    <field name="partner_id" string="Receive Dealer" readonly="1"/>
+                    <field name="division" readonly="1"/>
+                    <field name="delivery_state" readonly="1"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_assign_delivery_driver_wizard_view" model="ir.ui.view">
+			<field name="name">tw.assign.delivery.driver.wizard</field>
+			<field name="model">tw.assign.delivery.driver.wizard</field>
+			<field name="arch" type="xml">
+				<form>
+					<group>
+                        <field name="company_id" options="{'no_create': True,'no_open': True}" readonly="1" force_save="1"/>
+                        <field name="division" required="1"/>
+						<field name="delivery_driver_id" required="1" options="{'no_create': True,'no_open': True}"/>
+                        <field name="total_qty_assigned" invisible="1"/>
+                        <field name="total_qty" invisible="1"/>
+                        <field name="total_capacity" invisible="1"/>
+                        <div class="alert alert-warning mb-0 py-2 px-3" role="alert" colspan="2" invisible="total_qty_assigned == 0">
+					        <span>
+					            <i class="fa fa-warning-circle me-1" title="Warning"/>
+					            Driver yang dipilih memiliki tugas yang belum selesai sebanyak
+					            <strong><field name="total_qty_assigned" readonly="1" nolabel="1" class="oe_inline"/> Unit</strong>
+					        </span>
+				        </div>
+                        <div class="alert alert-warning mb-0 py-2 px-3" role="alert" colspan="2" invisible="total_qty &lt;= 8">
+					        <span>
+					            <i class="fa fa-warning-circle me-1" title="Warning"/>
+					            Unit yang di assign ke driver sebanyak <strong><field name="total_qty" readonly="1" nolabel="1" class="oe_inline"/> Unit</strong> sudah melebihi batas maksimal yaitu 8 unit
+					        </span>
+				        </div>
+                        <div class="alert alert-warning mb-0 py-2 px-3" role="alert" colspan="2" invisible="not delivery_driver_id or total_qty == 0 or total_qty &lt; total_capacity">
+					        <span>
+					            <i class="fa fa-warning-circle me-1" title="Warning"/>
+					            Driver yang dipilih tidak memiliki kapasitas yang cukup untuk meng-assign delivery. Total Unit: <strong><field name="total_qty" readonly="1" nolabel="1" class="oe_inline"/> Unit</strong>, Capacity: <strong><field name="total_capacity" readonly="1" nolabel="1" class="oe_inline"/> Unit</strong>
+					        </span>
+				        </div>
+					</group>
+                    <notebook>
+                        <page string="Source Picking">
+                            <field name="picking_ids" 
+                                domain="[
+                                    ('company_id', '=', company_id),
+                                    ('division', '=', division),
+                                    ('delivery_state', '=', 'draft'),
+                                    ('delivery_driver_id', '=', False),
+                                    ('validate_date', '!=', False),
+                                    '|',
+                                    '&amp;',
+                                    ('picking_type_id.code', '=', 'outgoing'),
+                                    '|',
+                                    '|',
+                                    ('mutation_order_id', '!=', False),
+                                    ('sale_order_id', '!=', False),
+                                    ('dealer_sale_order_id', '!=', False),
+                                    ('name', 'ilike', 'MU'),
+                                ]" 
+                                options="{'no_create': True,'no_open': True}"
+                                context="{'list_view_ref': 'tw_expedition_apps.tw_stock_picking_assign_driver_list_view'}"
+                                >
+                                <list editable="bottom">
+                                    <field name="name" readonly="1"/>
+                                    <field name="origin" readonly="1"/>
+                                    <field name="company_id" string="Branch" options="{'no_create': True,'no_open': True}" readonly="1"/>
+                                    <field name="partner_id" string="Receive Dealer" options="{'no_create': True,'no_open': True}" readonly="1"/>
+                                    <field name="division" readonly="1"/>
+                                    <field name="delivery_state" readonly="1"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+					<footer>
+						<button name="action_assign_delivery_driver" string="Assign" type="object" class="oe_highlight"/>
+						<button string="Close" class="oe_link" special="cancel" />
+					</footer>
+				</form>
+			</field>
+		</record>
+
+        <record id="action_tw_assign_delivery_driver_wizard" model="ir.actions.act_window">
+            <field name="name">Assign Delivery Driver</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.assign.delivery.driver.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_assign_delivery_driver_wizard_view"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

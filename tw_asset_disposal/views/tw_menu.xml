@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <menuitem id="tw_disposal_asset_submenu" name="Disposal Asset" parent="tw_menu.submenu_tw_general_affair_asset" groups="group_asset_disposal_read" action="tw_asset_disposal.tw_disposal_asset_action" sequence="99"/> 		
+    
+    </data>
+    
+
+</odoo>

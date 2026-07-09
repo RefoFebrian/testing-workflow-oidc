@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_api_log_partition_manage,access_tw_api_log_partition_manage,model_tw_api_log_partition,tw_api.group_tw_api_log_delete,1,1,1,1
+access_tw_api_log_partition_read,access_tw_api_log_partition_read,model_tw_api_log_partition,tw_api.group_tw_api_log_read,1,0,0,0

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- MRP Bundling -->
+        <record id="group_button_mrp_bundling_confirm" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Button - MRP Bundling Confirm</field>
+        </record>
+
+        <record id="group_button_mrp_bundling_start" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Button - MRP Bundling Start</field>
+        </record>
+
+        <record id="group_button_mrp_bundling_produce_all" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Button - MRP Bundling Produce All</field>
+        </record>
+
+        <record id="group_button_mrp_bundling_cancel" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Button - MRP Bundling Cancel</field>
+        </record>
+
+        <record id="group_button_mrp_bundling_unbuild" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Button - MRP Bundling Unbuild</field>
+        </record>
+    </data>
+
+    <data>
+        <!-- Admin Group -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_button_mrp_bundling_confirm')),
+                (4, ref('group_button_mrp_bundling_start')),
+                (4, ref('group_button_mrp_bundling_produce_all')),
+                (4, ref('group_button_mrp_bundling_cancel')),
+                (4, ref('group_button_mrp_bundling_unbuild')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

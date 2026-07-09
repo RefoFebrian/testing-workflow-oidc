@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_product_category_bundling_inherit_form_view" model="ir.ui.view">
+            <field name="name">product.category.account.property.inherit.form</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="account.view_category_property_form" />
+            <field name="arch" type="xml">
+                <field name="property_stock_account_production_cost_id" position="after">
+                    <field name="bundling_account_id" options="{'no_create': True}" required="1"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

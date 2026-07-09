@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        
+        <record id="tw_good_receive_collecting_list_view" model="ir.ui.view">
+            <field name="name">tw.good.receive.collecting.list.view</field>
+            <field name="model">tw.good.receive.collecting</field>
+            <field name="arch" type="xml">
+                <list string="List Good Receive Collecting" default_order="id desc">
+                    <field name="company_id"/>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="date"/>
+                    <field name="amount_total"/>
+                    <field name="state" widget="badge" decoration-success="state == 'done'"/>
+		        </list>
+		     </field>
+		</record>
+
+        <record id="tw_good_receive_collecting_form_view" model="ir.ui.view">
+		    <field name="name">tw.good.receive.collecting.form.view</field>
+		    <field name="model">tw.good.receive.collecting</field>
+		    <field name="arch" type="xml">		       	        		
+                <form>
+                    <header>
+                        <button name="action_confirm" string="Confirm" invisible="state != 'approved'" class="oe_highlight" type="object" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,open,done"/>
+            		</header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button"
+                                    name="action_view_invoice"
+                                    type="object"
+                                    icon="fa-bullseye"
+                                    invisible="not invoice_id">
+                                <div class="o_field_statinfo">
+                                    <span class="o_stat_text">Invoice</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h2>
+                                <label for="name" string=""/>
+                                <field name="name" force_save="1" class="oe_inline" readonly="1"/>
+                            </h2>
+                        </div>
+                            <group>
+                                <group>
+                                    <field name="company_id" required="1" options="{'no_open': True,'no_create': True}" readonly="state != 'draft'"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="partner_id" required="1" options="{'no_open': True,'no_create': True}" readonly="state != 'draft'"/>
+                                    <field name="description" required="1" readonly="state != 'draft'"/>
+                                    <field name="payment_term_id" readonly="state != 'draft'"/>
+                                    <field name="tax_ids" widget="many2many_tags" readonly="state != 'draft'" options="{'no_create': True,'no_open': True}"/>
+                                    <field name="good_receive_ids" widget="many2many_tags" readonly="state != 'draft'" options="{'no_create': True,'no_open': True}" domain="[('partner_id','=',partner_id),('company_id','=',company_id),('state','=','open')]"/>
+                                    <field name="is_collect_all" readonly="state != 'draft'"/>
+                                </group>
+                                <group>
+                                    <field name="division" readonly="1" required="1"/>
+                                    <field name="invoice_id" invisible="1"/>
+                                    <field name="date" readonly="1"/>
+                                    <field name="document_date" readonly="state != 'draft'"/>
+                                    <field name="document_no" readonly="state != 'draft'"/>
+                                    <field name="tgl_faktur_pajak" readonly="state != 'draft'"/>
+                                    <field name="no_faktur_pajak" string="No Faktur Pajak Vendor" readonly="state != 'draft'"/>
+                                    <field name="reason_cancel" invisible="not reason_cancel"/>
+                                </group>
+                            </group>
+                            <notebook>
+                                <page string="Collecting Lines">
+                                    <field colspan="4" name="line_ids" required="1" widget="one2many_list" nolabel="1" readonly="state != 'draft'">
+                                        <list editable="bottom" create="false">
+                                            <field name="collecting_good_receive_id" column_invisible="1" force_save="1" readonly="1" required="1" options="{'no_open': True,'no_create': True}"/>
+                                            <field name="purchase_order_line_id" column_invisible="1" force_save="1" string="Asset PO" readonly="1"/>
+                                            <field name="product_id" force_save="1" readonly="1"/>
+                                            <field name="is_asset" force_save="1" readonly="1"/>
+                                            <field name="qty" force_save="1" readonly="1"/>
+                                            <field name="account_id" force_save="1" readonly="1" options="{'no_open': True,'no_create': True}"/>
+                                            <field name="date_maturity" force_save="1" readonly="1"/>
+                                            <field name="price" force_save="1" required="1" readonly="1"/>
+                                            <field name="discount" force_save="1" readonly="1"/>
+                                            <field name="tax_ids" widget="many2many_tags" options="{'no_open': True,'no_create': True}"/>
+                                            <field name="price_tax" force_save="1" readonly="1"/>
+                                            <field name="price_subtotal" force_save="1" readonly="1"/>
+                                            <field name="price_total" force_save="1" readonly="1"/>
+                                        </list>
+                                    </field>
+                                    <group>
+                                        <group>
+                                            <field colspan="2" name="notes" nolabel="1" placeholder="Define your terms and conditions ..."/>
+                                        </group>
+                                        <group class="oe_subtotal_footer">
+                                            <field name="tax_totals" widget="account-tax-totals-field" nolabel="1" readonly="1"/>
+                                        </group>
+                                    </group>
+                                    <div class="clearfix"/>
+                                </page>
+                                <page string="Lampiran">
+                                    <field name="attachment_ids" nolabel="1" readonly="state != 'draft'"/>
+                                </page>
+                                <page name="journal_items" string="Journal Items">
+                                    <field name="move_ids" readonly="1"/>
+                                </page>
+                                <page string="Audit Trail">
+                                    <group>
+                                        <group>
+                                            <field name="create_uid" readonly="1"/>
+                                            <field name="create_date" readonly="1"/>
+                                            <field name="rfa_uid" readonly="1" invisible="not rfa_uid"/>
+                                            <field name="rfa_date" readonly="1" invisible="not rfa_date"/>
+                                            <field name="confirm_uid" readonly="1" invisible="not confirm_uid"/>
+                                            <field name="confirm_date" readonly="1" invisible="not confirm_date"/>
+                                            <field name="cancel_uid" readonly="1" invisible="not cancel_uid"/>
+                                            <field name="cancel_date" readonly="1" invisible="not cancel_date"/>
+                                        </group>
+                                        <group>							
+                                            <field name="write_uid" readonly="1"/>
+                                            <field name="write_date" readonly="1"/>
+                                            <field name="approve_uid" readonly="1" invisible="not approve_uid"/>
+                                            <field name="approve_date" readonly="1" invisible="not approve_date"/>
+                                            <field name="done_uid" readonly="1" invisible="not done_uid"/>
+                                            <field name="done_date" readonly="1" invisible="not done_date"/>
+                                        </group>
+                                    </group>
+                                </page>
+                            </notebook>
+                    </sheet>
+                </form>
+		    </field>
+		</record>
+
+        <!-- Cancel View -->
+        <record model="ir.ui.view" id="good_receive_collecting_cancel_wizard_form">
+		    <field name="name">tw.good.receive.collecting.cancel.wizard</field>
+		    <field name="model">tw.good.receive.collecting</field>
+            <field name="priority">100</field>
+		    <field name="arch" type="xml">
+		        <form string="REASON" version="7.0">
+		            <group>
+		                <field name="reason_cancel" required="1"/>
+		            </group>
+		            <footer>
+		                <button name="action_cancel" string="Save" type="object" class="oe_highlight"/>
+		                or
+		                <button string="Cancel" class="oe_link" special="cancel"/>
+		            </footer>
+		        </form>
+		    </field>
+		</record>
+
+        <record id="tw_good_receive_collecting_search_view" model="ir.ui.view">
+            <field name="name">tw.good.receive.collecting.search</field>
+            <field name="model">tw.good.receive.collecting</field>
+            <field name="arch" type="xml">
+                <search string="Search Good Receive Collecting">
+                    <field name="name" string="Nomor Transaksi"/>
+                    <field name="company_id"/>
+                    <field name="partner_id"/>
+                    <field name="document_no" string="Vendor Document No"/>
+                    <field name="description" />
+                    <field name="tax_ids" />
+                    <field name="good_receive_ids" />
+                    <field name="date" />
+                    <field name="no_faktur_pajak" />
+                    <field name="line_ids" string="Product" filter_domain="[('line_ids.product_id','ilike',self)]"/>
+                    <field name="line_ids" string="Account" filter_domain="[('line_ids.account_id','ilike',self)]"/>
+                    <separator/>
+                    <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                    <filter name="open" string="Open" domain="[('state', '=', 'open')]"/>
+                    <filter name="done" string="Done" domain="[('state', '=', 'done')]"/>
+                    <filter name="outstanding" string="Outstanding" domain="[('state', '!=', 'done')]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Branch" name="group_by_company" context="{'group_by': 'company_id'}"/>
+                        <filter string="Supplier" name="group_by_partner" context="{'group_by': 'partner_id'}"/>
+                        <filter string="Status" name="group_by_state" context="{'group_by': 'state'}"/>
+                        <filter string="Date" name="group_by_date" context="{'group_by': 'date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="tw_good_receive_collecting_action">
+            <field name="name">Collecting Good Receive</field>
+            <field name="res_model">tw.good.receive.collecting</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{'readonly_by_pass': 1,'is_asset': True,'search_default_outstanding':1}</field>
+            <field name="search_view_id" ref="tw_good_receive_collecting_search_view"/>
+        </record>
+        
+    </data>
+</odoo>

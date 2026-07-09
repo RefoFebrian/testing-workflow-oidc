@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    <!-- Master Reason rent Aset -->
+        <record id="tw_master_rent_reason_asset_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset"/>
+            <field name="name">TW Master Reason Peminjaman Aset Read</field>
+        </record>        
+        <record id="tw_master_rent_reason_asset_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_rent_reason_asset"/>
+            <field name="name">tw_master_rent_reason_asset read</field>
+            <field name="group_id" ref="tw_master_rent_reason_asset_group_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="tw_master_rent_reason_asset_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset"/>
+            <field name="name">TW Master Reason Peminjaman Aset Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_master_rent_reason_asset_group_read'))]" />
+        </record>        
+        <record id="tw_master_rent_reason_asset_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_rent_reason_asset"/>
+            <field name="name">tw_master_rent_reason_asset update</field>
+            <field name="group_id" ref="tw_master_rent_reason_asset_group_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_master_rent_reason_asset_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset"/>
+            <field name="name">TW Master Reason Peminjaman Aset Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_master_rent_reason_asset_group_read'))]" />
+        </record>        
+        <record id="tw_master_rent_reason_asset_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_rent_reason_asset"/>
+            <field name="name">tw_master_rent_reason_asset delete</field>
+            <field name="group_id" ref="tw_master_rent_reason_asset_group_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+    <!-- rent Aset -->
+        <record id="tw_rent_aset_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset"/>
+            <field name="name">TW Peminjaman Aset Read</field>
+        </record>        
+        <record id="tw_rent_aset_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_lending"/>
+            <field name="name">tw_rent_aset read</field>
+            <field name="group_id" ref="tw_rent_aset_group_read"/>
+            <field name="perm_read">1</field>
+        </record>
+        <record id="tw_rent_aset_line_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_lending_line"/>
+            <field name="name">tw_rent_aset_line read</field>
+            <field name="group_id" ref="tw_rent_aset_group_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="tw_rent_aset_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset"/>
+            <field name="name">TW Peminjaman Aset Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_rent_aset_group_read'))]" />
+        </record>        
+        <record id="tw_rent_aset_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_lending"/>
+            <field name="name">tw_rent_aset update</field>
+            <field name="group_id" ref="tw_rent_aset_group_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        <record id="tw_rent_aset_line_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_lending_line"/>
+            <field name="name">tw_rent_aset_line update</field>
+            <field name="group_id" ref="tw_rent_aset_group_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+
+        <record id="tw_rent_aset_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset"/>
+            <field name="name">TW Peminjaman Aset Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_rent_aset_group_read'))]" />
+        </record>        
+        <record id="tw_rent_aset_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_lending"/>
+            <field name="name">tw_rent_aset delete</field>
+            <field name="group_id" ref="tw_rent_aset_group_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+        <record id="tw_rent_aset_line_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_lending_line"/>
+            <field name="name">tw_rent_aset_line delete</field>
+            <field name="group_id" ref="tw_rent_aset_group_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+    <!-- return Aset -->
+        <record id="tw_return_aset_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset"/>
+            <field name="name">TW Pengembalian Aset Read</field>
+        </record>        
+        <record id="tw_return_aset_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_return"/>
+            <field name="name">tw_return_aset read</field>
+            <field name="group_id" ref="tw_return_aset_group_read"/>
+            <field name="perm_read">1</field>
+        </record>
+        <record id="tw_return_aset_line_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_return_line"/>
+            <field name="name">tw_return_aset_line read</field>
+            <field name="group_id" ref="tw_return_aset_group_read"/>
+            <field name="perm_read">1</field>
+        </record>
+        <record id="tw_rent_aset_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_lending"/>
+            <field name="name">tw_asset_lending read</field>
+            <field name="group_id" ref="tw_return_aset_group_read"/>
+            <field name="perm_read">1</field>
+        </record>
+        <record id="tw_rent_aset_line_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_lending_line"/>
+            <field name="name">tw_asset_lending_line read</field>
+            <field name="group_id" ref="tw_return_aset_group_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="tw_return_aset_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset"/>
+            <field name="name">TW Pengembalian Aset Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_return_aset_group_read'))]" />
+        </record>        
+        <record id="tw_return_aset_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_return"/>
+            <field name="name">tw_return_aset update</field>
+            <field name="group_id" ref="tw_return_aset_group_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        <record id="tw_return_aset_line_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_return_line"/>
+            <field name="name">tw_return_aset_line update</field>
+            <field name="group_id" ref="tw_return_aset_group_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        <record id="tw_rent_aset_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_lending"/>
+            <field name="name">tw_asset_lending update</field>
+            <field name="group_id" ref="tw_return_aset_group_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        <record id="tw_rent_aset_line_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_lending_line"/>
+            <field name="name">tw_asset_lending_line update</field>
+            <field name="group_id" ref="tw_return_aset_group_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_return_aset_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset"/>
+            <field name="name">TW Pengembalian Aset Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_return_aset_group_read'))]" />
+        </record>        
+        <record id="tw_return_aset_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_return"/>
+            <field name="name">tw_return_aset delete</field>
+            <field name="group_id" ref="tw_return_aset_group_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+        <record id="tw_return_aset_line_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_return_line"/>
+            <field name="name">tw_return_aset_line delete</field>
+            <field name="group_id" ref="tw_return_aset_group_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+        <record id="tw_rent_aset_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_lending"/>
+            <field name="name">tw_asset_lending delete</field>
+            <field name="group_id" ref="tw_return_aset_group_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+        <record id="tw_rent_aset_line_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_lending_line"/>
+            <field name="name">tw_asset_lending_line delete</field>
+            <field name="group_id" ref="tw_return_aset_group_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+    </data>
+    <data>
+    <!-- Add all access to admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+			<field name="implied_ids" eval="[
+                (4,ref('tw_master_rent_reason_asset_group_read')),
+                (4,ref('tw_master_rent_reason_asset_group_update')),
+                (4,ref('tw_master_rent_reason_asset_group_delete')),
+                (4,ref('tw_rent_aset_group_read')),
+                (4,ref('tw_rent_aset_group_update')),
+                (4,ref('tw_rent_aset_group_delete')),
+                (4,ref('tw_return_aset_group_read')),
+                (4,ref('tw_return_aset_group_update')),
+                (4,ref('tw_return_aset_group_delete'))
+			]"/> 
+		</record>
+    </data>
+</odoo>

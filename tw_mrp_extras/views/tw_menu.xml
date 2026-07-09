@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+        <!-- Showroom -->
+        <menuitem id='submenu_showroom_tw_mrp_extras' name='Extras' sequence="10" parent="tw_mrp.submenu_showroom_tw_manufacture_bom" action="tw_mrp_extras.tw_mrp_inherit_extras_action" groups="tw_mrp_extras.group_tw_mrp_bom_extras_read"/>
+        	    
+        <!-- Master -->
+        <menuitem id='submenu_master_tw_mrp_extras' name='Extras' sequence="10" parent="tw_mrp.submenu_master_tw_manufacture_bom" action="tw_mrp_extras.tw_mrp_inherit_extras_action" groups="tw_mrp_extras.group_tw_mrp_bom_extras_master_read"/>
+
+        <!-- Warehouse -->
+        <menuitem id='submenu_warehouse_tw_mrp_extras' name='Extras' sequence="10" parent="tw_mrp.submenu_warehouse_tw_manufacture_bom" action="tw_mrp_extras.tw_mrp_inherit_extras_action" groups="tw_mrp_extras.group_tw_mrp_bom_extras_warehouse_read"/>
+    </data>
+</odoo>

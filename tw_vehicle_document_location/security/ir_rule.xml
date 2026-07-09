@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_vehicle_document_location_rule" model="ir.rule">
+            <field name="name">Vehicle Document Location multi-company</field>
+            <field name="model_id" ref="model_tw_vehicle_document_location"/>
+            <!--
+                Location adalah master data referensi.
+                READ dibuka global (perm_read=False) agar branch tujuan inter-branch
+                mutation bisa ditampilkan tanpa Access Error.
+                Operasi write/create/unlink tetap dibatasi per company.
+            -->
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+    </data>
+</odoo>

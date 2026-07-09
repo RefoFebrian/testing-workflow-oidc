@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_ring,tw_ring.tw_ring,model_tw_ring,base.group_user,1,0,0,0
+access_tw_ring_kecamatan,tw_ring_kecamatan.tw_ring_kecamatan,model_tw_ring_kecamatan,base.group_user,1,0,0,0
+access_tw_ring_kecamatan_line,tw_ring_kecamatan.tw_ring_kecamatan_line,model_tw_ring_kecamatan_line,base.group_user,1,0,0,0

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_res_partner_base_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.res.partner.base.inherit.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" /> <!-- TODO: shouldn't it refer to tw_partner_contact_form_view views from module tw_partner? -->
+            <field name="arch" type="xml">
+                <field name='birthdate' position="after">
+                    <field name='whatsapp'/>
+                </field>
+                <field name='blood_type_id' position="after">
+                    <field name='responsible_occupation_id' options="{'no_open': True, 'no_create': True}"/>
+                </field>
+
+                <xpath expr="//page[@name='sales_purchases']" position="after">
+                    <page name="customer_cdb" string="Customer CDB">
+                        <field name="cdb_partner_ids" readonly="1" context="{
+                            'list_view_ref': 'tw_partner_cdb.view_tw_partner_cdb_list',
+                            'form_view_ref': 'tw_partner_cdb.view_tw_partner_cdb_form',
+                            'create': False,
+                            'edit': False,
+                            'delete': False,
+                        }"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_partner_customer_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.partner.customer.inherit.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="tw_partner.tw_customer_partner_form_view" /> <!-- TODO: shouldn't it refer to tw_partner_contact_form_view views from module tw_partner? -->
+            <field name="arch" type="xml">
+                <field name='birthdate' position="after">
+                    <field name='whatsapp'/>
+                </field>
+                <field name='blood_type_id' position="after">
+                    <field name='responsible_occupation_id' options="{'no_open': True, 'no_create': True}"/>
+                </field>
+
+                <xpath expr="//page[@name='contact_addresses']" position="after">
+                    <page name="customer_cdb" string="Customer CDB">
+                        <field name="cdb_partner_ids" readonly="1" context="{
+                            'list_view_ref': 'tw_partner_cdb.view_tw_partner_cdb_list',
+                            'form_view_ref': 'tw_partner_cdb.view_tw_partner_cdb_form',
+                            'create': False,
+                            'edit': False,
+                            'delete': False,
+                        }"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

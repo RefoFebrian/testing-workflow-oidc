@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_dgi_bast_wizard,tw.dgi.bast.wizard,model_tw_dgi_bast_wizard,tw_dgi_bast.tw_dgi_bast_button_group,1,1,1,0

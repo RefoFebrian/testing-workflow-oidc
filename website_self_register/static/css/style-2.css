@@ -1,0 +1,730 @@
+/* ===================================================
+   Website Self Register — Honda Service
+   Modern, accessible styling for ages 18-50
+   =================================================== */
+
+/* ---------- Google Font ---------- */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+/* ---------- Design Tokens ---------- */
+:root {
+  --honda-red: #cc0000;
+  --honda-red-dark: #8b0000;
+  --honda-red-light: #ff1a1a;
+  --accent-gold: #ffb800;
+  --text-primary: #1a1a2e;
+  --text-secondary: #555770;
+  --text-muted: #8e8ea0;
+  --bg-page: #f5f6fa;
+  --bg-white: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.92);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.14);
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 50px;
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Base ---------- */
+body {
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  color: var(--text-primary);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Container ---------- */
+.container-custom {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ==========================================================
+   HERO / SEARCH SECTION
+   ========================================================== */
+.search-container {
+  background: linear-gradient(
+    135deg,
+    var(--honda-red-dark) 0%,
+    var(--honda-red) 50%,
+    var(--honda-red-light) 100%
+  );
+  padding: 56px 36px 64px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* subtle texture overlay */
+.search-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/website_self_register/static/img/img_header.png")
+    center/cover no-repeat;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.search-container h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 10px;
+  position: relative;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.search-container p {
+  font-size: 1.05rem;
+  opacity: 0.92;
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.search-container p strong {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 8px;
+  border-radius: 6px;
+  letter-spacing: 1.5px;
+}
+
+/* ---------- Search Box ---------- */
+.search-box-custom {
+  display: flex;
+  align-items: center;
+  max-width: 480px;
+  margin: 0 auto;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  background-color: #fff;
+  position: relative;
+  left: auto;
+  transform: none;
+  transition: box-shadow var(--transition);
+}
+
+.search-box-custom:focus-within {
+  box-shadow: 0 6px 28px rgba(204, 0, 0, 0.3);
+}
+
+.search-box-custom input {
+  border: none;
+  padding: 14px 22px;
+  font-size: 1.05rem;
+  font-family: "Inter", sans-serif;
+  outline: none;
+  flex: 1;
+  min-width: 0;
+  color: var(--text-primary);
+  background: transparent;
+}
+
+.search-box-custom input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-box-custom button {
+  background: var(--honda-red);
+  color: #fff;
+  border: none;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  cursor: pointer;
+  border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+  transition:
+    background var(--transition),
+    transform var(--transition);
+  white-space: nowrap;
+}
+
+.search-box-custom button:hover {
+  background: var(--honda-red-dark);
+  transform: scale(1.02);
+}
+
+.search-box-custom button:active {
+  transform: scale(0.98);
+}
+
+/* Override generic form margin that shifts the form up */
+.container-custom form {
+  margin-top: 0;
+}
+
+/* ==========================================================
+   BACKGROUND ILLUSTRATION & FORM CARD
+   ========================================================== */
+.bg_illustrasi {
+  background: url("/website_self_register/static/img/bg_illustrasi.png")
+    no-repeat center bottom;
+  background-size: contain;
+  padding: 40px 0 120px !important;
+  color: var(--text-primary);
+  text-align: center;
+  margin-top: 0;
+  min-height: 300px;
+}
+
+#card_self_register {
+  background: var(--bg-card) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-md);
+  max-width: 700px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+#card_self_register .card-header {
+  background: linear-gradient(90deg, var(--honda-red), var(--honda-red-dark));
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 16px 24px;
+  border-bottom: none;
+  border-radius: var(--radius-md) var(--radius-md) 0 0 !important;
+}
+
+#card_self_register .card-body {
+  padding: 28px 32px 32px;
+}
+
+/* ---------- Form Styling ---------- */
+#card_self_register .form-control,
+#card_self_register .s_website_form_input {
+  border: 1.5px solid #e2e4ec;
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 1rem;
+  font-family: "Inter", sans-serif;
+  color: var(--text-primary);
+  background: var(--bg-white);
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+#card_self_register .form-control:focus,
+#card_self_register .s_website_form_input:focus {
+  border-color: var(--honda-red);
+  box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.1);
+  outline: none;
+}
+
+#card_self_register .form-control[readonly] {
+  background-color: #f5f6fa;
+  color: var(--text-secondary);
+  cursor: not-allowed;
+}
+
+#card_self_register select.form-control {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23555770' d='M1.41.59L6 5.17 10.59.59 12 2 6 8 0 2z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+#card_self_register label,
+#card_self_register .s_website_form_label {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+
+#card_self_register .s_website_form_label_content {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* ---------- Submit Button ---------- */
+#card_self_register .btn-primary {
+  background: linear-gradient(135deg, var(--honda-red), var(--honda-red-dark));
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 13px 36px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(204, 0, 0, 0.3);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+  letter-spacing: 0.3px;
+}
+
+#card_self_register .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(204, 0, 0, 0.4);
+}
+
+#card_self_register .btn-primary:active {
+  transform: translateY(0);
+}
+
+/* ==========================================================
+   SUCCESS / ERROR MODAL
+   ========================================================== */
+.modal-custom {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: fadeIn 0.25s ease;
+}
+
+.modal-custom-content {
+  background: var(--bg-white);
+  margin: 8% auto;
+  padding: 32px 28px 28px;
+  border-radius: var(--radius-md);
+  border: none;
+  width: 92%;
+  max-width: 460px;
+  text-align: center;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-custom-content h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.close-button {
+  color: var(--text-muted);
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 26px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color var(--transition);
+  line-height: 1;
+}
+
+.close-button:hover {
+  color: var(--honda-red);
+}
+
+.alert {
+  background-color: #fff8e1;
+  border: 1px solid #ffe082;
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin: 16px 0;
+  display: inline-block;
+  color: #795548;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.registration-number {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f5f6fa;
+  border: 1.5px solid #e2e4ec;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin: 16px 0;
+  gap: 10px;
+}
+
+.registration-number input {
+  border: none;
+  background: transparent;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: "Inter", monospace;
+  flex: 1;
+  text-align: center;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+.registration-number button {
+  background: var(--honda-red);
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  white-space: nowrap;
+  transition:
+    background var(--transition),
+    transform var(--transition);
+}
+
+.registration-number button:hover {
+  background: var(--honda-red-dark);
+  transform: scale(1.03);
+}
+
+.high-five-image {
+  margin-top: 20px;
+  width: 38%;
+  height: auto;
+  max-width: 180px;
+}
+
+/* ==========================================================
+   NON-ACTIVE / ERROR PAGE
+   ========================================================== */
+.sr-error-page {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+  background: var(--bg-page);
+}
+
+.sr-error-card {
+  background: var(--bg-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  padding: 48px 36px;
+  max-width: 520px;
+  width: 100%;
+}
+
+.sr-error-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+}
+
+.sr-error-card h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.sr-error-card p {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.sr-error-card .btn-helpdesk {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--honda-red);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(204, 0, 0, 0.25);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.sr-error-card .btn-helpdesk:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(204, 0, 0, 0.35);
+}
+
+.sr-error-card .btn-helpdesk i {
+  font-size: 1.1rem;
+}
+
+/* ==========================================================
+   FORM SECTION OVERRIDES
+   ========================================================== */
+section {
+  height: auto;
+}
+
+form {
+  margin-top: 0;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+@media (max-width: 768px) {
+  .search-container {
+    padding: 40px 20px 52px;
+    border-radius: var(--radius-md);
+  }
+
+  .search-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .search-container p {
+    font-size: 0.95rem;
+  }
+
+  .search-box-custom {
+    max-width: 100%;
+  }
+
+  .search-box-custom input {
+    padding: 12px 16px;
+    font-size: 1rem;
+  }
+
+  .search-box-custom button {
+    padding: 12px 20px;
+    font-size: 0.95rem;
+  }
+
+  .bg_illustrasi {
+    padding: 24px 0 80px !important;
+  }
+
+  #card_self_register .card-body {
+    padding: 20px 18px 24px;
+  }
+
+  .modal-custom-content {
+    margin: 15% auto;
+    padding: 24px 20px 22px;
+    width: 94%;
+  }
+
+  .sr-error-card {
+    padding: 36px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-container h2 {
+    font-size: 1.3rem;
+  }
+
+  .search-container p {
+    font-size: 0.9rem;
+  }
+
+  #card_self_register .s_website_form_label {
+    width: auto !important;
+  }
+
+  .registration-number {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .registration-number button {
+    width: 100%;
+  }
+}
+
+/* ==========================================================
+   PRIVACY POLICY
+   ========================================================== */
+.privacy-policy-section {
+  padding: 12px 0 4px;
+}
+
+.privacy-policy-section .form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.privacy-policy-section .form-check-input {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  accent-color: var(--honda-red);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.privacy-policy-section .form-check-label {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+a.privacy-policy-link {
+  color: var(--honda-red);
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color var(--transition);
+}
+
+a.privacy-policy-link:hover {
+  color: var(--honda-red-dark);
+}
+
+/* ---------- Privacy Policy Modal ---------- */
+.modal-privacy {
+  display: none;
+  position: fixed;
+  z-index: 10001;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: fadeIn 0.25s ease;
+}
+
+.modal-privacy-content {
+  background: var(--bg-white);
+  margin: 5% auto;
+  border-radius: var(--radius-md);
+  width: 92%;
+  max-width: 640px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.modal-privacy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e2e4ec;
+}
+
+.modal-privacy-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.close-privacy-modal {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  line-height: 1;
+  transition: color var(--transition);
+}
+
+.close-privacy-modal:hover {
+  color: var(--honda-red);
+}
+
+.modal-privacy-body {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.modal-privacy-body p {
+  margin-bottom: 12px;
+}
+
+.modal-privacy-footer {
+  padding: 16px 24px;
+  border-top: 1px solid #e2e4ec;
+  text-align: center;
+}
+
+.modal-privacy-footer .btn-primary {
+  background: linear-gradient(135deg, var(--honda-red), var(--honda-red-dark));
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 12px 36px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(204, 0, 0, 0.3);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.modal-privacy-footer .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(204, 0, 0, 0.4);
+}
+
+@media (max-width: 768px) {
+  .modal-privacy-content {
+    margin: 10% auto;
+    width: 95%;
+    max-height: 85vh;
+  }
+}

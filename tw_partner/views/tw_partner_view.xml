@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <!-- Base Form Partners -->
+
+        <record model="ir.ui.view" id="tw_partner_contact_form_view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="child_ids" position="before">
+                    <field name="contact_ids" mode="kanban" context="{'default_partner_id': id}">
+                        <kanban>
+                            <field name="name"/>
+                            <field name="type_id"/>
+                            <field name="company_id"/>
+                            <field name="dapat_dihubungi"/>
+                            <templates>
+                                <t t-name="card">
+                                    <div>
+                                        <div class="o_kanban_image" title="Phone">
+                                            <img class="fa fa-phone" alt="Contact image" title="Phone"/>
+                                        </div>
+                                        <div class="oe_kanban_details">
+                                            <div>Branch: <field name="company_id"/></div>
+                                            <div>Tipe: <field name="type_id"/></div>
+                                            <div>Value: <field name="name"/></div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </templates>
+                        </kanban>
+                        <form string="Contact / Address">
+                            <sheet>
+                                <field name="company_id" placeholder="Branch"/>
+                                <div class="text-muted oe_edit_only">
+                                    <p class="mb-0">
+                                        <span>Insert Branch of Customer's Contact</span>
+                                    </p>
+                                </div>
+                                <group>
+                                    <group>
+                                        <field name="type_id" string="Tipe Kontak" required="1"/>
+                                        <field name="name" string="Value" required="1"/>
+                                        <field name="dapat_dihubungi" invisible="type_id.name != 'Phone'" required="type_id.name == 'Phone'"/>
+                                    </group>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </field>
+
+                <field name="child_ids" position="attributes">
+                  <attribute name="invisible">True</attribute>
+                </field>
+
+                <!-- override view bawaan untuk memindahkan posisi -->
+                <field name="company_type" position="replace">
+                </field>
+
+                <xpath expr="//group/group[2]" position="replace">
+                </xpath>
+
+                <field name="parent_id" position="after">
+                    <field name="company_id" placeholder="Branch" options="{'no_open': True, 'no_create': True}" force_save="1"/>
+                </field>
+                <field name="name" position="after">
+                    <field name="code" placeholder="Partner Code" required="1"/>
+                </field>
+
+                <!-- Address -->
+                <xpath expr="//group/group[1]" position="attributes">
+                    <attribute name="string">Address</attribute>
+                </xpath>
+                <xpath expr="//field[@name='vat']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//label[@for='vat']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//group/group[1]/div[1]" position="replace">
+                    <field name="street" placeholder="Street..." required="1" readonly="type == 'contact' and parent_id"/>
+                    <field name="street2" placeholder="Street2..." readonly="type == 'contact' and parent_id"/>
+                    <label for="rt" string="RT/RW"/>
+                    <div>
+                        <field name="rt" placeholder="RT" style="width: 25%" readonly="type == 'contact' and parent_id"/>
+                        <field name="rw" placeholder="RW" style="width: 25%" readonly="type == 'contact' and parent_id"/>
+                    </div>
+                    <label for="state_id" string="Provinsi"/>
+                    <div class="d-flex">
+                        <field name="state_id" class="oe_no_button" placeholder="Provinsi" options="{'no_open': True,'no_create': True}" nolabel="1"
+                            readonly="type == 'contact' and parent_id" context="{'country_id': country_id, 'default_country_id': country_id}"/>
+                        <field name="state_text" nolabel="1" placeholder="Provinsi"
+                            readonly="type == 'contact' and parent_id"/>
+                    </div>
+                    <label for="city_id" string="Kota/Kabupaten"/>
+                    <div class="d-flex">
+                        <field name="city_id" placeholder="Kota/Kabupaten" nolabel="1" options="{'no_open': True,'no_create': True}"
+                            readonly="type == 'contact' and parent_id"/>
+                        <field name="city_text" nolabel="1" placeholder="Kota/Kabupaten"
+                            readonly="type == 'contact' and parent_id"/>
+                    </div>
+                    <label for="district_id" string="Kecamatan"/>
+                    <div class="d-flex">
+                        <field name="district_id" placeholder="Kecamatan" nolabel="1" options="{'no_open': True,'no_create': True}"
+                            readonly="type == 'contact' and parent_id"/>
+                        <field name="district_text" nolabel="1" placeholder="Kecamatan"
+                            readonly="type == 'contact' and parent_id"/>
+                    </div>
+                    <label for="sub_district_id" string="Kelurahan"/>
+                    <div class="d-flex">
+                        <field name="sub_district_id" placeholder="Kelurahan" string="Kelurahan" options="{'no_open': True,'no_create': True}"
+                            readonly="type == 'contact' and parent_id"/>
+                        <field name="sub_district_text" nolabel="1" placeholder="Kelurahan"
+                            readonly="type == 'contact' and parent_id"/>
+                    </div>
+                    <field name="zip" placeholder="Kode Pos" readonly="type == 'contact' and parent_id"/>
+                </xpath>
+                <xpath expr="//group/group[1]" position="after">
+                    <group string="Address Domicile">
+                        <field name="same_address" widget="boolean_button" force_save="1"/>
+                        <field name="street_domicile" string="Address" placeholder="Alamat Domisili..." readonly="type == 'contact' and parent_id"/>
+                        <field name="street2_domicile" string="Address 2" placeholder="Street2 Domisili..." readonly="type == 'contact' and parent_id"/>
+                        <label for="rt_domicile" string="RT/RW"/>
+                        <div>
+                            <field name="rt_domicile" placeholder="RT" style="width: 25%" readonly="type == 'contact' and parent_id"/>
+                            <field name="rw_domicile" placeholder="RW" style="width: 25%" readonly="type == 'contact' and parent_id"/>
+                        </div>
+                        <field name="state_domicile_id" class="oe_no_button" placeholder="Provinsi" options="{'no_open': True,'no_create': True}" string="Provinsi"
+                            readonly="type == 'contact' and parent_id" context="{'country_id': country_domicile_id, 'default_country_id': country_domicile_id}"/>
+                        <field name="city_domicile_id" placeholder="Kota/Kabupaten" string="Kota/Kabupaten" options="{'no_open': True,'no_create': True}"
+                            readonly="type == 'contact' and parent_id"/>
+                        <label for="district_domicile_id" string="Kecamatan"/>
+                        <div>
+                            <field name="district_domicile_id" placeholder="Kecamatan" string="Kecamatan" options="{'no_open': True,'no_create': True}"
+                                readonly="type == 'contact' and parent_id"/>
+                        </div>
+                        <label for="sub_district_domicile_id" string="Kelurahan"/>
+                        <div>
+                            <field name="sub_district_domicile_id" placeholder="Kelurahan" string="Kelurahan" options="{'no_open': True,'no_create': True}"
+                                readonly="type == 'contact' and parent_id"/>
+                        </div>
+                        <field name="zip_domicile" placeholder="Kode Pos" string="Kode Pos" readonly="type == 'contact' and parent_id"/>
+                    </group>
+                </xpath>
+                <xpath expr="//group[1]" position="before">
+                    <group name="detail_info" string="Personal Information"  invisible="is_company">
+                        <group name="personal_info" >
+                            <field name="company_type" readonly="context.get('form_type') in ('Finance Company', 'General Supplier','Biro Jasa')" widget="radio" options="{'horizontal': true}"/>
+                            <field name="identification_number" required="is_company == False" placeholder="e.g. 1871xxxxxx" invisible="is_company"/>
+                            <field name="birthplace" invisible="is_company" string="Tempat Lahir"/>
+                            <field name="birthdate" invisible="is_company" string="Tanggal Lahir"/>
+                            <field name="occupation_id" invisible="is_company" string="Pekerjaan"/>
+                            <field name="another_job" invisible="is_company" string="Pekerjaan Lainnya"/>
+                        </group>
+
+                        <group name="personal_info_2" string="">
+                            <field name="religion_id" invisible="is_company" string="Agama"/>
+                            <field name="gender_id" invisible="is_company" string="Jenis Kelamin"/>
+                            <field name="education_id" invisible="is_company" string="Pendidikan"/>
+                            <field name="housing_tenure_id" invisible="is_company" string="Status Rumah"/>
+                            <field name="blood_type_id" invisible="is_company" string="Golongan Darah"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Information">
+                            <field name="company_type" readonly="context.get('form_type') in ('Finance Company', 'General Supplier','Biro Jasa')" widget="radio" options="{'horizontal': true}" invisible="not is_company"/>
+                            <field name="function" placeholder="e.g. Sales Director"
+                                invisible="is_company"/>
+                            <field name="phone" widget="phone"/>
+                            <field name="mobile" widget="phone"/>
+                            <field name="email" widget="email" context="{'gravatar_image': True}" required="user_ids"/>
+                            <field name="website" string="Website" widget="url" placeholder="e.g. https://www.odoo.com"/>
+                            <field name="title" options='{"no_open": True}' placeholder="e.g. Mister"
+                                invisible="is_company"/>
+                            <field name="lang" invisible="active_lang_count &lt;= 1"/>
+                            <field name="category_id" widget="many2many_tags" readonly="context.get('is_readonly', False)" options="{'color_field': 'color'}"
+                                placeholder='e.g. "B2B", "VIP", "Consulting", ...'/>
+                        </group>
+                        <group name="tax_info" string="Tax Information"  invisible="not is_company">
+                                <field name="no_npwp" required="is_company" invisible="not is_company"/>
+                                <field name="alamat_npwp" invisible="not is_company"/>
+                                <field name="is_pkp" invisible="not is_company"/>
+                                <field invisible="is_pkp == False or not is_company" name="tgl_pengukuhan" required="is_pkp != False"/>
+                                <field name="alamat_pkp" invisible="not is_company"/>
+                        </group>
+                        <group name="tax_info" string="Tax Information"  invisible="is_company">
+                                <field name="no_npwp" required="is_company" invisible="is_company"/>
+                                <field name="alamat_npwp" invisible="is_company"/>
+                                <field name="is_pkp" invisible="is_company"/>
+                                <field invisible="is_pkp == False or is_company" name="tgl_pengukuhan" required="is_pkp != False"/>
+                                <field name="alamat_pkp" invisible="is_company"/>
+                        </group>
+                    </group>
+                </xpath>
+
+                <!-- Sales Information -->
+                <xpath expr="//group[@name='sale']" position="inside">
+                    <field name="purchase_type_id"/>
+                    <field name="customer_code_id"/>
+                    <field name="persona"/>
+                 </xpath>
+                <xpath expr="//page[@name='contact_addresses']" position="after">
+                    <page string="Addresses" name="partner_addresses">
+                        <field name="address_ids">
+                            <list>
+                                <field name="partner_id" invisible="1" optional="hide" />
+                                <field name="name" optional="show" />
+                                <field name="rt" optional="hide" />
+                                <field name="rw" optional="hide" />
+                                <field name="street" optional="show" />
+                                <field name="street2" optional="hide" />
+                                <field name="zip" optional="show" />
+                                <field name="state" optional="show" />
+                                <field name="address_type_id" optional="show" />
+                                <field name="sub_district_id" optional="hide" />
+                                <field name="district_id" optional="hide" />
+                                <field name="city_id" optional="hide" />
+                                <field name="state_id" optional="hide" />
+                                <field name="country_id" optional="hide" />
+                                <field name="is_main_address" string="Main Address?" optional="show"/>
+                            </list>
+                            <form>
+                                <sheet>
+                                    <group>
+                                        <group name="address_type">
+                                            <field name="name" required="1"/>
+                                            <field name="address_type_id" options="{'no_open': True, 'no_create': True}"/>
+                                            <field name="is_main_address"/>
+                                        </group>
+                                        <group name="address_info">
+                                            <label for="street" string="Address" />
+                                            <div class="o_address_format">
+                                                <field name="street" placeholder="Street..." class="o_address_street"/>
+                                                <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                                <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_create': True}"/>
+                                                <field name="city_id" placeholder="City" class="o_address_city" options="{'no_open': True, 'no_create': True}"/>
+                                                <field name="district_id" placeholder="District" class="o_address_city" options="{'no_open': True, 'no_create': True}"/>
+                                                <field name="sub_district_id" placeholder="Sub District" class="o_address_city" options="{'no_open': True, 'no_create': True}"/>
+                                                <field name="rt" placeholder="001" class="o_address_city" />
+                                                <field name="rw" placeholder="002" class="o_address_city" />
+                                                <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                                <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}' />
+                                            </div>
+                                        </group>
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </page>
+                </xpath>
+
+                <xpath expr="//page[@name='sales_purchases']" position="before">
+                    <page name="other_info" string="Other Information">
+                        <group string="Media Social" invisible="is_company">
+                            <field name="facebook" placeholder="e.g. Facebook Account" invisible="is_company"/>
+                            <field name="instagram" placeholder="e.g. @instgram_account" invisible="is_company"/>
+                            <field name="twitter" string="X / Twitter" placeholder="e.g. @x_account" invisible="is_company"/>
+                            <field name="youtube" placeholder="e.g. Youtube Account" invisible="is_company"/>
+                        </group>
+                    </page>
+                </xpath>
+                <xpath expr="//page[@name='internal_notes']" position="after">
+                    <page name="history_info" string="History Information">
+                        <field name="partner_history_ids" options="{'no_open': True, 'no_create': True}" readonly="1">
+                            <list>
+                                <field name="description"/>
+                                <field name="before_update"/>
+                                <field name="after_update"/>
+                                <field name="origin"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    <record id="tw_partner_hide_l10n_id_fields" model="ir.ui.view">
+        <field name="name">res.partner.form.hide.l10n.id.fields</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="l10n_id_efaktur.res_partner_tax_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group/group/field[@name='l10n_id_pkp']" position="replace">
+                <field name="l10n_id_pkp" string="Is PKP" invisible="is_company == False"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

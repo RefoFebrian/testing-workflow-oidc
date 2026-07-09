@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="print_wo_thermal_invoice">
+            <style type="text/css">
+                td {font-size: 13}
+                .td {font-size: 13}
+            </style>
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="tw_web.teto_report_layout">
+                        <t t-call="tw_web.teto_report_styles_base" />
+                        <div class="page font-sm">
+                            <div class="oe_structure">
+                                
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <t t-set="base_url" t-value="request.httprequest.host_url.rstrip('/')"/>
+                                        <img t-att-src="base_url + '/tw_work_order/static/src/img/ahass.jpg'"
+                                            style="width:80px; height:25px; align:right;position:absolute" />
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <img t-att-src="'data:image/png;base64,' + o.qr_code_base64" style="width: 2cm; height: 2cm;" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-6"><t t-esc="o.company_id.name" /></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12"><t t-esc="print_address(o.company_id.partner_id)" /></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">No Telp. <t t-esc="o.company_id.phone" /></div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-12 text-center font-lg bolder">INVOICE</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-8">
+                                        NO INVOICE : &#160;<t t-esc="invoice_obj().name" />
+                                    </div>
+                                    <div class="col-4 text-end">
+                                        <t t-esc="o.date.strftime('%d-%m-%Y') if o.date else ''" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        NO WO : &#160;<t t-esc="o.name" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        NPWP : &#160;<t t-esc="print_vat(o.company_id.partner_id)" />
+                                    </div>
+                                </div>
+
+                                <div class="row mt-5">
+                                    <div class="col-12">
+                                        <table class="table-borderless">
+                                            <tbody>
+                                                <tr><td colspan="3" class="font-md bolder">DATA KONSUMEN</td></tr>
+                                                <tr>
+                                                    <td width="30%">Nama Pemilik</td>
+                                                    <td>:</td>
+                                                    <td width="68%"><t t-esc="o.customer_stnk_id.name" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nama Pembawa</td>
+                                                    <td>:</td>
+                                                    <td><t t-esc="o.partner_id.name" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Alamat Pembawa</td>
+                                                    <td>:</td>
+                                                    <td><t t-esc="print_address(o.partner_id)" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>No HP Pembawa</td>
+                                                    <td>:</td>
+                                                    <td><t t-esc="o.mobile" /></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <table class="table-borderless">
+                                            <tbody>
+                                                <tr><td colspan="3" class="font-md bolder">DATA KENDARAAN</td></tr>
+                                                <tr>
+                                                    <td width="30%">No Polisi</td>
+                                                    <td>:</td>
+                                                    <td width="68%"><t t-esc="o.customer_stnk_id.name" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>No Engine</td>
+                                                    <td>:</td>
+                                                    <td><t t-esc="o.lot_id.name" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>No Rangka</td>
+                                                    <td>:</td>
+                                                    <td class="text-end"><t t-esc="o.lot_id.chassis_number" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tipe Motor</td>
+                                                    <td>:</td>
+                                                    <td><t t-esc="o.lot_id.product_id.name" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mekanik</td>
+                                                    <td>:</td>
+                                                    <td><t t-esc="o.mechanic_id.name" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kilometer</td>
+                                                    <td>:</td>
+                                                    <td><t t-esc="o.km" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>FUEL</td>
+                                                    <td>:</td>
+                                                    <td><t t-esc="o.fuel" /></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <table class="table-borderless">
+                                            <tbody>
+                                                <tr><td colspan="5" class="font-md bolder">RINCIAN PEKERJAAN &amp; SUKUCADANG</td></tr>
+                                                <t t-if="o.order_line">
+                                                    <tr>
+                                                        <th class="bolder" width="40%">Pekerjaan</th>
+                                                        <th class="bolder" width="5%">Qty</th>
+                                                        <th class="bolder" width="27%">Harga Satuan</th>
+                                                        <th class="bolder" width="11%">Disc</th>
+                                                        <th class="bolder" width="27%">Subtotal</th>
+                                                    </tr>
+                                                    <tr t-foreach="o.order_line.filtered(lambda x: x.division == 'Service')" t-as="k">
+                                                        <tr>
+                                                            <td><t t-esc="k.product_id.display_name" /></td>
+                                                            <td class="text-center"><t t-esc="k.product_uom_qty" /></td>
+                                                            <td class="text-end"><t t-esc="'{:,.2f}'.format(k.price_unit)" /></td>
+                                                            <td class="text-end"><t t-esc="'{:,.2f}'.format(k.discount)" /></td>
+                                                            <td class="text-end"><t t-esc="'{:,.2f}'.format(k.price_subtotal)" /></td>
+                                                        </tr>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3" class="border-bottom"></td>
+                                                        <td colspan="2" />
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="bolder">Suku Cadang</th>
+                                                        <th class="bolder">Qty</th>
+                                                        <th class="bolder">Harga Satuan</th>
+                                                        <th class="bolder">Disc</th>
+                                                        <th class="bolder">Subtotal</th>
+                                                    </tr>
+                                                    <tr t-foreach="o.order_line.filtered(lambda x: x.division == 'Sparepart')" t-as="k">
+                                                        <tr>
+                                                            <td><t t-esc="k.product_id.display_name" /></td>
+                                                            <td class="text-center"><t t-esc="k.product_uom_qty" /></td>
+                                                            <td class="text-end"><t t-esc="'{:,.2f}'.format(k.price_unit)" /></td>
+                                                            <td class="text-end"><t t-esc="'{:,.2f}'.format(k.discount)" /></td>
+                                                            <td class="text-end"><t t-esc="'{:,.2f}'.format(k.price_subtotal)" /></td>
+                                                        </tr>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3" class="border-bottom"></td>
+                                                        <td colspan="2" />
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="bolder" colspan="3">TOTAL</td>
+                                                        <td class="bolder text-end" colspan="2">
+                                                            <t t-esc="o.amount_total" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3" class="border-bottom"></td>
+                                                        <td colspan="2" />
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        Dicetak oleh:<br /><br /><br /><br /><br />
+                                        <span t-esc="user.name" class="bolder" />
+                                        (<span t-esc="time_date()" class="bolder" />)<br />
+                                        <t t-esc="print_user_role()" />
+                                    </div>
+                                    <div class="col-6">
+                                        <table class="table-borderless" width="100%">
+                                            <tr>
+                                                <td>Untaxed Amount</td>
+                                                <td>:</td>
+                                                <td class="text-end"><t t-esc="'{:,.2f}'.format(o.amount_untaxed)"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>DPP</td>
+                                                <td>:</td>
+                                                <td class="text-end"><t t-esc="'{:,.2f}'.format(o.amount_untaxed)"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>PPN</td>
+                                                <td>:</td>
+                                                <td class="text-end"><t t-esc="'{:,.2f}'.format(o.amount_tax)"/></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                                
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        *Lembar ke 1 Pelanggan &amp; Lembar ke 2 arsip cabang<br />
+                                        Rekomendasi service selanjutnya:<br />
+                                        <div class="border p-5"></div><br />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        Garansi:<br />
+                                        500 km/1 minggu* untuk service reguler<br />
+                                        1.000 km/1 bulan* untuk bongkar measin reguler<br />
+                                        1.000 km/1 minggu* untuk service CBR 250 dan PCX 150<br />
+                                        1.500 km/45 hari* untuk Bongkar Mesin CBR 250 dan PCX 150
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

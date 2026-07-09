@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_stock_lot_b2b_api_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.lot.b2b.api.inherit.form.view</field>
+            <field name="model">stock.lot</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_lot_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='delivery_group']" position="after">
+                    <group name='ev_group' string='EV Information' invisible="not jenis_acc">
+                        <field name="voucher_acc" readonly="1"/>
+                        <field name="jenis_acc" readonly="1"/>
+                        <field name="box_number" readonly="1"/>
+                        <field name="packing_number" readonly="1"/>
+                        <field name="carton_number" readonly="1"/>
+                        <field name="category_acc" readonly="1"/>
+                        <field name="note_api_ev" readonly="1"/>
+                        <field name="actual_ev_md_receive_date" readonly="1"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_payment_invoice_work_order_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.payment.invoice.work.order.inherit.form</field>
+        <field name="inherit_id" ref="tw_work_order.tw_work_order_form_view"/>
+        <field name="model">tw.work.order</field>
+        <field name="arch" type="xml">
+            <button name="action_print_wo" position="after">
+                <button name="action_auto_create_ar_payment_qris" invisible="state != 'sale'" string="Create Payment QRIS" type="object" class="oe_highlight" groups="tw_payment_invoice.group_tw_payment_invoice_button_generate_ar_payment_qris_wo"/>
+            </button>
+        </field>
+    </record>
+
+</odoo>

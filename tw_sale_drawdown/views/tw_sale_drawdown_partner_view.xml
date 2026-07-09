@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_tw_sale_partner_form" model="ir.ui.view">
+        <field name="name">view.tw.sale.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="tw_sale_plafond.view_tw_sale_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='credit_limit_sparepart']" position="after">
+                <field name="drawdown_unit"/>
+                <field name="drawdown_sparepart"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

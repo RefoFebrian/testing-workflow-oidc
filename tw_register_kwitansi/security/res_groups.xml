@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">  	
+    	
+    <!-- Generate Register Kwitansi -->	
+	
+        <record id="group_tw_generate_register_kwitansi_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Generate Register Kwitansi Read</field>
+        </record> 
+        
+        <record id="access_tw_generate_register_kwitansi_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_register_kwitansi"/>
+            <field name="name">tw_generate_register_kwitansi read</field> 
+            <field name="group_id" ref="group_tw_generate_register_kwitansi_read"/>  
+            <field name="perm_read">1</field> 
+        </record>        
+                               
+        <record id="access_tw_generate_register_kwitansi_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_register_kwitansi_line"/>
+            <field name="name">tw_generate_register_kwitansi_line read</field> 
+            <field name="group_id" ref="group_tw_generate_register_kwitansi_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                              
+        <record id="group_tw_generate_register_kwitansi_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Generate Register Kwitansi Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_generate_register_kwitansi_read'))]"/>            	            	
+        </record>
+                        
+        <record id="access_tw_generate_register_kwitansi_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_register_kwitansi"/>
+            <field name="name">tw_generate_register_kwitansi update</field> 
+            <field name="group_id" ref="group_tw_generate_register_kwitansi_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>    
+                  
+        <record id="access_tw_generate_register_kwitansi_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_register_kwitansi_line"/>
+            <field name="name">tw_generate_register_kwitansi_line update</field> 
+            <field name="group_id" ref="group_tw_generate_register_kwitansi_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field>        
+        </record> 
+
+        <record id="group_tw_generate_register_kwitansi_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Generate Register Kwitansi Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_generate_register_kwitansi_read'))]"/>            	            	
+        </record>
+                        
+        <record id="access_tw_generate_register_kwitansi_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_register_kwitansi"/>
+            <field name="name">tw_generate_register_kwitansi delete</field> 
+            <field name="group_id" ref="group_tw_generate_register_kwitansi_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>   
+        
+        <record id="access_tw_generate_register_kwitansi_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_register_kwitansi_line"/>
+            <field name="name">tw_generate_register_kwitansi_line delete</field> 
+            <field name="group_id" ref="group_tw_generate_register_kwitansi_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>          
+        
+    <!-- Register Kwitansi -->	
+	
+        <record id="group_tw_register_kwitansi_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Register Kwitansi Read</field>
+        </record> 
+          
+        <record id="access_tw_register_kwitansi_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_register_kwitansi_line"/>
+            <field name="name">tw_generate_register_kwitansi_line read</field> 
+            <field name="group_id" ref="group_tw_register_kwitansi_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                              
+        <record id="group_tw_register_kwitansi_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Register Kwitansi Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_register_kwitansi_read'))]"/>            	            	
+        </record>
+
+        <record id="access_tw_register_kwitansi_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_register_kwitansi_line"/>
+            <field name="name">tw_register_kwitansi_line update</field> 
+            <field name="group_id" ref="group_tw_register_kwitansi_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field>        
+        </record> 
+
+        <record id="group_tw_register_kwitansi_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Register Kwitansi Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_register_kwitansi_read'))]"/>            	            	
+        </record>
+                        
+        <record id="access_tw_generate_register_kwitansi_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_register_kwitansi"/>
+            <field name="name">tw_generate_register_kwitansi delete</field> 
+            <field name="group_id" ref="group_tw_generate_register_kwitansi_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>   
+        
+        <record id="access_tw_generate_register_kwitansi_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_register_kwitansi_line"/>
+            <field name="name">tw_generate_register_kwitansi_line delete</field> 
+            <field name="group_id" ref="group_tw_generate_register_kwitansi_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>     
+        
+        <!-- Report Register Kwitansi -->	
+		<record id="group_tw_report_register_kwitansi" model="res.groups">
+	    	<field name="category_id" ref="tw_base.tw_role"/>
+	      	<field name="name">TW Laporan Register Kwitansi Wizard</field>
+		</record>
+
+		<record id="access_tw_report_register_kwitansi_crud" model="ir.model.access">
+			<field name="model_id" ref="model_tw_report_register_kwitansi"/>
+			<field name="name">tw_report_register_kwitansi crud</field> 
+			<field name="group_id" ref="group_tw_report_register_kwitansi"/> 
+			<field name="perm_read">1</field>
+			<field name="perm_create">1</field> 
+      		<field name="perm_write">1</field>  
+			<field name="perm_unlink">1</field>
+		</record>
+
+        <record id="group_tw_laporan_kwitansi_wizard" model="res.groups">
+	    	<field name="category_id" ref="tw_base.tw_role"/>
+	      	<field name="name">TW Laporan Kwitansi Wizard</field>
+		</record>
+
+		<record id="access_tw_laporan_kwitansi_wizard_crud" model="ir.model.access">
+			<field name="model_id" ref="model_tw_laporan_kwitansi_wizard"/>
+			<field name="name">tw_laporan_kwitansi_wizard crud</field> 
+			<field name="group_id" ref="group_tw_laporan_kwitansi_wizard"/> 
+			<field name="perm_read">1</field>
+			<field name="perm_create">1</field> 
+      		<field name="perm_write">1</field>  
+			<field name="perm_unlink">1</field>
+		</record>
+        
+        <record id="tw_base.group_system_admin" model="res.groups">
+			<field name="implied_ids" eval="[
+                (4,ref('group_tw_generate_register_kwitansi_read')),
+                (4,ref('group_tw_generate_register_kwitansi_update')),
+                (4,ref('group_tw_generate_register_kwitansi_delete')),
+                (4,ref('group_tw_register_kwitansi_read')),
+                (4,ref('group_tw_register_kwitansi_update')),
+                (4,ref('group_tw_register_kwitansi_delete')),
+                (4,ref('group_tw_report_register_kwitansi')),
+                (4,ref('group_tw_laporan_kwitansi_wizard')),
+            ]"/> 
+		</record>                                                         
+    </data>
+</odoo>

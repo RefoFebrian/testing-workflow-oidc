@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+    
+        <record id="permata_account_beneficiary_account" model="ir.config_parameter">
+            <field name="key">permata_account_beneficiary_account</field>
+            <field name="value">00701209087</field>
+        </record>
+        <record id="permata_account_partner_id" model="ir.config_parameter">
+            <field name="key">permata_account_partner_id</field>
+            <field name="value">'A0163','A0164'</field>
+        </record>
+        <record id="account_bri" model="ir.config_parameter">
+            <field name="key">account_bri</field>
+            <field name="value"></field>
+        </record>
+    
+    </data>
+    
+
+</odoo>

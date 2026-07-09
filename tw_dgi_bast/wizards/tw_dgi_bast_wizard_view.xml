@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- BAST Wizard Form View -->
+    <record id="tw_dgi_bast_wizard_form_view" model="ir.ui.view">
+        <field name="name">tw.dgi.bast.wizard.form</field>
+        <field name="model">tw.dgi.bast.wizard</field>
+        <field name="arch" type="xml">
+            <form string="DGI BAST (Surat Jalan)">
+                <group>
+                    <group string="Filter">
+                        <field name="company_id" required="1" options="{'no_create': True, 'no_open': True}" domain="[('parent_id', '!=', False)]"/>
+                        <field name="from_time" required="1"/>
+                        <field name="to_time" required="1"/>
+                    </group>
+                    <group string="Optional Filter">
+                        <field name="delivery_document_id"/>
+                    </group>
+                </group>
+                <group string="Result">
+                    <field name="found_count" readonly="1"/>
+                </group>
+                <group string="Process Log" invisible="not process_log">
+                    <field name="process_log" readonly="1" nolabel="1" widget="text" colspan="2"/>
+                </group>
+                <footer>
+                    <button name="action_get_dgi_data" string="Sync dari DGI" type="object" class="btn-primary"/>
+                    <button string="Tutup" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- BAST Wizard Action -->
+    <record id="action_tw_dgi_bast_wizard" model="ir.actions.act_window">
+        <field name="name">DGI BAST (Surat Jalan)</field>
+        <field name="res_model">tw.dgi.bast.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

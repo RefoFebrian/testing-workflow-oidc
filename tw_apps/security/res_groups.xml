@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="group_tw_app_version_read" model="res.groups">
+            <field name="name">TW App Version Read</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+        <record id="access_tw_app_version_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_app_version"/>
+            <field name="name">tw_app_version read</field>
+            <field name="group_id" ref="group_tw_app_version_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_app_version_update" model="res.groups">
+            <field name="name">TW App Version Update</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+            <field name="implied_ids" eval="[(4, ref('group_tw_app_version_read'))]"/>
+        </record>
+
+        <record id="access_tw_app_version_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_app_version"/>
+            <field name="name">tw_app_version update</field>
+            <field name="group_id" ref="group_tw_app_version_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_app_version_delete" model="res.groups">
+            <field name="name">TW App Version Delete</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+            <field name="implied_ids" eval="[(4, ref('group_tw_app_version_read'))]"/>
+        </record>
+
+        <record id="access_tw_app_version_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_app_version"/>
+            <field name="name">tw_app_version delete</field>
+            <field name="group_id" ref="group_tw_app_version_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_app_version_read')),
+                (4, ref('group_tw_app_version_update')),
+                (4, ref('group_tw_app_version_delete')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

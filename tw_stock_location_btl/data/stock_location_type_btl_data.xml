@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_select_stock_loc_type_btl_cpn" model="tw.selection">
+            <field name="name">Channel Permis Noviardi</field>
+            <field name="value">Channel Permis Noviardi</field> 
+	    	<field name="type">StockLocationBTL</field>
+        </record>
+        <record id="tw_select_stock_loc_type_btl_canvasing" model="tw.selection">
+            <field name="name">Canvasing</field>
+            <field name="value">Canvasing</field> 
+	    	<field name="type">StockLocationBTL</field>
+        </record>
+        <record id="tw_select_stock_loc_type_btl_channel" model="tw.selection">
+            <field name="name">Channel</field>
+            <field name="value">Channel</field> 
+	    	<field name="type">StockLocationBTL</field>
+        </record>
+        <record id="tw_select_stock_loc_type_btl_gudang_unit" model="tw.selection">
+            <field name="name">Gudang Unit</field>
+            <field name="value">Gudang Unit</field> 
+	    	<field name="type">StockLocationBTL</field>
+        </record>
+        <record id="tw_select_stock_loc_type_btl_pameran" model="tw.selection">
+            <field name="name">Pameran</field>
+            <field name="value">Pameran</field> 
+	    	<field name="type">StockLocationBTL</field>
+        </record>
+        <record id="tw_select_stock_loc_type_btl_roadshow" model="tw.selection">
+            <field name="name">Roadshow</field>
+            <field name="value">Roadshow</field> 
+	    	<field name="type">StockLocationBTL</field>
+        </record>
+        <record id="tw_select_stock_loc_type_btl_pos" model="tw.selection">
+            <field name="name">POS</field>
+            <field name="value">POS</field> 
+	    	<field name="type">StockLocationBTL</field>
+        </record>
+        <record id="tw_select_stock_loc_type_btl_showroom" model="tw.selection">
+            <field name="name">Showroom</field>
+            <field name="value">Showroom</field> 
+	    	<field name="type">StockLocationBTL</field>
+        </record>
+    </data>
+</odoo>

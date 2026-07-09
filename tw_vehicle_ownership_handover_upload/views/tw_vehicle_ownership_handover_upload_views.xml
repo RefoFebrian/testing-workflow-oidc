@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="view_tw_vehicle_ownership_handover_upload_wizard" model="ir.ui.view">
+      <field name="name">tw.vehicle.ownership.handover.upload.wizard.form</field>
+      <field name="model">tw.vehicle.document.upload.wizard</field>
+      <field name="inherit_id" ref='tw_vehicle_registration_process_upload.tw_vehicle_registration_process_upload_wizard_view_form'/>
+      <field name="arch" type="xml">
+          <xpath expr="//div[hasclass('alert', 'alert-info')]" position="after">
+            <div class="alert alert-info" role="alert" invisible="upload_type != 'handover_ownership'">
+              <h4>
+                <i class="fa fa-info-circle"/>
+  Format File Excel</h4>
+              <ul>
+                <li>Kolom 1: Branch (Code) (Mandatory)</li>
+                <li>Kolom 2: Patner Type (Mandatory)</li>
+                <li>Kolom 3: Penerima (Mandatory)</li>
+                <li>Kolom 4: Note</li>
+                <li>Kolom 5: Nomor Mesin (Mandatory)</li>
+                <li>Kolom 6: Tanggal Penyerahan BPKB (Mandatory) (Format: mm/dd/yyyy)</li>
+                <li>Kolom 7: A/N BPKB</li>
+                <li>Kolom 8: Tanggal Ambil BPKB (Mandatory) (Format: mm/dd/yyyy)</li>
+              </ul>
+              <table class="table table-bordered" style="width: 60%; margin: 10px 0 20px 20px;">
+                <tr style="background-color: #f8f9fa;">
+                    <th style="padding: 8px; border: 1px solid #dee2e6;">Kolom 1</th>
+                    <th style="padding: 8px; border: 1px solid #dee2e6;">Kolom 2</th>
+                    <th style="padding: 8px; border: 1px solid #dee2e6;">Kolom 3</th>
+                    <th style="padding: 8px; border: 1px solid #dee2e6;">Kolom 4</th>
+                    <th style="padding: 8px; border: 1px solid #dee2e6;">Kolom 5</th>
+                    <th style="padding: 8px; border: 1px solid #dee2e6;">Kolom 6</th>
+                    <th style="padding: 8px; border: 1px solid #dee2e6;">Kolom 7</th>
+                    <th style="padding: 8px; border: 1px solid #dee2e6;">Kolom 8</th>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #dee2e6;">Branch (Code)</td>
+                    <td style="padding: 8px; border: 1px solid #dee2e6;">Partner Type</td>
+                    <td style="padding: 8px; border: 1px solid #dee2e6;">Penerima</td>
+                    <td style="padding: 8px; border: 1px solid #dee2e6;">Note</td>
+                    <td style="padding: 8px; border: 1px solid #dee2e6;">Nomor Mesin</td>
+                    <td style="padding: 8px; border: 1px solid #dee2e6;">Tanggal Penyerahan BPKB</td>
+                    <td style="padding: 8px; border: 1px solid #dee2e6;">A/N BPKB</td>
+                    <td style="padding: 8px; border: 1px solid #dee2e6;">Tanggal Ambil BPKB</td>
+                </tr>
+                <tr>			
+                    <td style="padding: 8px; border: 1px solid #dee2e6;">DDS</td>
+                    <td style="padding: 8px; border: 1px solid #dee2e6;">customer or finco</td>
+                    <td style="padding: 8px; border: 1px solid #dee2e6;">Agung Lestari</td>
+                    <td style="padding: 8px; border: 1px solid #dee2e6;">Tambahkan catatan jika ada</td>
+                    <td style="padding: 8px; border: 1px solid #dee2e6;">KFC1E1183217</td>
+                    <td style="padding: 8px; border: 1px solid #dee2e6;">16/10/2025</td>
+                    <td style="padding: 8px; border: 1px solid #dee2e6;">AGL</td>
+                    <td style="padding: 8px; border: 1px solid #dee2e6;">16/10/2025</td>
+                </tr>
+            </table>
+              <p><strong>Catatan:</strong> Baris pertama dianggap header.</p>
+            </div>
+            </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>

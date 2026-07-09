@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="tw_stock_opname_asset_print_bakso"> <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="tw_web.teto_report_layout">
+                    <t t-call="tw_web.teto_report_styles_base" />
+                    <div class="page">
+                        <div class="oe_structure border">
+
+                            <div class="row border p-3">
+                                <div class="col-12 text-center font-xl bolder">
+                                    BERITA ACARA STOCK OPNAME ASSET
+                                </div>
+                            </div>
+
+                            <div class="row border p-2">
+                                <div class="col bolder">
+                                    No Referensi: &#160;<t t-esc="o.name" />
+                                </div>
+                            </div>
+
+                            <div class="row border">
+                                <div class="col-12 px-2">
+                                    <table class="table-borderless">
+                                        <tbody>
+                                            <tr><td class="bolder" colspan="3">Pada hari ini telah dilakukan Stock Opname Motor Aset + Mobil Delivery TDM</td></tr>
+                                            <tr> <td width="20%">Cabang</td> <td>:</td> <td width="77%"><t t-esc="o.company_id.name" /></td> </tr>
+                                            <tr> <td>Division</td> <td>:</td> <td><t t-esc="o.division" /></td> </tr>
+                                            <tr> <td>Tanggal</td> <td>:</td> <td><span t-field="o.date" t-options='{"widget": "date", "format": "dd-MM-yyyy"}'/></td> </tr>
+                                            <tr><td class="bolder" colspan="3">Hasil Stock Opname adalah sebagai berikut</td></tr>
+                                            <tr> <td>Total Sistem</td> <td>:</td> <td><t t-esc="o.saldo_sistem" /></td> </tr>
+                                            <tr> <td>Total Fisik Tercatat Sistem</td> <td>:</td> <td class="text-end"><t t-esc="o.total_fisik_tercatat" /></td> </tr>
+                                            <tr> <td>Total Fisik Tidak Tercatat</td> <td>:</td> <td><t t-esc="o.other_asset_count" /></td> </tr>
+                                            <tr> <td class="bolder">Total Fisik Asset</td> <td>:</td> <td class="text-end"><t t-esc="o.total_stock" /></td> </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row border p-1">
+                                <div class="col-12 px-2">
+                                    <strong class="font-lg">Catatan</strong>
+                                    <div class="row border">
+                                        <div class="col-12 p-2">
+                                            <t t-esc="o.note_bakso" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row border p-2">
+                                <div class="col-12">
+                                    <table class="teto-table-signature">
+                                        <tr>
+                                            <td colspan="2">PIC SO</td>
+                                            <td>Menyetujui</td>
+                                        </tr>
+                                        <tr class="signature-row">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bolder"><span t-esc="o.adh_id.name"/></td>
+                                            <td class="bolder"><span t-esc="o.pdi_id.name"/></td>
+                                            <td class="bolder"><span t-esc="o.soh_id.name"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>ADH</td>
+                                            <td>PDI / Kamek / SA</td>
+                                            <td>SOH</td>  
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">
+                                                Dicetak oleh: &#160;<span t-esc="user.name"/>, <span t-esc="time.strftime('%d/%m/%Y %H:%M:%S')" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

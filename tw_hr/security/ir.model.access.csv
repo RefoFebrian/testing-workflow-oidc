@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_job,hr_job,model_hr_job,base.group_user,1,0,0,0
+access_hr_department,hr_department,model_hr_department,base.group_user,1,0,0,0
+access_hr_employee,hr_employee,model_hr_employee,base.group_user,1,0,0,0
+access_tw_employee_career_record,tw_employee_career_record,model_tw_employee_career_record,base.group_user,1,0,0,0
+access_tw_employee_import_wizard,tw_employee_import_wizard,model_tw_employee_import_wizard,tw_hr.group_tw_employee_import_custom,1,1,1,1

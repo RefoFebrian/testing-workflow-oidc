@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="cod_settlement_dso_template">
+            <t t-call="web.html_container">
+                <t t-call="tw_web.teto_report_layout">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            <style>
+                                .page {
+                                    font-weight: 600;
+                                }
+                                th {
+                                    font-weight: bolder;
+                                    border: 1px solid black;
+                                }
+                                td {
+                                    border: 1px solid black;
+                                    text-align: left;
+                                    padding: 0 0.3rem;
+                                }
+                            </style>
+                            <div class="oe_structure">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <strong t-esc="doc.company_id.sudo().parent_id.name"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <strong t-esc="doc.company_id.name"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <span t-esc="print_address(doc.company_id.sudo().parent_id.partner_id)"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <span t-esc="print_address(doc.company_id.partner_id)"/>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row mt-3">
+                                    <div class="col-12 text-center">
+                                        <strong>TANDA TERIMA PELUNASAN CASH ON DELIVERY</strong>
+                                    </div>
+                                </div>
+                                <div class="row mt-1">
+                                    <div class="col-12">
+                                        <table width="100%" class="table-borderless">
+                                            <tr>
+                                                <td width="18%">Sudah terima dari</td>
+                                                <td width="2%">:</td>
+                                                <td width="80%"><span t-esc="doc.partner_id.name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sejumlah</td>
+                                                <td>:</td>
+                                                <td><span t-esc="settlement" t-options="{'widget': 'float', 'precision': 0}"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Terbilang</td>
+                                                <td>:</td>
+                                                <td>### <span t-esc="terbilang(settlement)"/> ###</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <table width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Type Motor</th>
+                                                    <th>Warna</th>
+                                                    <th>No Mesin</th>
+                                                    <th>No Rangka</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr t-foreach="doc.order_line.filtered(lambda o: o.product_id)" t-as="line">
+                                                    <td><span t-esc="line.product_id.name" /></td>
+                                                    <td><span t-esc="line.product_id.product_template_attribute_value_ids.code"/> - <span t-esc="line.product_id.product_template_attribute_value_ids.name"/></td>
+                                                    <td><span t-esc="line.lot_id.name" /></td>
+                                                    <td class="text-end"><span t-esc="line.lot_id.chassis_number" /></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row my-3">
+                                    <div class="col-12">
+                                        <span t-esc="doc.company_id.partner_id.state_id.name" />,
+                                        <span t-esc="print_date(doc.date_order)" />
+                                    </div>
+                                </div>
+                                <div class="row mt-5">
+                                    <div class="col-12">
+                                        <span t-esc="user.name" />,
+                                        <span t-esc="print_datetime()" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+                

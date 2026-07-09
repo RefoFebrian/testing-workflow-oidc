@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- List/List View -->
+        <record id="tw_journal_memorial_list_view" model="ir.ui.view">
+            <field name="name">tw.journal.memorial.list</field>
+            <field name="model">tw.journal.memorial</field>
+            <field name="arch" type="xml">
+                <list string="Journal Memorials" default_order="id desc">
+                    <field name="name" string="Number"/>
+                    <field name="description" string="description" optional="show"/>
+                    <field name="company_id"/>
+                    <field name="period_id" optional="show"/>
+                    <field name="division"/>
+                    <field name="total_debit" widget="monetary" string="Debit"/>
+                    <field name="total_credit" widget="monetary" string="Credit"/>
+                    <field name="is_auto_reverse"/>
+                    <field name="date"/>
+                    <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'confirm'"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="tw_account_journal_memorial_form_view" model="ir.ui.view">
+            <field name="name">tw.journal.memorial.form</field>
+            <field name="model">tw.journal.memorial</field>
+            <field name="arch" type="xml">
+                <form string="Journal Memorial">
+                    <header>
+                        <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" invisible="state != 'draft'" groups="tw_journal_memorial.group_tw_journal_memorial_confirm"/>
+                        <!-- <button name="action_view_move" string="View Journal Entry" type="object" class="oe_stat_button" icon="fa-book" invisible="not move_id" groups="account.group_account_user"/> -->
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm"/>
+                    </header>
+                    <sheet>
+                        <field name="move_id" invisible="1"/>
+                        <field name="is_prev_period" invisible="1"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="journal_id" invisible="1"/>
+                        <div class="oe_title">
+                            <h1 invisible="name"><span>Journal Memorial</span></h1>
+                            <h1 invisible="not name"><field name="name" readonly="1"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="company_id" string="Branch" required="1" options="{'no_open': True,'no_create':True}" readonly="state != 'draft'"/>
+                                <field name="period_id" required="1" options="{'no_open': True,'no_create':True}" readonly="state != 'draft'"/>
+                                <field name="description" placeholder="description..." required="1" readonly="state != 'draft'"/>
+                                <field name="cancel_refered_id" readonly="1" invisible="state != 'cancel'" options="{'no_open': False}"/>
+                            </group>
+                            <group>
+                                <field name="division" required="1" readonly="state != 'draft'"/>
+                                <field name="date" required="1" readonly="1"/>
+                                <field name="period_date" readonly="1"/>
+                                <field name="is_auto_reverse" invisible="is_prev_period" readonly="state != 'draft'"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Detil">
+                                <field name="line_ids" context="{'default_company_id': company_id, 'default_name': name}" readonly="state != 'draft'">
+                                    <list editable="bottom" string="Journal Items">
+                                        <field name="company_id" options="{'no_open': True, 'no_create': True}"/>
+                                        <field name="type" widget="selection"/>
+                                        <field name="account_id" options="{'no_open': True, 'no_create': True}"/>
+                                        <field name="name" optional="hide"/>
+                                        <field name="amount" string="Amount" class="text-right"/>
+                                        <field name="partner_id" options="{'no_open': True, 'no_create': True}"/>
+                                        <field name="asset_id" options="{'no_open': True, 'no_create': True}"/>
+                                    </list>
+                                </field>
+                                <group col="12" class="oe_invoice_lines_tab overflow-hidden">
+                                    <group colspan="8">
+                                    
+                                    </group>    
+                                    <group colspan="4">
+                                        <group class="oe_subtotal_footer">
+                                            <table class="oe_subtotal_footer">
+                                                <tr>
+                                                    <td><b>Total Debit</b></td>
+                                                    <td> : </td>
+                                                    <td class="text-right">
+                                                        <field name="total_debit" style="margin-bottom: 0px;" options="{'currency_field': 'currency_id'}" nolabel="1"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Total Credit</b></td>
+                                                    <td> : </td>
+                                                    <td class="text-right">
+                                                        <field name="total_credit" style="margin-bottom: 0px;" options="{'currency_field': 'currency_id'}" nolabel="1"/>
+                                                    </td>
+                                                </tr>
+                                                <tr class="oe_subtotal_footer_separator" invisible="total_debit == total_credit">
+                                                    <td><b>Difference</b></td>
+                                                    <td> : </td>
+                                                    <td class="text-right" invisible="total_debit == total_credit">
+                                                        <field name="total_debit" options="{'currency_field': 'currency_id'}" nolabel="1" invisible="total_debit == total_credit" class="text-danger"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </group>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Journal Items" invisible="not move_line_ids">
+                                <separator string="Journal Items" invisible="not is_auto_reverse"/>
+                                <field name="move_line_ids" readonly="1"/>
+                                <separator string="Reversal Journal Items" invisible="not is_auto_reverse"/>
+                                <field name="auto_reverse_move_line_ids" readonly="1" invisible="not auto_reverse_move_line_ids"/>
+                            </page>
+                            <page string="Notes">
+                                <field name="note" placeholder="Add an internal note..."/>
+                            </page>
+                            
+                            <page name="audit_trail" string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"></field>
+                                        <field name="create_date" readonly="1"></field>
+                                        <field name="confirm_uid" readonly="1"></field>
+                                        <field name="confirm_date" readonly="1"></field>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1"></field>
+                                        <field name="write_date" readonly="1"></field>
+                                    </group>
+                                </group>
+                            </page>		
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="tw_journal_memorial_filter" model="ir.ui.view">
+            <field name="name">tw.journal.memorial.filter</field>
+            <field name="model">tw.journal.memorial</field>
+            <field name="arch" type="xml">
+                <search string="Journal Memorial">
+                    <field name="name" filter_domain="[('name', 'ilike', self)]"/>
+                    <field name="description" filter_domain="[('description', 'ilike', self)]"/>
+                    <field name="period_id"/>
+                    <field name="date"/>
+                    <field name="line_ids" string="Account" filter_domain="[('line_ids.account_id', 'ilike', self)]"/>
+                    <field name="line_ids" string="Partner" filter_domain="[('line_ids.partner_id', 'ilike', self)]"/>
+                    
+                    <field name="company_id" filter_domain="[('company_id', '=', self)]" groups="base.group_multi_company"/>
+                    <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                    <filter string="Confirmed" name="confirmed" domain="[('state','=','confirm')]"/>
+                    <filter string="Cancelled" name="cancelled" domain="[('state','=','cancel')]"/>
+                    <filter string="Outstanding" name="outstanding" domain="[('state','not in',('confirm','cancel'))]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                        <filter string="Date" name="group_date" context="{'group_by': 'date'}"/>
+                        <filter string="Branch" name="group_branch" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                        <filter string="Period" name="group_period" context="{'group_by': 'period_id'}"/>
+                        <filter string="Date" name="group_date" context="{'group_by': 'date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="tw_action_journal_memorial" model="ir.actions.act_window">
+            <field name="name">Journal Memorials</field>
+            <field name="res_model">tw.journal.memorial</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="
+                {
+                    'search_default_outstanding': 1,
+                }
+            " />
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first journal memorial
+                </p>
+            </field>
+        </record>
+
+        <!-- Server Actions -->
+        <record id="server_action_confirm_journal_memorial" model="ir.actions.server">
+            <field name="name">Confirm</field>
+            <field name="model_id" ref="model_tw_journal_memorial"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    records.action_confirm()
+            </field>
+        </record>
+
+    </data>
+</odoo>

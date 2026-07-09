@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>      
+        
+        <!-- Bank Transfer Cancel -->
+        <menuitem action="bank_transfer_cancel_unit_action" id="bank_transfer_cancel_unit_action_menu" parent="tw_cancellation.submenu_backoffice_tw_cancellation" groups="tw_bank_transfer_cancel.group_tw_bank_transfer_cancel_read" sequence="1"/>
+    
+    </data>
+</odoo>

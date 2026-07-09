@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <menuitem 
+            id="tw_invoice_hutang_lain_menuitem"
+            name="Invoice Hutang Lain"
+            parent="tw_payment.tw_account_customer_invoicing_backoffice_menuitem"
+            sequence="11"
+            action="tw_invoice_hutang_lain_action"
+            groups="tw_invoice_hutang_lain.group_tw_invoice_hutang_lain_read"
+        />
+    </data>
+    
+</odoo>

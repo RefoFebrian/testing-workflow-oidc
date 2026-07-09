@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_work_order_crm_form_view" model="ir.ui.view">
+        <field name="name">tw.work.order.crm</field>
+        <field name="model">tw.work.order</field>
+        <field name="inherit_id" ref="tw_work_order.tw_work_order_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='wo_line_2_right']/div" position="after">
+                <field name='location_id'
+                    required="reason_to_ahass_value == 'pos service'"
+                    invisible="reason_to_ahass_value != 'pos service'"
+                    options="{'no_open':True,'no_create':True}" />
+                <field name='relationship_with_the_owner_id' string='Hub. Dengan Pemilik'
+                    required="type != 'SLS'"
+                    readonly="state != 'draft'"
+                    options="{'no_open':True,'no_create':True}" />
+                <field name="is_all_location" readonly="state != 'draft'"
+                    invisible="reason_to_ahass_value != 'SVPS'" />
+                <field name="gender_id" readonly="state != 'draft'" />
+                <field name="consumer_age" readonly="state != 'draft'" />
+                <field name="job_id" options="{'no_show':True,'no_create':True,'no_open':True}"
+                    readonly="state != 'draft'" />
+                <field name="member" readonly="state != 'draft'" />
+                <field name="customer_type"
+                    required="type == 'SLS' and date >= '2019-12-04'"
+                    invisible="type != 'SLS'"
+                    readonly="state != 'draft'" />
+            </xpath>
+            <xpath expr="//group[@name='wo_line_2_left']/field[@name='purchase_date']" position="after">
+                <field name='is_own_dealer' widget='radio'
+                    required="type != 'SLS'" readonly="state != 'draft'" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Outgoing Document Search View -->
+        <record id="tw_document_mutation_outgoing_view_search" model="ir.ui.view">
+            <field name="name">tw.document.mutation.outgoing.search</field>
+            <field name="model">tw.document.mutation</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" />
+                    <field name="company_id" />
+                    <field name="destination_company_id" />
+                    <field name="document_mutation_line_ids" string="Engine No" filter_domain="[('document_mutation_line_ids.lot_id', 'ilike', self)]"/>
+                    <field name="document_mutation_line_ids" string="Customer BPKB" filter_domain="[('document_mutation_line_ids.customer_bpkb_id', 'ilike', self)]"/>
+                    <field name="document_mutation_line_ids" string="BPKB No" filter_domain="[('document_mutation_line_ids.document_number', 'ilike', self)]"/>
+                    <field name="state" />
+                    <filter name="draft" string="Draft" domain="[('state','=','draft')]" />
+                    <filter name="confirmed" string="Confirmed" domain="[('state','=','confirmed')]" />
+                    <filter name="done" string="Done" domain="[('state','=','done')]" />
+                    <separator/>
+                    <filter name="group_by_state" string="Group by State" context="{'group_by':'state'}" />
+                    <filter name="group_by_branch" string="Branch" context="{'group_by':'company_id'}" />
+                    <filter name="group_by_destination" string="Group by Destination" context="{'group_by':'destination_company_id'}" />
+                </search>
+            </field>
+        </record>
+
+        <!-- Outgoing Document List View -->
+        <record id="tw_document_mutation_outgoing_view_list" model="ir.ui.view">
+            <field name="name">tw.document.mutation.outgoing.list</field>
+            <field name="model">tw.document.mutation</field>
+            <field name="arch" type="xml">
+                <list create="false" edit="false" delete="false">
+                    <field name="name" />
+                    <field name="date" />
+                    <field name="company_id" string="Branch" />
+                    <field name="destination_company_id" />
+                    <field name="document_type" />
+                    <field name="transit_location_id" />
+                    <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'done'" decoration-warning="state == 'confirmed'" />
+                </list>
+            </field>
+        </record>
+
+        <!-- Outgoing Document Form View -->
+        <record id="tw_document_mutation_outgoing_view_form" model="ir.ui.view">
+            <field name="name">tw.document.mutation.outgoing.form</field>
+            <field name="model">tw.document.mutation</field>
+            <field name="arch" type="xml">
+                <form create="false" edit="false" delete="false">
+                    <header>
+                        <button name="action_confirm" data-hotkey="c"
+                            invisible="state != 'draft' or transfer_type != 'outgoing'" 
+                            string="Confirm" type="object"
+                            class="oe_highlight"
+                            confirm="Are you sure you want to confirm this outgoing document? This will create an incoming document at the destination branch." 
+                            groups="tw_vehicle_document_mutation.group_document_mutation_outgoing_confirm_button"/>
+                        <field name="state" widget="statusbar"
+                            statusbar_visible="draft,confirmed,done" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_incoming"
+                                type="object"
+                                class="o_stat_button"
+                                icon="fa-arrow-down"
+                                invisible="not incoming_mutation_id">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Incoming</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <span class="o_form_label">Outgoing Document</span>
+                            <h1>
+                                <field name="name" class="oe_inline" />
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Source">
+                                <field name="transfer_type" invisible="1" />
+                                <field name="company_id" string="Branch"
+                                    options="{'no_create': True,'no_open': True}"
+                                    readonly="state != 'draft'" />
+                                <field name="bpkb_source_location_id" string="BPKB Location"
+                                    invisible="document_type != 'bpkb'"
+                                    options="{'no_create': True,'no_open': True}"
+                                    required="document_type == 'bpkb'"
+                                    readonly="state != 'draft'" />
+                                <field name="stnk_source_location_id" string="STNK Location"
+                                    invisible="document_type != 'stnk'"
+                                    options="{'no_create': True,'no_open': True}"
+                                    required="document_type == 'stnk'"
+                                    readonly="state != 'draft'" />
+                                <field name="document_type" readonly="state != 'draft'" />
+                            </group>
+                            <group string="Destination">
+                                <field name="date" readonly="1" />
+                                <field name="destination_company_id" required="1"
+                                    options="{'no_create': True,'no_open': True}"
+                                    readonly="state != 'draft'" />
+                                <field name="transit_location_id" required="1"
+                                    options="{'no_create': True,'no_open': True}"
+                                    domain="[('company_id', '=', destination_company_id), ('type', '=', 'transit')]"
+                                    readonly="state != 'draft'" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Document Lines">
+                                <field name="document_mutation_line_ids" readonly="state != 'draft'">
+                                    <list editable="bottom">
+                                        <field name="lot_id" required="1"
+                                            options="{'no_create': True,'no_open': True}" />
+                                        <field name="chassis_number" readonly="1" />
+                                        <field name="document_number" readonly="1" />
+                                        <field name="bpkb_current_location_id" string="Current Location"
+                                            invisible="parent.document_type != 'bpkb'" />
+                                        <field name="stnk_current_location_id" string="Current Location"
+                                            invisible="parent.document_type != 'stnk'" />
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="References">
+                                <group>
+                                    <field name="ownership_mutation_request_id" readonly="1" />
+                                    <field name="incoming_mutation_id" readonly="1" />
+                                </group>
+                            </page>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1" />
+                                        <field name="confirm_uid" readonly="1" />
+                                        <field name="done_uid" readonly="1" />
+                                    </group>
+                                    <group>
+                                        <field name="create_date" readonly="1" />
+                                        <field name="confirm_date" readonly="1" />
+                                        <field name="done_date" readonly="1" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <!-- Outgoing Document Action -->
+        <record id="tw_document_mutation_outgoing_action" model="ir.actions.act_window">
+            <field name="name">On Outgoing Document</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.document.mutation</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('transfer_type', '=', 'outgoing')]</field>
+            <field name="context" eval="{'default_transfer_type': 'outgoing', 'default_document_type': 'bpkb', 'search_default_draft': 1, 'search_default_confirmed': 1, 'create': False}"/>
+        </record>
+
+        <record id="tw_document_mutation_outgoing_action_list" model="ir.actions.act_window.view">
+            <field name="sequence" eval="10" />
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_document_mutation_outgoing_view_list" />
+            <field name="act_window_id" ref="tw_document_mutation_outgoing_action" />
+        </record>
+
+        <record id="tw_document_mutation_outgoing_action_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="20" />
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_document_mutation_outgoing_view_form" />
+            <field name="act_window_id" ref="tw_document_mutation_outgoing_action" />
+        </record>
+
+    </data>
+</odoo>

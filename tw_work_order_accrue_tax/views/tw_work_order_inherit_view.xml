@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <record id="tw_work_order_accrue_tax_form_view" model="ir.ui.view">
+            <field name="name">tw.work.order.accrue.tax.form</field>
+            <field name="model">tw.work.order</field>
+            <field name="inherit_id" ref="tw_work_order.tw_work_order_form_view"/>
+            <field name="arch" type="xml">
+                <field name="is_shipped" position="after">
+                    <field name="accrue_tax_id" readonly="1" options="{'no_create': True,'no_open': True}" invisible="not accrue_tax_id"/>
+                    <field name="amount_accrue_tax" invisible="not amount_accrue_tax"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

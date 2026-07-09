@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="stnk_print_validasi">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page" style="font-family: Arial, Helvetica, sans-serif;">
+                        <div class="oe_structure"/>
+                        <div class="col-xs-12" style="margin-bottom:10px;">
+                            <table style="font-size:10px; width:100%; line-height:1.6; border-collapse: collapse; border:1px solid black;">
+                                <tr>
+                                    <th colspan="4"
+                                        style="font-size:12px; text-align:left; padding:5px; border:1px solid black; font-weight:bold;">
+                                        <span t-esc="doc.name or '-'"/>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="width:15%; padding:4px; border:1px solid black; font-weight:bold;">
+                                        Branch
+                                    </th>
+                                    <td style="padding:4px; border:1px solid black;">: &#160;<span t-esc="doc.company_id.display_name or '-'"/>
+                                    </td>
+                                    <th style="width:15%; padding:4px; border:1px solid black; font-weight:bold;">Staff
+                                        BBN
+                                    </th>
+                                    <td style="padding:4px; border:1px solid black;">: &#160;<span t-esc="doc.staff_bbn_id.name or '-'"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style="padding:4px; border:1px solid black; font-weight:bold;">Division</th>
+                                    <td style="padding:4px; border:1px solid black;">: &#160;<span t-esc="doc.division or '-'"/>
+                                    </td>
+                                    <th style="padding:4px; border:1px solid black; font-weight:bold;">ADH</th>
+                                    <td style="padding:4px; border:1px solid black;">: &#160;<span t-esc="doc.adh_id.name or '-'"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style="padding:4px; border:1px solid black; font-weight:bold;">Tanggal SO</th>
+                                    <td style="padding:4px; border:1px solid black;">: &#160;<span t-esc="doc.date.strftime('%d-%m-%Y') if doc.date else '-'" />
+                                    </td>
+                                    <th style="padding:4px; border:1px solid black; font-weight:bold;">SOH</th>
+                                    <td style="padding:4px; border:1px solid black;">: &#160;<span t-esc="doc.soh_id.name or '-'"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="col-xs-12" style="margin-top:10px;">
+                            <p style="font-weight:bold; margin-bottom:5px;">Data Stock STNK</p>
+                            <table style="font-size:9px; width:100%; border-collapse: collapse; border:1px solid black;">
+                                <thead style="background-color:#f2f2f2;">
+                                    <tr>
+                                        <th style="padding:3px; text-align:center; border:1px solid black;">No</th>
+                                        <th style="padding:3px; text-align:left; border:1px solid black;">Nama STNK</th>
+                                        <th style="padding:3px; text-align:left; border:1px solid black;">Lokasi STNK
+                                        </th>
+                                        <th style="padding:3px; text-align:left; border:1px solid black;">No Engine</th>
+                                        <th style="padding:3px; text-align:left; border:1px solid black;">Ceklis Fisik
+                                            STNK
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="doc.detail_stnk_ids" t-as="detail" t-index="detail_index">
+                                        <tr style="page-break-inside: avoid;">
+                                            <td style="padding:3px; text-align:center; border:1px solid black;">
+                                                <span t-esc="detail_index + 1"/>
+                                            </td>
+                                            <td style="padding:3px; border:1px solid black;">
+                                                <span t-esc="detail.customer_registration_id.name or '-'"/>
+                                            </td>
+                                            <td style="padding:3px; border:1px solid black;">
+                                                <span t-esc="detail.location_registration or '-'"/>
+                                            </td>
+                                            <td style="padding:3px; border:1px solid black;">
+                                                <span t-esc="detail.lot_id.name or '-'"/>
+                                            </td>
+                                            <td style="padding:3px; border:1px solid black;">
+                                                <span t-esc="detail.validation_check_physical_registration or '-'"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-xs-12" style="margin-top:10px;">
+                            <p style="font-weight:bold; margin-bottom:5px;">Fisik Tidak Tercatat Sistem</p>
+                            <table style="font-size:9px; width:100%; border-collapse: collapse; border:1px solid black;">
+                                <thead style="background-color:#f2f2f2;">
+                                    <tr>
+                                        <th style="padding:3px; text-align:center; border:1px solid black;">No</th>
+                                        <th style="padding:3px; text-align:left; border:1px solid black;">Nama STNK</th>
+                                        <th style="padding:3px; text-align:left; border:1px solid black;">No Engine</th>
+                                        <th style="padding:3px; text-align:left; border:1px solid black;">Keterangan
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="doc.other_stnk_ids" t-as="other" t-index="other_index">
+                                        <tr style="page-break-inside: avoid;">
+                                            <td style="padding:3px; text-align:center; border:1px solid black;">
+                                                <span t-esc="other_index + 1"/>
+                                            </td>
+                                            <td style="padding:3px; border:1px solid black;">
+                                                <span t-esc="other.name_registration or '-'"/>
+                                            </td>
+                                            <td style="padding:3px; border:1px solid black;">
+                                                <span t-esc="other.no_engine or '-'"/>
+                                            </td>
+                                            <td style="padding:3px; border:1px solid black;">
+                                                <span t-esc="other.description or '-'"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-xs-12" style="margin-top: 20px;">
+                            <table style="font-size:10px; width:100%; text-align:center; border-collapse: collapse; border:1px solid black;">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center; border:1px solid black;">PIC SO</th>
+                                        <th colspan="2" style="text-align: center; border:1px solid black;">MENGETAHUI
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="height: 80px;">
+                                        <td style="border:1px solid black;"></td>
+                                        <td style="border:1px solid black;"></td>
+                                        <td style="border:1px solid black;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:33.3%; border:1px solid black;">
+                                            <span t-esc="doc.adh_id.name or '-'"/>
+                                            <br/>ADH
+                                        </td>
+                                        <td style="width:33.3%; border:1px solid black;">
+                                            <span t-esc="doc.staff_bbn_id.name or '-'"/>
+                                            <br/>Staff BBN
+                                        </td>
+                                        <td style="width:33.3%; border:1px solid black;">
+                                            <span t-esc="doc.soh_id.name or '-'"/>
+                                            <br/>SOH
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3" style="text-align:left; border:none; font-size:9px;">
+                                            <span t-esc="user.name or '-'"/>,
+                                            <span t-esc="get_local_time()"/>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <div class="oe_structure"/>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

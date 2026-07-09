@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="batch_travel_document_template">
+            <t t-set="scale" t-value="1"/>
+            <t t-set="size_26" t-value="26 * scale"/>
+            <t t-set="size_24" t-value="24 * scale"/>
+            <t t-set="size_22" t-value="22 * scale"/>
+            <t t-set="size_20" t-value="20 * scale"/>
+            <t t-set="size_18" t-value="18 * scale"/>
+            <t t-set="size_16" t-value="16 * scale"/>
+            <t t-set="size_15" t-value="15 * scale"/>
+            <t t-set="size_14" t-value="14 * scale"/>
+            <t t-set="size_13" t-value="13 * scale"/>
+            <t t-set="size_12" t-value="12 * scale"/>
+            <t t-set="size_11" t-value="11 * scale"/>
+            <t t-set="size_10" t-value="10 * scale"/>
+            <t t-set="size_9" t-value="9 * scale"/>
+            <t t-set="size_8" t-value="8 * scale"/>
+            <t t-set="size_7" t-value="7 * scale"/>
+            <t t-set="size_6" t-value="6 * scale"/>
+            <t t-set="size_5" t-value="5 * scale"/>
+            <t t-set="size_4" t-value="4 * scale"/>
+            <t t-set="size_3" t-value="3 * scale"/>
+            <t t-set="size_2" t-value="2 * scale"/>
+            <t t-set="size_1" t-value="1 * scale"/>
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="batch">
+                    <t t-foreach="batch.picking_ids" t-as="o">
+                        <t t-call="tw_web.teto_report_layout">
+                            <t t-call="tw_web.teto_report_styles_base" />
+                            <div class="page">
+                                <div class="oe_structure"/>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <t t-call="tw_web.teto_report_partner_address">
+                                                <t t-set="partner" t-value="o.company_id.partner_id"/>
+                                            </t>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-12 bolder">SURAT JALAN</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4">No</div>
+                                            <div class="col-8">: &#160;<span t-esc="batch.name"/></div>
+                                        </div>
+                                        <div class="row" t-if="o.division != 'Sparepart'">
+                                            <div class="col-4"><span>Tanggal</span></div>
+                                            <div class="col-8">: &#160;<span t-field="o.date" t-options="{'format': 'dd-MM-yyyy'}"/></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row border">
+                                    <div class="col-12">
+                                        <table class="teto-table-header table-borderless" style="width: 100%; border-collapse: collapse;">
+                                            <tr>
+                                                <td style="width: 15%;">Kepada Yth</td>
+                                                <td style="width: 1%;">:</td>
+                                                <td style="width: 34%"><span t-esc="dealer_address(o)[0]"/></td>
+                                        
+                                                <td colspan="3" style="text-align: center;">Diambil</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Alamat</td>
+                                                <td>:</td>
+                                                <td><span t-esc="print_address(o.partner_id)"/></td>
+                                        
+                                                <td style="width: 15%">No Pol</td>
+                                                <td style="width: 1%">:</td>
+                                                <td style="width: 34%" class="text-end"><span t-esc="o.vehicle_id.plate_number"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Nomor HP/Telp</td>
+                                                <td>:</td>
+                                                <td><span t-esc="dealer_address(o)[8]"/></td>
+                                        
+                                                <td>Sopir</td>
+                                                <td>:</td>
+                                                <td><span t-esc="o.driver_id.name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>No Invoice</td>
+                                                <td>:</td>
+                                                <td><span t-esc="_get_invoice(o).name if _get_invoice(o) else '-'"/></td>
+                                            </tr>
+                                        </table>
+                                        
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <table width="100%" class="table table-bordered table-sm" style="border: 1px solid black;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 5%;">No</th>
+                                                            <th>No SO</th>
+                                                            <t t-if="_get_invoice(o) and _get_invoice(o).invoice_date">
+                                                                <th>Tgl Inv</th>
+                                                            </t>
+                                                            <th>Kode</th>
+                                                            <th>Keterangan</th>
+                                                            <t t-if="o.division == 'Unit'">
+                                                                <th>Warna</th>
+                                                                <th>No Mesin</th>
+                                                                <th>No Rangka</th>
+                                                            </t>
+                                                            <t t-if="o.division == 'Umum'">
+                                                                <th>Serial Number</th>
+                                                            </t>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <t t-foreach="doc_line(o.move_ids_without_package)" t-as="line">
+                                                            <tr t-foreach="line[1].move_line_ids" t-as="move_line">
+                                                                <td class="text-center"><span t-esc="line[0]"/></td>
+                                                                <td><span t-esc="o.origin"/></td>
+                                                                <t t-if="_get_invoice(o) and _get_invoice(o).invoice_date">
+                                                                    <td><span t-esc="_get_invoice(o).invoice_date.strftime('%d-%m-%Y')"/></td>
+                                                                </t>
+                                                                <td><span t-esc="line[1].product_id.default_code"/></td>
+                                                                <td><span t-esc="line[1].product_id.description"/></td>
+                                                                <t t-if="o.division == 'Unit'">
+                                                                    <td><span t-esc="product_color(line[1].product_id)"/></td>
+                                                                    <td><span t-esc="move_line.lot_id.name"/></td>
+                                                                    <td class="text-end"><span t-esc="move_line.lot_id.chassis_number"/></td>
+                                                                </t>
+                                                                <t t-if="o.division == 'Umum'">
+                                                                    <td><span t-esc="move_line.lot_id.name"/></td>
+                                                                </t>
+                                                            </tr>
+                                                        </t>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mt-1">
+                                    <div class="col-12">Note: Barang sudah diserahkan dengan keadaan baik dan lengkap</div>
+                                </div>
+                                
+                                <div class="row mt-1">
+                                    <div class="col-3">
+                                        <div class="row mb-5">
+                                            <div class="col">
+                                                <span>Dicetak Oleh</span>
+                                                <br/><br/><br/><br/>
+                                                ____________________
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="row mb-5">
+                                            <div class="col">
+                                                Diserahkan
+                                                <br/><br/><br/><br/>
+                                                ____________________
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="row mb-5">
+                                            <div class="col">
+                                                <t>Pengirim</t>
+                                                <br/><br/><br/><br/>
+                                                ____________________
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="row">
+                                            <div class="col">
+                                                <br/><br/><br/><br/>
+                                                <span t-esc="print_user()"/>, <span t-esc="time_date(o.date)"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <t>PIC Gudang</t>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col">
+                                        <t>Lembar ke-1 : Pengirim / Lembar ke-2 : Penerima</t>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

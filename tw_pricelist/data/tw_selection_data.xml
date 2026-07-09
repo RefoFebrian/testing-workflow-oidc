@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Service Category -->
+        <record id="tw_pricelist_data_service_category_a" model="tw.selection">
+            <field name="name">A</field>
+            <field name="value">a</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_b" model="tw.selection">
+            <field name="name">B</field>
+            <field name="value">b</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_f" model="tw.selection">
+            <field name="name">F</field>
+            <field name="value">f</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+                <record id="tw_pricelist_data_service_category_g" model="tw.selection">
+            <field name="name">G</field>
+            <field name="value">g</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>        
+
+        <record id="tw_pricelist_data_service_category_h" model="tw.selection">
+            <field name="name">H</field>
+            <field name="value">h</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_i" model="tw.selection">
+            <field name="name">I</field>
+            <field name="value">i</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_j" model="tw.selection">
+            <field name="name">J</field>
+            <field name="value">j</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_k" model="tw.selection">
+            <field name="name">K</field>
+            <field name="value">k</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_l" model="tw.selection">
+            <field name="name">L</field>
+            <field name="value">l</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_m" model="tw.selection">
+            <field name="name">M</field>
+            <field name="value">m</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_n" model="tw.selection">
+            <field name="name">N</field>
+            <field name="value">n</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_o" model="tw.selection">
+            <field name="name">O</field>
+            <field name="value">o</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_p" model="tw.selection">
+            <field name="name">P</field>
+            <field name="value">p</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_q" model="tw.selection">
+            <field name="name">Q</field>
+            <field name="value">q</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_r" model="tw.selection">
+            <field name="name">R</field>
+            <field name="value">r</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_s" model="tw.selection">
+            <field name="name">S</field>
+            <field name="value">s</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_t" model="tw.selection">
+            <field name="name">T</field>
+            <field name="value">t</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_u" model="tw.selection">
+            <field name="name">U</field>
+            <field name="value">u</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_v" model="tw.selection">
+            <field name="name">V</field>
+            <field name="value">v</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_w" model="tw.selection">
+            <field name="name">W</field>
+            <field name="value">w</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_x" model="tw.selection">
+            <field name="name">X</field>
+            <field name="value">x</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_y" model="tw.selection">
+            <field name="name">Y</field>
+            <field name="value">y</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_z" model="tw.selection">
+            <field name="name">Z</field>
+            <field name="value">z</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_ct" model="tw.selection">
+            <field name="name">CT</field>
+            <field name="value">ct</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_fo" model="tw.selection">
+            <field name="name">FO</field>
+            <field name="value">fo</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_h1" model="tw.selection">
+            <field name="name">H1</field>
+            <field name="value">h1</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_h2" model="tw.selection">
+            <field name="name">H2</field>
+            <field name="value">h2</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_h3" model="tw.selection">
+            <field name="name">H3</field>
+            <field name="value">h3</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_ix" model="tw.selection">
+            <field name="name">IX</field>
+            <field name="value">ix</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_m1" model="tw.selection">
+            <field name="name">M1</field>
+            <field name="value">m1</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_me" model="tw.selection">
+            <field name="name">ME</field>
+            <field name="value">me</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_mk" model="tw.selection">
+            <field name="name">MK</field>
+            <field name="value">mk</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_n1" model="tw.selection">
+            <field name="name">N1</field>
+            <field name="value">n1</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_q1" model="tw.selection">
+            <field name="name">Q1</field>
+            <field name="value">q1</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_re" model="tw.selection">
+            <field name="name">RE</field>
+            <field name="value">re</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_sc" model="tw.selection">
+            <field name="name">SC</field>
+            <field name="value">sc</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_v1" model="tw.selection">
+            <field name="name">V1</field>
+            <field name="value">v1</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_z1" model="tw.selection">
+            <field name="name">Z1</field>
+            <field name="value">z1</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_z2" model="tw.selection">
+            <field name="name">Z2</field>
+            <field name="value">z2</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_z3" model="tw.selection">
+            <field name="name">Z3</field>
+            <field name="value">z3</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_cuve" model="tw.selection">
+            <field name="name">CUVE</field>
+            <field name="value">cuve</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_icon" model="tw.selection">
+            <field name="name">ICON</field>
+            <field name="value">icon</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <record id="tw_pricelist_data_service_category_em1" model="tw.selection">
+            <field name="name">EM1</field>
+            <field name="value">em1</field>
+            <field name="type">PricelistServiceCategory</field>
+        </record>
+
+        <!-- Pricelisr Expedition -->
+        <record id="tw_pricelist_data_category_price_product" model="tw.selection">
+            <field name="name">Product</field>
+            <field name="value">product</field>
+            <field name="type">PricelistCategory</field>
+        </record>
+        <record id="tw_pricelist_data_category_price_delivery" model="tw.selection">
+            <field name="name">Delivery</field>
+            <field name="value">delivery</field>
+            <field name="type">PricelistCategory</field>
+        </record>
+        <record id="tw_pricelist_data_category_price_volume" model="tw.selection">
+            <field name="name">Volume</field>
+            <field name="value">volume</field>
+            <field name="type">PricelistCategory</field>
+        </record>
+        <record id="tw_pricelist_data_category_price_category" model="tw.selection">
+            <field name="name">Category</field>
+            <field name="value">category</field>
+            <field name="type">PricelistCategory</field>
+        </record>
+    </data>
+</odoo>

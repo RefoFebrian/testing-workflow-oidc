@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Field Category Report Group -->
+        <record id="group_tw_payment_klik_button_payment_klik" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Payment Klik</field>
+        </record>
+
+        <record id="group_tw_field_category_report_payment_klik_bank" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Field Category Report Payment Klik Bank</field>
+        </record>
+        
+        <!-- Payment Klik Verification Group -->
+        <record id="group_tw_monitoring_payment_klik_verify" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Monitoring Payment Klik: Verify</field>
+        </record>
+        
+        <!-- Payment Klik Approval Group -->
+        <record id="group_tw_monitoring_payment_klik_approve" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Monitoring Payment Klik: Approve</field>
+        </record>
+        
+        <!-- Payment Klik Process Group -->
+        <record id="group_tw_monitoring_payment_klik_process" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Monitoring Payment Klik: Process</field>
+        </record>
+
+        <!-- Add groups to System Admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_payment_klik_button_payment_klik')),
+                (4, ref('group_tw_field_category_report_payment_klik_bank')),
+                (4, ref('group_tw_monitoring_payment_klik_verify')),
+                (4, ref('group_tw_monitoring_payment_klik_approve')),
+                (4, ref('group_tw_monitoring_payment_klik_process')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Config Parameter Master Calculate Evaluation Performance Team Leader -->
+            <record id="tw_sp_digital_master_calculate_ep_employee_team_leader" model="ir.config_parameter">
+                <field name="key">master.calculate.ep.of.tl</field>
+                <field name="value">
+                    {
+                        'master_target_point_sales_partner': {'target': 5, 'point': 20},
+                        'master_target_cold_prospect': {'target': 625, 'point': 30},
+                        'master_target_volume_sales': {'target': 20, 'point': 50},
+                        'minimum_point_each_month': 50
+                    }
+                </field>
+            </record>
+
+    </data>
+</odoo>

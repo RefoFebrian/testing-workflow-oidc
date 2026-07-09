@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_competitor_yamaha" model="tw.selection">
+            <field name="name">Yamaha</field>
+            <field name="value">Yamaha</field> 
+            <field name="type">DealerCompetitor</field>
+        </record>
+
+        <record id="tw_competitor_lpm" model="tw.selection">
+            <field name="name">LPM</field>
+            <field name="value">LPM</field> 
+            <field name="type">DealerCompetitor</field>
+        </record>
+
+        <record id="tw_competitor_pas" model="tw.selection">
+            <field name="name">PT PAS</field>
+            <field name="value">PT PAS</field> 
+            <field name="type">DealerCompetitor</field>
+        </record>
+    </data>
+</odoo>

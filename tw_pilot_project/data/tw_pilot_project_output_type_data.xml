@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_selection_output_type_tuple" model="tw.selection">
+            <field name="name">Tuple</field>
+            <field name="value">str(tuple(%s)).replace(",)", ")")</field> 
+            <field name="type">OutputType</field> 
+        </record>
+        
+        <record id="tw_selection_output_type_dictionary" model="tw.selection">
+	    	<field name="name">Dictionary</field>
+            <field name="value">[{'id': field_id} for field_id in %s]</field>
+	    	<field name="type">OutputType</field> 
+        </record>
+     </data>
+</odoo>

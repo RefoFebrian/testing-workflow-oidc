@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="tw_file_dropzone_widget.BinaryDropzoneField">
+        <div class="tw-file-dropzone tw-file-dropzone-single position-relative w-100 h-100" t-ref="root">
+            <t t-if="!props.readonly">
+                <t t-if="props.record.data[props.name]">
+                    <div class="w-100 d-inline-flex gap-1 align-items-center">
+                        <FileUploader
+                            acceptedFileExtensions="props.acceptedFileExtensions"
+                            onUploaded.bind="update"
+                        >
+                            <t name="download" t-if="props.record.resId and !props.record.dirty">
+                                <button
+                                    class="btn btn-link btn-sm lh-1 fa fa-download o_download_file_button"
+                                    data-tooltip="Download"
+                                    aria-label="Download"
+                                    t-on-click="onFileDownload"
+                                >
+                                </button>
+                            </t>
+                            <t t-set-slot="toggler">
+                                <input type="text" class="o_input" t-att-value="fileName" readonly="readonly" />
+                                <button
+                                    class="btn btn-link btn-sm lh-1 fa fa-pencil o_select_file_button"
+                                    data-tooltip="Edit"
+                                    aria-label="Edit"
+                                >
+                                </button>
+                            </t>
+                            <button
+                                class="btn btn-link btn-sm lh-1 fa fa-trash o_clear_file_button"
+                                data-tooltip="Clear"
+                                aria-label="Clear"
+                                t-on-click="() => this.update({})"
+                            >
+                            </button>
+                        </FileUploader>
+                    </div>
+                </t>
+                <t t-else="">
+                    <t t-call="tw_file_dropzone_widget.DropzoneArea">
+                        <FileUploader
+                            acceptedFileExtensions="props.acceptedFileExtensions"
+                            onUploaded.bind="update"
+                        >
+                            <t t-set-slot="toggler">
+                                <button class="btn btn-primary" type="button">Browse File</button>
+                            </t>
+                        </FileUploader>
+                    </t>
+                </t>
+            </t>
+            <t t-elif="props.record.resId and props.record.data[props.name]">
+                <a class="o_form_uri" href="#" t-on-click.prevent="onFileDownload">
+                    <span class="fa fa-download me-2" />
+                    <t t-if="fileName" t-esc="fileName" />
+                </a>
+            </t>
+        </div>
+    </t>
+
+    <t t-name="tw_file_dropzone_widget.Many2ManyBinaryDropzoneField">
+        <div t-attf-class="tw-file-dropzone tw-file-dropzone-many oe_fileupload #{ props.className ? props.className : '' }" t-ref="root" aria-atomic="true">
+            <t t-if="!props.readonly and (!props.numberOfFiles or files.length &lt; props.numberOfFiles)">
+                <t t-call="tw_file_dropzone_widget.DropzoneArea">
+                    <t t-set="uploadLabel" t-value="'Browse Files'"/>
+                    <FileInput
+                        acceptedFileExtensions="props.acceptedFileExtensions"
+                        multiUpload="true"
+                        onUpload.bind="onFileUploaded"
+                        resModel="props.record.resModel"
+                        resId="props.record.resId or 0"
+                    >
+                        <button class="btn btn-primary o_attach" data-tooltip="Attach">
+                            <span class="fa fa-paperclip" aria-label="Attach"/> <t t-esc="uploadText"/>
+                        </button>
+                    </FileInput>
+                </t>
+            </t>
+
+            <div class="o_attachments" t-if="files.length">
+                <t t-foreach="files" t-as="file" t-key="file.id">
+                    <t t-call="tw_file_dropzone_widget.Many2ManyBinaryDropzoneField.attachment_preview"/>
+                </t>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="tw_file_dropzone_widget.Many2ManyBinaryDropzoneField.attachment_preview">
+        <t t-set="editable" t-value="!props.readonly"/>
+        <div name="attachment" t-attf-class="o_attachment o_attachment_many2many #{ editable ? 'o_attachment_editable' : '' }" t-att-title="file.name">
+            <div class="o_attachment_wrap">
+                <t t-set="ext" t-value="getExtension(file)"/>
+                <t t-set="url" t-value="getUrl(file.id)"/>
+                <div class="o_image_box float-start" t-att-data-tooltip="'Download ' + file.name">
+                    <a t-att-href="url" aria-label="Download" download="">
+                        <span class="o_image o_hover" t-att-data-mimetype="file.mimetype" t-att-data-ext="ext" role="img"/>
+                    </a>
+                </div>
+
+                <div class="caption">
+                    <a class="ml4" t-att-data-tooltip="'Download ' + file.name" t-att-href="url" download=""><t t-esc="file.name"/></a>
+                </div>
+                <div class="caption small">
+                    <a class="ml4 small text-uppercase" t-att-href="url" download=""><b><t t-esc="ext"/></b></a>
+                </div>
+
+                <div class="o_attachment_uploaded"><i class="text-success fa fa-check" role="img" aria-label="Uploaded" title="Uploaded"/></div>
+                <div t-if="editable" class="o_attachment_delete" t-on-click.stop="() => this.onFileRemove(file.id)"><span role="img" aria-label="Delete" title="Delete">×</span></div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="tw_file_dropzone_widget.DropzoneArea">
+        <div class="tw-dropzone-area border border-dashed text-center p-4 rounded d-flex flex-column align-items-center justify-content-center cursor-pointer">
+            <i class="fa fa-3x fa-cloud-upload text-muted mb-3"></i>
+            <h4 class="text-muted">Drag and drop file here</h4>
+            <span class="text-muted mb-3">or</span>
+            <div class="tw-dropzone-action">
+                <t t-out="0"/>
+            </div>
+        </div>
+    </t>
+
+</templates>

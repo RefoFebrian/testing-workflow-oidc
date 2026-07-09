@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Module Category Advance Payment -->
+        <record id="tw_module_category_advance_payment" model="ir.module.category">
+            <field name="name">TW Advance Payment</field>
+        </record>
+
+        <!-- Read Access -->
+        <record id="group_tw_advance_payment_read" model="res.groups">
+            <field name="category_id" ref="tw_advance_payment.tw_module_category_advance_payment"/>
+            <field name="name">TW Advance Payment Read</field>
+        </record>
+        
+        <record id="access_tw_advance_payment_move_read" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="name">tw_advance_payment move read</field>
+            <field name="group_id" ref="group_tw_advance_payment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+        <record id="access_tw_advance_payment_attachment_mixin_read" model="ir.model.access">
+            <field name="model_id" ref="tw_attachment.model_tw_attachment_mixin"/>
+            <field name="name">tw_advance_payment attachment mixin read</field>
+            <field name="group_id" ref="group_tw_advance_payment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+        
+        <record id="access_tw_advance_payment_attachment_read" model="ir.model.access">
+            <field name="model_id" ref="tw_attachment.model_tw_attachment"/>
+            <field name="name">tw_advance_payment attachment read</field>
+            <field name="group_id" ref="group_tw_advance_payment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+        
+        <record id="access_tw_advance_payment_account_payment_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_advance_payment"/>
+            <field name="name">tw_advance_payment Payment read</field>
+            <field name="group_id" ref="group_tw_advance_payment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+        
+        <record id="access_tw_advance_payment_account_payment_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_advance_payment_line"/>
+            <field name="name">tw_advance_payment Payment Line read</field>
+            <field name="group_id" ref="group_tw_advance_payment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+        
+        <record id="access_tw_advance_payment_move_line_read" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="name">tw_advance_payment move line read</field>
+            <field name="group_id" ref="group_tw_advance_payment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Update Access -->
+        <record id="group_tw_advance_payment_write" model="res.groups">
+            <field name="category_id" ref="tw_advance_payment.tw_module_category_advance_payment"/>
+            <field name="name">TW Advance Payment Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_advance_payment_read'))]"/>
+        </record>
+        
+        <record id="access_tw_advance_payment_move_write" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="name">tw_advance_payment move write</field>
+            <field name="group_id" ref="group_tw_advance_payment_write"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_advance_payment_attachment_write" model="ir.model.access">
+            <field name="model_id" ref="tw_attachment.model_tw_attachment"/>
+            <field name="name">tw_advance_payment attachment write</field>
+            <field name="group_id" ref="group_tw_advance_payment_write"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_advance_payment_attachment_mixin_write" model="ir.model.access">
+            <field name="model_id" ref="tw_attachment.model_tw_attachment_mixin"/>
+            <field name="name">tw_advance_payment attachment mixin write</field>
+            <field name="group_id" ref="group_tw_advance_payment_write"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <record id="access_tw_advance_payment_move_line_write" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="name">tw_advance_payment move line write</field>
+            <field name="group_id" ref="group_tw_advance_payment_write"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_advance_payment_account_payment_write" model="ir.model.access">
+            <field name="model_id" ref="model_tw_advance_payment"/>
+            <field name="name">tw_advance_payment Payment write</field>
+            <field name="group_id" ref="group_tw_advance_payment_write"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_advance_payment_account_payment_line_write" model="ir.model.access">
+            <field name="model_id" ref="model_tw_advance_payment_line"/>
+            <field name="name">tw_advance_payment Payment Line write</field>
+            <field name="group_id" ref="group_tw_advance_payment_write"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Delete Access -->
+        <record id="group_tw_advance_payment_delete" model="res.groups">
+            <field name="category_id" ref="tw_advance_payment.tw_module_category_advance_payment"/>
+            <field name="name">TW Advance Payment Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_advance_payment_read'))]"/>
+        </record>
+        
+        <record id="access_tw_advance_payment_move_delete" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="name">tw_advance_payment move delete</field>
+            <field name="group_id" ref="group_tw_advance_payment_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_advance_payment_attachment_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_attachment.model_tw_attachment"/>
+            <field name="name">tw_advance_payment attachment delete</field>
+            <field name="group_id" ref="group_tw_advance_payment_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_advance_payment_attachment_mixin_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_attachment.model_tw_attachment_mixin"/>
+            <field name="name">tw_advance_payment attachment mixin delete</field>
+            <field name="group_id" ref="group_tw_advance_payment_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+        
+        <record id="access_tw_advance_payment_move_line_delete" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="name">tw_advance_payment move line delete</field>
+            <field name="group_id" ref="group_tw_advance_payment_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+      
+        <record id="access_tw_advance_payment_account_payment_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_advance_payment"/>
+            <field name="name">tw_advance_payment Payment delete</field>
+            <field name="group_id" ref="group_tw_advance_payment_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_advance_payment_account_payment_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_advance_payment_line"/>
+            <field name="name">tw_advance_payment Payment Line delete</field>
+            <field name="group_id" ref="group_tw_advance_payment_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    </data>
+
+    <data>
+        <!-- Add to System Admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_advance_payment_read')),
+                (4, ref('group_tw_advance_payment_write')),
+                (4, ref('group_tw_advance_payment_delete')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_boom_task_escalation_inherit_form" model="ir.ui.view">
+            <field name="name">tw.boom.task.escalation.inherit.form</field>
+            <field name="model">tw.boom.task</field>
+            <field name="inherit_id" ref="tw_boom.view_tw_boom_task_form"/>
+            <field name="arch" type="xml">
+                <field name="last_escalation_date" position="after">
+                    <field name="is_last_reminder_escalation" readonly="1"/>
+                </field>
+                <xpath expr="//field[@name='escalation_transaction_ids']/list/field[@name='note']" position="before">
+                    <field name="wa_id" column_invisible="True"/>
+                    <field name="state_wa"/>
+                    <field name="note_wa"/>
+                </xpath>
+
+                <xpath expr="//field[@name='escalation_transaction_ids']/form//field[@name='state']" position="after">
+                    <field name="wa_id" invisible="1"/>
+                    <field name="state_wa" readonly="1" invisible="not state_wa"/>
+                    <field name="note_wa" readonly="1" invisible="not note_wa"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

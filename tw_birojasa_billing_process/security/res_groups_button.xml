@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="group_birojasa_billing_button_confirm" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">TW Button Tagihan Birojasa Confirm</field>
+            <field name="implied_ids" eval="[(4, ref('group_birojasa_billing_read'))]"/>
+        </record>
+
+        <record id="group_birojasa_billing_button_cancel" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">TW Button Tagihan Birojasa Cancel</field>
+            <field name="implied_ids" eval="[(4, ref('group_birojasa_billing_read'))]"/>
+        </record>
+
+        <record id="group_birojasa_billing_button_print" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">TW Button Tagihan Birojasa Print</field>
+            <field name="implied_ids" eval="[(4, ref('group_birojasa_billing_read'))]"/>
+        </record>
+    </data>
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+            (4,ref('group_birojasa_billing_button_confirm')),
+            (4,ref('group_birojasa_billing_button_cancel')),
+            (4,ref('group_birojasa_billing_button_print')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

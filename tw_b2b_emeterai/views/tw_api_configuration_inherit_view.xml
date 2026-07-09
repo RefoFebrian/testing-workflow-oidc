@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_api_configuration_b2b_emeterai_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.api.configuration.b2b.emeterai.inherit.form</field>
+        <field name="model">tw.api.configuration</field>
+        <field name="inherit_id" ref="tw_api.tw_api_configuration_form_view"/>
+        <field name="arch" type="xml">
+            <div class="oe_title" position="after">
+                <div class="oe_button_box" name="button_box">
+                    <button name="action_open_config_parameter_url_emeterai" string="URL API e-Meterai" type="object" class="oe_stat_button" icon="fa-gear" invisible="api_type_value != 'peruri_emeterai'"/>
+                </div>
+            </div>
+        </field>
+    </record>
+
+</odoo>

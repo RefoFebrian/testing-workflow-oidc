@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_report_google_drive_nrfs_form_view" model="ir.ui.view" >
+            <field name="name">tw.report.google.drive.nrfs.form</field>
+            <field name="model">tw.report.google.drive</field>
+            <field name="inherit_id" ref="tw_report_google_drive.view_tw_report_google_drive_form"/>
+            <field name="arch" type="xml">
+        		<button name="send_file_report_penjualan" position="after">
+        			<button name="send_file_report_nrfs" type="object" string="NRFS" />
+        		</button>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_disposal_asset_print">
+			<t t-set="scale" t-value="1"/>
+            <t t-set="size_26" t-value="26 * scale"/>
+            <t t-set="size_24" t-value="24 * scale"/>
+            <t t-set="size_22" t-value="22 * scale"/>
+            <t t-set="size_20" t-value="20 * scale"/>
+            <t t-set="size_18" t-value="18 * scale"/>
+            <t t-set="size_16" t-value="16 * scale"/>
+            <t t-set="size_15" t-value="15 * scale"/>
+            <t t-set="size_14" t-value="14 * scale"/>
+            <t t-set="size_13" t-value="13 * scale"/>
+            <t t-set="size_12" t-value="12 * scale"/>
+            <t t-set="size_11" t-value="11 * scale"/>
+            <t t-set="size_10" t-value="10 * scale"/>
+            <t t-set="size_9" t-value="9 * scale"/>
+            <t t-set="size_8" t-value="8 * scale"/>
+            <t t-set="size_7" t-value="7 * scale"/>
+            <t t-set="size_6" t-value="6 * scale"/>
+            <t t-set="size_5" t-value="5 * scale"/>
+            <t t-set="size_4" t-value="4 * scale"/>
+            <t t-set="size_3" t-value="3 * scale"/>
+            <t t-set="size_2" t-value="2 * scale"/>
+            <t t-set="size_1" t-value="1 * scale"/>
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page" t-attf-style="font-size: #{size_11}px;">
+
+                        <!-- Header: Logo + Title -->
+                        <table style="border-collapse: collapse; border: 1px solid black; width: 100%;">
+                            <tr style="border: 1px solid black;">
+                                <td width="15%" style="padding: 10px 0px; vertical-align: middle; text-align: center;">
+									<t t-set="base_url" t-value="request.httprequest.host_url.rstrip('/')"/>
+                                    <img t-att-src="base_url + '/tw_branch/static/src/img/logo.png'" style="max-width: 90px; height: auto;"/><br/>
+                                    <b t-attf-style="font-size: #{size_11}px;">Tunas Group</b>
+                                </td>
+                                <td width="70%" style="padding: 10px 15px;">
+                                    <div t-attf-style="text-align: center; padding-left:100px;">
+                                        <p t-attf-style="margin: 0; font-size: #{size_18}px; font-weight: bold;">Form Disposal Asset</p>
+                                        <b><span t-attf-style="font-size: #{size_11}px;" t-esc="doc.name"/></b>
+                                    </div>
+								</td>
+								<td width="15%" style="padding: 10px 15px; vertical-align: bottom; ">
+                                    <div t-attf-style="text-align: right; font-size: #{size_11}px;">
+                                        <b><u>General Affair Departement</u></b>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Branch Info + Date -->
+                            <tr>
+                                <td colspan="3">
+                                    <table width="100%" t-attf-style="font-size: #{size_11}px;">
+                                        <tr>
+                                            <td style="text-align: left; padding: 10px 10px 0; font-weight: bold;">
+                                                PT Tunas Dwipa Matra<br/>
+                                                <span t-esc="doc.company_id.name"/><br/>
+                                                <span t-esc="doc.company_id.street"/>
+                                            </td>
+                                            <td style="text-align: right; padding-right: 10px; font-weight: bold;">
+                                                Tanggal : &#160;<span t-esc="doc.date.strftime('%d-%m-%Y') if doc.date else ''"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="text-align: left; padding: 10px 10px; font-weight: bold;">
+                                                Type : &#160;<span t-esc="doc.type"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <!-- Detail Table for SOLD -->
+                            <tr>
+                                <td colspan="3" style="padding: 0 20px;">
+                                    <t t-if="doc.type == 'sold'">
+                                        <table width="100%" t-attf-style="font-size: #{size_11}px; border: 1px solid #dee2e6; border-collapse: collapse;">
+                                            <thead>
+                                                <tr>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">No</th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">
+                                                        No. Inventaris<br/>
+                                                        <span style="font-style: italic;">Fixed Asset No.</span>
+                                                    </th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">
+                                                        Keterangan<br/>
+                                                        <span style="font-style: italic;">Description</span>
+                                                    </th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">
+                                                        Jumlah<br/>
+                                                        <span style="font-style: italic;">Quantity</span>
+                                                    </th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">
+                                                        Harga Beli<br/>
+                                                        <span style="font-style: italic;">Cost</span>
+                                                    </th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">
+                                                        Nilai Buku<br/>
+                                                        <span style="font-style: italic;">NBV</span>
+                                                    </th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">
+                                                        Harga Jual<br/>
+                                                        <span style="font-style: italic;">Selling Price</span>
+                                                    </th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">
+                                                        Keterangan lainnya<br/>
+                                                        <span style="font-style: italic;">Other Desc.</span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-set="no" t-value="0"/>
+                                                <t t-foreach="doc.disposal_line" t-as="line">
+                                                    <t t-set="no" t-value="no + 1"/>
+                                                    <tr>
+                                                        <td style="border: 1px solid #dee2e6; padding: 4px; text-align: center;"><t t-esc="no"/></td>
+                                                        <td style="border: 1px solid #dee2e6; padding: 4px; text-align: left;"><span t-esc="line.asset_id.code"/></td>
+                                                        <td style="border: 1px solid #dee2e6; padding: 4px; text-align: left;"><span t-esc="line.asset_id.name"/></td>
+                                                        <td style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">1</td>
+                                                        <td style="border: 1px solid #dee2e6; padding: 4px; text-align: left;"><span t-esc="'{0:,.2f}'.format(line.nilai_asset).replace(',', '.')"/></td>
+                                                        <td style="border: 1px solid #dee2e6; padding: 4px; text-align: left;"><span t-esc="'{0:,.2f}'.format(line.book_value).replace(',', '.')"/></td>
+                                                        <td style="border: 1px solid #dee2e6; padding: 4px; text-align: left;" class="text-end"><span t-esc="'{0:,.2f}'.format(line.amount).replace(',', '.')"/></td>
+                                                        <td style="border: 1px solid #dee2e6; padding: 4px;"></td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </t>
+
+                                    <!-- Detail Table for SCRAP -->
+                                    <t t-if="doc.type == 'scrap'">
+                                        <table width="100%" t-attf-style="font-size: #{size_11}px; border: 1px solid #dee2e6; border-collapse: collapse;">
+                                            <thead>
+                                                <tr>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">No</th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">
+                                                        No. Inventaris<br/>
+                                                        <span style="font-style: italic;">Fixed Asset No.</span>
+                                                    </th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">
+                                                        Keterangan<br/>
+                                                        <span style="font-style: italic;">Description</span>
+                                                    </th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">
+                                                        Jumlah<br/>
+                                                        <span style="font-style: italic;">Quantity</span>
+                                                    </th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">
+                                                        Harga Beli<br/>
+                                                        <span style="font-style: italic;">Cost</span>
+                                                    </th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">Penyusutan / Bln</th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">Akumulasi Penyusutan</th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">
+                                                        Nilai Buku<br/>
+                                                        <span style="font-style: italic;">Book Value</span>
+                                                    </th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px;">
+                                                        Keterangan lainnya<br/>
+                                                        <span style="font-style: italic;">Other Desc.</span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-set="no" t-value="0"/>
+                                                <t t-foreach="doc.disposal_line" t-as="line">
+                                                    <t t-set="no" t-value="no + 1"/>
+                                                    <tr>
+                                                        <td style="border: 1px solid #dee2e6; padding: 4px; text-align: center;"><t t-esc="no"/></td>
+                                                        <td style="border: 1px solid #dee2e6; padding: 4px; text-align: left;"><span t-esc="line.asset_id.code"/></td>
+                                                        <td style="border: 1px solid #dee2e6; padding: 4px; text-align: left;"><span t-esc="line.asset_id.name"/></td>
+                                                        <td style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">1</td>
+                                                        <td style="border: 1px solid #dee2e6; padding: 4px; text-align: left;" class="text-end"><span t-esc="'{0:,.2f}'.format(line.amount).replace(',', '.')"/></td>
+                                                        <td style="border: 1px solid #dee2e6; padding: 4px; text-align: left;"><span t-esc="'{0:,.2f}'.format(line.nilai_penyusutan).replace(',', '.')"/></td>
+                                                        <td style="border: 1px solid #dee2e6; padding: 4px; text-align: left;" class="text-end"><span t-esc="'{0:,.2f}'.format(line.amount_depreciated).replace(',', '.')"/></td>
+                                                        <td style="border: 1px solid #dee2e6; padding: 4px; text-align: left;"><span t-esc="'{0:,.2f}'.format(line.book_value).replace(',', '.')"/></td>
+                                                        <td style="border: 1px solid #dee2e6; padding: 4px;"></td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </t>
+                                </td>
+                            </tr>
+
+							<tr>
+                                <td>
+							        <p style="height:16px;"></p>
+                                </td>
+                            </tr>
+
+                            <!-- Signature Table -->
+                            <tr>
+                                <td colspan="3">
+                                    <div style="padding: 0 15px;">
+                                        <table width="100%" t-attf-style="font-size: #{size_11}px; border: 1px solid #dee2e6; border-collapse: collapse;">
+                                            <tr>
+                                                <th colspan="2" style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">Pemohon</th>
+                                                <th colspan="5" style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">Mengetahui</th>
+                                                <th colspan="2" style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">Disetujui</th>
+                                            </tr>
+                                            <tr style="height: 70px;">
+                                                <td style="border: 1px solid #dee2e6;"></td><td style="border: 1px solid #dee2e6;"></td><td style="border: 1px solid #dee2e6;"></td><td style="border: 1px solid #dee2e6;"></td>
+                                                <td style="border: 1px solid #dee2e6;"></td><td style="border: 1px solid #dee2e6;"></td><td style="border: 1px solid #dee2e6;"></td><td style="border: 1px solid #dee2e6;"></td><td style="border: 1px solid #dee2e6;"></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">(ADH)</th>
+                                                <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">(SOH)</th>
+                                                <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">(AM)</th>
+                                                <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">(Adm Mgr)</th>
+                                                <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">(GM)</th>
+                                                <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">(COO)</th>
+                                                <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">(Fixed Asset Dept)</th>
+                                                <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">(Dir. GA)</th>
+                                                <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">(Dir. Ops)</th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+							        <p style="height:16px;"></p>
+                                </td>
+                            </tr>
+
+                            <!-- Notes -->
+                            <tr t-attf-style="font-style: italic; font-size: #{size_11}px;">
+                                <td colspan="3" style="padding: 0 20px 30px;">
+                                    <b><u>Note :</u></b><br/>
+                                    - Untuk type SOLD, lampirkan penawaran &amp; identitas calon pembeli, foto asset, estimasi harga pasar (internet), dan penawaran dari leasing<br/>
+                                    - Untuk tipe SCRAP, lampirkan foto asset<br/>
+                                    - Untuk penjualan Lelang lampirkan Rekap Barang &amp; Vendor Lelang
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <!-- Paper Format -->
+        <record id="paperformat_disposal_asset_print" model="report.paperformat">
+            <field name="name">Disposal Asset Print</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">5</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <!-- Report Action -->
+        <record id="action_print_disposal_asset" model="ir.actions.report">
+            <field name="name">Print Disposal Asset</field>
+            <field name="model">tw.asset.disposal</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_asset_disposal.report_disposal_asset_print</field>
+            <field name="report_file">tw_asset_disposal.report_disposal_asset_print</field>
+            <field name="print_report_name">'Disposal Asset - %s' % object.name</field>
+            <field name="paperformat_id" ref="paperformat_disposal_asset_print"/>
+        </record>
+
+    </data>
+</odoo>

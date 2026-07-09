@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+    
+    <!-- Bank Transfer Cancellation -->
+    	
+    	<record model="ir.ui.view" id="bank_transfer_cancel_list_view">
+            <field name="name">tw.bank.transfer.cancel.list</field>
+            <field name="model">tw.bank.transfer.cancel</field>
+            <field name="arch" type="xml">
+                <list string="Bank Transfer Cancel">
+                	<field name="name"/>
+                    <field name="company_id"/>
+                    <field name="division"/>
+                	<field name="bank_transfer_id"/>
+                    <field name="date"/>
+                    <field name="state"/>
+				</list>
+			</field>
+        </record>
+        
+        <record id="view_bank_transfer_cancel_search" model="ir.ui.view">
+            <field name="name">tw.bank.transfer.cancel.search</field>
+            <field name="model">tw.bank.transfer.cancel</field>
+            <field name="arch" type="xml">
+                <search string="Search Bank Transfer Cancel">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="bank_transfer_id"/>
+                </search>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="inherit_bank_transfer_cancel_form_view">
+            <field name="name">tw.bank.transfer.cancel.form</field>
+            <field name="model">tw.bank.transfer.cancel</field>
+            <field name="inherit_id" ref="tw_cancellation.tw_cancellation_form_view"/>
+            <field name="arch" type="xml">
+                <field name="transaction_name" position="after">
+                    <field name="bank_transfer_id" required="1" readonly="state != 'draft'" 
+                        options="{'no_create':True,'no_open':True}" 
+                        domain="[
+                            ('company_id','=',company_id),
+                            ('division', '=', division)
+                        ]" 
+                        invisible="context.get('default_model_type') != 'tw.bank.transfer'"
+                    />
+                </field>
+                <xpath expr="//button[@name='action_request_approval']" position="attributes">
+                    <attribute name="groups">tw_bank_transfer_cancel.group_tw_bank_transfer_cancel_rfa_approve</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_reject_or_cancel' and contains(@context, 'Cancel')]" position="attributes">
+                    <attribute name="groups">tw_bank_transfer_cancel.group_tw_bank_transfer_cancel_approval_cancel</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_confirm']" position="attributes">
+                    <attribute name="groups">tw_bank_transfer_cancel.group_tw_bank_transfer_cancel_confirm</attribute>
+                </xpath>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="bank_transfer_cancel_unit_action">
+            <field name="name">Bank Transfer Cancel</field>
+            <field name="res_model">tw.bank.transfer.cancel</field>
+            <field name="search_view_id" ref="view_bank_transfer_cancel_search"/>
+            <field name="context" eval="
+            {
+            'default_model_id': ref('tw_bank_transfer.model_tw_bank_transfer'),
+            'default_model_type': 'tw.bank.transfer',
+            'default_division': 'Umum',
+            }
+            "/>
+            <field name="domain">['|',('bank_transfer_id','!=',False),('model_id.model','=','tw.bank.transfer')]</field>
+        </record>
+        
+       
+        <record id="bank_transfer_cancel_unit_action_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="bank_transfer_cancel_list_view"/>
+            <field name="act_window_id" ref="bank_transfer_cancel_unit_action"/>
+        </record>
+        
+        <record id="bank_transfer_cancel_unit_action_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="inherit_bank_transfer_cancel_form_view"/>
+            <field name="act_window_id" ref="bank_transfer_cancel_unit_action"/>
+        </record>
+     
+	</data>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tw_endpoint_configuration_dgi_account_inherit_form" model="ir.ui.view">
+        <field name="name">tw.endpoint.configuration.dgi.account.inherit.form</field>
+        <field name="model">tw.endpoint.configuration</field>
+        <field name="inherit_id" ref="tw_api.view_tw_endpoint_configuration_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Request Structure Template" invisible="mode != 'add'">
+                    <field name="input_template" widget="json" nolabel="1" colspan="2"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

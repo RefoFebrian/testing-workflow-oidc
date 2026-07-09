@@ -1,0 +1,13 @@
+<odoo>
+  <!-- Client Action -->
+  <record id="action_qris_display" model="ir.actions.client">
+    <field name="name">QRIS Display</field>
+    <field name="tag">qris_display.client</field>
+    <field name="context">{'display_code': 'KASIR-01'}</field>
+    <field name="target">fullscreen</field>
+  </record>
+
+  <!-- Menu (opsional). Bisa juga dipanggil via smart button / custom button -->
+  <menuitem id="menu_qris_root" name="QRIS" sequence="10"/>
+  <menuitem id="menu_qris_display" name="Display" parent="menu_qris_root" action="action_qris_display" sequence="10"/>
+</odoo>

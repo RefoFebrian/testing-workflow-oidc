@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+        <!-- Stock Document READ -->
+        <record id="group_stock_document_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Stock Document Read</field>
+        </record>
+        
+        <record id="access_tw_stock_document_read" model="ir.model.access">
+            <field name="model_id" ref="tw_stock_document.model_tw_stock_document" />
+            <field name="name">tw_stock_document read</field>
+            <field name="group_id" ref="group_stock_document_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Stock Document UPDATE -->
+        <record id="group_stock_document_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Stock Document Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_stock_document_read'))]" />
+        </record>
+
+        <record id="access_tw_stock_document_update" model="ir.model.access">
+            <field name="model_id" ref="tw_stock_document.model_tw_stock_document" />
+            <field name="name">tw_stock_document update</field>
+            <field name="group_id" ref="group_stock_document_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Stock Document DELETE -->
+        <record id="group_stock_document_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Stock Document Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_stock_document_read'))]" />
+        </record>
+
+        <record id="access_tw_stock_document_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_stock_document.model_tw_stock_document" />
+            <field name="name">tw_stock_document delete</field>
+            <field name="group_id" ref="group_stock_document_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+        
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_stock_document_read')),
+                (4, ref('group_stock_document_update')),
+                (4, ref('group_stock_document_delete')),
+            ]" />
+        </record>
+    </data>
+
+</odoo>

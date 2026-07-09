@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Master Country -->
+        <record id="group_tw_res_country_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Negara Read</field>
+        </record>
+
+        <record id="access_tw_res_country_read" model="ir.model.access">
+            <field name="model_id" ref="model_res_country"/>
+            <field name="name">tw_res_country read</field>
+            <field name="group_id" ref="group_tw_res_country_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_res_country_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Negara Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_country_read'))]"/>
+        </record>
+
+        <record id="access_tw_res_country_update" model="ir.model.access">
+            <field name="model_id" ref="model_res_country"/>
+            <field name="name">tw_res_country update</field>
+            <field name="group_id" ref="group_tw_res_country_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_res_country_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Negara Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_country_read'))]"/>
+        </record>
+
+        <record id="access_tw_activity_plan_delete" model="ir.model.access">
+            <field name="model_id" ref="model_res_country"/>
+            <field name="name">tw_res_country delete</field>
+            <field name="group_id" ref="group_tw_res_country_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Master Country State -->
+        <record id="group_tw_res_country_state_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Provinsi Read</field>
+        </record>
+
+        <record id="access_tw_res_country_state_read" model="ir.model.access">
+            <field name="model_id" ref="model_res_country_state"/>
+            <field name="name">tw_res_country_state read</field>
+            <field name="group_id" ref="group_tw_res_country_state_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_res_country_state_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Provinsi Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_country_state_read'))]"/>
+        </record>
+
+        <record id="access_tw_res_country_state_update" model="ir.model.access">
+            <field name="model_id" ref="model_res_country_state"/>
+            <field name="name">tw_res_country_state update</field>
+            <field name="group_id" ref="group_tw_res_country_state_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_res_country_state_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Provinsi Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_country_state_read'))]"/>
+        </record>
+
+        <record id="access_tw_activity_plan_delete" model="ir.model.access">
+            <field name="model_id" ref="model_res_country_state"/>
+            <field name="name">tw_res_country_state delete</field>
+            <field name="group_id" ref="group_tw_res_country_state_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Master City -->
+        <record id="group_tw_res_city_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Kabupaten/Kota Read</field>
+        </record>
+
+        <record id="access_tw_res_city_read" model="ir.model.access">
+            <field name="model_id" ref="model_res_city"/>
+            <field name="name">tw_res_city read</field>
+            <field name="group_id" ref="group_tw_res_city_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_res_city_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Kabupaten/Kota Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_city_read'))]"/>
+        </record>
+
+        <record id="access_tw_res_city_update" model="ir.model.access">
+            <field name="model_id" ref="model_res_city"/>
+            <field name="name">tw_res_city update</field>
+            <field name="group_id" ref="group_tw_res_city_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_res_city_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Kabupaten/Kota Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_city_read'))]"/>
+        </record>
+
+        <record id="access_tw_activity_plan_delete" model="ir.model.access">
+            <field name="model_id" ref="model_res_city"/>
+            <field name="name">tw_res_city delete</field>
+            <field name="group_id" ref="group_tw_res_city_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Master District -->
+        <record id="group_tw_res_district_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Kecamatan Read</field>
+        </record>
+
+        <record id="access_tw_res_district_read" model="ir.model.access">
+            <field name="model_id" ref="model_res_district"/>
+            <field name="name">tw_res_district read</field>
+            <field name="group_id" ref="group_tw_res_district_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_res_district_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Kecamatan Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_district_read'))]"/>
+        </record>
+
+        <record id="access_tw_res_district_update" model="ir.model.access">
+            <field name="model_id" ref="model_res_district"/>
+            <field name="name">tw_res_district update</field>
+            <field name="group_id" ref="group_tw_res_district_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_res_district_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Kecamatan Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_district_read'))]"/>
+        </record>
+
+        <record id="access_tw_activity_plan_delete" model="ir.model.access">
+            <field name="model_id" ref="model_res_district"/>
+            <field name="name">tw_res_district delete</field>
+            <field name="group_id" ref="group_tw_res_district_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Master District -->
+        <record id="group_tw_res_sub_district_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Kelurahan Read</field>
+        </record>
+
+        <record id="access_tw_res_sub_district_read" model="ir.model.access">
+            <field name="model_id" ref="model_res_sub_district"/>
+            <field name="name">tw_res_sub_district read</field>
+            <field name="group_id" ref="group_tw_res_sub_district_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_res_sub_district_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Kelurahan Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_sub_district_read'))]"/>
+        </record>
+
+        <record id="access_tw_res_sub_district_update" model="ir.model.access">
+            <field name="model_id" ref="model_res_sub_district"/>
+            <field name="name">tw_res_sub_district update</field>
+            <field name="group_id" ref="group_tw_res_sub_district_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_res_sub_district_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Kelurahan Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_sub_district_read'))]"/>
+        </record>
+
+        <record id="access_tw_activity_plan_delete" model="ir.model.access">
+            <field name="model_id" ref="model_res_sub_district"/>
+            <field name="name">tw_res_sub_district delete</field>
+            <field name="group_id" ref="group_tw_res_sub_district_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+    </data>
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+               	(4, ref('group_tw_res_country_read')),
+                (4, ref('group_tw_res_country_update')),
+                (4, ref('group_tw_res_country_delete')),
+
+               	(4, ref('group_tw_res_country_state_read')),
+                (4, ref('group_tw_res_country_state_update')),
+                (4, ref('group_tw_res_country_state_delete')),
+
+               	(4, ref('group_tw_res_city_read')),
+                (4, ref('group_tw_res_city_update')),
+                (4, ref('group_tw_res_city_delete')),
+
+               	(4, ref('group_tw_res_district_read')),
+                (4, ref('group_tw_res_district_update')),
+                (4, ref('group_tw_res_district_delete')),
+
+               	(4, ref('group_tw_res_sub_district_read')),
+                (4, ref('group_tw_res_sub_district_update')),
+                (4, ref('group_tw_res_sub_district_delete')),
+				]"/>
+        </record>
+    </data>
+</odoo>

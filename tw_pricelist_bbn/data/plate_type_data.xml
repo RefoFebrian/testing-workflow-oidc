@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_selection_plate_type_red" model="tw.selection">
+            <field name="name">Merah</field>
+            <field name="value">M</field>
+            <field name="type">PlateType</field>
+        </record>
+
+        <record id="tw_selection_plate_type_black" model="tw.selection">
+            <field name="name">Hitam</field>
+            <field name="value">H</field>
+            <field name="type">PlateType</field>
+        </record>
+
+        <record id="tw_selection_plate_type_white" model="tw.selection">
+            <field name="name">Putih</field>
+            <field name="value">P</field>
+            <field name="type">PlateType</field>
+        </record>
+
+        <record id="tw_selection_plate_type_yellow" model="tw.selection">
+            <field name="name">Kuning</field>
+            <field name="value">K</field>
+            <field name="type">PlateType</field>
+        </record>
+
+    </data>
+</odoo>

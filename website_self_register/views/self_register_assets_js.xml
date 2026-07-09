@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="custom_self_register_footer" inherit_id="website.layout" name="Header" active="True">
+            <xpath expr="//head" position="inside">
+                <link rel="stylesheet" type="text/css" href="/website_self_register/static/css/style-2.css"/>
+                <script src="/website_self_register/static/js/self_register_home_0.8.js"></script>
+            </xpath>
+        </template>
+    </data>
+</odoo>

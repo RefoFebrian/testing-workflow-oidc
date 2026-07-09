@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- List View -->
+        <record id="tw_payment_request_type_list_view" model="ir.ui.view">
+            <field name="name">tw.payment.request.type.list</field>
+            <field name="model">tw.payment.request.type</field>
+            <field name="arch" type="xml">
+                <list string="Payment Request Types" decoration-muted="active == False">
+                    <field name="name" string="Name"/>
+                    <field name="active"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="tw_payment_request_type_form_view" model="ir.ui.view">
+            <field name="name">tw.payment.request.type.form</field>
+            <field name="model">tw.payment.request.type</field>
+            <field name="arch" type="xml">
+                <form string="Payment Request Type">
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                                <field name="active"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        
+                        <!-- Payment Request Type Lines -->
+                        <notebook>
+                            <page string="Type Lines">
+                                <field name="line_ids">
+                                    <list editable="bottom" string="Type Lines">
+                                        <field name="name" string="Name" required="1"/>
+                                        <field name="account_id" string="Account" required="1" options="{'no_create': True}"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_payment_request_type_search" model="ir.ui.view">
+            <field name="name">tw.payment.request.type.search</field>
+            <field name="model">tw.payment.request.type</field>
+            <field name="arch" type="xml">
+                <search string="Search Payment Request Type">
+                    <field name="name"/>
+                    <field name="line_ids" string="Type Line Name" filter_domain="[('line_ids.name', 'ilike', self)]"/>
+                    <field name="line_ids" string="Type Line Account" filter_domain="[('line_ids.account_id', 'ilike', self)]"/>
+                    <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                    <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Payment Request Type Action -->
+        <record id="tw_payment_request_type_action" model="ir.actions.act_window">
+            <field name="name">Payment Request Types</field>
+            <field name="res_model">tw.payment.request.type</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{
+                'search_default_active':'1',
+            }" />
+        </record>
+
+        <!-- List View -->
+        <record id="tw_payment_request_type_list_action_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_payment_request_type_list_view"/>
+            <field name="act_window_id" ref="tw_payment_request_type_action"/>
+        </record>
+        
+        <!-- Form View -->
+        <record id="tw_payment_request_type_form_action_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_payment_request_type_form_view"/>
+            <field name="act_window_id" ref="tw_payment_request_type_action"/>
+        </record>
+    </data>
+</odoo>

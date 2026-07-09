@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Products Menu -->
+        <menuitem id="tw_products_assets_header_menu" parent="tw_menu.submenu_tw_general_affair_configuration" name="Products" sequence="50"/>
+        <menuitem id="tw_menuitem_product_template_assets" parent="tw_product.tw_submenu_product" action="tw_product_template_assets_unit_action" sequence="14" groups="tw_asset_management.group_tw_product_template_assets_read"/>
+        <menuitem id="tw_menuitem_product_product_assets_variants" parent="tw_product.tw_submenu_product" action="tw_product_product_variants_assets_action" sequence="24" groups="tw_asset_management.group_tw_product_product_assets_read"/>
+        <menuitem id="tw_menuitem_product_template_assets_ga" parent="tw_asset_management.tw_products_assets_header_menu" action="tw_product_template_assets_unit_action" sequence="10" groups="tw_asset_management.group_tw_product_template_assets_read"/>
+        <menuitem id="tw_menuitem_product_product_assets_variants_ga" parent="tw_asset_management.tw_products_assets_header_menu" action="tw_product_product_variants_assets_action" sequence="20" groups="tw_asset_management.group_tw_product_product_assets_read"/>
+    
+        <!-- Assets Menu -->
+        <menuitem id="menu_action_assets" parent="tw_menu.submenu_tw_general_affair_asset" name="Assets" sequence="1"/>
+        <menuitem id="menu_action_account_asset_asset_list_normal_purchase_ga" parent="menu_action_assets" name="Assets" action="om_account_asset.action_account_asset_asset_form" groups="tw_asset_management.group_tw_account_asset_read" sequence="1"/>
+        
+        <!-- Asset Category -->
+        <menuitem id="menu_assets_configuration" name="Configuration" parent="tw_menu.submenu_tw_general_affair_configuration" sequence="10"/>
+        <menuitem id="menu_assets_category" parent="menu_assets_configuration" name="Asset Categories" action="om_account_asset.action_account_asset_asset_list_normal_purchase" groups="tw_asset_management.group_tw_account_asset_category_read" sequence="10"/>
+        
+        <!-- Prepaid Assets Menu -->
+        <menuitem id="menu_prepaid_assets" parent="menu_action_assets" name="Prepaid Assets" action="action_account_asset_prepaid" groups="tw_asset_management.group_purchase_order_asset_read" sequence="2"/>
+        
+        <!-- Purchase Order Menu -->
+        <menuitem id="tw_purchase_order_asset_menuitem" name="Purchase Order Asset" parent="tw_menu.submenu_tw_general_affair_purchase" action="tw_asset_management.tw_purchase_order_asset_action_server" groups="tw_asset_management.group_purchase_order_asset_read" sequence="10"/>
+        
+        <!-- Good Receive Menu -->
+        <menuitem id="tw_good_receive_header_menu" name="Good Receive" parent="tw_menu.submenu_tw_general_affair_purchase" sequence="50"/>
+        <menuitem id="tw_good_receive_asset_menuitem" name="Good Receive Asset" parent="tw_menu.submenu_tw_general_affair_purchase" action="tw_asset_management.tw_good_receive_asset_action" groups="tw_asset_management.group_good_receive_asset_read" sequence="20"/>
+        
+        <!-- Asset Acquisition Menu -->
+        <menuitem id="tw_asset_acquisition_menuitem" name="Asset Acquisition" parent="tw_menu.submenu_tw_general_affair_purchase" action="tw_asset_management.tw_asset_acquisition_action" groups="tw_asset_management.group_asset_acquisition_read" sequence="25"/>
+        
+        
+        <!-- Payment Menu -->
+        <menuitem id="tw_asset_payment_header_menu" name="Payment" parent="tw_menu.submenu_tw_general_affair_purchase" sequence="50"/>
+        <menuitem id="tw_good_receive_collecting_asset_menuitem" name="Good Receive Collecting Asset" parent="tw_asset_payment_header_menu" groups="tw_asset_management.group_good_receive_asset_collecting_read" action="tw_asset_management.tw_good_receive_collecting_action" sequence="10"/>
+
+        <!-- Location Assets Menu -->
+        <menuitem id="tw_location_assets_header_menu" action="tw_stock_location_assets_action" name="Location Assets" parent="tw_menu.submenu_tw_general_affair_configuration" groups="tw_asset_management.group_location_asset_read" sequence="50"/>
+
+    </data>
+</odoo>

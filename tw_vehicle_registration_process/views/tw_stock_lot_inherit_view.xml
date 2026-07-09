@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_vehicle_registration_process_lot_form" model="ir.ui.view">
+            <field name="name">tw.vehicle.registration.process.lot.form</field>
+            <field name="model">stock.lot</field>
+            <field name="inherit_id" ref="tw_vehicle_document.view_production_lot_vehicle_document_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//group[@name='vehicle_document']" position="after">
+                    <group name="stnk_process" string="Proses STNK">
+                        <group>
+                            <field name="registration_process_id" string="Proses STNK" readonly="1"/>
+                            <field name="registration_process_date" string="Tanggal Proses STNK" readonly="1"/>
+                        </group>
+                    </group>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

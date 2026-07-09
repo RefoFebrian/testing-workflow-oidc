@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="view_tw_stock_opname_baso_wizard" model="ir.ui.view">
+			<field name="name">view.tw.stock.opname.baso.wizard</field>
+			<field name="model">tw.stock.opname.baso.wizard</field>
+			<field name="arch" type="xml">
+				<form string="Berita Acara">
+					<sheet>
+						<group>
+							<field name="opname_id" readonly="1" options="{'no_open':True,'no_create':True}"/>
+							<field name="division" required="1" options="{'no_open':True,'no_create':True}"/>
+							<field name="note"/>
+						</group>
+						<footer>
+		                    <button name="action_submit_baso" string="Print" type="object" class="oe_highlight" />
+		                    <button string="Close" class="oe_link" special="cancel" />
+		                </footer>
+					</sheet>
+				</form>
+			</field>
+		</record>
+    </data>
+</odoo>
+

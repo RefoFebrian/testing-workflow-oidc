@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="surat_kuasa_dso_template">
+            <t t-call="web.html_container">
+                <style type="text/css">
+                    .page {
+                        margin-top: -10px !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                    }
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                    }
+                    th, td {
+                        padding: 5px;
+                        border: 1px solid black;
+                    }
+                    .no-border {
+                        border: none !important;
+                    }
+                    .border-top {
+                        border-top: 1px solid black !important;
+                        border-left: none !important;
+                        border-right: none !important;
+                        border-bottom: none !important;
+                    }
+                    .border-left-top {
+                        border-top: 1px solid black !important;
+                        border-left: 1px solid black !important;
+                        border-right: none !important;
+                        border-bottom: none !important;
+                    }
+                    .border-right-top {
+                        border-top: 1px solid black !important;
+                        border-left: none !important;
+                        border-right: 1px solid black !important;
+                        border-bottom: none !important;
+                    }
+                    .border-left {
+                        border-top: none !important;
+                        border-left: 1px solid black !important;
+                        border-right: none !important;
+                        border-bottom: none !important;
+                    }
+                    .border-right {
+                        border-top: none !important;
+                        border-left: none !important;
+                        border-right: 1px solid black !important;
+                        border-bottom: none !important;
+                    }
+                    .border-bottom {
+                        border-top: none !important;
+                        border-left: none !important;
+                        border-right: none !important;
+                        border-bottom: 1px solid black !important;
+                    }
+                    .border-left-bottom {
+                        border-top: none !important;
+                        border-left: 1px solid black !important;
+                        border-right: none !important;
+                        border-bottom: 1px solid black !important;
+                    }
+                    .border-right-bottom {
+                        border-top: none !important;
+                        border-left: none !important;
+                        border-right: 1px solid black !important;
+                        border-bottom: 1px solid black !important;
+                    }
+                </style>
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <table class="header">
+                            <table>
+                                <tr>
+                                    <td class="no-border" style="text-align: center;"><b><u><span style="font-size: 18px;">SURAT KUASA</span></u></b></td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border"><b>Yang bertanda tangan dibawah ini :</b></td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td class="no-border" width="15%">Nama</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%"><span t-esc="doc.partner_id.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">Pekerjaan</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%"><span t-esc="doc.partner_id.occupation_id.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">Alamat</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%"><span t-esc="print_address(doc.partner_id)"/></td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table>
+                                <tr>
+                                    <td class="no-border" width="100%"><b>Dengan ini memberikan kuasa kepada : </b></td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td class="no-border" width="15%">Nama</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%"><span t-esc="power_of_attorney_name()"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">Pekerjaan</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%"><span t-esc="power_of_attorney_job(doc.power_of_attorney_type)"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">Alamat</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%"><span t-esc="power_of_attorney_street(doc.power_of_attorney_type)"/></td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table>
+                                <tr>
+                                    <td class="no-border" width="100%"><b>Untuk keperluaan check fisik kendaraan, pendaftaran STNK, TNKB, dan BPKB kendaraan bermotor baru dengan spesifikasi sebagai berikut : </b></td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td class="no-border" width="15%">Jenis Kendaraan</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%">Sepeda Motor</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">Merk</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%">Honda</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">Type</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%"><span t-esc="doc.order_line[0].product_id.default_code"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">Warna</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%">
+                                        <span t-esc="doc.order_line[0].product_id.product_template_attribute_value_ids.code"/> - <span t-esc="doc.order_line[0].product_id.product_template_attribute_value_ids.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">Tahun / Cylinde</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%"><span t-esc="doc.order_line[0].lot_id.production_year"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">No. Mesin</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%"><span t-esc="doc.order_line[0].lot_id.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">No. Rangka</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="text-end no-border" width="83%"><span t-esc="doc.order_line[0].lot_id.chassis_number"/></td>
+                                </tr>
+                            </table>
+                            <br/><br/>
+                            <table>
+                                <tr>
+                                    <td class="no-border" width="100%">Demikian surat kuasa ini dibuat dengan sebenarnya agar dapat dipergunakan sebagaimana mestinya.</td>
+                                </tr>
+                            </table>
+                            <table class="mt-5">
+                                <tr>
+                                    <td class="no-border text-center"/>
+                                    <td class="no-border"/>
+                                    <td class="no-border text-center"><span t-esc="doc.partner_id.city_id.name"/>, <span t-esc="time_date(doc.date_order)"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border text-center"><b>Yang Diberi Kuasa</b></td>
+                                    <td class="no-border"/>
+                                    <td class="no-border text-center"><b>Yang Memberi Kuasa</b></td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border text-center"><br/><br/><br/><br/>( <span t-esc="power_of_attorney_name()"/> )</td>
+                                    <td class="no-border"></td>
+                                    <td class="no-border text-center"><br/><br/><br/><br/>( <span t-esc="doc.partner_id.name"/> )</td>
+                                </tr>
+                            </table>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

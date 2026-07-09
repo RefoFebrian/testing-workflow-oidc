@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="tw_dealer_sale_order_inherited" model="ir.ui.view">
+            <field name="name">tw.dealer.sale.order.inherited</field>
+            <field name="model">tw.dealer.sale.order</field>
+            <field name="inherit_id" ref="tw_dealer_sale_order.view_dealer_sale_form" />
+            <field name="arch" type="xml">
+                
+                <xpath expr="//field[@name='dso_line_ids']/list" position="inside">
+                    <field name="amount_extra_reward" readonly="1"/>
+                    <field name="amount_res_margin" readonly="1"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</openerp>

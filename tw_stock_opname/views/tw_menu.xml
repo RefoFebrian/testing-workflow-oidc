@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="submenu_stock_opname_workshop" name="Stock Opname" parent="tw_menu.menu_tw_workshop" sequence="4"/>
+        <menuitem id="submenu_stock_opname_showroom" name="Stock Opname" parent="tw_menu.menu_tw_showroom" sequence="4"/>
+    </data>
+</odoo>

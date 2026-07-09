@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Dealer Sale Order Commission Read -->
+        <record id="access_tw_dealer_sale_order_commission_read" model="ir.model.access">
+            <field name="model_id" ref="tw_commission.model_tw_commission"/>
+            <field name="name">tw_dealer_sale_order_commission read</field>
+            <field name="group_id" ref="tw_dealer_sale_order.group_tw_dealer_sale_order_read"/>
+            <field name="perm_read">1</field>
+        </record>
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                
+            ]"/>
+        </record>
+    </data>
+</odoo>

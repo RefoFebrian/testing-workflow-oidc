@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <menuitem name='Laporan Mutasi Part (Detail)' id='menuitem_mutasi_part'
+    parent='tw_menu.submenu_tw_workshop_report' action='action_tw_mutation_detail_report_workshop_wizard' 
+    groups="tw_mutation_report.group_tw_mutation_detail_laporan_workshop"/>
+    
+  <menuitem name='Laporan Mutasi Unit (Detail)' id='menuitem_mutasi_unit'
+    parent='tw_menu.submenu_tw_showroom_report' action='action_tw_mutation_detail_report_showroom_wizard' 
+    groups="tw_mutation_report.group_tw_mutation_detail_laporan_showroom"/>
+
+</odoo>

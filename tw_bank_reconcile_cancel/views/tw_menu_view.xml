@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+        <!-- Bank Reconcile Cancel Menu -->
+        <menuitem id="tw_bank_reconcile_cancel_menuitem"
+            name="Bank Reconcile Cancel"
+            parent="tw_cancellation.submenu_backoffice_tw_cancellation"
+            action="tw_bank_reconcile_cancel_action"
+            sequence="08"
+            groups="group_tw_bank_reconcile_cancel_read"
+        />
+
+    </data>
+</odoo>

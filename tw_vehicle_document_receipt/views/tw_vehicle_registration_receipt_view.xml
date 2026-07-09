@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <record id="tw_vehicle_registration_receipt_view_search" model="ir.ui.view">
+      <field name="name">tw.vehicle.registration.receipt.search</field>
+      <field name="model">tw.vehicle.registration.receipt</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name" />
+          <field name="company_id" />
+          <field name="division" />
+
+          <field name="biro_jasa_id" />
+          <field name="state" />
+          <field name="vehicle_registration_location_id" string="Location STNK"/>
+          <field name="vehicle_registration_receipt_line_ids" string="Engine Number" filter_domain="[('vehicle_registration_receipt_line_ids.name', 'ilike', self)]"/>
+          <field name="vehicle_registration_receipt_line_ids" string="Customer" filter_domain="[('vehicle_registration_receipt_line_ids.customer_stnk_id', 'ilike', self)]"/>
+          <field name="vehicle_registration_receipt_line_ids" string="Nomor Notice" filter_domain="[('vehicle_registration_receipt_line_ids.notice_number', 'ilike', self)]"/>
+          <field name="vehicle_registration_receipt_line_ids" string="Nomor STNK" filter_domain="[('vehicle_registration_receipt_line_ids.vehicle_registration_number', 'ilike', self)]"/>
+          <field name="vehicle_registration_receipt_line_ids" string="Nomor Plat" filter_domain="[('vehicle_registration_receipt_line_ids.plate_number', 'ilike', self)]"/>
+          <filter name="draft" string="Draft" domain="[('state','=','draft')]" />
+          <filter name="done" string="Done" domain="[('state','=','done')]" />
+          <filter name="cancelled" string="Cancelled" domain="[('state','=','cancel')]" />
+          <filter name="group_by_state" string="Group by State" context="{'group_by':'state'}" />
+          <filter name="group_by_branch" string="Group by Branch"
+            context="{'group_by':'company_id'}" />
+          <filter name="group_by_division" string="Group by Division"
+            context="{'group_by':'division'}" />
+        </search>
+      </field>
+    </record>
+
+    <record id="tw_vehicle_registration_receipt_view_list" model="ir.ui.view">
+      <field name="name">tw.vehicle.registration.receipt.list</field>
+      <field name="model">tw.vehicle.registration.receipt</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="name" />
+          <field name="company_id" />
+          <field name="division" />
+          <field name="biro_jasa_id" />
+          <field name="vehicle_registration_location_id" string="Location STNK"/>
+          <field name="date"/>
+          <field name="state" />
+        </list>
+      </field>
+    </record>
+
+    <record id="tw_vehicle_registration_receipt_view_form" model="ir.ui.view">
+      <field name="name">tw.vehicle.registration.receipt.form</field>
+      <field name="model">tw.vehicle.registration.receipt</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+            <button name="action_confirm" data-hotkey="c" invisible="state != 'draft'" string="Post"
+              type="object" class="oe_highlight"
+              groups="tw_vehicle_document_receipt.group_vehicle_registration_receipt_button_post" />
+            <button name="action_print_out_registration_receipt" invisible="state != 'done'" string="Print"
+              type="object" class="oe_highlight"
+              groups="tw_vehicle_document_receipt.group_vehicle_registration_receipt_button_print"/>
+            <field name="state" widget="statusbar" statusbar_visible="draft,done" />
+          </header>
+          <sheet>
+            <div class="oe_title">
+              <span class="o_form_label">Penerimaan STNK</span>
+              <h1>
+                <field name="name" class="oe_inline" invisible="not name" />
+                <span invisible="name">Draft</span>
+              </h1>
+            </div>
+            <group>
+              <group>
+                <field name="company_id" options="{'no_create': True,'no_open': True}"
+                  readonly="state != 'draft'" required="1" string="Branch"/>
+                <field name="available_biro_jasa_ids" invisible="1"/>
+                <field name="biro_jasa_id" options="{'no_create': True,'no_open': True}"
+                  readonly="state != 'draft'" required="1" string="Biro Jasa"/>
+                <field name="vehicle_registration_location_id" options="{'no_create': True,'no_open': True}"
+                  readonly="state != 'draft'" required="1"/>
+              </group>
+              <group>
+                <field name="division" readonly="1" />
+                <field name="date" readonly="1" />
+                <field name="available_lot_ids" invisible="1" />
+              </group>
+            </group>
+            <notebook>
+              <page string="Engine Line">
+                <field name="vehicle_registration_receipt_line_ids" readonly="state != 'draft'">
+                  <list editable="bottom">
+                    <field name="notice_received" column_invisible="1" />
+                    <field name="vehicle_registration_received" column_invisible="1" />
+                    <field name="plate_received" column_invisible="1" />
+
+                    <field name="lot_id" required="1" options="{'no_create': True,'no_open': True}"
+                      domain="[('id', 'in', parent.available_lot_ids)]" string="Engine No" width="150"/>
+                    <field name="customer_stnk_id" string="Customer" width="200"/>
+                    <field name="notice_number" string="Nomor Notice" readonly="notice_received" force_save="1" width="150" required="notice_date"/>
+                    <field name="notice_date" string="Tanggal JTP Notice"
+                      readonly="notice_received" force_save="1" width="150" required="notice_number"/>
+                    <field name="vehicle_registration_number" string="Nomor STNK" required="stnk_date"
+                      readonly="vehicle_registration_received" force_save="1" width="150"/>
+                    <field name="stnk_date" required="vehicle_registration_number" string="Tanggal JTP STNK"
+                      readonly="vehicle_registration_received" force_save="1" width="150"/>
+                    <field name="plate_number" string="Nomor Plat" force_save="1" required="vehicle_registration_number" width="150" readonly="vehicle_registration_received"/>
+                    <field name="is_receive_plate" string="Terima Plat" widget="boolean_toggle" width="100" readonly="plate_received or state != 'draft'" force_save="1"/>
+                    <field name="state" readonly="1" decoration-danger="state == 'cancel'"
+                                                    decoration-warning="state == 'draft'"
+                                                    decoration-success="state == 'done'"
+                    />
+                  </list>
+                </field>
+              </page>
+              <page string="Audit Trail">
+                <group>
+                  <group>
+                    <field name="create_uid" readonly="1" />
+                    <field name="create_date" readonly="1" />
+                    <field name="confirm_uid" readonly="1" />
+                    <field name="confirm_date" readonly="1" />
+                  </group>
+                  <group>
+                    <field name="write_uid" readonly="1" />
+                    <field name="write_date" readonly="1" />
+                    <field name="cancel_uid" readonly="1" />
+                    <field name="cancel_date" readonly="1" />
+                  </group>
+                </group>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="tw_vehicle_registration_receipt_action" model="ir.actions.act_window">
+      <field name="name">Penerimaan STNK</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">tw.vehicle.registration.receipt</field>
+      <field name="view_mode">list,form</field>
+      <field name="context">{"search_default_draft": 1}</field>
+    </record>
+
+  </data>
+</odoo>

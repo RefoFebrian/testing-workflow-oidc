@@ -1,0 +1,26 @@
+<odoo>
+  <data>
+    <record id="tw_pricelist_branch_setting_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.pricelist.branch.setting.inherit.view.form</field>
+        <field name="model">tw.branch.setting</field>
+        <field name="inherit_id" ref="tw_branch_setting.tw_branch_setting_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Readonly Purchase Order Vendor Price -->
+            <xpath expr="//page[@name='page_1']" position="after">
+                <page name="pricelist" string="Pricelist">
+                  <group>
+                    <group name="left_group">
+                        <field name="pricelist_purchase_unit_id" required="branch_category in ('H1','H123')" options="{'no_quick_create': True}"/>
+                        <field name="pricelist_purchase_sparepart_id" required="branch_category in ('H23','H123')" options="{'no_quick_create': True}"/>
+                    </group>
+                    <group name="right_group">
+                        <field name="pricelist_sale_unit_id" required="branch_category in ('H1','H123')" options="{'no_quick_create': True}"/>
+                        <field name="pricelist_sale_sparepart_id" required="branch_category in ('H23','H123')" options="{'no_quick_create': True}"/>
+                    </group>
+                  </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>

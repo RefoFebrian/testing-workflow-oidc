@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_kpb_engine_type,tw_work_order_voucher.tw_kpb_engine_type,model_tw_kpb_engine_type,base.group_user,1,0,0,0
+access_tw_kpb_engine_price,tw_work_order_voucher.tw_kpb_engine_price,model_tw_kpb_engine_price,base.group_user,1,0,0,0
+access_tw_kpb_expired_all,tw_kpb_expired all,model_tw_kpb_expired,base.group_user,1,0,0,0

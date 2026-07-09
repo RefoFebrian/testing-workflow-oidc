@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Menu -->
+        <menuitem id="menu_product_series_master" name="Product Series" parent="tw_product.tw_submenu_product" action="action_product_series" sequence="04" groups="tw_product_series.group_tw_product_series_master_read"/>
+        <menuitem id="menu_product_series_showroom" name="Product Series" parent="tw_product.tw_menuitem_product_submenu_showroom" action="action_product_series" sequence="180" groups="tw_product_series.group_tw_product_series_read"/>
+    </data>
+</odoo>

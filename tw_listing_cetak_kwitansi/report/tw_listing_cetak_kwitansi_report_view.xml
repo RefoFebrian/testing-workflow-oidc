@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Wizard View -->
+        <record id="tw_listing_cetak_kwitansi_report_wizard_view" model="ir.ui.view">
+            <field name="name">tw.listing.cetak.kwitansi.report.wizard</field>
+            <field name="model">tw.listing.cetak.kwitansi.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Laporan Listing Cetak Kwitansi">
+                    <sheet>
+                		<group invisible="state_x == 'get'">
+							<group>
+								<label for="start_date" string="Date"/>
+								<div>                               
+									<field name="start_date" required="1" placeholder="Start Date" class="oe_inline"/> -
+									<field name="end_date" required="1" placeholder="End Date" class="oe_inline"/>
+								</div>
+							</group>
+							<group>
+							</group>
+                		</group>
+                		<notebook invisible="state_x == 'get'">
+                			<page string="Branch">
+                				<field name="company_ids" colspan="4" nolabel="1" options="{'no_create': True, 'no_open': True}">
+                					<list create="1" delete="1" editable="bottom" edit="0">
+                						<field name="name"/>
+                					</list>
+                				</field>
+                			</page>
+                		</notebook>
+                		<field invisible="1" name="state_x"/>                
+		                <newline/>    
+		                <group col="4" fill="0" invisible="state_x != 'get'">
+		                    <separator colspan="4" string="Excel Report Generated. Click link below to download ..." invisible="state_x == 'choose'"/>
+		                    <field name="name" invisible="1" width="100"/>
+		                    <field name="data_x" nolabel="1" readonly="0" width="100" filename="name" invisible="state_x == 'choose'"/>
+		                </group>
+                		<footer>
+			                <button name="action_export" invisible="state_x == 'get'" string="Export Report" type="object" class="oe_highlight"/>
+			                <button string="Cancel" invisible="state_x == 'get'" class="oe_link" special="cancel"/>
+			            </footer>
+                	</sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action View -->
+        <record id="tw_listing_cetak_kwitansi_report_action" model="ir.actions.server">
+            <field name="name">Laporan Listing Cetak Kwitansi</field>
+            <field name="model_id" ref="tw_listing_cetak_kwitansi.model_tw_listing_cetak_kwitansi_report"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.listing.cetak.kwitansi.report'].action_listing_cetak_kwitansi_report_tree()
+            </field>
+        </record>
+
+    </data>
+</odoo>

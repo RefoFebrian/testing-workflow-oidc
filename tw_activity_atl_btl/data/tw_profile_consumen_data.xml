@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_profile_consumen_petani" model="tw.selection">
+            <field name="name">Petani</field>
+            <field name="value">Petani</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_petani_kopi" model="tw.selection">
+            <field name="name">Petani Kopi</field>
+            <field name="value">Petani Kopi</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_petani_karet" model="tw.selection">
+            <field name="name">Petani Karet</field>
+            <field name="value">Petani Karet</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_pekebun" model="tw.selection">
+            <field name="name">Pekebun</field>
+            <field name="value">Pekebun</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_peternak" model="tw.selection">
+            <field name="name">Peternak</field>
+            <field name="value">Peternak</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_nelayan" model="tw.selection">
+            <field name="name">Nelayan</field>
+            <field name="value">Nelayan</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_wiraswasta_pedagang" model="tw.selection">
+            <field name="name">Wiraswasta/Pedagang</field>
+            <field name="value">Wiraswasta/Pedagang</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_wirausaha" model="tw.selection">
+            <field name="name">Wirausaha</field>
+            <field name="value">Wirausaha</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_buruh" model="tw.selection">
+            <field name="name">Buruh</field>
+            <field name="value">Buruh</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_pns" model="tw.selection">
+            <field name="name">PNS/ASN</field>
+            <field name="value">PNS/ASN</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_guru_dosen" model="tw.selection">
+            <field name="name">Guru/Dosen</field>
+            <field name="value">Guru/Dosen</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_dokter" model="tw.selection">
+            <field name="name">Dokter</field>
+            <field name="value">Dokter</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_mahasiswa_pelajar" model="tw.selection">
+            <field name="name">Mahasiswa/Pelajar</field>
+            <field name="value">Mahasiswa/Pelajar</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_tni_polri" model="tw.selection">
+            <field name="name">TNI/POLRI</field>
+            <field name="value">TNI/POLRI</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_karyawan" model="tw.selection">
+            <field name="name">Karyawan</field>
+            <field name="value">Karyawan</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_karyawan_swasta" model="tw.selection">
+            <field name="name">Karyawan Swasta</field>
+            <field name="value">Karyawan Swasta</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_bumn" model="tw.selection">
+            <field name="name">Karyawan BUMN</field>
+            <field name="value">Karyawan BUMN</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_buruh" model="tw.selection">
+            <field name="name">Buruh</field>
+            <field name="value">Buruh</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_perkampungan" model="tw.selection">
+            <field name="name">Perkampungan</field>
+            <field name="value">Perkampungan</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_rural" model="tw.selection">
+            <field name="name">Rural</field>
+            <field name="value">Rural</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_urban" model="tw.selection">
+            <field name="name">Urban</field>
+            <field name="value">Urban</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_pertanian" model="tw.selection">
+            <field name="name">Pertanian</field>
+            <field name="value">Pertanian</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_perkebunan" model="tw.selection">
+            <field name="name">Perkebunan</field>
+            <field name="value">Perkebunan</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>
+
+        <record id="tw_profile_consumen_supra" model="tw.selection">
+            <field name="name">Supra</field>
+            <field name="value">Supra</field> 
+            <field name="type">ProfileConsumen</field>
+        </record> 
+
+        <record id="tw_profile_consumen_pos_yamaha_honda" model="tw.selection">
+            <field name="name">POS Yamaha &amp; Honda</field>
+            <field name="value">POS Yamaha &amp; Honda</field> 
+            <field name="type">ProfileConsumen</field>
+        </record>       
+    </data>
+</odoo>

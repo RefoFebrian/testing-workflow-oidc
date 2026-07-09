@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+
+        <!-- Form View: Bank Transfer -->
+        <record id="tw_pust_bank_transfer_form_view" model="ir.ui.view">
+            <field name="name">tw.pust.bank.transfer.form.inherit</field>
+            <field name="model">tw.bank.transfer</field>
+            <field name="inherit_id" ref="tw_bank_transfer.tw_bank_transfer_form_view"/>
+            <field name="arch" type="xml">
+
+                <!-- Override journal_id domain to include 'transit' type -->
+                <xpath expr="//field[@name='journal_id']" position="attributes">
+                    <attribute name="domain">[('company_id', 'parent_of', company_id),('type', 'in', ['cash', 'bank', 'transit'])]</attribute>
+                </xpath>
+
+                <!-- Add is_pust and transit_ref after description -->
+                <xpath expr="//field[@name='description']" position="after">
+                    <field name="is_pust" invisible="not is_pust" force_save="1" readonly="1"/>
+                    <field name="transit_ref" invisible="not transit_ref" force_save="1" readonly="1"/>
+                </xpath>
+
+                <!-- Override amount field: readonly when journal is cash or transit -->
+                <xpath expr="//field[@name='amount']" position="attributes">
+                    <attribute name="readonly">state != 'draft' or journal_type == 'cash'</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+
+                <!-- Override line_ids tree to include PUST fields -->
+                <xpath expr="//field[@name='line_ids']//list" position="inside">
+                    <field name="bank_types" column_invisible="1"/>
+                    <field name="pust_ref" readonly="1" column_invisible="parent.journal_type != 'transit'" force_save="1" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- List View: Bank Transfer -->
+        <record id="tw_pust_bank_transfer_list_view" model="ir.ui.view">
+            <field name="name">tw.pust.bank.transfer.list.inherit</field>
+            <field name="model">tw.bank.transfer</field>
+            <field name="inherit_id" ref="tw_bank_transfer.tw_bank_transfer_list_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state']" position="before">
+                    <field name="is_pust" optional="hide"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Search View: Bank Transfer -->
+        <record id="tw_pust_bank_transfer_search_view" model="ir.ui.view">
+            <field name="name">tw.pust.bank.transfer.search.inherit</field>
+            <field name="model">tw.bank.transfer</field>
+            <field name="inherit_id" ref="tw_bank_transfer.tw_bank_transfer_search_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='cancelled']" position="after">
+                    <separator/>
+                    <filter name="is_pust" string="PUST Only" domain="[('is_pust','=',True)]"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Form View: Account Journal (is_pusted visibility) -->
+        <record id="tw_pust_account_journal_form_view" model="ir.ui.view">
+            <field name="name">tw.pust.account.journal.form.inherit</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='type']" position="after">
+                    <field name="is_pusted" invisible="type != 'cash'"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

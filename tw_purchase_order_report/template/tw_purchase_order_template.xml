@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="custom_report_purchaseorder">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                    <style>
+                        .teds-layout {
+                            font-family: Arial, sans-serif;
+                            font-size: 13px;
+                            width: 100%;
+                            color: black;
+                        }
+                        .teds-table-outer {
+                            width: 100%;
+                            border: 1px solid black;
+                            border-collapse: collapse;
+                            margin-bottom: 10px;
+                        }
+                        .teds-table-outer td {
+                            vertical-align: top;
+                            padding: 0;
+                        }
+                        .teds-table-inner {
+                            width: 100%;
+                            border-collapse: collapse;
+                        }
+                        .teds-table-inner td {
+                            padding: 4px;
+                        }
+                        .border-right {
+                            border-right: 1px solid black;
+                        }
+                        .border-bottom {
+                            border-bottom: 1px solid black;
+                        }
+                        .border-top {
+                            border-top: 1px solid black;
+                        }
+                        .header-besar {
+                            font-size: 14px;
+                            font-weight: bold;
+                        }
+                        .text-right {
+                            text-align: right;
+                        }
+                        .text-center {
+                            text-align: center;
+                        }
+                        .main-table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            border: 1px solid black;
+                            margin-bottom: 10px;
+                        }
+                        .main-table th, .main-table td {
+                            border: 1px solid black;
+                            padding: 4px;
+                        }
+                        .main-table th {
+                            font-weight: normal;
+                        }
+                    </style>
+
+                    <div class="page teds-layout">
+                        <!-- HEADER BLOCK 1 -->
+                        <table class="teds-table-outer">
+                            <tr>
+                                <td style="width: 60%; padding: 4px;" class="border-right">
+                                    <div class="header-besar"><t t-out="o.company_id.name or ''"/></div>
+                                    <div><t t-out="o.company_id.street or ''"/></div>
+                                    <div><t t-out="o.company_id.state_id.name or ''"/></div>
+                                </td>
+                                <td style="width: 40%;">
+                                    <div class="header-besar border-bottom" style="padding: 4px;">PURCHASE ORDER</div>
+                                    <table class="teds-table-inner">
+                                        <tr>
+                                            <td style="width: 20%;">No</td>
+                                            <td style="width: 5%;">:</td>
+                                            <td style="width: 75%;"><t t-out="o.name"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border-top">Eff Date</td>
+                                            <td class="border-top">:</td>
+                                            <td class="border-top">
+                                                <t t-if="o.start_date"><span t-field="o.start_date" t-options="{'widget': 'date', 'format': 'dd/MM/yyyy'}"/></t>
+                                                s/d 
+                                                <t t-if="o.end_date"><span t-field="o.end_date" t-options="{'widget': 'date', 'format': 'dd/MM/yyyy'}"/></t>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- HEADER BLOCK 2 (SUPPLIER & PAYMENT) -->
+                        <table class="teds-table-outer">
+                            <tr>
+                                <td style="width: 60%;" class="border-right">
+                                    <table class="teds-table-inner">
+                                        <tr>
+                                            <td style="width: 20%;">Tanggal</td>
+                                            <td style="width: 5%;">:</td>
+                                            <td style="width: 75%;"><span t-field="o.date_order" t-options="{'widget': 'date', 'format': 'dd/MM/yyyy'}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border-top">Supplier</td>
+                                            <td class="border-top">:</td>
+                                            <td class="border-top"><t t-out="o.partner_id.name or ''"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td><t t-out="o.partner_id.street or ''"/></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="width: 40%; vertical-align: bottom;">
+                                    <div class="border-top" style="padding: 4px;">
+                                        Pembayaran: Cash Tempo <t t-out="o.payment_term_id.name or ''"/>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- MAIN TABLE -->
+                        <table class="main-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%;">No.</th>
+                                    <th style="width: 15%;">Kode Barang</th>
+                                    <th style="width: 15%;">No PP</th>
+                                    <th style="width: 25%;">Nama Barang</th>
+                                    <th style="width: 10%;">Warna</th>
+                                    <th style="width: 10%;" class="text-center">Jumlah</th>
+                                    <th style="width: 10%;">Harga Satuan</th>
+                                    <th style="width: 10%;">Sub Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="seq" t-value="1"/>
+                                <t t-set="total_qty" t-value="0"/>
+                                <t t-foreach="o.order_line" t-as="line">
+                                    <t t-set="total_qty" t-value="total_qty + line.product_qty"/>
+                                    <tr>
+                                        <td class="text-right"><t t-out="seq"/></td>
+                                        <td><t t-out="line.product_id.default_code or line.product_id.name"/></td>
+                                        <td><t t-out="o.name"/></td>
+                                        <td><t t-out="line.name or line.product_id.name"/></td>
+                                        <td>
+                                            <t t-if="line.product_id.product_template_attribute_value_ids">
+                                                <t t-out="', '.join(line.product_id.product_template_attribute_value_ids.mapped('name'))"/>
+                                            </t>
+                                            <t t-else="">
+                                                -
+                                            </t>
+                                        </td>
+                                        <td class="text-right"><span t-esc="line.product_qty" t-options='{"widget": "float", "precision": 0}'/></td>
+                                        <td class="text-right"><span t-esc="line.price_unit" t-options='{"widget": "float", "precision": 0}'/></td>
+                                        <td class="text-right"><span t-esc="line.price_subtotal" t-options='{"widget": "float", "precision": 0}'/></td>
+                                    </tr>
+                                    <t t-set="seq" t-value="seq + 1"/>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- SUMMARY BLOCK -->
+                        <table class="teds-table-outer">
+                            <tr>
+                                <td style="width: 50%;">
+                                    <table class="teds-table-inner">
+                                        <tr><td style="padding-top: 4px;"><t t-out="o.notes or ''"/></td></tr>
+                                        <tr><td style="padding-top: 4px;"><t t-out="o.notes or ''"/></td></tr>
+                                        <tr><td style="padding-top: 4px;">Jumlah Unit : <span t-esc="total_qty" t-options='{"widget": "float", "precision": 0}'/></td></tr>
+                                        <tr><td>&#160;</td></tr>
+                                        <tr><td>&#160;</td></tr>
+                                    </table>
+                                </td>
+                                <td style="width: 50%;">
+                                    <table class="teds-table-inner">
+                                        <tr>
+                                            <td style="width: 40%; text-align: right;">Untaxed</td>
+                                            <td style="width: 20%; text-align: right;"></td>
+                                            <td style="width: 40%; text-align: right;"><span t-esc="o.amount_untaxed" t-options='{"widget": "float", "precision": 0}'/></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">DPP</td>
+                                            <td class="text-right"></td>
+                                            <td class="text-right"><span t-esc="o.amount_untaxed" t-options='{"widget": "float", "precision": 0}'/></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">PPN</td>
+                                            <td class="text-right">PPN</td>
+                                            <td class="text-right"><span t-esc="o.amount_tax" t-options='{"widget": "float", "precision": 0}'/></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">PPH</td>
+                                            <td class="text-right">0.00 %</td>
+                                            <td class="text-right">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">Total</td>
+                                            <td class="text-right"></td>
+                                            <td class="text-right"><span t-esc="o.amount_total" t-options='{"widget": "float", "precision": 0}'/></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- FOOTER (SIGNATURES) -->
+                        <div style="page-break-inside: avoid; margin-top: 30px;">
+                            <table style="width: 100%; font-family: Arial, sans-serif; font-size: 13px;">
+                                <tr>
+                                    <td style="width: 35%;">Disetujui</td>
+                                    <td style="width: 35%;"></td>
+                                    <td style="width: 30%;"></td>
+                                </tr>
+                                <tr>
+                                    <td style="height: 80px;"></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        ___________________________________<br/>
+                                        Nama<br/><br/>
+                                        <span style="font-size: 10px;">Lebar ke-1 Supplier / Lembar ke-2 Arsip</span>
+                                    </td>
+                                    <td>
+                                        __________________________<br/>
+                                        Nama
+                                    </td>
+                                    <td style="vertical-align: bottom;">
+                                        <span t-out="user.name"/> <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M:%S')"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

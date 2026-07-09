@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_config_files_mft_ppo_form_view" model="ir.ui.view">
+            <field name="name">tw.config.files.mft.ppo.form</field>
+            <field name="model">tw.config.files</field>
+            <field name="inherit_id" ref="tw_config_files.tw_config_files_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="mft_generate_ppo_urgent" type="object" string="PPO Urgent" class="oe_highlight" />
+                    <button name="mft_generate_nrfs" type="object" string="NRFS" class="oe_highlight" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

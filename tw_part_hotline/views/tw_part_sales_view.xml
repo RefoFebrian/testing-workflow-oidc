@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="tw_part_sales_hotline_view_form" model="ir.ui.view">
+      <field name="name">tw.part.sales.hotline.form</field>
+      <field name="model">tw.part.sales</field>
+      <field name="inherit_id" ref="tw_part_sales.tw_part_sales_form_view" />
+      <field name="arch" type="xml">
+        <!-- Add part_hotline_id column to order_line list -->
+        <xpath expr="//field[@name='order_line']/list//field[@name='product_id']" position="before">
+          <field name="part_hotline_id" width="200" string="No Hotline" options="{'no_open':True,'no_create':True}" domain="[('customer_id','=',parent.partner_id), ('company_id','=',parent.company_id), ('state','=','approved'), ('status_po','=','done'), ('is_used','=',False)]" readonly="parent.state != 'draft'" />
+          <!-- <field name="available_hotline_product_ids" column_invisible="1"/> -->
+        </xpath>
+
+        <!-- Stat button -->
+        <button name="action_view_invoice" position="after">
+          <field name="is_part_hotline" invisible="1"/>
+          <button name="action_view_part_hotline" icon="fa-wrench" invisible="not is_part_hotline" string="Part Hotline" type="object" class="oe_stat_button" />
+        </button>
+      </field>
+    </record>
+  </data>
+</odoo>

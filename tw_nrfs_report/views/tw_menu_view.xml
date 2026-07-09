@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="tw_nrfs_lkuat_report_workshop_menuitem" action="tw_nrfs_lkuat_report_action" parent="tw_menu.submenu_tw_workshop_report" sequence="40" groups="tw_nrfs_report.tw_nrfs_lkuat_laporan_group_read"/>
+        <menuitem id="tw_nrfs_lkuat_report_showroom_menuitem" action="tw_nrfs_lkuat_report_action" parent="tw_menu.submenu_tw_showroom_report" sequence="40" groups="tw_nrfs_report.tw_nrfs_lkuat_laporan_group_read"/>
+        <menuitem id="tw_nrfs_po_urgent_report_menuitem" action="tw_nrfs_po_urgent_report_action" parent="tw_menu.submenu_tw_showroom_report" sequence="20" groups="tw_nrfs_report.tw_nrfs_po_urgent_laporan_group_read"/>
+        <menuitem id="tw_nrfs_sparepart_report_menuitem" action="tw_nrfs_sparepart_report_action" parent="tw_menu.submenu_tw_workshop_report" sequence="20" groups="tw_nrfs_report.tw_nrfs_sparepart_laporan_group_read"/>
+    </data>
+</odoo>

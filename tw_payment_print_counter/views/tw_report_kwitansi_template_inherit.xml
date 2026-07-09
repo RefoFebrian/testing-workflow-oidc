@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="inherit_report_tw_account_payment_kwitansi" inherit_id="tw_payment.report_tw_account_payment_kwitansi">
+        <xpath expr="//tr[td[contains(., 'No Kwitansi')]]" position="replace">
+            <tr>
+                <td style="padding: 0px; margin: 0px;">No Kwitansi</td>
+                <td style="padding: 0px; margin: 0px;">:</td>
+                <td style="padding: 0px; margin: 0px;">
+                    <span t-esc="doc.cust_pay_kwitansi_line_id.name"/>
+                </td>
+            </tr>
+        </xpath>
+    </template>
+
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_api_configuration_koprol_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.api.configuration.koprol.inherit.form</field>
+        <field name="model">tw.api.configuration</field>
+        <field name="inherit_id" ref="tw_api.tw_api_configuration_form_view"/>
+        <field name="arch" type="xml">
+            <div class="oe_title" position="after">
+                <div class="oe_button_box" name="button_box">
+                    <button name="action_open_config_parameter_url_koprol" 
+                            string="URL API Koprol" 
+                            type="object" 
+                            class="oe_stat_button" 
+                            icon="fa-gear" 
+                            invisible="api_type_value != 'koprol_2'"/>
+                </div>
+            </div>
+            
+            <!-- Add open_id, audience and issuer fields to Token Validation -->
+            <xpath expr="//group[@name='token_validation']" position="inside">
+                <field name="open_id" placeholder="https://login.microsoftonline.com/{tenant}/v2.0/.well-known/openid-configuration"/>
+                <field name="audience" placeholder="api://your-app-id"/>
+                <field name="issuer" placeholder="https://login.microsoftonline.com/{tenant}/v2.0"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

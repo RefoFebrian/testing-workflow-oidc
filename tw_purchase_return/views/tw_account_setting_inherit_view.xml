@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+      <record id="tw_purchase_return_account_setting_inherit_form_view" model="ir.ui.view">
+          <field name="name">tw.purchase.return.account.setting.inherit.view.form</field>
+          <field name="model">tw.account.setting</field>
+          <field name="inherit_id" ref="tw_account_purchase.tw_purchase_account_setting_inherit_form_view"/>
+          <field name="arch" type="xml">
+            <xpath expr="//group[@name='purchase_journal_group']" position="inside">
+              <field name="journal_purchase_return_id" options='{"no_quick_create": True}'/>
+            </xpath>
+          </field>
+      </record>
+    </data>
+  </odoo>
+  

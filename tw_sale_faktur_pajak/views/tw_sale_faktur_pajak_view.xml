@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_sale_faktur_pajak_form_view" model="ir.ui.view">
+            <field name="name">tw.sale.faktur.pajak.form</field>
+            <field name="model">tw.sale.order</field>
+            <field name="inherit_id" ref="tw_sale.tw_sale_order_form_view"/>
+            <field name="arch" type="xml">
+
+			    <xpath expr="//page[@name='other_information']" position="after">
+                    <page string="Faktur Pajak" name="faktur_pajak" invisible="amount_tax == 0">
+                        <group>
+                            <field name="is_combined_tax" force_save="1" readonly="state != 'draft'"/>
+                            <field name="faktur_pajak_out_id" string="No. Faktur Pajak" readonly="1" invisible="not faktur_pajak_out_id" force_save="1"/>
+                            <field name="number_faktur_pajak" 
+                                   string="Nomor Faktur Pajak" 
+                                   readonly="faktur_pajak_out_id != False or is_combined_tax == True"
+                                   invisible="faktur_pajak_out_id != False"/>
+                            <field name="date_faktur_pajak" 
+                                   string="Tanggal Faktur Pajak" 
+                                   readonly="faktur_pajak_out_id != False or is_combined_tax == True"/>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

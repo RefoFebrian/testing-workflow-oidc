@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit form view to add source_document below name and Integrations tab -->
+        <record id="tw_lead_integration_form_inherit" model="ir.ui.view">
+            <field name="name">tw.lead.integration.form.inherit</field>
+            <field name="model">tw.lead</field>
+            <field name="inherit_id" ref="tw_lead.tw_lead_crm_lead_form_view"/>
+            <field name="arch" type="xml">
+                <!-- Add source_document below name field -->
+                <xpath expr="//div[hasclass('oe_title', 'mb32')]/h2" position="after">
+                    <field name="is_integration" invisible="1"/>
+                    <field name="source_document" readonly="1" invisible="not is_integration"/>
+                </xpath>
+
+                <!-- Add Integrations tab page -->
+                <xpath expr="//notebook/page[@name='audit_trail']" position="before">
+                    <page name="integrations" string="Integrations" invisible="not is_integration">
+                        <group>
+                            <group name="integration_info" string="Integration Info">
+                                <field name="source_data_id" options="{'no_open': True, 'no_create': True}" readonly="1"/>
+                                <field name="web_source_id" options="{'no_open': True, 'no_create': True}" readonly="1"/>
+                                <field name="unique_code" readonly="1"/>
+                                <field name="reference" readonly="1"/>
+                            </group>
+                            <group name="integration_status" string="Integration Status">
+                                <field name="integration_state" readonly="1"/>
+                                <field name="integration_remark" readonly="1"/>
+                            </group>
+                        </group>
+                        <group name="version_info" string="Version Info">
+                            <group>
+                                <field name="version_code" readonly="1"/>
+                                <field name="version_name" readonly="1"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

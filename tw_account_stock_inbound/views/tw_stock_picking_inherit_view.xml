@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>         
+        <record id="tw_account_stock_picking_form_view" model="ir.ui.view">
+            <field name="name">tw.account.stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="tw_stock_inbound.tw_stock_picking_inbound_form_view" />
+            <field name="arch" type="xml">
+                <field name="stock_inbound_id" position="after">
+                    <field name="pricelist_type_id" options="{'no_create': True,'no_open': True}" required="stock_inbound_id" invisible="not stock_inbound_id" readonly="state == 'done'" force_save="1"/>
+                    <field name="pricelist_type_value" invisible="1"/>
+                    <field name="volume" invisible="pricelist_type_value != 'volume'" required="pricelist_type_value == 'volume'" readonly="state != 'draft'"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

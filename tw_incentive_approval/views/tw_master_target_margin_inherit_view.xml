@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>  
+    	
+		<record id="tw_master_target_margin_approval_form_view" model="ir.ui.view">
+            <field name="name">tw.master.target.margin.approval.form</field>
+            <field name="model">tw.master.target.margin</field>
+            <field name="inherit_id" ref="tw_incentive.tw_master_target_margin_view_form"/>
+            <field name="arch" type="xml">
+				<button name="action_confirm" position="replace">
+					<button name="action_request_approval"
+							invisible="state != 'draft'"
+							string="RFA"
+							type="object"
+							class="oe_highlight"
+							groups="tw_incentive_approval.group_tw_master_target_margin_approval_rfa" />
+					<button name="action_approval"
+							invisible="state != 'waiting_for_approval'"
+							string="Approve"
+							type="object"
+							class="oe_highlight"/>
+					<button name="action_reject_or_cancel"
+							invisible="state != 'waiting_for_approval'"
+							string="Reject"
+							type="object"
+							context="{'window_title': 'Reject'}" />
+					<button name="action_confirm"
+							invisible="state != 'approved'"
+							data-hotkey="q"
+							string="Confirm"
+							type="object"
+							class="oe_highlight"
+							context="{'validate_analytic': True}"
+							groups="tw_incentive_approval.group_tw_master_target_margin_confirm" />
+					<button name="action_reject_or_cancel"
+							invisible="state not in ('waiting_for_approval', 'approved')"
+							string="Cancel Approval"
+							type="object"
+							groups="tw_incentive_approval.group_tw_master_target_margin_approval_cancel"
+							context="{'window_title': 'Cancel'}" />
+				</button>
+
+				<field name="date" position="after">
+					<field name="amount_total" invisible="1" />
+				</field>
+
+				<xpath expr="//page[@name='target_margin_line']" position="after">
+					<page string="Approval">
+						<field name="approval_ids" readonly="True" />
+					</page>
+				</xpath>
+			</field>
+		</record>
+		
+ 	</data>
+</odoo>

@@ -1,0 +1,716 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Product Category -->
+            <record id="product_category_asset" model="product.category">
+			<field name="name">Non-trade</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+		</record>
+
+        <record id="product_category_asset_Bangunan_Pembelian_Gedung_Bangunan" model="product.category">
+                <field name="name">Bangunan / Pembelian Gedung / Bangunan</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+
+        <record id="product_category_asset_Biaya_Alat_Tulis_Kantor_ATK_Continous_Form" model="product.category">
+                <field name="name">Biaya Alat Tulis Kantor / ATK-Continous Form</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+
+        <record id="product_category_asset_Biaya_Alat_Tulis_Kantor_ATK_Lain_Lain" model="product.category">
+                <field name="name">Biaya Alat Tulis Kantor / ATK-Lain-Lain</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+
+        <record id="product_category_asset_Biaya_Alat_Tulis_Kantor_ATK_Map" model="product.category">
+                <field name="name">Biaya Alat Tulis Kantor / ATK-Map</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+
+        <record id="product_category_asset_Biaya_Alat_Tulis_Kantor_ATK_Pulpen_Ballpoint_Pensil" model="product.category">
+                <field name="name">Biaya Alat Tulis Kantor / ATK-Pulpen/Ballpoint/Pensil</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+
+        <record id="product_category_asset_Biaya_Komputer_Biaya_Perlengkapan_IT_Lain_Lain" model="product.category">
+                <field name="name">Biaya Komputer / Biaya Perlengkapan IT Lain-Lain</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+
+        <record id="product_category_asset_Biaya_Komputer_Biaya_Perlengkapan_Komputer_Notebook_Server" model="product.category">
+                <field name="name">Biaya Komputer / Biaya Perlengkapan Komputer/Notebook/Server</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+
+        <record id="product_category_asset_Biaya_Komputer_Biaya_Perlengkapan_Printer" model="product.category">
+                <field name="name">Biaya Komputer / Biaya Perlengkapan Printer</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+
+        <record id="product_category_asset_Biaya_Komputer_Perlengkapan_Komputer_IT" model="product.category">
+                <field name="name">Biaya Komputer - Perlengkapan Komputer/IT</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+
+        <record id="product_category_asset_Biaya_Percetakan_Cetakan_Sablon_Binding" model="product.category">
+                <field name="name">Biaya Percetakan - Cetakan/Sablon/Binding</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+
+        <record id="product_category_asset_Kendaraan_Inventaris_Mobil_Inventaris" model="product.category">
+                <field name="name">Kendaraan Inventaris / Mobil Inventaris</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+
+        <record id="product_category_asset_LAND" model="product.category">
+                <field name="name">LAND</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+
+        <record id="product_category_asset_Lease_Hold_Improvement_Renovasi_Gedung_sewa" model="product.category">
+                <field name="name">Lease Hold Improvement / Renovasi Gedung sewa</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+
+        <record id="product_category_asset_Office_Equipment_Gol_1_Alat_Pemadam" model="product.category">
+                <field name="name">Office Equipment Gol. 1 - Alat Pemadam</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+
+        <record id="product_category_asset_Office_Equipment_Gol_1_CCTV" model="product.category">
+                <field name="name">Office Equipment Gol. 1 - CCTV</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+
+        <record id="product_category_asset_Office_Equipment_Gol_1_Kamera" model="product.category">
+                <field name="name">Office Equipment Gol. 1 - Kamera</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+
+        <record id="product_category_asset_Office_Equipment_Gol_1_Komputer_PC" model="product.category">
+                    <field name="name">Office Equipment Gol. 1 - Komputer/PC</field>
+                <field name="parent_id" ref="product_category_asset"/>
+                <field name="property_valuation">real_time</field>
+                <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Office_Equipment_Gol_1_Notebook_Laptop" model="product.category">
+            <field name="name">Office Equipment Gol. 1 - Notebook/Laptop</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Office_Equipment_Gol_1_Peralatan_Perlengkapan_IT_Lain" model="product.category">
+            <field name="name">Office Equipment Gol. 1 - Peralatan/Perlengkapan IT Lain</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Office_Equipment_Gol_1_Pompa" model="product.category">
+            <field name="name">Office Equipment Gol. 1 - Pompa</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Office_Equipment_Gol_2_Air_Conditioner" model="product.category">
+            <field name="name">Office Equipment Gol. 2 - Air Conditioner</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Office_Equipment_Lain_Non_Asset" model="product.category">
+            <field name="name">Office Equipment Lain Non Asset</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Bengkel_Kunci_Kunci_Tools_Mekanik" model="product.category">
+            <field name="name">Peralatan Bengkel / Kunci-Kunci/Tools Mekanik</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Bengkel_Workshop_Equipment" model="product.category">
+            <field name="name">Peralatan Bengkel / Workshop Equipment</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Bengkel_Workshop_Equipment_Gol_2_Steel" model="product.category">
+            <field name="name">Peralatan Bengkel / Workshop Equipment - Gol. 2 Steel</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_Air_Conditioner" model="product.category">
+            <field name="name">Peralatan Kantor / Air Conditioner</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_Alat_Pemadam_Kebakaran" model="product.category">
+            <field name="name">Peralatan Kantor / Alat Pemadam Kebakaran</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_CCTV" model="product.category">
+            <field name="name">Peralatan Kantor / CCTV</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_Electronic_Handphone" model="product.category">
+            <field name="name">Peralatan Kantor / Electronic-Handphone</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_Electronic_Kamera" model="product.category">
+            <field name="name">Peralatan Kantor / Electronic-Kamera</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_Electronic_Kipas_Angin" model="product.category">
+            <field name="name">Peralatan Kantor / Electronic-Kipas Angin</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_Electronic_Kulkas_Pendingin" model="product.category">
+            <field name="name">Peralatan Kantor / Electronic-Kulkas/Pendingin</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_Electronic_Lain_Lain" model="product.category">
+            <field name="name">Peralatan Kantor / Electronic-Lain-Lain</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_Electronic_Projector" model="product.category">
+            <field name="name">Peralatan Kantor / Electronic-Projector</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_Electronic_Televisi" model="product.category">
+            <field name="name">Peralatan Kantor / Electronic-Televisi</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_Electronic_Vacum_Cleaner" model="product.category">
+            <field name="name">Peralatan Kantor / Electronic-Vacum Cleaner</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_Furniture_Kursi_Non_Steel" model="product.category">
+            <field name="name">Peralatan Kantor / Furniture-Kursi Non Steel</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_Furniture_Lemari_Non_Steel" model="product.category">
+            <field name="name">Peralatan Kantor / Furniture-Lemari Non Steel</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_Furniture_Lemari_Steel" model="product.category">
+            <field name="name">Peralatan Kantor / Furniture-Lemari Steel</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_Furniture_Meja" model="product.category">
+            <field name="name">Peralatan Kantor / Furniture-Meja</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_Furniture_Sofa" model="product.category">
+            <field name="name">Peralatan Kantor / Furniture-Sofa</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_IT_Equipt_Access_Point_Router_Switch_Hub" model="product.category">
+            <field name="name">Peralatan Kantor / IT Equipt-Access Point/Router/Switch/Hub</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_IT_Equipt_Komputer" model="product.category">
+            <field name="name">Peralatan Kantor / IT Equipt-Komputer</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_IT_Equipt_License_Software" model="product.category">
+            <field name="name">Peralatan Kantor / IT Equipt-License/Software</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_IT_Equipt_Printer" model="product.category">
+            <field name="name">Peralatan Kantor / IT-Equipt-Printer</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_Mesin_Absensi_Door_Lock" model="product.category">
+            <field name="name">Peralatan Kantor / Mesin Absensi/Door Lock</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_Peralatan_Kantor_Lain_Lain_Non_Steel" model="product.category">
+            <field name="name">Peralatan Kantor / Peralatan Kantor-Lain-Lain Non Steel</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_Peralatan_Kantor_Lain_Lain_Steel" model="product.category">
+            <field name="name">Peralatan Kantor / Peralatan Kantor Lain-Lain Steel</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Peralatan_Kantor_TELEPHONE" model="product.category">
+            <field name="name">Peralatan Kantor / TELEPHONE</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Perbaikan_Pemeliharaan_Gedung_Electrical" model="product.category">
+            <field name="name">Perbaikan Pemeliharaan Gedung / Electrical</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Perbaikan_Pemeliharaan_Gedung_Kids_Corner" model="product.category">
+            <field name="name">Perbaikan Pemeliharaan Gedung / Kids Corner</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Perbaikan_Pemeliharaan_Gedung_Perbaikan_Pemeliharaan_Gedung" model="product.category">
+            <field name="name">Perbaikan Pemeliharaan Gedung / Perbaikan Pemeliharaan Gedung</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Perbaikan_Pemeliharaan_Gedung_Perbaikan_Pemeliharaan_Gedung" model="product.category">
+            <field name="name">Perbaikan Pemeliharaan Gedung / Perbaikan Pemeliharaan Gedung</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Perbaikan_Pemeliharaan_Gedung_Signage" model="product.category">
+            <field name="name">Perbaikan Pemeliharaan Gedung / Signage</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Perbaikan_Pemeliharaan_Infrastruktur_Gedung_Electrical_(Opex)" model="product.category">
+            <field name="name">Perbaikan/Pemeliharaan Infrastruktur Gedung/Electrical (Opex)</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Perbaikan_Peralatan_Bengkel" model="product.category">
+            <field name="name">Perbaikan Peralatan Bengkel</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Perbaikan_Peralatan_Bengkel_Jasa_Perbaikan_Peralatan_Bengkel" model="product.category">
+            <field name="name">Perbaikan Peralatan Bengkel / Jasa Perbaikan Peralatan Bengkel</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Perbaikan_Peralatan_Bengkel_Perbaikan_Peralatan_Bengkel" model="product.category">
+            <field name="name">Perbaikan Peralatan Bengkel / Perbaikan Peralatan Bengkel</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Perbaikan_Peralatan_Kantor" model="product.category">
+            <field name="name">Perbaikan Peralatan Kantor</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Perbaikan_Peralatan_Kantor_Perbaikan_AC_Material_AC" model="product.category">
+            <field name="name">Perbaikan Peralatan Kantor / Perbaikan AC/Material AC</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Perbaikan_Peralatan_Kantor_Perbaikan_Furniture" model="product.category">
+            <field name="name">Perbaikan Peralatan Kantor / Perbaikan Furniture</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Perbaikan_Peralatan_Kantor_Perbaikan_Genset" model="product.category">
+            <field name="name">Perbaikan Peralatan Kantor / Perbaikan Genset</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Perbaikan_Peralatan_Kantor_Perbaikan_Peralatan_Kantor" model="product.category">
+            <field name="name">Perbaikan Peralatan Kantor / Perbaikan Peralatan Kantor</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Perbaikan_Peralatan_Kantor_Perbaikan_Telepone_PABX_CCTV" model="product.category">
+            <field name="name">Perbaikan Peralatan Kantor / Perbaikan Telepone/PABX/CCTV</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Perbaikan_Peralatan_Kantor_Refill_APAR" model="product.category">
+            <field name="name">Perbaikan Peralatan Kantor / Refill APAR</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Perbaikan_Peralatan_Komputer" model="product.category">
+            <field name="name">Perbaikan Peralatan Komputer</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Perbaikan_Peralatan_Komputer_Monitor_PC" model="product.category">
+            <field name="name">Perbaikan Peralatan Komputer / Monitor PC</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Perbaikan_Peralatan_Komputer_Perbaikan_Peralatan_Komputer" model="product.category">
+            <field name="name">Perbaikan Peralatan Komputer / Perbaikan Peralatan Komputer</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Perbaikan_Peralatan_Komputer_Renewal_License" model="product.category">
+            <field name="name">Perbaikan Peralatan Komputer / Renewal License</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_PERIJINAN" model="product.category">
+            <field name="name">PERIJINAN</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Stationery_Alat_Tulis" model="product.category">
+            <field name="name">Stationery - Alat Tulis</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Stationery_Kertas" model="product.category">
+            <field name="name">Stationery - Kertas</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Stationery_Tinta_Cartridge_Pita_Toner_Printer" model="product.category">
+            <field name="name">Stationery - Tinta/Cartridge/Pita/Toner Printer</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Workshop_Equipment_Gol_1" model="product.category">
+            <field name="name">Workshop Equipment Gol. 1</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Workshop_Equipment_Gol_1_Kunci_Kunci_Tools" model="product.category">
+            <field name="name">Workshop Equipment Gol. 1 - Kunci-Kunci/Tools</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        <record id="product_category_asset_Workshop_Equipment_Gol_2" model="product.category">
+            <field name="name">Workshop Equipment Gol. 2</field>
+            <field name="parent_id" ref="product_category_asset"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+    </data>
+</odoo>

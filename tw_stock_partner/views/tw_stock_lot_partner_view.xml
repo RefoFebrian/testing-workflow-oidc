@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_stock_lot_partner_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.lot.partner.form</field>
+            <field name="model">stock.lot</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_lot_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='receive_group']" position="inside">
+                    <field name="supplier_id" readonly="1" options="{'no_create': True,'no_open': True}"/>
+                    <field name="stock_inbound_id" readonly="1" options="{'no_create': True,'no_open': True}"/>
+                </xpath>
+                <xpath expr="//group[@name='distribution_group']" position="inside">
+                    <field name="sales_md_date" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

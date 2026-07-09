@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+            <record id="tw_auth_oauth_schema_reset_password" model="ir.config_parameter">
+                <field name="key">schema.reset.password</field>
+                <field name="value">False</field>
+            </record>
+
+    </data>
+</odoo>

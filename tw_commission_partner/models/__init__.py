@@ -1,0 +1,1 @@
+from . import tw_partner_inherit

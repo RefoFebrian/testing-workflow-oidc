@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- TW Stock Adjustment Group Read -->
+
+        <record id="tw_stock_adjustment_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Stock Adjustment Read</field>
+        </record>
+
+        <record id="tw_stock_adjustment_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_adjustment" />
+            <field name="name">tw_stock_adjustment read</field>
+            <field name="group_id" ref="tw_stock_adjustment_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="tw_stock_adjustment_line_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_adjustment_line"/>
+            <field name="name">tw_stock_adjustment_line read</field>
+            <field name="group_id" ref="tw_stock_adjustment_group_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- TW Stock Adjustment Group Update -->
+
+        <record id="tw_stock_adjustment_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Stock Adjustment Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_stock_adjustment_group_read'))]" />
+        </record>
+
+        <record id="tw_stock_adjustment_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_adjustment" />
+            <field name="name">tw_stock_adjustment update</field>
+            <field name="group_id" ref="tw_stock_adjustment_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_stock_adjustment_line_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_adjustment_line"/>
+            <field name="name">tw_stock_adjustment_line update</field>
+            <field name="group_id" ref="tw_stock_adjustment_group_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- TW Stock Adjustment Group Delete -->
+
+        <record id="tw_stock_adjustment_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Stock Adjustment Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_stock_adjustment_group_read'))]" />
+        </record>
+
+        <record id="tw_stock_adjustment_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_adjustment" />
+            <field name="name">tw_stock_adjustment delete</field>
+            <field name="group_id" ref="tw_stock_adjustment_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="tw_stock_adjustment_line_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_adjustment_line"/>
+            <field name="name">tw_stock_adjustment_line delete</field>
+            <field name="group_id" ref="tw_stock_adjustment_group_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('tw_stock_adjustment_group_read')),
+                (4,ref('tw_stock_adjustment_group_update')),
+                (4,ref('tw_stock_adjustment_group_delete')),
+                ]" />
+        </record>
+    </data>
+</odoo>

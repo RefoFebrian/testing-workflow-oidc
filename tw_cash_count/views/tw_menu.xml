@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Cash Count -->
+    <menuitem id="tw_cash_count_menuitem" action="action_tw_cash_count" parent="tw_menu.submenu_tw_backoffice_non_trade" groups="tw_cash_count.group_tw_cash_count_read" sequence="6"/>
+
+    <!-- Cash Count Validation -->
+    <menuitem id="tw_cash_count_validasi_menuitem" action="action_tw_cash_count_validasi" parent="tw_menu.submenu_tw_backoffice_configuration" groups="tw_cash_count.group_tw_cash_count_validation_read" sequence="30"/>
+
+</odoo>

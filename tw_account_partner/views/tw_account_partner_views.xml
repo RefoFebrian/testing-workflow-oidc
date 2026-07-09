@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_res_partner_account_inherit_form" model="ir.ui.view">
+            <field name="name">res.partner.account.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <group id="invoice_send_settings" position="after">
+                    <group id="account_partner_payment" string="Payment Account">
+                        <field name="property_account_payable_id" domain="[('deprecated', '=', False)]" options="{'no_create': True}" context="{'default_account_type': 'payable'}"/>
+                        <field name="property_account_receivable_id" domain="[('deprecated', '=', False)]" options="{'no_create': True}" context="{'default_account_type': 'receivable'}"/>
+                    </group>
+                </group>
+            </field>
+        </record>
+    </data>
+</odoo>

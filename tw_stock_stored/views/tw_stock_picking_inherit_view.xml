@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_stock_stored_stock_picking_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.stored.stock.picking.inherit.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='button_validate'][2]" position="after">
+                    <button name="action_check_stored_picking" invisible="state != 'stored'" string="Check Stored" type="object" class="oe_highlight"/>
+                </xpath>
+                <xpath expr="//button[@name='button_validate'][1]" position="attributes">
+                    <attribute name="invisible">state in ('draft', 'confirmed', 'done', 'cancel','stored')</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_validate'][2]" position="attributes">
+                    <attribute name="invisible">state in ('waiting', 'assigned', 'done', 'cancel','stored')</attribute>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="tw_stock_stored_stock_picking_inherit_tw_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.stored.stock.picking.inherit.tw_form.view</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_picking_inherit_form_view" />
+            <field name="arch" type="xml">
+                <field name="move_ids_without_extras" position="attributes">
+                    <attribute name="readonly" add="state == 'stored'" separator=" or "/>
+                </field>
+                <field name="write_date" position="after">
+                    <field name="store_date" readonly="1"/>
+                    <field name="store_uid" readonly="1" options="{'no_create': True,'no_open': True}"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="tw_stock_stored_stock_picking_inherit_extras_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.stored.stock.picking.inherit.extras.form.view</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="tw_stock_extras.tw_stock_picking_extras_inherit_form_view" />
+            <field name="arch" type="xml">
+                <field name="extras_move_ids" position="attributes">
+                    <attribute name="readonly" add="state == 'stored'" separator=" or "/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

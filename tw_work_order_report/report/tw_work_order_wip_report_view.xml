@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="tw_work_order_wip_report_view" model="ir.ui.view">
+            <field name="name">WO WIP</field>
+            <field name="model">tw.work.order.wip.report</field>
+            <field name="arch" type="xml">
+               <form string="WO WIP Report" create="false" edit="false">
+                    <group>
+                        <group>
+                            <field name="company_ids" widget="many2many_tags"/>              
+                        </group>
+                        <group>
+                            <label for="start_date" string="Date"/>
+                            <div>
+                                <field name="start_date" class="oe_inline"/>&#160;-&#160;
+                                <field name="end_date" class="oe_inline"/>
+                            </div>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="excel_report" string="Export Report" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_work_order_wip_report_action" model="ir.actions.act_window">
+             <field name="name">Laporan WIP</field>
+             <field name="res_model">tw.work.order.wip.report</field>
+             <field name="type">ir.actions.act_window</field>
+             <field name="view_mode">form</field>
+             <field name="view_id" ref="tw_work_order_wip_report_view"/>
+             <field name="target">new</field>
+        </record>
+
+    </data>
+
+</odoo>

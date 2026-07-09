@@ -1,0 +1,3296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        \# data province Nanggroe Aceh Darussalam
+        
+        <record id="kab_id_1101" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kab. Simeulue</field> 
+            <field name="code">1101</field>  
+        </record>
+        
+        <record id="kab_id_1104" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kab. Aceh Tenggara</field> 
+            <field name="code">1104</field>  
+        </record>
+        
+        <record id="kab_id_1105" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kab. Aceh Timur</field> 
+            <field name="code">1105</field>  
+        </record>
+        
+        <record id="kab_id_1106" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kab. Aceh Tengah</field> 
+            <field name="code">1106</field>  
+        </record>
+        
+        <record id="kab_id_1107" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kab. Aceh Barat</field> 
+            <field name="code">1107</field>  
+        </record>
+        
+        <record id="kab_id_1108" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kab. Aceh Besar</field> 
+            <field name="code">1108</field>  
+        </record>
+        
+        <record id="kab_id_1109" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kab. Pidie</field> 
+            <field name="code">1109</field>  
+        </record>
+        
+        <record id="kab_id_1110" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kab. Bireuen</field> 
+            <field name="code">1110</field>  
+        </record>
+        
+        <record id="kab_id_1111" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kab. Aceh Utara</field> 
+            <field name="code">1111</field>  
+        </record>
+        
+        <record id="kab_id_1112" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kab. Aceh Barat Daya</field> 
+            <field name="code">1112</field>  
+        </record>
+        
+        <record id="kab_id_1113" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kab. Gayo Lues</field> 
+            <field name="code">1113</field>  
+        </record>
+        
+        <record id="kab_id_1114" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kab. Aceh Tamiang</field> 
+            <field name="code">1114</field>  
+        </record>
+        
+        <record id="kab_id_1115" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kab. Nagan Raya</field> 
+            <field name="code">1115</field>  
+        </record>
+        
+        <record id="kab_id_1116" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kab. Aceh Jaya</field> 
+            <field name="code">1116</field>  
+        </record>
+        
+        <record id="kab_id_1117" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kab. Bener Meriah</field> 
+            <field name="code">1117</field>  
+        </record>
+        
+        <record id="kab_id_1118" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kab. Pidie Jaya</field> 
+            <field name="code">1118</field>  
+        </record>
+        
+        <record id="kab_id_1171" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kota Banda Aceh</field> 
+            <field name="code">1171</field>  
+        </record>
+        
+        <record id="kab_id_1172" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kota Sabang</field> 
+            <field name="code">1172</field>  
+        </record>
+        
+        <record id="kab_id_1173" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kota Langsa</field> 
+            <field name="code">1173</field>  
+        </record>
+        
+        <record id="kab_id_1174" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kota Lhokseumawe</field> 
+            <field name="code">1174</field>  
+        </record>
+        
+        <record id="kab_id_1175" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kota Subulussalam</field> 
+            <field name="code">1175</field>  
+        </record>
+        
+        <record id="kab_id_1102" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kab. Aceh Singkil</field> 
+            <field name="code">1102</field>  
+        </record>
+        
+        <record id="kab_id_1103" model="res.city">
+	    	<field name="state_id" ref="province_id_1100"/>
+	    	<field name="name">Kab. Aceh Selatan</field> 
+            <field name="code">1103</field>  
+        </record>
+        
+        \# data province Sumatera Utara
+        
+        <record id="kab_id_1273" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kota Pematang Siantar</field> 
+            <field name="code">1273</field>  
+        </record>
+        
+        <record id="kab_id_1201" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Nias</field> 
+            <field name="code">1201</field>  
+        </record>
+        
+        <record id="kab_id_1202" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Mandailing Natal</field> 
+            <field name="code">1202</field>  
+        </record>
+        
+        <record id="kab_id_1203" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Tapanuli Selatan</field> 
+            <field name="code">1203</field>  
+        </record>
+        
+        <record id="kab_id_1204" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Tapanuli Tengah</field> 
+            <field name="code">1204</field>  
+        </record>
+        
+        <record id="kab_id_1205" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Tapanuli Utara</field> 
+            <field name="code">1205</field>  
+        </record>
+        
+        <record id="kab_id_1206" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Toba Samosir</field> 
+            <field name="code">1206</field>  
+        </record>
+        
+        <record id="kab_id_1207" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Labuhan Batu</field> 
+            <field name="code">1207</field>  
+        </record>
+        
+        <record id="kab_id_1208" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Asahan</field> 
+            <field name="code">1208</field>  
+        </record>
+        
+        <record id="kab_id_1209" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Simalungun</field> 
+            <field name="code">1209</field>  
+        </record>
+        
+        <record id="kab_id_1210" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Dairi</field> 
+            <field name="code">1210</field>  
+        </record>
+        
+        <record id="kab_id_1211" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Karo</field> 
+            <field name="code">1211</field>  
+        </record>
+        
+        <record id="kab_id_1212" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Deli Serdang</field> 
+            <field name="code">1212</field>  
+        </record>
+        
+        <record id="kab_id_1213" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Langkat</field> 
+            <field name="code">1213</field>  
+        </record>
+        
+        <record id="kab_id_1214" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Nias Selatan</field> 
+            <field name="code">1214</field>  
+        </record>
+        
+        <record id="kab_id_1215" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Humbang Hasundutan</field> 
+            <field name="code">1215</field>  
+        </record>
+        
+        <record id="kab_id_1216" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Pakpak Bharat</field> 
+            <field name="code">1216</field>  
+        </record>
+        
+        <record id="kab_id_1217" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Samosir</field> 
+            <field name="code">1217</field>  
+        </record>
+        
+        <record id="kab_id_1218" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Serdang Bedagai</field> 
+            <field name="code">1218</field>  
+        </record>
+        
+        <record id="kab_id_1219" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Batu Bara</field> 
+            <field name="code">1219</field>  
+        </record>
+        
+        <record id="kab_id_1220" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Labuhan Batu Selatan</field> 
+            <field name="code">1220</field>  
+        </record>
+        
+        <record id="kab_id_1221" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Labuhan Batu Utara</field> 
+            <field name="code">1221</field>  
+        </record>
+        
+        <record id="kab_id_1222" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Nias Utara</field> 
+            <field name="code">1222</field>  
+        </record>
+        
+        <record id="kab_id_1223" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Kisaran</field> 
+            <field name="code">1223</field>  
+        </record>
+        
+        <record id="kab_id_1224" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Nias Barat</field> 
+            <field name="code">1224</field>  
+        </record>
+        
+        <record id="kab_id_1271" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kota Sibolga</field> 
+            <field name="code">1271</field>  
+        </record>
+        
+        <record id="kab_id_1272" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kota Tanjung Balai</field> 
+            <field name="code">1272</field>  
+        </record>
+        
+        <record id="kab_id_1274" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kota Tebing Tinggi</field> 
+            <field name="code">1274</field>  
+        </record>
+        
+        <record id="kab_id_1275" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kota Medan</field> 
+            <field name="code">1275</field>  
+        </record>
+        
+        <record id="kab_id_1276" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kota Binjai</field> 
+            <field name="code">1276</field>  
+        </record>
+        
+        <record id="kab_id_1277" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kota Padang Sidempuan</field> 
+            <field name="code">1277</field>  
+        </record>
+        
+        <record id="kab_id_1278" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Padang Lawas</field> 
+            <field name="code">1278</field>  
+        </record>
+        
+        <record id="kab_id_1279" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kab. Padang Lawas Utara</field> 
+            <field name="code">1279</field>  
+        </record>
+        
+        <record id="kab_id_1280" model="res.city">
+	    	<field name="state_id" ref="province_id_1200"/>
+	    	<field name="name">Kota Gunung Sitoli</field> 
+            <field name="code">1280</field>  
+        </record>
+        
+        \# data province Sumatera Barat
+        
+        <record id="kab_id_1301" model="res.city">
+	    	<field name="state_id" ref="province_id_1300"/>
+	    	<field name="name">Kab. Kepulauan Mentawai</field> 
+            <field name="code">1301</field>  
+        </record>
+        
+        <record id="kab_id_1302" model="res.city">
+	    	<field name="state_id" ref="province_id_1300"/>
+	    	<field name="name">Kab. Pesisir Selatan</field> 
+            <field name="code">1302</field>  
+        </record>
+        
+        <record id="kab_id_1303" model="res.city">
+	    	<field name="state_id" ref="province_id_1300"/>
+	    	<field name="name">Kab. Solok</field> 
+            <field name="code">1303</field>  
+        </record>
+        
+        <record id="kab_id_1304" model="res.city">
+	    	<field name="state_id" ref="province_id_1300"/>
+	    	<field name="name">Kab. Sawahlunto/Sijunjung</field> 
+            <field name="code">1304</field>  
+        </record>
+        
+        <record id="kab_id_1305" model="res.city">
+	    	<field name="state_id" ref="province_id_1300"/>
+	    	<field name="name">Kab. Tanah Datar</field> 
+            <field name="code">1305</field>  
+        </record>
+        
+        <record id="kab_id_1306" model="res.city">
+	    	<field name="state_id" ref="province_id_1300"/>
+	    	<field name="name">Kab. Padang Pariaman</field> 
+            <field name="code">1306</field>  
+        </record>
+        
+        <record id="kab_id_1307" model="res.city">
+	    	<field name="state_id" ref="province_id_1300"/>
+	    	<field name="name">Kab. Agam</field> 
+            <field name="code">1307</field>  
+        </record>
+        
+        <record id="kab_id_1308" model="res.city">
+	    	<field name="state_id" ref="province_id_1300"/>
+	    	<field name="name">Kab. Lima Puluh Kota</field> 
+            <field name="code">1308</field>  
+        </record>
+        
+        <record id="kab_id_1309" model="res.city">
+	    	<field name="state_id" ref="province_id_1300"/>
+	    	<field name="name">Kab. Pasaman</field> 
+            <field name="code">1309</field>  
+        </record>
+        
+        <record id="kab_id_1310" model="res.city">
+	    	<field name="state_id" ref="province_id_1300"/>
+	    	<field name="name">Kab. Solok Selatan</field> 
+            <field name="code">1310</field>  
+        </record>
+        
+        <record id="kab_id_1311" model="res.city">
+	    	<field name="state_id" ref="province_id_1300"/>
+	    	<field name="name">Kab. Dharmasraya</field> 
+            <field name="code">1311</field>  
+        </record>
+        
+        <record id="kab_id_1312" model="res.city">
+	    	<field name="state_id" ref="province_id_1300"/>
+	    	<field name="name">Kab. Pasaman Barat</field> 
+            <field name="code">1312</field>  
+        </record>
+        
+        <record id="kab_id_1371" model="res.city">
+	    	<field name="state_id" ref="province_id_1300"/>
+	    	<field name="name">Kota Padang</field> 
+            <field name="code">1371</field>  
+        </record>
+        
+        <record id="kab_id_1372" model="res.city">
+	    	<field name="state_id" ref="province_id_1300"/>
+	    	<field name="name">Kota Solok</field> 
+            <field name="code">1372</field>  
+        </record>
+        
+        <record id="kab_id_1373" model="res.city">
+	    	<field name="state_id" ref="province_id_1300"/>
+	    	<field name="name">Kota Sawahlunto</field> 
+            <field name="code">1373</field>  
+        </record>
+        
+        <record id="kab_id_1374" model="res.city">
+	    	<field name="state_id" ref="province_id_1300"/>
+	    	<field name="name">Kota Padang Panjang</field> 
+            <field name="code">1374</field>  
+        </record>
+        
+        <record id="kab_id_1375" model="res.city">
+	    	<field name="state_id" ref="province_id_1300"/>
+	    	<field name="name">Kota Bukittinggi</field> 
+            <field name="code">1375</field>  
+        </record>
+        
+        <record id="kab_id_1376" model="res.city">
+	    	<field name="state_id" ref="province_id_1300"/>
+	    	<field name="name">Kota Payakumbuh</field> 
+            <field name="code">1376</field>  
+        </record>
+        
+        <record id="kab_id_1377" model="res.city">
+	    	<field name="state_id" ref="province_id_1300"/>
+	    	<field name="name">Kota Pariaman</field> 
+            <field name="code">1377</field>  
+        </record>
+        
+        \# data province Riau
+        
+        <record id="kab_id_1401" model="res.city">
+	    	<field name="state_id" ref="province_id_1400"/>
+	    	<field name="name">Kab. Kuantan Singingi</field> 
+            <field name="code">1401</field>  
+        </record>
+        
+        <record id="kab_id_1402" model="res.city">
+	    	<field name="state_id" ref="province_id_1400"/>
+	    	<field name="name">Kab. Indragiri Hulu</field> 
+            <field name="code">1402</field>  
+        </record>
+        
+        <record id="kab_id_1403" model="res.city">
+	    	<field name="state_id" ref="province_id_1400"/>
+	    	<field name="name">Kab. Indragiri Hilir</field> 
+            <field name="code">1403</field>  
+        </record>
+        
+        <record id="kab_id_1404" model="res.city">
+	    	<field name="state_id" ref="province_id_1400"/>
+	    	<field name="name">Kab. Pelalawan</field> 
+            <field name="code">1404</field>  
+        </record>
+        
+        <record id="kab_id_1405" model="res.city">
+	    	<field name="state_id" ref="province_id_1400"/>
+	    	<field name="name">Kab. Siak</field> 
+            <field name="code">1405</field>  
+        </record>
+        
+        <record id="kab_id_1406" model="res.city">
+	    	<field name="state_id" ref="province_id_1400"/>
+	    	<field name="name">Kab. Kampar</field> 
+            <field name="code">1406</field>  
+        </record>
+        
+        <record id="kab_id_1407" model="res.city">
+	    	<field name="state_id" ref="province_id_1400"/>
+	    	<field name="name">Kab. Rokan Hulu</field> 
+            <field name="code">1407</field>  
+        </record>
+        
+        <record id="kab_id_1408" model="res.city">
+	    	<field name="state_id" ref="province_id_1400"/>
+	    	<field name="name">Kab. Bengkalis</field> 
+            <field name="code">1408</field>  
+        </record>
+        
+        <record id="kab_id_1409" model="res.city">
+	    	<field name="state_id" ref="province_id_1400"/>
+	    	<field name="name">Kab. Rokan Hilir</field> 
+            <field name="code">1409</field>  
+        </record>
+        
+        <record id="kab_id_1410" model="res.city">
+	    	<field name="state_id" ref="province_id_1400"/>
+	    	<field name="name">Kab. Kepulauan Meranti</field> 
+            <field name="code">1410</field>  
+        </record>
+        
+        <record id="kab_id_1471" model="res.city">
+	    	<field name="state_id" ref="province_id_1400"/>
+	    	<field name="name">Kota Pekanbaru</field> 
+            <field name="code">1471</field>  
+        </record>
+        
+        <record id="kab_id_1473" model="res.city">
+	    	<field name="state_id" ref="province_id_1400"/>
+	    	<field name="name">Kota Dumai</field> 
+            <field name="code">1473</field>  
+        </record>
+        
+        \# data province Jambi
+        
+        <record id="kab_id_1501" model="res.city">
+	    	<field name="state_id" ref="province_id_1500"/>
+	    	<field name="name">Kab. Kerinci</field> 
+            <field name="code">1501</field>  
+        </record>
+        
+        <record id="kab_id_1502" model="res.city">
+	    	<field name="state_id" ref="province_id_1500"/>
+	    	<field name="name">Kab. Merangin</field> 
+            <field name="code">1502</field>  
+        </record>
+        
+        <record id="kab_id_1503" model="res.city">
+	    	<field name="state_id" ref="province_id_1500"/>
+	    	<field name="name">Kab. Sarolangun</field> 
+            <field name="code">1503</field>  
+        </record>
+        
+        <record id="kab_id_1504" model="res.city">
+	    	<field name="state_id" ref="province_id_1500"/>
+	    	<field name="name">Kab. Batang Hari</field> 
+            <field name="code">1504</field>  
+        </record>
+        
+        <record id="kab_id_1505" model="res.city">
+	    	<field name="state_id" ref="province_id_1500"/>
+	    	<field name="name">Kab. Muaro Jambi</field> 
+            <field name="code">1505</field>  
+        </record>
+        
+        <record id="kab_id_1506" model="res.city">
+	    	<field name="state_id" ref="province_id_1500"/>
+	    	<field name="name">Kab. Tanjung Jabung Timur</field> 
+            <field name="code">1506</field>  
+        </record>
+        
+        <record id="kab_id_1507" model="res.city">
+	    	<field name="state_id" ref="province_id_1500"/>
+	    	<field name="name">Kab. Tanjung Jabung Barat</field> 
+            <field name="code">1507</field>  
+        </record>
+        
+        <record id="kab_id_1508" model="res.city">
+	    	<field name="state_id" ref="province_id_1500"/>
+	    	<field name="name">Kab. Tebo</field> 
+            <field name="code">1508</field>  
+        </record>
+        
+        <record id="kab_id_1509" model="res.city">
+	    	<field name="state_id" ref="province_id_1500"/>
+	    	<field name="name">Kab. Bungo</field> 
+            <field name="code">1509</field>  
+        </record>
+        
+        <record id="kab_id_1571" model="res.city">
+	    	<field name="state_id" ref="province_id_1500"/>
+	    	<field name="name">Kota Jambi</field> 
+            <field name="code">1571</field>  
+        </record>
+        
+        <record id="kab_id_1572" model="res.city">
+	    	<field name="state_id" ref="province_id_1500"/>
+	    	<field name="name">Kota Sungai Penuh</field> 
+            <field name="code">1572</field>  
+        </record>
+        
+        \# data province Sumatera Selatan
+        
+        <record id="kab_id_1601" model="res.city">
+	    	<field name="state_id" ref="province_id_1600"/>
+	    	<field name="name">Kab. Ogan Komering Ulu</field> 
+            <field name="code">1601</field>  
+        </record>
+        
+        <record id="kab_id_1602" model="res.city">
+	    	<field name="state_id" ref="province_id_1600"/>
+	    	<field name="name">Kab. Ogan Komering Ilir</field> 
+            <field name="code">1602</field>  
+        </record>
+        
+        <record id="kab_id_1603" model="res.city">
+	    	<field name="state_id" ref="province_id_1600"/>
+	    	<field name="name">Kab. Muara Enim</field> 
+            <field name="code">1603</field>  
+        </record>
+        
+        <record id="kab_id_1604" model="res.city">
+	    	<field name="state_id" ref="province_id_1600"/>
+	    	<field name="name">Kab. Lahat</field> 
+            <field name="code">1604</field>  
+        </record>
+        
+        <record id="kab_id_1605" model="res.city">
+	    	<field name="state_id" ref="province_id_1600"/>
+	    	<field name="name">Kab. Musi Rawas</field> 
+            <field name="code">1605</field>  
+        </record>
+        
+        <record id="kab_id_1606" model="res.city">
+	    	<field name="state_id" ref="province_id_1600"/>
+	    	<field name="name">Kab. Musi Banyuasin</field> 
+            <field name="code">1606</field>  
+        </record>
+        
+        <record id="kab_id_1607" model="res.city">
+	    	<field name="state_id" ref="province_id_1600"/>
+	    	<field name="name">Kab. Banyuasin</field> 
+            <field name="code">1607</field>  
+        </record>
+        
+        <record id="kab_id_1608" model="res.city">
+	    	<field name="state_id" ref="province_id_1600"/>
+	    	<field name="name">Kab. Ogan Komering Ulu Selatan</field> 
+            <field name="code">1608</field>  
+        </record>
+        
+        <record id="kab_id_1609" model="res.city">
+	    	<field name="state_id" ref="province_id_1600"/>
+	    	<field name="name">Kab. Ogan Komering Ulu Timur</field> 
+            <field name="code">1609</field>  
+        </record>
+        
+        <record id="kab_id_1610" model="res.city">
+	    	<field name="state_id" ref="province_id_1600"/>
+	    	<field name="name">Kab. Ogan Ilir</field> 
+            <field name="code">1610</field>  
+        </record>
+        
+        <record id="kab_id_1611" model="res.city">
+	    	<field name="state_id" ref="province_id_1600"/>
+	    	<field name="name">Kab. Empat Lawang</field> 
+            <field name="code">1611</field>  
+        </record>
+        
+        <record id="kab_id_1612" model="res.city">
+	    	<field name="state_id" ref="province_id_1600"/>
+	    	<field name="name">Kab.Penukal Abab Lematang Ilir</field> 
+            <field name="code">1612</field>  
+        </record>
+        
+        <record id="kab_id_1671" model="res.city">
+	    	<field name="state_id" ref="province_id_1600"/>
+	    	<field name="name">Kota Palembang</field> 
+            <field name="code">1671</field>  
+        </record>
+        
+        <record id="kab_id_1672" model="res.city">
+	    	<field name="state_id" ref="province_id_1600"/>
+	    	<field name="name">Kota Prabumulih</field> 
+            <field name="code">1672</field>  
+        </record>
+        
+        <record id="kab_id_1673" model="res.city">
+	    	<field name="state_id" ref="province_id_1600"/>
+	    	<field name="name">Kota Pagar Alam</field> 
+            <field name="code">1673</field>  
+        </record>
+        
+        <record id="kab_id_1674" model="res.city">
+	    	<field name="state_id" ref="province_id_1600"/>
+	    	<field name="name">Kota Lubuk Linggau</field> 
+            <field name="code">1674</field>  
+        </record>
+        
+        \# data province Bengkulu
+        
+        <record id="kab_id_1701" model="res.city">
+	    	<field name="state_id" ref="province_id_1700"/>
+	    	<field name="name">Kab. Bengkulu Selatan</field> 
+            <field name="code">1701</field>  
+        </record>
+        
+        <record id="kab_id_1702" model="res.city">
+	    	<field name="state_id" ref="province_id_1700"/>
+	    	<field name="name">Kab. Rejang Lebong</field> 
+            <field name="code">1702</field>  
+        </record>
+        
+        <record id="kab_id_1703" model="res.city">
+	    	<field name="state_id" ref="province_id_1700"/>
+	    	<field name="name">Kab. Bengkulu Utara</field> 
+            <field name="code">1703</field>  
+        </record>
+        
+        <record id="kab_id_1704" model="res.city">
+	    	<field name="state_id" ref="province_id_1700"/>
+	    	<field name="name">Kab. Kaur</field> 
+            <field name="code">1704</field>  
+        </record>
+        
+        <record id="kab_id_1705" model="res.city">
+	    	<field name="state_id" ref="province_id_1700"/>
+	    	<field name="name">Kab. Seluma</field> 
+            <field name="code">1705</field>  
+        </record>
+        
+        <record id="kab_id_1706" model="res.city">
+	    	<field name="state_id" ref="province_id_1700"/>
+	    	<field name="name">Kab. Mukomuko</field> 
+            <field name="code">1706</field>  
+        </record>
+        
+        <record id="kab_id_1707" model="res.city">
+	    	<field name="state_id" ref="province_id_1700"/>
+	    	<field name="name">Kab. Lebong</field> 
+            <field name="code">1707</field>  
+        </record>
+        
+        <record id="kab_id_1708" model="res.city">
+	    	<field name="state_id" ref="province_id_1700"/>
+	    	<field name="name">Kab. Kepahiang</field> 
+            <field name="code">1708</field>  
+        </record>
+        
+        <record id="kab_id_1710" model="res.city">
+	    	<field name="state_id" ref="province_id_1700"/>
+	    	<field name="name">Kab. Bengkulu Tengah</field> 
+            <field name="code">1710</field>  
+        </record>
+        
+        <record id="kab_id_1771" model="res.city">
+	    	<field name="state_id" ref="province_id_1700"/>
+	    	<field name="name">Kota Bengkulu</field> 
+            <field name="code">1771</field>  
+        </record>
+        
+        \# data province Lampung
+        
+        <record id="kab_id_1801" model="res.city">
+	    	<field name="state_id" ref="province_id_1800"/>
+	    	<field name="name">Kab. Lampung Barat</field> 
+            <field name="code">1801</field>  
+        </record>
+        
+        <record id="kab_id_1803" model="res.city">
+	    	<field name="state_id" ref="province_id_1800"/>
+	    	<field name="name">Kab. Lampung Selatan</field> 
+            <field name="code">1803</field>  
+        </record>
+        
+        <record id="kab_id_1805" model="res.city">
+	    	<field name="state_id" ref="province_id_1800"/>
+	    	<field name="name">Kab. Lampung Tengah</field> 
+            <field name="code">1805</field>  
+        </record>
+        
+        <record id="kab_id_1804" model="res.city">
+	    	<field name="state_id" ref="province_id_1800"/>
+	    	<field name="name">Kab. Lampung Timur</field> 
+            <field name="code">1804</field>  
+        </record>
+        
+        <record id="kab_id_1806" model="res.city">
+	    	<field name="state_id" ref="province_id_1800"/>
+	    	<field name="name">Kab. Lampung Utara</field> 
+            <field name="code">1806</field>  
+        </record>
+        
+        <record id="kab_id_1811" model="res.city">
+	    	<field name="state_id" ref="province_id_1800"/>
+	    	<field name="name">Kab. Mesuji</field> 
+            <field name="code">1811</field>  
+        </record>
+        
+        <record id="kab_id_1809" model="res.city">
+	    	<field name="state_id" ref="province_id_1800"/>
+	    	<field name="name">Kab. Pesawaran</field> 
+            <field name="code">1809</field>  
+        </record>
+        
+        <record id="kab_id_1813" model="res.city">
+	    	<field name="state_id" ref="province_id_1800"/>
+	    	<field name="name">Kab. Pesisir Barat</field> 
+            <field name="code">1813</field>  
+        </record>
+        
+        <record id="kab_id_1810" model="res.city">
+	    	<field name="state_id" ref="province_id_1800"/>
+	    	<field name="name">Kab. Pringsewu</field> 
+            <field name="code">1810</field>  
+        </record>
+        
+        <record id="kab_id_1802" model="res.city">
+	    	<field name="state_id" ref="province_id_1800"/>
+	    	<field name="name">Kab. Tanggamus</field> 
+            <field name="code">1802</field>  
+        </record>
+        
+        <record id="kab_id_1808" model="res.city">
+	    	<field name="state_id" ref="province_id_1800"/>
+	    	<field name="name">Kab. Tulang Bawang</field> 
+            <field name="code">1808</field>  
+        </record>
+        
+        <record id="kab_id_1812" model="res.city">
+	    	<field name="state_id" ref="province_id_1800"/>
+	    	<field name="name">Kab. Tulang Bawang Barat</field> 
+            <field name="code">1812</field>  
+        </record>
+        
+        <record id="kab_id_1807" model="res.city">
+	    	<field name="state_id" ref="province_id_1800"/>
+	    	<field name="name">Kab. Way Kanan</field> 
+            <field name="code">1807</field>  
+        </record>
+        
+        <record id="kab_id_1871" model="res.city">
+	    	<field name="state_id" ref="province_id_1800"/>
+	    	<field name="name">Kota Bandar Lampung</field> 
+            <field name="code">1871</field>  
+        </record>
+        
+        <record id="kab_id_1872" model="res.city">
+	    	<field name="state_id" ref="province_id_1800"/>
+	    	<field name="name">Kota Metro</field> 
+            <field name="code">1872</field>  
+        </record>
+        
+        \# data province Bangka-Belitung
+        
+        <record id="kab_id_1901" model="res.city">
+	    	<field name="state_id" ref="province_id_1900"/>
+	    	<field name="name">Kab. Bangka</field> 
+            <field name="code">1901</field>  
+        </record>
+        
+        <record id="kab_id_1902" model="res.city">
+	    	<field name="state_id" ref="province_id_1900"/>
+	    	<field name="name">Kab. Belitung</field> 
+            <field name="code">1902</field>  
+        </record>
+        
+        <record id="kab_id_1903" model="res.city">
+	    	<field name="state_id" ref="province_id_1900"/>
+	    	<field name="name">Kab. Bangka Barat</field> 
+            <field name="code">1903</field>  
+        </record>
+        
+        <record id="kab_id_1904" model="res.city">
+	    	<field name="state_id" ref="province_id_1900"/>
+	    	<field name="name">Kab. Bangka Tengah</field> 
+            <field name="code">1904</field>  
+        </record>
+        
+        <record id="kab_id_1905" model="res.city">
+	    	<field name="state_id" ref="province_id_1900"/>
+	    	<field name="name">Kab. Bangka Selatan</field> 
+            <field name="code">1905</field>  
+        </record>
+        
+        <record id="kab_id_1906" model="res.city">
+	    	<field name="state_id" ref="province_id_1900"/>
+	    	<field name="name">Kab. Belitung Timur</field> 
+            <field name="code">1906</field>  
+        </record>
+        
+        <record id="kab_id_1971" model="res.city">
+	    	<field name="state_id" ref="province_id_1900"/>
+	    	<field name="name">Kota Pangkal Pinang</field> 
+            <field name="code">1971</field>  
+        </record>
+        
+        \# data province Kepulauan Riau
+        
+        <record id="kab_id_2101" model="res.city">
+	    	<field name="state_id" ref="province_id_2100"/>
+	    	<field name="name">Kab. Karimun</field> 
+            <field name="code">2101</field>  
+        </record>
+        
+        <record id="kab_id_2102" model="res.city">
+	    	<field name="state_id" ref="province_id_2100"/>
+	    	<field name="name">Kab. Kepulauan Riau</field> 
+            <field name="code">2102</field>  
+        </record>
+        
+        <record id="kab_id_2103" model="res.city">
+	    	<field name="state_id" ref="province_id_2100"/>
+	    	<field name="name">Kab. Natuna</field> 
+            <field name="code">2103</field>  
+        </record>
+        
+        <record id="kab_id_2104" model="res.city">
+	    	<field name="state_id" ref="province_id_2100"/>
+	    	<field name="name">Kab. Lingga</field> 
+            <field name="code">2104</field>  
+        </record>
+        
+        <record id="kab_id_2105" model="res.city">
+	    	<field name="state_id" ref="province_id_2100"/>
+	    	<field name="name">Kab. Kepulauan Anambas</field> 
+            <field name="code">2105</field>  
+        </record>
+        
+        <record id="kab_id_2171" model="res.city">
+	    	<field name="state_id" ref="province_id_2100"/>
+	    	<field name="name">Kota Batam</field> 
+            <field name="code">2171</field>  
+        </record>
+        
+        <record id="kab_id_2172" model="res.city">
+	    	<field name="state_id" ref="province_id_2100"/>
+	    	<field name="name">Kota Tanjung Pinang</field> 
+            <field name="code">2172</field>  
+        </record>
+        
+        \# data province D K I Jakarta
+        
+        <record id="kab_id_3101" model="res.city">
+	    	<field name="state_id" ref="province_id_3100"/>
+	    	<field name="name">Kab. Adm. Kepulauan Seribu</field> 
+            <field name="code">3101</field>  
+        </record>
+        
+        <record id="kab_id_3171" model="res.city">
+	    	<field name="state_id" ref="province_id_3100"/>
+	    	<field name="name">Kota Jakarta Selatan</field> 
+            <field name="code">3171</field>  
+        </record>
+        
+        <record id="kab_id_3172" model="res.city">
+	    	<field name="state_id" ref="province_id_3100"/>
+	    	<field name="name">Kota Jakarta Timur</field> 
+            <field name="code">3172</field>  
+        </record>
+        
+        <record id="kab_id_3173" model="res.city">
+	    	<field name="state_id" ref="province_id_3100"/>
+	    	<field name="name">Kota Jakarta Pusat</field> 
+            <field name="code">3173</field>  
+        </record>
+        
+        <record id="kab_id_3174" model="res.city">
+	    	<field name="state_id" ref="province_id_3100"/>
+	    	<field name="name">Kota Jakarta Barat</field> 
+            <field name="code">3174</field>  
+        </record>
+        
+        <record id="kab_id_3175" model="res.city">
+	    	<field name="state_id" ref="province_id_3100"/>
+	    	<field name="name">Kota Jakarta Utara</field> 
+            <field name="code">3175</field>  
+        </record>
+        
+        \# data province Jawa Barat
+        
+        <record id="kab_id_3201" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kab. Bogor</field> 
+            <field name="code">3201</field>  
+        </record>
+        
+        <record id="kab_id_3202" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kab. Sukabumi</field> 
+            <field name="code">3202</field>  
+        </record>
+        
+        <record id="kab_id_3203" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kab. Cianjur</field> 
+            <field name="code">3203</field>  
+        </record>
+        
+        <record id="kab_id_3204" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kab. Bandung</field> 
+            <field name="code">3204</field>  
+        </record>
+        
+        <record id="kab_id_3205" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kab. Garut</field> 
+            <field name="code">3205</field>  
+        </record>
+        
+        <record id="kab_id_3206" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kab. Tasikmalaya</field> 
+            <field name="code">3206</field>  
+        </record>
+        
+        <record id="kab_id_3207" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kab. Ciamis</field> 
+            <field name="code">3207</field>  
+        </record>
+        
+        <record id="kab_id_3208" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kab. Kuningan</field> 
+            <field name="code">3208</field>  
+        </record>
+        
+        <record id="kab_id_3209" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kab. Cirebon</field> 
+            <field name="code">3209</field>  
+        </record>
+        
+        <record id="kab_id_3210" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kab. Majalengka</field> 
+            <field name="code">3210</field>  
+        </record>
+        
+        <record id="kab_id_3211" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kab. Sumedang</field> 
+            <field name="code">3211</field>  
+        </record>
+        
+        <record id="kab_id_3212" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kab. Indramayu</field> 
+            <field name="code">3212</field>  
+        </record>
+        
+        <record id="kab_id_3213" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kab. Subang</field> 
+            <field name="code">3213</field>  
+        </record>
+        
+        <record id="kab_id_3214" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kab. Purwakarta</field> 
+            <field name="code">3214</field>  
+        </record>
+        
+        <record id="kab_id_3215" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kab. Karawang</field> 
+            <field name="code">3215</field>  
+        </record>
+        
+        <record id="kab_id_3216" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kab. Bekasi</field> 
+            <field name="code">3216</field>  
+        </record>
+        
+        <record id="kab_id_3217" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kab. Bandung Barat</field> 
+            <field name="code">3217</field>  
+        </record>
+        
+        <record id="kab_id_3218" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kab. Pangandaran</field> 
+            <field name="code">3218</field>  
+        </record>
+        
+        <record id="kab_id_3271" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kota Bogor</field> 
+            <field name="code">3271</field>  
+        </record>
+        
+        <record id="kab_id_3272" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kota Sukabumi</field> 
+            <field name="code">3272</field>  
+        </record>
+        
+        <record id="kab_id_3273" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kota Bandung</field> 
+            <field name="code">3273</field>  
+        </record>
+        
+        <record id="kab_id_3274" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kota Cirebon</field> 
+            <field name="code">3274</field>  
+        </record>
+        
+        <record id="kab_id_3275" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kota Bekasi</field> 
+            <field name="code">3275</field>  
+        </record>
+        
+        <record id="kab_id_3276" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kota Depok</field> 
+            <field name="code">3276</field>  
+        </record>
+        
+        <record id="kab_id_3277" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kota Cimahi</field> 
+            <field name="code">3277</field>  
+        </record>
+        
+        <record id="kab_id_3278" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kota Tasikmalaya</field> 
+            <field name="code">3278</field>  
+        </record>
+        
+        <record id="kab_id_3279" model="res.city">
+	    	<field name="state_id" ref="province_id_3200"/>
+	    	<field name="name">Kota Banjar</field> 
+            <field name="code">3279</field>  
+        </record>
+        
+        \# data province Jawa Tengah
+        
+        <record id="kab_id_3301" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Cilacap</field> 
+            <field name="code">3301</field>  
+        </record>
+        
+        <record id="kab_id_3302" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Banyumas</field> 
+            <field name="code">3302</field>  
+        </record>
+        
+        <record id="kab_id_3303" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Purbalingga</field> 
+            <field name="code">3303</field>  
+        </record>
+        
+        <record id="kab_id_3304" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Banjarnegara</field> 
+            <field name="code">3304</field>  
+        </record>
+        
+        <record id="kab_id_3305" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Kebumen</field> 
+            <field name="code">3305</field>  
+        </record>
+        
+        <record id="kab_id_3306" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Purworejo</field> 
+            <field name="code">3306</field>  
+        </record>
+        
+        <record id="kab_id_3307" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Wonosobo</field> 
+            <field name="code">3307</field>  
+        </record>
+        
+        <record id="kab_id_3308" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Magelang</field> 
+            <field name="code">3308</field>  
+        </record>
+        
+        <record id="kab_id_3309" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Boyolali</field> 
+            <field name="code">3309</field>  
+        </record>
+        
+        <record id="kab_id_3310" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Klaten</field> 
+            <field name="code">3310</field>  
+        </record>
+        
+        <record id="kab_id_3311" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Sukoharjo</field> 
+            <field name="code">3311</field>  
+        </record>
+        
+        <record id="kab_id_3312" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Wonogiri</field> 
+            <field name="code">3312</field>  
+        </record>
+        
+        <record id="kab_id_3313" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Karanganyar</field> 
+            <field name="code">3313</field>  
+        </record>
+        
+        <record id="kab_id_3314" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Sragen</field> 
+            <field name="code">3314</field>  
+        </record>
+        
+        <record id="kab_id_3315" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Grobogan</field> 
+            <field name="code">3315</field>  
+        </record>
+        
+        <record id="kab_id_3316" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Blora</field> 
+            <field name="code">3316</field>  
+        </record>
+        
+        <record id="kab_id_3317" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Rembang</field> 
+            <field name="code">3317</field>  
+        </record>
+        
+        <record id="kab_id_3318" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Pati</field> 
+            <field name="code">3318</field>  
+        </record>
+        
+        <record id="kab_id_3319" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Kudus</field> 
+            <field name="code">3319</field>  
+        </record>
+        
+        <record id="kab_id_3320" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Jepara</field> 
+            <field name="code">3320</field>  
+        </record>
+        
+        <record id="kab_id_3321" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Demak</field> 
+            <field name="code">3321</field>  
+        </record>
+        
+        <record id="kab_id_3322" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Semarang</field> 
+            <field name="code">3322</field>  
+        </record>
+        
+        <record id="kab_id_3323" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Temanggung</field> 
+            <field name="code">3323</field>  
+        </record>
+        
+        <record id="kab_id_3324" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Kendal</field> 
+            <field name="code">3324</field>  
+        </record>
+        
+        <record id="kab_id_3325" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Batang</field> 
+            <field name="code">3325</field>  
+        </record>
+        
+        <record id="kab_id_3326" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Pekalongan</field> 
+            <field name="code">3326</field>  
+        </record>
+        
+        <record id="kab_id_3327" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Pemalang</field> 
+            <field name="code">3327</field>  
+        </record>
+        
+        <record id="kab_id_3328" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Tegal</field> 
+            <field name="code">3328</field>  
+        </record>
+        
+        <record id="kab_id_3329" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab. Brebes</field> 
+            <field name="code">3329</field>  
+        </record>
+        
+        <record id="kab_id_3330" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab.Lasem</field> 
+            <field name="code">3330</field>  
+        </record>
+        
+        <record id="kab_id_3331" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kab.Sleman</field> 
+            <field name="code">3331</field>  
+        </record>
+        
+        <record id="kab_id_3371" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kota Magelang</field> 
+            <field name="code">3371</field>  
+        </record>
+        
+        <record id="kab_id_3372" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kota Surakarta</field> 
+            <field name="code">3372</field>  
+        </record>
+        
+        <record id="kab_id_3373" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kota Salatiga</field> 
+            <field name="code">3373</field>  
+        </record>
+        
+        <record id="kab_id_3374" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kota Semarang</field> 
+            <field name="code">3374</field>  
+        </record>
+        
+        <record id="kab_id_3375" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kota Pekalongan</field> 
+            <field name="code">3375</field>  
+        </record>
+        
+        <record id="kab_id_3376" model="res.city">
+	    	<field name="state_id" ref="province_id_3300"/>
+	    	<field name="name">Kota Tegal</field> 
+            <field name="code">3376</field>  
+        </record>
+        
+        \# data province D I Yogyakarta
+        
+        <record id="kab_id_3401" model="res.city">
+	    	<field name="state_id" ref="province_id_3400"/>
+	    	<field name="name">Kab. Kulon Progo</field> 
+            <field name="code">3401</field>  
+        </record>
+        
+        <record id="kab_id_3402" model="res.city">
+	    	<field name="state_id" ref="province_id_3400"/>
+	    	<field name="name">Kab. Bantul</field> 
+            <field name="code">3402</field>  
+        </record>
+        
+        <record id="kab_id_3403" model="res.city">
+	    	<field name="state_id" ref="province_id_3400"/>
+	    	<field name="name">Kab. Gunung Kidul</field> 
+            <field name="code">3403</field>  
+        </record>
+        
+        <record id="kab_id_3404" model="res.city">
+	    	<field name="state_id" ref="province_id_3400"/>
+	    	<field name="name">Kab. Sleman</field> 
+            <field name="code">3404</field>  
+        </record>
+        
+        <record id="kab_id_3471" model="res.city">
+	    	<field name="state_id" ref="province_id_3400"/>
+	    	<field name="name">Kota Yogyakarta</field> 
+            <field name="code">3471</field>  
+        </record>
+        
+        \# data province Jawa Timur
+        
+        <record id="kab_id_3501" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Pacitan</field> 
+            <field name="code">3501</field>  
+        </record>
+        
+        <record id="kab_id_3502" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Ponorogo</field> 
+            <field name="code">3502</field>  
+        </record>
+        
+        <record id="kab_id_3503" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Trenggalek</field> 
+            <field name="code">3503</field>  
+        </record>
+        
+        <record id="kab_id_3504" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Tulungagung</field> 
+            <field name="code">3504</field>  
+        </record>
+        
+        <record id="kab_id_3505" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Blitar</field> 
+            <field name="code">3505</field>  
+        </record>
+        
+        <record id="kab_id_3506" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Kediri</field> 
+            <field name="code">3506</field>  
+        </record>
+        
+        <record id="kab_id_3507" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Malang</field> 
+            <field name="code">3507</field>  
+        </record>
+        
+        <record id="kab_id_3508" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Lumajang</field> 
+            <field name="code">3508</field>  
+        </record>
+        
+        <record id="kab_id_3509" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Jember</field> 
+            <field name="code">3509</field>  
+        </record>
+        
+        <record id="kab_id_3510" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Banyuwangi</field> 
+            <field name="code">3510</field>  
+        </record>
+        
+        <record id="kab_id_3511" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Bondowoso</field> 
+            <field name="code">3511</field>  
+        </record>
+        
+        <record id="kab_id_3512" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Situbondo</field> 
+            <field name="code">3512</field>  
+        </record>
+        
+        <record id="kab_id_3513" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Probolinggo</field> 
+            <field name="code">3513</field>  
+        </record>
+        
+        <record id="kab_id_3514" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Pasuruan</field> 
+            <field name="code">3514</field>  
+        </record>
+        
+        <record id="kab_id_3515" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Sidoarjo</field> 
+            <field name="code">3515</field>  
+        </record>
+        
+        <record id="kab_id_3516" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Mojokerto</field> 
+            <field name="code">3516</field>  
+        </record>
+        
+        <record id="kab_id_3517" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Jombang</field> 
+            <field name="code">3517</field>  
+        </record>
+        
+        <record id="kab_id_3518" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Nganjuk</field> 
+            <field name="code">3518</field>  
+        </record>
+        
+        <record id="kab_id_3519" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Madiun</field> 
+            <field name="code">3519</field>  
+        </record>
+        
+        <record id="kab_id_3520" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Magetan</field> 
+            <field name="code">3520</field>  
+        </record>
+        
+        <record id="kab_id_3521" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Ngawi</field> 
+            <field name="code">3521</field>  
+        </record>
+        
+        <record id="kab_id_3522" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Bojonegoro</field> 
+            <field name="code">3522</field>  
+        </record>
+        
+        <record id="kab_id_3523" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Tuban</field> 
+            <field name="code">3523</field>  
+        </record>
+        
+        <record id="kab_id_3524" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Lamongan</field> 
+            <field name="code">3524</field>  
+        </record>
+        
+        <record id="kab_id_3525" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Gresik</field> 
+            <field name="code">3525</field>  
+        </record>
+        
+        <record id="kab_id_3526" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Bangkalan</field> 
+            <field name="code">3526</field>  
+        </record>
+        
+        <record id="kab_id_3527" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Sampang</field> 
+            <field name="code">3527</field>  
+        </record>
+        
+        <record id="kab_id_3528" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Pamekasan</field> 
+            <field name="code">3528</field>  
+        </record>
+        
+        <record id="kab_id_3529" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kab. Sumenep</field> 
+            <field name="code">3529</field>  
+        </record>
+        
+        <record id="kab_id_3571" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kota Kediri</field> 
+            <field name="code">3571</field>  
+        </record>
+        
+        <record id="kab_id_3572" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kota Blitar</field> 
+            <field name="code">3572</field>  
+        </record>
+        
+        <record id="kab_id_3573" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kota Malang</field> 
+            <field name="code">3573</field>  
+        </record>
+        
+        <record id="kab_id_3574" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kota Probolinggo</field> 
+            <field name="code">3574</field>  
+        </record>
+        
+        <record id="kab_id_3575" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kota Pasuruan</field> 
+            <field name="code">3575</field>  
+        </record>
+        
+        <record id="kab_id_3576" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kota Mojokerto</field> 
+            <field name="code">3576</field>  
+        </record>
+        
+        <record id="kab_id_3577" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kota Madiun</field> 
+            <field name="code">3577</field>  
+        </record>
+        
+        <record id="kab_id_3578" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kota Surabaya</field> 
+            <field name="code">3578</field>  
+        </record>
+        
+        <record id="kab_id_3579" model="res.city">
+	    	<field name="state_id" ref="province_id_3500"/>
+	    	<field name="name">Kota Batu</field> 
+            <field name="code">3579</field>  
+        </record>
+        
+        \# data province Banten
+        
+        <record id="kab_id_3601" model="res.city">
+	    	<field name="state_id" ref="province_id_3600"/>
+	    	<field name="name">Kab. Pandeglang</field> 
+            <field name="code">3601</field>  
+        </record>
+        
+        <record id="kab_id_3602" model="res.city">
+	    	<field name="state_id" ref="province_id_3600"/>
+	    	<field name="name">Kab. Lebak</field> 
+            <field name="code">3602</field>  
+        </record>
+        
+        <record id="kab_id_3603" model="res.city">
+	    	<field name="state_id" ref="province_id_3600"/>
+	    	<field name="name">Kab. Tangerang</field> 
+            <field name="code">3603</field>  
+        </record>
+        
+        <record id="kab_id_3604" model="res.city">
+	    	<field name="state_id" ref="province_id_3600"/>
+	    	<field name="name">Kab. Serang</field> 
+            <field name="code">3604</field>  
+        </record>
+        
+        <record id="kab_id_3671" model="res.city">
+	    	<field name="state_id" ref="province_id_3600"/>
+	    	<field name="name">Kota Tangerang</field> 
+            <field name="code">3671</field>  
+        </record>
+        
+        <record id="kab_id_3672" model="res.city">
+	    	<field name="state_id" ref="province_id_3600"/>
+	    	<field name="name">Kota Cilegon</field> 
+            <field name="code">3672</field>  
+        </record>
+        
+        <record id="kab_id_3673" model="res.city">
+	    	<field name="state_id" ref="province_id_3600"/>
+	    	<field name="name">Kota Tangerang Selatan</field> 
+            <field name="code">3673</field>  
+        </record>
+        
+        <record id="kab_id_3674" model="res.city">
+	    	<field name="state_id" ref="province_id_3600"/>
+	    	<field name="name">Kota Serang</field> 
+            <field name="code">3674</field>  
+        </record>
+        
+        \# data province Bali
+        
+        <record id="kab_id_5101" model="res.city">
+	    	<field name="state_id" ref="province_id_5100"/>
+	    	<field name="name">Kab. Jembrana</field> 
+            <field name="code">5101</field>  
+        </record>
+        
+        <record id="kab_id_5102" model="res.city">
+	    	<field name="state_id" ref="province_id_5100"/>
+	    	<field name="name">Kab. Tabanan</field> 
+            <field name="code">5102</field>  
+        </record>
+        
+        <record id="kab_id_5103" model="res.city">
+	    	<field name="state_id" ref="province_id_5100"/>
+	    	<field name="name">Kab. Badung</field> 
+            <field name="code">5103</field>  
+        </record>
+        
+        <record id="kab_id_5104" model="res.city">
+	    	<field name="state_id" ref="province_id_5100"/>
+	    	<field name="name">Kab. Gianyar</field> 
+            <field name="code">5104</field>  
+        </record>
+        
+        <record id="kab_id_5105" model="res.city">
+	    	<field name="state_id" ref="province_id_5100"/>
+	    	<field name="name">Kab. Klungkung</field> 
+            <field name="code">5105</field>  
+        </record>
+        
+        <record id="kab_id_5106" model="res.city">
+	    	<field name="state_id" ref="province_id_5100"/>
+	    	<field name="name">Kab. Bangli</field> 
+            <field name="code">5106</field>  
+        </record>
+        
+        <record id="kab_id_5107" model="res.city">
+	    	<field name="state_id" ref="province_id_5100"/>
+	    	<field name="name">Kab. Karang Asem</field> 
+            <field name="code">5107</field>  
+        </record>
+        
+        <record id="kab_id_5108" model="res.city">
+	    	<field name="state_id" ref="province_id_5100"/>
+	    	<field name="name">Kab. Buleleng</field> 
+            <field name="code">5108</field>  
+        </record>
+        
+        <record id="kab_id_5171" model="res.city">
+	    	<field name="state_id" ref="province_id_5100"/>
+	    	<field name="name">Kota Denpasar</field> 
+            <field name="code">5171</field>  
+        </record>
+        
+        <record id="kab_id_110101" model="res.city">
+	    	<field name="state_id" ref="province_id_5100"/>
+	    	<field name="name">Simeulue Tengah</field> 
+            <field name="code">110101</field>  
+        </record>
+        
+        <record id="kab_id_110102" model="res.city">
+	    	<field name="state_id" ref="province_id_5100"/>
+	    	<field name="name">Salang</field> 
+            <field name="code">110102</field>  
+        </record>
+        
+        <record id="kab_id_110103" model="res.city">
+	    	<field name="state_id" ref="province_id_5100"/>
+	    	<field name="name">Teupah Barat</field> 
+            <field name="code">110103</field>  
+        </record>
+        
+        <record id="kab_id_110104" model="res.city">
+	    	<field name="state_id" ref="province_id_5100"/>
+	    	<field name="name">Simeulue Timur</field> 
+            <field name="code">110104</field>  
+        </record>
+        
+        <record id="kab_id_110105" model="res.city">
+	    	<field name="state_id" ref="province_id_5100"/>
+	    	<field name="name">Teluk Dalam</field> 
+            <field name="code">110105</field>  
+        </record>
+        
+        <record id="kab_id_110106" model="res.city">
+	    	<field name="state_id" ref="province_id_5100"/>
+	    	<field name="name">Simeulue Barat</field> 
+            <field name="code">110106</field>  
+        </record>
+        
+        <record id="kab_id_110107" model="res.city">
+	    	<field name="state_id" ref="province_id_5100"/>
+	    	<field name="name">Teupah Selatan</field> 
+            <field name="code">110107</field>  
+        </record>
+        
+        <record id="kab_id_110108" model="res.city">
+	    	<field name="state_id" ref="province_id_5100"/>
+	    	<field name="name">Alapan</field> 
+            <field name="code">110108</field>  
+        </record>
+        
+        <record id="kab_id_110109" model="res.city">
+	    	<field name="state_id" ref="province_id_5100"/>
+	    	<field name="name">Teupah Tengah</field> 
+            <field name="code">110109</field>  
+        </record>
+        
+        <record id="kab_id_110110" model="res.city">
+	    	<field name="state_id" ref="province_id_5100"/>
+	    	<field name="name">Simeulue Cut</field> 
+            <field name="code">110110</field>  
+        </record>
+        
+        \# data province Nusa Tenggara Barat
+        
+        <record id="kab_id_5201" model="res.city">
+	    	<field name="state_id" ref="province_id_5200"/>
+	    	<field name="name">Kab. Lombok Barat</field> 
+            <field name="code">5201</field>  
+        </record>
+        
+        <record id="kab_id_5202" model="res.city">
+	    	<field name="state_id" ref="province_id_5200"/>
+	    	<field name="name">Kab. Lombok Tengah</field> 
+            <field name="code">5202</field>  
+        </record>
+        
+        <record id="kab_id_5203" model="res.city">
+	    	<field name="state_id" ref="province_id_5200"/>
+	    	<field name="name">Kab. Lombok Timur</field> 
+            <field name="code">5203</field>  
+        </record>
+        
+        <record id="kab_id_5204" model="res.city">
+	    	<field name="state_id" ref="province_id_5200"/>
+	    	<field name="name">Kab. Sumbawa</field> 
+            <field name="code">5204</field>  
+        </record>
+        
+        <record id="kab_id_5205" model="res.city">
+	    	<field name="state_id" ref="province_id_5200"/>
+	    	<field name="name">Kab. Dompu</field> 
+            <field name="code">5205</field>  
+        </record>
+        
+        <record id="kab_id_5206" model="res.city">
+	    	<field name="state_id" ref="province_id_5200"/>
+	    	<field name="name">Kab. Bima</field> 
+            <field name="code">5206</field>  
+        </record>
+        
+        <record id="kab_id_5207" model="res.city">
+	    	<field name="state_id" ref="province_id_5200"/>
+	    	<field name="name">Kab. Sumbawa Barat</field> 
+            <field name="code">5207</field>  
+        </record>
+        
+        <record id="kab_id_5208" model="res.city">
+	    	<field name="state_id" ref="province_id_5200"/>
+	    	<field name="name">Kab. Lombok Utara</field> 
+            <field name="code">5208</field>  
+        </record>
+        
+        <record id="kab_id_5271" model="res.city">
+	    	<field name="state_id" ref="province_id_5200"/>
+	    	<field name="name">Kota Mataram</field> 
+            <field name="code">5271</field>  
+        </record>
+        
+        <record id="kab_id_5272" model="res.city">
+	    	<field name="state_id" ref="province_id_5200"/>
+	    	<field name="name">Kota Bima</field> 
+            <field name="code">5272</field>  
+        </record>
+        
+        \# data province Nusa Tenggara Timur
+        
+        <record id="kab_id_5301" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Sumba Barat</field> 
+            <field name="code">5301</field>  
+        </record>
+        
+        <record id="kab_id_5302" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Sumba Timur</field> 
+            <field name="code">5302</field>  
+        </record>
+        
+        <record id="kab_id_5303" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Kupang</field> 
+            <field name="code">5303</field>  
+        </record>
+        
+        <record id="kab_id_5304" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Timor Tengah Selatan</field> 
+            <field name="code">5304</field>  
+        </record>
+        
+        <record id="kab_id_5305" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Timor Tengah Utara</field> 
+            <field name="code">5305</field>  
+        </record>
+        
+        <record id="kab_id_5306" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Belu</field> 
+            <field name="code">5306</field>  
+        </record>
+        
+        <record id="kab_id_5307" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Alor</field> 
+            <field name="code">5307</field>  
+        </record>
+        
+        <record id="kab_id_5308" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Lembata</field> 
+            <field name="code">5308</field>  
+        </record>
+        
+        <record id="kab_id_5309" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Flores Timur</field> 
+            <field name="code">5309</field>  
+        </record>
+        
+        <record id="kab_id_5310" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Sikka</field> 
+            <field name="code">5310</field>  
+        </record>
+        
+        <record id="kab_id_5311" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Ende</field> 
+            <field name="code">5311</field>  
+        </record>
+        
+        <record id="kab_id_5312" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Ngada</field> 
+            <field name="code">5312</field>  
+        </record>
+        
+        <record id="kab_id_5313" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Manggarai</field> 
+            <field name="code">5313</field>  
+        </record>
+        
+        <record id="kab_id_5314" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Rote Ndao</field> 
+            <field name="code">5314</field>  
+        </record>
+        
+        <record id="kab_id_5315" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Manggarai Barat</field> 
+            <field name="code">5315</field>  
+        </record>
+        
+        <record id="kab_id_5316" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Sumba Barat Daya</field> 
+            <field name="code">5316</field>  
+        </record>
+        
+        <record id="kab_id_5317" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Sumba Tengah</field> 
+            <field name="code">5317</field>  
+        </record>
+        
+        <record id="kab_id_5318" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Nagekeo</field> 
+            <field name="code">5318</field>  
+        </record>
+        
+        <record id="kab_id_5319" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Sabu Raijua</field> 
+            <field name="code">5319</field>  
+        </record>
+        
+        <record id="kab_id_5320" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Malaka</field> 
+            <field name="code">5320</field>  
+        </record>
+        
+        <record id="kab_id_5371" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kota Kupang</field> 
+            <field name="code">5371</field>  
+        </record>
+        
+        <record id="kab_id_5372" model="res.city">
+	    	<field name="state_id" ref="province_id_5300"/>
+	    	<field name="name">Kab. Manggarai Timur</field> 
+            <field name="code">5372</field>  
+        </record>
+        
+        \# data province Kalimantan Barat
+        
+        <record id="kab_id_6101" model="res.city">
+	    	<field name="state_id" ref="province_id_6100"/>
+	    	<field name="name">Kab. Sambas</field> 
+            <field name="code">6101</field>  
+        </record>
+        
+        <record id="kab_id_6102" model="res.city">
+	    	<field name="state_id" ref="province_id_6100"/>
+	    	<field name="name">Kab. Bengkayang</field> 
+            <field name="code">6102</field>  
+        </record>
+        
+        <record id="kab_id_6103" model="res.city">
+	    	<field name="state_id" ref="province_id_6100"/>
+	    	<field name="name">Kab. Landak</field> 
+            <field name="code">6103</field>  
+        </record>
+        
+        <record id="kab_id_6104" model="res.city">
+	    	<field name="state_id" ref="province_id_6100"/>
+	    	<field name="name">Kab. Pontianak</field> 
+            <field name="code">6104</field>  
+        </record>
+        
+        <record id="kab_id_6105" model="res.city">
+	    	<field name="state_id" ref="province_id_6100"/>
+	    	<field name="name">Kab. Sanggau</field> 
+            <field name="code">6105</field>  
+        </record>
+        
+        <record id="kab_id_6106" model="res.city">
+	    	<field name="state_id" ref="province_id_6100"/>
+	    	<field name="name">Kab. Ketapang</field> 
+            <field name="code">6106</field>  
+        </record>
+        
+        <record id="kab_id_6107" model="res.city">
+	    	<field name="state_id" ref="province_id_6100"/>
+	    	<field name="name">Kab. Sintang</field> 
+            <field name="code">6107</field>  
+        </record>
+        
+        <record id="kab_id_6108" model="res.city">
+	    	<field name="state_id" ref="province_id_6100"/>
+	    	<field name="name">Kab. Kapuas Hulu</field> 
+            <field name="code">6108</field>  
+        </record>
+        
+        <record id="kab_id_6109" model="res.city">
+	    	<field name="state_id" ref="province_id_6100"/>
+	    	<field name="name">Kab. Sekadau</field> 
+            <field name="code">6109</field>  
+        </record>
+        
+        <record id="kab_id_6110" model="res.city">
+	    	<field name="state_id" ref="province_id_6100"/>
+	    	<field name="name">Kab. Melawi</field> 
+            <field name="code">6110</field>  
+        </record>
+        
+        <record id="kab_id_6111" model="res.city">
+	    	<field name="state_id" ref="province_id_6100"/>
+	    	<field name="name">Kab. Kayong Utara</field> 
+            <field name="code">6111</field>  
+        </record>
+        
+        <record id="kab_id_6112" model="res.city">
+	    	<field name="state_id" ref="province_id_6100"/>
+	    	<field name="name">Kab. Mempawah</field> 
+            <field name="code">6112</field>  
+        </record>
+        
+        <record id="kab_id_6171" model="res.city">
+	    	<field name="state_id" ref="province_id_6100"/>
+	    	<field name="name">Kota Pontianak</field> 
+            <field name="code">6171</field>  
+        </record>
+        
+        <record id="kab_id_6172" model="res.city">
+	    	<field name="state_id" ref="province_id_6100"/>
+	    	<field name="name">Kota Singkawang</field> 
+            <field name="code">6172</field>  
+        </record>
+        
+        <record id="kab_id_6173" model="res.city">
+	    	<field name="state_id" ref="province_id_6100"/>
+	    	<field name="name">Kab. Putussibau</field> 
+            <field name="code">6173</field>  
+        </record>
+        
+        <record id="kab_id_6174" model="res.city">
+	    	<field name="state_id" ref="province_id_6100"/>
+	    	<field name="name">Kab. Kubu Raya</field> 
+            <field name="code">6174</field>  
+        </record>
+        
+        \# data province Kalimantan Tengah
+        
+        <record id="kab_id_6201" model="res.city">
+	    	<field name="state_id" ref="province_id_6200"/>
+	    	<field name="name">Kab. Kotawaringin Barat</field> 
+            <field name="code">6201</field>  
+        </record>
+        
+        <record id="kab_id_6202" model="res.city">
+	    	<field name="state_id" ref="province_id_6200"/>
+	    	<field name="name">Kab. Kotawaringin Timur</field> 
+            <field name="code">6202</field>  
+        </record>
+        
+        <record id="kab_id_6203" model="res.city">
+	    	<field name="state_id" ref="province_id_6200"/>
+	    	<field name="name">Kab. Kapuas</field> 
+            <field name="code">6203</field>  
+        </record>
+        
+        <record id="kab_id_6204" model="res.city">
+	    	<field name="state_id" ref="province_id_6200"/>
+	    	<field name="name">Kab. Barito Selatan</field> 
+            <field name="code">6204</field>  
+        </record>
+        
+        <record id="kab_id_6205" model="res.city">
+	    	<field name="state_id" ref="province_id_6200"/>
+	    	<field name="name">Kab. Barito Utara</field> 
+            <field name="code">6205</field>  
+        </record>
+        
+        <record id="kab_id_6206" model="res.city">
+	    	<field name="state_id" ref="province_id_6200"/>
+	    	<field name="name">Kab. Sukamara</field> 
+            <field name="code">6206</field>  
+        </record>
+        
+        <record id="kab_id_6207" model="res.city">
+	    	<field name="state_id" ref="province_id_6200"/>
+	    	<field name="name">Kab. Lamandau</field> 
+            <field name="code">6207</field>  
+        </record>
+        
+        <record id="kab_id_6208" model="res.city">
+	    	<field name="state_id" ref="province_id_6200"/>
+	    	<field name="name">Kab. Seruyan</field> 
+            <field name="code">6208</field>  
+        </record>
+        
+        <record id="kab_id_6209" model="res.city">
+	    	<field name="state_id" ref="province_id_6200"/>
+	    	<field name="name">Kab. Katingan</field> 
+            <field name="code">6209</field>  
+        </record>
+        
+        <record id="kab_id_6210" model="res.city">
+	    	<field name="state_id" ref="province_id_6200"/>
+	    	<field name="name">Kab. Pulang Pisau</field> 
+            <field name="code">6210</field>  
+        </record>
+        
+        <record id="kab_id_6211" model="res.city">
+	    	<field name="state_id" ref="province_id_6200"/>
+	    	<field name="name">Kab. Gunung Mas</field> 
+            <field name="code">6211</field>  
+        </record>
+        
+        <record id="kab_id_6212" model="res.city">
+	    	<field name="state_id" ref="province_id_6200"/>
+	    	<field name="name">Kab. Barito Timur</field> 
+            <field name="code">6212</field>  
+        </record>
+        
+        <record id="kab_id_6213" model="res.city">
+	    	<field name="state_id" ref="province_id_6200"/>
+	    	<field name="name">Kab. Murung Raya</field> 
+            <field name="code">6213</field>  
+        </record>
+        
+        <record id="kab_id_6271" model="res.city">
+	    	<field name="state_id" ref="province_id_6200"/>
+	    	<field name="name">Kota Palangkaraya</field> 
+            <field name="code">6271</field>  
+        </record>
+        
+        \# data province Kalimantan Selatan
+        
+        <record id="kab_id_6301" model="res.city">
+	    	<field name="state_id" ref="province_id_6300"/>
+	    	<field name="name">Kab. Tanah Laut</field> 
+            <field name="code">6301</field>  
+        </record>
+        
+        <record id="kab_id_6302" model="res.city">
+	    	<field name="state_id" ref="province_id_6300"/>
+	    	<field name="name">Kab. Kota Baru</field> 
+            <field name="code">6302</field>  
+        </record>
+        
+        <record id="kab_id_6303" model="res.city">
+	    	<field name="state_id" ref="province_id_6300"/>
+	    	<field name="name">Kab. Banjar</field> 
+            <field name="code">6303</field>  
+        </record>
+        
+        <record id="kab_id_6304" model="res.city">
+	    	<field name="state_id" ref="province_id_6300"/>
+	    	<field name="name">Kab. Barito Kuala</field> 
+            <field name="code">6304</field>  
+        </record>
+        
+        <record id="kab_id_6305" model="res.city">
+	    	<field name="state_id" ref="province_id_6300"/>
+	    	<field name="name">Kab. Tapin</field> 
+            <field name="code">6305</field>  
+        </record>
+        
+        <record id="kab_id_6306" model="res.city">
+	    	<field name="state_id" ref="province_id_6300"/>
+	    	<field name="name">Kab. Hulu Sungai Selatan</field> 
+            <field name="code">6306</field>  
+        </record>
+        
+        <record id="kab_id_6307" model="res.city">
+	    	<field name="state_id" ref="province_id_6300"/>
+	    	<field name="name">Kab. Hulu Sungai Tengah</field> 
+            <field name="code">6307</field>  
+        </record>
+        
+        <record id="kab_id_6308" model="res.city">
+	    	<field name="state_id" ref="province_id_6300"/>
+	    	<field name="name">Kab. Hulu Sungai Utara</field> 
+            <field name="code">6308</field>  
+        </record>
+        
+        <record id="kab_id_6309" model="res.city">
+	    	<field name="state_id" ref="province_id_6300"/>
+	    	<field name="name">Kab. Tabalong</field> 
+            <field name="code">6309</field>  
+        </record>
+        
+        <record id="kab_id_6310" model="res.city">
+	    	<field name="state_id" ref="province_id_6300"/>
+	    	<field name="name">Kab. Tanah Bumbu</field> 
+            <field name="code">6310</field>  
+        </record>
+        
+        <record id="kab_id_6311" model="res.city">
+	    	<field name="state_id" ref="province_id_6300"/>
+	    	<field name="name">Kab. Balangan</field> 
+            <field name="code">6311</field>  
+        </record>
+        
+        <record id="kab_id_6371" model="res.city">
+	    	<field name="state_id" ref="province_id_6300"/>
+	    	<field name="name">Kota Banjarmasin</field> 
+            <field name="code">6371</field>  
+        </record>
+        
+        <record id="kab_id_6372" model="res.city">
+	    	<field name="state_id" ref="province_id_6300"/>
+	    	<field name="name">Kota Banjar Baru</field> 
+            <field name="code">6372</field>  
+        </record>
+        
+        \# data province Kalimantan Timur
+        
+        <record id="kab_id_6401" model="res.city">
+	    	<field name="state_id" ref="province_id_6400"/>
+	    	<field name="name">Kab. Paser</field> 
+            <field name="code">6401</field>  
+        </record>
+        
+        <record id="kab_id_6402" model="res.city">
+	    	<field name="state_id" ref="province_id_6400"/>
+	    	<field name="name">Kab. Kutai Barat</field> 
+            <field name="code">6402</field>  
+        </record>
+        
+        <record id="kab_id_6403" model="res.city">
+	    	<field name="state_id" ref="province_id_6400"/>
+	    	<field name="name">Kab. Kutai Kertanegara</field> 
+            <field name="code">6403</field>  
+        </record>
+        
+        <record id="kab_id_6404" model="res.city">
+	    	<field name="state_id" ref="province_id_6400"/>
+	    	<field name="name">Kab. Kutai Timur</field> 
+            <field name="code">6404</field>  
+        </record>
+        
+        <record id="kab_id_6405" model="res.city">
+	    	<field name="state_id" ref="province_id_6400"/>
+	    	<field name="name">Kab. Berau</field> 
+            <field name="code">6405</field>  
+        </record>
+        
+        <record id="kab_id_6406" model="res.city">
+	    	<field name="state_id" ref="province_id_6400"/>
+	    	<field name="name">Kab. Malinau</field> 
+            <field name="code">6406</field>  
+        </record>
+        
+        <record id="kab_id_6407" model="res.city">
+	    	<field name="state_id" ref="province_id_6400"/>
+	    	<field name="name">Kab. Bulungan</field> 
+            <field name="code">6407</field>  
+        </record>
+        
+        <record id="kab_id_6408" model="res.city">
+	    	<field name="state_id" ref="province_id_6400"/>
+	    	<field name="name">Kab. Nunukan</field> 
+            <field name="code">6408</field>  
+        </record>
+        
+        <record id="kab_id_6409" model="res.city">
+	    	<field name="state_id" ref="province_id_6400"/>
+	    	<field name="name">Kab. Penajam Paser Utara</field> 
+            <field name="code">6409</field>  
+        </record>
+        
+        <record id="kab_id_6410" model="res.city">
+	    	<field name="state_id" ref="province_id_6400"/>
+	    	<field name="name">Kab.Sangatta</field> 
+            <field name="code">6410</field>  
+        </record>
+        
+        <record id="kab_id_6411" model="res.city">
+	    	<field name="state_id" ref="province_id_6400"/>
+	    	<field name="name">Kab. Tana Tidung</field> 
+            <field name="code">6411</field>  
+        </record>
+        
+        <record id="kab_id_6412" model="res.city">
+	    	<field name="state_id" ref="province_id_6400"/>
+	    	<field name="name">Kab. Mahakam Ulu</field> 
+            <field name="code">6412</field>  
+        </record>
+        
+        <record id="kab_id_6471" model="res.city">
+	    	<field name="state_id" ref="province_id_6400"/>
+	    	<field name="name">Kota Balikpapan</field> 
+            <field name="code">6471</field>  
+        </record>
+        
+        <record id="kab_id_6472" model="res.city">
+	    	<field name="state_id" ref="province_id_6400"/>
+	    	<field name="name">Kota Samarinda</field> 
+            <field name="code">6472</field>  
+        </record>
+        
+        <record id="kab_id_6473" model="res.city">
+	    	<field name="state_id" ref="province_id_6400"/>
+	    	<field name="name">Kota Tarakan</field> 
+            <field name="code">6473</field>  
+        </record>
+        
+        <record id="kab_id_6474" model="res.city">
+	    	<field name="state_id" ref="province_id_6400"/>
+	    	<field name="name">Kota Bontang</field> 
+            <field name="code">6474</field>  
+        </record>
+        
+        \# data province Kalimantan Utara
+        
+        <record id="kab_id_6501" model="res.city">
+	    	<field name="state_id" ref="province_id_6500"/>
+	    	<field name="name">Kab. Malinau</field> 
+            <field name="code">6501</field>  
+        </record>
+        
+        <record id="kab_id_6502" model="res.city">
+	    	<field name="state_id" ref="province_id_6500"/>
+	    	<field name="name">Kab. Bulungan</field> 
+            <field name="code">6502</field>  
+        </record>
+        
+        <record id="kab_id_6503" model="res.city">
+	    	<field name="state_id" ref="province_id_6500"/>
+	    	<field name="name">Kab. Tana Tidung</field> 
+            <field name="code">6503</field>  
+        </record>
+        
+        <record id="kab_id_6504" model="res.city">
+	    	<field name="state_id" ref="province_id_6500"/>
+	    	<field name="name">Kab. Nunukan</field> 
+            <field name="code">6504</field>  
+        </record>
+        
+        <record id="kab_id_6571" model="res.city">
+	    	<field name="state_id" ref="province_id_6500"/>
+	    	<field name="name">Kota Tarakan</field> 
+            <field name="code">6571</field>  
+        </record>
+        
+        \# data province Sulawesi Utara
+        
+        <record id="kab_id_7101" model="res.city">
+	    	<field name="state_id" ref="province_id_7100"/>
+	    	<field name="name">Kab. Bolaang Mengondow</field> 
+            <field name="code">7101</field>  
+        </record>
+        
+        <record id="kab_id_7102" model="res.city">
+	    	<field name="state_id" ref="province_id_7100"/>
+	    	<field name="name">Kab. Minahasa</field> 
+            <field name="code">7102</field>  
+        </record>
+        
+        <record id="kab_id_7103" model="res.city">
+	    	<field name="state_id" ref="province_id_7100"/>
+	    	<field name="name">Kab. Kepulauan Sangihe</field> 
+            <field name="code">7103</field>  
+        </record>
+        
+        <record id="kab_id_7104" model="res.city">
+	    	<field name="state_id" ref="province_id_7100"/>
+	    	<field name="name">Kab. Kepulauan Talaud</field> 
+            <field name="code">7104</field>  
+        </record>
+        
+        <record id="kab_id_7105" model="res.city">
+	    	<field name="state_id" ref="province_id_7100"/>
+	    	<field name="name">Kab. Minahasa Selatan</field> 
+            <field name="code">7105</field>  
+        </record>
+        
+        <record id="kab_id_7106" model="res.city">
+	    	<field name="state_id" ref="province_id_7100"/>
+	    	<field name="name">Kab. Minahasa Utara</field> 
+            <field name="code">7106</field>  
+        </record>
+        
+        <record id="kab_id_7107" model="res.city">
+	    	<field name="state_id" ref="province_id_7100"/>
+	    	<field name="name">Kab. Bolaang Mongondow Utara</field> 
+            <field name="code">7107</field>  
+        </record>
+        
+        <record id="kab_id_7108" model="res.city">
+	    	<field name="state_id" ref="province_id_7100"/>
+	    	<field name="name">Kab. Kep. Sitaro</field> 
+            <field name="code">7108</field>  
+        </record>
+        
+        <record id="kab_id_7109" model="res.city">
+	    	<field name="state_id" ref="province_id_7100"/>
+	    	<field name="name">Kab. Minahasa Tenggara (Mitra)</field> 
+            <field name="code">7109</field>  
+        </record>
+        
+        <record id="kab_id_7171" model="res.city">
+	    	<field name="state_id" ref="province_id_7100"/>
+	    	<field name="name">Kota Manado</field> 
+            <field name="code">7171</field>  
+        </record>
+        
+        <record id="kab_id_7172" model="res.city">
+	    	<field name="state_id" ref="province_id_7100"/>
+	    	<field name="name">Kota Bitung</field> 
+            <field name="code">7172</field>  
+        </record>
+        
+        <record id="kab_id_7173" model="res.city">
+	    	<field name="state_id" ref="province_id_7100"/>
+	    	<field name="name">Kota Tomohon</field> 
+            <field name="code">7173</field>  
+        </record>
+        
+        <record id="kab_id_7174" model="res.city">
+	    	<field name="state_id" ref="province_id_7100"/>
+	    	<field name="name">Kota Kotamobagu</field> 
+            <field name="code">7174</field>  
+        </record>
+        
+        <record id="kab_id_7175" model="res.city">
+	    	<field name="state_id" ref="province_id_7100"/>
+	    	<field name="name">Kab. Bolaang Mongondow Timur</field> 
+            <field name="code">7175</field>  
+        </record>
+        
+        <record id="kab_id_7176" model="res.city">
+	    	<field name="state_id" ref="province_id_7100"/>
+	    	<field name="name">Kab. Bolaang Mongondow Selatan</field> 
+            <field name="code">7176</field>  
+        </record>
+        
+        <record id="kab_id_7177" model="res.city">
+	    	<field name="state_id" ref="province_id_7100"/>
+	    	<field name="name">Kab. Kepulauan Siau Tagulandan</field> 
+            <field name="code">7177</field>  
+        </record>
+        
+        \# data province Sulawesi Tengah
+        
+        <record id="kab_id_7201" model="res.city">
+	    	<field name="state_id" ref="province_id_7200"/>
+	    	<field name="name">Kab. Banggai Kepulauan</field> 
+            <field name="code">7201</field>  
+        </record>
+        
+        <record id="kab_id_7202" model="res.city">
+	    	<field name="state_id" ref="province_id_7200"/>
+	    	<field name="name">Kab. Banggai</field> 
+            <field name="code">7202</field>  
+        </record>
+        
+        <record id="kab_id_7203" model="res.city">
+	    	<field name="state_id" ref="province_id_7200"/>
+	    	<field name="name">Kab. Morowali</field> 
+            <field name="code">7203</field>  
+        </record>
+        
+        <record id="kab_id_7204" model="res.city">
+	    	<field name="state_id" ref="province_id_7200"/>
+	    	<field name="name">Kab. Poso</field> 
+            <field name="code">7204</field>  
+        </record>
+        
+        <record id="kab_id_7205" model="res.city">
+	    	<field name="state_id" ref="province_id_7200"/>
+	    	<field name="name">Kab. Donggala</field> 
+            <field name="code">7205</field>  
+        </record>
+        
+        <record id="kab_id_7206" model="res.city">
+	    	<field name="state_id" ref="province_id_7200"/>
+	    	<field name="name">Kab. Toli-Toli</field> 
+            <field name="code">7206</field>  
+        </record>
+        
+        <record id="kab_id_7207" model="res.city">
+	    	<field name="state_id" ref="province_id_7200"/>
+	    	<field name="name">Kab. Buol</field> 
+            <field name="code">7207</field>  
+        </record>
+        
+        <record id="kab_id_7208" model="res.city">
+	    	<field name="state_id" ref="province_id_7200"/>
+	    	<field name="name">Kab. Parigi Moutong</field> 
+            <field name="code">7208</field>  
+        </record>
+        
+        <record id="kab_id_7209" model="res.city">
+	    	<field name="state_id" ref="province_id_7200"/>
+	    	<field name="name">Kab. Tojo Una-Una</field> 
+            <field name="code">7209</field>  
+        </record>
+        
+        <record id="kab_id_7210" model="res.city">
+	    	<field name="state_id" ref="province_id_7200"/>
+	    	<field name="name">Kab. Sigi Biromaru</field> 
+            <field name="code">7210</field>  
+        </record>
+        
+        <record id="kab_id_7211" model="res.city">
+	    	<field name="state_id" ref="province_id_7200"/>
+	    	<field name="name">Kab. Banggai Laut</field> 
+            <field name="code">7211</field>  
+        </record>
+        
+        <record id="kab_id_7212" model="res.city">
+	    	<field name="state_id" ref="province_id_7200"/>
+	    	<field name="name">Kab. Morowali Utara</field> 
+            <field name="code">7212</field>  
+        </record>
+        
+        <record id="kab_id_7271" model="res.city">
+	    	<field name="state_id" ref="province_id_7200"/>
+	    	<field name="name">Kota Palu</field> 
+            <field name="code">7271</field>  
+        </record>
+        
+        \# data province Sulawesi Selatan
+        
+        <record id="kab_id_7301" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Selayar</field> 
+            <field name="code">7301</field>  
+        </record>
+        
+        <record id="kab_id_7302" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Bulukumba</field> 
+            <field name="code">7302</field>  
+        </record>
+        
+        <record id="kab_id_7303" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Bantaeng</field> 
+            <field name="code">7303</field>  
+        </record>
+        
+        <record id="kab_id_7304" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Jeneponto</field> 
+            <field name="code">7304</field>  
+        </record>
+        
+        <record id="kab_id_7305" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Takalar</field> 
+            <field name="code">7305</field>  
+        </record>
+        
+        <record id="kab_id_7306" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Gowa</field> 
+            <field name="code">7306</field>  
+        </record>
+        
+        <record id="kab_id_7307" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Sinjai</field> 
+            <field name="code">7307</field>  
+        </record>
+        
+        <record id="kab_id_7308" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Maros</field> 
+            <field name="code">7308</field>  
+        </record>
+        
+        <record id="kab_id_7309" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Pangkajene Kepulauan</field> 
+            <field name="code">7309</field>  
+        </record>
+        
+        <record id="kab_id_7310" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Barru</field> 
+            <field name="code">7310</field>  
+        </record>
+        
+        <record id="kab_id_7311" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Bone</field> 
+            <field name="code">7311</field>  
+        </record>
+        
+        <record id="kab_id_7312" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Soppeng</field> 
+            <field name="code">7312</field>  
+        </record>
+        
+        <record id="kab_id_7313" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Wajo</field> 
+            <field name="code">7313</field>  
+        </record>
+        
+        <record id="kab_id_7314" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Sidenreng Rappang</field> 
+            <field name="code">7314</field>  
+        </record>
+        
+        <record id="kab_id_7315" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Pinrang</field> 
+            <field name="code">7315</field>  
+        </record>
+        
+        <record id="kab_id_7316" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Enrekang</field> 
+            <field name="code">7316</field>  
+        </record>
+        
+        <record id="kab_id_7317" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Luwu</field> 
+            <field name="code">7317</field>  
+        </record>
+        
+        <record id="kab_id_7318" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Tana Toraja</field> 
+            <field name="code">7318</field>  
+        </record>
+        
+        <record id="kab_id_7322" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Luwu Utara</field> 
+            <field name="code">7322</field>  
+        </record>
+        
+        <record id="kab_id_7325" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Luwu Timur</field> 
+            <field name="code">7325</field>  
+        </record>
+        
+        <record id="kab_id_7326" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Toraja Utara</field> 
+            <field name="code">7326</field>  
+        </record>
+        
+        <record id="kab_id_7371" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kota Makassar</field> 
+            <field name="code">7371</field>  
+        </record>
+        
+        <record id="kab_id_7372" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kota Pare-Pare</field> 
+            <field name="code">7372</field>  
+        </record>
+        
+        <record id="kab_id_7373" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kota Palopo</field> 
+            <field name="code">7373</field>  
+        </record>
+        
+        <record id="kab_id_7374" model="res.city">
+	    	<field name="state_id" ref="province_id_7300"/>
+	    	<field name="name">Kab. Pangkep</field> 
+            <field name="code">7374</field>  
+        </record>
+        
+        \# data province Sulawesi Tenggara
+        
+        <record id="kab_id_7401" model="res.city">
+	    	<field name="state_id" ref="province_id_7400"/>
+	    	<field name="name">Kab. Buton</field> 
+            <field name="code">7401</field>  
+        </record>
+        
+        <record id="kab_id_7402" model="res.city">
+	    	<field name="state_id" ref="province_id_7400"/>
+	    	<field name="name">Kab. Muna</field> 
+            <field name="code">7402</field>  
+        </record>
+        
+        <record id="kab_id_7403" model="res.city">
+	    	<field name="state_id" ref="province_id_7400"/>
+	    	<field name="name">Kab. Konawe</field> 
+            <field name="code">7403</field>  
+        </record>
+        
+        <record id="kab_id_7404" model="res.city">
+	    	<field name="state_id" ref="province_id_7400"/>
+	    	<field name="name">Kab. Kolaka</field> 
+            <field name="code">7404</field>  
+        </record>
+        
+        <record id="kab_id_7405" model="res.city">
+	    	<field name="state_id" ref="province_id_7400"/>
+	    	<field name="name">Kab. Konawe Selatan</field> 
+            <field name="code">7405</field>  
+        </record>
+        
+        <record id="kab_id_7406" model="res.city">
+	    	<field name="state_id" ref="province_id_7400"/>
+	    	<field name="name">Kab. Bombana</field> 
+            <field name="code">7406</field>  
+        </record>
+        
+        <record id="kab_id_7407" model="res.city">
+	    	<field name="state_id" ref="province_id_7400"/>
+	    	<field name="name">Kab. Wakatobi</field> 
+            <field name="code">7407</field>  
+        </record>
+        
+        <record id="kab_id_7408" model="res.city">
+	    	<field name="state_id" ref="province_id_7400"/>
+	    	<field name="name">Kab. Kolaka Utara</field> 
+            <field name="code">7408</field>  
+        </record>
+        
+        <record id="kab_id_7409" model="res.city">
+	    	<field name="state_id" ref="province_id_7400"/>
+	    	<field name="name">Kab. Buton Utara</field> 
+            <field name="code">7409</field>  
+        </record>
+        
+        <record id="kab_id_7410" model="res.city">
+	    	<field name="state_id" ref="province_id_7400"/>
+	    	<field name="name">Kab. Konawe Utara</field> 
+            <field name="code">7410</field>  
+        </record>
+        
+        <record id="kab_id_7471" model="res.city">
+	    	<field name="state_id" ref="province_id_7400"/>
+	    	<field name="name">Kota Kendari</field> 
+            <field name="code">7471</field>  
+        </record>
+        
+        <record id="kab_id_7472" model="res.city">
+	    	<field name="state_id" ref="province_id_7400"/>
+	    	<field name="name">Kota Bau-Bau</field> 
+            <field name="code">7472</field>  
+        </record>
+        
+        <record id="kab_id_7473" model="res.city">
+	    	<field name="state_id" ref="province_id_7400"/>
+	    	<field name="name">Kab. Kolaka Timur</field> 
+            <field name="code">7473</field>  
+        </record>
+        
+        <record id="kab_id_7474" model="res.city">
+	    	<field name="state_id" ref="province_id_7400"/>
+	    	<field name="name">Kab. Konawe Kepulauan</field> 
+            <field name="code">7474</field>  
+        </record>
+        
+        <record id="kab_id_7475" model="res.city">
+	    	<field name="state_id" ref="province_id_7400"/>
+	    	<field name="name">Kab. Muna Barat</field> 
+            <field name="code">7475</field>  
+        </record>
+        
+        <record id="kab_id_7476" model="res.city">
+	    	<field name="state_id" ref="province_id_7400"/>
+	    	<field name="name">Kab. Buton Tengah</field> 
+            <field name="code">7476</field>  
+        </record>
+        
+        <record id="kab_id_7477" model="res.city">
+	    	<field name="state_id" ref="province_id_7400"/>
+	    	<field name="name">Kab. Buton Selatan</field> 
+            <field name="code">7477</field>  
+        </record>
+        
+        \# data province Gorontalo
+        
+        <record id="kab_id_7501" model="res.city">
+	    	<field name="state_id" ref="province_id_7500"/>
+	    	<field name="name">Kab. Boalemo</field> 
+            <field name="code">7501</field>  
+        </record>
+        
+        <record id="kab_id_7502" model="res.city">
+	    	<field name="state_id" ref="province_id_7500"/>
+	    	<field name="name">Kab. Gorontalo</field> 
+            <field name="code">7502</field>  
+        </record>
+        
+        <record id="kab_id_7503" model="res.city">
+	    	<field name="state_id" ref="province_id_7500"/>
+	    	<field name="name">Kab. Pohuwato</field> 
+            <field name="code">7503</field>  
+        </record>
+        
+        <record id="kab_id_7504" model="res.city">
+	    	<field name="state_id" ref="province_id_7500"/>
+	    	<field name="name">Kab. Bone Bolango</field> 
+            <field name="code">7504</field>  
+        </record>
+        
+        <record id="kab_id_7505" model="res.city">
+	    	<field name="state_id" ref="province_id_7500"/>
+	    	<field name="name">Kab. Gorontalo Utara</field> 
+            <field name="code">7505</field>  
+        </record>
+        
+        <record id="kab_id_7571" model="res.city">
+	    	<field name="state_id" ref="province_id_7500"/>
+	    	<field name="name">Kota Gorontalo</field> 
+            <field name="code">7571</field>  
+        </record>
+        
+        \# data province Sulawesi Barat
+        
+        <record id="kab_id_7601" model="res.city">
+	    	<field name="state_id" ref="province_id_7600"/>
+	    	<field name="name">Kab. Majene</field> 
+            <field name="code">7601</field>  
+        </record>
+        
+        <record id="kab_id_7602" model="res.city">
+	    	<field name="state_id" ref="province_id_7600"/>
+	    	<field name="name">Kab. Polewali Mandar</field> 
+            <field name="code">7602</field>  
+        </record>
+        
+        <record id="kab_id_7603" model="res.city">
+	    	<field name="state_id" ref="province_id_7600"/>
+	    	<field name="name">Kab. Mamasa</field> 
+            <field name="code">7603</field>  
+        </record>
+        
+        <record id="kab_id_7604" model="res.city">
+	    	<field name="state_id" ref="province_id_7600"/>
+	    	<field name="name">Kab. Mamuju</field> 
+            <field name="code">7604</field>  
+        </record>
+        
+        <record id="kab_id_7605" model="res.city">
+	    	<field name="state_id" ref="province_id_7600"/>
+	    	<field name="name">Kab. Mamuju Utara</field> 
+            <field name="code">7605</field>  
+        </record>
+        
+        <record id="kab_id_7606" model="res.city">
+	    	<field name="state_id" ref="province_id_7600"/>
+	    	<field name="name">Kab. Polmas</field> 
+            <field name="code">7606</field>  
+        </record>
+        
+        <record id="kab_id_7607" model="res.city">
+	    	<field name="state_id" ref="province_id_7600"/>
+	    	<field name="name">Kab. Mamuju Tengah</field> 
+            <field name="code">7607</field>  
+        </record>
+        
+        \# data province Maluku
+        
+        <record id="kab_id_8101" model="res.city">
+	    	<field name="state_id" ref="province_id_8100"/>
+	    	<field name="name">Kab. Maluku Tenggara Barat</field> 
+            <field name="code">8101</field>  
+        </record>
+        
+        <record id="kab_id_8102" model="res.city">
+	    	<field name="state_id" ref="province_id_8100"/>
+	    	<field name="name">Kab. Maluku Tenggara</field> 
+            <field name="code">8102</field>  
+        </record>
+        
+        <record id="kab_id_8103" model="res.city">
+	    	<field name="state_id" ref="province_id_8100"/>
+	    	<field name="name">Kab. Maluku Tengah</field> 
+            <field name="code">8103</field>  
+        </record>
+        
+        <record id="kab_id_8104" model="res.city">
+	    	<field name="state_id" ref="province_id_8100"/>
+	    	<field name="name">Kab. Buru</field> 
+            <field name="code">8104</field>  
+        </record>
+        
+        <record id="kab_id_8105" model="res.city">
+	    	<field name="state_id" ref="province_id_8100"/>
+	    	<field name="name">Kab. Kepulauan Aru</field> 
+            <field name="code">8105</field>  
+        </record>
+        
+        <record id="kab_id_8106" model="res.city">
+	    	<field name="state_id" ref="province_id_8100"/>
+	    	<field name="name">Kab. Seram Bagian Barat</field> 
+            <field name="code">8106</field>  
+        </record>
+        
+        <record id="kab_id_8107" model="res.city">
+	    	<field name="state_id" ref="province_id_8100"/>
+	    	<field name="name">Kab. Seram Bagian Timur</field> 
+            <field name="code">8107</field>  
+        </record>
+        
+        <record id="kab_id_8108" model="res.city">
+	    	<field name="state_id" ref="province_id_8100"/>
+	    	<field name="name">Kab. Maluku Barat Daya</field> 
+            <field name="code">8108</field>  
+        </record>
+        
+        <record id="kab_id_8109" model="res.city">
+	    	<field name="state_id" ref="province_id_8100"/>
+	    	<field name="name">Kab. Buru Selatan</field> 
+            <field name="code">8109</field>  
+        </record>
+        
+        <record id="kab_id_8171" model="res.city">
+	    	<field name="state_id" ref="province_id_8100"/>
+	    	<field name="name">Kota Ambon</field> 
+            <field name="code">8171</field>  
+        </record>
+        
+        <record id="kab_id_8172" model="res.city">
+	    	<field name="state_id" ref="province_id_8100"/>
+	    	<field name="name">Kota Tual</field> 
+            <field name="code">8172</field>  
+        </record>
+        
+        \# data province Maluku Utara
+        
+        <record id="kab_id_8201" model="res.city">
+	    	<field name="state_id" ref="province_id_8200"/>
+	    	<field name="name">Kab. Halmahera Barat</field> 
+            <field name="code">8201</field>  
+        </record>
+        
+        <record id="kab_id_8202" model="res.city">
+	    	<field name="state_id" ref="province_id_8200"/>
+	    	<field name="name">Kab. Halmahera Tengah</field> 
+            <field name="code">8202</field>  
+        </record>
+        
+        <record id="kab_id_8203" model="res.city">
+	    	<field name="state_id" ref="province_id_8200"/>
+	    	<field name="name">Kab. Kepulauan Sula</field> 
+            <field name="code">8203</field>  
+        </record>
+        
+        <record id="kab_id_8204" model="res.city">
+	    	<field name="state_id" ref="province_id_8200"/>
+	    	<field name="name">Kab. Halmahera Selatan</field> 
+            <field name="code">8204</field>  
+        </record>
+        
+        <record id="kab_id_8205" model="res.city">
+	    	<field name="state_id" ref="province_id_8200"/>
+	    	<field name="name">Kab. Halmahera Utara</field> 
+            <field name="code">8205</field>  
+        </record>
+        
+        <record id="kab_id_8206" model="res.city">
+	    	<field name="state_id" ref="province_id_8200"/>
+	    	<field name="name">Kab. Halmahera Timur</field> 
+            <field name="code">8206</field>  
+        </record>
+        
+        <record id="kab_id_8207" model="res.city">
+	    	<field name="state_id" ref="province_id_8200"/>
+	    	<field name="name">Kab. Pulau Morotai</field> 
+            <field name="code">8207</field>  
+        </record>
+        
+        <record id="kab_id_8208" model="res.city">
+	    	<field name="state_id" ref="province_id_8200"/>
+	    	<field name="name">Kab. Pulau Taliabu</field> 
+            <field name="code">8208</field>  
+        </record>
+        
+        <record id="kab_id_8271" model="res.city">
+	    	<field name="state_id" ref="province_id_8200"/>
+	    	<field name="name">Kota Ternate</field> 
+            <field name="code">8271</field>  
+        </record>
+        
+        <record id="kab_id_8272" model="res.city">
+	    	<field name="state_id" ref="province_id_8200"/>
+	    	<field name="name">Kota Tidore Kepulauan</field> 
+            <field name="code">8272</field>  
+        </record>
+        
+        \# data province Papua Barat
+        
+        <record id="kab_id_9101" model="res.city">
+	    	<field name="state_id" ref="province_id_9100"/>
+	    	<field name="name">Kab. Fak-Fak</field> 
+            <field name="code">9101</field>  
+        </record>
+        
+        <record id="kab_id_9102" model="res.city">
+	    	<field name="state_id" ref="province_id_9100"/>
+	    	<field name="name">Kab. Kaimana</field> 
+            <field name="code">9102</field>  
+        </record>
+        
+        <record id="kab_id_9103" model="res.city">
+	    	<field name="state_id" ref="province_id_9100"/>
+	    	<field name="name">Kab. Teluk Wondama</field> 
+            <field name="code">9103</field>  
+        </record>
+        
+        <record id="kab_id_9104" model="res.city">
+	    	<field name="state_id" ref="province_id_9100"/>
+	    	<field name="name">Kab. Teluk Bintuni</field> 
+            <field name="code">9104</field>  
+        </record>
+        
+        <record id="kab_id_9105" model="res.city">
+	    	<field name="state_id" ref="province_id_9100"/>
+	    	<field name="name">Kab. Manokwari</field> 
+            <field name="code">9105</field>  
+        </record>
+        
+        <record id="kab_id_9106" model="res.city">
+	    	<field name="state_id" ref="province_id_9100"/>
+	    	<field name="name">Kab. Sorong Selatan</field> 
+            <field name="code">9106</field>  
+        </record>
+        
+        <record id="kab_id_9107" model="res.city">
+	    	<field name="state_id" ref="province_id_9100"/>
+	    	<field name="name">Kab. Sorong</field> 
+            <field name="code">9107</field>  
+        </record>
+        
+        <record id="kab_id_9108" model="res.city">
+	    	<field name="state_id" ref="province_id_9100"/>
+	    	<field name="name">Kab. Raja Ampat</field> 
+            <field name="code">9108</field>  
+        </record>
+        
+        <record id="kab_id_9109" model="res.city">
+	    	<field name="state_id" ref="province_id_9100"/>
+	    	<field name="name">Kab. Maybrat</field> 
+            <field name="code">9109</field>  
+        </record>
+        
+        <record id="kab_id_9110" model="res.city">
+	    	<field name="state_id" ref="province_id_9100"/>
+	    	<field name="name">Kab. Tambrauw</field> 
+            <field name="code">9110</field>  
+        </record>
+        
+        <record id="kab_id_9111" model="res.city">
+	    	<field name="state_id" ref="province_id_9100"/>
+	    	<field name="name">Kab. Manokwari Selatan</field> 
+            <field name="code">9111</field>  
+        </record>
+        
+        <record id="kab_id_9112" model="res.city">
+	    	<field name="state_id" ref="province_id_9100"/>
+	    	<field name="name">Kab. Pegunungan Arfak</field> 
+            <field name="code">9112</field>  
+        </record>
+        
+        <record id="kab_id_9171" model="res.city">
+	    	<field name="state_id" ref="province_id_9100"/>
+	    	<field name="name">Kota Sorong</field> 
+            <field name="code">9171</field>  
+        </record>
+        
+        \# data province Papua
+        
+        <record id="kab_id_9401" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Merauke</field> 
+            <field name="code">9401</field>  
+        </record>
+        
+        <record id="kab_id_9402" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Jayawijaya</field> 
+            <field name="code">9402</field>  
+        </record>
+        
+        <record id="kab_id_9403" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Jayapura</field> 
+            <field name="code">9403</field>  
+        </record>
+        
+        <record id="kab_id_9404" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Nabire</field> 
+            <field name="code">9404</field>  
+        </record>
+        
+        <record id="kab_id_9408" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Kepulauan Yapen</field> 
+            <field name="code">9408</field>  
+        </record>
+        
+        <record id="kab_id_9409" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Biak Numfor</field> 
+            <field name="code">9409</field>  
+        </record>
+        
+        <record id="kab_id_9410" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Paniai</field> 
+            <field name="code">9410</field>  
+        </record>
+        
+        <record id="kab_id_9411" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Puncak Jaya</field> 
+            <field name="code">9411</field>  
+        </record>
+        
+        <record id="kab_id_9412" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Mimika</field> 
+            <field name="code">9412</field>  
+        </record>
+        
+        <record id="kab_id_9413" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Boven Digoel</field> 
+            <field name="code">9413</field>  
+        </record>
+        
+        <record id="kab_id_9414" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Mappi</field> 
+            <field name="code">9414</field>  
+        </record>
+        
+        <record id="kab_id_9415" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Asmat</field> 
+            <field name="code">9415</field>  
+        </record>
+        
+        <record id="kab_id_9416" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Yahukimo</field> 
+            <field name="code">9416</field>  
+        </record>
+        
+        <record id="kab_id_9417" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Pegunungan Bintang</field> 
+            <field name="code">9417</field>  
+        </record>
+        
+        <record id="kab_id_9418" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Tolikara</field> 
+            <field name="code">9418</field>  
+        </record>
+        
+        <record id="kab_id_9419" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Sarmi</field> 
+            <field name="code">9419</field>  
+        </record>
+        
+        <record id="kab_id_9420" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Keerom</field> 
+            <field name="code">9420</field>  
+        </record>
+        
+        <record id="kab_id_9426" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Waropen</field> 
+            <field name="code">9426</field>  
+        </record>
+        
+        <record id="kab_id_9427" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Supiori</field> 
+            <field name="code">9427</field>  
+        </record>
+        
+        <record id="kab_id_9428" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Deiyai</field> 
+            <field name="code">9428</field>  
+        </record>
+        
+        <record id="kab_id_9429" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Dogiyai</field> 
+            <field name="code">9429</field>  
+        </record>
+        
+        <record id="kab_id_9430" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Intan Jaya</field> 
+            <field name="code">9430</field>  
+        </record>
+        
+        <record id="kab_id_9431" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Lanny Jaya</field> 
+            <field name="code">9431</field>  
+        </record>
+        
+        <record id="kab_id_9432" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Mamberamo Raya</field> 
+            <field name="code">9432</field>  
+        </record>
+        
+        <record id="kab_id_9433" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Mamberamo Tengah</field> 
+            <field name="code">9433</field>  
+        </record>
+        
+        <record id="kab_id_9434" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Nduga</field> 
+            <field name="code">9434</field>  
+        </record>
+        
+        <record id="kab_id_9435" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Puncak</field> 
+            <field name="code">9435</field>  
+        </record>
+        
+        <record id="kab_id_9436" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kab. Yalimo</field> 
+            <field name="code">9436</field>  
+        </record>
+        
+        <record id="kab_id_9471" model="res.city">
+	    	<field name="state_id" ref="province_id_9400"/>
+	    	<field name="name">Kota Jayapura</field> 
+            <field name="code">9471</field>  
+        </record>
+        
+    </data>
+</odoo>

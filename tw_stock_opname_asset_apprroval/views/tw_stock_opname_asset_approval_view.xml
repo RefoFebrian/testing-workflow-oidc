@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="tw_stock_opname_asset_approval_form_view" model="ir.ui.view">
+			<field name="name">tw.stock.opname.asset.approval.form</field>
+			<field name="model">tw.stock.opname.asset</field>
+			<field name="inherit_id" ref="tw_stock_opname_asset.view_tw_stock_opname_asset_form"/>
+			<field name="arch" type="xml">
+				<field name="state" position="replace">
+					<field name="state" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,posted"/>
+				</field>
+				<button name="action_post" position="replace">
+					<button name="action_request_approval" invisible="state != 'draft'" string="RFA" type="object" class="oe_highlight" groups="tw_stock_opname_asset_apprroval.group_tw_so_asset_approval_rfa"/>
+					<button name="action_approval" invisible="state != 'waiting_for_approval'" string="Approve" type="object" class="oe_highlight"/>
+					<button name="action_post" invisible="state != 'approved'" string="Post" type="object" class="oe_highlight" groups="tw_stock_opname_asset_apprroval.group_tw_so_asset_approval_done"/>
+					<button name="action_reject_or_cancel" invisible="state != 'waiting_for_approval'" string="Reject" type="object" context="{'window_title': 'Reject'}"/>
+					<button name="action_reject_or_cancel" invisible="state not in ('waiting_for_approval', 'approved')" string="Cancel Approval" type="object" groups="tw_stock_opname_asset_apprroval.group_tw_so_asset_approval_cancel" context="{'window_title': 'Cancel'}"/>
+				</button>
+
+				<xpath expr="//page[@name='audit_trail']" position="before">
+					<page string="Approval">
+						<field name="approval_ids" readonly="True">
+						</field>
+					</page>
+				</xpath>
+			</field>
+		</record>
+
+
+
+	</data>
+</odoo>

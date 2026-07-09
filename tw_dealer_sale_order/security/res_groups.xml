@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_module_category_dealer_sale_order" model="ir.module.category">
+            <field name="name">TW Dealer Sales Order</field>
+        </record>
+        
+        <!-- Dealer Sales Order -->
+        <record id="group_tw_dealer_sale_order_admin" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order" />
+            <field name="name">TW Dealer Sales Order Admin</field>
+        </record>
+
+        <record id="group_tw_dealer_sale_order_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order" />
+            <field name="name">TW Dealer Sales Order Read</field>
+        </record>
+
+        <record id="access_tw_dealer_sale_order_showroom_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order" />
+            <field name="name">access_tw_dealer_sale_order_showroom read</field>
+            <field name="group_id" ref="group_tw_dealer_sale_order_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_dealer_sale_order_line_showroom_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order_line" />
+            <field name="name">access_tw_dealer_sale_order_line_showroom read</field>
+            <field name="group_id" ref="group_tw_dealer_sale_order_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_dealer_sale_order_analytic_line_invoice" model="ir.model.access">
+            <field name="model_id" ref="analytic.model_account_analytic_line" />
+            <field name="name">access_tw_dealer_sale_order_analytic_line_invoice</field>
+            <field name="group_id" ref="group_tw_dealer_sale_order_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_sale_order_line_showroom_read" model="ir.model.access">
+            <field name="model_id" ref="sale.model_sale_order_line" />
+            <field name="name">access_sale_order_line_showroom read</field>
+            <field name="group_id" ref="group_tw_dealer_sale_order_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_dealer_sale_order_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order" />
+            <field name="name">TW Dealer Sales Order Update</field>
+        </record>
+
+        <record id="access_tw_dealer_sale_order_showroom_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order" />
+            <field name="name">access_tw_dealer_sale_order_showroom update</field>
+            <field name="group_id" ref="group_tw_dealer_sale_order_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_dealer_sale_order_showroom_partner_update" model="ir.model.access">
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="name">access_tw_dealer_sale_order_showroom_partner update</field>
+            <field name="group_id" ref="group_tw_dealer_sale_order_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_dealer_sale_order_line_showroom_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order_line" />
+            <field name="name">access_tw_dealer_sale_order_line_showroom update</field>
+            <field name="group_id" ref="group_tw_dealer_sale_order_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_dealer_sale_order_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order" />
+            <field name="name">TW Dealer Sales Order Delete</field>
+        </record>
+
+        <record id="access_tw_dealer_sale_order_showroom_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order" />
+            <field name="name">access_tw_dealer_sale_order_showroom delete</field>
+            <field name="group_id" ref="group_tw_dealer_sale_order_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_dealer_sale_order_line_showroom_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order_line" />
+            <field name="name">access_tw_dealer_sale_order_line_showroom delete</field>
+            <field name="group_id" ref="group_tw_dealer_sale_order_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Dealer Sale Order Make Invoice Advance -->
+        <record id="group_tw_dealer_sale_advance_payment_inv_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order" />
+            <field name="name">TW Dealer Sale Order Make Invoice Advance Read</field>
+        </record>
+
+        <record id="access_tw_dealer_sale_advance_payment_inv_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_advance_payment_inv" />
+            <field name="name">access_tw_dealer_sale_advance_payment_inv read</field>
+            <field name="group_id" ref="group_tw_dealer_sale_advance_payment_inv_read" />
+            <field name="perm_read">1</field>
+        </record>
+        
+        <record id="group_tw_dealer_sale_advance_payment_inv_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order" />
+            <field name="name">TW Dealer Sale Order Make Invoice Advance Update</field>
+        </record>
+
+        <record id="access_tw_dealer_sale_advance_payment_inv_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_advance_payment_inv" />
+            <field name="name">access_tw_dealer_sale_advance_payment_inv update</field>
+            <field name="group_id" ref="group_tw_dealer_sale_advance_payment_inv_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <record id="group_tw_dealer_sale_advance_payment_inv_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order" />
+            <field name="name">TW Dealer Sale Order Make Invoice Advance Delete</field>
+        </record>
+
+        <record id="access_tw_dealer_sale_advance_payment_inv_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_advance_payment_inv" />
+            <field name="name">access_tw_dealer_sale_advance_payment_inv delete</field>
+            <field name="group_id" ref="group_tw_dealer_sale_advance_payment_inv_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="group_tw_dealer_sale_order_quotations" model="res.groups">
+            <field name="name">TW Dealer Sales Order Quotations</field>
+            <field name="category_id" ref="tw_module_category_dealer_sale_order" />
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_dealer_sale_order_read')),
+                (4, ref('group_tw_dealer_sale_order_update')),
+                (4, ref('group_tw_dealer_sale_order_delete')),
+            ]" />
+        </record>
+
+        <record id="group_tw_dealer_sale_order_invoice" model="res.groups">
+        <field name="category_id" ref="tw_module_category_dealer_sale_order" />
+            <field name="name">TW Dealer Sales Order Invoice</field>
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_dealer_sale_order_read')),
+                (4, ref('group_tw_dealer_sale_order_update')),
+                (4, ref('group_tw_dealer_sale_order_delete')),
+            ]" />
+        </record>
+
+        <record id="group_tw_dealer_sale_order_upselling" model="res.groups">
+            <field name="name">TW Dealer Sales Order Upselling</field>
+            <field name="category_id" ref="tw_module_category_dealer_sale_order" />
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_dealer_sale_order_read')),
+                (4, ref('group_tw_dealer_sale_order_update')),
+                (4, ref('group_tw_dealer_sale_order_delete')),
+            ]" />
+        </record>
+        
+
+        <record id="group_tw_dealer_sale_order_line_to_invoiced" model="res.groups">
+            <field name="name">Tw Dealer Sale Order Line To Invoiced</field>
+            <field name="category_id" ref="tw_module_category_dealer_sale_order" />
+        </record>
+
+        <record id="group_tw_dealer_sale_order_line_packings" model="res.groups">
+            <field name="name">Tw Dealer Sale Order Line Packings</field>
+            <field name="category_id" ref="tw_module_category_dealer_sale_order" />
+        </record>
+
+        <record id="group_tw_dealer_sale_order_proforma_sales" model="res.groups">
+            <field name="name">TW Dealer Sale Order Proforma Sales</field>
+            <field name="category_id" ref="tw_module_category_dealer_sale_order" />
+        </record>
+
+        <record id="group_tw_dealer_sale_order_auto_done_setting" model="res.groups">
+            <field name="name">TW Dealer Sale Order Auto Done Setting</field>
+            <field name="category_id" ref="tw_module_category_dealer_sale_order" />
+        </record>
+        
+        <record id="group_tw_dealer_sale_order_discount_per_so_line" model="res.groups">
+            <field name="name">TW Dealer Sale Order Discount Per So Line</field>
+            <field name="category_id" ref="tw_module_category_dealer_sale_order" />
+        </record>
+
+        <!-- Dealer Sale Order Summary Read -->
+        <record id="group_tw_dealer_sale_order_summary_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order"/>
+            <field name="name">TW Dealer Sale Order Summary Read</field>
+        </record>
+
+        <record id="access_tw_dealer_sale_order_summary_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order_summary"/>
+            <field name="name">tw_dealer_sale_order_summary read</field>
+            <field name="group_id" ref="group_tw_dealer_sale_order_summary_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Dealer Sale Order Summary Update -->
+        <record id="group_tw_dealer_sale_order_summary_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order"/>
+            <field name="name">TW Dealer Sale Order Summary Update</field>
+        </record>
+
+        <record id="access_tw_dealer_sale_order_summary_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order_summary"/>
+            <field name="name">tw_dealer_sale_order_summary update</field>
+            <field name="group_id" ref="group_tw_dealer_sale_order_summary_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Dealer Sale Order Summary Delete -->
+        <record id="group_tw_dealer_sale_order_summary_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order"/>
+            <field name="name">TW Dealer Sale Order Summary Delete</field>
+        </record>
+
+        <record id="access_tw_dealer_sale_order_summary_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order_summary"/>
+            <field name="name">tw_dealer_sale_order_summary delete</field>
+            <field name="group_id" ref="group_tw_dealer_sale_order_summary_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Dealer Sale Order Payment Read -->
+        <record id="group_tw_dealer_sale_order_payment_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order"/>
+            <field name="name">TW Dealer Sale Order Payment Read</field>
+        </record>
+        
+        <record id="access_tw_dealer_sale_order_payment_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order_payment"/>
+            <field name="name">tw_dealer_sale_order_payment read</field>
+            <field name="group_id" ref="group_tw_dealer_sale_order_payment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+    <!-- Dealer Sale Order Payment Update -->
+        <record id="group_tw_dealer_sale_order_payment_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order"/>
+            <field name="name">TW Dealer Sale Order Payment Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_dealer_sale_order_payment_read'))]"/>
+        </record>
+        
+        <record id="access_tw_dealer_sale_order_payment_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order_payment"/>
+            <field name="name">tw_dealer_sale_order_payment update</field>
+            <field name="group_id" ref="group_tw_dealer_sale_order_payment_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+    <!-- Dealer Sale Order Payment Delete -->
+        <record id="group_tw_dealer_sale_order_payment_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order"/>
+            <field name="name">TW Dealer Sale Order Payment Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_dealer_sale_order_payment_read'))]"/>
+        </record>
+
+        <record id="access_tw_dealer_sale_order_payment_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order_payment"/>
+            <field name="name">tw_dealer_sale_order_payment delete</field>
+            <field name="group_id" ref="group_tw_dealer_sale_order_payment_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="group_tw_dso_data_consumen_report_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order"/>
+            <field name="name">TW Laporan Data Konsumen Read</field>
+        </record> 
+
+        <record id="access_tw_dso_data_consumen_report" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order_data_consumen_report" />
+            <field name="name">access_tw_dso_data_consumen_report</field>
+            <field name="group_id" ref="group_tw_dso_data_consumen_report_read" />
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Groups for menu access Laporan Penjualan -->
+        <record id="group_tw_dso_report_sales_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order"/>
+            <field name="name">TW Laporan Penjualan Read</field>
+        </record> 
+
+        <record id="access_tw_dso_report_sales" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order_penjualan_report" />
+            <field name="name">access_tw_dso_report_sales</field>
+            <field name="group_id" ref="group_tw_dso_report_sales_read" />
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Groups for menu access Laporan Penjualan Direct Gift -->
+        <record id="group_tw_dso_report_sales_direct_gift_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order"/>
+            <field name="name">TW Laporan Penjualan Direct Gift Read</field>
+        </record> 
+
+        <record id="access_tw_dso_report_sales_direct_gift" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order_penjualan_direct_gift_report" />
+            <field name="name">access_tw_dso_report_sales_direct_gift</field>
+            <field name="group_id" ref="group_tw_dso_report_sales_direct_gift_read" />
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Groups for access Laporan Penjualan ALL (Super Group) -->
+        <record id="group_tw_dso_report_sales_all_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order"/>
+            <field name="name">TW Laporan Penjualan ALL Read</field> 
+        </record> 
+
+        <record id="access_tw_dso_report_sales_all" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order_penjualan_report" />
+            <field name="name">access_tw_dso_report_sales_all</field>
+            <field name="group_id" ref="group_tw_dso_report_sales_all_read" />
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Groups for access Laporan Penjualan Salesman -->
+        <record id="group_tw_dso_report_sales_salesman_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order"/>
+            <field name="name">TW Laporan Penjualan Salesman Read</field> 
+        </record> 
+
+        <record id="access_tw_dso_report_sales_salesman" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order_penjualan_report" />
+            <field name="name">access_tw_dso_report_sales_salesman</field>
+            <field name="group_id" ref="group_tw_dso_report_sales_salesman_read" />
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Groups for access Laporan Penjualan Konsumen -->
+        <record id="group_tw_dso_report_sales_konsumen_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order"/>
+            <field name="name">TW Laporan Penjualan Konsumen Read</field> 
+        </record> 
+
+        <record id="access_tw_dso_report_sales_konsumen" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order_penjualan_report" />
+            <field name="name">access_tw_dso_report_sales_konsumen</field>
+            <field name="group_id" ref="group_tw_dso_report_sales_konsumen_read" />
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Groups for access Laporan Penjualan Direct Gift ALL (Super Group) -->
+        <record id="group_tw_dso_report_sales_direct_gift_all_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order"/>
+            <field name="name">TW Laporan Penjualan Direct Gift ALL Read</field> 
+        </record> 
+
+        <record id="access_tw_dso_report_sales_direct_gift_all" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order_penjualan_direct_gift_report" />
+            <field name="name">access_tw_dso_report_sales_direct_gift_all</field>
+            <field name="group_id" ref="group_tw_dso_report_sales_direct_gift_all_read" />
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Groups for access Laporan Penjualan Direct Gift Salesman -->
+        <record id="group_tw_dso_report_sales_direct_gift_salesman_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_sale_order"/>
+            <field name="name">TW Laporan Penjualan Direct Gift Salesman Read</field> 
+        </record> 
+
+        <record id="access_tw_dso_report_sales_direct_gift_salesman" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order_penjualan_direct_gift_report" />
+            <field name="name">access_tw_dso_report_sales_direct_gift_salesman</field>
+            <field name="group_id" ref="group_tw_dso_report_sales_direct_gift_salesman_read" />
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_dealer_sale_order_read')),
+                (4, ref('group_tw_dealer_sale_order_update')),
+                (4, ref('group_tw_dealer_sale_order_delete')),
+                (4, ref('group_tw_dealer_sale_advance_payment_inv_read')),
+                (4, ref('group_tw_dealer_sale_advance_payment_inv_update')),
+                (4, ref('group_tw_dealer_sale_advance_payment_inv_delete')),
+                (4, ref('group_tw_dealer_sale_order_quotations')),
+                (4, ref('group_tw_dealer_sale_order_invoice')),
+                (4, ref('group_tw_dealer_sale_order_line_to_invoiced')),
+                (4, ref('group_tw_dealer_sale_order_line_packings')),
+                (4, ref('group_tw_dealer_sale_order_proforma_sales')),
+                (4, ref('group_tw_dealer_sale_order_auto_done_setting')),
+                (4, ref('group_tw_dealer_sale_order_discount_per_so_line')),
+                (4, ref('group_tw_dealer_sale_order_payment_read')),
+                (4, ref('group_tw_dealer_sale_order_payment_update')),
+                (4, ref('group_tw_dealer_sale_order_payment_delete')),
+                (4, ref('group_tw_dealer_sale_order_summary_read')),
+                (4, ref('group_tw_dealer_sale_order_summary_update')),
+                (4, ref('group_tw_dealer_sale_order_summary_delete')),
+                (4, ref('group_tw_dealer_sale_order_admin')),
+                (4, ref('group_tw_dso_data_consumen_report_read')),
+                (4, ref('group_tw_dso_report_sales_read')),
+                (4, ref('group_tw_dso_report_sales_all_read')),
+                (4, ref('group_tw_dso_report_sales_salesman_read')),
+                (4, ref('group_tw_dso_report_sales_konsumen_read')),
+                (4, ref('group_tw_dso_report_sales_direct_gift_read')),
+                (4, ref('group_tw_dso_report_sales_direct_gift_all_read')),
+                (4, ref('group_tw_dso_report_sales_direct_gift_salesman_read')),
+                ]" />
+        </record>
+    </data>
+
+</odoo>

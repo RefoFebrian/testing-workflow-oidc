@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+
+        <menuitem id="tw_work_order_collecting_menuitem" name="Work Order Collecting"
+            parent="tw_menu.submenu_tw_workshop_collecting" sequence="2"
+            action="tw_work_order_collecting_action" 
+            groups="tw_work_order_collecting.tw_work_order_collecting_group_read"/>
+
+    </data>
+
+</odoo>

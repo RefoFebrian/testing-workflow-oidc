@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_b2b_file_extension_pod_data" model="tw.selection">
+	    	<field name="name">POD</field>
+            <field name="value">POD</field> 
+	    	<field name="type">MftFileExtension</field> 
+        </record>
+
+        <record id="tw_b2b_file_extension_sal_data" model="tw.selection">
+	    	<field name="name">SAL</field>
+            <field name="value">SAL</field> 
+	    	<field name="type">MftFileExtension</field> 
+        </record>
+
+        <record id="tw_b2b_file_extension_cdb_data" model="tw.selection">
+            <field name="name">CDB</field>
+            <field name="value">CDB</field>
+            <field name="type">MftFileExtension</field>
+        </record>
+
+        <record id="tw_b2b_file_extension_petd_data" model="tw.selection">
+            <field name="name">PETD</field>
+            <field name="value">PETD</field>
+            <field name="type">MftFileExtension</field>
+        </record>
+
+        <record id="tw_b2b_file_extension_inv_data" model="tw.selection">
+            <field name="name">INV</field>
+            <field name="value">INV</field>
+            <field name="type">MftFileExtension</field>
+        </record>
+
+        <record id="tw_b2b_file_extension_pvtm_data" model="tw.selection">
+            <field name="name">PVTM</field>
+            <field name="value">PVTM</field>
+            <field name="type">MftFileExtension</field>
+        </record>
+
+        <record id="tw_b2b_file_extension_fm_data" model="tw.selection">
+            <field name="name">FM</field>
+            <field name="value">FM</field>
+            <field name="type">MftFileExtension</field>
+        </record>
+
+        <record id="tw_b2b_file_extension_fdo_data" model="tw.selection">
+            <field name="name">FDO</field>
+            <field name="value">FDO</field>
+            <field name="type">MftFileExtension</field>
+        </record>
+
+        <record id="tw_b2b_file_extension_udh_data" model="tw.selection">
+            <field name="name">UDH</field>
+            <field name="value">UDH</field>
+            <field name="type">MftFileExtension</field>
+        </record>
+
+        <record id="tw_b2b_file_extension_psl_data" model="tw.selection">
+            <field name="name">PSL</field>
+            <field name="value">PSL</field>
+            <field name="type">MftFileExtension</field>
+        </record>
+
+        <record id="tw_b2b_file_extension_ptrac_data" model="tw.selection">
+            <field name="name">PTRAC</field>
+            <field name="value">PTRAC</field>
+            <field name="type">MftFileExtension</field>
+        </record>
+
+        <record id="tw_b2b_file_extension_sipb_data" model="tw.selection">
+            <field name="name">SIPB</field>
+            <field name="value">SIPB</field>
+            <field name="type">MftFileExtension</field>
+        </record>
+
+        <record id="tw_b2b_file_extension_nrfs_data" model="tw.selection">
+            <field name="name">NRFS</field>
+            <field name="value">NRFS</field>
+            <field name="type">MftFileExtension</field>
+        </record>
+
+        <record id="tw_b2b_file_extension_upo_data" model="tw.selection">
+            <field name="name">UPO</field>
+            <field name="value">UPO</field>
+            <field name="type">MftFileExtension</field>
+        </record>
+
+        <record id="tw_b2b_file_extension_sl_data" model="tw.selection">
+            <field name="name">SL</field>
+            <field name="value">SL</field>
+            <field name="type">MftFileExtension</field>
+        </record>
+
+        <record id="tw_b2b_file_extension_ps_data" model="tw.selection">
+            <field name="name">PS</field>
+            <field name="value">PS</field>
+            <field name="type">MftFileExtension</field>
+        </record>
+
+        <record id="tw_b2b_file_extension_ptm_data" model="tw.selection">
+            <field name="name">PTM</field>
+            <field name="value">PTM</field>
+            <field name="type">MftFileExtension</field>
+        </record>
+
+        <record id="tw_b2b_file_extension_pmp_data" model="tw.selection">
+            <field name="name">PMP</field>
+            <field name="value">PMP</field>
+            <field name="type">MftFileExtension</field>
+        </record>
+
+        <record id="tw_b2b_file_extension_udds_data" model="tw.selection">
+            <field name="name">UDDS</field>
+            <field name="value">UDDS</field>
+            <field name="type">MftFileExtension</field>
+        </record>
+
+        <record id="tw_b2b_file_extension_lds_data" model="tw.selection">
+            <field name="name">LDS</field>
+            <field name="value">LDS</field>
+            <field name="type">MftFileExtension</field>
+        </record>
+
+        <!-- <record id="tw_b2b_file_extension_ssu_data" model="tw.selection">
+            <field name="name">SSU</field>
+            <field name="value">SSU</field>
+            <field name="type">MftFileExtension</field>
+        </record> -->
+     </data>
+</odoo>

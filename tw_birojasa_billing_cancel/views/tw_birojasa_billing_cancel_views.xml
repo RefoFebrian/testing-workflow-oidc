@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <!-- Cancel Tagihan Birojasalation -->
+        <record id="birojasa_billing_cancel_list_view" model="ir.ui.view">
+            <field name="name">tw.birojasa.billing.cancel.list</field>
+            <field name="model">tw.birojasa.billing.cancel</field>
+            <field name="arch" type="xml">
+                <list string="Cancel Tagihan Birojasa">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="division"/>
+                    <field name="birojasa_billing_id"/>
+                    <field name="date"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_birojasa_billing_cancel_search" model="ir.ui.view">
+            <field name="name">tw.birojasa.billing.cancel.search</field>
+            <field name="model">tw.birojasa.billing.cancel</field>
+            <field name="arch" type="xml">
+                <search string="Search Cancel Tagihan Birojasa">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="birojasa_billing_id"/>
+                    <filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+                    <filter name="waiting_for_approval" string="Waiting For Approval" domain="[('state','=','waiting_for_approval')]"/>
+                    <filter name="approved" string="Approved" domain="[('state','=','approved')]"/>
+                    <filter name="confirmed" string="Confirmed" domain="[('state','=','confirmed')]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_state" string="Status" context="{'group_by':'state'}"/>
+                        <filter name="group_by_date" string="Date" context="{'group_by':'date'}"/>
+                        <filter name="group_by_company" string="Branch" context="{'group_by':'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="inherit_birojasa_billing_cancel_form_view">
+            <field name="name">tw.birojasa.billing.cancel.form</field>
+            <field name="model">tw.birojasa.billing.cancel</field>
+            <field name="inherit_id" ref="tw_cancellation.tw_cancellation_form_view"/>
+            <field name="arch" type="xml">
+                <field name="transaction_name" position="after">
+                    <field name="birojasa_billing_id" required="1" readonly="state != 'draft'" options="{'no_create':True,'no_open':True}" domain="[('company_id','=',company_id), ('state', '=', 'confirmed')]" invisible="context.get('default_model_type') != 'tw.birojasa.billing.cancel'"/>
+                </field>
+                <xpath expr="//button[@name='action_request_approval']" position="attributes">
+                    <attribute name="groups">tw_birojasa_billing_cancel.group_tw_birojasa_billing_cancel_rfa_approve</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_reject_or_cancel' and contains(@context, 'Cancel')]" position="attributes">
+                    <attribute name="groups">tw_birojasa_billing_cancel.group_tw_birojasa_billing_cancel_approval_cancel</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_confirm']" position="attributes">
+                    <attribute name="groups">tw_birojasa_billing_cancel.group_tw_birojasa_billing_cancel_confirm</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="birojasa_billing_cancel_unit_action" model="ir.actions.act_window">
+            <field name="name">Cancel Tagihan Birojasa</field>
+            <field name="res_model">tw.birojasa.billing.cancel</field>
+            <field name="search_view_id" ref="view_birojasa_billing_cancel_search"/>
+            <field name="context" eval="
+            {
+            'default_model_id': ref('tw_birojasa_billing_cancel.model_tw_birojasa_billing_cancel'),
+            'default_model_type': 'tw.birojasa.billing.cancel',
+            'default_division': 'Unit',
+            'readonly_division': True,
+            'search_default_draft': True,
+            'search_default_waiting_for_approval': True,
+            'search_default_approved':True,
+            }
+            "/>
+            <field name="domain">[('division','=','Unit'),'|',('birojasa_billing_id','!=',False),('model_id.model','=','tw.birojasa.billing.cancel')]</field>
+        </record>
+
+        <record id="birojasa_billing_cancel_unit_action_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="birojasa_billing_cancel_list_view"/>
+            <field name="act_window_id" ref="birojasa_billing_cancel_unit_action"/>
+        </record>
+
+        <record id="birojasa_billing_cancel_unit_action_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="inherit_birojasa_billing_cancel_form_view"/>
+            <field name="act_window_id" ref="birojasa_billing_cancel_unit_action"/>
+        </record>
+    </data>
+</odoo>

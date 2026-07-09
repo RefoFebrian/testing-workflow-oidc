@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tw_report_cash_count_form" model="ir.ui.view">
+        <field name="name">tw.report.cash.count.form</field>
+        <field name="model">tw.report.cash.count</field>
+        <field name="arch" type="xml">
+            <form string="Report Cash Count">
+                <group>
+                    <group>
+                        <field name="date" widget="date" required="1"/>
+                    </group>
+                </group>
+                <notebook>
+                    <page string="Branch">
+                        <field name="company_ids"/>
+                    </page>
+                </notebook>
+                <footer>
+                    <button name="action_print_report" string="Export Report" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_tw_report_cash_count" model="ir.actions.act_window">
+        <field name="name">Report Cash Count</field>
+        <field name="res_model">tw.report.cash.count</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="1">
+
+      <record id="firebase_content_template_tomorrow_followup_reminder" model="tw.firebase.content.template">
+        <field name="name">Tomorrow Followup Reminder</field>
+        <field name="content" type="html">
+            <p>
+               <p> <b>Hi, %penerima% </b> <br /> Jadwal Follow Up konsumen besok ada %jumlah_followup% :</p>
+                  <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                    <tbody>
+                      <tr>
+                        <td style="width: 30%;white-space:nowrap; overflow: hidden; text-overflow: ellipsis;">%customers%</td>
+                        <td style="width: 40%;text-align:left">%dates% </td>
+                        <td style="width: 30%;text-align:left">%followup_by% </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                    <p> <b>Jangan lupa untuk di Follow Up.</b> </p>
+                    <br /> <br /> Terimakasih, <br /><br /><p>HondaKita</p>
+                </p>
+          </field>
+      </record>
+
+      <record id="firebase_content_template_followup_reminder" model="tw.firebase.content.template">
+        <field name="name">Before Followup Reminder</field>
+        <field name="content" type="html">
+            <p>
+               <p> <b>Hi, %penerima% </b> <br /> Jadwal Follow Up konsumen hari ini :</p>
+                  <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                    <tbody>
+                      <tr>
+                        <td style="width: 35%;">Nama</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_name% </td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Waktu</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%tgl_followup% </td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Minat</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_minat%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Folowup By</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_followup_by%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Produk</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_product%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Pembayaran</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_payment_type%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Catatan</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_note%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                    <p> <b>Lakukan Follow Up sesuai dengan waktu yang telah ditentukan.</b> </p>
+                    <br /> <br /> Terimakasih, <br /><br /><p>HondaKita</p>
+                </p>
+          </field>
+      </record>
+
+      <record id="firebase_content_template_daily_followup_reminder" model="tw.firebase.content.template">
+        <field name="name">Daily Followup Reminder</field>
+        <field name="content" type="html">
+            <p>
+               <p>Kepada %penerima% sebagai %jabatan% %dealer% <br /> Berikut kami informasikan bahwa data prospek :</p>
+                  <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                    <tbody>
+                      <tr>
+                        <td style="width: 35%;">Nama</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_name% </td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">No HP</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_no_hp%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Folowup By</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_followup_by%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Minat</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_minat%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Produk</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_product%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                    <p> Harus dilakukan followup pada hari ini(%tgl_followup%). </p>
+                    <p> <b>Untuk dapat mengubungi kosumen bisa klik icon Telp atau WA di atas.</b> </p>
+                    <br /> <br /> <br /> Terimakasih, <br /><br /><p>HondaKita</p>
+                </p>
+          </field>
+      </record>
+
+      <record id="firebase_content_template_overdue_notification" model="tw.firebase.content.template">
+        <field name="name">Overdue Notification</field>
+        <field name="content" type="html">
+            <p>
+               <p>Hi, %penerima% <br/> Kamu <span style="color: #ff0000;">belum melakukan Follow Up</span> pada konsumen ini :</p>
+                  <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                    <tbody>
+                      <tr>
+                        <td style="width: 35%;">Nama</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_name% </td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Janji Follow up</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_followup_date%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Folowup By</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_followup_by%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Minat</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_minat%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Produk</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_product%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Jenis Pembayaran</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_payment_type%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Catatan</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_note%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                    <p>
+                      <br />
+                        Mohon lakukan Follow Up sebelum pukul %deadline%.
+                      <br />
+                    </p>
+                    <p> <b>Untuk dapat mengubungi kosumen bisa klik icon Telp atau WA di atas.</b> </p>
+                    <br /> <br /> Terimakasih, <br /><br /><p>HondaKita</p>
+                </p>
+          </field>
+      </record>
+
+      <record id="firebase_content_template_overdue_kacab_reminder" model="tw.firebase.content.template">
+        <field name="name">Overdue Kacab Notification</field>
+        <field name="content" type="html">
+            <p>
+               <p>Hi, %penerima% <br/> Salesman mu %salesman_name% <br/> <span style="color: #ff0000;">belum melakukan Follow Up</span> pada konsumen ini :</p>
+                  <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                    <tbody>
+                      <tr>
+                        <td style="width: 35%;">Nama</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_name% </td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Janji Follow up</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_followup_date%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Folowup By</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_followup_by%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Minat</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_minat%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Produk</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_product%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Pembayaran</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_payment_type%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Catatan</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_note%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                    <p>
+                      <br/>
+                        Mohon lakukan Follow Up konsumen ini secepatnya.
+                      <br/> <br/>
+                    </p>
+                    <p> <b>Untuk dapat mengubungi kosumen bisa klik icon Telp atau WA di atas.</b> </p>
+                    <br /> <br /> Terimakasih, <br /><br /><p>HondaKita</p>
+                </p>
+          </field>
+      </record>
+
+      <record id="firebase_content_template_stnk_followup_reminder" model="tw.firebase.content.template">
+        <field name="name">STNK Followup Reminder</field>
+        <field name="content" type="html">
+            <p>
+               <p>Kepada %penerima% sebagai %jabatan% %dealer% <br /> Berikut kami informasikan bahwa data faktur :</p>
+                  <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                    <tbody>
+                      <tr>
+                        <td style="width: 35%;">Nama</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%faktur_name% </td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">No KTP</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%faktur_no_ktp%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">No HP</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%faktur_no_hp%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">No Engine</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%faktur_no_engine%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                    <p> Sudah selesai proses STNK pada %tgl_stnk% dan sudah dapat diserahkan kepada konsumen. </p>
+                    <p> <b>Untuk dapat mengubungi kosumen bisa klik icon Telp atau WA di atas.</b> </p>
+                    <br /> <br /> <br /> Terimakasih, <br /><br /><p>HondaKita</p>
+                </p>
+          </field>
+      </record>
+
+      <record id="firebase_content_template_bpkb_followup_reminder" model="tw.firebase.content.template">
+        <field name="name">BPKB Followup Reminder</field>
+        <field name="content" type="html">
+            <p>
+               <p>Kepada %penerima% sebagai %jabatan% %dealer% <br /> Berikut kami informasikan bahwa data faktur :</p>
+                  <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                    <tbody>
+                      <tr>
+                        <td style="width: 35%;">Nama</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%faktur_name% </td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">No KTP</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%faktur_no_ktp%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">No HP</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%faktur_no_hp%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">No Engine</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%faktur_no_engine%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                    <p> Sudah selesai proses BPKB pada %tgl_bpkb% dan sudah dapat diserahkan kepada konsumen. </p>
+                    <p> <b>Untuk dapat mengubungi kosumen bisa klik icon Telp atau WA di atas.</b> </p>
+                    <br /> <br /> <br /> Terimakasih, <br /><br /><p>HondaKita</p>
+                </p>
+          </field>
+      </record>
+
+      <record id="firebase_content_template_finco_new_order" model="tw.firebase.content.template">
+        <field name="name">Finco New Order</field>
+        <field name="content" type="html">
+            <p>
+               <p> Kepada PT. Federal International Finance</p>
+               <p> kami beritahukan bahwa ada status New Order <br /> Berikut ini detail data konsumen :</p>
+                  <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                    <tbody>
+                      <tr>
+                        <td style="width: 35%;">Branch</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_branch% </td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Nama</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_name% </td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Alamat</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_alamat%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Product</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_product%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">DP</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_dp%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Cicilan</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_cicilan%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Tenor</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_tenor%</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 35%;">Tgl Pengajuan</td>
+                        <td style="width: 5%;">:</td>
+                        <td style="width: 60%;">%prospek_tgl_pengajuan%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                    <p> Mohon untuk segera diproses. </p>
+                    <br /> <br /> <br /> Terimakasih, <br /><br /><p>HondaKita</p>
+                </p>
+          </field>
+      </record>
+
+      <record id="firebase_content_template_sp_notification_open_kacab_reminder" model="tw.firebase.content.template">
+        <field name="name">SP Open Notification Kacab</field>
+        <field name="content" type="html">
+          <p>
+            Kepada Yth. %name%,<br/>
+            sehubungan dengan karyawan anda yang bernama :
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+                  <td style="width: 40%;white-space:nowrap; overflow: hidden; text-overflow: ellipsis;">%left%</td>
+                  <td style="width: 60%;white-space:nowrap; overflow: hidden; text-overflow: ellipsis;">%right%</td>
+                </tr>
+              </tbody>
+            </table>
+            <br/>
+            Mohon segera konfirmasi terkait Surat Peringatan ini melalui Aplikasi doodool atau Situs Web Tunas Honda.<br/>
+            Atas Perhatian anda kami ucapkan terimakasih. Salam Satu Hati.
+          </p>
+        </field>
+      </record>
+
+      <record id="firebase_content_template_sp_notification_confirmed_kacab_reminder" model="tw.firebase.content.template">
+        <field name="name">SP Corfirmed Notification Kacab</field>
+        <field name="content" type="html">
+          <p>
+            Kepada Yth. %name%,<br/>
+            Surat Peringatan untuk karyawan anda yang bernama :
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+                  <td style="width: 40%;white-space:nowrap; overflow: hidden; text-overflow: ellipsis;">%left%</td>
+                  <td style="width: 60%;white-space:nowrap; overflow: hidden; text-overflow: ellipsis;">%right%</td>
+                </tr>
+              </tbody>
+            </table>
+            <br/>
+            Telah aktif. 
+            Atas Perhatian anda kami ucapkan terimakasih. Salam Satu Hati.
+          </p>
+        </field>
+      </record>
+      
+      <record id="firebase_content_template_sp_notification_confirmed_employee_reminder" model="tw.firebase.content.template">
+        <field name="name">SP Notification Employee</field>
+        <field name="content" type="html">
+          <p>
+            Kepada Yth. %name%,<br/>
+            anda telah mendapatkan surat peringatan (SP %sp_level%).<br/>
+            Silahkan konfirmasi lakukan konfirmasi melalui Aplikasi doodool atau Situs Web Tunas Honda.<br/>
+            Atas Perhatian anda kami ucapkan terimakasih. Salam Satu Hati.
+          </p>
+        </field>
+      </record>
+
+      <record id="firebase_content_template_notification_approval_pbt" model="tw.firebase.content.template">
+        <field name="name">Approval Input Sisa Margin</field>
+        <field name="content" type="html">
+          <p>
+            Kepada Yth. <strong>%name%</strong>,<br/>
+            Anda diharapkan untuk melakukan approval dan pengecekan terhadap Sisa Margin yang sudah diupload oleh cabang berikut:<br/>
+            %branch%
+            <br />
+            Jika tidak upload sisa margin dan status belum approved maka <strong>insentif tidak dapat dihitung</strong>,
+            jika master sisa margin belum aktif maka <strong>tidak bisa buka DO di doodolan.</strong><br /><br />
+            Atas Perhatian anda kami ucapkan terimakasih.<br />Salam Satu Hati.
+          </p>
+        </field>
+      </record>
+
+      <record id="firebase_content_template_notification_reminder_input_pbt_to_soh" model="tw.firebase.content.template">
+        <field name="name">Reminder Input Sisa Margin</field>
+        <field name="content" type="html">
+          <p>
+            Kepada Yth. <strong>%name%</strong>,<br/>
+            Anda diharapkan untuk segera upload Sisa Margin untuk bulan ini!<br />
+            Untuk melakukan download format Sisa Margin silakan buka menu <strong>PBT > Download Input Sisa Margin</strong><br />
+            Untuk melakukan upload Sisa Margin silakan buka menu <strong>PBT > Upload Input Sisa Margin</strong>
+            Jika tidak upload sisa margin dan status belum approved maka <strong>insentif tidak dapat dihitung</strong>,
+            jika master sisa margin belum aktif maka <strong>tidak bisa buka DO di doodolan.</strong><br /><br />
+            Atas Perhatian anda kami ucapkan terimakasih.<br />
+            Salam Satu Hati.
+            
+          </p>
+        </field>
+      </record>
+
+  </data>
+</odoo>

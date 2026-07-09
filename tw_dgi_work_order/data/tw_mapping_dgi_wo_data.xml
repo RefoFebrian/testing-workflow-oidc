@@ -1,0 +1,1694 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--
+        =============================================================
+        DGI Work Order (PKB) Response Mappings
+
+        Field yang di-handle DGI Engine:
+          - dealerId          → company_id   (relation lookup)
+          - noWorkOrder       → md_reference_pkb
+          - noSAForm          → md_reference_sa
+          - statusWorkOrder   → validation (skip Cancel = '5')
+          - __default__       → is_dgi = True
+          - __default__       → division = 'Sparepart'
+
+        Field kompleks (dihandle di wizard _create_record_from_response):
+          - namaPemilik/alamat/kodeXxx  → customer_stnk_id  (find/create res.partner)
+          - namaPembawa/alamat/kodeXxx  → partner_id         (find/create res.partner)
+          - noMesin / noRangka          → lot_id             (find/create stock.lot)
+          - services[]                  → order_line (service lines + KPB type detect)
+          - parts[]                     → order_line (part lines by partsNumber)
+          - informasiBensin             → fuel               (value alias map)
+          - hubunganDenganPemilik       → relationship_with_the_owner_id
+          - asalUnitEntry               → reason_to_ahass_id
+          - hondaIdMekanik              → mechanic_id
+          - noWorkOrderJobReturn        → type WAR + previous_work_order_id
+          - statusWorkOrder             → state_dgi (value alias map)
+        =============================================================
+        -->
+
+        <!-- ==================== HSO ==================== -->
+
+        <record id="mapping_wo_hso_company" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_hso"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_wo_hso_no_wo" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_hso"/>
+            <field name="json_path">noWorkOrder</field>
+            <field name="target_field">md_reference_pkb</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">No Work Order → md_reference_pkb</field>
+        </record>
+
+        <record id="mapping_wo_hso_no_sa" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_hso"/>
+            <field name="json_path">noSAForm</field>
+            <field name="target_field">md_reference_sa</field>
+            <field name="field_type">direct</field>
+            <field name="notes">No SA Form → md_reference_sa</field>
+        </record>
+
+        <record id="mapping_wo_hso_is_dgi" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_hso"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">is_dgi</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">true</field>
+            <field name="notes">Static: is_dgi = True</field>
+        </record>
+
+        <record id="mapping_wo_hso_division" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_hso"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">division</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">Sparepart</field>
+            <field name="notes">Static default division → Sparepart</field>
+        </record>
+
+        <!-- Filter: skip statusWorkOrder = '5' (Cancel) per HSO -->
+        <record id="mapping_wo_hso_status_filter" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_hso"/>
+            <field name="json_path">statusWorkOrder</field>
+            <field name="field_type">validation</field>
+            <field name="validation_operator">!=</field>
+            <field name="expected_value">5</field>
+            <field name="notes">Filter: skip statusWorkOrder = 5 (Cancel)</field>
+        </record>
+
+        <!-- Mappings dynamically injected for HSO -->
+        <record id="mapping_wo_hso_fuel" model="tw.mapping.response">
+            <field name="sequence">61</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_hso"/>
+            <field name="json_path">informasiBensin</field>
+            <field name="target_field">fuel</field>
+            <field name="field_type">direct</field>
+            <field name="value_alias">{"1": "25", "2": "50", "3": "75", "4": "100"}</field>
+            <field name="default_value">50</field>
+        </record>
+
+        <record id="mapping_wo_hso_relationship" model="tw.mapping.response">
+            <field name="sequence">62</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_hso"/>
+            <field name="json_path">hubunganDenganPemilik</field>
+            <field name="target_field">relationship_with_the_owner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="relation_search_domain">[('type', '=', 'HubunganDenganPemilik')]</field>
+            <field name="value_alias">{"0": "Sendiri", "1": "Orang Tua", "2": "Anak", "3": "Saudara", "4": "Karyawan", "5": "Teman", "6": "Suami/Istri"}</field>
+            <field name="default_value">Lainnya</field>
+        </record>
+
+        <record id="mapping_wo_hso_reason_to_ahass" model="tw.mapping.response">
+            <field name="sequence">63</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_hso"/>
+            <field name="json_path">asalUnitEntry</field>
+            <field name="target_field">reason_to_ahass_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="relation_search_domain">[('type', '=', 'AlasanKeAhass')]</field>
+            <field name="value_alias">{"NP": "non promotion", "Non-Promotion": "non promotion", "RM": "sms call remainder", "Reminder": "sms call remainder", "AE01": "ahass event ahm", "AE02": "ahass event md", "AE03": "ahass event ahass", "PEIN": "pit express indoor", "PEOT": "pit express outdoor", "SVPS": "pos service", "SVJD": "join dealer activity", "SVGC": "group customer", "SVPA": "public area", "SVER": "emergency", "SVAH": "ahass keliling", "SVHC": "home care"}</field>
+            <field name="default_value">regular visit ahass</field>
+        </record>
+
+        <record id="mapping_wo_hso_mechanic" model="tw.mapping.response">
+            <field name="sequence">64</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_hso"/>
+            <field name="json_path">hondaIdMekanik</field>
+            <field name="target_field">mechanic_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="hr.model_hr_employee"/>
+            <field name="relation_lookup_field">md_employee_id</field>
+            <field name="relation_search_domain">['|', ('md_employee_id', '=', value), ('honda_id', '=', value)]</field>
+        </record>
+
+        <record id="mapping_wo_hso_status_dgi" model="tw.mapping.response">
+            <field name="sequence">65</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_hso"/>
+            <field name="json_path">statusWorkOrder</field>
+            <field name="target_field">state_dgi</field>
+            <field name="field_type">direct</field>
+            <field name="value_alias">{"1": "Start", "2": "Pause", "3": "Pending", "4": "Finish", "5": "Cancel"}</field>
+            <field name="default_value">Start</field>
+        </record>
+
+        <record id="mapping_wo_HSO_chassis" model="tw.mapping.response">
+            <field name="sequence">66</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_hso"/>
+            <field name="json_path">noRangka</field>
+            <field name="target_field">chassis_number</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_HSO_plate" model="tw.mapping.response">
+            <field name="sequence">67</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_hso"/>
+            <field name="json_path">noPolisi</field>
+            <field name="target_field">plate_number</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_HSO_km" model="tw.mapping.response">
+            <field name="sequence">68</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_hso"/>
+            <field name="json_path">kmTerakhir</field>
+            <field name="target_field">km</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_HSO_mobile" model="tw.mapping.response">
+            <field name="sequence">69</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_hso"/>
+            <field name="json_path">noTelpPembawa</field>
+            <field name="target_field">mobile</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_HSO_prod_year" model="tw.mapping.response">
+            <field name="sequence">70</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_hso"/>
+            <field name="json_path">tahunMotor</field>
+            <field name="target_field">production_year</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_HSO_customer_stnk" model="tw.mapping.response">
+            <field name="sequence">71</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_hso"/>
+            <field name="json_path">namaPemilik</field>
+            <field name="target_field">customer_stnk_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "namaPemilik",
+                "street": "alamatPemilik",
+                "street_domicile": "alamatPemilik",
+                "mobile": "noTelpPemilik",
+                "sub_district_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPemilik", "_type": "m2o"},
+                "sub_district_domicile_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPemilik", "_type": "m2o"},
+                "district_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPemilik", "_type": "m2o"},
+                "district_domicile_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPemilik", "_type": "m2o"},
+                "city_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPemilik", "_type": "m2o"},
+                "city_domicile_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPemilik", "_type": "m2o"},
+                "state_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPemilik", "_type": "m2o"},
+                "state_domicile_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPemilik", "_type": "m2o"}
+            }</field>
+        </record>
+
+        <record id="mapping_wo_HSO_partner" model="tw.mapping.response">
+            <field name="sequence">72</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_hso"/>
+            <field name="json_path">noTelpPembawa</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">mobile</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "namaPembawa",
+                "street": "alamatPembawa",
+                "street_domicile": "alamatPembawa",
+                "mobile": "noTelpPembawa",
+                "sub_district_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPembawa", "_type": "m2o"},
+                "sub_district_domicile_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPembawa", "_type": "m2o"},
+                "district_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPembawa", "_type": "m2o"},
+                "district_domicile_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPembawa", "_type": "m2o"},
+                "city_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPembawa", "_type": "m2o"},
+                "city_domicile_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPembawa", "_type": "m2o"},
+                "state_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPembawa", "_type": "m2o"},
+                "state_domicile_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPembawa", "_type": "m2o"}
+            }</field>
+        </record>
+
+        <record id="mapping_wo_HSO_lot" model="tw.mapping.response">
+            <field name="sequence">73</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_hso"/>
+            <field name="json_path">noMesin</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "noMesin",
+                "chassis_number": "noRangka",
+                "plate_number": "noPolisi",
+                "production_year": "tahunMotor",
+                "state": "workshop",
+                "product_id": {"_lookup": "product.product", "_field": "unit_type_code", "_value": "kodeTipeUnit", "_type": "m2o"},
+                "customer_stnk_id": {"_lookup": "res.partner", "_field": "name", "_value": "namaPemilik", "_type": "m2o"},
+                "partner_id": {"_lookup": "res.partner", "_field": "mobile", "_value": "noTelpPembawa", "_type": "m2o"}
+            }</field>
+        </record>
+
+
+
+
+
+        <!-- ==================== ASP ==================== -->
+
+        <record id="mapping_wo_asp_company" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_asp"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_wo_asp_no_wo" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_asp"/>
+            <field name="json_path">noWorkOrder</field>
+            <field name="target_field">md_reference_pkb</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">No Work Order → md_reference_pkb</field>
+        </record>
+
+        <record id="mapping_wo_asp_no_sa" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_asp"/>
+            <field name="json_path">noSAForm</field>
+            <field name="target_field">md_reference_sa</field>
+            <field name="field_type">direct</field>
+            <field name="notes">No SA Form → md_reference_sa</field>
+        </record>
+
+        <record id="mapping_wo_asp_is_dgi" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_asp"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">is_dgi</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">true</field>
+            <field name="notes">Static: is_dgi = True</field>
+        </record>
+
+        <record id="mapping_wo_asp_division" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_asp"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">division</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">Sparepart</field>
+            <field name="notes">Static default division → Sparepart</field>
+        </record>
+
+        <!-- Filter: ASP pakai numeric, skip status 5 -->
+        <record id="mapping_wo_asp_status_filter" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_asp"/>
+            <field name="json_path">statusWorkOrder</field>
+            <field name="field_type">validation</field>
+            <field name="validation_operator">!=</field>
+            <field name="expected_value">5</field>
+            <field name="notes">Filter: skip statusWorkOrder = 5 (Cancel)</field>
+        </record>
+
+        <!-- Mappings dynamically injected for ASP -->
+        <record id="mapping_wo_asp_fuel" model="tw.mapping.response">
+            <field name="sequence">61</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_asp"/>
+            <field name="json_path">informasiBensin</field>
+            <field name="target_field">fuel</field>
+            <field name="field_type">direct</field>
+            <field name="value_alias">{"1": "25", "2": "50", "3": "75", "4": "100"}</field>
+            <field name="default_value">50</field>
+        </record>
+
+        <record id="mapping_wo_asp_relationship" model="tw.mapping.response">
+            <field name="sequence">62</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_asp"/>
+            <field name="json_path">hubunganDenganPemilik</field>
+            <field name="target_field">relationship_with_the_owner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="relation_search_domain">[('type', '=', 'HubunganDenganPemilik')]</field>
+            <field name="value_alias">{"0": "Sendiri", "1": "Orang Tua", "2": "Anak", "3": "Saudara", "4": "Karyawan", "5": "Teman", "6": "Suami/Istri"}</field>
+            <field name="default_value">Lainnya</field>
+        </record>
+
+        <record id="mapping_wo_asp_reason_to_ahass" model="tw.mapping.response">
+            <field name="sequence">63</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_asp"/>
+            <field name="json_path">asalUnitEntry</field>
+            <field name="target_field">reason_to_ahass_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="relation_search_domain">[('type', '=', 'AlasanKeAhass')]</field>
+            <field name="value_alias">{"NP": "non promotion", "Non-Promotion": "non promotion", "RM": "sms call remainder", "Reminder": "sms call remainder", "AE01": "ahass event ahm", "AE02": "ahass event md", "AE03": "ahass event ahass", "PEIN": "pit express indoor", "PEOT": "pit express outdoor", "SVPS": "pos service", "SVJD": "join dealer activity", "SVGC": "group customer", "SVPA": "public area", "SVER": "emergency", "SVAH": "ahass keliling", "SVHC": "home care"}</field>
+            <field name="default_value">regular visit ahass</field>
+        </record>
+
+        <record id="mapping_wo_asp_mechanic" model="tw.mapping.response">
+            <field name="sequence">64</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_asp"/>
+            <field name="json_path">hondaIdMekanik</field>
+            <field name="target_field">mechanic_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="hr.model_hr_employee"/>
+            <field name="relation_lookup_field">md_employee_id</field>
+            <field name="relation_search_domain">['|', ('md_employee_id', '=', value), ('honda_id', '=', value)]</field>
+        </record>
+
+        <record id="mapping_wo_asp_status_dgi" model="tw.mapping.response">
+            <field name="sequence">65</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_asp"/>
+            <field name="json_path">statusWorkOrder</field>
+            <field name="target_field">state_dgi</field>
+            <field name="field_type">direct</field>
+            <field name="value_alias">{"1": "Start", "2": "Pause", "3": "Pending", "4": "Finish", "5": "Cancel"}</field>
+            <field name="default_value">Start</field>
+        </record>
+
+        <record id="mapping_wo_ASP_chassis" model="tw.mapping.response">
+            <field name="sequence">66</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_asp"/>
+            <field name="json_path">noRangka</field>
+            <field name="target_field">chassis_number</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_ASP_plate" model="tw.mapping.response">
+            <field name="sequence">67</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_asp"/>
+            <field name="json_path">noPolisi</field>
+            <field name="target_field">plate_number</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_ASP_km" model="tw.mapping.response">
+            <field name="sequence">68</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_asp"/>
+            <field name="json_path">kmTerakhir</field>
+            <field name="target_field">km</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_ASP_mobile" model="tw.mapping.response">
+            <field name="sequence">69</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_asp"/>
+            <field name="json_path">noTelpPembawa</field>
+            <field name="target_field">mobile</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_ASP_prod_year" model="tw.mapping.response">
+            <field name="sequence">70</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_asp"/>
+            <field name="json_path">tahunMotor</field>
+            <field name="target_field">production_year</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_ASP_customer_stnk" model="tw.mapping.response">
+            <field name="sequence">71</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_asp"/>
+            <field name="json_path">namaPemilik</field>
+            <field name="target_field">customer_stnk_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "namaPemilik",
+                "street": "alamatPemilik",
+                "street_domicile": "alamatPemilik",
+                "mobile": "noTelpPemilik",
+                "sub_district_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPemilik", "_type": "m2o"},
+                "sub_district_domicile_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPemilik", "_type": "m2o"},
+                "district_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPemilik", "_type": "m2o"},
+                "district_domicile_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPemilik", "_type": "m2o"},
+                "city_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPemilik", "_type": "m2o"},
+                "city_domicile_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPemilik", "_type": "m2o"},
+                "state_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPemilik", "_type": "m2o"},
+                "state_domicile_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPemilik", "_type": "m2o"}
+            }</field>
+        </record>
+
+        <record id="mapping_wo_ASP_partner" model="tw.mapping.response">
+            <field name="sequence">72</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_asp"/>
+            <field name="json_path">noTelpPembawa</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">mobile</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "namaPembawa",
+                "street": "alamatPembawa",
+                "street_domicile": "alamatPembawa",
+                "mobile": "noTelpPembawa",
+                "sub_district_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPembawa", "_type": "m2o"},
+                "sub_district_domicile_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPembawa", "_type": "m2o"},
+                "district_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPembawa", "_type": "m2o"},
+                "district_domicile_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPembawa", "_type": "m2o"},
+                "city_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPembawa", "_type": "m2o"},
+                "city_domicile_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPembawa", "_type": "m2o"},
+                "state_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPembawa", "_type": "m2o"},
+                "state_domicile_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPembawa", "_type": "m2o"}
+            }</field>
+        </record>
+
+        <record id="mapping_wo_ASP_lot" model="tw.mapping.response">
+            <field name="sequence">73</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_asp"/>
+            <field name="json_path">noMesin</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "noMesin",
+                "chassis_number": "noRangka",
+                "plate_number": "noPolisi",
+                "production_year": "tahunMotor",
+                "state": "workshop",
+                "product_id": {"_lookup": "product.product", "_field": "unit_type_code", "_value": "kodeTipeUnit", "_type": "m2o"},
+                "customer_stnk_id": {"_lookup": "res.partner", "_field": "name", "_value": "namaPemilik", "_type": "m2o"},
+                "partner_id": {"_lookup": "res.partner", "_field": "mobile", "_value": "noTelpPembawa", "_type": "m2o"}
+            }</field>
+        </record>
+
+
+
+
+
+        <!-- ==================== DAM ==================== -->
+
+        <record id="mapping_wo_dam_company" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_dam"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_wo_dam_no_wo" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_dam"/>
+            <field name="json_path">noWorkOrder</field>
+            <field name="target_field">md_reference_pkb</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">No Work Order → md_reference_pkb</field>
+        </record>
+
+        <record id="mapping_wo_dam_no_sa" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_dam"/>
+            <field name="json_path">noSAForm</field>
+            <field name="target_field">md_reference_sa</field>
+            <field name="field_type">direct</field>
+            <field name="notes">No SA Form → md_reference_sa</field>
+        </record>
+
+        <record id="mapping_wo_dam_is_dgi" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_dam"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">is_dgi</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">true</field>
+            <field name="notes">Static: is_dgi = True</field>
+        </record>
+
+        <record id="mapping_wo_dam_division" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_dam"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">division</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">Sparepart</field>
+            <field name="notes">Static default division → Sparepart</field>
+        </record>
+
+        <record id="mapping_wo_dam_status_filter" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_dam"/>
+            <field name="json_path">statusWorkOrder</field>
+            <field name="field_type">validation</field>
+            <field name="validation_operator">!=</field>
+            <field name="expected_value">5</field>
+            <field name="notes">Filter: skip statusWorkOrder = 5 (Cancel)</field>
+        </record>
+
+        <!-- Mappings dynamically injected for DAM -->
+        <record id="mapping_wo_dam_fuel" model="tw.mapping.response">
+            <field name="sequence">61</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_dam"/>
+            <field name="json_path">informasiBensin</field>
+            <field name="target_field">fuel</field>
+            <field name="field_type">direct</field>
+            <field name="value_alias">{"1": "25", "2": "50", "3": "75", "4": "100"}</field>
+            <field name="default_value">50</field>
+        </record>
+
+        <record id="mapping_wo_dam_relationship" model="tw.mapping.response">
+            <field name="sequence">62</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_dam"/>
+            <field name="json_path">hubunganDenganPemilik</field>
+            <field name="target_field">relationship_with_the_owner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="relation_search_domain">[('type', '=', 'HubunganDenganPemilik')]</field>
+            <field name="value_alias">{"0": "Sendiri", "1": "Orang Tua", "2": "Anak", "3": "Saudara", "4": "Karyawan", "5": "Teman", "6": "Suami/Istri"}</field>
+            <field name="default_value">Lainnya</field>
+        </record>
+
+        <record id="mapping_wo_dam_reason_to_ahass" model="tw.mapping.response">
+            <field name="sequence">63</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_dam"/>
+            <field name="json_path">asalUnitEntry</field>
+            <field name="target_field">reason_to_ahass_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="relation_search_domain">[('type', '=', 'AlasanKeAhass')]</field>
+            <field name="value_alias">{"NP": "non promotion", "Non-Promotion": "non promotion", "RM": "sms call remainder", "Reminder": "sms call remainder", "AE01": "ahass event ahm", "AE02": "ahass event md", "AE03": "ahass event ahass", "PEIN": "pit express indoor", "PEOT": "pit express outdoor", "SVPS": "pos service", "SVJD": "join dealer activity", "SVGC": "group customer", "SVPA": "public area", "SVER": "emergency", "SVAH": "ahass keliling", "SVHC": "home care"}</field>
+            <field name="default_value">regular visit ahass</field>
+        </record>
+
+        <record id="mapping_wo_dam_mechanic" model="tw.mapping.response">
+            <field name="sequence">64</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_dam"/>
+            <field name="json_path">hondaIdMekanik</field>
+            <field name="target_field">mechanic_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="hr.model_hr_employee"/>
+            <field name="relation_lookup_field">md_employee_id</field>
+            <field name="relation_search_domain">['|', ('md_employee_id', '=', value), ('honda_id', '=', value)]</field>
+        </record>
+
+        <record id="mapping_wo_dam_status_dgi" model="tw.mapping.response">
+            <field name="sequence">65</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_dam"/>
+            <field name="json_path">statusWorkOrder</field>
+            <field name="target_field">state_dgi</field>
+            <field name="field_type">direct</field>
+            <field name="value_alias">{"1": "Start", "2": "Pause", "3": "Pending", "4": "Finish", "5": "Cancel"}</field>
+            <field name="default_value">Start</field>
+        </record>
+
+        <record id="mapping_wo_DAM_chassis" model="tw.mapping.response">
+            <field name="sequence">66</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_dam"/>
+            <field name="json_path">noRangka</field>
+            <field name="target_field">chassis_number</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_DAM_plate" model="tw.mapping.response">
+            <field name="sequence">67</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_dam"/>
+            <field name="json_path">noPolisi</field>
+            <field name="target_field">plate_number</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_DAM_km" model="tw.mapping.response">
+            <field name="sequence">68</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_dam"/>
+            <field name="json_path">kmTerakhir</field>
+            <field name="target_field">km</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_DAM_mobile" model="tw.mapping.response">
+            <field name="sequence">69</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_dam"/>
+            <field name="json_path">noTelpPembawa</field>
+            <field name="target_field">mobile</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_DAM_prod_year" model="tw.mapping.response">
+            <field name="sequence">70</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_dam"/>
+            <field name="json_path">tahunMotor</field>
+            <field name="target_field">production_year</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_DAM_customer_stnk" model="tw.mapping.response">
+            <field name="sequence">71</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_dam"/>
+            <field name="json_path">namaPemilik</field>
+            <field name="target_field">customer_stnk_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "namaPemilik",
+                "street": "alamatPemilik",
+                "street_domicile": "alamatPemilik",
+                "mobile": "noTelpPemilik",
+                "sub_district_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPemilik", "_type": "m2o"},
+                "sub_district_domicile_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPemilik", "_type": "m2o"},
+                "district_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPemilik", "_type": "m2o"},
+                "district_domicile_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPemilik", "_type": "m2o"},
+                "city_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPemilik", "_type": "m2o"},
+                "city_domicile_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPemilik", "_type": "m2o"},
+                "state_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPemilik", "_type": "m2o"},
+                "state_domicile_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPemilik", "_type": "m2o"}
+            }</field>
+        </record>
+
+        <record id="mapping_wo_DAM_partner" model="tw.mapping.response">
+            <field name="sequence">72</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_dam"/>
+            <field name="json_path">noTelpPembawa</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">mobile</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "namaPembawa",
+                "street": "alamatPembawa",
+                "street_domicile": "alamatPembawa",
+                "mobile": "noTelpPembawa",
+                "sub_district_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPembawa", "_type": "m2o"},
+                "sub_district_domicile_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPembawa", "_type": "m2o"},
+                "district_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPembawa", "_type": "m2o"},
+                "district_domicile_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPembawa", "_type": "m2o"},
+                "city_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPembawa", "_type": "m2o"},
+                "city_domicile_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPembawa", "_type": "m2o"},
+                "state_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPembawa", "_type": "m2o"},
+                "state_domicile_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPembawa", "_type": "m2o"}
+            }</field>
+        </record>
+
+        <record id="mapping_wo_DAM_lot" model="tw.mapping.response">
+            <field name="sequence">73</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_dam"/>
+            <field name="json_path">noMesin</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "noMesin",
+                "chassis_number": "noRangka",
+                "plate_number": "noPolisi",
+                "production_year": "tahunMotor",
+                "state": "workshop",
+                "product_id": {"_lookup": "product.product", "_field": "unit_type_code", "_value": "kodeTipeUnit", "_type": "m2o"},
+                "customer_stnk_id": {"_lookup": "res.partner", "_field": "name", "_value": "namaPemilik", "_type": "m2o"},
+                "partner_id": {"_lookup": "res.partner", "_field": "mobile", "_value": "noTelpPembawa", "_type": "m2o"}
+            }</field>
+        </record>
+
+
+
+
+
+        <!-- ==================== DAW ==================== -->
+
+        <record id="mapping_wo_daw_company" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_daw"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_wo_daw_no_wo" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_daw"/>
+            <field name="json_path">noWorkOrder</field>
+            <field name="target_field">md_reference_pkb</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">No Work Order → md_reference_pkb</field>
+        </record>
+
+        <record id="mapping_wo_daw_no_sa" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_daw"/>
+            <field name="json_path">noSAForm</field>
+            <field name="target_field">md_reference_sa</field>
+            <field name="field_type">direct</field>
+            <field name="notes">No SA Form → md_reference_sa</field>
+        </record>
+
+        <record id="mapping_wo_daw_is_dgi" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_daw"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">is_dgi</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">true</field>
+            <field name="notes">Static: is_dgi = True</field>
+        </record>
+
+        <record id="mapping_wo_daw_division" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_daw"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">division</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">Sparepart</field>
+            <field name="notes">Static default division → Sparepart</field>
+        </record>
+
+        <record id="mapping_wo_daw_status_filter" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_daw"/>
+            <field name="json_path">statusWorkOrder</field>
+            <field name="field_type">validation</field>
+            <field name="validation_operator">!=</field>
+            <field name="expected_value">5</field>
+            <field name="notes">Filter: skip statusWorkOrder = 5 (Cancel)</field>
+        </record>
+
+        <!-- Mappings dynamically injected for DAW -->
+        <record id="mapping_wo_daw_fuel" model="tw.mapping.response">
+            <field name="sequence">61</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_daw"/>
+            <field name="json_path">informasiBensin</field>
+            <field name="target_field">fuel</field>
+            <field name="field_type">direct</field>
+            <field name="value_alias">{"1": "25", "2": "50", "3": "75", "4": "100"}</field>
+            <field name="default_value">50</field>
+        </record>
+
+        <record id="mapping_wo_daw_relationship" model="tw.mapping.response">
+            <field name="sequence">62</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_daw"/>
+            <field name="json_path">hubunganDenganPemilik</field>
+            <field name="target_field">relationship_with_the_owner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="relation_search_domain">[('type', '=', 'HubunganDenganPemilik')]</field>
+            <field name="value_alias">{"0": "Sendiri", "1": "Orang Tua", "2": "Anak", "3": "Saudara", "4": "Karyawan", "5": "Teman", "6": "Suami/Istri"}</field>
+            <field name="default_value">Lainnya</field>
+        </record>
+
+        <record id="mapping_wo_daw_reason_to_ahass" model="tw.mapping.response">
+            <field name="sequence">63</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_daw"/>
+            <field name="json_path">asalUnitEntry</field>
+            <field name="target_field">reason_to_ahass_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="relation_search_domain">[('type', '=', 'AlasanKeAhass')]</field>
+            <field name="value_alias">{"NP": "non promotion", "Non-Promotion": "non promotion", "RM": "sms call remainder", "Reminder": "sms call remainder", "AE01": "ahass event ahm", "AE02": "ahass event md", "AE03": "ahass event ahass", "PEIN": "pit express indoor", "PEOT": "pit express outdoor", "SVPS": "pos service", "SVJD": "join dealer activity", "SVGC": "group customer", "SVPA": "public area", "SVER": "emergency", "SVAH": "ahass keliling", "SVHC": "home care"}</field>
+            <field name="default_value">regular visit ahass</field>
+        </record>
+
+        <record id="mapping_wo_daw_mechanic" model="tw.mapping.response">
+            <field name="sequence">64</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_daw"/>
+            <field name="json_path">hondaIdMekanik</field>
+            <field name="target_field">mechanic_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="hr.model_hr_employee"/>
+            <field name="relation_lookup_field">md_employee_id</field>
+            <field name="relation_search_domain">['|', ('md_employee_id', '=', value), ('honda_id', '=', value)]</field>
+        </record>
+
+        <record id="mapping_wo_daw_status_dgi" model="tw.mapping.response">
+            <field name="sequence">65</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_daw"/>
+            <field name="json_path">statusWorkOrder</field>
+            <field name="target_field">state_dgi</field>
+            <field name="field_type">direct</field>
+            <field name="value_alias">{"1": "Start", "2": "Pause", "3": "Pending", "4": "Finish", "5": "Cancel"}</field>
+            <field name="default_value">Start</field>
+        </record>
+
+        <record id="mapping_wo_DAW_chassis" model="tw.mapping.response">
+            <field name="sequence">66</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_daw"/>
+            <field name="json_path">noRangka</field>
+            <field name="target_field">chassis_number</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_DAW_plate" model="tw.mapping.response">
+            <field name="sequence">67</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_daw"/>
+            <field name="json_path">noPolisi</field>
+            <field name="target_field">plate_number</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_DAW_km" model="tw.mapping.response">
+            <field name="sequence">68</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_daw"/>
+            <field name="json_path">kmTerakhir</field>
+            <field name="target_field">km</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_DAW_mobile" model="tw.mapping.response">
+            <field name="sequence">69</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_daw"/>
+            <field name="json_path">noTelpPembawa</field>
+            <field name="target_field">mobile</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_DAW_prod_year" model="tw.mapping.response">
+            <field name="sequence">70</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_daw"/>
+            <field name="json_path">tahunMotor</field>
+            <field name="target_field">production_year</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_DAW_customer_stnk" model="tw.mapping.response">
+            <field name="sequence">71</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_daw"/>
+            <field name="json_path">namaPemilik</field>
+            <field name="target_field">customer_stnk_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "namaPemilik",
+                "street": "alamatPemilik",
+                "street_domicile": "alamatPemilik",
+                "mobile": "noTelpPemilik",
+                "sub_district_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPemilik", "_type": "m2o"},
+                "sub_district_domicile_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPemilik", "_type": "m2o"},
+                "district_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPemilik", "_type": "m2o"},
+                "district_domicile_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPemilik", "_type": "m2o"},
+                "city_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPemilik", "_type": "m2o"},
+                "city_domicile_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPemilik", "_type": "m2o"},
+                "state_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPemilik", "_type": "m2o"},
+                "state_domicile_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPemilik", "_type": "m2o"}
+            }</field>
+        </record>
+
+        <record id="mapping_wo_DAW_partner" model="tw.mapping.response">
+            <field name="sequence">72</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_daw"/>
+            <field name="json_path">noTelpPembawa</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">mobile</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "namaPembawa",
+                "street": "alamatPembawa",
+                "street_domicile": "alamatPembawa",
+                "mobile": "noTelpPembawa",
+                "sub_district_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPembawa", "_type": "m2o"},
+                "sub_district_domicile_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPembawa", "_type": "m2o"},
+                "district_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPembawa", "_type": "m2o"},
+                "district_domicile_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPembawa", "_type": "m2o"},
+                "city_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPembawa", "_type": "m2o"},
+                "city_domicile_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPembawa", "_type": "m2o"},
+                "state_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPembawa", "_type": "m2o"},
+                "state_domicile_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPembawa", "_type": "m2o"}
+            }</field>
+        </record>
+
+        <record id="mapping_wo_DAW_lot" model="tw.mapping.response">
+            <field name="sequence">73</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_daw"/>
+            <field name="json_path">noMesin</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "noMesin",
+                "chassis_number": "noRangka",
+                "plate_number": "noPolisi",
+                "production_year": "tahunMotor",
+                "state": "workshop",
+                "product_id": {"_lookup": "product.product", "_field": "unit_type_code", "_value": "kodeTipeUnit", "_type": "m2o"},
+                "customer_stnk_id": {"_lookup": "res.partner", "_field": "name", "_value": "namaPemilik", "_type": "m2o"},
+                "partner_id": {"_lookup": "res.partner", "_field": "mobile", "_value": "noTelpPembawa", "_type": "m2o"}
+            }</field>
+        </record>
+
+
+
+
+
+        <!-- ==================== NPM ==================== -->
+
+        <record id="mapping_wo_npm_company" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_npm"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_wo_npm_no_wo" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_npm"/>
+            <field name="json_path">noWorkOrder</field>
+            <field name="target_field">md_reference_pkb</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">No Work Order → md_reference_pkb</field>
+        </record>
+
+        <record id="mapping_wo_npm_no_sa" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_npm"/>
+            <field name="json_path">noSAForm</field>
+            <field name="target_field">md_reference_sa</field>
+            <field name="field_type">direct</field>
+            <field name="notes">No SA Form → md_reference_sa</field>
+        </record>
+
+        <record id="mapping_wo_npm_is_dgi" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_npm"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">is_dgi</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">true</field>
+            <field name="notes">Static: is_dgi = True</field>
+        </record>
+
+        <record id="mapping_wo_npm_division" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_npm"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">division</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">Sparepart</field>
+            <field name="notes">Static default division → Sparepart</field>
+        </record>
+
+        <record id="mapping_wo_npm_status_filter" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_npm"/>
+            <field name="json_path">statusWorkOrder</field>
+            <field name="field_type">validation</field>
+            <field name="validation_operator">!=</field>
+            <field name="expected_value">5</field>
+            <field name="notes">Filter: skip statusWorkOrder = 5 (Cancel)</field>
+        </record>
+
+        <!-- Mappings dynamically injected for NPM -->
+        <record id="mapping_wo_npm_fuel" model="tw.mapping.response">
+            <field name="sequence">61</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_npm"/>
+            <field name="json_path">informasiBensin</field>
+            <field name="target_field">fuel</field>
+            <field name="field_type">direct</field>
+            <field name="value_alias">{"1": "25", "2": "50", "3": "75", "4": "100"}</field>
+            <field name="default_value">50</field>
+        </record>
+
+        <record id="mapping_wo_npm_relationship" model="tw.mapping.response">
+            <field name="sequence">62</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_npm"/>
+            <field name="json_path">hubunganDenganPemilik</field>
+            <field name="target_field">relationship_with_the_owner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="relation_search_domain">[('type', '=', 'HubunganDenganPemilik')]</field>
+            <field name="value_alias">{"0": "Sendiri", "1": "Orang Tua", "2": "Anak", "3": "Saudara", "4": "Karyawan", "5": "Teman", "6": "Suami/Istri"}</field>
+            <field name="default_value">Lainnya</field>
+        </record>
+
+        <record id="mapping_wo_npm_reason_to_ahass" model="tw.mapping.response">
+            <field name="sequence">63</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_npm"/>
+            <field name="json_path">asalUnitEntry</field>
+            <field name="target_field">reason_to_ahass_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="relation_search_domain">[('type', '=', 'AlasanKeAhass')]</field>
+            <field name="value_alias">{"NP": "non promotion", "Non-Promotion": "non promotion", "RM": "sms call remainder", "Reminder": "sms call remainder", "AE01": "ahass event ahm", "AE02": "ahass event md", "AE03": "ahass event ahass", "PEIN": "pit express indoor", "PEOT": "pit express outdoor", "SVPS": "pos service", "SVJD": "join dealer activity", "SVGC": "group customer", "SVPA": "public area", "SVER": "emergency", "SVAH": "ahass keliling", "SVHC": "home care"}</field>
+            <field name="default_value">regular visit ahass</field>
+        </record>
+
+        <record id="mapping_wo_npm_mechanic" model="tw.mapping.response">
+            <field name="sequence">64</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_npm"/>
+            <field name="json_path">hondaIdMekanik</field>
+            <field name="target_field">mechanic_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="hr.model_hr_employee"/>
+            <field name="relation_lookup_field">md_employee_id</field>
+            <field name="relation_search_domain">['|', ('md_employee_id', '=', value), ('honda_id', '=', value)]</field>
+        </record>
+
+        <record id="mapping_wo_npm_status_dgi" model="tw.mapping.response">
+            <field name="sequence">65</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_npm"/>
+            <field name="json_path">statusWorkOrder</field>
+            <field name="target_field">state_dgi</field>
+            <field name="field_type">direct</field>
+            <field name="value_alias">{"1": "Start", "2": "Pause", "3": "Pending", "4": "Finish", "5": "Cancel"}</field>
+            <field name="default_value">Start</field>
+        </record>
+
+        <record id="mapping_wo_NPM_chassis" model="tw.mapping.response">
+            <field name="sequence">66</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_npm"/>
+            <field name="json_path">noRangka</field>
+            <field name="target_field">chassis_number</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_NPM_plate" model="tw.mapping.response">
+            <field name="sequence">67</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_npm"/>
+            <field name="json_path">noPolisi</field>
+            <field name="target_field">plate_number</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_NPM_km" model="tw.mapping.response">
+            <field name="sequence">68</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_npm"/>
+            <field name="json_path">kmTerakhir</field>
+            <field name="target_field">km</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_NPM_mobile" model="tw.mapping.response">
+            <field name="sequence">69</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_npm"/>
+            <field name="json_path">noTelpPembawa</field>
+            <field name="target_field">mobile</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_NPM_prod_year" model="tw.mapping.response">
+            <field name="sequence">70</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_npm"/>
+            <field name="json_path">tahunMotor</field>
+            <field name="target_field">production_year</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_NPM_customer_stnk" model="tw.mapping.response">
+            <field name="sequence">71</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_npm"/>
+            <field name="json_path">namaPemilik</field>
+            <field name="target_field">customer_stnk_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "namaPemilik",
+                "street": "alamatPemilik",
+                "street_domicile": "alamatPemilik",
+                "mobile": "noTelpPemilik",
+                "sub_district_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPemilik", "_type": "m2o"},
+                "sub_district_domicile_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPemilik", "_type": "m2o"},
+                "district_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPemilik", "_type": "m2o"},
+                "district_domicile_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPemilik", "_type": "m2o"},
+                "city_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPemilik", "_type": "m2o"},
+                "city_domicile_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPemilik", "_type": "m2o"},
+                "state_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPemilik", "_type": "m2o"},
+                "state_domicile_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPemilik", "_type": "m2o"}
+            }</field>
+        </record>
+
+        <record id="mapping_wo_NPM_partner" model="tw.mapping.response">
+            <field name="sequence">72</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_npm"/>
+            <field name="json_path">noTelpPembawa</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">mobile</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "namaPembawa",
+                "street": "alamatPembawa",
+                "street_domicile": "alamatPembawa",
+                "mobile": "noTelpPembawa",
+                "sub_district_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPembawa", "_type": "m2o"},
+                "sub_district_domicile_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPembawa", "_type": "m2o"},
+                "district_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPembawa", "_type": "m2o"},
+                "district_domicile_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPembawa", "_type": "m2o"},
+                "city_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPembawa", "_type": "m2o"},
+                "city_domicile_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPembawa", "_type": "m2o"},
+                "state_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPembawa", "_type": "m2o"},
+                "state_domicile_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPembawa", "_type": "m2o"}
+            }</field>
+        </record>
+
+        <record id="mapping_wo_NPM_lot" model="tw.mapping.response">
+            <field name="sequence">73</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_npm"/>
+            <field name="json_path">noMesin</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "noMesin",
+                "chassis_number": "noRangka",
+                "plate_number": "noPolisi",
+                "production_year": "tahunMotor",
+                "state": "workshop",
+                "product_id": {"_lookup": "product.product", "_field": "unit_type_code", "_value": "kodeTipeUnit", "_type": "m2o"},
+                "customer_stnk_id": {"_lookup": "res.partner", "_field": "name", "_value": "namaPemilik", "_type": "m2o"},
+                "partner_id": {"_lookup": "res.partner", "_field": "mobile", "_value": "noTelpPembawa", "_type": "m2o"}
+            }</field>
+        </record>
+
+
+
+
+
+        <!-- ==================== SINSEN ==================== -->
+
+        <record id="mapping_wo_sinsen_company" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_sinsen"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_wo_sinsen_no_wo" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_sinsen"/>
+            <field name="json_path">noWorkOrder</field>
+            <field name="target_field">md_reference_pkb</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">No Work Order → md_reference_pkb</field>
+        </record>
+
+        <record id="mapping_wo_sinsen_no_sa" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_sinsen"/>
+            <field name="json_path">noSAForm</field>
+            <field name="target_field">md_reference_sa</field>
+            <field name="field_type">direct</field>
+            <field name="notes">No SA Form → md_reference_sa</field>
+        </record>
+
+        <record id="mapping_wo_sinsen_is_dgi" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_sinsen"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">is_dgi</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">true</field>
+            <field name="notes">Static: is_dgi = True</field>
+        </record>
+
+        <record id="mapping_wo_sinsen_division" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_sinsen"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">division</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">Sparepart</field>
+            <field name="notes">Static default division → Sparepart</field>
+        </record>
+
+        <record id="mapping_wo_sinsen_status_filter" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_sinsen"/>
+            <field name="json_path">statusWorkOrder</field>
+            <field name="field_type">validation</field>
+            <field name="validation_operator">!=</field>
+            <field name="expected_value">5</field>
+            <field name="notes">Filter: skip statusWorkOrder = 5 (Cancel)</field>
+        </record>
+
+        <!-- Mappings dynamically injected for SINSEN -->
+        <record id="mapping_wo_sinsen_fuel" model="tw.mapping.response">
+            <field name="sequence">61</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_sinsen"/>
+            <field name="json_path">informasiBensin</field>
+            <field name="target_field">fuel</field>
+            <field name="field_type">direct</field>
+            <field name="value_alias">{"1": "25", "2": "50", "3": "75", "4": "100"}</field>
+            <field name="default_value">50</field>
+        </record>
+
+        <record id="mapping_wo_sinsen_relationship" model="tw.mapping.response">
+            <field name="sequence">62</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_sinsen"/>
+            <field name="json_path">hubunganDenganPemilik</field>
+            <field name="target_field">relationship_with_the_owner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="relation_search_domain">[('type', '=', 'HubunganDenganPemilik')]</field>
+            <field name="value_alias">{"0": "Sendiri", "1": "Orang Tua", "2": "Anak", "3": "Saudara", "4": "Karyawan", "5": "Teman", "6": "Suami/Istri"}</field>
+            <field name="default_value">Lainnya</field>
+        </record>
+
+        <record id="mapping_wo_sinsen_reason_to_ahass" model="tw.mapping.response">
+            <field name="sequence">63</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_sinsen"/>
+            <field name="json_path">asalUnitEntry</field>
+            <field name="target_field">reason_to_ahass_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="relation_search_domain">[('type', '=', 'AlasanKeAhass')]</field>
+            <field name="value_alias">{"NP": "non promotion", "Non-Promotion": "non promotion", "RM": "sms call remainder", "Reminder": "sms call remainder", "AE01": "ahass event ahm", "AE02": "ahass event md", "AE03": "ahass event ahass", "PEIN": "pit express indoor", "PEOT": "pit express outdoor", "SVPS": "pos service", "SVJD": "join dealer activity", "SVGC": "group customer", "SVPA": "public area", "SVER": "emergency", "SVAH": "ahass keliling", "SVHC": "home care"}</field>
+            <field name="default_value">regular visit ahass</field>
+        </record>
+
+        <record id="mapping_wo_sinsen_mechanic" model="tw.mapping.response">
+            <field name="sequence">64</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_sinsen"/>
+            <field name="json_path">hondaIdMekanik</field>
+            <field name="target_field">mechanic_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="hr.model_hr_employee"/>
+            <field name="relation_lookup_field">md_employee_id</field>
+            <field name="relation_search_domain">['|', ('md_employee_id', '=', value), ('honda_id', '=', value)]</field>
+        </record>
+
+        <record id="mapping_wo_sinsen_status_dgi" model="tw.mapping.response">
+            <field name="sequence">65</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_sinsen"/>
+            <field name="json_path">statusWorkOrder</field>
+            <field name="target_field">state_dgi</field>
+            <field name="field_type">direct</field>
+            <field name="value_alias">{"1": "Start", "2": "Pause", "3": "Pending", "4": "Finish", "5": "Cancel"}</field>
+            <field name="default_value">Start</field>
+        </record>
+
+        <record id="mapping_wo_SINSEN_chassis" model="tw.mapping.response">
+            <field name="sequence">66</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_sinsen"/>
+            <field name="json_path">noRangka</field>
+            <field name="target_field">chassis_number</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_SINSEN_plate" model="tw.mapping.response">
+            <field name="sequence">67</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_sinsen"/>
+            <field name="json_path">noPolisi</field>
+            <field name="target_field">plate_number</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_SINSEN_km" model="tw.mapping.response">
+            <field name="sequence">68</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_sinsen"/>
+            <field name="json_path">kmTerakhir</field>
+            <field name="target_field">km</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_SINSEN_mobile" model="tw.mapping.response">
+            <field name="sequence">69</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_sinsen"/>
+            <field name="json_path">noTelpPembawa</field>
+            <field name="target_field">mobile</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_SINSEN_prod_year" model="tw.mapping.response">
+            <field name="sequence">70</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_sinsen"/>
+            <field name="json_path">tahunMotor</field>
+            <field name="target_field">production_year</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_SINSEN_customer_stnk" model="tw.mapping.response">
+            <field name="sequence">71</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_sinsen"/>
+            <field name="json_path">namaPemilik</field>
+            <field name="target_field">customer_stnk_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "namaPemilik",
+                "street": "alamatPemilik",
+                "street_domicile": "alamatPemilik",
+                "mobile": "noTelpPemilik",
+                "sub_district_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPemilik", "_type": "m2o"},
+                "sub_district_domicile_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPemilik", "_type": "m2o"},
+                "district_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPemilik", "_type": "m2o"},
+                "district_domicile_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPemilik", "_type": "m2o"},
+                "city_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPemilik", "_type": "m2o"},
+                "city_domicile_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPemilik", "_type": "m2o"},
+                "state_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPemilik", "_type": "m2o"},
+                "state_domicile_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPemilik", "_type": "m2o"}
+            }</field>
+        </record>
+
+        <record id="mapping_wo_SINSEN_partner" model="tw.mapping.response">
+            <field name="sequence">72</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_sinsen"/>
+            <field name="json_path">noTelpPembawa</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">mobile</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "namaPembawa",
+                "street": "alamatPembawa",
+                "street_domicile": "alamatPembawa",
+                "mobile": "noTelpPembawa",
+                "sub_district_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPembawa", "_type": "m2o"},
+                "sub_district_domicile_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPembawa", "_type": "m2o"},
+                "district_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPembawa", "_type": "m2o"},
+                "district_domicile_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPembawa", "_type": "m2o"},
+                "city_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPembawa", "_type": "m2o"},
+                "city_domicile_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPembawa", "_type": "m2o"},
+                "state_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPembawa", "_type": "m2o"},
+                "state_domicile_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPembawa", "_type": "m2o"}
+            }</field>
+        </record>
+
+        <record id="mapping_wo_SINSEN_lot" model="tw.mapping.response">
+            <field name="sequence">73</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_sinsen"/>
+            <field name="json_path">noMesin</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "noMesin",
+                "chassis_number": "noRangka",
+                "plate_number": "noPolisi",
+                "production_year": "tahunMotor",
+                "state": "workshop",
+                "product_id": {"_lookup": "product.product", "_field": "unit_type_code", "_value": "kodeTipeUnit", "_type": "m2o"},
+                "customer_stnk_id": {"_lookup": "res.partner", "_field": "name", "_value": "namaPemilik", "_type": "m2o"},
+                "partner_id": {"_lookup": "res.partner", "_field": "mobile", "_value": "noTelpPembawa", "_type": "m2o"}
+            }</field>
+        </record>
+
+
+
+
+
+        <!-- ==================== WAHANA ==================== -->
+
+        <record id="mapping_wo_wahana_company" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_wahana"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_wo_wahana_no_wo" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_wahana"/>
+            <field name="json_path">noWorkOrder</field>
+            <field name="target_field">md_reference_pkb</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">No Work Order → md_reference_pkb</field>
+        </record>
+
+        <record id="mapping_wo_wahana_no_sa" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_wahana"/>
+            <field name="json_path">noSAForm</field>
+            <field name="target_field">md_reference_sa</field>
+            <field name="field_type">direct</field>
+            <field name="notes">No SA Form → md_reference_sa</field>
+        </record>
+
+        <record id="mapping_wo_wahana_is_dgi" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_wahana"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">is_dgi</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">true</field>
+            <field name="notes">Static: is_dgi = True</field>
+        </record>
+
+        <record id="mapping_wo_wahana_division" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_wahana"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">division</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">Sparepart</field>
+            <field name="notes">Static default division → Sparepart</field>
+        </record>
+
+        <!-- Wahana menggunakan status text, filter skip 'cancel' atau '5' -->
+        <record id="mapping_wo_wahana_status_filter" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_wahana"/>
+            <field name="json_path">statusWorkOrder</field>
+            <field name="field_type">validation</field>
+            <field name="validation_operator">!=</field>
+            <field name="expected_value">5</field>
+            <field name="notes">Filter: skip statusWorkOrder = 5 / cancel</field>
+        </record>
+
+        <!-- Mappings dynamically injected for WAHANA -->
+        <record id="mapping_wo_wahana_fuel" model="tw.mapping.response">
+            <field name="sequence">61</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_wahana"/>
+            <field name="json_path">informasiBensin</field>
+            <field name="target_field">fuel</field>
+            <field name="field_type">direct</field>
+            <field name="value_alias">{"1": "25", "2": "50", "3": "75", "4": "100"}</field>
+            <field name="default_value">50</field>
+        </record>
+
+        <record id="mapping_wo_wahana_relationship" model="tw.mapping.response">
+            <field name="sequence">62</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_wahana"/>
+            <field name="json_path">hubunganDenganPemilik</field>
+            <field name="target_field">relationship_with_the_owner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="relation_search_domain">[('type', '=', 'HubunganDenganPemilik')]</field>
+            <field name="value_alias">{"0": "Sendiri", "1": "Orang Tua", "2": "Anak", "3": "Saudara", "4": "Karyawan", "5": "Teman", "6": "Suami/Istri"}</field>
+            <field name="default_value">Lainnya</field>
+        </record>
+
+        <record id="mapping_wo_wahana_reason_to_ahass" model="tw.mapping.response">
+            <field name="sequence">63</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_wahana"/>
+            <field name="json_path">asalUnitEntry</field>
+            <field name="target_field">reason_to_ahass_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="relation_search_domain">[('type', '=', 'AlasanKeAhass')]</field>
+            <field name="value_alias">{"NP": "non promotion", "Non-Promotion": "non promotion", "RM": "sms call remainder", "Reminder": "sms call remainder", "AE01": "ahass event ahm", "AE02": "ahass event md", "AE03": "ahass event ahass", "PEIN": "pit express indoor", "PEOT": "pit express outdoor", "SVPS": "pos service", "SVJD": "join dealer activity", "SVGC": "group customer", "SVPA": "public area", "SVER": "emergency", "SVAH": "ahass keliling", "SVHC": "home care"}</field>
+            <field name="default_value">regular visit ahass</field>
+        </record>
+
+        <record id="mapping_wo_wahana_mechanic" model="tw.mapping.response">
+            <field name="sequence">64</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_wahana"/>
+            <field name="json_path">hondaIdMekanik</field>
+            <field name="target_field">mechanic_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="hr.model_hr_employee"/>
+            <field name="relation_lookup_field">md_employee_id</field>
+            <field name="relation_search_domain">['|', ('md_employee_id', '=', value), ('honda_id', '=', value)]</field>
+        </record>
+
+        <record id="mapping_wo_wahana_status_dgi" model="tw.mapping.response">
+            <field name="sequence">65</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_wahana"/>
+            <field name="json_path">statusWorkOrder</field>
+            <field name="target_field">state_dgi</field>
+            <field name="field_type">direct</field>
+            <field name="value_alias">{"1": "Start", "2": "Pause", "3": "Pending", "4": "Finish", "5": "Cancel"}</field>
+            <field name="default_value">Start</field>
+        </record>
+
+        <record id="mapping_wo_WAHANA_chassis" model="tw.mapping.response">
+            <field name="sequence">66</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_wahana"/>
+            <field name="json_path">noRangka</field>
+            <field name="target_field">chassis_number</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_WAHANA_plate" model="tw.mapping.response">
+            <field name="sequence">67</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_wahana"/>
+            <field name="json_path">noPolisi</field>
+            <field name="target_field">plate_number</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_WAHANA_km" model="tw.mapping.response">
+            <field name="sequence">68</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_wahana"/>
+            <field name="json_path">kmTerakhir</field>
+            <field name="target_field">km</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_WAHANA_mobile" model="tw.mapping.response">
+            <field name="sequence">69</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_wahana"/>
+            <field name="json_path">noTelpPembawa</field>
+            <field name="target_field">mobile</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_WAHANA_prod_year" model="tw.mapping.response">
+            <field name="sequence">70</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_wahana"/>
+            <field name="json_path">tahunMotor</field>
+            <field name="target_field">production_year</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wo_WAHANA_customer_stnk" model="tw.mapping.response">
+            <field name="sequence">71</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_wahana"/>
+            <field name="json_path">namaPemilik</field>
+            <field name="target_field">customer_stnk_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "namaPemilik",
+                "street": "alamatPemilik",
+                "street_domicile": "alamatPemilik",
+                "mobile": "noTelpPemilik",
+                "sub_district_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPemilik", "_type": "m2o"},
+                "sub_district_domicile_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPemilik", "_type": "m2o"},
+                "district_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPemilik", "_type": "m2o"},
+                "district_domicile_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPemilik", "_type": "m2o"},
+                "city_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPemilik", "_type": "m2o"},
+                "city_domicile_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPemilik", "_type": "m2o"},
+                "state_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPemilik", "_type": "m2o"},
+                "state_domicile_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPemilik", "_type": "m2o"}
+            }</field>
+        </record>
+
+        <record id="mapping_wo_WAHANA_partner" model="tw.mapping.response">
+            <field name="sequence">72</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_wahana"/>
+            <field name="json_path">noTelpPembawa</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">mobile</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "namaPembawa",
+                "street": "alamatPembawa",
+                "street_domicile": "alamatPembawa",
+                "mobile": "noTelpPembawa",
+                "sub_district_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPembawa", "_type": "m2o"},
+                "sub_district_domicile_id": {"_lookup": "res.sub.district", "_field": "code", "_value": "kodeKelurahanPembawa", "_type": "m2o"},
+                "district_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPembawa", "_type": "m2o"},
+                "district_domicile_id": {"_lookup": "res.district", "_field": "code", "_value": "kodeKecamatanPembawa", "_type": "m2o"},
+                "city_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPembawa", "_type": "m2o"},
+                "city_domicile_id": {"_lookup": "res.city", "_field": "code", "_value": "kodeKotaPembawa", "_type": "m2o"},
+                "state_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPembawa", "_type": "m2o"},
+                "state_domicile_id": {"_lookup": "res.country.state", "_field": "code", "_value": "kodeProvinsiPembawa", "_type": "m2o"}
+            }</field>
+        </record>
+
+        <record id="mapping_wo_WAHANA_lot" model="tw.mapping.response">
+            <field name="sequence">73</field>
+            <field name="endpoint_id" ref="tw_dgi_work_order.tw_endpoint_dgi_wo_wahana"/>
+            <field name="json_path">noMesin</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">name</field>
+            <field name="create_if_not_found">1</field>
+            <field name="create_field_mappings">{
+                "name": "noMesin",
+                "chassis_number": "noRangka",
+                "plate_number": "noPolisi",
+                "production_year": "tahunMotor",
+                "state": "workshop",
+                "product_id": {"_lookup": "product.product", "_field": "unit_type_code", "_value": "kodeTipeUnit", "_type": "m2o"},
+                "customer_stnk_id": {"_lookup": "res.partner", "_field": "name", "_value": "namaPemilik", "_type": "m2o"},
+                "partner_id": {"_lookup": "res.partner", "_field": "mobile", "_value": "noTelpPembawa", "_type": "m2o"}
+            }</field>
+        </record>
+
+
+
+
+
+    </data>
+</odoo>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- ===========================================
+            SECURITY GROUPS
+        ============================================ -->
+        <!-- Cancel Birojasa Billing Groups -->
+        <record id="group_birojasa_billing_cancel_read" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">Cancel Tagihan Birojasa Read</field>
+        </record>
+
+        <record id="group_birojasa_billing_cancel_write" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">Cancel Tagihan Birojasa Write</field>
+            <field name="implied_ids" eval="[(4, ref('group_birojasa_billing_cancel_read'))]"/>
+        </record>
+
+        <record id="group_birojasa_billing_cancel_delete" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">Cancel Tagihan Birojasa Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_birojasa_billing_cancel_write'))]"/>
+        </record>
+
+        <!-- Access Rights -->
+        <record id="access_birojasa_billing_cancel_read" model="ir.model.access">
+            <field name="name">tw_birojasa_billing_cancel_read</field>
+            <field name="model_id" ref="model_tw_birojasa_billing_cancel"/>
+            <field name="group_id" ref="group_birojasa_billing_cancel_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">0</field>
+            <field name="perm_create">0</field>
+            <field name="perm_unlink">0</field>
+        </record>
+
+        <record id="access_birojasa_billing_cancel_write" model="ir.model.access">
+            <field name="name">tw_birojasa_billing_cancel_write</field>
+            <field name="model_id" ref="model_tw_birojasa_billing_cancel"/>
+            <field name="group_id" ref="group_birojasa_billing_cancel_write"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">0</field>
+        </record>
+
+        <record id="access_birojasa_billing_cancel_delete" model="ir.model.access">
+            <field name="name">tw_birojasa_billing_cancel_delete</field>
+            <field name="model_id" ref="model_tw_birojasa_billing_cancel"/>
+            <field name="group_id" ref="group_birojasa_billing_cancel_delete"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Include to System Admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_birojasa_billing_cancel_delete')),
+                (4, ref('group_birojasa_billing_cancel_write')),
+                (4, ref('group_birojasa_billing_cancel_read')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

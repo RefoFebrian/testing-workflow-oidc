@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Journal Memorial Upload Group Read -->
+        <record id="tw_group_upload_journal_memorial_upload_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Upload Journal Memorial Upload Read</field>
+        </record>
+
+        <record id="tw_access_upload_journal_memorial_upload_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_journal_memorial_upload_wizard"/>
+            <field name="name">upload.journal.memorial.upload.read</field>
+            <field name="group_id" ref="tw_group_upload_journal_memorial_upload_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Journal Net Off Group Read -->
+        <record id="tw_group_upload_net_off_upload_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Upload Net Off Upload Read</field>
+        </record>
+
+        <record id="tw_access_upload_net_off_upload_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_net_off_upload_wizard"/>
+            <field name="name">upload.net.off.upload.read</field>
+            <field name="group_id" ref="tw_group_upload_net_off_upload_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+    </data>
+    <data noupdate="1">
+        <!-- Add all access to admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('tw_group_upload_journal_memorial_upload_read')),
+                (4,ref('tw_group_upload_net_off_upload_read')),
+            ]"/> 
+        </record>
+    </data>
+</odoo>

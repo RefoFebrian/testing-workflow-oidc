@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Odoo Default -->
+    <record id="purchase.menu_purchase_root" model="ir.ui.menu">
+        <field name="parent_id" ref="tw_menu.menu_tw_odoo_default" />
+    </record>
+
+    <!-- Master -->
+    <menuitem id="tw_product_pricelist_master_submenu"
+        name="Pricelist"
+        sequence="5"
+        parent="tw_menu.submenu_tw_miscellaneous"
+        />
+
+    <menuitem id="tw_product_pricelist_master_menuitem"
+        name="Pricelist"
+        sequence="10"
+        parent="tw_pricelist.tw_product_pricelist_master_submenu"
+        action="tw_pricelist.tw_product_pricelist_action2"
+        groups="tw_pricelist.group_tw_product_pricelist_read"
+        />
+    
+    <menuitem id="tw_product_pricelist_version_master_menuitem" 
+        name="Pricelist Version" 
+        parent="tw_pricelist.tw_product_pricelist_master_submenu" 
+        sequence="40" 
+        action="tw_product_pricelist_version_action" 
+        groups="tw_pricelist.group_tw_product_pricelist_version_read"
+        />
+
+    <menuitem id="tw_product_pricelist_item_master_menuitem" 
+        name="Pricelist Item" 
+        parent="tw_pricelist.tw_product_pricelist_master_submenu" 
+        sequence="20" 
+        action="tw_product_pricelist_item_action" 
+        groups="tw_pricelist.group_tw_product_pricelist_version_read"
+        />
+
+    <menuitem
+        id="menuitem_tw_selection_pricelist_category"
+        name="Pricelist Category"
+        parent="tw_selection.submenu_tw_selection"
+        action="tw_selection_pricelist_category_action"
+        sequence="6"
+        groups="tw_pricelist.group_tw_selection_pricelist_category"
+    />
+
+    <!-- Showroom -->
+    <!-- TODO: Menu di hide, hanya di master saja, perlu ditambahkan division unit? -->
+    <!-- <menuitem id="tw_product_pricelist_showroom_menuitem"
+        name="Pricelist"
+        sequence="20"
+        parent="tw_menu.submenu_tw_showroom_configuration"
+        action="tw_pricelist.tw_product_pricelist_action2"
+        groups="tw_pricelist.group_tw_product_pricelist_read"
+        />
+    
+    <menuitem id="tw_product_pricelist_version_showroom_menuitem" 
+        name="Pricelist Version" 
+        parent="tw_menu.submenu_tw_showroom_configuration" 
+        sequence="20" 
+        action="tw_product_pricelist_version_action" 
+        groups="tw_pricelist.group_tw_product_pricelist_version_read"
+        /> -->
+
+    <!-- Workshop -->
+    <!-- TODO: Menu di hide, hanya di master saja, perlu ditambahkan division sparepart? -->
+    <!-- <menuitem id="tw_product_pricelist_workshop_menuitem"
+        name="Pricelist"
+        sequence="10"
+        parent="tw_menu.submenu_tw_workshop_configuration"
+        action="tw_pricelist.tw_product_pricelist_action2"
+        groups="tw_pricelist.group_tw_product_pricelist_read"
+        />
+    
+    <menuitem id="tw_product_pricelist_version_workshop_menuitem" 
+        name="Pricelist Version" 
+        parent="tw_menu.submenu_tw_workshop_configuration" 
+        sequence="40" 
+        action="tw_product_pricelist_version_action" 
+        groups="tw_pricelist.group_tw_product_pricelist_version_read"
+        /> -->
+
+</odoo>

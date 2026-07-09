@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    
+        <!-- READ -->
+        <record id="group_tw_payment_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">Tw Payment Read</field>
+            <field name="implied_ids" eval="[(4, ref('tw_account.group_tw_account_invoicing_read'))]"/>
+        </record>
+
+        <record id="access_tw_payment_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment"/>
+            <field name="name">tw_payment read</field>
+            <field name="group_id" ref="group_tw_payment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_payment_provider_payment_read" model="ir.model.access">
+            <field name="model_id" ref="account_payment.model_payment_provider"/>
+            <field name="name">payment_provider_payment read</field>
+            <field name="group_id" ref="group_tw_payment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+            
+        <!-- UPDATE -->
+        <record id="group_tw_payment_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">Tw Payment Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_payment_read'))]"/>
+        </record>
+
+        <record id="access_tw_payment_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment"/>
+            <field name="name">tw_payment update</field>
+            <field name="group_id" ref="group_tw_payment_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- DELETE -->
+        <record id="group_tw_payment_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">Tw Payment Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_payment_read'))]"/>
+        </record>
+
+        <record id="access_tw_payment_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment"/>
+            <field name="name">tw_payment delete</field>
+            <field name="group_id" ref="group_tw_payment_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+    
+
+
+        <!-- Receive Payment -->
+
+        <!-- READ -->
+        <record id="group_account_payment_receive_payment_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Hutang Lain Read</field>
+        </record>
+
+        <record id="access_account_payment_receive_payment_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment"/>
+            <field name="name">account_payment_receive_payment read</field>
+            <field name="group_id" ref="group_account_payment_receive_payment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_account_payment_line_receive_payment_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment_line"/>
+            <field name="name">account_payment_line_receive_payment read</field>
+            <field name="group_id" ref="group_account_payment_receive_payment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+            
+        <!-- UPDATE -->
+        <record id="group_account_payment_receive_payment_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Hutang Lain Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_account_payment_receive_payment_read'))]"/>
+        </record>
+
+        <record id="access_account_payment_receive_payment_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment"/>
+            <field name="name">account_payment_receive_payment update</field>
+            <field name="group_id" ref="group_account_payment_receive_payment_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_account_payment_line_receive_payment_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment_line"/>
+            <field name="name">account_payment_line_receive_payment update</field>
+            <field name="group_id" ref="group_account_payment_receive_payment_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+            
+        <!-- DELETE -->
+        <record id="group_account_payment_receive_payment_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Hutang Lain Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_account_payment_receive_payment_read'))]"/>
+        </record>
+
+        <record id="access_account_payment_receive_payment_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment"/>
+            <field name="name">account_payment_receive_payment delete</field>
+            <field name="group_id" ref="group_account_payment_receive_payment_delete"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_account_payment_line_receive_payment_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment_line"/>
+            <field name="name">account_payment_line_receive_payment delete</field>
+            <field name="group_id" ref="group_account_payment_receive_payment_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Customer Payment -->
+
+        <!-- READ -->
+        <record id="group_account_payment_customer_payment_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Customer Payment Read</field>
+        </record>
+
+        <record id="access_account_payment_customer_payment_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment"/>
+            <field name="name">account_payment_customer_payment read</field>
+            <field name="group_id" ref="group_account_payment_customer_payment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_account_payment_line_customer_payment_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment_line"/>
+            <field name="name">account_payment_line_customer_payment read</field>
+            <field name="group_id" ref="group_account_payment_customer_payment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_payment_provider_customer_payment_read" model="ir.model.access">
+            <field name="model_id" ref="account_payment.model_payment_provider"/>
+            <field name="name">payment_provider_customer_payment read</field>
+            <field name="group_id" ref="group_account_payment_customer_payment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+            
+        <!-- UPDATE -->
+        <record id="group_account_payment_customer_payment_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Customer Payment Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_payment_read'))]"/>
+        </record>
+
+        <record id="access_account_payment_customer_payment_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment"/>
+            <field name="name">account_payment_customer_payment update</field>
+            <field name="group_id" ref="group_account_payment_customer_payment_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_account_payment_line_customer_payment_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment_line"/>
+            <field name="name">account_payment_line_customer_payment update</field>
+            <field name="group_id" ref="group_account_payment_customer_payment_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_payment_provider_customer_payment_update" model="ir.model.access">
+            <field name="model_id" ref="account_payment.model_payment_provider"/>
+            <field name="name">payment_provider_customer_payment update</field>
+            <field name="group_id" ref="group_account_payment_customer_payment_update"/>
+            <field name="perm_read">1</field>
+        </record>
+            
+        <!-- DELETE -->
+        <record id="group_account_payment_customer_payment_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Customer Payment Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_account_payment_customer_payment_read'))]"/>
+        </record>
+
+        <record id="access_account_payment_customer_payment_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment"/>
+            <field name="name">account_payment_customer_payment delete</field>
+            <field name="group_id" ref="group_account_payment_customer_payment_delete"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_account_payment_line_customer_payment_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment_line"/>
+            <field name="name">account_payment_line_customer_payment delete</field>
+            <field name="group_id" ref="group_account_payment_customer_payment_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Supplier Payment -->
+
+        <!-- READ -->
+        <record id="group_account_payment_supplier_payment_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Supplier Payment Read</field>
+        </record>
+
+        <record id="access_account_payment_supplier_payment_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment"/>
+            <field name="name">account_payment_supplier_payment read</field>
+            <field name="group_id" ref="group_account_payment_supplier_payment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_account_payment_line_supplier_payment_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment_line"/>
+            <field name="name">account_payment_line_supplier_payment read</field>
+            <field name="group_id" ref="group_account_payment_supplier_payment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_payment_provider_supplier_payment_read" model="ir.model.access">
+            <field name="model_id" ref="account_payment.model_payment_provider"/>
+            <field name="name">payment_provider_supplier_payment read</field>
+            <field name="group_id" ref="group_account_payment_supplier_payment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+            
+        <!-- UPDATE -->
+        <record id="group_account_payment_supplier_payment_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Supplier Payment Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_account_payment_supplier_payment_read'))]"/>
+        </record>
+
+        <record id="access_account_payment_supplier_payment_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment"/>
+            <field name="name">account_payment_supplier_payment update</field>
+            <field name="group_id" ref="group_account_payment_supplier_payment_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_account_payment_line_supplier_payment_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment_line"/>
+            <field name="name">account_payment_line_supplier_payment update</field>
+            <field name="group_id" ref="group_account_payment_supplier_payment_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+            
+        <!-- DELETE -->
+        <record id="group_account_payment_supplier_payment_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Supplier Payment Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_account_payment_supplier_payment_read'))]"/>
+        </record>
+
+        <record id="access_account_payment_supplier_payment_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment"/>
+            <field name="name">account_payment_supplier_payment delete</field>
+            <field name="group_id" ref="group_account_payment_supplier_payment_delete"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_account_payment_line_supplier_payment_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_payment_line"/>
+            <field name="name">account_payment_line_supplier_payment delete</field>
+            <field name="group_id" ref="group_account_payment_supplier_payment_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Customer invoice -->
+
+        <!-- READ -->
+        <record id="group_account_move_customer_invoice_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Customer Invoice Read</field>
+        </record>
+
+        <record id="access_account_move_customer_invoice_read" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="name">account_move_customer_invoice read</field>
+            <field name="group_id" ref="group_account_move_customer_invoice_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_account_move_customer_invoice_read" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="name">account_move_customer_invoice read</field>
+            <field name="group_id" ref="group_account_move_customer_invoice_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_account_move_partial_reconcile_customer_invoice_read" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_partial_reconcile"/>
+            <field name="name">account_move_partial_reconcile_customer_invoice read</field>
+            <field name="group_id" ref="group_account_move_customer_invoice_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_account_reconcile_model_customer_invoice_read" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_reconcile_model"/>
+            <field name="name">account_reconcile_model_customer_invoice read</field>
+            <field name="group_id" ref="group_account_move_customer_invoice_read"/>
+            <field name="perm_read">1</field>
+        </record>
+            
+        <!-- UPDATE -->
+        <record id="group_account_move_customer_invoice_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Customer Invoice Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_account_move_customer_invoice_read'))]"/>
+        </record>
+
+        <record id="access_account_move_customer_invoice_update" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="name">account_move_customer_invoice update</field>
+            <field name="group_id" ref="group_account_move_customer_invoice_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_account_move_customer_invoice_update" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="name">account_move_customer_invoice update</field>
+            <field name="group_id" ref="group_account_move_customer_invoice_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+            
+        <!-- DELETE -->
+        <record id="group_account_move_customer_invoice_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Customer Invoice Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_account_move_customer_invoice_read'))]"/>
+        </record>
+
+        <record id="access_account_move_customer_invoice_delete" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="name">account_move_customer_invoice delete</field>
+            <field name="group_id" ref="group_account_move_customer_invoice_delete"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_account_move_customer_invoice_delete" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="name">account_move_customer_invoice delete</field>
+            <field name="group_id" ref="group_account_move_customer_invoice_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Supplier invoice -->
+
+        <!-- READ -->
+        <record id="group_account_move_supplier_invoice_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Supplier Invoice Read</field>
+        </record>
+
+        <record id="access_account_move_supplier_invoice_read" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="name">account_move_supplier_invoice read</field>
+            <field name="group_id" ref="group_account_move_supplier_invoice_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_account_move_supplier_invoice_read" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="name">account_move_supplier_invoice read</field>
+            <field name="group_id" ref="group_account_move_supplier_invoice_read"/>
+            <field name="perm_read">1</field>
+        </record>
+            
+        <!-- UPDATE -->
+        <record id="group_account_move_supplier_invoice_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Supplier Invoice Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_account_move_supplier_invoice_read'))]"/>
+        </record>
+
+        <record id="access_account_move_supplier_invoice_update" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="name">account_move_supplier_invoice update</field>
+            <field name="group_id" ref="group_account_move_supplier_invoice_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_account_move_supplier_invoice_update" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="name">account_move_supplier_invoice update</field>
+            <field name="group_id" ref="group_account_move_supplier_invoice_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+            
+        <!-- DELETE -->
+        <record id="group_account_move_supplier_invoice_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Supplier Invoice Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_account_move_supplier_invoice_read'))]"/>
+        </record>
+
+        <record id="access_account_move_supplier_invoice_delete" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="name">account_move_supplier_invoice delete</field>
+            <field name="group_id" ref="group_account_move_supplier_invoice_delete"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_account_move_supplier_invoice_delete" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="name">account_move_supplier_invoice delete</field>
+            <field name="group_id" ref="group_account_move_supplier_invoice_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_account_partial_reconcile_supplier_invoice_delete" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_partial_reconcile"/>
+            <field name="name">account_partial_reconcile_supplier_invoice delete</field>
+            <field name="group_id" ref="group_account_move_supplier_invoice_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_payment_read')),
+                (4, ref('group_tw_payment_update')),
+                (4, ref('group_tw_payment_delete')),
+                (4, ref('group_account_payment_receive_payment_read')),
+                (4, ref('group_account_payment_receive_payment_update')),
+                (4, ref('group_account_payment_receive_payment_delete')),
+                (4, ref('group_account_payment_customer_payment_read')),
+                (4, ref('group_account_payment_customer_payment_update')),
+                (4, ref('group_account_payment_customer_payment_delete')),
+                (4, ref('group_account_payment_supplier_payment_read')),
+                (4, ref('group_account_payment_supplier_payment_update')),
+                (4, ref('group_account_payment_supplier_payment_delete')),
+                (4, ref('group_account_move_customer_invoice_read')),
+                (4, ref('group_account_move_customer_invoice_update')),
+                (4, ref('group_account_move_customer_invoice_delete')),
+                (4, ref('group_account_move_supplier_invoice_read')),
+                (4, ref('group_account_move_supplier_invoice_update')),
+                (4, ref('group_account_move_supplier_invoice_delete')),
+            ]"/>
+        </record>
+    </data>
+
+</odoo>

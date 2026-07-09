@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View for App Version -->
+    <record id="view_tw_app_version_tree" model="ir.ui.view">
+        <field name="name">tw.app.version.list</field>
+        <field name="model">tw.app.version</field>
+        <field name="arch" type="xml">
+            <list string="App Versions" editable="top">
+                <field name="name" required='1'/>
+                <field name="app_type_id" required='1' options="{'no_open':True,'no_create':True}"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="tw_app_version_filter" model="ir.ui.view">
+            <field name="name">tw.app.version.filter</field>
+            <field name="model">tw.app.version</field>
+            <field name="arch" type="xml">
+                <search string="Search App Version">
+                    <field name="name"></field>
+                    <field name="app_type_id" />
+                    <filter name="name" string="name" context="{'group_by': 'name'}" />
+                    <filter name="app_type_id" string="app_type_id" context="{'group_by': 'app_type_id'}" />
+                </search>
+            </field>
+        </record> 
+    
+    <!-- Action for App Version -->
+    <record id="action_tw_app_version" model="ir.actions.act_window">
+        <field name="name">App Versions</field>
+        <field name="res_model">tw.app.version</field>
+        <field name="path">app-version</field>
+        <field name="view_mode">list</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No app versions found. Let's create one!
+            </p>
+        </field>
+    </record>
+</odoo>

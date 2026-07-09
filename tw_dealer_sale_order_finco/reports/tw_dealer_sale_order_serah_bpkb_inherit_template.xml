@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="serah_bpkb_dso_template_finco_ext"
+              inherit_id="tw_dealer_sale_order.serah_bpkb_dso_template">
+
+        <xpath expr="//div/table[1]/table[5]" position="before">
+            <table>
+                <tr>
+                    <td class="no-border" width="100%">
+                        Sedang dalam proses pengurusan dan akan kami serahkan kepada <span t-esc="doc.finco_id.name" /> dalam waktu 3 bulan dari tanggal surat pernyataan ini dibuat dan akan kami serahkan tanpa syarat apapun.
+                    </td>
+                </tr>
+            </table>
+        </xpath>
+
+    </template>
+
+</odoo>

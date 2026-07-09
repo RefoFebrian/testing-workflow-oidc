@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_nrfs_mutation_internal_inherit_form_view" model="ir.ui.view" >
+            <field name="name">tw.nrfs.mutation.internal.inherit.form</field>
+            <field name="model">tw.nrfs</field>
+            <field name="inherit_id" ref="tw_nrfs.tw_nrfs_form_view"/>
+            <field name="arch" type="xml">
+        		<xpath expr="//header" position="inside">
+                    <button name="action_create_internal_transfer" string="Create Mutation Internal" type="object" class="oe_highlight" invisible="state != 'done' or picking_id" groups="tw_nrfs_mutation_internal.group_tw_nrfs_create_internal_transfer_button_read"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

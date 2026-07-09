@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- List View -->
+        <record id="tw_sales_program_line_list_view" model="ir.ui.view">
+            <field name="name">tw.sales.program.line.list</field>
+            <field name="model">tw.sales.program.line</field>
+            <field name="type">list</field>
+            <field name="arch" type="xml">
+                <list string="Master Sales Program" editable="bottom">
+                    <field name="sales_program_type_id" readonly="1" optional="1"/>
+                    <field name="sales_program_type_name" readonly="1" optional="1"/>
+                    <field name="qty" required="sales_program_type_name == 'Program Subsidi Barang'" column_invisible="parent.sales_program_type_name != 'Program Subsidi Barang'"/>
+                    <field name="dp_type" column_invisible="parent.sales_program_type_name != 'Program Subsidi'"/>
+                    <field name="amount_dp" column_invisible="parent.sales_program_type_name != 'Program Subsidi'"/>
+                    <field name="discount_ahm" column_invisible="parent.sales_program_type_name == 'Program Voucher'"/>
+                    <field name="discount_md" column_invisible="parent.sales_program_type_name == 'Program Voucher'"/>
+                    <field name="discount_others" string="Diskon Voucher" required="sales_program_type_name == 'Program Voucher'" column_invisible="parent.sales_program_type_name != 'Program Voucher'"/>
+                    <field name="discount_dealer" column_invisible="parent.sales_program_type_name == 'Program Voucher'"/>
+                    <field name="discount_finco" column_invisible="parent.sales_program_type_name == 'Program Voucher'"/>
+                    <field name="discount_total"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="tw_sales_program_line_form_view" model="ir.ui.view">
+            <field name="name">tw.sales.program.line.form</field>
+            <field name="model">tw.sales.program.line</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Sales Program Lines">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="sales_program_type_id" invisible="1" readonly="1"/>
+                                <field name="sales_program_type_name" invisible="0" readonly="1"/>
+                                <field name="qty" invisible="sales_program_type_name != 'Program Subsidi Barang'" required="sales_program_type_name == 'Program Subsidi Barang'"/>
+                                <field name="dp_type" invisible="sales_program_type_name != 'Program Subsidi'"/>
+                                <field name="amount_dp" invisible="sales_program_type_name != 'Program Subsidi'"/>
+                                <field name="discount_ahm" invisible="sales_program_type_name not in ('Program Subsidi Barang', 'Program Subsidi')"/>
+                                <field name="discount_md" invisible="sales_program_type_name not in ('Program Subsidi Barang', 'Program Subsidi')"/>
+                                <field name="discount_others" string="Diskon Voucher" invisible="sales_program_type_name != 'Program Voucher'" required="sales_program_type_name == 'Program Voucher'"/>
+                            </group>
+                            <group>
+                                <field name="discount_dealer" invisible="sales_program_type_name not in ('Program Subsidi Barang', 'Program Subsidi')"/>
+                                <field name="discount_finco" invisible="sales_program_type_name not in ('Program Subsidi Barang', 'Program Subsidi')"/>
+                                <field name="discount_total" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+			    </form>
+            </field>
+        </record>
+        
+    </data>
+</odoo>

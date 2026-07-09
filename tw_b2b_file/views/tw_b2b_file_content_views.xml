@@ -1,0 +1,103 @@
+<odoo>
+	<data>
+
+		<!-- B2B FILE CONTENT -->
+			<record id="tw_b2b_file_content_list_view" model="ir.ui.view">
+				<field name="name">tw.b2b.file.content.tree</field>
+				<field name="model">tw.b2b.file.content</field>
+				<field name="type">list</field>
+				<field eval="10" name="priority" />
+				<field name="arch" type="xml">
+					<list string="B2B File Content" default_order="file_id desc">
+						<field name="name" />
+						<field name="file_id" />
+						<field name="state" widget="badge"
+							   decoration-danger="state == 'error'"
+							   decoration-warning="state == 'pending'"
+							   decoration-success="state == 'done'"/>
+					</list>
+				</field>
+			</record>
+
+			<record id="tw_b2b_file_content_form_view" model="ir.ui.view">
+				<field name="name">tw.b2b.file.content.form</field>
+				<field name="model">tw.b2b.file.content</field>
+				<field name="arch" type="xml">
+					<form create="false" edit="false" delete="false">
+						<header>
+							<button name="action_process_content" string="Process" type="object"
+									invisible="state != 'open'"
+									class="btn btn-info"
+									groups="tw_b2b_file.tw_b2b_file_group_button_process_content" />
+							
+							<button name="action_re_open_content" string="Re Open" type="object"
+									invisible="state != 'error'"
+									class="btn btn-warning"
+									groups="tw_b2b_file.tw_b2b_file_group_button_re_open_content" />
+
+							<field name="state" widget="statusbar"/>
+						</header>
+						<sheet>
+							<group>
+								<field name="file_id" options="{'no_open': True, 'no_create': True}"/>
+								<field name="name" />
+								<field name="log"
+									   decoration-danger="state == 'error'"
+									   decoration-warning="state == 'pending'"
+									   decoration-success="state == 'done'"/>
+							</group>
+							<notebook>
+								<page name="content_line" string="">
+									<field name="content_line_ids">
+										<list create="false" edit="false" delete="false">
+											<field name="name" />
+											<field name="value" />
+										</list>
+									</field>
+								</page>
+							</notebook>
+						</sheet>
+					</form>
+				</field>
+			</record>
+
+			<record id="tw_b2b_file_content_search_view" model="ir.ui.view">
+				<field name="name">tw.b2b.file.content.search</field>
+				<field name="model">tw.b2b.file.content</field>
+				<field name="arch" type="xml">
+					<search string="MFT File">
+						<field name="name" string="Content"/>
+						<field name="file_id" string="Filename"/>
+						<field name="log" string="Log"/>
+						<field name="state"/>
+						<filter string="Outstanding" name="filter_state_outstanding" domain="[('state','in', ('draft','pending','error'))]"/>
+						<filter string="Draft" name="filter_state_draft" domain="[('state','=', 'draft')]"/>
+						<filter string="Pending" name="filter_state_pending" domain="[('state','=', 'pending')]"/>
+						<filter string="Error" name="filter_state_error" domain="[('state','=', 'error')]"/>
+						<filter string="Done" name="filter_state_done" domain="[('state','=', 'done')]"/>
+						<group expand="0" string="Group By">
+							<filter name="group_by_state" string="Group by State" domain="" context="{'group_by':'state'}"/>
+							<filter name="group_by_file" string="Group by File" domain="[]" context="{'group_by':'file_id'}"/>
+						</group>
+					</search>
+				</field>
+			</record>
+
+			<record id="action_window_tw_b2b_file_content" model="ir.actions.act_window">
+				<field name="name">B2B File Content</field>
+				<field name="res_model">tw.b2b.file.content</field>
+				<field name="view_mode">list,form</field>
+				<field name="context">{'search_default_filter_state_outstanding': 1,'search_default_group_by_file': 1}</field>
+			</record>
+
+			<record id="action_process_tw_b2b_file_content" model="ir.actions.server">
+				<field name="name">Process Content</field>
+				<field name="model_id" ref="model_tw_b2b_file_content"/>
+				<field name="binding_model_id" ref="model_tw_b2b_file_content"/>
+				<field name="binding_type">action</field>
+				<field name="state">code</field>
+				<field name="code">records.action_process_content()</field>
+			</record>	
+
+	</data>
+</odoo>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_activity_atl_btl_line_approve_list_view" model="ir.ui.view">
+			<field name="name">tw.activity.atl.btl.approval.list</field>
+			<field name="model">tw.activity.atl.btl.line</field>
+			<field name="arch" type="xml">
+				<list create="0" delete="0">
+					<field name="company_id"/>
+					<field name="sales_channel_id" options="{'no_open':True,'no_create':True}"/>
+					<field name="name"/>
+					<field name="act_type_id" options="{'no_open':True,'no_create':True}"/>
+					<field name="ring_id" options="{'no_open':True,'no_create':True}"/>
+					<field name="district_id" options="{'no_open':True,'no_create':True}"/>
+					<field name="submission_type"/>
+					<field name="location_id"/>
+					<field name="start_date"/>
+					<field name="end_date"/>
+					<field name="display_unit"/>
+					<field name="state"/>
+				</list>
+			</field>
+		</record>
+
+        <record id="tw_activity_atl_btl_line_approval_list_view" model="ir.ui.view">
+            <field name="name">tw.activity.atl.btl.approval.list</field>
+            <field name="model">tw.activity.atl.btl.line</field>
+			<field name="inherit_id" ref="tw_activity_atl_btl.tw_activity_atl_btl_line_all_list_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='sales_channel_id']" position="before">
+					<header>
+                        <button name="action_multi_rfa_event" type="object" string="RFA"/>
+                        <button name="action_multi_approve_event" type="object" string="Approve"/>
+                    </header>
+				</xpath>
+            </field>
+        </record>
+
+        <record id="tw_activity_atl_btl_line_approval_form_view" model="ir.ui.view">
+			<field name="name">tw.activity.atl.btl.line.approval.form</field>
+			<field name="model">tw.activity.atl.btl.line</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="tw_activity_atl_btl.tw_activity_atl_btl_line_all_form_view"/>
+			<field name="arch" type="xml">
+                <button name="action_confirm_lpj" position="before">
+                    <button name="action_rfa" string="RFA" type="object" class="oe_highlight" invisible="state not in ('open','revision')" groups="tw_activity_atl_btl_approval.group_tw_activity_atl_btl_line_rfa"/>
+                    <button name="action_approve" string="Approve" type="object" class="oe_highlight" invisible="state != 'waiting_for_approval'" groups="tw_activity_atl_btl_approval.group_tw_activity_atl_btl_line_approval_rfa_approve"/>
+					<button name="action_revision" string="Revision" type="object" class="oe_highlight" invisible="not context.get('reject_btl') and state != 'reject'"/>
+                    <button name="action_reject" string="Reject" type="object" invisible="state != 'waiting_for_approval'"/>
+                </button>
+
+				<xpath expr="//field[@name='state']" position="attributes">
+					<attribute name="statusbar_visible">draft,open,waiting_for_approval,confirmed,done</attribute>
+				</xpath>
+
+                <xpath expr="//page[@name='history_activity']" position="before">
+					<page string="Approval">
+						<field name="line_approval_ids" readonly="True"/>
+					</page>
+				</xpath>
+
+			</field>
+		</record>
+
+        <record id="tw_activity_atl_btl_line_approval_action" model="ir.actions.server">
+            <field name="name">Approve Activity BTL</field>
+            <field name="model_id" ref="tw_activity_atl_btl.model_tw_activity_atl_btl"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.activity.atl.btl.line'].action_activity_atl_btl_line_approval()
+            </field>
+        </record>  
+    </data>
+</odoo>

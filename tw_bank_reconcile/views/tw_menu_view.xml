@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+        
+        <!-- Bank Reconcile Menu -->
+        <menuitem id="tw_bank_reconcile_submenu" name="Bank Reconcile" parent="tw_menu.menu_tw_backoffice" sequence="25"/>
+        
+        <!-- Bank Mutasi Menu -->
+        <menuitem id="tw_bank_mutasi_menuitem"
+            name="Bank Mutasi"
+            parent="tw_bank_reconcile_submenu"
+            action="tw_bank_mutasi_action"
+            sequence="01"
+            groups="group_tw_bank_mutasi_read"
+        />
+        <menuitem id="tw_export_bank_mutasi_menuitem"
+            name="Export Bank Mutasi"
+            parent="tw_bank_reconcile_submenu"
+            action="tw_export_bank_mutasi_action"
+            sequence="02"
+            groups="group_tw_export_bank_mutasi_read"
+        />
+        <menuitem id="tw_import_bank_mutasi_menuitem"
+            name="Import Bank Mutasi"
+            parent="tw_bank_reconcile_submenu"
+            action="tw_import_bank_mutasi_action"
+            sequence="03"
+            groups="group_tw_import_bank_mutasi_read"
+        />
+        <menuitem id="tw_import_bank_mutasi_update_menuitem"
+            name="Import Bank Mutasi (Update)"
+            parent="tw_bank_reconcile_submenu"
+            action="tw_import_bank_mutasi_update_action"
+            sequence="04"
+            groups="group_tw_import_bank_mutasi_update_read"
+        />
+        <menuitem id="tw_bank_reconcile_menuitem"
+            name="Bank Reconcile"
+            parent="tw_bank_reconcile_submenu"
+            action="tw_bank_reconcile_action"
+            sequence="05"
+            groups="group_tw_bank_reconcile_read"
+        />
+        <menuitem id="tw_bank_reconcile_report_menuitem"
+            name="Laporan Bank Reconcile"
+            parent="tw_bank_reconcile_submenu"
+            action="tw_bank_reconcile_report_action"
+            sequence="06"
+            groups="group_tw_bank_reconcile_report_read"
+        />
+        <menuitem id="tw_bank_reconcile_mutasi_report_menuitem"
+            name="Laporan Mutasi Bank Reconcile"
+            parent="tw_bank_reconcile_submenu"
+            action="tw_bank_reconcile_mutasi_report_action"
+            sequence="07"
+            groups="group_tw_bank_reconcile_mutasi_report_read"
+        />
+
+    </data>
+</odoo>

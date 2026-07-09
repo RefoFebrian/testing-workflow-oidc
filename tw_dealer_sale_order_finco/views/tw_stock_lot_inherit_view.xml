@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_production_lot_finco_form" model="ir.ui.view">
+            <field name="name">stock.lot.finco.form</field>
+            <field name="model">stock.lot</field>
+            <field name="inherit_id" ref="tw_dealer_sale_order.tw_stock_lot_dealer_sale_order_inherit_form_view"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="before">
+                    <field name="finco_id" readonly="1" options="{'no_create': True, 'no_open': True}"/>
+                </field>
+
+                <field name="downpayment" position="after">
+                    <field name="tenor" readonly="1" />
+                    <field name="installment" readonly="1" />
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_telegram_configuration_list_view" model="ir.ui.view">
+            <field name="name">tw.telegram.configuration.list</field>
+            <field name="model">tw.telegram.configuration</field>
+            <field name="type">list</field>
+            <field name="arch" type="xml">
+                <list string="Telegram Configuration">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="company_id"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_telegram_configuration_form_view" model="ir.ui.view">
+            <field name="name">tw.telegram.configuration.form</field>
+            <field name="model">tw.telegram.configuration</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Telegram Configuration">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                            </group>
+                            <group>
+                                <field name="company_id" required="1"/>
+                            </group>
+                            <group string="Telegram" name="telegram_group">
+                                <field name="telegram_username"/>
+                                <field name="api_configuration_id" options="{'no_create': True,'no_open': True}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"/>
+                                        <field name="create_date" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1"/>
+                                        <field name="write_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="tw_telegram_configuration_search_view" model="ir.ui.view">
+            <field name="name">tw.telegram.configuration.search</field>
+            <field name="model">tw.telegram.configuration</field>
+            <field name="arch" type="xml">
+                <search string="Telegram Configuration Search">
+                    <field name="name"/>
+                    <field name="company_id" string="Branch"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="tw_telegram_configuration_action" model="ir.actions.act_window">
+            <field name="name">Telegram Configuration</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.telegram.configuration</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{"readonly_by_pass": 1}</field>
+        </record>
+
+    </data>
+</odoo>

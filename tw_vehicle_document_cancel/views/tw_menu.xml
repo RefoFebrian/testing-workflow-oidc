@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="tw_vehicle_document_cancel_menu_sub" name="Cancellation" parent="tw_vehicle_document.tw_document_handling_menu_root" sequence="26"/>
+        <menuitem id="tw_vehicle_document_cancel_menu" name="Proses Faktur" parent="tw_vehicle_document_cancel_menu_sub" sequence="10"/>
+
+        <menuitem id="tw_vehicle_document_request_cancel_menu" name="Permohonan Faktur Cancel" parent="tw_vehicle_document_cancel_menu" action="tw_vehicle_document_request_cancel_action" sequence="10" groups="tw_vehicle_document_cancel.group_vehicle_document_request_cancel_read"/>
+        <menuitem id="tw_vehicle_document_receive_cancel_menu" name="Penerimaan Faktur Cancel" parent="tw_vehicle_document_cancel_menu" action="tw_vehicle_document_receive_cancel_action" sequence="20" groups="tw_vehicle_document_cancel.group_vehicle_document_receive_cancel_read"/>
+    </data>
+</odoo>

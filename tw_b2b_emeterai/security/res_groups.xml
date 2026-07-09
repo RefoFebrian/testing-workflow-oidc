@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+    <!-- B2B e-Meterai Master Coordinate Group Read -->
+        <record id="group_tw_b2b_emeterai_master_coordinate_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Koordinat e-Meterai Read</field>
+        </record>
+        <record id="access_tw_b2b_emeterai_master_coordinate_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_emeterai_master_coordinate"/>
+            <field name="name">tw_b2b_emeterai_master_coordinate read</field>
+            <field name="group_id" ref="group_tw_b2b_emeterai_master_coordinate_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- B2B e-Meterai Master Coordinate Group Update -->
+        <record id="group_tw_b2b_emeterai_master_coordinate_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Koordinat e-Meterai Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_b2b_emeterai_master_coordinate_read'))]"/>
+        </record>
+        <record id="access_tw_b2b_emeterai_master_coordinate_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_emeterai_master_coordinate"/>
+            <field name="name">tw_b2b_emeterai_master_coordinate update</field>
+            <field name="group_id" ref="group_tw_b2b_emeterai_master_coordinate_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- B2B e-Meterai Master Coordinate Group Delete -->
+        <record id="group_tw_b2b_emeterai_master_coordinate_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Koordinat e-Meterai Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_b2b_emeterai_master_coordinate_read'))]"/>
+        </record>
+        <record id="access_tw_b2b_emeterai_master_coordinate_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_emeterai_master_coordinate"/>
+            <field name="name">tw_b2b_emeterai_master_coordinate delete</field>
+            <field name="group_id" ref="group_tw_b2b_emeterai_master_coordinate_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+    
+    <!-- B2B e-Meterai Master Quota Group Read -->
+        <record id="group_tw_b2b_emeterai_master_quota_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Kuota e-Meterai Read</field>
+        </record>
+        <record id="access_tw_b2b_emeterai_master_quota_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_emeterai_master_quota"/>
+            <field name="name">tw_b2b_emeterai_master_quota read</field>
+            <field name="group_id" ref="group_tw_b2b_emeterai_master_quota_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- B2B e-Meterai Master Quota Group Update -->
+        <record id="group_tw_b2b_emeterai_master_quota_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Kuota e-Meterai Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_b2b_emeterai_master_quota_read'))]"/>
+        </record>
+        <record id="access_tw_b2b_emeterai_master_quota_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_emeterai_master_quota"/>
+            <field name="name">tw_b2b_emeterai_master_quota update</field>
+            <field name="group_id" ref="group_tw_b2b_emeterai_master_quota_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- B2B e-Meterai Master Quota Group Delete -->
+        <record id="group_tw_b2b_emeterai_master_quota_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Kuota e-Meterai Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_b2b_emeterai_master_quota_read'))]"/>
+        </record>
+        <record id="access_tw_b2b_emeterai_master_quota_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_emeterai_master_quota"/>
+            <field name="name">tw_b2b_emeterai_master_quota delete</field>
+            <field name="group_id" ref="group_tw_b2b_emeterai_master_quota_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+    
+    <!-- B2B e-Meterai Group Read -->
+        <record id="group_tw_b2b_emeterai_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW B2B e-Meterai Read</field>
+        </record>
+        <record id="access_tw_b2b_emeterai_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_emeterai"/>
+            <field name="name">tw_b2b_emeterai read</field>
+            <field name="group_id" ref="group_tw_b2b_emeterai_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- B2B e-Meterai Group Update -->
+        <record id="group_tw_b2b_emeterai_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW B2B e-Meterai Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_b2b_emeterai_read'))]"/>
+        </record>
+        <record id="access_tw_b2b_emeterai_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_emeterai"/>
+            <field name="name">tw_b2b_emeterai update</field>
+            <field name="group_id" ref="group_tw_b2b_emeterai_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- B2B e-Meterai Group Delete -->
+        <record id="group_tw_b2b_emeterai_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW B2B e-Meterai Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_b2b_emeterai_read'))]"/>
+        </record>
+        <record id="access_tw_b2b_emeterai_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_emeterai"/>
+            <field name="name">tw_b2b_emeterai delete</field>
+            <field name="group_id" ref="group_tw_b2b_emeterai_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    <!-- B2B e-Meterai Report -->
+        <record id="group_tw_b2b_emeterai_report_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Penggunaan e-Meterai</field>
+        </record>
+        <record id="access_tw_b2b_emeterai_report_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_emeterai_report"/>
+            <field name="name">tw_b2b_emeterai_report update</field>
+            <field name="group_id" ref="group_tw_b2b_emeterai_report_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_tw_b2b_emeterai_master_coordinate_read')),
+                (4,ref('group_tw_b2b_emeterai_master_coordinate_update')),
+                (4,ref('group_tw_b2b_emeterai_master_coordinate_delete')),
+                (4,ref('group_tw_b2b_emeterai_master_quota_read')),
+                (4,ref('group_tw_b2b_emeterai_master_quota_update')),
+                (4,ref('group_tw_b2b_emeterai_master_quota_delete')),
+                (4,ref('group_tw_b2b_emeterai_read')),
+                (4,ref('group_tw_b2b_emeterai_update')),
+                (4,ref('group_tw_b2b_emeterai_delete')),
+                (4,ref('group_tw_b2b_emeterai_report_read')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_expense_source_avp" model="tw.selection">
+            <field name="name">Advance Payment</field>
+            <field name="value">AVP</field> 
+	    	<field name="type">ExpenseSource</field>
+        </record>
+        <record id="tw_expense_source_cash" model="tw.selection">
+            <field name="name">Payment Request</field>
+            <field name="value">NC</field> 
+	    	<field name="type">ExpenseSource</field>
+        </record>
+    </data>
+</odoo>

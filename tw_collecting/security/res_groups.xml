@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Collecting Read Group -->
+        <record id="group_tw_collecting_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Collecting AR/AP Read</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <!-- Collecting Update Group -->
+        <record id="group_tw_collecting_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Collecting AR/AP Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_collecting_read'))]"/>
+        </record>
+
+        <!-- Collecting Delete Group -->
+        <record id="group_tw_collecting_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Collecting AR/AP Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_collecting_read'))]"/>
+        </record>
+
+        <!-- Collecting Entries Read Group -->
+        <record id="group_tw_collecting_entries_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Collecting Entries Read</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <!-- Collecting Entries Update Group -->
+        <record id="group_tw_collecting_entries_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Collecting Entries Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_collecting_entries_read'))]"/>
+        </record>
+
+        <!-- Collecting Entries Delete Group -->
+        <record id="group_tw_collecting_entries_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Collecting Entries Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_collecting_entries_read'))]"/>
+        </record>
+        
+    </data>
+    
+    <!-- Add all Collecting groups to System Admin in one go for better performance -->
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_collecting_read')),
+                (4, ref('group_tw_collecting_update')),
+                (4, ref('group_tw_collecting_delete')),
+                (4, ref('group_tw_collecting_entries_read')),
+                (4, ref('group_tw_collecting_entries_update')),
+                (4, ref('group_tw_collecting_entries_delete')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

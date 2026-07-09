@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_payment_invoice_dealer_sale_order_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.payment.invoice.dealer.sale.order.inherit.form</field>
+        <field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_order_view_form"/>
+        <field name="model">tw.dealer.sale.order</field>
+        <field name="arch" type="xml">
+            <button name="action_print_report_dso_wizard" position="after">
+                <button name="action_auto_create_ar_payment_va" invisible="state != 'sale'" string="Create Payment VA" type="object" class="oe_highlight" groups="tw_payment_invoice.group_tw_payment_invoice_button_generate_ar_payment_va_dso"/>
+            </button>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_endpoint_configuration,tw_endpoint_configuration,tw_dgi.model_tw_endpoint_configuration,base.group_user,1,0,0,0
+access_tw_mapping_response,tw_mapping_response,tw_dgi.model_tw_mapping_response,base.group_user,1,0,0,0
+access_tw_response_mapping_import_wizard,tw_response_mapping_import_wizard,tw_dgi.model_tw_response_mapping_import_wizard,base.group_user,1,1,1,1
+access_tw_endpoint_config_wizard,tw_endpoint_config_wizard,tw_dgi.model_tw_endpoint_config_wizard,base.group_user,1,1,1,1
+access_tw_dgi_info_wizard,tw_dgi_info_wizard,tw_dgi.model_tw_dgi_info_wizard,base.group_user,1,0,0,0

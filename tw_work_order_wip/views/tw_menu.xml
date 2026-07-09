@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+
+        <menuitem id="tw_work_order_wip_menuitem" action="tw_work_order_wip_action"
+            parent="tw_work_order.submenu_tw_work_order" groups="tw_work_order_wip.group_tw_work_order_wip_read" sequence="5" />
+
+    </data>
+
+</odoo>

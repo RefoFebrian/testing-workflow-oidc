@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<menuitem id="tw_backoffice_tax_submenu" name="Tax" parent="tw_menu.menu_tw_backoffice" sequence="30"/>
+
+		<menuitem id="tw_faktur_pajak_out_menuitem" name="Faktur Pajak" parent="tw_faktur_pajak.tw_backoffice_tax_submenu" action="tw_faktur_pajak.tw_faktur_pajak_out_action" sequence="100" groups="tw_faktur_pajak.group_tw_faktur_pajak_read"/>
+		<menuitem id="tw_faktur_pajak_menuitem" name="Generate Faktur Pajak" parent="tw_faktur_pajak.tw_backoffice_tax_submenu" action="tw_faktur_pajak.tw_faktur_pajak_action" sequence="101" groups="tw_faktur_pajak.group_tw_faktur_pajak_read"/>
+	</data>
+</odoo>

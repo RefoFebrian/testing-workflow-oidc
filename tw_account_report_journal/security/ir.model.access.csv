@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_report_journal_read,payment.request.read,tw_account_report_journal.model_tw_account_report_journal,group_account_laporan_journal,1,0,0,0

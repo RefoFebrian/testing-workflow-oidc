@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Default value for is_only_use_pricelist setting -->
+        <record id="config_param_is_only_use_pricelist" model="ir.config_parameter">
+            <field name="key">tw_pricelist.is_only_use_pricelist</field>
+            <field name="value">True</field>
+        </record>
+    </data>
+</odoo>

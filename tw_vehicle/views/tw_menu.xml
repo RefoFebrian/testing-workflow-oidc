@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <!-- MENU -->
+		<menuitem id="tw_vehicle_menuitem" action="tw_vehicle.tw_vehicle_action" parent="tw_menu.submenu_tw_warehouse_expedition" sequence="30" groups="tw_vehicle.group_tw_vehicle_read"/>
+	</data>
+</odoo>

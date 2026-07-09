@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_loss_demand_list_view" model="ir.ui.view">
+            <field name="name">tw.loss.demand.list.view</field>
+            <field name="model">tw.loss.demand</field>
+            <field name="priority">2</field>
+            <field name="arch" type="xml">
+                <list string="Loss Demand">                   
+                    <field name="company_id"/>
+                    <field name="product_id"/>
+                    <field name="date"/>
+                    <field name="partner_id"/>
+                    <field name="mobile"/>
+                 </list>
+            </field>
+        </record>
+
+        <record id='tw_loss_demand_form_view' model='ir.ui.view'>
+            <field name='name'>tw.loss.demand.form.view</field>
+            <field name='model'>tw.loss.demand</field>
+            <field name='arch' type='xml'>
+                <form string="Loss Demand">
+                    <sheet>
+                        <div class="oe_title">                      
+                        <h1>
+                            Loss Demand
+                        </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name='company_id' options="{'no_create': True,'no_open':True}" required="1"/>
+                                <field name='division' required="1"/>
+                                <field name='product_id' required="1"/>
+                                <field name='qty' required="1"/>
+                            </group>
+                            <group>
+                                <field name='date' required="1" />
+                                <field name='partner_id' required="1"/>
+                                <field name='mobile' required="1"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"></field> 
+                                        <field name="create_date" readonly="1"></field>                 
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1"></field>
+                                        <field name="write_date" readonly="1"></field>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_loss_demand_search_view" model="ir.ui.view">
+            <field name="name">tw.loss.demand.search</field>
+            <field name="model">tw.loss.demand</field>
+            <field name="arch" type="xml">
+                <search string="Search Loss Demand">
+                    <field name="company_id"/>
+                    <field name="product_id"/>
+                    <field name="division"/>
+                    <field name="date"/>
+                    <field name="partner_id"/>
+                    <field name="mobile"/>
+                    <filter name="division_unit" string="Unit" domain="[('division','=','Unit')]"/>
+                    <filter name="division_sparepart" string="Sparepart" domain="[('division','=','Sparepart')]"/>
+                    <filter name="division_service" string="Service" domain="[('division','=','Service')]"/>
+                    <filter name="division_umum" string="Umum" domain="[('division','=','Umum')]"/>
+                    <filter name="division_extras" string="Extras" domain="[('division','=','Extras')]"/>
+                    <filter name="division_finance" string="Finance" domain="[('division','=','Finance')]"/>
+                    <group expand="0" string="Group By">
+						<filter name="product_id" string="Product" context="{'group_by': 'product_id'}" />
+						<filter name="division" string="Division" context="{'group_by': 'division'}" />
+						<filter name="date" string="Date" context="{'group_by': 'date'}" />
+						<filter name="partner_id" string="Partner" context="{'group_by': 'partner_id'}" />
+					</group>
+                </search>
+            </field>
+        </record>
+
+
+        <record id='tw_loss_demand_action' model='ir.actions.act_window'>
+            <field name='name'>Loss Demand</field>
+            <field name='res_model'>tw.loss.demand</field>
+            <field name='view_mode'>list,form</field>
+        </record>
+
+    </data>
+</odoo>

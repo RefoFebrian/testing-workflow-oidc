@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="TWBoomDashboardUser">
+        <div class="boom-dashboard-container">
+            <!-- Loading State -->
+            <t t-if="state.loading">
+                <div class="boom-loading">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-3">Loading dashboard...</p>
+                </div>
+            </t>
+
+            <!-- Dashboard Content -->
+            <t t-else="">
+                <!-- Header Section -->
+                <div class="boom-header-horizontal">
+                    <div class="boom-welcome">
+                        <h2>
+                            Selamat <t t-esc="state.welcomeData.userInfo?.greet || 'Pagi'"/>! 
+                            <t t-esc="state.welcomeData.userInfo?.name || 'User'"/>
+                        </h2>
+                        <p class="text-muted">
+                            <t t-esc="state.welcomeData.userInfo?.job || ''"/>
+                        </p>
+                        <div class="boom-message" t-if="state.welcomeData.userInfo?.message">
+                            <p class="alert alert-info">
+                                <t t-esc="state.welcomeData.userInfo.message"/>
+                            </p>
+                        </div>
+                        <a id="birthday-text" href="#" t-on-click="onClickDetailBirthDay">
+                            Employee's birthday
+                        </a>
+                    </div>
+                    
+                    <div class="boom-quote" t-if="state.welcomeData.userInfo?.quotes">
+                        <div class="blockquote">
+                            <p>"<t t-esc="state.welcomeData.userInfo.quotes"/>"</p>
+                            <footer class="blockquote-footer">
+                                <t t-esc="state.welcomeData.userInfo.author || 'Unknown'"/>
+                            </footer>
+                        </div>
+                    </div>
+
+                    <div class="boom-box-notif">
+                        
+                    </div>
+                </div>
+                <div class="boom-header">
+                    <div class="boom-task-status">
+                        <div class="boom-status-card-container">
+                            <!-- Today Card -->
+                            <div class="boom-status-card">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="card-header-text">Today</div>
+                                        <div class="card-main-value">
+                                            <t t-esc="state.taskStatus.today || 0"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="card-footer-text">
+                                            <span class="overdue-count text-danger">
+                                                <t t-esc="state.taskStatus.overdue_today || 0"/>
+                                            </span>
+                                            <span class="overdue-label">OVERDUE</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- NOW Card -->
+                            <div class="boom-status-card">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="card-header-text">NOW</div>
+                                        <div class="card-main-value">
+                                            <t t-esc="state.taskStatus.now || 0"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="card-footer-text">
+                                            <span class="overdue-count text-danger">
+                                                <t t-esc="state.taskStatus.overdue_now || 0"/>
+                                            </span>
+                                            <span class="overdue-label">OVERDUE</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="boom-task-by-category mt-4">
+                    <div class="boom-section-card">
+                        <!-- Section Header -->
+                        <div class="section-header">
+                            <div class="title-area">
+                                <h3>Misi Focus</h3>
+                            </div>
+                            <div class="summary-cards">
+                                <div class="summary-card text-danger border-danger-subtle">
+                                    <span class="value"><t t-esc="state.taskStatus.overdue || 0"/></span>
+                                    <span class="label">Overdue</span>
+                                </div>
+                                <div class="summary-card text-warning border-warning-subtle">
+                                    <span class="value"><t t-esc="state.taskStatus.potensi_od || 0"/></span>
+                                    <span class="label">Potensi OD</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Data Table -->
+                        <div class="section-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th style="min-width: 200px;">Kategori</th>
+                                            <th class="text-center" style="width: 100px;">Overdue</th>
+                                            <th class="text-center" style="width: 100px;">Potensi OD</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-if="state.taskCategories.length === 0">
+                                            <tr>
+                                                <td colspan="3" class="text-center py-4 text-muted">
+                                                    No data available in table
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-else="">
+                                            <tr t-foreach="state.taskCategories" t-as="cat" t-key="cat_index">
+                                                <td>
+                                                    <span class="fw-medium"><t t-esc="cat.kategori_name"/></span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span t-att-class="cat.kat_overdue > 0 ? 'badge rounded-pill text-bg-danger' : 'text-muted'">
+                                                        <t t-esc="cat.kat_overdue"/>
+                                                    </span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span t-att-class="cat.kat_potensi_od > 0 ? 'badge rounded-pill text-bg-warning' : 'text-muted'">
+                                                        <t t-esc="cat.kat_potensi_od"/>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+            
+        </div>
+    </t>
+
+    <t t-name="TWBoomDashboardUser.BirthdayDialog">
+        <Dialog title="props.title">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Branch</th>
+                            <th>Job</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="props.birthdayData" t-as="b" t-key="b.id">
+                            <tr>
+                                <td t-esc="b.name"/>
+                                <td t-esc="b.company"/>
+                                <td t-esc="b.job"/>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <t t-set-slot="footer">
+                <button class="btn btn-primary" t-on-click="props.close">Close</button>
+            </t>
+        </Dialog>
+    </t>
+</templates>

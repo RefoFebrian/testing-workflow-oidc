@@ -1,0 +1,24 @@
+<odoo>
+	<data>
+
+		<!-- Inherited Form View in TW Purchase Order -->
+			<record id="tw_inherit_purchase_order_pricelist_view_form" model="ir.ui.view">
+				<field name="name">tw.purchase.order.pricelist.form</field>
+				<field name="model">purchase.order</field>
+				<field name="inherit_id" ref="purchase.purchase_order_form" />
+				<field name="arch" type="xml">
+                    <field name="partner_id" position="after">
+                        <field name="is_only_use_pricelist" invisible="1"/>
+                    </field>    
+                            
+                    <field name="price_unit" position="attributes">
+                        <attribute name="readonly">parent.division in ('Unit','Sparepart') and parent.is_only_use_pricelist</attribute>
+                    </field>
+
+					<field name="origin" position="after">
+						<field name="pricelist_id" readonly="1" options="{'no_create': True}"/>
+					</field>
+                </field>
+            </record>
+    </data>
+</odoo>

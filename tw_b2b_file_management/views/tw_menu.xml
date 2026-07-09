@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <menuitem id="tw_b2b_file_upload_wizard_submenu" parent="tw_b2b_file.tw_menuitem_b2b_file_sep" action="tw_b2b_file_management.tw_b2b_file_upload_wizard_action" sequence="3" groups="tw_b2b_file_management.tw_b2b_file_upload_group_read"/>
+        <menuitem id="tw_b2b_file_upload_submenu" parent="tw_b2b_file.tw_menuitem_b2b_file_sep" action="tw_b2b_file_management.tw_b2b_file_upload_action" sequence="4" groups="tw_b2b_file_management.tw_b2b_file_upload_group_read"/>
+        <menuitem id="tw_b2b_file_monitoring_submenu" parent="tw_b2b_file.tw_menuitem_b2b_file_sep" action="tw_b2b_file_management.tw_b2b_file_monitoring_action" sequence="5" groups="tw_b2b_file_management.tw_b2b_file_monitoring_group_read"/>
+        <menuitem id="tw_b2b_file_server_configuration_submenu" parent="tw_menu.menu_tw_mft_monitoring_configuration" action="tw_b2b_file_management.tw_b2b_file_server_configuration_action" sequence="6" groups="tw_b2b_file_management.tw_b2b_file_server_configuration_group_read"/>
+    </data>
+</odoo>

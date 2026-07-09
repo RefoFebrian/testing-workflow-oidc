@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    
+        <record id="tw_whatsapp_content_template_escalation_boom" model="tw.whatsapp.content.template">
+            <field name="name">Escalation Boom</field>
+            <field name="subject">TunasHonda_WA</field>
+            <field name="template_type_id" ref="tw_boom_escalation.tw_selection_type_escalation_boom"/>
+            <field name="content">*[sapaan] [name] [job_name]*\n\nSummary task yang belum dikerjakan [dealer_name] [tgl_transaksi]\n[detail_transaksi]\n[footer]\nTerimakasih</field>
+        </record>
+    
+    </data>
+</odoo>

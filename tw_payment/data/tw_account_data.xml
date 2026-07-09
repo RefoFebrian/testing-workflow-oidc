@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Payment methods -->
+        <record id="tw_account_payment_method_bank_transfer_in" model="account.payment.method">
+            <field name="name">Bank Transfer</field>
+            <field name="code">transfer</field>
+            <field name="payment_type">inbound</field>
+        </record>
+        <record id="tw_account_payment_method_bank_transfer_out" model="account.payment.method">
+            <field name="name">Bank Transfer</field>
+            <field name="code">transfer</field>
+            <field name="payment_type">outbound</field>
+            <field name="is_require_bank_account">1</field>
+        </record>
+
+        <record id="tw_account_payment_method_virtual_account_in" model="account.payment.method">
+            <field name="name">Virtual Account</field>
+            <field name="code">virtual_account</field>
+            <field name="payment_type">inbound</field>
+        </record>
+        <record id="tw_account_payment_method_virtual_account_out" model="account.payment.method">
+            <field name="name">Virtual Account</field>
+            <field name="code">virtual_account</field>
+            <field name="payment_type">outbound</field>
+            <field name="is_require_account_number">1</field>
+        </record>
+
+        <record id="tw_account_payment_method_qris_in" model="account.payment.method">
+            <field name="name">QRIS</field>
+            <field name="code">qris</field>
+            <field name="payment_type">inbound</field>
+        </record>
+        <record id="tw_account_payment_method_qris_out" model="account.payment.method">
+            <field name="name">QRIS</field>
+            <field name="code">qris</field>
+            <field name="payment_type">outbound</field>
+        </record>
+
+        <record id="tw_account_payment_method_cheque_in" model="account.payment.method">
+            <field name="name">Cheque</field>
+            <field name="code">cheque</field>
+            <field name="payment_type">inbound</field>
+        </record>
+        <record id="tw_account_payment_method_cheque_out" model="account.payment.method">
+            <field name="name">Cheque</field>
+            <field name="code">cheque</field>
+            <field name="payment_type">outbound</field>
+        </record>
+
+        <record id="tw_account_payment_method_auto_debit_in" model="account.payment.method">
+            <field name="name">Auto Debit</field>
+            <field name="code">auto_debit</field>
+            <field name="payment_type">inbound</field>
+        </record>
+        <record id="tw_account_payment_method_auto_debit_out" model="account.payment.method">
+            <field name="name">Auto Debit</field>
+            <field name="code">auto_debit</field>
+            <field name="payment_type">outbound</field>
+        </record>
+
+    </data>
+</odoo>

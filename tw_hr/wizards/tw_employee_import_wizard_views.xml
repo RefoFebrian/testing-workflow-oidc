@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Form View for the Wizard -->
+        <record id="view_tw_employee_import_wizard_form" model="ir.ui.view">
+            <field name="name">tw.employee.import.wizard.form</field>
+            <field name="model">tw.employee.import.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Import Employees">
+                    <field name="state" invisible="1"/>
+                    <group invisible="state == 'done'">
+                        <group>
+                            <field name="file_name" invisible="1"/>
+                            <field name="file" filename="file_name" widget="binary" />
+                            <field name="skip_existing" widget="boolean_toggle"/>
+                            <field name="process_batch" widget="boolean_toggle"/>
+                            <field name="batch_limit"/>
+                            <field name="start_row"/>
+                        </group>
+                    </group>
+                    
+                    <div invisible="state == 'draft'">
+                        <p class="text-success">Import process finished. Please review the log below.</p>
+                        <field name="import_log" nolabel="1" readonly="1" widget="text" />
+                    </div>
+
+                    <footer>
+                        <button name="action_import" string="Import" type="object" class="btn-primary" invisible="state == 'done'" />
+                        <button string="Close" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action to open Wizard -->
+        <record id="action_tw_employee_import_wizard" model="ir.actions.act_window">
+            <field name="name">Import Employees (Custom)</field>
+            <field name="res_model">tw.employee.import.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- Menu Item -->
+        <menuitem id="menu_tw_employee_import_wizard"
+                  name="Import Employees (Custom)"
+                  parent="tw_hr.submenu_tw_hr"
+                  sequence="99"
+                  action="action_tw_employee_import_wizard"
+                  groups="group_tw_employee_import_custom" />
+
+    </data>
+</odoo>

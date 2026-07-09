@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_b2b_api_ev_all,tw_b2b_api_ev all,model_tw_b2b_api_ev,base.group_user,1,0,0,0
+access_tw_b2b_api_ev_line_all,tw_b2b_api_ev_line all,model_tw_b2b_api_ev_line,base.group_user,1,0,0,0
+access_tw_b2b_api_monitoring_ev_all,tw_b2b_api_monitoring_ev all,model_tw_b2b_api_monitoring_ev,base.group_user,1,0,0,0
+access_tw_b2b_api_monitoring_ev_line_all,tw_b2b_api_monitoring_ev_line all,model_tw_b2b_api_monitoring_ev_line,base.group_user,1,0,0,0

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Asset Category Form View -->
+    <record id="view_asset_category_form_inherit" model="ir.ui.view">
+        <field name="name">account.asset.category.form.inherit</field>
+        <field name="model">account.asset.category</field>
+        <field name="inherit_id" ref="om_account_asset.view_account_asset_category_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="type"/>
+                <div>
+                    <label for="asset_code" string="Asset Code"/>
+                    <field name="asset_code_id" required="1" options="{'no_open': True}" context="{'default_type': 'AssetCode'}"/>
+                </div>
+                <div>
+                    <label for="is_cip" string="CIP?"/>
+                    <field name="is_cip"/>
+                </div>
+            </xpath>
+            <field name="account_asset_id" position="attributes">
+                <attribute name="domain">[('company_ids','parent_of',company_id)]</attribute>
+            </field>
+            <field name="account_depreciation_id" position="attributes">
+                <attribute name="domain">[('company_ids','parent_of',company_id)]</attribute>
+            </field>
+
+            <field name="open_asset">
+                <field name="asset_code"/>
+            </field>
+
+        </field>
+
+    </record>
+
+    <!-- Asset Category Search View -->
+    <record id="view_asset_category_search_inherit" model="ir.ui.view">
+        <field name="name">account.asset.category.search.inherit</field>
+        <field name="model">account.asset.category</field>
+        <field name="inherit_id" ref="om_account_asset.view_account_asset_category_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="type"/>
+                <filter string="Prepaid" name="prepaid" domain="[('type_assets','=','asset_prepayments')]"/>
+                <filter string="Fixed Asset" name="fixed" domain="[('type_assets','=','fixed')]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

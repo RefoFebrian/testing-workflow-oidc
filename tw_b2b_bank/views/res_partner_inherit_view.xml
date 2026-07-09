@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_partner_b2b_bank_inherit_form_view" model="ir.ui.view">
+        <field name="name">res.partner.b2b.bank.inherit.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="tw_partner.tw_partner_contact_form_view"/>
+        <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <field name="is_bank"/>
+                <field name="is_fintech"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

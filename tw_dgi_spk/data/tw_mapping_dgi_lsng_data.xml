@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- ==================== HSO ==================== -->
+        <record id="mapping_lsng_hso_tenor" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_hso"/>
+            <field name="json_path">tenor</field>
+            <field name="target_field">tenor</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_hso_installment" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_hso"/>
+            <field name="json_path">jumlahCicilan</field>
+            <field name="target_field">installment</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_hso_down_payment" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_hso"/>
+            <field name="json_path">jumlahDP</field>
+            <field name="target_field">down_payment</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_hso_finco_po" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_hso"/>
+            <field name="json_path">idPOFinanceCompany</field>
+            <field name="target_field">finco_po</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_hso_finco_po_create" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_hso"/>
+            <field name="json_path">tanggalPembuatanPO</field>
+            <field name="target_field">finco_po_create</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_hso_finco_id" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_hso"/>
+            <field name="json_path">idFinanceCompany</field>
+            <field name="target_field">finco_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">code</field>
+            <field name="relation_search_domain">[('category_id.name', '=', 'Finance Company')]</field>
+        </record>
+
+        <!-- ==================== ASP ==================== -->
+        <record id="mapping_lsng_asp_tenor" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_asp"/>
+            <field name="json_path">tenor</field>
+            <field name="target_field">tenor</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_asp_installment" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_asp"/>
+            <field name="json_path">jumlahCicilan</field>
+            <field name="target_field">installment</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_asp_down_payment" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_asp"/>
+            <field name="json_path">jumlahDP</field>
+            <field name="target_field">down_payment</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_asp_finco_po" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_asp"/>
+            <field name="json_path">idPOFinanceCompany</field>
+            <field name="target_field">finco_po</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_asp_finco_po_create" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_asp"/>
+            <field name="json_path">tanggalPembuatanPO</field>
+            <field name="target_field">finco_po_create</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_asp_finco_id" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_asp"/>
+            <field name="json_path">idFinanceCompany</field>
+            <field name="target_field">finco_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">code</field>
+            <field name="relation_search_domain">[('category_id.name', '=', 'Finance Company')]</field>
+        </record>
+
+        <!-- ==================== DAM ==================== -->
+        <record id="mapping_lsng_dam_tenor" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_dam"/>
+            <field name="json_path">tenor</field>
+            <field name="target_field">tenor</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_dam_installment" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_dam"/>
+            <field name="json_path">jumlahCicilan</field>
+            <field name="target_field">installment</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_dam_down_payment" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_dam"/>
+            <field name="json_path">jumlahDP</field>
+            <field name="target_field">down_payment</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_dam_finco_po" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_dam"/>
+            <field name="json_path">idPOFinanceCompany</field>
+            <field name="target_field">finco_po</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_dam_finco_po_create" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_dam"/>
+            <field name="json_path">tanggalPembuatanPO</field>
+            <field name="target_field">finco_po_create</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_dam_finco_id" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_dam"/>
+            <field name="json_path">idFinanceCompany</field>
+            <field name="target_field">finco_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">code</field>
+            <field name="relation_search_domain">[('category_id.name', '=', 'Finance Company')]</field>
+        </record>
+
+        <!-- ==================== DAW ==================== -->
+        <record id="mapping_lsng_daw_tenor" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_daw"/>
+            <field name="json_path">tenor</field>
+            <field name="target_field">tenor</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_daw_installment" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_daw"/>
+            <field name="json_path">jumlahCicilan</field>
+            <field name="target_field">installment</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_daw_down_payment" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_daw"/>
+            <field name="json_path">jumlahDP</field>
+            <field name="target_field">down_payment</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_daw_finco_po" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_daw"/>
+            <field name="json_path">idPOFinanceCompany</field>
+            <field name="target_field">finco_po</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_daw_finco_po_create" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_daw"/>
+            <field name="json_path">tanggalPembuatanPO</field>
+            <field name="target_field">finco_po_create</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_daw_finco_id" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_daw"/>
+            <field name="json_path">idFinanceCompany</field>
+            <field name="target_field">finco_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">code</field>
+            <field name="relation_search_domain">[('category_id.name', '=', 'Finance Company')]</field>
+        </record>
+
+        <!-- ==================== NPM ==================== -->
+        <record id="mapping_lsng_npm_tenor" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_npm"/>
+            <field name="json_path">tenor</field>
+            <field name="target_field">tenor</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_npm_installment" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_npm"/>
+            <field name="json_path">jumlahCicilan</field>
+            <field name="target_field">installment</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_npm_down_payment" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_npm"/>
+            <field name="json_path">jumlahDP</field>
+            <field name="target_field">down_payment</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_npm_finco_po" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_npm"/>
+            <field name="json_path">idPOFinanceCompany</field>
+            <field name="target_field">finco_po</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_npm_finco_po_create" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_npm"/>
+            <field name="json_path">tanggalPembuatanPO</field>
+            <field name="target_field">finco_po_create</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_npm_finco_id" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_npm"/>
+            <field name="json_path">idFinanceCompany</field>
+            <field name="target_field">finco_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">code</field>
+            <field name="relation_search_domain">[('category_id.name', '=', 'Finance Company')]</field>
+        </record>
+
+        <!-- ==================== SINSEN ==================== -->
+        <record id="mapping_lsng_sinsen_tenor" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_sinsen"/>
+            <field name="json_path">tenor</field>
+            <field name="target_field">tenor</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_sinsen_installment" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_sinsen"/>
+            <field name="json_path">jumlahCicilan</field>
+            <field name="target_field">installment</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_sinsen_down_payment" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_sinsen"/>
+            <field name="json_path">jumlahDP</field>
+            <field name="target_field">down_payment</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_sinsen_finco_po" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_sinsen"/>
+            <field name="json_path">idPOFinanceCompany</field>
+            <field name="target_field">finco_po</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_sinsen_finco_po_create" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_sinsen"/>
+            <field name="json_path">tanggalPembuatanPO</field>
+            <field name="target_field">finco_po_create</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_sinsen_finco_id" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_sinsen"/>
+            <field name="json_path">idFinanceCompany</field>
+            <field name="target_field">finco_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">code</field>
+            <field name="relation_search_domain">[('category_id.name', '=', 'Finance Company')]</field>
+        </record>
+    
+<!-- ==================== WAHANA ==================== -->
+        <record id="mapping_lsng_wahana_tenor" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_wahana"/>
+            <field name="json_path">tenor</field>
+            <field name="target_field">tenor</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_wahana_installment" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_wahana"/>
+            <field name="json_path">jumlahCicilan</field>
+            <field name="target_field">installment</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_wahana_down_payment" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_wahana"/>
+            <field name="json_path">jumlahDP</field>
+            <field name="target_field">down_payment</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_wahana_finco_po" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_wahana"/>
+            <field name="json_path">idPOFinanceCompany</field>
+            <field name="target_field">finco_po</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_wahana_finco_po_create" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_wahana"/>
+            <field name="json_path">tanggalPembuatanPO</field>
+            <field name="target_field">finco_po_create</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_lsng_wahana_finco_id" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_spk.tw_endpoint_dgi_lsng_wahana"/>
+            <field name="json_path">idFinanceCompany</field>
+            <field name="target_field">finco_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_partner"/>
+            <field name="relation_lookup_field">code</field>
+            <field name="relation_search_domain">[('category_id.name', '=', 'Finance Company')]</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+  <record id="tw_work_order_job_return_view_form" model="ir.ui.view">
+    <field name="name">tw.work.order.job.return</field>
+    <field name="model">tw.work.order</field>
+    <field name="inherit_id" ref="tw_work_order.tw_work_order_form_view" />
+    <field name="arch" type="xml">
+      <field name="km" position="after">
+        <field name="warranty" />
+      </field>
+      <field name="combo_item_id" position="after">
+        <field name="warranty" />
+      </field>
+      <field name="mechanic_id" position="before">
+        <field name="previous_work_order_id"
+          options="{'no_show':True,'no_create':True,'no_open':True}"
+          invisible="type != 'WAR'" required="type == 'WAR'" 
+          domain="[('id', 'in', available_previous_work_order_ids)]"/>
+        <field name="available_previous_work_order_ids" invisible="1"/>
+      </field>
+    </field>
+  </record>
+</odoo>

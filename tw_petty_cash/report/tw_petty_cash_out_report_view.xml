@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="tw_petty_cash_out_report" name="tw_petty_cash_out_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <style>
+                        .page {
+                            font-family: 'Arial', sans-serif;
+                            padding: 25px;
+                            color: #000;
+                            line-height: 1.4;
+                        }
+                    </style>
+
+                    <table class="header-table" style="width: 100%;">
+                        <tr>
+                            <td style="width:65%;vertical-align:top">
+                                <div >
+                                    <h3>
+                                        <t t-if="o.company_id.parent_id">
+                                            <t t-esc="o.company_id.parent_id.suspend_security().name"/>
+ - </t>
+                                        <t t-esc="o.company_id.name"/>
+                                    </h3>
+                                    <p>
+                                        <t t-esc="o.company_id.street"/>
+                                    </p>
+                                    <p>
+                                        <t t-esc="o.company_id.state_id.name"/>
+                                    </p>
+                                </div>
+                            </td>
+                            <td style="width:35%;vertical-align:top;padding-left:15px">
+                                <div >
+                                    <h3>PETTY CASH</h3>
+                                    <table style="width:100%; border:none; margin-bottom: 1rem;">
+                                        <tr>
+                                            <td style="width:30%; border:none; padding:0;">No</td>
+                                            <td style="width:5%; border:none; padding:0;">:</td>
+                                            <td style="width:65%; border:none; padding:0;"><t t-esc="o.name"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:none; padding:0;">Tanggal</td>
+                                            <td style="border:none; padding:0;">:</td>
+                                            <td style="border:none; padding:0;"><t t-esc="o.date.strftime('%d-%m-%Y') if o.date else ''"/></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table table-sm mt-3" style="width: 100%; border:1px solid black; border-collapse:collapse;">
+                        <thead>
+                            <tr style="border-top:1px solid black; border-right:1px solid black;border-left:1px solid black;">
+                                <th colspan="2" width="25%" style="text-align:left;padding-left:10px;padding-top:15px;font-weight:normal;">
+                                    <p>Divisi </p>
+                                </th>
+                                <th colspan="2" width="75%" style="text-align:left;font-weight:normal;">
+                                    <p>: <span style="padding-left:10px;">
+                                            <t t-esc="o.division"/>
+                                        </span>
+                                    </p>
+                                </th>
+                            </tr>
+                            <tr style="border-right:1px solid black;border-left:1px solid black;">
+                                <th colspan="2" width="25%" style="text-align:left;padding-left:10px;font-weight:normal;">
+                                    <p>Branch Destination</p>
+                                </th>
+                                <th colspan="2" width="75%" style="text-align:left;font-weight:normal;">
+                                    <p>: <span style="padding-left:10px;">
+                                            <t t-esc="o.branch_destination_id.name"/>
+                                        </span>
+                                    </p>
+                                </th>
+                            </tr>
+                            <tr style="border-right:1px solid black;border-left:1px solid black;">
+                                <th colspan="2" width="25%" style="text-align:left;padding-left:10px;font-weight:normal;">
+                                    <p>Dibayarkan Kepada</p>
+                                </th>
+                                <th colspan="2" width="75%" style="text-align:left;font-weight:normal;">
+                                    <p>: <span style="padding-left:10px;">
+                                            <t t-esc="o.employee_id.suspend_security().name"/>
+                                        </span>
+                                    </p>
+                                </th>
+                            </tr>
+                            <tr style="border-right:1px solid black;border-left:1px solid black;">
+                                <th colspan="2" width="25%" style="text-align:left;padding-left:10px;padding-bottom:15px;font-weight:normal;">
+                                    <p>Payment Method</p>
+                                </th>
+                                <th colspan="2" width="75%" style="text-align:left;font-weight:normal;">
+                                    <p>: <span style="padding-left:10px;">
+                                            <t t-esc="o.journal_petty_id.name"/>
+                                        </span>
+                                    </p>
+                                </th>
+                            </tr>
+                            <tr style="border:1px solid black;">
+                                <th style="border:1px solid black;text-align:left; padding-bottom:5px;padding-top:5px; font-weight:normal;">No</th>
+                                <th style="border:1px solid black;text-align:left; padding-bottom:5px;padding-top:5px; font-weight:normal;">No Rek</th>
+                                <th style="border:1px solid black;text-align:left; padding-bottom:5px;padding-top:5px; font-weight:normal;">Keterangan</th>
+                                <th style="border:1px solid black; text-align:center; padding-bottom:5px;padding-top:5px; font-weight:normal;">Jumlah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.petty_cash_out_line_ids" t-as="line">
+                                <tr style="border:1px solid black; padding-bottom:5px;padding-top:5px;">
+                                    <td style="border:1px solid black; padding-bottom:5px;padding-top:5px;">
+                                        <t t-esc="line_index + 1"/>
+                                    </td>
+                                    <td style="border:1px solid black;padding-bottom:5px;padding-top:5px;">
+                                        <t t-esc="line.account_id.code"/>
+                                    </td>
+                                    <td style="border:1px solid black;padding-bottom:5px;padding-top:5px;">
+                                        <t t-esc="line.name"/>
+                                    </td>
+                                    <td style="border:1px solid black; text-align:right;padding-bottom:5px;padding-top:5px;" class="text-end">
+                                        <t t-esc="'{:,.2f}'.format(line.amount_real)"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td colspan="2" style="border:1px solid black; text-align:left;padding-bottom:5px;"></td>
+                                <td style="border:1px solid black; text-align:left;padding-bottom:5px;">Total</td>
+                                <td style="border:1px solid black; text-align:right;padding-bottom:5px;" class="text-end">
+                                    <t t-esc="'{:,.2f}'.format(o.amount_real)"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p class="mt-2">
+                        <b>###                            <t t-esc="o.currency_id.amount_to_text(o.amount_real)"/>
+ ###</b>
+                    </p>
+
+                    <p>Kasir</p>
+                    <br />
+                    <br />
+                    <p>--------------------------------------------</p>
+
+                    <div class="text-end mt-2">
+                        <t t-esc="o.create_uid.name"/>
+                        <t t-esc="o.write_date.strftime('%d-%m-%Y %H:%M') if o.write_date else ''" />
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="paperformat_petty_cash_out" model="report.paperformat">
+        <field name="name">Petty Cash Out Report</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">5</field>
+        <field name="margin_bottom">5</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="css_margins" eval="True"/>
+        <field name="header_spacing">3</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="action_report_tw_petty_cash_out_report" model="ir.actions.report">
+        <field name="name">Petty Cash Out Report</field>
+        <field name="model">tw.petty.cash.out</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tw_petty_cash.tw_petty_cash_out_report</field>
+        <field name="report_file">tw_petty_cash.tw_petty_cash_out_report</field>
+        <field name="print_report_name">'Petty Cash - %s' % object.name</field>
+        <field name="paperformat_id" ref="paperformat_petty_cash_out"/>
+    </record>
+
+</odoo>

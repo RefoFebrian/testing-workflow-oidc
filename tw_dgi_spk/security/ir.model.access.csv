@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_dgi_spk_wizard_sync,access_tw_dgi_spk_wizard_sync,model_tw_dgi_spk_wizard,tw_dgi_spk.tw_dgi_spk_button_group,1,1,1,1

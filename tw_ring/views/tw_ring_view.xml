@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- Tree View -->
+        <record id="tw_ring_list_view" model="ir.ui.view">
+            <field name="name">tw.ring.tree</field>
+            <field name="model">tw.ring</field>
+            <field name="type">list</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="Master Ring" editable="bottom" delete="0">
+                    <field name="name" required="1"/>
+                    <field name="active" invisible="1" optional="hide"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="tw_ring_form_view" model="ir.ui.view">
+            <field name="name">tw.ring.form</field>
+            <field name="model">tw.ring</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Master Ring">
+                    <header>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" string="Ring Name"/>
+                            <h1><field name="name" required="1"/></h1>
+                        </div>
+                        <notebook>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                        <field name="create_date" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                        <field name="write_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="tw_ring_search_view" model="ir.ui.view">
+            <field name="name">tw.ring.search</field>
+            <field name="model">tw.ring</field>
+            <field name="arch" type="xml">
+                <search string="Master Ring">
+                    <field name="name" select="True"/>
+                    <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                    <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action View -->
+         <record id="action_activate_tw_ring" model="ir.actions.server">
+            <field name="name">Activate</field>
+            <field name="model_id" ref="tw_ring.model_tw_ring"/>
+            <field name="binding_model_id" ref="tw_ring.model_tw_ring"/>
+            <field name="binding_type">action</field>
+            <field name="state">code</field>
+            <field name="code">records.action_activate()</field>
+        </record>
+
+        <record id="action_deactivate_tw_ring" model="ir.actions.server">
+            <field name="name">Deactivate</field>
+            <field name="model_id" ref="tw_ring.model_tw_ring"/>
+            <field name="binding_model_id" ref="tw_ring.model_tw_ring"/>
+            <field name="binding_type">action</field>
+            <field name="state">code</field>
+            <field name="code">records.action_deactivate()</field>
+        </record>
+        
+        <record id="tw_ring_action" model="ir.actions.server">
+            <field name="name">Master Ring</field>
+            <field name="model_id" ref="tw_ring.model_tw_ring"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.ring'].action_ring_tree()
+            </field>
+        </record>
+        
+    </data>
+</odoo>

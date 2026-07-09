@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_selection_branch_category_h123" model="tw.selection">
+            <field name="name">H123</field>
+            <field name="value">H123</field>
+            <field name="type">BranchCategory</field>
+        </record>
+
+        <record id="tw_selection_branch_category_h23" model="tw.selection">
+            <field name="name">H23</field>
+            <field name="value">H23</field>
+            <field name="type">BranchCategory</field>
+        </record>
+
+        <record id="tw_selection_branch_category_h1" model="tw.selection">
+            <field name="name">H1</field>
+            <field name="value">H1</field>
+            <field name="type">BranchCategory</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Approval Manual atau Reject AM -->
+        <record id="view_tw_profit_before_tax_line_list" model="ir.ui.view">
+            <field name="name">view.tw.profit.before.tax.line.list</field>
+            <field name="model">tw.profit.before.tax.line</field>
+            <field name="arch" type="xml">
+                <list string="Approval AM" create="false">
+                    <field name="company_id" />
+                    <field name="series_motor" />
+                    <field name="series_margin_salesman_cash" string="Salesman Cash" />
+                    <field name="series_margin_salesman_credit" string="Salesman Credit" />
+                    <field name="series_margin_counter_cash" string="SC Cash" />
+                    <field name="series_margin_counter_credit" string="SC Credit" />
+                    <field name="series_margin_sco_cash" string="SCO Cash" />
+                    <field name="series_margin_sco_credit" string="SCO Credit" />
+                    <field name="lm_series_margin_salesman_cash" string="(LM) Sales Cash" />
+                    <field name="lm_series_margin_salesman_credit" string="(LM) Sales Credit" />
+                    <field name="lm_series_margin_counter_cash" string="(LM) SC Cash" />
+                    <field name="lm_series_margin_counter_credit" string="(LM) SC Credit" />
+                    <field name="lm_series_margin_sco_cash" string="(LM) SCO Cash" />
+                    <field name="lm_series_margin_sco_credit" string="(LM) SCO Credit" />
+                    <field name="amount_net_proposed_margin" />
+                    <field name="lm_amount_net_proposed_margin" />
+                    <field name="description" />
+                    <field name="state" />
+                </list>
+            </field>
+        </record>
+
+        <record id="view_tw_profit_before_tax_line_form" model="ir.ui.view">
+            <field name="name">view.tw.profit.before.tax.line.form</field>
+            <field name="model">tw.profit.before.tax.line</field>
+            <field name="arch" type="xml">
+                <form string="Approval AM" create="false" edit="false" delete="false">
+                    <header>
+                        <button name="action_approve"
+                                type="object"
+                                icon="fa-check"
+                                string="Approve"
+                                class="oe_highlight"
+                                groups="tw_profit_before_tax.tw_profit_before_tax_line_group_button_approved"
+                                invisible="state in ('rejected', 'approved')" />
+                        <button name="action_reject"
+                                type="object"
+                                icon="fa-remove"
+                                string="Reject"
+                                groups="tw_profit_before_tax.tw_profit_before_tax_line_group_button_rejected"
+                                invisible="state in ('rejected', 'approved')" />
+                        <field name="state"
+                               widget="statusbar"
+                               statusbar_visible="draft,approved"
+                               statusbar_colors='{"rejected":"red", "approved":"blue"}' />
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" class="oe_inline" placeholder="Name" />
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Info">
+                                <field name="company_id" options="{'no_open':True,'no_create':True}" />
+                                <field name="period_time_formated" readonly="1" />
+                                <field name="series_motor" options="{'no_open':True,'no_create':True}" />
+                                <field name="amount_net_proposed_margin" />
+                                <field name="lm_amount_net_proposed_margin" />
+                            </group>
+                            <group string="Summary">
+                                <field name="description" />
+                                <field name="lm_ttl_sales" />
+                                <field name="lm_ttl_sales_cash" />
+                                <field name="lm_ttl_sales_credit" />
+                                <field name="ttl_sales" />
+                            </group>
+                            <group string="Propose Net Margin">
+                                <field name="salesman_net_proposed_margin" />
+                                <field name="counter_net_proposed_margin" />
+                                <field name="sco_net_proposed_margin" />
+                            </group>
+                            <group string="Propose Net Margin Bulan Lalu">
+                                <field name="lm_salesman_net_proposed_margin" />
+                                <field name="lm_counter_net_proposed_margin" />
+                                <field name="lm_sco_net_proposed_margin" />
+                            </group>
+                            <group string="Unit Cash Sales">
+                                <field name="unit_cash_salesman" />
+                                <field name="unit_cash_scounter" />
+                                <field name="unit_cash_sco" />
+                                <field name="amount_unit_cash" />
+                            </group>
+                            <group string="Unit Credit Sales">
+                                <field name="unit_credit_salesman" />
+                                <field name="unit_credit_scounter" />
+                                <field name="unit_credit_sco" />
+                                <field name="amount_unit_credit" />
+                            </group>
+                            <group string="Unit Discount Cash">
+                                <field name="discount_cash_salesman" />
+                                <field name="discount_cash_counter" />
+                                <field name="discount_cash_sco" />
+                                <field name="amount_discount_cash" />
+                            </group>
+                            <group string="Unit Discount Credit">
+                                <field name="discount_credit_salesman" />
+                                <field name="discount_credit_counter" />
+                                <field name="discount_credit_sco" />
+                                <field name="amount_discount_credit" />
+                            </group>
+                            <group string="Gross Profit">
+                                <field name="gp_bbn" />
+                                <field name="gp_unit" />
+                                <field name="ttl_gp" />
+                                <field name="refund" />
+                            </group>
+                            <group></group>
+                            <group string="Net Margin Salesman">
+                                <field name="net_margin_salesman_cash" />
+                                <field name="net_margin_salesman_credit" />
+                                <field name="amount_net_margin_salesman" />
+                            </group>
+                            <group string="Net Margin Sales Counter">
+                                <field name="net_margin_counter_cash" />
+                                <field name="net_margin_counter_credit" />
+                                <field name="amount_net_margin_counter" />
+                            </group>
+                            <group string="Net Margin SCO">
+                                <field name="net_margin_sco_cash" />
+                                <field name="net_margin_sco_credit" />
+                                <field name="amount_net_margin_sco" />
+                            </group>
+                            <group string="Net Margin All">
+                                <field name="all_net_margin_cash" />
+                                <field name="all_net_margin_credit" />
+                                <field name="all_net_margin_amount" />
+                            </group>
+                            <group string="Net Margin per Series">
+                                <field name="series_margin_salesman_cash" readonly="1" />
+                                <field name="series_margin_salesman_credit" readonly="1" />
+                                <field name="series_margin_counter_cash" readonly="1" />
+                                <field name="series_margin_counter_credit" readonly="1" />
+                                <field name="series_margin_sco_cash" readonly="1" />
+                                <field name="series_margin_sco_credit" readonly="1" />
+                            </group>
+                            <group string="Net Margin per Series Bulan Lalu">
+                                <field name="lm_series_margin_salesman_cash" readonly="1" />
+                                <field name="lm_series_margin_salesman_credit" readonly="1" />
+                                <field name="lm_series_margin_counter_cash" readonly="1" />
+                                <field name="lm_series_margin_counter_credit" readonly="1" />
+                                <field name="lm_series_margin_sco_cash" readonly="1" />
+                                <field name="lm_series_margin_sco_credit" readonly="1" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <!-- <page name="approval_ids" string="Approval">
+                                <field name="approval_ids" readonly="1">
+                                    <list colors="red:state == 'rejected' ;">
+                                        <field name="group_id" readonly="1"/>
+                                        <field name="job_id" readonly="1"/>
+                                        <field name="user_id" readonly="1"/>
+                                        <field name="date" readonly="1"/>
+                                        <field name="state" readonly="1" widget="badge" decoration-success="state == 'approved'" decoration-info="state == 'open'" decoration-danger="state == 'rejected'"/>
+                                    </list>
+                                    <form>
+                                        <sheet>
+                                            <group> 
+                                                <group>
+                                                    <field name="group_id" readonly="1"/>
+                                                    <field name="user_id" readonly="1"/>
+                                                    <field name="employee_id" readonly="1"/>
+                                                </group>
+                                                <group>
+                                                    <field name="date" readonly="1"/>
+                                                    <field name="state" readonly="1"/>
+                                                    <field name="alasan_reject" readonly="1" invisible="alasan_reject == False"/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page> -->
+                            <page name="audit_trail_page" string="Audit Trail" invisible="create_date == False">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1" />
+                                        <field name="create_date" readonly="1" />
+                                        <field name="approve_uid" readonly="1" invisible="approve_uid == False" />
+                                        <field name="approve_date" readonly="1" invisible="approve_date == False" />
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1" />
+                                        <field name="write_date" readonly="1" />
+                                        <field name="reject_uid" readonly="1" invisible="reject_uid == False" />
+                                        <field name="reject_date" readonly="1" invisible="reject_date == False" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_tw_profit_before_tax_line_search" model="ir.ui.view">
+            <field name="name">tw.profit.before.tax.line.search</field>
+            <field name="model">tw.profit.before.tax.line</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" />
+                    <field name="company_id" />
+                    <field name="period_time_formated" />
+                    <field name="series_motor" />
+                    <field name="all_net_margin_amount" />
+                    <field name="ttl_sales" />
+                    <field name="state" />
+                    <filter name="draft" string="Draft" domain="[('state','=','draft')]" />
+                    <filter name="reject" string="Reject" domain="[('state','=','reject')]" />
+                    <filter name="approved" string="Approved" domain="[('state','=','approved')]" />
+                    <separator />
+                    <group string="Group By">
+                        <filter name="company_id" string="Branch" context="{'group_by': 'company_id'}" />
+                        <filter name="state" string="State" context="{'group_by': 'state'}" />
+                        <filter name="series_motor" string="Series Motor" context="{'group_by': 'series_motor'}" />
+                        <filter name="groupby_period_time_formated" string="Periode" context="{'group_by': 'period_time_formated'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Approval Manual atau Reject AM - Action -->
+        <record id="action_tw_profit_before_tax_line" model="ir.actions.server">
+            <field name="name">Approval AM</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="tw_profit_before_tax.model_tw_profit_before_tax_line" />
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.profit.before.tax.line'].action_profit_before_tax_line_list()
+            </field>
+        </record>
+
+        <record id="approval_am" model="ir.actions.server">
+            <field name="name">Approve</field>
+            <field name="model_id" ref="model_tw_profit_before_tax_line" />
+            <field name="binding_model_id" ref="tw_profit_before_tax.model_tw_profit_before_tax_line" />
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.profit.before.tax.line'].action_approve()
+            </field>
+        </record>
+
+        
+
+    </data>
+</odoo>

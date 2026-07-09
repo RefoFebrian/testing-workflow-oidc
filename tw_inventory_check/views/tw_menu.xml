@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <menuitem name='Loss Demand' parent='tw_menu.submenu_tw_workshop_h3' sequence="100" 
+        id='tw_loss_demand_menuitem'  action='tw_loss_demand_action' groups="tw_inventory_check.tw_loss_demand_group_read"/>
+        <menuitem name="Check Prices" parent="tw_menu.submenu_tw_showroom_h1" sequence="1"
+        id="tw_pricelist_transient_showroom_menuitem" action="tw_pricelist_transient_showroom_action" groups="tw_inventory_check.tw_pricelist_transient_group_read"/>
+        <menuitem name="Check Prices" parent="tw_menu.submenu_tw_workshop_h3" sequence="10"
+        id="tw_pricelist_transient_workshop_menuitem" action="tw_pricelist_transient_workshop_action" groups="tw_inventory_check.tw_pricelist_transient_group_workshop_read"/>
+        <menuitem name="Laporan Loss Demand" parent="tw_menu.submenu_tw_workshop_report"
+        id="tw_loss_demand_report_workshop_menuitem" action="tw_loss_demand_workshop_report_action" groups="tw_inventory_check.tw_loss_demand_group_read"/> 
+    
+    </data>
+    
+
+</odoo>

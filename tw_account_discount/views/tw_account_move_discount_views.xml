@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_account_branch_account_move_discount_view_form" model="ir.ui.view">
+            <field name="name">tw.account.branch.account.move.discount.view.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="tw_account.tw_account_move_view_form" />
+            <field name="arch" type="xml">
+
+                <field name="company_id" position="after">
+                    <field name="account_discount_ids" widget="many2many_tags" invisible="1" />
+                    <field name="has_discount" invisible="1" />
+                </field>
+
+                <field name="invoice_line_ids" position="attributes">
+                    <attribute name="invisible">has_discount or is_limit_edit</attribute>
+                    <attribute name="readonly">state not in ('draft', 'open')</attribute>
+                </field>
+
+                <field name="invoice_line_ids" position="after">
+                    <field name="invoice_ids" widget="product_label_section_and_note_field_o2m" mode="list" invisible="has_discount != True" context="{
+                                'default_move_type': context.get('default_move_type'),
+                                'journal_id': journal_id,
+                                'default_partner_id': commercial_partner_id,
+                                'default_currency_id': currency_id or company_currency_id,
+                                'default_display_type': 'product',
+                                'quick_encoding_vals': quick_encoding_vals,
+                            }" readonly="state not in ('draft', 'open')">
+                        <list editable="bottom" string="Journal Items" default_order="sequence, id">
+                            <control>
+                                <create name="add_line_control" string="Add a line"/>
+                                <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                                <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>
+                                <button name="action_add_from_catalog" string="Catalog" type="object" class="btn-link" context="{'order_id': parent.id}"/>
+                            </control>
+
+                            <!-- Displayed fields -->
+                            <field name="sequence" widget="handle"/>
+                            <field name="product_id" optional="show" readonly="parent.is_limit_edit" widget="product_label_section_and_note_field" domain="
+                                        (
+                                            context.get('default_move_type') in ('out_invoice', 'out_refund', 'out_receipt')
+                                            and [('sale_ok', '=', True)]
+                                            or [('purchase_ok', '=', True)]
+                                        ) and [('categ_id', 'in', parent.product_category_ids)]
+                                    "/>
+                            <field name="name" widget="section_and_note_text" optional="show"/>
+                            <field name="account_id" context="{'partner_id': partner_id, 'move_type': parent.move_type}" groups="account.group_account_readonly" options="{'no_quick_create': True}" domain="[('deprecated', '=', False), ('account_type', 'not in', ('asset_receivable', 'liability_payable', 'off_balance'))]" readonly="parent.is_limit_edit" required="display_type not in ('line_note', 'line_section')"/>
+                            <field name="analytic_distribution" widget="analytic_distribution" string="Analytic" groups="analytic.group_analytic_accounting" optional="show" readonly="parent.is_limit_edit" options="{'product_field': 'product_id', 'account_field': 'account_id', 'amount_field': 'price_subtotal'}" business_domain_compute="parent.move_type in ['out_invoice', 'out_refund', 'out_receipt'] and 'invoice' or parent.move_type in ['in_invoice', 'in_refund', 'in_receipt'] and 'bill' or 'general'"/>
+                            <field name="quantity" optional="show" readonly="parent.state not in ('draft', 'open') or parent.is_limit_edit" />
+                            <field name="product_uom_category_id" column_invisible="True"/>
+                            <field name="product_uom_id" string="UoM" groups="uom.group_uom" optional="show" width="92px" readonly="parent.is_limit_edit"/>
+                            <!-- /l10n_in_edi.test_edi_json -->
+                            <!-- required for @api.onchange('product_id') -->
+                            <field name="product_uom_id" column_invisible="True"/>
+                            <field name="price_unit" string="Price" readonly="parent.state not in ('draft', 'open')" />
+                            <field name="discount" width="50px" string="Disc.%" optional="show" readonly="parent.state not in ('draft', 'open')" />
+                            <field name="tax_ids" widget="many2many_tax_tags" domain="[('type_tax_use', '=?', parent.invoice_filter_type_domain), ('company_id', 'parent_of', parent.company_id), ('country_id', '=', parent.tax_country_id)]" context="{'append_type_to_tax_name': not parent.invoice_filter_type_domain, 'active_test': True}" options="{'no_create': True}" optional="show"/>
+                            <field name="price_subtotal" column_invisible="parent.move_type not in ['in_invoice', 'in_refund', 'in_receipt'] and parent.company_price_include == 'tax_included'" string="Amount"/>
+                            <field name="price_total" column_invisible="parent.move_type in ['in_invoice', 'in_refund', 'in_receipt'] or parent.company_price_include == 'tax_excluded'" string="Amount"/>
+                            <!-- Others fields -->
+                            <field name="partner_id" column_invisible="True"/>
+                            <field name="currency_id" column_invisible="True"/>
+                            <field name="company_id" column_invisible="True"/>
+                            <field name="company_currency_id" column_invisible="True"/>
+                            <field name="display_type" force_save="1" column_invisible="True"/>
+                        </list>
+                    </field>
+                </field>
+
+                <!-- Override the second invoice_line_ids added by tw_account (for is_limit_edit mode) -->
+                <xpath expr="//page[@id='invoice_tab']/field[@name='invoice_line_ids'][2]" position="attributes">
+                    <attribute name="invisible">not is_limit_edit or has_discount</attribute>
+                </xpath>
+
+                <xpath expr="//page[@id='invoice_tab']/group/group[2]/group[hasclass('oe_subtotal_footer')]" position="before">
+
+                    <field name="discount_line_ids" nolabel="1" class="discount_footer" force_save="1">
+                        <list editable="bottom" delete="false" create="false">
+                            <field name="name" readonly="1" force_save="1" />
+                            <field name="amount" force_save="1" />
+                            <field name="company_id" />
+                            <field name="currency_id" />
+                            <field name="discount_id" />
+                            <field name="account_id" />
+                            <field name="tax_ids" />
+                        </list>
+                    </field>
+                    <field name="discount_ids" nolabel="1" readonly="1" invisible="1">
+                        <list>
+                            <field name="name" />
+                            <field name="account_id" />
+                            <field name="price_unit" />
+                            <field name="price_subtotal" />
+                            <field name="price_total" />
+                            <field name="tax_ids" widget="many2many_tags"/>
+                            <field name="tax_tag_ids" widget="many2many_tags"/>
+                        </list>
+                    </field>
+
+
+                </xpath>
+
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

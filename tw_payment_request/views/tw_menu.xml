@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="menu_payment_request" name="Payment Request" parent="tw_menu.submenu_tw_backoffice_non_trade" action="action_payment_request" sequence="10" groups="tw_payment_request.group_payment_request_read"/>
+        <menuitem id="menuitem_payment_request_type" name="Payment Request Type" parent="tw_menu.submenu_tw_backoffice_configuration" action="tw_payment_request_type_action" sequence="15" groups="tw_payment_request.group_payment_request_type_read"/>
+        <menuitem id="menuitem_payment_request_report" name="Laporan Payment Request" parent="tw_menu.submenu_tw_backoffice_report" action="action_tw_payment_request_report" sequence="20" groups="tw_payment_request.group_payment_request_read"/>
+
+    </data>
+</odoo>

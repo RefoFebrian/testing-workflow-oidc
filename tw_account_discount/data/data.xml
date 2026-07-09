@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_account_discount_cash_vendor_bill" model="tw.account.discount">
+            <field name="name">Discount Cash</field>
+            <field name="type">in_invoice</field>
+            <field name="is_all_branch">True</field>
+        </record>
+
+        <record id="tw_account_discount_other_vendor_bill" model="tw.account.discount">
+            <field name="name">Discount Other</field>
+            <field name="type">in_invoice</field>
+            <field name="is_all_branch">True</field>
+        </record>
+
+        <record id="tw_account_discount_program_vendor_bill" model="tw.account.discount">
+            <field name="name">Discount Program</field>
+            <field name="type">in_invoice</field>
+            <field name="is_all_branch">True</field>
+        </record>
+        
+        <record id="tw_account_discount_cash_customer_invoice" model="tw.account.discount">
+            <field name="name">Discount Cash</field>
+            <field name="type">out_invoice</field>
+            <field name="is_all_branch">True</field>
+        </record>
+
+        <record id="tw_account_discount_other_customer_invoice" model="tw.account.discount">
+            <field name="name">Discount Other</field>
+            <field name="type">out_invoice</field>
+            <field name="is_all_branch">True</field>
+        </record>
+
+        <record id="tw_account_discount_program_customer_invoice" model="tw.account.discount">
+            <field name="name">Discount Program</field>
+            <field name="type">out_invoice</field>
+            <field name="is_all_branch">True</field>
+        </record>
+
+    </data>
+</odoo>

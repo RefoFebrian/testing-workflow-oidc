@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Form View - Quick Guide Only -->
+        <record id="view_tw_mapping_response_form" model="ir.ui.view">
+            <field name="name">tw.mapping.response.form.guide</field>
+            <field name="model">tw.mapping.response</field>
+            <field name="arch" type="xml">
+                <form string="Response Mapping - Quick Guide">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>Response Mapping Configuration</h1>
+                        </div>
+
+                        <group>
+                            <div class="alert alert-success" role="alert">
+                                <h4>Field Types</h4>
+                                <ul>
+                                    <li>
+                                        <strong>Direct Mapping</strong>: Map JSON field directly to Odoo field (e.g., unit.nomorMesin to engine_number)</li>
+                                    <li>
+                                        <strong>Relational Lookup</strong>: Find existing record by external ID or code (e.g., lookup product by code)</li>
+                                    <li>
+                                        <strong>Validation Only</strong>: Filter records - only import if value matches expected (e.g., status=8 for completed STNK)</li>
+                                    <li>
+                                        <strong>Derived Field</strong>: Ambil nilai dari parsed result field lain (e.g., partner_id dari company_id.default_supplier_id)</li>
+                                </ul>
+                            </div>
+                        </group>
+
+                        <group>
+                            <div class="alert alert-info" role="alert">
+                                <h4>Field Reference Guide</h4>
+                                <table class="table table-sm table-bordered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Field Name</th>
+                                            <th>Description</th>
+                                            <th>Example</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <strong>Sequence</strong>
+                                            </td>
+                                            <td>Processing order (lower = first)</td>
+                                            <td>10, 20, 30</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>JSON Path</strong>
+                                            </td>
+                                            <td>Path to data in API response</td>
+                                            <td>unit.nomorMesin</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Field Type</strong>
+                                            </td>
+                                            <td>How to process this mapping</td>
+                                            <td>Direct/Relational/Validation/Derived</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Field Type</strong>
+                                            </td>
+                                            <td>How to process this mapping</td>
+                                            <td>Direct/Relational/Validation/Derived</td>
+                                        </tr>
+                                        <!-- Target Model/Field removed - defined in Output Template -->
+                                        <tr>
+                                            <td>
+                                                <strong>Relation Model</strong>
+                                            </td>
+                                            <td>Model to lookup related record</td>
+                                            <td>product.product</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Relation Lookup Field</strong>
+                                            </td>
+                                            <td>Field to match in relation model</td>
+                                            <td>default_code, external_id</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Is Required</strong>
+                                            </td>
+                                            <td>Must have value or import fails</td>
+                                            <td>Check for mandatory fields</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Default Value</strong>
+                                            </td>
+                                            <td>Use this if JSON value is empty</td>
+                                            <td>0, draft, N/A</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Expected Value</strong>
+                                            </td>
+                                            <td>Filter: value must match this</td>
+                                            <td>8 (for status=8)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Validation Operator</strong>
+                                            </td>
+                                            <td>How to compare with expected</td>
+                                            <td>= , in, contains</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Relation Model</strong>
+                                            </td>
+                                            <td>Model to lookup related record</td>
+                                            <td>product.product</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Relation Lookup Field</strong>
+                                            </td>
+                                            <td>Field to match in relation model</td>
+                                            <td>default_code, external_id</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Notes</strong>
+                                            </td>
+                                            <td>Additional documentation</td>
+                                            <td>Special handling notes</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </group>
+
+                        <group>
+                            <div class="alert alert-info" role="alert">
+                                <h4>Validation Filter Usage</h4>
+                                <ul>
+                                    <li>
+                                        <strong>Expected Value</strong>: Value to match (e.g., '8' for statusFakturSTNK=8)</li>
+                                    <li>
+                                        <strong>Operators</strong>: = (equals), != (not equals), in (comma-separated list), contains, &lt;, &gt;, &lt;=, &gt;=</li>
+                                    <li>
+                                        <strong>Behavior</strong>: Records NOT matching will be <strong>skipped automatically</strong>
+                                    </li>
+                                    <li>
+                                        <strong>Multiple Validations</strong>: All must pass (AND logic)</li>
+                                </ul>
+                                <p>
+                                    <strong>Example:</strong> To import only completed STNK (status=8):</p>
+                                <ul>
+                                    <li>JSON Path: <code>unit.statusFakturSTNK</code>
+                                    </li>
+                                    <li>Field Type: <code>Validation Only</code>
+                                    </li>
+                                    <li>Validation Operator: <code>=</code>
+                                    </li>
+                                    <li>Expected Value: <code>8</code>
+                                    </li>
+                                </ul>
+                            </div>
+                        </group>
+
+                        <group>
+                            <div class="alert alert-warning" role="alert">
+                                <h4>Important Notes</h4>
+                                <ul>
+                                    <li>Use <strong>sequence</strong> to control processing order</li>
+                                    <li>Validation fields are checked FIRST before creating records</li>
+                                    <li>Required fields must have values, otherwise import fails</li>
+                                    <li>Use drag handle to reorder mappings</li>
+                                </ul>
+                            </div>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- list View untuk tw.mapping.response -->
+        <record id="view_tw_mapping_response_list" model="ir.ui.view">
+            <field name="name">tw.mapping.response.list</field>
+            <field name="model">tw.mapping.response</field>
+            <field name="arch" type="xml">
+                <list string="Response Mappings" editable="top">
+
+                    <field name="sequence" widget="handle"/>
+                    <field name="json_path" placeholder="unit.nomorMesin" required="1"/>
+                    <field name="field_type" required="1"/>
+
+                    <!-- Direct/Relation Fields -->
+                    <!-- Removed target_model_id and target_field as they are now handled by Output Template -->
+
+                    <!-- Validation Filter Fields -->
+                    <field name="validation_operator" />
+                    <field name="expected_value" placeholder="8" />
+
+                    <field name="is_required"/>
+                    <field name="default_value"/>
+                    <field name="relation_model_id" options="{'no_create': True}" invisible="field_type != 'relation'" />
+                    <field name="relation_lookup_field" invisible="field_type != 'relation'" />
+                    <field name="relation_search_domain" invisible="field_type != 'relation'"/>
+                    <field name="fallback_domain" invisible="field_type != 'relation'"/>
+                    <field name="value_alias" widget="char" optional="hide"/>
+                    <field name="notes"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Rules Popup Form View for Advanced Configuration -->
+        <record id="view_tw_mapping_response_rules_form" model="ir.ui.view">
+            <field name="name">tw.mapping.response.rules.form</field>
+            <field name="model">tw.mapping.response</field>
+            <field name="priority">99</field>
+            <field name="arch" type="xml">
+                <form string="Mapping Rules Configuration">
+                    <sheet>
+                        <!-- Guide Section -->
+                        <div class="alert alert-info" role="alert">
+                            <h4>
+                                <i class="fa fa-info-circle" title="Info"/>
+ Rules Configuration Guide</h4>
+                            <ul class="mb-0">
+                                <li>
+                                    <strong>Default Value</strong>: Nilai yang digunakan jika data JSON kosong/null. Contoh: 0, draft, N/A</li>
+                                <li>
+                                    <strong>Search Domain</strong>: Filter tambahan untuk lookup relasi. Contoh: [('active','=',True)]</li>
+                                <li>
+                                    <strong>Fallback Domain</strong>: Domain cadangan jika pencarian utama gagal. Contoh: [('job_id.name','=','Sales')]</li>
+                                <li>
+                                    <strong>Value Alias</strong>: Normalisasi nilai eksternal → internal sebelum lookup.
+                                    Contoh: {"CREDIT": "Credit", "credit": "Credit", "2": "Credit"}</li>
+                                <li>
+                                    <strong>Create Field Mappings</strong>: JSON mapping untuk create record baru. Contoh: {"name": "namaCustomer"}</li>
+                            </ul>
+                        </div>
+
+                        <!-- Header Info - Readonly context -->
+                        <div class="alert alert-secondary" role="alert">
+                            <strong>Mapping:</strong>
+                            <field name="json_path" readonly="1" nolabel="1" class="oe_inline"/>
+                            →                            <strong>Type:</strong>
+                            <field name="field_type" readonly="1" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <!-- Common Rules - All field types -->
+                        <group string="Common Rules">
+                            <group>
+                                <field name="default_value" placeholder="Nilai default jika kosong"/>
+                                <field name="derived_value_type" invisible="field_type != 'derived'"/>
+                            </group>
+                            <group>
+                                <field name="notes" placeholder="Catatan tambahan..."/>
+                            </group>
+                        </group>
+
+                        <!-- Relation Lookup Rules - Only for relation type -->
+                        <group string="Advanced Lookup Rules" invisible="field_type != 'relation'">
+                            <group>
+                                <field name="relation_search_domain" placeholder="[('active','=',True)]" help="Filter tambahan saat lookup relasi. Format Odoo domain. Contoh: [('active','=',True),('is_customer','=',True)]"/>
+                            </group>
+                            <group>
+                                <field name="fallback_domain" placeholder="[('job_id.name','=','Sales')]" help="Domain cadangan jika pencarian utama gagal (tidak ketemu). Contoh: [('job_id.name','in',['Sales Digital'])]"/>
+                            </group>
+                        </group>
+
+                        <!-- Value Alias - Normalisasi external → internal -->
+                        <group string="Value Alias (External → Internal)">
+                            <div class="alert alert-info mb-3" role="alert">
+                                <strong>Value Alias</strong> digunakan untuk menormalisasi nilai dari API eksternal ke format internal Odoo sebelum proses lookup dilakukan.
+                                <br/>
+                                <br/>
+                                <strong>Kapan digunakan?</strong>
+                                <ul class="mb-2">
+                                    <li>API mengirim <code>CREDIT</code>,                                        <code>credit</code>, atau <code>2</code> — tapi master data Odoo menyimpan <code>Credit</code>
+                                    </li>
+                                    <li>Nilai numerik perlu dipetakan ke label teks (e.g., <code>"1"</code> →                                        <code>"Cash"</code>)
+                                    </li>
+                                    <li>Penanganan case-sensitivity atau format tidak konsisten dari API pihak ketiga</li>
+                                </ul>
+                                <strong>Format JSON:</strong>
+                                <br/>
+                                <code>{"nilai_eksternal_1": "nilai_internal", "nilai_eksternal_2": "nilai_internal"}</code>
+                                <br/>
+                                <br/>
+                                <strong>Contoh untuk Tipe Pembayaran:</strong>
+                                <br/>
+                                <code>{"CREDIT": "Credit", "credit": "Credit", "2": "Credit", "CASH": "Cash", "cash": "Cash", "1": "Cash"}</code>
+                            </div>
+                            <field name="value_alias" widget="ace" nolabel="1" placeholder='{"CREDIT": "Credit", "credit": "Credit", "2": "Credit"}'/>
+                        </group>
+
+                        <!-- Create Record Configuration - Only for relation type -->
+                        <group string="Create Record Configuration" invisible="field_type != 'relation' or not create_if_not_found">
+                            <div class="alert alert-info mb-3" role="alert">
+                                <strong>Create Field Mappings</strong> digunakan untuk membuat record baru jika lookup gagal.
+                                <br/>
+                                <br/>
+                                <strong>Format yang didukung:</strong>
+                                <ul class="mb-2">
+                                    <li>
+                                        <strong>String:</strong> Extract dari JSON path<br/>
+                                    <code>"name": "namaCustomer"</code>
+                                </li>
+                                <li>
+                                    <strong>Number/Bool:</strong> Static value<br/>
+                                <code>"customer_rank": 1</code>
+                            </li>
+                            <li>
+                                <strong>Lookup Dict:</strong> Untuk field relasi (m2m/m2o)<br/>
+                            <code>"category_id": {"_lookup": "res.partner.category", "_field": "name", "_value": "Customer", "_type": "m2m"}</code>
+                        </li>
+                    </ul>
+                    <strong>Contoh lengkap:</strong>
+                    <br/>
+                    <code>{"name": "namaCustomer", "phone": "noKontak", "customer_rank": 1, "category_id": {"_lookup": "res.partner.category", "_field": "name", "_value": "Customer", "_type": "m2m"}}</code>
+                </div>
+                <field name="create_field_mappings" widget="ace" nolabel="1" placeholder='{"name": "namaCustomer", "phone": "noKontak", "customer_rank": 1}'/>
+            </group>
+
+            <!-- Guide per Type -->
+            <group string="Guide" invisible="field_type == 'relation'">
+                <div class="alert alert-success" role="alert" invisible="field_type != 'direct'">
+                    <strong>Direct Mapping:</strong> Nilai dari JSON path langsung dimasukkan ke field Odoo target.
+                    <br/>
+Gunakan <strong>Default Value</strong> untuk memberikan nilai cadangan jika JSON kosong.
+                </div>
+                <div class="alert alert-warning" role="alert" invisible="field_type != 'validation'">
+                    <strong>Validation Only:</strong> Digunakan untuk memfilter record, bukan menyimpan data.
+                    <br/>
+Record yang TIDAK sesuai dengan Expected Value akan di-skip.
+                    <br/>
+                    <strong>Operator dan Expected Value</strong> dikonfigurasi di list utama.
+                </div>
+                <div class="alert alert-info" role="alert" invisible="field_type != 'derived'">
+                    <strong>Derived Field:</strong> JSON Path dibaca dari parsed result, bukan dari raw response.
+                    <br/>
+Gunakan contoh seperti <code>company_id.default_supplier_id</code> untuk menghasilkan config inline di output template, misalnya <code>"partner_id": {"_from_result": "company_id.default_supplier_id", "_type": "m2o"}</code>.
+                </div>
+            </group>
+        </sheet>
+        <footer>
+            <button string="Save" special="save" class="btn-primary"/>
+            <button string="Cancel" special="cancel" class="btn-secondary"/>
+        </footer>
+    </form>
+</field>
+</record>
+
+<!-- Action untuk membuka Rules Form -->
+<record id="action_open_mapping_rules" model="ir.actions.act_window">
+<field name="name">Mapping Rules</field>
+<field name="res_model">tw.mapping.response</field>
+<field name="view_mode">form</field>
+<field name="view_id" ref="view_tw_mapping_response_rules_form"/>
+<field name="target">new</field>
+</record>
+</data>
+</odoo>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_workcenter_form_inherit_cost_type" model="ir.ui.view">
+        <field name="name">mrp.workcenter.form.inherit.cost.type</field>
+        <field name="model">mrp.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_workcenter_view"/>
+        <field name="arch" type="xml">
+            
+            <xpath expr="//label[@for='costs_hour']" position="before">
+                <field name="cost_calculation_type" required="1" class="oe_inline"/>
+            </xpath>
+            <xpath expr="//label[@for='costs_hour']" position="attributes">
+                <attribute name="invisible">cost_calculation_type != 'time'</attribute>
+            </xpath>
+            <xpath expr="//div[@id='costs_hour']" position="attributes">
+                <attribute name="invisible">cost_calculation_type != 'time'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='costs_hour']" position="attributes">
+                <attribute name="invisible">cost_calculation_type != 'time'</attribute>
+            </xpath>
+            <xpath expr="//label[@for='costs_hour']" position="after">
+                <label for="cost_per_unit" invisible="cost_calculation_type != 'qty'"/>
+                <div id="cost_per_unit" invisible="cost_calculation_type != 'qty'">
+                    <field name="cost_per_unit" widget="monetary" class="oe_inline"/> per workcenter
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_mrp_workcenter_search" model="ir.ui.view">
+        <field name="name">mrp.workcenter.search</field>
+        <field name="model">mrp.workcenter</field>
+        <field name="inherit_id" ref="mrp.view_mrp_workcenter_search"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="code"/>
+                <field name="tag_ids"/>
+                <field name="alternative_workcenter_ids"/>
+                <field name="company_id" string="Branch"/>
+            </field>
+        </field>
+    </record>
+</odoo>

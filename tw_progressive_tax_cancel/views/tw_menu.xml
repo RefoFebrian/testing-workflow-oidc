@@ -1,0 +1,17 @@
+<odoo>
+  <data>
+    <!-- Main Menu -->
+    <menuitem id="menu_progressive_tax_cancel_root"
+              name="Progressive Tax Cancel"
+              parent="tw_vehicle_document_cancel.tw_vehicle_document_cancel_menu_sub"
+              sequence="50"/>
+    
+    <!-- Cancel Menu -->
+    <menuitem id="menu_progressive_tax_cancel"
+              name="Cancel Progressive Tax"
+              parent="menu_progressive_tax_cancel_root"
+              action="tw_progressive_tax_cancel_action"
+              groups="tw_progressive_tax_cancel.group_tw_progressive_tax_cancel_read"
+              sequence="10"/>
+  </data>
+</odoo>

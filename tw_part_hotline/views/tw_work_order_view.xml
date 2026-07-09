@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="tw_work_order_hotline_view_form" model="ir.ui.view">
+      <field name="name">tw.work.order.hotline.form</field>
+      <field name="model">tw.work.order</field>
+      <field name="inherit_id" ref="tw_work_order.tw_work_order_form_view" />
+      <field name="arch" type="xml">
+        <!-- Add part_hotline_id column to order_line list -->
+        <xpath expr="//field[@name='order_line']/list//field[@name='product_id']" position="before">
+          <field name="part_hotline_id" width="200" string="No Hotline" options="{'no_open':True,'no_create':True}" domain="[('customer_id','=',parent.partner_id), ('company_id','=',parent.company_id), ('state','=','approved'), ('status_po','=','done'), ('is_used','=',False)]" readonly="parent.state != 'draft' or division == 'Service'" />
+          <!-- <field name="available_hotline_product_ids" column_invisible="1"/> -->
+        </xpath>
+        <!-- <xpath expr="//list/field[@name='product_id']" position="replace">
+          <field name="product_id" string="Product" readonly="not product_updatable" required="not display_type and not is_downpayment" force_save="1" context="{
+              'partner_id': parent.partner_id,
+              'quantity': product_uom_qty,
+              'pricelist': parent.pricelist_id,
+              'company_id': parent.company_id,
+              'default_lst_price': price_unit,
+          }" options="{
+              'no_open': True,
+          }" optional="show" domain="[('sale_ok', '=', True),('division','=',division),('id', 'in', available_hotline_product_ids)]" widget="sol_product_many2one"/>
+        </xpath> -->
+        <!-- Warning for customer with hotline -->
+        <xpath expr="//group[@name='wo_line_2_right']/div" position="before">
+          <field name="is_customer_hotline" invisible="1"/>
+          <div invisible="not is_customer_hotline" colspan="2" style="margin-top: 1px; margin-bottom: 1px;">
+            <span style="color:red;">Perhatian! Customer ini memiliki Part Hotline</span>
+          </div>
+        </xpath>
+        <!-- Stat button -->
+        <button name="action_view_invoice" position="after">
+          <field name="is_part_hotline" invisible="1"/>
+          <button name="action_view_part_hotline" icon="fa-wrench" invisible="not is_part_hotline" string="Hotline" type="object" class="oe_stat_button" />
+        </button>
+      </field>
+    </record>
+  </data>
+</odoo>

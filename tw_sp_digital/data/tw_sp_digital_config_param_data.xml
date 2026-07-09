@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_sp_digital_param_date_not_confirm" model="ir.config_parameter">
+            <field name="key">tw_sp_digital_param_date_not_confirm</field>
+            <field name="value">10</field>
+        </record>
+    </data>
+</odoo>

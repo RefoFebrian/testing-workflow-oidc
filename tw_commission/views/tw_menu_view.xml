@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+        <menuitem id="tw_hutang_komisi_menuitem" groups="tw_group_commission_read" name="Hutang Komisi" parent="tw_menu.submenu_tw_showroom_configuration" action="tw_hutang_komisi_action" sequence="27"/>
+    </data>
+</odoo>

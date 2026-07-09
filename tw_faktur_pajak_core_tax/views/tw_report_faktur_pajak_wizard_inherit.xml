@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_report_faktur_pajak_coretax_inherit" model="ir.ui.view">
+            <field name="name">tw.report.faktur.pajak.coretax.inherit</field>
+            <field name="model">tw.report.faktur.pajak</field>
+            <field name="inherit_id" ref="tw_faktur_pajak_report.tw_report_faktur_pajak_wizard_form_view"/>
+            <field name="arch" type="xml">
+                <field name="option" position="after">
+                    <field name="is_coretax" invisible="1"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

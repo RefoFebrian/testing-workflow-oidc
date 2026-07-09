@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_activity_atl_btl_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.activity.atl.btl.inherit.form.view</field>
+            <field name="model">tw.activity.atl.btl</field>
+            <field name="inherit_id" ref="tw_activity_atl_btl.tw_activity_atl_btl_form_view"/>
+            <field name="arch" type="xml">
+                <field name="activity_line_ids" position="after">
+                    <group class="oe_subtotal_footer oe_right">
+                        <field name="total_ho_expense" readonly="1"/>
+                        <field name="total_leasing_expense" readonly="1"/>
+                        <field name="total_company_expense" readonly="1"/>
+                        <field name="total_support_fund" readonly="1"/>
+                    </group>
+                    <group class="oe_subtotal_footer oe_right ">
+                        <field name="total_cost_btl" readonly="1" />
+                        <field name="total_tax_btl" readonly="1" />
+                    </group>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

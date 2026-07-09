@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+        <!-- # TOP MENU -->
+		<!-- TODO : Change all to new menu_icon then delete the old asset -->
+        <menuitem id='menu_tw_showroom' name='Showroom' sequence="20" web_icon="tw_menu,static/src/img/menu_icon/showroom.png"/>
+        <menuitem id='menu_tw_workshop' name='Workshop' sequence="24" web_icon="tw_menu,static/src/img/menu_icon/workshop.png"/>
+        <menuitem id='menu_tw_stnk_bpkb' name='Document Handling' sequence="26" web_icon="tw_menu,static/src/img/menu_icon/stnk_bpkb.png"/>
+		<menuitem id="menu_tw_marketing" name="Marketing" sequence="27" web_icon="tw_menu,static/src/img/menu_icon/marketing.png"/>
+        <menuitem id='menu_tw_backoffice' name='Backoffice' sequence="28" web_icon="tw_menu,static/src/img/menu_icon/backoffice.png"/>
+        <menuitem id='menu_tw_warehouse' name='Warehouse' sequence="30" web_icon="tw_menu,static/src/img/menu_icon/warehouse.png"/>
+        <menuitem id='menu_tw_general_affair' name='General Affair' sequence="32" web_icon="tw_menu,static/src/img/menu_icon/ga.png"/>
+        <menuitem id='menu_tw_employee' name='HR' sequence="40" web_icon="tw_menu,static/src/img/menu_icon/hrd.png"/>
+        <menuitem id="menu_tw_master" name="Master" sequence="200" web_icon="tw_menu,static/src/img/menu_icon/master.png"/>
+        <menuitem id="menu_tw_odoo_default" name="Odoo Default" sequence="450" web_icon="tw_menu,static/src/img/odoo_o.png" groups="tw_base.group_system_admin"/>
+		<menuitem id='tw_doodool_apps_top_menu' name='Mobile Apps' sequence="11"  web_icon="tw_menu,static/src/img/menu_icon/apps.png"/>
+		<menuitem id="menu_tw_whatsapp_top" name="WhatsApp" sequence="45" web_icon="tw_menu,static/src/img/menu_icon/whatsapp.png"/>
+		<menuitem id="menu_tw_boom_top" name="BOOM" sequence="50" web_icon="tw_menu,static/src/img/menu_icon/boom.png"/>
+		<menuitem id="menu_tw_mft_monitoring" name="MFT Monitoring" sequence="60" web_icon="tw_menu,static/src/img/odoo_default.png"/>
+        
+		<!--Header-->
+			<!-- Showroom -->
+			<menuitem id="submenu_tw_showroom_purchase" name="Pembelian" parent="menu_tw_showroom" sequence="01"/>
+			<menuitem id="submenu_tw_showroom_h1" name="Penjualan" parent="menu_tw_showroom" sequence='05'/>
+			<menuitem id="submenu_tw_showroom_marketing" name="Marketing" parent="menu_tw_showroom" sequence="06"/>
+        	<menuitem id="submenu_tw_showroom_mutation" name="Mutation" parent="tw_menu.menu_tw_showroom" sequence="07"/>
+			<menuitem id="submenu_tw_showroom_report" name="Laporan" parent="menu_tw_showroom" sequence="500"/>
+			<menuitem id="submenu_tw_showroom_incentive" name="Incentive" parent="menu_tw_showroom" sequence="600"/>
+			<menuitem id="submenu_tw_showroom_configuration" name="Configuration" parent="menu_tw_showroom" sequence="1000"/>
+			<menuitem id="submenu_tw_showroom_configuration_misc" name="Misc" parent="submenu_tw_showroom_configuration" sequence="1000"/>
+
+			<!-- Submenu Penjualan -->
+			<menuitem id="submenu_tw_dealers_sale_showroom" name="Penjualan" parent="submenu_tw_showroom_h1" sequence="10"/>
+        
+			<!-- STNK/BPKB -->
+			<menuitem id="submenu_tw_proses_stnk_bpkb" name="Proses STNK" parent="menu_tw_stnk_bpkb" sequence="02"/>
+			<menuitem id="submenu_tw_stnk_bpkb_report" name="Laporan" parent="menu_tw_stnk_bpkb" sequence="500"/>
+			<menuitem id="submenu_tw_stnk_bpkb_configuration" name="Configuration" parent="menu_tw_stnk_bpkb" sequence="1000"/>
+		
+			<!-- Workshop -->
+			<menuitem id="submenu_tw_workshop_purchase" name="Pembelian" parent="menu_tw_workshop" sequence="01"/>
+			<menuitem id="submenu_tw_workshop_h2" name="Service" parent="menu_tw_workshop" sequence='02'/> 
+			<menuitem id="submenu_tw_workshop_h3" name="Penjualan" parent="menu_tw_workshop" sequence='03'/>
+			<menuitem id="submenu_tw_workshop_mutation" name="Mutation" parent="tw_menu.menu_tw_workshop" sequence="04"/>
+			<menuitem id="submenu_tw_workshop_collecting" name="Collecting" parent="menu_tw_workshop" sequence='05'/>
+			<menuitem id="submenu_tw_workshop_report" name="Laporan" parent="menu_tw_workshop" sequence="06"/>
+			<menuitem id="submenu_tw_workshop_configuration" name="Configuration" parent="menu_tw_workshop" sequence="1000"/>
+        
+			<!-- SALES FORCE -->
+			<menuitem id='submenu_tw_employee' name='Sales' parent='menu_tw_employee'  sequence="01"/>
+			<menuitem id="submenu_tw_employee_report" name="Laporan" parent="menu_tw_employee" sequence="500"/>
+			<menuitem id="submenu_tw_employee_configuration" name="Configuration" parent="menu_tw_employee" sequence="1000"/>
+
+			<!-- WAREHOUSE -->
+        	<menuitem id="submenu_tw_warehouse_operation" name="Operations" parent="menu_tw_warehouse" sequence="10"/>
+        	<menuitem id="submenu_tw_warehouse_product" name="Products" parent="menu_tw_warehouse" sequence="20"/>
+        	<menuitem id="submenu_tw_warehouse_expedition" name="Expedition" parent="menu_tw_warehouse" sequence="30"/>
+			<menuitem id="submenu_tw_warehouse_traceability" name="Traceability" parent="menu_tw_warehouse" sequence="40"/>
+			<menuitem id="submenu_tw_warehouse_report" name="Laporan" parent="menu_tw_warehouse" sequence="50"/>
+			<menuitem id="submenu_tw_warehouse_configuration" name="Configuration" parent="menu_tw_warehouse" sequence="60"/>
+
+			<!-- MASTER -->
+			<menuitem id="submenu_tw_branch" name="Branch" parent="menu_tw_master" sequence="5"/>
+			<menuitem id="submenu_tw_partner" name="Partners" parent="menu_tw_master" sequence="15"/>
+			<menuitem id="submenu_tw_accounting" name="Accounting" parent="menu_tw_master" sequence="35"/>
+			<menuitem id="submenu_tw_api" name="API" parent="menu_tw_master" sequence="40"/>
+			<menuitem id="submenu_tw_miscellaneous" name="Miscellaneous" parent="menu_tw_master" sequence="45"/>
+			<menuitem id="submenu_tw_report" name="Laporan" parent="menu_tw_master" sequence="48"/>
+			<menuitem id="submenu_tw_configuration" name="Configuration" parent="menu_tw_master" sequence="50"/>
+			
+			<!-- GENERAL AFFAIR -->
+			<menuitem id="submenu_tw_general_affair_purchase" name="Purchase" parent="menu_tw_general_affair" sequence="1"/>
+			<menuitem id="submenu_tw_general_affair_asset" name="Assets" parent="menu_tw_general_affair" sequence="2"/>
+			<menuitem id="submenu_tw_general_affair_report" name="Laporan" parent="menu_tw_general_affair" sequence="3"/>
+			<menuitem id="submenu_tw_general_affair_configuration" name="Configuration" parent="menu_tw_general_affair" sequence="4"/>
+			
+			<!-- Backoffice -->
+			<menuitem id="submenu_tw_backoffice_bank_cash" name="Bank And Cash" parent="menu_tw_backoffice" sequence="50"/>
+			<menuitem id="submenu_tw_backoffice_non_trade" name="Non Trade" parent="menu_tw_backoffice" sequence="60"/>
+			<menuitem id="submenu_tw_backoffice_report" name="Laporan" parent="menu_tw_backoffice" sequence="70"/>
+			<menuitem id="submenu_tw_backoffice_configuration" name="Configuration" parent="menu_tw_backoffice" sequence="80"/>
+			<menuitem id="submenu_tw_backoffice_misc" name="Misc" parent="menu_tw_backoffice" sequence="65"/>
+
+			<!-- Configuration APPS Doodool -->
+			<menuitem id="tw_doodool_apps_sub_menu" name="Apps" parent="tw_doodool_apps_top_menu" sequence="01"/>
+			<menuitem id="tw_doodool_firebase_sub_menu" name="Firebase" parent="tw_doodool_apps_top_menu" sequence="02"/>
+			<menuitem id="tw_doodool_configuration_sub_menu" name="Configuration" parent="tw_doodool_apps_top_menu" sequence="025"/>
+			
+			<!-- Menu MFT Monitoring -->
+			<menuitem id="menu_tw_mft_monitoring_configuration" name="Configuration" parent="menu_tw_mft_monitoring" sequence="90"/>
+	    
+    </data>
+</odoo>

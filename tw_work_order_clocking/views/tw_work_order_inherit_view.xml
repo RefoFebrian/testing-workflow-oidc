@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_work_order_clocking_form_view" model="ir.ui.view">
+            <field name="name">tw.work.order.clocking</field>
+            <field name="model">tw.work.order</field>
+            <field name="inherit_id" ref="tw_work_order.tw_work_order_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//header/field[@name='state']" position="replace">
+                    <!-- <field name="state" invisible="not is_other_module_installed" widget="statusbar" statusbar_visible="draft,finished,sale,done" /> -->
+                    <field name="state" invisible="is_other_module_installed" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,finished,sale,done" />
+                </xpath>
+                <!-- Clean UI: Move Timer to Smart Button -->
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <!-- Clocking Timer Smart Button -->
+                    <button class="oe_stat_button tw_clocking_timer_btn" icon="fa-clock-o" disabled="1" invisible="not state_wo or state in ('draft', 'waiting_for_approval', 'cancel','unused')">
+                        <div class="o_stat_info">
+                            <span class="o_stat_value text-danger fs-4 fw-bold">
+                                <field name="duration" widget="tw_work_order_timer" readonly="1" nolabel="1"/>
+                            </span>
+                            <span class="o_stat_text">Clocking</span>
+                        </div>
+                    </button>
+                </xpath>
+
+                <xpath expr="//list[@name='work_order_history_list']/field[@name='lot_id']" position="after">
+                    <field name="duration" />
+                </xpath>
+                <xpath expr="//list[@name='work_order_history_list']/field[@name='state']" position="after">
+                    <field name="state_wo" string="Status Clocking" />
+                </xpath>
+                <button name="action_start_stop_wo" position="replace">
+                    <!-- Clean UI: Hide old generic button and inject control buttons logically -->
+                    <button name="action_start_stop_wo" type="object" string="Start Stop WO" invisible="1"/>
+
+                    <button name="button_start" type="object" string="START" class="btn-success" invisible="is_invisible_action_start_stop_wo or start_date != False" icon="fa-play" groups="tw_work_order_clocking.tw_start_stop_wo_group_button" />
+                    <button name="button_break" type="object" string="PAUSE" class="btn-warning text-dark" icon="fa-pause" invisible="not state_wo or state_wo != 'in_progress'" groups="tw_work_order_clocking.tw_start_stop_wo_group_button" />
+                    <button name="button_end_break" type="object" string="RESUME" class="btn-info text-white" icon="fa-play" invisible="not state_wo or state_wo != 'break'" groups="tw_work_order_clocking.tw_start_stop_wo_group_button" />
+                    <button name="button_finish" type="object" string="FINISH" class="btn-danger" icon="fa-stop" invisible="not state_wo or state_wo not in ('in_progress','break')" groups="tw_work_order_clocking.tw_start_stop_wo_group_button" confirm="Apa kamu sudah yakin untuk menyelesaikan WO ini?" />
+                </button>
+                <button name="action_start_stop_wo" position="after">
+                    <button name="action_clocking_reset" invisible="state != 'approved' or state_wo != 'finish'" string="Reset Clocking" type="object" groups="tw_work_order_clocking.tw_work_order_group_button_reset_clocking" />
+                </button>
+                <button name="action_supply" position="replace">
+                    <button name="action_supply" invisible="is_shipped or state in ('draft','waiting_for_approval','sale','done','cancel') or is_supply" string="Supply Products" type="object" class="oe_highlight m-1" />
+
+                </button>
+                <xpath expr="//group[@name='audit_cancellation']" position="after">
+                    <group string="Clocking" name="audit_clocking" invisible="not start_date">
+                        <field name="start_uid" readonly="1" invisible="not start_date"/>
+                        <field name="start_date" readonly="1" invisible="not start_date"/>
+                        <field name="break_uid" readonly="1" invisible="not break_date"/>
+                        <field name="break_date" readonly="1" invisible="not break_date"/>
+                        <field name="end_break_uid" readonly="1" invisible="not end_break_date"/>
+                        <field name="end_break_date" readonly="1" invisible="not end_break_date"/>
+                        <field name="finish_uid" readonly="1" invisible="not finish_date"/>
+                        <field name="finish_date" readonly="1" invisible="not finish_date"/>
+                        <field name="duration" readonly="1" string="Duration (minutes)" invisible="not duration and duration == 0"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_work_order_clocking_list_view" model="ir.ui.view">
+            <field name="name">tw.work.order.clocking.list</field>
+            <field name="inherit_id" ref="tw_work_order.tw_work_order_list_view" />
+            <field name="model">tw.work.order</field>
+            <field name="arch" type="xml">
+                <field name="lot_id" position="after">
+                    <field name="duration" widget="tw_work_order_timer" sum="real duration" />
+                    <button name="button_start" type="object" title="Start" class="btn-success px-2" invisible="not state_wo or start_date != False" icon="fa-play" groups="tw_work_order_clocking.tw_start_stop_wo_group_button" />
+                    <button name="button_break" type="object" title="Pause" class="btn-warning px-2" icon="fa-pause" invisible="not state_wo or state_wo != 'in_progress'" groups="tw_work_order_clocking.tw_start_stop_wo_group_button" />
+                    <button name="button_end_break" type="object" title="End Break" class="btn-warning px-2" icon="fa-play" invisible="not state_wo or state_wo != 'break'" groups="tw_work_order_clocking.tw_start_stop_wo_group_button" />
+                    <button name="button_finish" type="object" title="Finish" class="btn-success px-2" icon="fa-check" invisible="not state_wo or state_wo != 'in_progress'" groups="tw_work_order_clocking.tw_start_stop_wo_group_button" confirm="Apa kamu sudah yakin untuk menyelesaikan WO ini?" />
+                </field>
+            </field>
+        </record>
+
+        <record id="tw_work_order_clocking_kanban_view" model="ir.ui.view">
+            <field name="name">tw.work.order.clocking.kanban</field>
+            <field name="inherit_id" ref="tw_work_order.tw_work_order_kanban_view" />
+            <field name="model">tw.work.order</field>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban/templates/t/footer" position="replace">
+                    <footer class="d-flex align-items-center" name="tw_wo_kanban_footer">
+                        <field name="date" class="fs-6 me-1 tw_wo_form_string" />
+                        <i class="fa fa-calendar tw_wo_form_string"></i>
+                        <span class="ms-auto tw_wo_form_string">Status Clocking :</span>
+                        <field name="state_wo" invisible="not state_wo" widget="label_selection" options="{'classes': {
+                                            'in_progress': 'warning', 
+                                            'break': 'danger', 
+                                            'finish': 'success', 
+                                            'done': 'success', 
+                                        }}" class="ms-2 override_label_selection_widget" />
+                        <span class="ms-2 badge tw_custom_badge_text_bg_secondary" invisible="state_wo">Not Started</span>
+                        <span class="ms-2 tw_wo_form_string">Status :</span>
+                        <field name="state" widget="label_selection" options="{'classes': {
+                                        'draft': 'secondary', 
+                                        'cancel': 'danger', 
+                                        'waiting_for_approval': 'warning', 
+                                        'approved': 'info', 
+                                        'finished': 'success',
+                                        'sale': 'info', 
+                                        'done': 'success',
+                                        'unused': 'danger',
+                                        'rejected': 'danger'
+                                    }}" class="ms-2 override_label_selection_widget" />
+                    </footer>
+                </xpath>
+                <button name="action_create_invoice" position="after">
+                    <button name="action_start_stop_wo" type="object" invisible="is_invisible_action_start_stop_wo" string="Start Stop WO" class="oe_highlight m-1"/>
+                </button>
+                <button name="action_supply" position="replace">
+                    <button name="button_start" type="object" title="Start" class="btn-success px-2" invisible="not state_wo or start_date != False" icon="fa-play" groups="tw_work_order_clocking.tw_start_stop_wo_group_button" />
+                    <button name="button_break" type="object" title="Pause" class="btn-warning px-2" icon="fa-pause" invisible="not state_wo or state_wo != 'in_progress'" groups="tw_work_order_clocking.tw_start_stop_wo_group_button" />
+                    <button name="button_end_break" type="object" title="End Break" class="btn-warning px-2" icon="fa-play" invisible="not state_wo or state_wo != 'break'" groups="tw_work_order_clocking.tw_start_stop_wo_group_button" />
+                    <button name="button_finish" type="object" title="Finish" class="btn-success px-2" icon="fa-check" invisible="not state_wo or state_wo != 'in_progress'" groups="tw_work_order_clocking.tw_start_stop_wo_group_button" confirm="Apa kamu sudah yakin untuk menyelesaikan WO ini?" />
+                    <button name="action_supply" invisible="is_shipped or state in ('draft','waiting_for_approval','sale','done','cancel') or is_supply" string="Supply Products" type="object" class="oe_highlight m-1" />
+                </button>
+            </field>
+        </record>
+
+        <record id="tw_work_order_clocking_search_view" model="ir.ui.view">
+            <field name="name">tw.work.order.clocking.search</field>
+            <field name="inherit_id" ref="tw_work_order.tw_work_order_search_view" />
+            <field name="model">tw.work.order</field>
+            <field name="arch" type="xml">
+                <filter name="state_open" position="before">
+                    <filter string="Finished" name="state_finished" domain="[('state','=','finished')]" />
+                </filter>
+            </field>
+        </record>
+    </data>
+</odoo>

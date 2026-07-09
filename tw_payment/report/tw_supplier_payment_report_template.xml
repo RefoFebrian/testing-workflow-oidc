@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_tw_supplier_payment_document">
+        <t t-call="tw_web.teto_report_layout">
+            <t t-call="tw_web.teto_report_styles_base" />
+
+            <t t-set="o" t-value="o.with_context(lang=lang)"/>
+            <t t-set="values" t-value="o._get_payment_receipt_report_values()"/>
+
+            <div class="page font-sm">
+                <div class="oe_structure">
+
+                    <div class="row">
+                        <div class="col-6">
+                            <t t-call="tw_web.teto_report_partner_address">
+                                <t t-set="partner" t-value="o.company_id.partner_id"/>
+                            </t>
+                        </div>
+                        <div class="col-6">
+                            <span class="bolder font-md">BUKTI PEMBAYARAN</span>
+                            <br />
+                            <table class="table-borderless" style="width: 100%">
+                                <tr>
+                                    <td width="20%">No</td>
+                                    <td>:</td>
+                                    <td width="79%"><t t-esc="o.name" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Tanggal</td>
+                                    <td>:</td>
+                                    <td><t t-esc="o.date.strftime('%d-%m-%Y') if o.date else ''" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row my-2">
+                        <div class="col-6">
+                            <table class="table-borderless" style="width: 100%">
+                                <tr>
+                                    <td width="20%">Cabang</td>
+                                    <td>:</td>
+                                    <td><t t-esc="o.company_id.name" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Supplier</td>
+                                    <td>:</td>
+                                    <td><t t-esc="o.partner_id.name" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Bank</td>
+                                    <td>:</td>
+                                    <td><t t-esc="o.journal_id.name" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td>:</td>
+                                    <td class="text-end"><t t-esc="'{:,.2f}'.format(o.amount)" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Terbilang</td>
+                                    <td>:</td>
+                                    <td class="text-end"><t t-esc="terbilang(o.amount)" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-6">
+                            <table class="table-borderless" style="width: 100%">
+                                <tr>
+                                    <td width="20%">Memo</td>
+                                    <td>:</td>
+                                    <td><t t-esc="o.memo" /></td>
+                                </tr>
+                                <tr>
+                                    <td>No Rekening</td>
+                                    <td>:</td>
+                                    <td class="text-end"><t t-esc="o.account_number or o.partner_bank_id.acc_number" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Keterangan</td>
+                                    <td>:</td>
+                                    <td><t t-esc="o.narration" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Selisih</td>
+                                    <td>:</td>
+                                    <td class="text-end"><t t-esc="'{:,.2f}'.format(o.writeoff_amount)" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row my-2" name="line_debit">
+                        <div class="col-12">
+                            <table class="teto-table-content">
+                                <thead>
+                                    <tr>
+                                        <th width="3%">No</th>
+                                        <th width="23%">No Bukti</th>
+                                        <th width="30%">No Invoice Supplier</th>
+                                        <th width="12%">Tgl Invoice</th>
+                                        <th width="12%">Tgl JTP</th>
+                                        <th width="20%">Jumlah</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="number" t-value="1" />
+                                    <tr t-foreach="o.line_dr_ids" t-as="line">
+                                        <td class="text-center"><t t-esc="number" /></td>
+                                        <td><t t-esc="line.move_line_id.name" /></td>
+                                        <td><t t-esc="line.account_id.name" /></td>
+                                        <td><t t-esc="line.date_original.strftime('%d-%m-%Y') if line.date_original else ''" /></td>
+                                        <td><t t-esc="line.date_due.strftime('%d-%m-%Y') if line.date_due else ''" /></td>
+                                        <td class="text-end"><t t-esc="'{:,.2f}'.format(line.amount)" /></td>
+
+                                        <t t-set="number" t-value="number + 1" />
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5">Total Debit</td>
+                                        <td class="text-end"><t t-esc="'{:,.2f}'.format(sum([l.amount for l in o.line_dr_ids]))" /></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row my-2" name="line_credit">
+                        <div class="col-12">
+                            <table class="teto-table-content">
+                                <thead>
+                                    <tr>
+                                        <th width="3%">No</th>
+                                        <th width="23%">No Bukti</th>
+                                        <th width="30%">No Invoice Supplier</th>
+                                        <th width="12%">Tgl Invoice</th>
+                                        <th width="12%">Tgl JTP</th>
+                                        <th width="20%">Jumlah</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="number" t-value="1" />
+                                    <tr t-foreach="o.line_cr_ids" t-as="line">
+                                        <td class="text-center"><t t-esc="number" /></td>
+                                        <td><t t-esc="line.move_line_id.name" /></td>
+                                        <td><t t-esc="line.account_id.name" /></td>
+                                        <td><t t-esc="line.date_original.strftime('%d-%m-%Y') if line.date_original else ''" /></td>
+                                        <td><t t-esc="line.date_due.strftime('%d-%m-%Y') if line.date_due else ''" /></td>
+                                        <td class="text-end"><t t-esc="'{:,.2f}'.format(line.amount)" /></td>
+
+                                        <t t-set="number" t-value="number + 1" />
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5">Total Credit</td>
+                                        <td class="text-end"><t t-esc="'{:,.2f}'.format(sum([l.amount for l in o.line_cr_ids]))" /></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row my-2" name="line_writeoff">
+                        <div class="col-12">
+                            <table class="teto-table-content">
+                                <thead>
+                                    <tr>
+                                        <th width="3%">No</th>
+                                        <th width="23%">No Bukti</th>
+                                        <th width="54%">Account</th>
+                                        <th width="20%">Jumlah</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="number" t-value="1" />
+                                    <tr t-foreach="o.line_wo_ids" t-as="line">
+                                        <td class="text-center"><t t-esc="number" /></td>
+                                        <td><t t-esc="line.move_line_id.name" /></td>
+                                        <td><t t-esc="line.account_id.name" /></td>
+                                        <td class="text-end"><t t-esc="'{:,.2f}'.format(line.amount)" /></td>
+
+                                        <t t-set="number" t-value="number + 1" />
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3">Total Write Off</td>
+                                        <td class="text-end"><t t-esc="'{:,.2f}'.format(sum([l.amount for l in o.line_wo_ids]))" /></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row my-2 text-center">
+                        <div class="col-3">
+                            Approved by<br /><br /><br /><br />
+                        </div>
+                        <div class="col-3">
+                            Finance<br /><br /><br /><br /><t t-esc="user.name" />
+                        </div>
+                        <div class="col-3">
+                            Posting<br /><br /><br /><br /><t t-esc="o.confirm_uid.name" />
+                        </div>
+                        <div class="col-3">
+                            Penerima<br /><br /><br /><br />
+                        </div>
+                    </div>
+
+                    <div class="row mt-1">
+                        <div class="col-12">
+                            Lembar ke-1 Finance / Lembar ke-2 Accounting -- <t t-esc="user.name" />, <t t-esc="get_local_time()" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_tw_supplier_payment">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.partner_id.lang or o.company_id.partner_id.lang"/>
+                <t t-call="tw_payment.report_tw_supplier_payment_document" t-lang="lang"/>
+            </t>
+        </t>
+    </template>
+    
+</odoo>

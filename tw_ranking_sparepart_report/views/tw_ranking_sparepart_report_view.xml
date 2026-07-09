@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_ranking_sparepart_report_view" model="ir.ui.view">
+            <field name="name">tw.ranking.sparepart.report.wizard</field>
+            <field name="model">tw.ranking.sparepart.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Laporan Ranking Sparepart">
+                    <group>
+                        <field name="company_ids" widget="many2many_tags" options="{'no_open': True, 'no_create': True}"/>
+                    </group>
+                    <notebook>
+                        <page string="Product Categories">
+                            <field name="categ_ids" options="{'no_open': True, 'no_create': True, 'no_quick_create': True, 'no_create_edit': True, 'no_export': True}" context="{'list_view_ref': False, 'form_view_ref': False, 'form_view_no_many2many_dropdown': True, 'no_breadcrumbs': True}">
+                                <list create="0" edit="0" delete="0" decoration-muted="1" limit="100" editable="top">
+                                    <field name="display_name" readonly="1" force_save="1"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button name="action_export_report" string="Generate" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+	  	<record id="tw_ranking_sparepart_report_action" model="ir.actions.act_window">
+            <field name="name">Laporan Ranking Sparepart</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.ranking.sparepart.report</field>
+            <field name="view_id" ref="tw_ranking_sparepart_report_view"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_sale_order_discount_showroom_read,access.tw.sale.order.discount.showroom.read,model_tw_sale_order_discount,tw_sale.group_tw_sale_order_showroom_read,1,0,0,0
+access_tw_sale_order_discount_showroom_update,access.tw.sale.order.discount.showroom.update,model_tw_sale_order_discount,tw_sale.group_tw_sale_order_showroom_update,1,1,1,0
+access_tw_sale_order_discount_showroom_delete,access.tw.sale.order.discount.showroom.delete,model_tw_sale_order_discount,tw_sale.group_tw_sale_order_showroom_delete,1,1,1,1
+access_tw_sale_order_discount_workshop_read,access.tw.sale.order.discount.workshop.read,model_tw_sale_order_discount,tw_sale.group_tw_sale_order_workshop_read,1,0,0,0
+access_tw_sale_order_discount_workshop_update,access.tw.sale.order.discount.workshop.update,model_tw_sale_order_discount,tw_sale.group_tw_sale_order_workshop_read,1,1,1,0
+access_tw_sale_order_discount_workshop_delete,access.tw.sale.order.discount.workshop.delete,model_tw_sale_order_discount,tw_sale.group_tw_sale_order_workshop_read,1,1,1,1
+
+access_tw_sale_discount_items,access.tw.sale.discount.items,model_tw_sale_discount_items,base.group_user,1,0,0,0
+access_tw_sale_discount_cash,access.tw.sale.discount.cash,model_tw_sale_discount_cash,base.group_user,1,0,0,0
+
+access_tw_master_ahass_top,access.tw.master.ahass.top,model_tw_master_ahass_top,base.group_user,1,0,0,0
+access_tw_master_ahass_top_line,access.tw.master.ahass.top.line,model_tw_master_ahass_top_line,base.group_user,1,0,0,0

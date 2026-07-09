@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Partner Drawdown Upload Wizard Form View -->
+    <record id="view_partner_drawdown_upload_wizard_form" model="ir.ui.view">
+        <field name="name">partner.drawdown.upload.wizard.form</field>
+        <field name="model">partner.drawdown.upload.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Upload Partner Drawdown">
+                <sheet>
+                    <div class="alert alert-info" role="alert">
+                        <h4><i class="fa fa-info-circle" title="Info"/> Format File Excel</h4>
+                        <ul>
+                            <li>Pastikan file Excel memiliki 3 kolom dengan urutan sebagai berikut:</li>
+                        </ul>
+                        <table class="table table-bordered" style="width: 80%; margin: 10px 0 20px 20px;">
+                            <tr style="background-color: #f8f9fa;">
+                                <th style="padding: 8px; border: 1px solid #dee2e6;">Kolom 1</th>
+                                <th style="padding: 8px; border: 1px solid #dee2e6;">Kolom 2</th>
+                                <th style="padding: 8px; border: 1px solid #dee2e6;">Kolom 3</th>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; border: 1px solid #dee2e6;">Kode Partner</td>
+                                <td style="padding: 8px; border: 1px solid #dee2e6;">Drawdown Unit</td>
+                                <td style="padding: 8px; border: 1px solid #dee2e6;">Drawdown Sparepart</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; border: 1px solid #dee2e6;">DEALER01</td>
+                                <td style="padding: 8px; border: 1px solid #dee2e6; text-align: right;">1,000,000</td>
+                                <td style="padding: 8px; border: 1px solid #dee2e6; text-align: right;">500,000</td>
+                            </tr>
+                        </table>
+                        <p><strong>Catatan:</strong> Baris pertama akan dianggap sebagai header dan akan dilewati.</p>
+                    </div>
+                    <group>
+                        <group>
+                            <div class="mt-2">
+                                <p class="text-muted">
+                                    <i class="fa fa-info-circle" title="Info"/> Unduh template untuk format yang benar
+                                </p>
+                                <button name="action_download_format_file" 
+                                        type="object" 
+                                        class="btn btn-outline-secondary">
+                                    <i class="fa fa-download me-2" title="Download"/>
+                                    Download Template Excel
+                                </button>
+                            </div>
+                            <field name="upload_file" filename="filename" string="Pilih File Excel"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_import" string="Import" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <!-- Action for Partner Drawdown Upload Wizard -->
+    <record id="action_partner_drawdown_upload_wizard" model="ir.actions.act_window">
+        <field name="name">Upload Partner Drawdown</field>
+        <field name="res_model">partner.drawdown.upload.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_res_partner"/>
+    </record>
+</odoo>

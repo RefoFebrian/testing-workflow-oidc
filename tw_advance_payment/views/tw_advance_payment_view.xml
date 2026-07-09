@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <!-- List View -->
+        <record id="view_advance_payment_list" model="ir.ui.view">
+            <field name="name">tw.advance.payment.list</field>
+            <field name="model">tw.advance.payment</field>
+            <field name="arch" type="xml">
+                <list default_order="id desc">
+                    <field name="name" string="Advance Payment"/>
+                    <field name="employee_id" string="Employee"/>
+                    <field name="date"/>
+                    <field name="state" widget="badge" decoration-info="state in ('draft','cancel','rejected')" decoration-warning="state not in ('draft','canceled','rejected','paid','confirm','done')" decoration-success="state in ('paid','confirm', 'done')"/>
+                </list>
+            </field>
+        </record>
+
+        
+        <!-- Form Views -->
+        <record id="tw_advance_payment_form_view" model="ir.ui.view">
+            <field name="name">tw.account.advance.payment.form.view</field>
+            <field name="model">tw.advance.payment</field> 
+            <field name="arch" type="xml">
+                <form string="Advance Payment">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done"/>
+                        <button name="action_validate" string="Validate" type="object" class="oe_highlight" groups="tw_advance_payment.group_tw_advance_payment_validate" invisible="state != 'draft'"/>
+                    </header>
+                    
+                    <sheet>
+                        <!-- Invisible fields -->
+                        <field name="id" invisible="1"/>
+                        <field name="is_sent" invisible="1"/>
+                        <field name="need_cancel_request" invisible="1"/>
+                        <field name="is_reconciled" invisible="1"/>
+                        <field name="is_matched" invisible="1"/>
+                        <field name="payment_method_code" invisible="1"/>
+                        <field name="show_partner_bank_account" invisible="1"/>
+                        <field name="require_partner_bank_account" invisible="1"/>
+                        <field name="available_payment_method_line_ids" invisible="1"/>
+                        <field name="available_account_ids" invisible="1"/>
+                        <field name="available_partner_bank_ids" invisible="1"/>
+                        <field name="country_code" invisible="1"/>
+                        <field name="partner_type" invisible="1"/>
+                        <field name="reconciled_invoices_type" invisible="1"/>
+                        <field name="type" invisible="1"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="paired_internal_transfer_payment_id" invisible="1"/>
+                        <field name="available_journal_ids" invisible="1"/>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="outstanding_account_id" invisible="1"/>
+                        <field name="payment_ids" invisible="1" groups="tw_advance_payment.group_tw_advance_payment_view_payment"/>
+                        <field name="account_avp_id" invisible="1"/>
+                        
+                        <div class="oe_button_box" name="button_box">
+                            <!-- Invoice stat button -->
+                            <button name="action_view_payment" string="View Payment" type="object" icon="fa-dollar" invisible="not payment_ids" groups="tw_advance_payment.group_tw_advance_payment_view_payment"/>
+                        </div>
+
+                        <div class="oe_title">
+                            <h1 invisible="name"><span>Draft</span></h1>
+                            <h1 invisible="not name"><field name="name" readonly="1"/></h1>
+                        </div>
+
+                        <group>
+                            <group>
+                                <field name="company_id" required="True" readonly="state != 'draft'" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="employee_id" options="{'no_create': True, 'no_open': True}" required="True" readonly="state != 'draft'"/>
+                                <field name="partner_id" invisible="1"/>
+                                <field name="amount" string="Total" required="1" readonly="state != 'draft'"/>
+                                <field name="partner_bank_id" string="Bank" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'"/>
+                                <field name="email" readonly="state != 'draft'"/>
+                                <field name="description" readonly="state != 'draft'"/>
+                            </group>
+                            <group>
+                                <field name="division"  required="True" readonly="state != 'draft'"/>
+                                <field name="due_date" required="True" readonly="state != 'draft'"/>
+                                <field name="date" readonly="1"/>
+                                <field name="journal_id" string="Journal" readonly="1" force_save="1"/>
+                                <field name="user_balance" readonly="1"/>
+                                <field name="partner_bank_id" string="Bank Account"
+                                    context="{'default_partner_id': partner_id, 'display_account_trust': True}"
+                                    invisible="not show_partner_bank_account or partner_type != 'supplier' or payment_type == 'inbound'"
+                                    required="require_partner_bank_account" 
+                                    readonly="state != 'draft'"
+                                    options="{'no_create': True}"/>
+                                <field name="bank_id" string="Bank"
+                                        options="{'no_create': True, 'no_open': True}"
+                                        invisible="not show_account_number or partner_type != 'supplier' or payment_type == 'inbound'"
+                                        required="require_account_number" 
+                                        readonly="state != 'draft'"
+                                        />
+                                <field name="account_number" string="Account Number"
+                                        invisible="not show_account_number or partner_type != 'supplier' or payment_type == 'inbound'"
+                                        required="require_account_number" 
+                                        readonly="state != 'draft'"
+                                        />
+                                <field name="account_holder" string="Account Holder"
+                                        invisible="not show_account_number or partner_type != 'supplier' or payment_type == 'inbound'"
+                                        readonly="state != 'draft'"
+                                        />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page invisible="1" string="Bill Information">
+                                <field name="line_dr_ids" readonly="1" force_save="1">
+                                    <list editable="bottom">
+                                        <field name="account_id" force_save="1" required="1" options="{'no_open': True, 'no_create': True}"/>
+                                        <field name="name" force_save="1" required="1"/>
+                                        <field name="amount" force_save="1" required="1"/>
+                                    </list>
+                                </field>
+
+                                <group col="12" class="oe_invoice_lines_tab overflow-hidden">
+                                    <group colspan="8">
+                                    
+                                    </group>    
+                                    <group colspan="4">
+                                        <button name="action_update_amount" type="object" string=" Update Amount" help="Recompute all amount" class="btn-link mb-1 px-0" icon="fa-refresh" invisible="state != 'draft'"/>
+                                        <group class="oe_subtotal_footer">
+                                            <span>Untaxed Amount</span>
+                                            <field name="amount_untaxed" nolabel="1" readonly="1" widget="monetary"/>
+                                            <span>Taxes</span>
+                                            <field name="amount_tax" nolabel="1" readonly="1" widget="monetary"/>
+                                            <span style="font-weight: bold">Total</span>
+                                            <field name="amount_total" nolabel="1" readonly="1" widget="monetary" style="font-weight: bold"/>
+                                        </group>
+                                    </group>
+                                </group>
+                            </page>
+                            <page name='docs' string='Lampiran'>
+                                <field name="attachment_ids" nolabel="1" readonly="state != 'draft'"/>
+                            </page>
+                            <page string="Journal Items" >
+                                <field name="move_ids" readonly="1" />
+                            </page>
+                            <page name="audit_trail" string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"></field>
+                                        <field name="create_date" readonly="1"></field>
+                                        <field name="confirm_uid" readonly="1"></field>
+                                        <field name="confirm_date" readonly="1"></field>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1"></field>
+                                        <field name="write_date" readonly="1"></field>
+                                        <field name="validate_uid" readonly="1"></field>
+                                        <field name="validate_date" readonly="1"></field>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Search View -->
+        <record id="view_advance_payment_search" model="ir.ui.view">
+            <field name="name">tw.advance.payment.search</field>
+            <field name="model">tw.advance.payment</field>
+            <field name="arch" type="xml">
+                <search string="Advance Payment">
+                    <field name="name" string="Advance Payment"/>
+                    <field name="company_id" string="Branch"/>
+                    <field name="employee_id" string="Employee"/>
+                    <field name="due_date" string="Due Date"/>
+                    <field name="partner_bank_id" string="Bank"/>
+                    <field name="description" string="Description"/>
+                    <field name="journal_id" string="Journal"/>
+                    <field name="email" string="Email"/>
+                    <field name="move_ids" string="Journal Entry" filter_domain="[('move_ids.move_name', 'ilike', self)]"/>
+                    <field name="move_ids" string="Account" filter_domain="[('move_ids.account_id', 'ilike', self)]"/>
+                    <field name="move_ids" string="Partner" filter_domain="[('move_ids.partner_id', 'ilike', self)]"/>
+                    <field name="move_ids" string="Reference" filter_domain="[('move_ids.ref', 'ilike', self)]"/>
+                    <field name="move_ids" string="Label" filter_domain="[('move_ids.name', 'ilike', self)]"/>
+                    <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]" />
+                    <filter name="confirm" string="Confirmed" domain="[('state', '=', 'confirm')]" />
+                    <group
+                     expand="0" string="Group By">
+                        <filter string="Branch" name="branch" context="{'group_by':'company_id'}"/>
+                        <filter string="Tanggal" name="date" context="{'group_by':'date'}"/>
+                        <filter string="Employee" name="employee" context="{'group_by':'employee_id'}"/>
+                        <filter name="division" string="division" context="{'group_by': 'division'}" />
+                        <filter name="state" string="state" context="{'group_by': 'state'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+
+        <!-- Action Form -->
+        <record id="action_advance_payment" model="ir.actions.act_window">
+            <field name="name">Advance Payment</field>
+            <field name="res_model">tw.advance.payment</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('type', '=', 'advance_payment')]</field>
+            <field name="search_view_id" ref="view_advance_payment_search"/>
+            <field name="context">{'readonly_by_pass': 1,'default_type': 'advance_payment','default_payment_type': 'outbound', 'search_default_draft': '1'}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first advance payment
+                </p>
+            </field>
+        </record>
+    </data>
+
+
+    <record id="tw_advance_payment_tree_action_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="tw_advance_payment.view_advance_payment_list"/>
+        <field name="act_window_id" ref="tw_advance_payment.action_advance_payment"/>
+    </record>
+
+    <record id="tw_advance_payment_form_action_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="tw_advance_payment.tw_advance_payment_form_view"/>
+        <field name="act_window_id" ref="tw_advance_payment.action_advance_payment"/>
+    </record>
+
+</odoo>

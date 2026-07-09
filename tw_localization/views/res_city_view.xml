@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_res_city_list_view" model="ir.ui.view">
+            <field name="name">tw.res.city.tree</field>
+            <field name="model">res.city</field>
+            <field name="arch" type="xml">
+                <list string="Kabupaten/Kota">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="state_id"/>
+                    <field name="sequence" widget="handle"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_res_city_form_view" model="ir.ui.view">
+            <field name="name">tw.res.city.form</field>
+            <field name="model">res.city</field>
+            <field name="arch" type="xml">
+                <form string="Kabupaten/Kota">
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="state_id" />
+                            <field name="sequence" widget="handle"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_localization_res_country_state_inherit_form_view" model="ir.ui.view">
+            <field name="name">inherit.res.country.state.form</field>
+            <field name="model">res.country.state</field>
+            <field name="inherit_id" ref="base.view_country_state_form"/>
+            <field name="arch" type="xml">   
+                <xpath expr="//group" position="after">
+                  <notebook>
+                    <page string="City">
+                        <field name="city_ids" nolabel="1" colspan="2">
+                            <list string="City">
+                                <field name="code" />
+                                <field name="name"/>
+                                <field name="sequence" widget="handle"/>
+                            </list>
+                        </field>
+                    </page>
+                    <page string="Audit Trail">
+                      <group>
+                        <group>
+                          <field name="create_uid" readonly="1"></field>
+                          <field name="create_date" readonly="1"></field>
+                        </group>
+                        <group>							
+                          <field name="write_uid" readonly="1"></field>
+                          <field name="write_date" readonly="1"></field>
+                        </group>
+                      </group>
+                    </page>
+                  </notebook>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_res_city_view_search" model="ir.ui.view">
+            <field name="name">tw_res_city.search</field>
+            <field name="model">res.district</field>
+            <field name="arch" type="xml">
+                <search string="Search City">
+                    <field name='name'/>
+                    <field name='code'/> 
+                    <field name='state_id'/>  
+                    <filter name="state" string="Provinsi"  context="{'group_by': 'state_id'}" />  
+                </search>
+            </field>
+        </record>
+
+        <record id="tw_res_city_action" model="ir.actions.act_window">
+            <field name="name">Kabupaten / Kota</field>
+            <field name="res_model">res.city</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="tw_res_city_view_search"/>
+        </record>
+
+        <record id="tw_res_city_action_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_res_city_list_view"/>
+            <field name="act_window_id" ref="tw_res_city_action"/>
+        </record>
+
+    </data>
+</odoo>

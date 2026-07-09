@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="tw_reimbursement_petty_cash_approval_form_view" model="ir.ui.view">
+      <field name="name">tw.reimbursement.petty.cash.approval.form</field>
+      <field name="model">tw.reimbursement.petty.cash</field>
+      <field name="inherit_id" ref="tw_petty_cash.tw_reimbursement_petty_cash_view_form" />
+      <field name="arch" type="xml">
+        <field name="state" position="replace">
+          <field name="state" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,paid,cancel"/>
+        </field>  
+        <field name="state" position="before">
+          <button name="action_request_approval"
+            invisible="state != 'draft'" string="RFA" type="object"
+            class="oe_highlight" groups="tw_petty_cash_approval.group_reimbursement_petty_cash_button_rfa"/>
+          <button name="action_approval" invisible="state != 'waiting_for_approval'"
+            string="Approve" type="object" class="oe_highlight"/>
+          <button name="action_reject_or_cancel" invisible="state != 'waiting_for_approval'"
+            string="Reject" type="object"
+            context="{'window_title': 'Reject'}"/>
+          <button name="action_reject_or_cancel" invisible="state not in ('waiting_for_approval', 'approved')"
+            string="Cancel Approval" type="object" context="{'window_title': 'Cancel'}" groups="tw_petty_cash_approval.group_reimbursement_petty_cash_button_cancel_approval"/>
+        </field>
+        <xpath expr="//button[@name='action_open_petty_cash_out']" position="attributes">
+                <attribute name="invisible">state not in ('approved', 'paid')</attribute>
+        </xpath>
+        <xpath expr="//button[@name='%(tw_petty_cash.action_report_tw_reimburse_petty_cash_report)d']" position="attributes">
+          <attribute name="invisible">state in ('cancel', 'reject')</attribute>
+      </xpath>
+
+        <xpath expr="//page[@name='audit_trail']" position="before">
+          <page string="Approval">
+            <field name="approval_ids" readonly="True" />
+          </page>
+        </xpath>
+      </field>
+    </record>
+    <record id="tw_reimbursement_petty_cash_approval_search_view" model="ir.ui.view">
+      <field name="name">tw.reimbursement.petty.cash.approval.search</field>
+      <field name="model">tw.reimbursement.petty.cash</field>
+      <field name="inherit_id" ref="tw_petty_cash.tw_reimbursement_petty_cash_view_search" />
+      <field name="arch" type="xml">
+        <xpath expr="//filter[@name='draft']" position="after">
+            <filter name="waiting_for_approval"
+                    string="Waiting For Approval"
+                    domain="[('state', '=', 'waiting_for_approval')]"/>
+            <filter name="approved" string="Approved" domain="[('state','=','approved')]"/>
+        </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>

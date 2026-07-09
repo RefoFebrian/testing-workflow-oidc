@@ -1,0 +1,1372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="kec_id_180301" model="res.district">
+	    	<field name="city_id" ref="kab_id_1803"/>
+	    	<field name="name">NATAR</field> 
+            <field name="code">180301</field>  
+        </record>
+    
+        <record id="kec_id_180302" model="res.district">
+	    	<field name="city_id" ref="kab_id_1803"/>
+	    	<field name="name">TANJUNG BINTANG</field> 
+            <field name="code">180302</field>  
+        </record>
+    
+        <record id="kec_id_180303" model="res.district">
+	    	<field name="city_id" ref="kab_id_1803"/>
+	    	<field name="name">KALIANDA</field> 
+            <field name="code">180303</field>  
+        </record>
+    
+        <record id="kec_id_180304" model="res.district">
+	    	<field name="city_id" ref="kab_id_1803"/>
+	    	<field name="name">SIDOMULYO</field> 
+            <field name="code">180304</field>  
+        </record>
+    
+        <record id="kec_id_180305" model="res.district">
+	    	<field name="city_id" ref="kab_id_1803"/>
+	    	<field name="name">KATIBUNG</field> 
+            <field name="code">180305</field>  
+        </record>
+    
+        <record id="kec_id_180306" model="res.district">
+	    	<field name="city_id" ref="kab_id_1803"/>
+	    	<field name="name">PENENGAHAN</field> 
+            <field name="code">180306</field>  
+        </record>
+    
+        <record id="kec_id_180307" model="res.district">
+	    	<field name="city_id" ref="kab_id_1803"/>
+	    	<field name="name">PALAS</field> 
+            <field name="code">180307</field>  
+        </record>
+    
+        <record id="kec_id_180308" model="res.district">
+	    	<field name="city_id" ref="kab_id_1803"/>
+	    	<field name="name">JATI AGUNG</field> 
+            <field name="code">180308</field>  
+        </record>
+    
+        <record id="kec_id_180309" model="res.district">
+	    	<field name="city_id" ref="kab_id_1803"/>
+	    	<field name="name">KETAPANG</field> 
+            <field name="code">180309</field>  
+        </record>
+    
+        <record id="kec_id_180310" model="res.district">
+	    	<field name="city_id" ref="kab_id_1803"/>
+	    	<field name="name">SRAGI</field> 
+            <field name="code">180310</field>  
+        </record>
+    
+        <record id="kec_id_180311" model="res.district">
+	    	<field name="city_id" ref="kab_id_1803"/>
+	    	<field name="name">RAJA BASA</field> 
+            <field name="code">180311</field>  
+        </record>
+    
+        <record id="kec_id_180312" model="res.district">
+	    	<field name="city_id" ref="kab_id_1803"/>
+	    	<field name="name">CANDIPURO</field> 
+            <field name="code">180312</field>  
+        </record>
+    
+        <record id="kec_id_180313" model="res.district">
+	    	<field name="city_id" ref="kab_id_1803"/>
+	    	<field name="name">MERBAU MATARAM</field> 
+            <field name="code">180313</field>  
+        </record>
+    
+        <record id="kec_id_180314" model="res.district">
+	    	<field name="city_id" ref="kab_id_1803"/>
+	    	<field name="name">BAKAUHENI</field> 
+            <field name="code">180314</field>  
+        </record>
+    
+        <record id="kec_id_180315" model="res.district">
+	    	<field name="city_id" ref="kab_id_1803"/>
+	    	<field name="name">TANJUNG SARI</field> 
+            <field name="code">180315</field>  
+        </record>
+    
+        <record id="kec_id_180316" model="res.district">
+	    	<field name="city_id" ref="kab_id_1803"/>
+	    	<field name="name">WAY SULAN</field> 
+            <field name="code">180316</field>  
+        </record>
+    
+        <record id="kec_id_180317" model="res.district">
+	    	<field name="city_id" ref="kab_id_1803"/>
+	    	<field name="name">WAY PANJI</field> 
+            <field name="code">180317</field>  
+        </record>
+    
+        <record id="kec_id_180501" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">KALIREJO</field> 
+            <field name="code">180501</field>  
+        </record>
+    
+        <record id="kec_id_180502" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">BANGUN REJO</field> 
+            <field name="code">180502</field>  
+        </record>
+    
+        <record id="kec_id_180503" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">PADANG RATU</field> 
+            <field name="code">180503</field>  
+        </record>
+    
+        <record id="kec_id_180504" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">GUNUNG SUGIH</field> 
+            <field name="code">180504</field>  
+        </record>
+    
+        <record id="kec_id_180505" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">TRIMURJO</field> 
+            <field name="code">180505</field>  
+        </record>
+    
+        <record id="kec_id_180506" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">PUNGGUR</field> 
+            <field name="code">180506</field>  
+        </record>
+    
+        <record id="kec_id_180507" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">TERBANGGI BESAR</field> 
+            <field name="code">180507</field>  
+        </record>
+    
+        <record id="kec_id_180508" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">SEPUTIH RAMAN</field> 
+            <field name="code">180508</field>  
+        </record>
+    
+        <record id="kec_id_180509" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">RUMBIA</field> 
+            <field name="code">180509</field>  
+        </record>
+    
+        <record id="kec_id_180510" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">SEPUTIH BANYAK</field> 
+            <field name="code">180510</field>  
+        </record>
+    
+        <record id="kec_id_180511" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">SEPUTIH MATARAM</field> 
+            <field name="code">180511</field>  
+        </record>
+    
+        <record id="kec_id_180512" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">SEPUTIH SURABAYA</field> 
+            <field name="code">180512</field>  
+        </record>
+    
+        <record id="kec_id_180513" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">TERUSAN NUNYAI</field> 
+            <field name="code">180513</field>  
+        </record>
+    
+        <record id="kec_id_180514" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">BUMI RATU NUBAN</field> 
+            <field name="code">180514</field>  
+        </record>
+    
+        <record id="kec_id_180515" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">BEKRI</field> 
+            <field name="code">180515</field>  
+        </record>
+    
+        <record id="kec_id_180516" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">SEPUTIH AGUNG</field> 
+            <field name="code">180516</field>  
+        </record>
+    
+        <record id="kec_id_180517" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">WAY PENGUBUAN</field> 
+            <field name="code">180517</field>  
+        </record>
+    
+        <record id="kec_id_180518" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">BANDAR MATARAM</field> 
+            <field name="code">180518</field>  
+        </record>
+    
+        <record id="kec_id_180519" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">PUBIAN</field> 
+            <field name="code">180519</field>  
+        </record>
+    
+        <record id="kec_id_180520" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">SELAGAI LINGGA</field> 
+            <field name="code">180520</field>  
+        </record>
+    
+        <record id="kec_id_180521" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">ANAK TUHA</field> 
+            <field name="code">180521</field>  
+        </record>
+    
+        <record id="kec_id_180522" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">SENDANG AGUNG</field> 
+            <field name="code">180522</field>  
+        </record>
+    
+        <record id="kec_id_180523" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">KOTA GAJAH</field> 
+            <field name="code">180523</field>  
+        </record>
+    
+        <record id="kec_id_180524" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">BUMI NABUNG</field> 
+            <field name="code">180524</field>  
+        </record>
+    
+        <record id="kec_id_180525" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">WAY SEPUTIH</field> 
+            <field name="code">180525</field>  
+        </record>
+    
+        <record id="kec_id_180526" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">BANDAR SURABAYA</field> 
+            <field name="code">180526</field>  
+        </record>
+    
+        <record id="kec_id_180527" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">ANAK RATU AJI</field> 
+            <field name="code">180527</field>  
+        </record>
+    
+        <record id="kec_id_180528" model="res.district">
+	    	<field name="city_id" ref="kab_id_1805"/>
+	    	<field name="name">PUTRA RUMBIA</field> 
+            <field name="code">180528</field>  
+        </record>
+    
+        <record id="kec_id_180601" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">BUKIT KEMUNING</field> 
+            <field name="code">180601</field>  
+        </record>
+    
+        <record id="kec_id_180602" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">KOTABUMI</field> 
+            <field name="code">180602</field>  
+        </record>
+    
+        <record id="kec_id_180603" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">SUNGKAI SELATAN</field> 
+            <field name="code">180603</field>  
+        </record>
+    
+        <record id="kec_id_180604" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">TANJUNG RAJA</field> 
+            <field name="code">180604</field>  
+        </record>
+    
+        <record id="kec_id_180605" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">ABUNG TIMUR</field> 
+            <field name="code">180605</field>  
+        </record>
+    
+        <record id="kec_id_180606" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">ABUNG BARAT</field> 
+            <field name="code">180606</field>  
+        </record>
+    
+        <record id="kec_id_180607" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">ABUNG SELATAN</field> 
+            <field name="code">180607</field>  
+        </record>
+    
+        <record id="kec_id_180608" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">SUNGKAI UTARA</field> 
+            <field name="code">180608</field>  
+        </record>
+    
+        <record id="kec_id_180609" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">KOTABUMI UTARA</field> 
+            <field name="code">180609</field>  
+        </record>
+    
+        <record id="kec_id_180610" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">KOTABUMI SELATAN</field> 
+            <field name="code">180610</field>  
+        </record>
+    
+        <record id="kec_id_180611" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">ABUNG TENGAH</field> 
+            <field name="code">180611</field>  
+        </record>
+    
+        <record id="kec_id_180612" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">ABUNG TINGGI</field> 
+            <field name="code">180612</field>  
+        </record>
+    
+        <record id="kec_id_180613" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">ABUNG SEMULI</field> 
+            <field name="code">180613</field>  
+        </record>
+    
+        <record id="kec_id_180614" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">ABUNG SURAKARTA</field> 
+            <field name="code">180614</field>  
+        </record>
+    
+        <record id="kec_id_180615" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">MUARA SUNGKAI</field> 
+            <field name="code">180615</field>  
+        </record>
+    
+        <record id="kec_id_180616" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">BUNGA MAYANG</field> 
+            <field name="code">180616</field>  
+        </record>
+    
+        <record id="kec_id_180617" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">HULU SUNGKAI</field> 
+            <field name="code">180617</field>  
+        </record>
+    
+        <record id="kec_id_180618" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">SUNGKAI TENGAH</field> 
+            <field name="code">180618</field>  
+        </record>
+    
+        <record id="kec_id_180619" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">ABUNG PEKURUN</field> 
+            <field name="code">180619</field>  
+        </record>
+    
+        <record id="kec_id_180620" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">SUNGKAI JAYA</field> 
+            <field name="code">180620</field>  
+        </record>
+    
+        <record id="kec_id_180621" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">SUNGKAI BARAT</field> 
+            <field name="code">180621</field>  
+        </record>
+    
+        <record id="kec_id_180622" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">ABUNG KUNANG</field> 
+            <field name="code">180622</field>  
+        </record>
+    
+        <record id="kec_id_180623" model="res.district">
+	    	<field name="city_id" ref="kab_id_1806"/>
+	    	<field name="name">BLAMBANGAN PAGAR</field> 
+            <field name="code">180623</field>  
+        </record>
+    
+        <record id="kec_id_180101" model="res.district">
+	    	<field name="city_id" ref="kab_id_1801"/>
+	    	<field name="name">BALIK BUKIT</field> 
+            <field name="code">180101</field>  
+        </record>
+    
+        <record id="kec_id_180102" model="res.district">
+	    	<field name="city_id" ref="kab_id_1801"/>
+	    	<field name="name">SUMBER JAYA</field> 
+            <field name="code">180102</field>  
+        </record>
+    
+        <record id="kec_id_180103" model="res.district">
+	    	<field name="city_id" ref="kab_id_1801"/>
+	    	<field name="name">BELALAU</field> 
+            <field name="code">180103</field>  
+        </record>
+    
+        <record id="kec_id_180104" model="res.district">
+	    	<field name="city_id" ref="kab_id_1801"/>
+	    	<field name="name">WAY TENONG</field> 
+            <field name="code">180104</field>  
+        </record>
+    
+        <record id="kec_id_180105" model="res.district">
+	    	<field name="city_id" ref="kab_id_1801"/>
+	    	<field name="name">SEKINCAU</field> 
+            <field name="code">180105</field>  
+        </record>
+    
+        <record id="kec_id_180106" model="res.district">
+	    	<field name="city_id" ref="kab_id_1801"/>
+	    	<field name="name">SUOH</field> 
+            <field name="code">180106</field>  
+        </record>
+    
+        <record id="kec_id_180107" model="res.district">
+	    	<field name="city_id" ref="kab_id_1801"/>
+	    	<field name="name">BATU BRAK</field> 
+            <field name="code">180107</field>  
+        </record>
+    
+        <record id="kec_id_180108" model="res.district">
+	    	<field name="city_id" ref="kab_id_1801"/>
+	    	<field name="name">SUKAU</field> 
+            <field name="code">180108</field>  
+        </record>
+    
+        <record id="kec_id_180109" model="res.district">
+	    	<field name="city_id" ref="kab_id_1801"/>
+	    	<field name="name">GEDUNG SURIAN</field> 
+            <field name="code">180109</field>  
+        </record>
+    
+        <record id="kec_id_180110" model="res.district">
+	    	<field name="city_id" ref="kab_id_1801"/>
+	    	<field name="name">KEBUN TEBU</field> 
+            <field name="code">180110</field>  
+        </record>
+    
+        <record id="kec_id_180111" model="res.district">
+	    	<field name="city_id" ref="kab_id_1801"/>
+	    	<field name="name">AIR HITAM</field> 
+            <field name="code">180111</field>  
+        </record>
+    
+        <record id="kec_id_180112" model="res.district">
+	    	<field name="city_id" ref="kab_id_1801"/>
+	    	<field name="name">PAGAR DEWA</field> 
+            <field name="code">180112</field>  
+        </record>
+    
+        <record id="kec_id_180113" model="res.district">
+	    	<field name="city_id" ref="kab_id_1801"/>
+	    	<field name="name">BATU KETULIS</field> 
+            <field name="code">180113</field>  
+        </record>
+    
+        <record id="kec_id_180114" model="res.district">
+	    	<field name="city_id" ref="kab_id_1801"/>
+	    	<field name="name">LUMBOK SEMINUNG</field> 
+            <field name="code">180114</field>  
+        </record>
+    
+        <record id="kec_id_180115" model="res.district">
+	    	<field name="city_id" ref="kab_id_1801"/>
+	    	<field name="name">BANDAR NEGERI SUOH</field> 
+            <field name="code">180115</field>  
+        </record>
+    
+        <record id="kec_id_180801" model="res.district">
+	    	<field name="city_id" ref="kab_id_1808"/>
+	    	<field name="name">MENGGALA</field> 
+            <field name="code">180801</field>  
+        </record>
+    
+        <record id="kec_id_180802" model="res.district">
+	    	<field name="city_id" ref="kab_id_1808"/>
+	    	<field name="name">GEDUNG AJI</field> 
+            <field name="code">180802</field>  
+        </record>
+    
+        <record id="kec_id_180803" model="res.district">
+	    	<field name="city_id" ref="kab_id_1808"/>
+	    	<field name="name">BANJAR AGUNG</field> 
+            <field name="code">180803</field>  
+        </record>
+    
+        <record id="kec_id_180804" model="res.district">
+	    	<field name="city_id" ref="kab_id_1808"/>
+	    	<field name="name">GEDUNG MENENG</field> 
+            <field name="code">180804</field>  
+        </record>
+    
+        <record id="kec_id_180805" model="res.district">
+	    	<field name="city_id" ref="kab_id_1808"/>
+	    	<field name="name">RAWA JITU SELATAN</field> 
+            <field name="code">180805</field>  
+        </record>
+    
+        <record id="kec_id_180806" model="res.district">
+	    	<field name="city_id" ref="kab_id_1808"/>
+	    	<field name="name">PENAWAR TAMA</field> 
+            <field name="code">180806</field>  
+        </record>
+    
+        <record id="kec_id_180807" model="res.district">
+	    	<field name="city_id" ref="kab_id_1808"/>
+	    	<field name="name">RAWA JITU TIMUR</field> 
+            <field name="code">180807</field>  
+        </record>
+    
+        <record id="kec_id_180808" model="res.district">
+	    	<field name="city_id" ref="kab_id_1808"/>
+	    	<field name="name">BANJAR MARGO</field> 
+            <field name="code">180808</field>  
+        </record>
+    
+        <record id="kec_id_180809" model="res.district">
+	    	<field name="city_id" ref="kab_id_1808"/>
+	    	<field name="name">RAWA PITU</field> 
+            <field name="code">180809</field>  
+        </record>
+    
+        <record id="kec_id_180810" model="res.district">
+	    	<field name="city_id" ref="kab_id_1808"/>
+	    	<field name="name">PENAWAR AJI</field> 
+            <field name="code">180810</field>  
+        </record>
+    
+        <record id="kec_id_180811" model="res.district">
+	    	<field name="city_id" ref="kab_id_1808"/>
+	    	<field name="name">DENTE TELADAS</field> 
+            <field name="code">180811</field>  
+        </record>
+    
+        <record id="kec_id_180812" model="res.district">
+	    	<field name="city_id" ref="kab_id_1808"/>
+	    	<field name="name">MERAKSA AJI</field> 
+            <field name="code">180812</field>  
+        </record>
+    
+        <record id="kec_id_180813" model="res.district">
+	    	<field name="city_id" ref="kab_id_1808"/>
+	    	<field name="name">GEDUNG AJI BARU</field> 
+            <field name="code">180813</field>  
+        </record>
+    
+        <record id="kec_id_180814" model="res.district">
+	    	<field name="city_id" ref="kab_id_1808"/>
+	    	<field name="name">BANJAR BARU</field> 
+            <field name="code">180814</field>  
+        </record>
+    
+        <record id="kec_id_180815" model="res.district">
+	    	<field name="city_id" ref="kab_id_1808"/>
+	    	<field name="name">MENGGALA TIMUR</field> 
+            <field name="code">180815</field>  
+        </record>
+    
+        <record id="kec_id_180201" model="res.district">
+	    	<field name="city_id" ref="kab_id_1802"/>
+	    	<field name="name">KOTA AGUNG</field> 
+            <field name="code">180201</field>  
+        </record>
+    
+        <record id="kec_id_180202" model="res.district">
+	    	<field name="city_id" ref="kab_id_1802"/>
+	    	<field name="name">TALANG PADANG</field> 
+            <field name="code">180202</field>  
+        </record>
+    
+        <record id="kec_id_180203" model="res.district">
+	    	<field name="city_id" ref="kab_id_1802"/>
+	    	<field name="name">WONOSOBO</field> 
+            <field name="code">180203</field>  
+        </record>
+    
+        <record id="kec_id_180204" model="res.district">
+	    	<field name="city_id" ref="kab_id_1802"/>
+	    	<field name="name">PULAU PANGGUNG</field> 
+            <field name="code">180204</field>  
+        </record>
+    
+        <record id="kec_id_180205" model="res.district">
+	    	<field name="city_id" ref="kab_id_1802"/>
+	    	<field name="name">CUKUH BALAK</field> 
+            <field name="code">180205</field>  
+        </record>
+    
+        <record id="kec_id_180206" model="res.district">
+	    	<field name="city_id" ref="kab_id_1802"/>
+	    	<field name="name">PUGUNG</field> 
+            <field name="code">180206</field>  
+        </record>
+    
+        <record id="kec_id_180207" model="res.district">
+	    	<field name="city_id" ref="kab_id_1802"/>
+	    	<field name="name">SEMAKA</field> 
+            <field name="code">180207</field>  
+        </record>
+    
+        <record id="kec_id_180208" model="res.district">
+	    	<field name="city_id" ref="kab_id_1802"/>
+	    	<field name="name">SUMBER REJO</field> 
+            <field name="code">180208</field>  
+        </record>
+    
+        <record id="kec_id_180209" model="res.district">
+	    	<field name="city_id" ref="kab_id_1802"/>
+	    	<field name="name">ULU BELU</field> 
+            <field name="code">180209</field>  
+        </record>
+    
+        <record id="kec_id_180210" model="res.district">
+	    	<field name="city_id" ref="kab_id_1802"/>
+	    	<field name="name">PEMATANG SAWA</field> 
+            <field name="code">180210</field>  
+        </record>
+    
+        <record id="kec_id_180211" model="res.district">
+	    	<field name="city_id" ref="kab_id_1802"/>
+	    	<field name="name">KELUMBAYAN</field> 
+            <field name="code">180211</field>  
+        </record>
+    
+        <record id="kec_id_180212" model="res.district">
+	    	<field name="city_id" ref="kab_id_1802"/>
+	    	<field name="name">KOTA AGUNG BARAT</field> 
+            <field name="code">180212</field>  
+        </record>
+    
+        <record id="kec_id_180213" model="res.district">
+	    	<field name="city_id" ref="kab_id_1802"/>
+	    	<field name="name">KOTA AGUNG TIMUR</field> 
+            <field name="code">180213</field>  
+        </record>
+    
+        <record id="kec_id_180214" model="res.district">
+	    	<field name="city_id" ref="kab_id_1802"/>
+	    	<field name="name">GISTING</field> 
+            <field name="code">180214</field>  
+        </record>
+    
+        <record id="kec_id_180215" model="res.district">
+	    	<field name="city_id" ref="kab_id_1802"/>
+	    	<field name="name">GUNUNG ALIP</field> 
+            <field name="code">180215</field>  
+        </record>
+    
+        <record id="kec_id_180216" model="res.district">
+	    	<field name="city_id" ref="kab_id_1802"/>
+	    	<field name="name">LIMAU</field> 
+            <field name="code">180216</field>  
+        </record>
+    
+        <record id="kec_id_180217" model="res.district">
+	    	<field name="city_id" ref="kab_id_1802"/>
+	    	<field name="name">BANDAR NEGERI</field> 
+            <field name="code">180217</field>  
+        </record>
+    
+        <record id="kec_id_180218" model="res.district">
+	    	<field name="city_id" ref="kab_id_1802"/>
+	    	<field name="name">AIR NANINGAN</field> 
+            <field name="code">180218</field>  
+        </record>
+    
+        <record id="kec_id_180219" model="res.district">
+	    	<field name="city_id" ref="kab_id_1802"/>
+	    	<field name="name">BULOK</field> 
+            <field name="code">180219</field>  
+        </record>
+    
+        <record id="kec_id_180220" model="res.district">
+	    	<field name="city_id" ref="kab_id_1802"/>
+	    	<field name="name">KELUMBAYAN BARAT</field> 
+            <field name="code">180220</field>  
+        </record>
+    
+        <record id="kec_id_180401" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">SUKADANA</field> 
+            <field name="code">180401</field>  
+        </record>
+    
+        <record id="kec_id_180402" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">LABUHAN MARINGGAI</field> 
+            <field name="code">180402</field>  
+        </record>
+    
+        <record id="kec_id_180403" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">JABUNG</field> 
+            <field name="code">180403</field>  
+        </record>
+    
+        <record id="kec_id_180404" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">PEKALONGAN</field> 
+            <field name="code">180404</field>  
+        </record>
+    
+        <record id="kec_id_180405" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">SEKAMPUNG</field> 
+            <field name="code">180405</field>  
+        </record>
+    
+        <record id="kec_id_180406" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">BATANGHARI</field> 
+            <field name="code">180406</field>  
+        </record>
+    
+        <record id="kec_id_180407" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">WAY JEPARA</field> 
+            <field name="code">180407</field>  
+        </record>
+    
+        <record id="kec_id_180408" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">PURBOLINGGO</field> 
+            <field name="code">180408</field>  
+        </record>
+    
+        <record id="kec_id_180409" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">RAMAN UTARA</field> 
+            <field name="code">180409</field>  
+        </record>
+    
+        <record id="kec_id_180410" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">METRO KIBANG</field> 
+            <field name="code">180410</field>  
+        </record>
+    
+        <record id="kec_id_180411" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">MARGATIGA</field> 
+            <field name="code">180411</field>  
+        </record>
+    
+        <record id="kec_id_180412" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">SEKAMPUNG UDIK</field> 
+            <field name="code">180412</field>  
+        </record>
+    
+        <record id="kec_id_180413" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">BATANGHARI NUBAN</field> 
+            <field name="code">180413</field>  
+        </record>
+    
+        <record id="kec_id_180414" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">BUMI AGUNG</field> 
+            <field name="code">180414</field>  
+        </record>
+    
+        <record id="kec_id_180415" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">BANDAR SRIBHAWONO</field> 
+            <field name="code">180415</field>  
+        </record>
+    
+        <record id="kec_id_180416" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">MATARAM BARU</field> 
+            <field name="code">180416</field>  
+        </record>
+    
+        <record id="kec_id_180417" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">MELINTING</field> 
+            <field name="code">180417</field>  
+        </record>
+    
+        <record id="kec_id_180418" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">GUNUNG PELINDUNG</field> 
+            <field name="code">180418</field>  
+        </record>
+    
+        <record id="kec_id_180419" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">PASIR SAKTI</field> 
+            <field name="code">180419</field>  
+        </record>
+    
+        <record id="kec_id_180420" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">WAWAY KARYA</field> 
+            <field name="code">180420</field>  
+        </record>
+    
+        <record id="kec_id_180421" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">LABUHAN RATU</field> 
+            <field name="code">180421</field>  
+        </record>
+    
+        <record id="kec_id_180422" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">BRAJA SELEBAH</field> 
+            <field name="code">180422</field>  
+        </record>
+    
+        <record id="kec_id_180423" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">WAY BUNGUR</field> 
+            <field name="code">180423</field>  
+        </record>
+    
+        <record id="kec_id_180424" model="res.district">
+	    	<field name="city_id" ref="kab_id_1804"/>
+	    	<field name="name">MARGA SEKAMPUNG</field> 
+            <field name="code">180424</field>  
+        </record>
+    
+        <record id="kec_id_180701" model="res.district">
+	    	<field name="city_id" ref="kab_id_1807"/>
+	    	<field name="name">BLAMBANGAN UMPU</field> 
+            <field name="code">180701</field>  
+        </record>
+    
+        <record id="kec_id_180702" model="res.district">
+	    	<field name="city_id" ref="kab_id_1807"/>
+	    	<field name="name">KASUI</field> 
+            <field name="code">180702</field>  
+        </record>
+    
+        <record id="kec_id_180703" model="res.district">
+	    	<field name="city_id" ref="kab_id_1807"/>
+	    	<field name="name">BANJIT</field> 
+            <field name="code">180703</field>  
+        </record>
+    
+        <record id="kec_id_180704" model="res.district">
+	    	<field name="city_id" ref="kab_id_1807"/>
+	    	<field name="name">BARADATU</field> 
+            <field name="code">180704</field>  
+        </record>
+    
+        <record id="kec_id_180705" model="res.district">
+	    	<field name="city_id" ref="kab_id_1807"/>
+	    	<field name="name">BAHUGA</field> 
+            <field name="code">180705</field>  
+        </record>
+    
+        <record id="kec_id_180706" model="res.district">
+	    	<field name="city_id" ref="kab_id_1807"/>
+	    	<field name="name">PAKUAN RATU</field> 
+            <field name="code">180706</field>  
+        </record>
+    
+        <record id="kec_id_180707" model="res.district">
+	    	<field name="city_id" ref="kab_id_1807"/>
+	    	<field name="name">NEGERI AGUNG</field> 
+            <field name="code">180707</field>  
+        </record>
+    
+        <record id="kec_id_180708" model="res.district">
+	    	<field name="city_id" ref="kab_id_1807"/>
+	    	<field name="name">WAY TUBA</field> 
+            <field name="code">180708</field>  
+        </record>
+    
+        <record id="kec_id_180709" model="res.district">
+	    	<field name="city_id" ref="kab_id_1807"/>
+	    	<field name="name">REBANG TANGKAS</field> 
+            <field name="code">180709</field>  
+        </record>
+    
+        <record id="kec_id_180710" model="res.district">
+	    	<field name="city_id" ref="kab_id_1807"/>
+	    	<field name="name">GUNUNG LABUHAN</field> 
+            <field name="code">180710</field>  
+        </record>
+    
+        <record id="kec_id_180711" model="res.district">
+	    	<field name="city_id" ref="kab_id_1807"/>
+	    	<field name="name">NEGARA BATIN</field> 
+            <field name="code">180711</field>  
+        </record>
+    
+        <record id="kec_id_180712" model="res.district">
+	    	<field name="city_id" ref="kab_id_1807"/>
+	    	<field name="name">NEGERI BESAR</field> 
+            <field name="code">180712</field>  
+        </record>
+    
+        <record id="kec_id_180713" model="res.district">
+	    	<field name="city_id" ref="kab_id_1807"/>
+	    	<field name="name">BUAY BAHUGA</field> 
+            <field name="code">180713</field>  
+        </record>
+    
+        <record id="kec_id_180714" model="res.district">
+	    	<field name="city_id" ref="kab_id_1807"/>
+	    	<field name="name">BUMI AGUNG</field> 
+            <field name="code">180714</field>  
+        </record>
+    
+        <record id="kec_id_180901" model="res.district">
+	    	<field name="city_id" ref="kab_id_1809"/>
+	    	<field name="name">GEDONG TATAAN</field> 
+            <field name="code">180901</field>  
+        </record>
+    
+        <record id="kec_id_180902" model="res.district">
+	    	<field name="city_id" ref="kab_id_1809"/>
+	    	<field name="name">NEGERI KATON</field> 
+            <field name="code">180902</field>  
+        </record>
+    
+        <record id="kec_id_180903" model="res.district">
+	    	<field name="city_id" ref="kab_id_1809"/>
+	    	<field name="name">TEGINENENG</field> 
+            <field name="code">180903</field>  
+        </record>
+    
+        <record id="kec_id_180904" model="res.district">
+	    	<field name="city_id" ref="kab_id_1809"/>
+	    	<field name="name">WAY LIMA</field> 
+            <field name="code">180904</field>  
+        </record>
+    
+        <record id="kec_id_180905" model="res.district">
+	    	<field name="city_id" ref="kab_id_1809"/>
+	    	<field name="name">PADANG CERMIN</field> 
+            <field name="code">180905</field>  
+        </record>
+    
+        <record id="kec_id_180906" model="res.district">
+	    	<field name="city_id" ref="kab_id_1809"/>
+	    	<field name="name">PUNDUH PIDADA</field> 
+            <field name="code">180906</field>  
+        </record>
+    
+        <record id="kec_id_180907" model="res.district">
+	    	<field name="city_id" ref="kab_id_1809"/>
+	    	<field name="name">KEDONDONG</field> 
+            <field name="code">180907</field>  
+        </record>
+    
+        <record id="kec_id_180908" model="res.district">
+	    	<field name="city_id" ref="kab_id_1809"/>
+	    	<field name="name">MARGA PUNDUH</field> 
+            <field name="code">180908</field>  
+        </record>
+    
+        <record id="kec_id_180909" model="res.district">
+	    	<field name="city_id" ref="kab_id_1809"/>
+	    	<field name="name">WAY KHILAU</field> 
+            <field name="code">180909</field>  
+        </record>
+    
+        <record id="kec_id_180910" model="res.district">
+	    	<field name="city_id" ref="kab_id_1809"/>
+	    	<field name="name">TELUK PANDAN</field> 
+            <field name="code">180910</field>  
+        </record>
+    
+        <record id="kec_id_180911" model="res.district">
+	    	<field name="city_id" ref="kab_id_1809"/>
+	    	<field name="name">WAY RATAI</field> 
+            <field name="code">180911</field>  
+        </record>
+    
+        <record id="kec_id_181001" model="res.district">
+	    	<field name="city_id" ref="kab_id_1810"/>
+	    	<field name="name">PRINGSEWU</field> 
+            <field name="code">181001</field>  
+        </record>
+    
+        <record id="kec_id_181002" model="res.district">
+	    	<field name="city_id" ref="kab_id_1810"/>
+	    	<field name="name">GADING REJO</field> 
+            <field name="code">181002</field>  
+        </record>
+    
+        <record id="kec_id_181003" model="res.district">
+	    	<field name="city_id" ref="kab_id_1810"/>
+	    	<field name="name">AMBARAWA</field> 
+            <field name="code">181003</field>  
+        </record>
+    
+        <record id="kec_id_181004" model="res.district">
+	    	<field name="city_id" ref="kab_id_1810"/>
+	    	<field name="name">PARDASUKA</field> 
+            <field name="code">181004</field>  
+        </record>
+    
+        <record id="kec_id_181005" model="res.district">
+	    	<field name="city_id" ref="kab_id_1810"/>
+	    	<field name="name">PAGELARAN</field> 
+            <field name="code">181005</field>  
+        </record>
+    
+        <record id="kec_id_181006" model="res.district">
+	    	<field name="city_id" ref="kab_id_1810"/>
+	    	<field name="name">BANYUMAS</field> 
+            <field name="code">181006</field>  
+        </record>
+    
+        <record id="kec_id_181007" model="res.district">
+	    	<field name="city_id" ref="kab_id_1810"/>
+	    	<field name="name">ADILUWIH</field> 
+            <field name="code">181007</field>  
+        </record>
+    
+        <record id="kec_id_181008" model="res.district">
+	    	<field name="city_id" ref="kab_id_1810"/>
+	    	<field name="name">SUKOHARJO</field> 
+            <field name="code">181008</field>  
+        </record>
+    
+        <record id="kec_id_181009" model="res.district">
+	    	<field name="city_id" ref="kab_id_1810"/>
+	    	<field name="name">PAGELARAN UTARA</field> 
+            <field name="code">181009</field>  
+        </record>
+    
+        <record id="kec_id_181101" model="res.district">
+	    	<field name="city_id" ref="kab_id_1811"/>
+	    	<field name="name">MESUJI</field> 
+            <field name="code">181101</field>  
+        </record>
+    
+        <record id="kec_id_181102" model="res.district">
+	    	<field name="city_id" ref="kab_id_1811"/>
+	    	<field name="name">MESUJI TIMUR</field> 
+            <field name="code">181102</field>  
+        </record>
+    
+        <record id="kec_id_181103" model="res.district">
+	    	<field name="city_id" ref="kab_id_1811"/>
+	    	<field name="name">RAWA JITU UTARA</field> 
+            <field name="code">181103</field>  
+        </record>
+    
+        <record id="kec_id_181104" model="res.district">
+	    	<field name="city_id" ref="kab_id_1811"/>
+	    	<field name="name">WAY SERDANG</field> 
+            <field name="code">181104</field>  
+        </record>
+    
+        <record id="kec_id_181105" model="res.district">
+	    	<field name="city_id" ref="kab_id_1811"/>
+	    	<field name="name">SIMPANG PEMATANG</field> 
+            <field name="code">181105</field>  
+        </record>
+    
+        <record id="kec_id_181106" model="res.district">
+	    	<field name="city_id" ref="kab_id_1811"/>
+	    	<field name="name">PANCA JAYA</field> 
+            <field name="code">181106</field>  
+        </record>
+    
+        <record id="kec_id_181107" model="res.district">
+	    	<field name="city_id" ref="kab_id_1811"/>
+	    	<field name="name">TANJUNG RAYA</field> 
+            <field name="code">181107</field>  
+        </record>
+    
+        <record id="kec_id_181201" model="res.district">
+	    	<field name="city_id" ref="kab_id_1812"/>
+	    	<field name="name">TULANG BAWANG TENGAH</field> 
+            <field name="code">181201</field>  
+        </record>
+    
+        <record id="kec_id_181202" model="res.district">
+	    	<field name="city_id" ref="kab_id_1812"/>
+	    	<field name="name">TUMIJAJAR</field> 
+            <field name="code">181202</field>  
+        </record>
+    
+        <record id="kec_id_181203" model="res.district">
+	    	<field name="city_id" ref="kab_id_1812"/>
+	    	<field name="name">TULANG BAWANG UDIK</field> 
+            <field name="code">181203</field>  
+        </record>
+    
+        <record id="kec_id_181204" model="res.district">
+	    	<field name="city_id" ref="kab_id_1812"/>
+	    	<field name="name">GUNUNG TERANG</field> 
+            <field name="code">181204</field>  
+        </record>
+    
+        <record id="kec_id_181205" model="res.district">
+	    	<field name="city_id" ref="kab_id_1812"/>
+	    	<field name="name">GUNUNG AGUNG</field> 
+            <field name="code">181205</field>  
+        </record>
+    
+        <record id="kec_id_181206" model="res.district">
+	    	<field name="city_id" ref="kab_id_1812"/>
+	    	<field name="name">WAY KENANGA</field> 
+            <field name="code">181206</field>  
+        </record>
+    
+        <record id="kec_id_181207" model="res.district">
+	    	<field name="city_id" ref="kab_id_1812"/>
+	    	<field name="name">LAMBU KIBANG</field> 
+            <field name="code">181207</field>  
+        </record>
+    
+        <record id="kec_id_181208" model="res.district">
+	    	<field name="city_id" ref="kab_id_1812"/>
+	    	<field name="name">PAGAR DEWA</field> 
+            <field name="code">181208</field>  
+        </record>
+    
+        <record id="kec_id_181301" model="res.district">
+	    	<field name="city_id" ref="kab_id_1813"/>
+	    	<field name="name">PESISIR TENGAH</field> 
+            <field name="code">181301</field>  
+        </record>
+    
+        <record id="kec_id_181302" model="res.district">
+	    	<field name="city_id" ref="kab_id_1813"/>
+	    	<field name="name">PESISIR SELATAN</field> 
+            <field name="code">181302</field>  
+        </record>
+    
+        <record id="kec_id_181303" model="res.district">
+	    	<field name="city_id" ref="kab_id_1813"/>
+	    	<field name="name">LEMONG</field> 
+            <field name="code">181303</field>  
+        </record>
+    
+        <record id="kec_id_181304" model="res.district">
+	    	<field name="city_id" ref="kab_id_1813"/>
+	    	<field name="name">PESISIR UTARA</field> 
+            <field name="code">181304</field>  
+        </record>
+    
+        <record id="kec_id_181305" model="res.district">
+	    	<field name="city_id" ref="kab_id_1813"/>
+	    	<field name="name">KARYA PENGGAWA</field> 
+            <field name="code">181305</field>  
+        </record>
+    
+        <record id="kec_id_181306" model="res.district">
+	    	<field name="city_id" ref="kab_id_1813"/>
+	    	<field name="name">PULAUPISANG</field> 
+            <field name="code">181306</field>  
+        </record>
+    
+        <record id="kec_id_181307" model="res.district">
+	    	<field name="city_id" ref="kab_id_1813"/>
+	    	<field name="name">WAY KRUI</field> 
+            <field name="code">181307</field>  
+        </record>
+    
+        <record id="kec_id_181308" model="res.district">
+	    	<field name="city_id" ref="kab_id_1813"/>
+	    	<field name="name">KRUI SELATAN</field> 
+            <field name="code">181308</field>  
+        </record>
+    
+        <record id="kec_id_181309" model="res.district">
+	    	<field name="city_id" ref="kab_id_1813"/>
+	    	<field name="name">NGAMBUR</field> 
+            <field name="code">181309</field>  
+        </record>
+    
+        <record id="kec_id_181310" model="res.district">
+	    	<field name="city_id" ref="kab_id_1813"/>
+	    	<field name="name">BENGKUNAT</field> 
+            <field name="code">181310</field>  
+        </record>
+    
+        <record id="kec_id_181311" model="res.district">
+	    	<field name="city_id" ref="kab_id_1813"/>
+	    	<field name="name">BENGKUNAT BELIMBING</field> 
+            <field name="code">181311</field>  
+        </record>
+    
+        <record id="kec_id_187101" model="res.district">
+	    	<field name="city_id" ref="kab_id_1871"/>
+	    	<field name="name">KEDATON</field> 
+            <field name="code">187101</field>  
+        </record>
+    
+        <record id="kec_id_187102" model="res.district">
+	    	<field name="city_id" ref="kab_id_1871"/>
+	    	<field name="name">SUKARAME</field> 
+            <field name="code">187102</field>  
+        </record>
+    
+        <record id="kec_id_187103" model="res.district">
+	    	<field name="city_id" ref="kab_id_1871"/>
+	    	<field name="name">TANJUNGKARANG BARAT</field> 
+            <field name="code">187103</field>  
+        </record>
+    
+        <record id="kec_id_187104" model="res.district">
+	    	<field name="city_id" ref="kab_id_1871"/>
+	    	<field name="name">PANJANG</field> 
+            <field name="code">187104</field>  
+        </record>
+    
+        <record id="kec_id_187105" model="res.district">
+	    	<field name="city_id" ref="kab_id_1871"/>
+	    	<field name="name">TANJUNG KARANG TIMUR</field> 
+            <field name="code">187105</field>  
+        </record>
+    
+        <record id="kec_id_187106" model="res.district">
+	    	<field name="city_id" ref="kab_id_1871"/>
+	    	<field name="name">TANJUNG KARANG PUSAT</field> 
+            <field name="code">187106</field>  
+        </record>
+    
+        <record id="kec_id_187107" model="res.district">
+	    	<field name="city_id" ref="kab_id_1871"/>
+	    	<field name="name">TELUK BETUNG SELATAN</field> 
+            <field name="code">187107</field>  
+        </record>
+    
+        <record id="kec_id_187108" model="res.district">
+	    	<field name="city_id" ref="kab_id_1871"/>
+	    	<field name="name">TELUK BETUNG BARAT</field> 
+            <field name="code">187108</field>  
+        </record>
+    
+        <record id="kec_id_187109" model="res.district">
+	    	<field name="city_id" ref="kab_id_1871"/>
+	    	<field name="name">TELUK BETUNG UTARA</field> 
+            <field name="code">187109</field>  
+        </record>
+    
+        <record id="kec_id_187110" model="res.district">
+	    	<field name="city_id" ref="kab_id_1871"/>
+	    	<field name="name">RAJABASA</field> 
+            <field name="code">187110</field>  
+        </record>
+    
+        <record id="kec_id_187111" model="res.district">
+	    	<field name="city_id" ref="kab_id_1871"/>
+	    	<field name="name">TANJUNG SENANG</field> 
+            <field name="code">187111</field>  
+        </record>
+    
+        <record id="kec_id_187112" model="res.district">
+	    	<field name="city_id" ref="kab_id_1871"/>
+	    	<field name="name">SUKABUMI</field> 
+            <field name="code">187112</field>  
+        </record>
+    
+        <record id="kec_id_187113" model="res.district">
+	    	<field name="city_id" ref="kab_id_1871"/>
+	    	<field name="name">KEMILING</field> 
+            <field name="code">187113</field>  
+        </record>
+    
+        <record id="kec_id_187114" model="res.district">
+	    	<field name="city_id" ref="kab_id_1871"/>
+	    	<field name="name">LABUHAN RATU</field> 
+            <field name="code">187114</field>  
+        </record>
+    
+        <record id="kec_id_187115" model="res.district">
+	    	<field name="city_id" ref="kab_id_1871"/>
+	    	<field name="name">WAY HALIM</field> 
+            <field name="code">187115</field>  
+        </record>
+    
+        <record id="kec_id_187116" model="res.district">
+	    	<field name="city_id" ref="kab_id_1871"/>
+	    	<field name="name">LANGKAPURA</field> 
+            <field name="code">187116</field>  
+        </record>
+    
+        <record id="kec_id_187117" model="res.district">
+	    	<field name="city_id" ref="kab_id_1871"/>
+	    	<field name="name">ENGGAL</field> 
+            <field name="code">187117</field>  
+        </record>
+    
+        <record id="kec_id_187118" model="res.district">
+	    	<field name="city_id" ref="kab_id_1871"/>
+	    	<field name="name">KEDAMAIAN</field> 
+            <field name="code">187118</field>  
+        </record>
+    
+        <record id="kec_id_187119" model="res.district">
+	    	<field name="city_id" ref="kab_id_1871"/>
+	    	<field name="name">TELUK BETUNG TIMUR</field> 
+            <field name="code">187119</field>  
+        </record>
+    
+        <record id="kec_id_187120" model="res.district">
+	    	<field name="city_id" ref="kab_id_1871"/>
+	    	<field name="name">BUMI WARAS</field> 
+            <field name="code">187120</field>  
+        </record>
+    
+        <record id="kec_id_187201" model="res.district">
+	    	<field name="city_id" ref="kab_id_1872"/>
+	    	<field name="name">METRO PUSAT</field> 
+            <field name="code">187201</field>  
+        </record>
+    
+        <record id="kec_id_187202" model="res.district">
+	    	<field name="city_id" ref="kab_id_1872"/>
+	    	<field name="name">METRO UTARA</field> 
+            <field name="code">187202</field>  
+        </record>
+    
+        <record id="kec_id_187203" model="res.district">
+	    	<field name="city_id" ref="kab_id_1872"/>
+	    	<field name="name">METRO BARAT</field> 
+            <field name="code">187203</field>  
+        </record>
+    
+        <record id="kec_id_187204" model="res.district">
+	    	<field name="city_id" ref="kab_id_1872"/>
+	    	<field name="name">METRO TIMUR</field> 
+            <field name="code">187204</field>  
+        </record>
+    
+        <record id="kec_id_187205" model="res.district">
+	    	<field name="city_id" ref="kab_id_1872"/>
+	    	<field name="name">METRO SELATAN</field> 
+            <field name="code">187205</field>  
+        </record>
+    
+        <record id="kec_id_181209" model="res.district">
+	    	<field name="city_id" ref="kab_id_1812"/>
+	    	<field name="name">BATU PUTIH</field> 
+            <field name="code">181209</field>  
+        </record>
+    </data>
+</odoo>

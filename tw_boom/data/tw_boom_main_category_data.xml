@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    
+        <record id="tw_boom_main_kategori_ar" model="tw.boom.main.category">
+            <field name="name">AR</field>
+        </record>
+
+        <record id="tw_boom_main_kategori_cash" model="tw.boom.main.category">
+            <field name="name">Cash</field>
+        </record>
+
+        <record id="tw_boom_main_kategori_stock" model="tw.boom.main.category">
+            <field name="name">Stock</field>
+        </record>
+
+        <record id="tw_boom_main_kategori_others" model="tw.boom.main.category">
+            <field name="name">Others</field>
+        </record>
+    
+    </data>
+</odoo>

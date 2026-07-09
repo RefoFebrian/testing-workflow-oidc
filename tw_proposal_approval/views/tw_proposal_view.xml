@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="tw_proposal_approval_form_view" model="ir.ui.view">
+			<field name="name">tw.proposal.approval.form</field>
+			<field name="model">tw.proposal</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="tw_proposal.view_tw_proposal_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//button[@name='action_done']" position="before">
+					<button name="action_request_approval" string="RFA" type="object" class="oe_highlight" invisible="state != 'draft'" groups="tw_proposal_approval.group_tw_proposal_approval_rfa"/>
+					<button name="action_approval" string="Approve" type="object" class="oe_highlight" invisible="state != 'waiting_for_approval'" groups="tw_proposal_approval.group_tw_proposal_approval_approve"/>
+					<button name="action_reject_or_cancel" string="Reject" type="object" invisible="state != 'waiting_for_approval'" groups="tw_proposal_approval.group_tw_proposal_approval_reject" context="{'window_title': 'Reject'}"/>
+					<button name="action_reject_or_cancel" string="Cancel Approval" type="object" invisible="state not in ('waiting_for_approval', 'approved')" groups="tw_proposal_approval.group_tw_proposal_approval_cancel" context="{'window_title': 'Cancel'}"/>
+				</xpath>
+
+                <xpath expr="//field[@name='state']" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,done" readonly="1"/>
+                </xpath>
+
+				<xpath expr="//page[@name='sponsor']" position="after">
+					<page string="Approval">
+						<field name="approval_ids" readonly="True"/>
+					</page>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>

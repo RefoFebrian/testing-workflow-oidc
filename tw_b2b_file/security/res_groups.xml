@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- B2B FILE CONFIG -->
+            <record id="group_tw_b2b_file_config_read" model="res.groups">
+                <field name="category_id" ref="tw_base.tw_role"/>
+                <field name="name">TW Configuration Read</field>
+            </record>
+
+            <record id="access_tw_b2b_file_config_read" model="ir.model.access">
+                <field name="model_id" ref="model_tw_b2b_file_config"/>
+                <field name="name">tw_b2b_file_config read</field>
+                <field name="group_id" ref="group_tw_b2b_file_config_read"/>
+                <field name="perm_read">1</field>
+            </record>
+
+            <record id="group_tw_b2b_file_config_update" model="res.groups">
+                <field name="category_id" ref="tw_base.tw_role"/>
+                <field name="name">TW Configuration Update</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_b2b_file_config_read'))]"/>
+            </record>
+
+            <record id="access_tw_b2b_file_config_update" model="ir.model.access">
+                <field name="model_id" ref="model_tw_b2b_file_config"/>
+                <field name="name">tw_b2b_file_config Update</field>
+                <field name="group_id" ref="group_tw_b2b_file_config_update"/>
+                <field name="perm_create">1</field>
+                <field name="perm_write">1</field>
+            </record>
+
+            <record id="group_tw_b2b_file_config_delete" model="res.groups">
+                <field name="category_id" ref="tw_base.tw_role"/>
+                <field name="name">TW Configuration Delete</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_b2b_file_config_read'))]"/>
+            </record>
+
+            <record id="access_tw_b2b_file_config_delete" model="ir.model.access">
+                <field name="model_id" ref="model_tw_b2b_file_config"/>
+                <field name="name">tw_b2b_file_config Delete</field>
+                <field name="group_id" ref="group_tw_b2b_file_config_delete"/>
+                <field name="perm_unlink">1</field>
+            </record>
+        <!-- B2B FILE CONFIG -->
+    
+        <!-- B2B FILE CONTENT, LINES -->
+            <!-- READ -->
+                <record id="group_tw_b2b_file_read" model="res.groups">
+                    <field name="category_id" ref="tw_base.tw_role"/>
+                    <field name="name">TW B2B File Read</field>
+                </record>
+
+                <record id="access_tw_b2b_file_read" model="ir.model.access">
+                    <field name="model_id" ref="model_tw_b2b_file"/>
+                    <field name="name">tw_b2b_file read</field>
+                    <field name="group_id" ref="group_tw_b2b_file_read"/>
+                    <field name="perm_read">1</field>
+                </record>
+
+                <record id="access_tw_b2b_file_content_read" model="ir.model.access">
+                    <field name="model_id" ref="model_tw_b2b_file_content"/>
+                    <field name="name">tw_b2b_file_content read</field>
+                    <field name="group_id" ref="group_tw_b2b_file_read"/>
+                    <field name="perm_read">1</field>
+                </record>
+
+                <record id="access_tw_b2b_file_content_line_read" model="ir.model.access">
+                    <field name="model_id" ref="model_tw_b2b_file_content_line"/>
+                    <field name="name">tw_b2b_file_content_line read</field>
+                    <field name="group_id" ref="group_tw_b2b_file_read"/>
+                    <field name="perm_read">1</field>
+                </record>
+            <!-- READ -->
+                
+            <!-- UPDATE -->
+                <record id="group_tw_b2b_file_update" model="res.groups">
+                    <field name="category_id" ref="tw_base.tw_role"/>
+                    <field name="name">TW B2B File Update</field>
+                    <field name="implied_ids" eval="[(4, ref('group_tw_b2b_file_read'))]"/>
+                </record>
+
+                <record id="access_tw_b2b_file_update" model="ir.model.access">
+                    <field name="model_id" ref="model_tw_b2b_file"/>
+                    <field name="name">tw_b2b_file update</field>
+                    <field name="group_id" ref="group_tw_b2b_file_update"/>
+                    <field name="perm_create">1</field>
+                    <field name="perm_write">1</field>
+                </record>
+
+                <record id="access_tw_b2b_file_content_update" model="ir.model.access">
+                    <field name="model_id" ref="model_tw_b2b_file_content"/>
+                    <field name="name">tw_b2b_file_content update</field>
+                    <field name="group_id" ref="group_tw_b2b_file_update"/>
+                    <field name="perm_create">1</field>
+                    <field name="perm_write">1</field>
+                </record>
+
+                <record id="access_tw_b2b_file_content_line_update" model="ir.model.access">
+                    <field name="model_id" ref="model_tw_b2b_file_content_line"/>
+                    <field name="name">tw_b2b_file_content_line update</field>
+                    <field name="group_id" ref="group_tw_b2b_file_update"/>
+                    <field name="perm_create">1</field>
+                    <field name="perm_write">1</field>
+                </record>
+            <!-- UPDATE -->
+
+            <!-- DELETE -->
+                <record id="group_tw_b2b_file_delete" model="res.groups">
+                    <field name="category_id" ref="tw_base.tw_role"/>
+                    <field name="name">TW B2B File Delete</field>
+                    <field name="implied_ids" eval="[(4, ref('group_tw_b2b_file_read'))]"/>
+                </record>
+
+                <record id="access_tw_b2b_file_delete" model="ir.model.access">
+                    <field name="model_id" ref="model_tw_b2b_file"/>
+                    <field name="name">tw_b2b_file delete</field>
+                    <field name="group_id" ref="group_tw_b2b_file_delete"/>
+                    <field name="perm_unlink">1</field>
+                </record>
+
+                <record id="access_tw_b2b_file_content_delete" model="ir.model.access">
+                    <field name="model_id" ref="model_tw_b2b_file_content"/>
+                    <field name="name">tw_b2b_file_content delete</field>
+                    <field name="group_id" ref="group_tw_b2b_file_delete"/>
+                    <field name="perm_unlink">1</field>
+                </record>
+
+                <record id="access_tw_b2b_file_content_line_delete" model="ir.model.access">
+                    <field name="model_id" ref="model_tw_b2b_file_content_line"/>
+                    <field name="name">tw_b2b_file_content_line delete</field>
+                    <field name="group_id" ref="group_tw_b2b_file_delete"/>
+                    <field name="perm_unlink">1</field>
+                </record>
+            <!-- DELETE -->
+        <!-- B2B FILE CONTENT, LINES -->
+
+        <!-- B2B ERROR LOG -->
+            <record id="group_tw_b2b_error_log_read" model="res.groups">
+                <field name="category_id" ref="tw_base.tw_role"/>
+                <field name="name">B2B Error Log Read</field>
+            </record>
+
+            <record id="access_tw_b2b_error_log_read" model="ir.model.access">
+                <field name="model_id" ref="model_tw_b2b_error_log"/>
+                <field name="name">tw_b2b_error_log read</field>
+                <field name="group_id" ref="group_tw_b2b_error_log_read"/>
+                <field name="perm_read">1</field>
+            </record>
+
+            <record id="group_tw_b2b_error_log_update" model="res.groups">
+                <field name="category_id" ref="tw_base.tw_role"/>
+                <field name="name">B2B Error Log Update</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_b2b_error_log_read'))]"/>
+            </record>
+
+            <record id="access_tw_b2b_error_log_update" model="ir.model.access">
+                <field name="model_id" ref="model_tw_b2b_error_log"/>
+                <field name="name">tw_b2b_error_log Update</field>
+                <field name="group_id" ref="group_tw_b2b_error_log_update"/>
+                <field name="perm_create">1</field>
+                <field name="perm_write">1</field>
+            </record>
+
+            <record id="group_tw_b2b_error_log_delete" model="res.groups">
+                <field name="category_id" ref="tw_base.tw_role"/>
+                <field name="name">B2B Error Log Delete</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_b2b_error_log_read'))]"/>
+            </record>
+
+            <record id="access_tw_b2b_error_log_delete" model="ir.model.access">
+                <field name="model_id" ref="model_tw_b2b_error_log"/>
+                <field name="name">tw_b2b_error_log Delete</field>
+                <field name="group_id" ref="group_tw_b2b_error_log_delete"/>
+                <field name="perm_unlink">1</field>
+            </record>
+
+    
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_b2b_file_config_read')),
+                (4, ref('group_tw_b2b_file_config_update')),
+                (4, ref('group_tw_b2b_file_config_delete')),
+                (4, ref('group_tw_b2b_file_read')),
+                (4, ref('group_tw_b2b_file_update')),
+                (4, ref('group_tw_b2b_file_delete')),
+                (4, ref('group_tw_b2b_error_log_read')),
+                (4, ref('group_tw_b2b_error_log_update')),
+                (4, ref('group_tw_b2b_error_log_delete')),
+            ]"/>
+        </record>
+    </data>
+
+</odoo>

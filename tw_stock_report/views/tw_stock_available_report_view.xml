@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_stock_available_report_view" model="ir.ui.view">
+            <field name="name">tw.stock.available.report.wizard</field>
+            <field name="model">tw.stock.available.report</field>
+            <field name="inherit_id" ref="tw_stock_report.tw_stock_report_view"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="string">Report Stock Available</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_stock_available_report_action" model="ir.actions.act_window">
+            <field name="name">Laporan Stock Available</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.stock.available.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="tw_stock_available_showroom_report_action" model="ir.actions.act_window">
+            <field name="name">Laporan Stock Available Showroom</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.stock.available.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'default_division': 'Unit', 'default_is_locked_division': True}</field>
+        </record>
+
+        <record id="tw_stock_available_workshop_report_action" model="ir.actions.act_window">
+            <field name="name">Laporan Stock Available Workshop</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.stock.available.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'default_division': 'Sparepart', 'default_is_locked_division': True}</field>
+        </record>
+
+        <record id="tw_stock_available_umum_report_action" model="ir.actions.act_window">
+            <field name="name">Laporan Stock Available Umum</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.stock.available.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'default_division': 'Umum', 'default_is_locked_division': True}</field>
+        </record>
+    </data>
+</odoo>

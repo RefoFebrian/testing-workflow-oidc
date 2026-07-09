@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <!-- Add Layout 6 case to KPIView -->
+    <t t-name="tw_boom_dashboard.KPIViewLayout6" t-inherit="synconics_bi_dashboard.KPIView" t-inherit-mode="extension">
+        <xpath expr="//t[@t-elif=&quot;state.layout_type === 'layout5'&quot;]" position="after">
+            <t t-elif="state.layout_type === 'layout6'">
+                <KpiLayoutSix data="state.data" />
+            </t>
+        </xpath>
+    </t>
+
+</templates>

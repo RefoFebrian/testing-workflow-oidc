@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Halaman Website: Aktivasi MFA (TOTP) -->
+  <template id="totp_enable_page" name="MFA - Enable TOTP (Website)">
+    <t t-call="web.login_layout" style="max-width: 500px !important;">
+      <div class="container my-5 o_auth_totp_enable_2FA">
+        <div class="mb-3 w-100">
+          <h3 class="fw-bold">Authenticator App Setup</h3>
+
+          <ul class="ps-3">
+            <!-- Mobile: deep link ke app -->
+            <div class="d-md-none d-block">
+              <li>
+                <a t-att-href="url" class="text-wrap">Klik tautan ini untuk membuka aplikasi authenticator</a>
+              </li>
+            </div>
+
+            <li class="mt-2">
+              <div class="d-flex align-items-center flex-wrap">
+                <span class="d-md-none d-block">Atau pasang aplikasi authenticator</span>
+                <span class="d-none d-md-block">Pasang aplikasi authenticator di ponsel Anda</span>
+                <div class="d-block d-md-none ms-2">
+                  <a href="https://play.google.com/store/search?q=authenticator&amp;c=apps" class="mx-2" target="_blank" rel="noopener">
+                    <img alt="On Google Play" style="width:24px;" src="/base_setup/static/src/img/logo_google_play.png"/>
+                  </a>
+                  <a href="http://appstore.com/2fa" class="mx-2" target="_blank" rel="noopener">
+                    <img alt="On Apple Store" style="width:24px;" src="/base_setup/static/src/img/logo_apple_store.png"/>
+                  </a>
+                </div>
+              </div>
+            </li>
+
+            <span class="text-muted">Contoh: Authy, Google Authenticator, atau Microsoft Authenticator.</span>
+            <li>Cari tombol “Add an account”.</li>
+            <li>
+              <span class="d-none d-md-inline">Saat diminta, scan barcode di bawah ini.</span>
+              <span class="d-inline d-md-none">Saat diminta, salin key di bawah ini.</span>
+              <span class="d-inline d-md-none">Jika melakukan Refresh silahkan scan barcode ulang.</span>
+            </li>
+          </ul>
+
+          <!-- Desktop: QR -->
+          <div class="text-center d-none d-md-block my-3">
+            <t t-if="qrcode">
+              <img t-att-src="qrcode" alt="MFA QR Code" class="img-fluid border rounded p-2"/>
+            </t>
+            <h5 class="fw-bold mt-3">
+              <a data-bs-toggle="collapse" href="#collapseTotpSecret" role="button" aria-expanded="false" aria-controls="collapseTotpSecret">
+                Tidak bisa scan?
+              </a>
+            </h5>
+            <div class="collapse" id="collapseTotpSecret">
+              <div class="mb-3 ps-3">
+                <code class="user-select-all"><t t-esc="secret"/></code>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile: Secret -->
+          <div class="text-center d-block d-md-none my-3">
+            <code class="user-select-all"><t t-esc="secret"/></code>
+          </div>
+
+          <h3 class="fw-bold mt-4">Masukkan 6-digit kode</h3>
+          <form action="/mfa/verify" method="post" class="mt-2">
+            <!-- CSRF -->
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+            <!-- Opsi: kirimkan wizard_id/user_id jika perlu -->
+            <input type="hidden" name="wizard_id" t-att-value="wizard_id or ''"/>
+
+            <label for="code" class="px-0">Verification Code</label>
+            <div class="d-flex align-items-center">
+              <input id="code" name="code" required="required" autocomplete="one-time-code"
+                     inputmode="numeric" pattern="[0-9]{6}"
+                     class="form-control o_field_highlight px-0 me-2" placeholder="mis. 123456"/>
+              <button type="submit" class="btn btn-primary">Register</button>
+              <a href="/web/session/logout" class="btn btn-secondary ms-2">Cancel</a>
+            </div>
+
+            <!-- Tampilkan pesan error bila ada -->
+            <t t-if="error">
+              <div class="alert alert-danger mt-3" role="alert">
+                <t t-esc="error"/>
+              </div>
+            </t>
+            <t t-if="info">
+              <div class="alert alert-info mt-3" role="alert">
+                <t t-esc="info"/>
+              </div>
+            </t>
+          </form>
+        </div>
+      </div>
+    </t>
+  </template>
+</odoo>

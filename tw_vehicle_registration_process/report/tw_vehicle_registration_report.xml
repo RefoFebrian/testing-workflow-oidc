@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="paperformat_vehicle_registration" model="report.paperformat">
+            <field name="name">Vehicle Registration Report</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="css_margins" eval="True"/>
+            <field name="header_spacing">3</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="action_print_out_registration" model="ir.actions.report">
+            <field name="name">Print Out Registration</field>
+            <field name="model">tw.vehicle.registration.process</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_vehicle_registration_process.print_out_registration</field>
+            <field name="report_file">tw_vehicle_registration_process.print_out_registration</field>
+            <field name="print_report_name">'Print Out Registration - %s' % (object.name)</field>
+            <field name="paperformat_id" ref="paperformat_vehicle_registration"/>
+        </record>
+
+    </data>
+</odoo>

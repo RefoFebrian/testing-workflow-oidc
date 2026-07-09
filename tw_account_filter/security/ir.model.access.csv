@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_account_filter_all_read,tw.account.filter.all.read,model_tw_account_filter,base.group_user,1,0,0,0
+access_tw_account_filter_read,tw.account.filter.read,model_tw_account_filter,group_tw_account_filter_read,1,0,0,0
+access_tw_account_filter_update,tw.account.filter.update,model_tw_account_filter,group_tw_account_filter_update,1,1,1,0
+access_tw_account_filter_delete,tw.account.filter.delete,model_tw_account_filter,group_tw_account_filter_delete,1,0,0,1

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+    
+        <record id="tw_auto_report_category" model="ir.module.category">
+            <field name="name">TW Auto Report</field>
+        </record>
+
+        <record id="group_auto_report_read" model="res.groups">
+            <field name="name">TW Auto Report Read</field>
+            <field name="category_id" ref="tw_auto_report_category"/>
+        </record>
+
+        <record id="access_auto_report_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_report_automation"/>
+            <field name="name">tw_auto_report_read</field> 
+            <field name="group_id" ref="group_auto_report_read"/>  
+            <field name="perm_read">1</field> 
+        </record>
+
+        <record id="access_auto_report_file_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_report_automation_file"/>
+            <field name="name">tw_auto_report_file_read</field> 
+            <field name="group_id" ref="group_auto_report_read"/>  
+            <field name="perm_read">1</field> 
+        </record>
+            
+        <record id="group_auto_report_update" model="res.groups">
+            <field name="name">TW Auto Report Update</field>
+            <field name="category_id" ref="tw_auto_report_category"/>
+            <field name="implied_ids" eval="[(4, ref('group_auto_report_read'))]"/>
+        </record>
+
+        <record id="access_auto_report_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_report_automation"/>
+            <field name="name">tw_auto_report_update</field> 
+            <field name="group_id" ref="group_auto_report_update"/>  
+            <field name="perm_write">1</field> 
+            <field name="perm_create">1</field> 
+        </record>
+
+        <record id="access_auto_report_file_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_report_automation_file"/>
+            <field name="name">tw_auto_report_file_update</field> 
+            <field name="group_id" ref="group_auto_report_update"/>  
+            <field name="perm_write">1</field> 
+            <field name="perm_create">1</field> 
+        </record>
+
+        <record id="group_auto_report_delete" model="res.groups">
+            <field name="name">TW Auto Report Delete</field>
+            <field name="category_id" ref="tw_auto_report_category"/>
+            <field name="implied_ids" eval="[(4, ref('group_auto_report_read'))]"/>
+        </record>
+
+        <record id="access_auto_report_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_report_automation"/>
+            <field name="name">tw_auto_report_delete</field> 
+            <field name="group_id" ref="group_auto_report_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+        <record id="access_auto_report_file_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_report_automation_file"/>
+            <field name="name">tw_auto_report_file_delete</field> 
+            <field name="group_id" ref="group_auto_report_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    
+    </data>
+
+    <data>
+    
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+            (4,ref('group_auto_report_read')),
+            (4,ref('group_auto_report_update')),
+            (4,ref('group_auto_report_delete')),
+            ]"/>
+        </record>
+    
+    </data>
+    
+    
+
+</odoo>

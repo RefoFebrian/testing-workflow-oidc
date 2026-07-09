@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- <field name="name">Print Out Registration Receipt</field>
+            <field name="model">tw.vehicle.registration.receipt</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_vehicle_document_receipt.reg_receipt_report</field>
+            <field name="report_file">tw_vehicle_document_receipt.reg_receipt_report</field>
+            <field name="print_report_name">'Penerimaan STNK - %s' % (object.name)</field> -->
+
+        <record id="action_berita_acara_stock_opname" model="ir.actions.report">
+            <field name="name">Berita Acara Stock Opname Unit</field>
+            <field name="model">tw.stock.opname.baso.wizard</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_stock_opname.berita_acara_stock_opname</field>
+            <field name="report_file">tw_stock_opname.berita_acara_stock_opname</field>
+            <field name="paperformat_id" ref="tw_web.tw_report_paperformat_a4"/>
+            <field name="print_report_name">'Berita Acara Stock Opname Unit - %s' % (object.name)</field>
+        </record>
+
+        <record id="action_berita_acara_so" model="ir.actions.report">
+            <field name="name">Berita Acara Stock Opname Sparepart</field>
+            <field name="model">tw.stock.opname.baso.wizard</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_stock_opname.baso_sparepart_pdf</field>
+            <field name="report_file">tw_stock_opname.baso_sparepart_pdf</field>
+            <field name="paperformat_id" ref="tw_web.tw_report_paperformat_a4"/>
+            <field name="print_report_name">'Berita Acara Stock Opname Sparepart - %s' % (object.name)</field>
+        </record>
+        
+        <record id="action_report_tw_stock_opname_unit_validation" model="ir.actions.report">
+            <field name="name">Validasi Stock Opname Unit</field>
+            <field name="model">tw.stock.opname</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_stock_opname.unit_validation</field>
+            <field name="report_file">tw_stock_opname.unit_validation</field>
+            <field name="paperformat_id" ref="tw_web.tw_report_paperformat_a4_landscape"/>
+            <field name="print_report_name">'Validasi Stock Opname Unit - %s' % (object.name)</field>
+        </record>
+
+    </data>
+</odoo>

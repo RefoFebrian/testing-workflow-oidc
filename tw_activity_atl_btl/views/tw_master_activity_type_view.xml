@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_master_activity_type_list_view" model="ir.ui.view">
+            <field name="name">tw.master.activity.type.list</field>
+            <field name="model">tw.master.activity.type</field>
+            <field name="type">list</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="Master Activity Type" delete="0" editable="top">
+                    <field name="code" required="1"/>
+                    <field name="name" required="1"/>
+                    <field name="is_btl"/>
+                    <field name="is_location"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_master_activity_type_search_view" model="ir.ui.view">
+            <field name="name">tw.master.activity.type.search</field>
+            <field name="model">tw.master.activity.type</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Search Master Activity Type">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                    <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_activate_tw_master_activity_type" model="ir.actions.server">
+            <field name="name">Activate</field>
+            <field name="model_id" ref="model_tw_master_activity_type"/>
+            <field name="binding_model_id" ref="model_tw_master_activity_type"/>
+            <field name="binding_type">action</field>
+            <field name="state">code</field>
+            <field name="code">records.action_activate()</field>
+        </record>
+
+        <record id="action_deactivate_tw_master_activity_type" model="ir.actions.server">
+            <field name="name">Deactivate</field>
+            <field name="model_id" ref="model_tw_master_activity_type"/>
+            <field name="binding_model_id" ref="model_tw_master_activity_type"/>
+            <field name="binding_type">action</field>
+            <field name="state">code</field>
+            <field name="code">records.action_deactivate()</field>
+        </record>
+
+        <record id="action_tw_master_activity_type" model="ir.actions.act_window">
+            <field name="name">Activity Type</field>
+            <field name="res_model">tw.master.activity.type</field>
+            <field name="path">master-activity-type</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="tw_master_activity_type_search_view"/>
+            <field name="context">{'search_default_active':1}</field>
+        </record>
+
+    </data>
+</odoo>

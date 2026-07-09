@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_dgi_uinb_wizard,tw.dgi.uinb.wizard,model_tw_dgi_uinb_wizard,,1,1,1,0
+access_tw_dgi_pinb_wizard,tw.dgi.pinb.wizard,model_tw_dgi_pinb_wizard,,1,1,1,0

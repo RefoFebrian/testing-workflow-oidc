@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Cancellation Header Menu -->
+        <menuitem 
+            id="submenu_tw_general_affair_cancellation" 
+            name="Cancellation" 
+            parent="tw_menu.menu_tw_general_affair" 
+            sequence="3"/>
+
+        <!-- PO Asset Cancel Menu -->
+        <menuitem 
+            id="tw_po_asset_cancel_menuitem" 
+            name="PO Asset Cancel" 
+            parent="tw_po_asset_cancel.submenu_tw_general_affair_cancellation" 
+            action="tw_po_asset_cancel.action_tw_purchase_order_asset_cancel" 
+            groups="tw_po_asset_cancel.group_po_asset_cancel_read" 
+            sequence="10"/>
+
+    </data>
+</odoo>

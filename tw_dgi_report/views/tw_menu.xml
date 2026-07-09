@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_tw_report_b2b_dgi_retail"
+                name="Utilisasi DGI TDM Retail"
+                parent="tw_menu.submenu_tw_report"
+                action="action_tw_report_b2b_dgi_retail"
+                groups="tw_dgi_report.group_tw_dgi_report"
+                sequence="100"/>
+    </data>
+</odoo>

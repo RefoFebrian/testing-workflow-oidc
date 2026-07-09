@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Proses STNK Upload -->
+        <record id="group_tw_vehicle_ownership_handover_upload_read" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">TW Vehicle ownership Handover Upload Read</field>
+        </record>
+        
+        <!-- Main Model Access -->
+        <record id="access_tw_vehicle_ownership_handover_upload_result_wizard_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_vehicle_ownership_handover_upload_result_wizard"/>
+            <field name="name">tw_vehicle_ownership_handover_upload_result_wizard read</field>
+            <field name="group_id" ref="group_tw_vehicle_ownership_handover_upload_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Line Model Access -->
+        <record id="access_tw_vehicle_ownership_handover_upload_result_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_vehicle_ownership_handover_upload_result_line"/>
+            <field name="name">tw_vehicle_ownership_handover_upload_result_line read</field>
+            <field name="group_id" ref="group_tw_vehicle_ownership_handover_upload_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Update Group -->
+        <record id="group_tw_vehicle_ownership_handover_upload_update" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">TW Vehicle ownership Handover Upload Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_vehicle_ownership_handover_upload_read'))]"/>
+        </record>
+
+        <record id="access_tw_vehicle_ownership_handover_upload_result_wizard_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_vehicle_ownership_handover_upload_result_wizard"/>
+            <field name="name">tw_vehicle_ownership_handover_upload_result_wizard update</field>
+            <field name="group_id" ref="group_tw_vehicle_ownership_handover_upload_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_vehicle_ownership_handover_upload_result_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_vehicle_ownership_handover_upload_result_line"/>
+            <field name="name">tw_vehicle_ownership_handover_upload_result_line update</field>
+            <field name="group_id" ref="group_tw_vehicle_ownership_handover_upload_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Delete Group -->
+        <record id="group_tw_vehicle_ownership_handover_upload_delete" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">TW Vehicle ownership Handover Upload Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_vehicle_ownership_handover_upload_read'))]"/>
+        </record>
+
+        <record id="access_tw_vehicle_ownership_handover_upload_result_wizard_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_vehicle_ownership_handover_upload_result_wizard"/>
+            <field name="name">tw_vehicle_ownership_handover_upload_result_wizard delete</field>
+            <field name="group_id" ref="group_tw_vehicle_ownership_handover_upload_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_vehicle_ownership_handover_upload_result_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_vehicle_ownership_handover_upload_result_line"/>
+            <field name="name">tw_vehicle_ownership_handover_upload_result_line delete</field>
+            <field name="group_id" ref="group_tw_vehicle_ownership_handover_upload_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+    </data>
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+            (4,ref('group_tw_vehicle_ownership_handover_upload_read')),
+            (4,ref('group_tw_vehicle_ownership_handover_upload_update')),
+            (4,ref('group_tw_vehicle_ownership_handover_upload_delete')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

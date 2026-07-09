@@ -1,0 +1,46 @@
+<odoo>
+    <data>
+        <record id="res_user_employee_auth_signup_form_view" model="ir.ui.view">
+            <field name="name">res.users.employee.auth.signup.form</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="auth_signup.res_users_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_reset_password'][last()]" position="after">
+                    <button string="Reset Password"
+                        type="object"
+                        name="action_generate_reset_password_user"
+                        groups="tw_hr_auth_signup.tw_employee_res_users_auth_signup_group_read"
+                    />
+                    <button string="Send Reset Password Email"
+                        type="object"
+                        name="action_send_reset_password_instruction"
+                        groups="tw_hr_auth_signup.tw_employee_res_users_auth_signup_group_read"
+                    />
+                </xpath>
+                
+
+                <!-- Hide Bawaan -->
+                <button name="action_reset_password" position="attributes">
+                    <attribute name="string">Reset Password by Email</attribute>
+                    <attribute name="invisible">1</attribute>
+                </button>
+
+                <xpath expr="//button[@name='action_reset_password'][last()]" position="attributes">
+                    <attribute name="string">Reset Password by Email</attribute>
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <field name="image_1920" position="before">
+                    <div class="oe_edit_only alert alert-info" role="alert" style="text-align: left" invisible="not reset_password_url or (reset_password_date and login_date and reset_password_date &lt; login_date) or (reset_password_date and reset_password_date &lt; context_today().strftime('%%Y-%%m-%%d'))" groups="tw_base.group_system_admin">
+                        <label for="reset_password_url" string="Reset Password Information" class="oe_edit_only"/>
+                        <h3><field name="reset_password_url" nolabel="1" widget="CopyClipboardURL" readonly="1" groups="tw_base.group_system_admin"/></h3>
+                    </div>
+                    <label for="reset_password_date" invisible="1" string="Reset Password Date" class="oe_edit_only"/>
+                    <h5><field name="reset_password_date" invisible="1" readonly="1" groups="tw_base.group_system_admin"/></h5>
+                    <label for="login_date" invisible="1" string="Login Date" class="oe_edit_only"/>
+                    <field name="login_date" invisible="1" readonly="1" groups="tw_base.group_system_admin"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

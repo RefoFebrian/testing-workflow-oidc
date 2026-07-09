@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <!-- Receive Cancel Search View -->
+        <record id="tw_vehicle_document_receive_cancel_view_search" model="ir.ui.view">
+            <field name="name">tw.vehicle.document.cancel.cancel.search</field>
+            <field name="model">tw.vehicle.document.cancel</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="division"/>
+                    <field name="date"/>
+                    <field name="vehicle_document_receive_id"/>
+                    <field name="state"/>
+                    <field name="vehicle_document_cancel_line_ids" string="Engine Number" filter_domain="[('vehicle_document_cancel_line_ids.lot_id', 'ilike', self)]"/>
+                    <field name="vehicle_document_cancel_line_ids" string="Chassis Number" filter_domain="[('vehicle_document_cancel_line_ids.chassis_no', 'ilike', self)]"/>
+                    <filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+                    <filter name="confirmed" string="Confirmed" domain="[('state','=','confirmed')]"/>
+                    <filter name="group_by_state" string="Group by State" context="{'group_by':'state'}"/>
+                    <filter name="group_by_branch" string="Branch" context="{'group_by':'company_id'}"/>
+                    <filter name="group_by_division" string="Group by Division" context="{'group_by':'division'}"/>
+                </search>
+            </field>
+        </record>
+        
+        <!-- Receive Cancel List View -->
+        <record model="ir.ui.view" id="tw_vehicle_document_receive_cancel_list_view">
+            <field name="name">tw.vehicle.document.cancel.cancel.list</field>
+            <field name="model">tw.vehicle.document.cancel</field>
+            <field name="arch" type="xml">
+                <list string="Cancel Penerimaan Faktur">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="division"/>
+                    <field name="vehicle_document_receive_id"/>
+                    <field name="date"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+        
+        <!-- Receive Cancel Form View -->
+        <record model="ir.ui.view" id="tw_vehicle_document_receive_cancel_form_view">
+            <field name="name">tw.vehicle.document.cancel.cancel.form</field>
+            <field name="model">tw.vehicle.document.cancel</field>
+            <field name="inherit_id" ref="tw_cancellation.tw_cancellation_form_view"/>
+            <field name="arch" type="xml">
+                <!-- Replace header to only show Confirm button and draft/confirmed states -->
+                <xpath expr="//header" position="replace">
+                    <header>
+                        <button name="action_confirm" data-hotkey="r" invisible="state != 'draft'" string="Confirm" type="object" class="oe_highlight" groups="tw_vehicle_document_cancel.tw_vehicle_document_receive_cancel_confirm_button"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
+                    </header>
+                </xpath>
+                
+                <!-- Hide approval page -->
+                <xpath expr="//page[@name='approval']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                
+                <field name="transaction_name" position="after">
+                    <field name="vehicle_document_receive_id" 
+                           options="{'no_create':True,'no_open':True}" 
+                           required="context.get('default_model_type') == 'tw.vehicle.document.cancel'" 
+                           invisible="context.get('default_model_type') != 'tw.vehicle.document.cancel'"
+                           readonly="state != 'draft'"
+                           domain="[('id', 'in', available_receive_ids)]"/>
+                </field>
+                <xpath expr="//page[@name='approval']" position="before">
+                    <page string="Engine Details" name="cancel_lines" required="context.get('default_model_type') == 'tw.vehicle.document.cancel'" invisible="context.get('default_model_type') != 'tw.vehicle.document.cancel'">
+                        <field name="available_lot_ids" invisible="1"/>
+                        <field name="available_receive_ids" invisible="1"/>
+                        <field name="vehicle_document_cancel_line_ids" nolabel="1" readonly="state != 'draft'">
+                            <list editable="bottom">
+                                <field name="lot_id" string="Engine Number" domain="[('id', 'in', parent.available_lot_ids)]" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="chassis_no" string="Chassis Number" readonly="1"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        
+        <!-- Receive Cancel Action -->
+        <record id="tw_vehicle_document_receive_cancel_action" model="ir.actions.act_window">
+            <field name="name">Cancel Penerimaan Faktur</field>
+            <field name="res_model">tw.vehicle.document.cancel</field>
+            <field name="search_view_id" ref="tw_vehicle_document_receive_cancel_view_search"/>
+            <field name="context" eval="
+            {
+            'default_model_id': ref('tw_vehicle_document_cancel.model_tw_vehicle_document_cancel'),
+            'default_model_type': 'tw.vehicle.document.cancel',
+            'default_division': 'Unit',
+            'readonly_division': True,
+            'search_default_draft': True,
+            }
+            "/>
+            <field name="domain">[('vehicle_document_receive_id','!=',False)]</field>
+            <field name="view_mode">list,form</field>
+        </record>
+        
+        <!-- List View for Receive Cancel -->
+        <record id="tw_vehicle_document_receive_cancel_action_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_vehicle_document_receive_cancel_list_view"/>
+            <field name="act_window_id" ref="tw_vehicle_document_receive_cancel_action"/>
+        </record>
+        
+        <!-- Form View for Receive Cancel -->
+        <record id="tw_vehicle_document_receive_cancel_action_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_vehicle_document_receive_cancel_form_view"/>
+            <field name="act_window_id" ref="tw_vehicle_document_receive_cancel_action"/>
+        </record>
+        
+    </data>
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <menuitem id="submenu_tw_submission_off_the_road" name="Pengurusan Off The Road" parent="tw_vehicle_registration_process.tw_vehicle_registration_process_menu_sub" sequence="120" />
+    
+  <menuitem id="tw_submission_off_the_road_menuitem" name="Penyerahan Faktur Off The Road"
+    parent="tw_document_off_the_road.submenu_tw_submission_off_the_road"
+    action="action_tw_submission_off_the_road"
+    groups="tw_document_off_the_road.group_tw_submission_off_the_road_read"
+    sequence="10" />
+
+  <menuitem id="pengurusan_stnk_bpkb_submenu" name="Pengurusan STNK &amp; BPKB Off The Road"
+    parent="tw_document_off_the_road.submenu_tw_submission_off_the_road"
+    action="action_tw_process_off_the_road" 
+    groups="tw_document_off_the_road.group_tw_process_off_the_road_read"
+    sequence="20" />
+
+</odoo>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_report_b2b_dgi_retail_wizard_form" model="ir.ui.view">
+            <field name="name">tw.report.b2b.dgi.retail.wizard.form</field>
+            <field name="model">tw.dgi.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Laporan Utilisasi DGI TDM Retail">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>Utilisasi DGI TDM Retail</h1>
+                        </div>
+                        <group>
+                            <group string="Periode &amp; Divisi">
+                                <field name="division" widget="radio" options="{'horizontal': true}" required="1"/>
+                                <label for="start_date" string="Periode"/>
+                                <div name="periode">
+                                    <field name="start_date" required="1"/> - 
+                                    <field name="end_date" required="1"/>
+                                </div>
+                            </group>
+                            <group string="Format Laporan">
+                                <field name="report_type" widget="radio" options="{'horizontal': true}" required="1"/>
+                                <field name="report_summary_type" widget="radio" options="{'horizontal': true}" required="report_type == 'summary'" invisible="report_type != 'summary'"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Filter Titik DGI">
+                                <field name="available_endpoint_ids" invisible="1"/>
+                                <field name="end_point_ids" widget="many2many_tags" options="{'no_create': True}" domain="[('id', 'in', available_endpoint_ids)]" placeholder="Pilih Titik DGI (Kosongkan untuk semua)..."/>
+                            </group>
+                            <group string="Filter Cabang">
+                                <field name="md_ids" widget="many2many_tags" options="{'no_create': True}" placeholder="Pilih Main Dealer..."/>
+                                <field name="company_ids" widget="many2many_tags" options="{'no_create': True}" placeholder="Pilih Cabang..."/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_export_excel" string="Export xlsx" type="object" class="btn-primary" icon="fa-file-excel-o"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_tw_report_b2b_dgi_retail" model="ir.actions.act_window">
+            <field name="name">Utilisasi DGI TDM Retail</field>
+            <field name="res_model">tw.dgi.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

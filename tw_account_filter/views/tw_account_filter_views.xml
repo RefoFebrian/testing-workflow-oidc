@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_tw_account_filter_list" model="ir.ui.view">
+        <field name="name">tw.account.filter.list</field>
+        <field name="model">tw.account.filter</field>
+        <field name="arch" type="xml">
+            <list string="Account Filters">
+                <field name="transaction_type_id"/>
+                <field name="internal_group"/>
+                <field name="account_type"/>
+                <field name="prefix"/>
+            </list>
+        </field>
+    </record>
+    
+    <!-- Form View -->
+    <record id="view_tw_account_filter_form" model="ir.ui.view">
+        <field name="name">tw.account.filter.form</field>
+        <field name="model">tw.account.filter</field>
+        <field name="arch" type="xml">
+            <form string="Account Filter">
+                <sheet>
+                    <group>
+                        <group string="Transaction Type">
+                            <field name="transaction_type_id" required="1" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="name" invisible="1"/>
+                            <field name="code" readonly="1" invisible="not transaction_type_id"/>
+                        </group>
+                        <group string="Account Filtering">
+                            <field name="internal_group"/>
+                            <field name="account_type"/>
+                            <field name="prefix" placeholder="e.g. 21111"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Audit Trail">
+                            <group>
+                                <group string="Created">
+                                    <field name="create_uid" readonly="1"/>
+                                    <field name="create_date" readonly="1"/>
+                                </group>
+                                <group string="Last Updated">
+                                    <field name="write_uid" readonly="1"/>
+                                    <field name="write_date" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_account_filter_search" model="ir.ui.view">
+            <field name="name">tw.account.filter.search</field>
+            <field name="model">tw.account.filter</field>
+            <field name="arch" type="xml">
+                <search string="Search Account Filter">
+                    <field name="transaction_type_id"/>
+                    <field name="internal_group"/>
+                    <field name="account_type"/>
+                    <field name="prefix" />
+                    <field name="code" />
+                    <group expand="0" string="Group By">
+                        <filter string="Internal Type" name="group_internal_type" context="{'group_by': 'internal_group'}"/>
+                        <filter string="Account Type" name="group_account_type" context="{'group_by': 'account_type'}"/>
+                        <filter string="Prefix" name="group_prefix" context="{'group_by': 'prefix'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    
+    <!-- Action -->
+    <record id="tw_account_filter_action" model="ir.actions.act_window">
+        <field name="name">Account Filters</field>
+        <field name="res_model">tw.account.filter</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first account filter
+            </p>
+        </field>
+    </record>
+    
+</odoo>

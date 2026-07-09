@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<menuitem id="submenu_tw_discount" name="Discount"  parent="tw_menu.submenu_tw_workshop_configuration" sequence="20"/>
+
+        <menuitem id="menu_tw_sale_order_discount_upload" action="tw_sale_order_discount_upload_menuitem" parent="tw_sale_order_discount.submenu_tw_discount" sequence="1" groups="tw_sale_order_discount.tw_master_discount_upload_group_read"/>
+        <menuitem id="menu_tw_sale_order_discount_items" action="action_tw_sale_discount_items" parent="tw_sale_order_discount.submenu_tw_discount" sequence="2" groups="tw_sale_order_discount.tw_sale_discount_items_group_read"/>
+        <menuitem id="menu_tw_sale_order_discount_cash" action="tw_sale_discount_cash_action" parent="tw_sale_order_discount.submenu_tw_discount" sequence="3" groups="tw_sale_order_discount.tw_sale_discount_cash_group_read"/>
+        <menuitem id="menu_tw_sale_order_discount_ahass_top" action="tw_master_ahass_top_action" parent="tw_sale_order_discount.submenu_tw_discount" sequence="4" groups="tw_sale_order_discount.tw_master_ahass_top_group_read"/>
+	</data>
+</odoo>

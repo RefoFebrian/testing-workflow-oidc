@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <menuitem id="tw_matrix_approval_report_wizard_menu"
+    parent="tw_menu.submenu_tw_backoffice_report"
+    sequence="102"
+    action="tw_approval_matrix_report_action"
+    groups="tw_approval_report.group_tw_approval_matrix_report"/>
+
+</odoo>

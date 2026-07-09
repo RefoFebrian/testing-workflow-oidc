@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <record id="tw_lbb_report_view_wizard" model="ir.ui.view">
+      <field name="name">Laporan LBB</field>
+      <field name="model">tw.lbb.report</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="Laporan LBB">
+          <group col="4" colspan="4">
+            <field name="options" />
+            <field name="company_id" options="{'no_show':True,'no_create':True,'no_open':True}"
+              invisible="options == 'detil_prestasi'"
+              required="options != 'detil_prestasi'" />
+            <label for="start_date" string="Date"/>
+            <div>
+              <field name="start_date" class="oe_inline" required="1"/> - <field name="end_date"
+                class="oe_inline" required="1"/>
+            </div>
+          </group>
+          <notebook colspan="5">
+            <page string="Branchs" invisible="options != 'detil_prestasi'">
+              <field name="company_ids" colspan="4" nolabel="1" />
+            </page>
+          </notebook>
+          <footer>
+            <button name="excel_report"
+              string="Export Report" type="object" class="oe_highlight" /> or <button
+              string="Cancel" class="oe_link"
+              special="cancel" />
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_tw_lbb_report_wizard" model="ir.actions.act_window">
+      <field name="name">Laporan LBB</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">tw.lbb.report</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="tw_lbb_report_view_wizard" />
+      <field name="target">new</field>
+    </record>
+
+  </data>
+</odoo>

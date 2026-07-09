@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <menuitem id="submenu_tw_register_kwitansi_configuration" name="Register Kwitansi" parent="tw_menu.submenu_tw_showroom_configuration" sequence="1" />
+        <menuitem action="action_tw_generate_kwitansi" id="tw_generate_kwitansi_menuitem" parent="submenu_tw_register_kwitansi_configuration" groups="tw_register_kwitansi.group_tw_generate_register_kwitansi_read" sequence="1"/>
+        <menuitem action="tw_register_kwitansi_action" id="tw_register_kwitansi_menuitem" parent="submenu_tw_register_kwitansi_configuration" groups="tw_register_kwitansi.group_tw_register_kwitansi_read" sequence="2"/>
+        <menuitem action="tw_report_register_kwitansi_action_wizard" id="tw_report_register_kwitansi_menuitem" parent="submenu_tw_register_kwitansi_configuration" groups="tw_register_kwitansi.group_tw_report_register_kwitansi" sequence="3"/>
+        <menuitem action="action_laporan_kwitansi" id="tw_report_kwitansi_menuitem" parent="tw_menu.submenu_tw_showroom_report" groups="tw_register_kwitansi.group_tw_laporan_kwitansi_wizard" sequence="4"/>
+    </data>
+    
+</odoo>

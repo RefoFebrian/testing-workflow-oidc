@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- FORM INPUT WORK ORDER (Inherit dari Base View di atas) -->
+    <record model="ir.ui.view" id="tw_customer_wizard_form_view">
+        <field name="name">tw.customer.wizard.form.view</field>
+        <field name="model">res.partner</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="tw_partner.tw_customer_validation_base_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='dynamic_input_area']" position="inside">
+                <div class="oe_title">
+                    <h1>
+                        <field name="name" class="oe_inline" readonly="create_date" placeholder="Customer Name" required="1"/>
+                    </h1>
+                </div>
+                <group>
+                    <!-- Kolom Kiri: Informasi Personal / Perusahaan -->
+                    <group name="info_column">
+                        <div colspan="2" class="fw-bold fs-5 mt-2 mb-1" invisible="is_company == False">Company Information</div>
+                        <field name="is_pkp" invisible="is_company == False"/>
+                        <field invisible="is_pkp == False or is_company == False" name="tgl_pengukuhan" required="is_pkp != False"/>
+                        <field name="no_npwp" required="is_company" invisible="is_company == False"/>
+                        <field name="alamat_npwp" invisible="is_company == False"/>
+
+                        <div colspan="2" class="fw-bold fs-5 mt-2 mb-1" invisible="is_company">Personal Information</div>
+                        <field name="mobile" placeholder="e.g. 628xxxxxxxxx" required="1" invisible="is_company"/>
+                        <field name="identification_number" placeholder="e.g. 1871xxxxxx" invisible="is_company"/>
+                        <field name="birthplace" invisible="is_company"/>
+                        <field name="birthdate" invisible="is_company"/>
+                        <field name="occupation_id" invisible="is_company"/>
+                        <field name="another_job" string="Pekerjaan Lain" invisible="is_company"/>
+                        <field name="religion_id" invisible="is_company"/>
+                        <field name="education_id" invisible="is_company"/>
+                        <field name="gender_id" invisible="is_company"/>
+                        <field name="housing_tenure_id" invisible="is_company"/>
+                        <field name="blood_type_id" invisible="is_company"/>
+                    </group>
+
+                    <!-- Kolom Kanan: Detail Address -->
+                    <group name="address_column" string="Address">
+                        <field name="create_date" invisible="1"/>
+                        <field name="code" invisible="True"/>
+
+                        <field name="street" required="1" placeholder="Street..."/>
+                        <field name="street2" required="1" placeholder="Street 2"/>
+
+                        <label for="rt" string="RT / RW"/>
+                        <div class="o_row">
+                            <field name="rt" required="1" placeholder="RT"/>
+                            <span class="mx-2">/</span>
+                            <field name="rw" required="1" placeholder="RW"/>
+                        </div>
+
+                        <field name="state_id" required="1" class="oe_no_button" placeholder="Province" options="{'no_create':True,'no_open':True}"/>
+                        <field name="city_id" required="1" options="{'no_create': True,'no_open': True}" placeholder="City"/>
+                        <field name="district_id" required="1" options="{'no_create': True,'no_open': True}" placeholder="Kecamatan"/>
+                        <field name="sub_district_id" required="1" options="{'no_create': True,'no_open': True}" placeholder="Kelurahan"/>
+                        <field name="zip" required="1" placeholder="ZIP"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>  
+    	
+		<record id="tw_asset_mutation_approval_form_view" model="ir.ui.view">
+            <field name="name">tw.asset.mutation.approval.form</field>
+            <field name="model">tw.asset.mutation</field>
+            <field name="inherit_id" ref="tw_asset_mutation.view_tw_asset_mutation_form"/>
+            <field name="arch" type="xml">
+
+				<field name="state" position="replace">
+					<field name="state" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,open,done"/>
+				</field>
+
+				<button name="action_confirm" position="replace">
+					<button name="action_request_approval" invisible="state != 'draft'" string="RFA" type="object" class="oe_highlight" groups="tw_asset_mutation_approval.group_tw_asset_mutation_approval_request"/>
+					<button name="action_approval" invisible="state != 'waiting_for_approval'" string="Approve" type="object" class="oe_highlight" />
+					<button name="action_reject_or_cancel" invisible="state != 'waiting_for_approval'" string="Reject" type="object" context="{'window_title': 'Reject'}"/>
+					<button name="action_confirm" invisible="state != 'approved'" data-hotkey="q" string="Confirm" type="object" class="oe_highlight" groups="tw_asset_mutation.group_tw_asset_mutation_confirm"/>
+					<button name="action_reject_or_cancel" invisible="state != 'approved'" string="Cancel Approval" type="object" context="{'window_title': 'Cancel'}" groups="tw_asset_mutation_approval.group_tw_asset_mutation_approval_cancel"/>
+				</button>
+
+				<xpath expr="//page[@name='asset_detail']" position="after">
+					<page string="Approval">
+						<field name="approval_ids" readonly="True">
+						</field>
+					</page>
+				</xpath>
+			</field>
+		</record>
+
+		<record id="inherit_tw_asset_mutation_search_view" model="ir.ui.view">
+			<field name="name">tw.asset.mutation.search.inherit</field>
+			<field name="model">tw.asset.mutation</field>
+			<field name="inherit_id" ref="tw_asset_mutation.view_tw_asset_mutation_filter"/>
+			<field name="arch" type="xml">
+				<xpath expr="//search" position="inside">
+					<filter name="waiting_for_approval" string="Waiting for Approval" domain="[('state', '=', 'waiting_for_approval')]"/>
+					<filter name="approved" string="Approved" domain="[('state', '=', 'approved')]"/>
+				</xpath>
+			</field>
+		</record>
+		
+ 	</data>
+</odoo>

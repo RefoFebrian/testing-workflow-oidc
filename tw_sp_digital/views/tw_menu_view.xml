@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+        
+        <!-- SP Digital Menu -->
+        <menuitem id="tw_employee_sp_digital_submenu" name="SP Digital" parent="tw_menu.menu_tw_employee" sequence="02"/>
+        
+        <!-- SP Menu -->
+        <menuitem id="tw_sp_digital_sp_menu" name="SP" parent="tw_employee_sp_digital_submenu" sequence="01"/>
+        <menuitem id="tw_sp_digital_menuitem"
+            name="SP Digital"
+            parent="tw_sp_digital_sp_menu"
+            action="tw_sp_digital_action"
+            sequence="01"
+            groups="group_tw_sp_digital_read"
+        />
+        <menuitem id="tw_upload_sp_digital_menuitem"
+            name="Upload SP Digital"
+            parent="tw_sp_digital_sp_menu"
+            action="tw_upload_sp_digital_action"
+            sequence="02"
+            groups="group_tw_upload_sp_digital_read"
+        />
+
+        <!-- Laporan Menu -->
+        <menuitem id="tw_sp_digital_report_menu" name="Laporan" parent="tw_employee_sp_digital_submenu" sequence="02"/>
+        <menuitem id="tw_report_sp_digital_menuitem"
+            name="Laporan SP Digital"
+            parent="tw_sp_digital_report_menu"
+            action="tw_report_sp_digital_action"
+            sequence="01"
+            groups="group_tw_report_sp_digital_read"
+        />
+        
+        <!-- Configuration Menu -->
+        <menuitem id="tw_sp_digital_config_menu" name="Configuration" parent="tw_employee_sp_digital_submenu" sequence="03"/>
+        <menuitem id="tw_sp_digital_target_menuitem"
+            name="Master Target SP Digital"
+            parent="tw_sp_digital_config_menu"
+            action="tw_sp_digital_target_action"
+            sequence="01"
+            groups="group_tw_sp_digital_target_read"
+        />
+        <menuitem id="tw_upload_sp_digital_target_menuitem"
+            name="Upload Target (SP Digital)"
+            parent="tw_sp_digital_config_menu"
+            action="tw_upload_sp_digital_target_action"
+            sequence="02"
+            groups="group_tw_upload_sp_digital_target_read"
+        />
+
+    </data>
+</odoo>

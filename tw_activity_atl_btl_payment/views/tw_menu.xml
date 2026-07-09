@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="tw_activity_atl_btl_settlement_menu" action="action_tw_activity_atl_btl_settlement" parent="tw_activity_atl_btl.tw_activity_atl_btl_menu" sequence="05" groups="tw_activity_atl_btl_payment.group_tw_activity_atl_btl_settlement_read"/>
+
+        <menuitem id="tw_master_expense_source_menuitem" name="Master Expense Source" parent="tw_activity_atl_btl.tw_configure_act_plan_menu" action="tw_activity_atl_btl_payment.action_tw_master_expense_source" sequence="06" groups="tw_activity_atl_btl_payment.group_tw_activity_atl_btl_master_expense_source_read"/>
+    </data>
+</odoo>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_faktur_pajak_gabungan_view_list" model="ir.ui.view">
+            <field name="name">tw.faktur.pajak.gabungan.list</field>
+            <field name="model">tw.faktur.pajak.gabungan</field>
+            <field name="arch" type="xml">
+                <list string="Faktur Pajak Gabungan" decoration-info="state=='draft'" decoration-muted="state=='cancel'">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="company_id"/>
+                    <field name="partner_id"/>
+                    <field name="master_model_id"/>
+                    <field name="faktur_pajak_out_id" string="No. Faktur Pajak"/>
+                    <field name="number_faktur_pajak" string="Nomor Faktur Pajak" optional="hide"/>
+                    <field name="date_faktur_pajak" string="Tanggal Faktur Pajak" optional="hide"/>
+                    <field name="state" widget="badge" decoration-success="state=='confirmed'" decoration-warning="state=='draft'"/>
+                </list>
+            </field>
+        </record>
+
+        
+        <record id="tw_faktur_pajak_gabungan_view_form" model="ir.ui.view">
+            <field name="name">tw.faktur.pajak.gabungan.form</field>
+            <field name="model">tw.faktur.pajak.gabungan</field>
+            <field name="arch" type="xml">
+                <form string="Faktur Pajak Gabungan">
+                    <header>
+                        <button name="action_print_report_pdf" string="Print" type="object" invisible="state not in ('draft', 'confirmed')" groups="tw_faktur_pajak_gabungan.group_fpg_read"/>
+                        <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" invisible="state != 'draft'" groups="tw_faktur_pajak_gabungan.group_tw_faktur_pajak_gabungan_confirm_button"/>
+                        <button name="action_cancel" string="Cancel" type="object" invisible="state != 'confirmed'" groups="tw_faktur_pajak_gabungan.group_tw_faktur_pajak_gabungan_cancel_button"/>
+                        <button name="action_set_to_draft" string="Set to Draft" type="object" invisible="state not in ['cancel', 'confirmed']" groups="tw_faktur_pajak_gabungan.group_tw_faktur_pajak_gabungan_set_to_draft_button"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="%(tw_faktur_pajak.tw_faktur_pajak_out_action)d"
+                                type="action"
+                                class="oe_stat_button"
+                                icon="fa-pencil-square-o"
+                                invisible="not faktur_pajak_out_id"
+                                context="{'default_id': faktur_pajak_out_id}">
+                                <div class="o_stat_info">
+                                    <field name="faktur_pajak_out_id" readonly="1" class="o_stat_value"/>
+                                    <span class="o_stat_text">Faktur Pajak</span>
+                                </div>
+                            </button>
+                            <button class="oe_stat_button" icon="fa-edit" invisible="faktur_pajak_out_id">
+                                <div class="o_stat_info">
+                                    <field name="number_faktur_pajak" readonly="faktur_pajak_out_id != False"/>
+                                    <span class="o_stat_text">Nomor Manual</span>
+                                </div>
+                            </button>
+                            <button class="oe_stat_button" icon="fa-calendar" invisible="faktur_pajak_out_id">
+                                <div class="o_stat_info">
+                                    <field name="date_faktur_pajak" readonly="faktur_pajak_out_id != False"/>
+                                    <span class="o_stat_text">Tanggal Manual</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1><field name="name" readonly="1"/></h1>
+                        </div>
+                        <group string="Filter Transaksi">
+                            <group>
+                                <field name="company_id" required="1" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'"/>
+                                <field name="partner_id" required="1" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'"/>
+                                <field name="division" required="1" readonly="state != 'draft'"/>
+                            </group>
+                            <group>
+                                <field name="master_model_id" required="1" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'"/>
+                                <label for="start_date" string="Periode Transaksi"/>
+                                <div class="o_row">
+                                    <field name="start_date" readonly="state != 'draft'"/>
+                                    <span>s/d</span>
+                                    <field name="end_date" readonly="state != 'draft'"/>
+                                </div>
+                                <field name="date" readonly="state != 'draft'"/>
+                                <field name="date_pajak" readonly="state != 'draft'" required="1"/>
+                            </group>
+                        </group>
+                        
+                        <group>
+                            <button name="action_search_transactions" 
+                                string="Search Transactions" 
+                                type="object" 
+                                class="oe_highlight" 
+                                invisible="state != 'draft'"/>
+                        </group>
+                        
+                        <notebook>
+                            <page string="Detail Transaksi" name="lines">
+                                <field name="pajak_gabungan_line" readonly="state != 'draft'">
+                                    <list string="Detail Transaksi" create="false" editable="top">
+                                        <field name="name" string="Nomor Transaksi" readonly="1"/>
+                                        <field name="date" string="Tanggal" readonly="1"/>
+                                        <field name="source_doc_id" string="Dokumen Sumber" readonly="1"/>
+                                        <field name="untaxed_amount" sum="Total DPP" readonly="1"/>
+                                        <field name="tax_amount" sum="Total PPN" readonly="1"/>
+                                        <field name="total_amount" sum="Total" readonly="1"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Audit Trail" name="audit_trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"/>
+                                        <field name="create_date" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="confirm_uid" readonly="1"/>
+                                        <field name="confirm_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+     
+
+        <record id="tw_faktur_pajak_gabungan_view_search" model="ir.ui.view">
+            <field name="name">tw.faktur.pajak.gabungan.search</field>
+            <field name="model">tw.faktur.pajak.gabungan</field>
+            <field name="arch" type="xml">
+                <search string="Cari Faktur Pajak Gabungan">
+                    <field name="name" string="Nomor FPG"/>
+                    <field name="company_id" string="Branch"/>
+                    <field name="partner_id" string="Customer"/>
+                    <field name="master_model_id" />
+                    <field name="pajak_gabungan_line" string="Nomor Transaksi" filter_domain="[('pajak_gabungan_line.name', 'ilike', self)]"/>
+                    <field name="faktur_pajak_out_id" string="Nomor Faktur Pajak"/>
+                    <field name="number_faktur_pajak" string="Nomor Faktur Pajak Manual"/>
+                    <filter name="state_draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                    <filter name="state_confirmed" string="Confirmed" domain="[('state', '=', 'confirmed')]"/>
+                    <separator/>
+                    <filter name="create_date_today" string="Hari Ini" domain="[('create_date', '&gt;=', context_today().strftime('%%Y-%%m-%%d')), ('create_date', '&lt;', (context_today() + relativedelta(days=1)).strftime('%%Y-%%m-%%d'))]"/>
+                    <filter name="create_date_this_month" string="Bulan Ini" domain="[('create_date', '&gt;=', (context_today() - relativedelta(day=1)).strftime('%%Y-%%m-%%d')), ('create_date', '&lt;=', (context_today() + relativedelta(day=31)).strftime('%%Y-%%m-%%d'))]"/>
+                    <filter name="create_date_this_quarter" string="Kuartal Ini" domain="[('create_date', '&gt;=', (context_today() - relativedelta(day=1, months=((context_today().month - 1) %% 3))).strftime('%%Y-%%m-%%d')), ('create_date', '&lt;', (context_today() + relativedelta(day=1, months=3 - ((context_today().month - 1) %% 3))).strftime('%%Y-%%m-%%d'))]"/>
+                    <filter name="create_date_this_year" string="Tahun Ini" domain="[('create_date', '&gt;=', (context_today() - relativedelta(day=1, month=1)).strftime('%%Y-%%m-%%d')), ('create_date', '&lt;=', (context_today() + relativedelta(day=31, month=12)).strftime('%%Y-%%m-%%d'))]"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter string="Branch" name="group_by_company" context="{'group_by': 'company_id'}"/>
+                        <filter string="Customer" name="group_by_partner" context="{'group_by': 'partner_id'}"/>
+                        <filter string="Tanggal Dibuat" name="group_by_create_date" context="{'group_by': 'create_date:month'}"/>
+                        <filter string="Status" name="group_by_state" context="{'group_by': 'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="tw_faktur_pajak_gabungan_action" model="ir.actions.act_window">
+            <field name="name">Faktur Pajak Gabungan</field>
+            <field name="res_model">tw.faktur.pajak.gabungan</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="tw_faktur_pajak_gabungan_view_search"/>
+            <field name="context">{'readonly_by_pass': 1,'search_default_state_draft': 1}</field>
+        </record>
+    </data>
+</odoo>

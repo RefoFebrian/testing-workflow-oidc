@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="menuitem_account_report_hutang" name="Laporan Hutang" parent="tw_menu.submenu_tw_backoffice_report" action="action_tw_account_report_hutang" sequence="50" groups="tw_account_report_hutang_piutang.group_account_laporan_hutang"/>
+        <menuitem id="menuitem_account_report_piutang" name="Laporan Piutang" parent="tw_menu.submenu_tw_backoffice_report" action="action_tw_account_report_piutang" sequence="60" groups="tw_account_report_hutang_piutang.group_account_laporan_piutang"/>
+        <menuitem id="menuitem_account_report_piutang_showroom" name="Laporan Piutang" parent="tw_menu.submenu_tw_showroom_report" action="action_tw_account_report_piutang_showroom" sequence="70" groups="tw_account_report_hutang_piutang.group_account_laporan_piutang_showroom"/>
+        <menuitem id="menuitem_account_report_piutang_workshop" name="Laporan Piutang" parent="tw_menu.submenu_tw_workshop_report" action="action_tw_account_report_piutang_workshop" sequence="80" groups="tw_account_report_hutang_piutang.group_account_laporan_piutang_workshop"/>
+
+    </data>
+</odoo>

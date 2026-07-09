@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_stock_move_operation_nrfs_inherit_view_form" model="ir.ui.view">
+            <field name="name">tw.stock.move.operation.nrfs.inherit.form</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_move_operation_inherit_view_form" />
+            <field name="arch" type="xml">
+                <field name="has_tracking" position="after">
+                    <field name="has_nrfs" invisible="1"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

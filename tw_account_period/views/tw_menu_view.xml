@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+        
+        <!-- Master Account Period -->
+        <menuitem id="tw_account_period_menuitem" name="Periods" parent="account.account_account_menu" action="tw_account_period_action" sequence="06" groups="group_tw_account_period_read"/>
+
+    </data>
+</odoo>

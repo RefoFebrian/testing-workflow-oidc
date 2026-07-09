@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Form View -->
+        <record id="view_tw_endpoint_configuration_form" model="ir.ui.view">
+            <field name="name">tw.endpoint.configuration.form</field>
+            <field name="model">tw.endpoint.configuration</field>
+            <field name="arch" type="xml">
+                <form string="Endpoint Configuration">
+                    <sheet>
+                        <group>
+                            <group string="Endpoint Information">
+                                <field name="code" required="1"/>
+                                <field name="version" required="1"/>
+                                <field name="name" readonly="1"/>
+                            </group>
+                            <group string="Configuration">
+                                <field name="config_id" required="1" options="{'no_create': True}"/>
+                                <field name="method" required="1"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                        
+                        <group string="URL Configuration" col="2">
+                            <field name="url_path" 
+                                   required="1"
+                                   placeholder="/endpoint/path"/>
+                            <field name="base_url_override" 
+                                   placeholder="Leave empty to use API Config's base URL"/>
+                            <field name="full_url" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <!-- List View -->
+        <record id="view_tw_endpoint_configuration_list" model="ir.ui.view">
+            <field name="name">tw.endpoint.configuration.list</field>
+            <field name="model">tw.endpoint.configuration</field>
+            <field name="arch" type="xml">
+                <list string="API Endpoints">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="version"/>
+                    <field name="method"/>
+                    <field name="url_path"/>
+                    <field name="config_id"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+        
+        <!-- Action -->
+        <record id="action_tw_endpoint_configuration" model="ir.actions.act_window">
+            <field name="name">API Endpoints</field>
+            <field name="res_model">tw.endpoint.configuration</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a new API Endpoint
+                </p>
+                <p>
+                    Configure API endpoints for external service integrations.
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

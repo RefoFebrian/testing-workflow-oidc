@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">        
+        <record id="contact_tags_finco" model="res.partner.category">
+            <field name="name">Finance Company</field>
+            <field name="color" eval="3"/>
+        </record>
+        
+        <record id="contact_tags_ahaas" model="res.partner.category">
+            <field name="name">AHASS</field>
+            <field name="color" eval="9"/>
+        </record>
+        
+        <record id="contact_tags_birojasa" model="res.partner.category">
+            <field name="name">Birojasa</field>
+            <field name="color" eval="4"/>
+        </record>
+        
+        <record id="contact_tags_general_supplier" model="res.partner.category">
+            <field name="name">General Supplier</field>
+            <field name="color" eval="8"/>
+        </record>
+        
+        <record id="contact_tags_showroom" model="res.partner.category">
+            <field name="name">Showroom</field>
+            <field name="color" eval="7"/>
+        </record>
+        
+        <record id="contact_tags_dealer" model="res.partner.category">
+            <field name="name">Dealer</field>
+            <field name="color" eval="7"/>
+        </record>
+        
+        <record id="contact_tags_customer" model="res.partner.category">
+            <field name="name">Customer</field>
+            <field name="color" eval="8"/>
+        </record>
+        
+        <record id="contact_tags_direct_customer" model="res.partner.category">
+            <field name="name">Direct Customer</field>
+            <field name="color" eval="8"/>
+        </record>
+        
+        <record id="contact_tags_fintech" model="res.partner.category">
+            <field name="name">Fintech</field>
+            <field name="color" eval="3"/>
+        </record>
+        
+        <record id="contact_tags_bank" model="res.partner.category">
+            <field name="name">Bank</field>
+            <field name="color" eval="4"/>
+        </record>
+        
+        <record id="contact_tags_one_time_supplier" model="res.partner.category">
+            <field name="name">One Time Supplier</field>
+            <field name="color" eval="4"/>
+        </record>
+        
+        <record id="contact_tags_branch" model="res.partner.category">
+            <field name="name">Branch</field>
+            <field name="color" eval="4"/>
+        </record>
+        
+        <record id="contact_tags_principle" model="res.partner.category">
+            <field name="name">Principle</field>
+            <field name="color" eval="4"/>
+        </record>
+       
+    </data>
+</odoo>

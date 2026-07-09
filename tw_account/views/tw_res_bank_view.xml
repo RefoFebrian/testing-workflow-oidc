@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tw_res_bank_list_inherit_view" model="ir.ui.view">
+        <field name="name">tw.res.bank.list.inherit</field>
+        <field name="model">res.bank</field>
+        <field name="inherit_id" ref="base.view_res_bank_tree"/>
+        <field name="arch" type="xml">
+            <field name="bic" position="before">
+                <field name="code"/>
+                <field name="transfer_code"/>
+            </field>
+            <field name="bic" position="after">
+                <field name="is_restrict_length" optional="hide"/>
+                <field name="allowed_length" optional="hide"/>
+            </field>
+            <field name="country" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </field>
+
+        </field>
+    </record>
+
+    <record id="tw_res_bank_form_inherit_view" model="ir.ui.view">
+        <field name="name">tw.res.bank.form.inherit</field>
+        <field name="model">res.bank</field>
+        <field name="inherit_id" ref="base.view_res_bank_form"/>
+        <field name="arch" type="xml">
+            <field name="bic" position="before">
+                <field name="code" required="1" placeholder='BCA'/>
+                <field name="transfer_code" required="1" placeholder='014'/>
+            </field>
+            <field name="bic" position="after">
+                <field name="is_restrict_length"/>
+                <field name="allowed_length" required="is_restrict_length"/>
+                <field name="active"/>
+            </field>
+
+            <xpath expr="//sheet" position="inside">
+                <notebook>
+                    <page string="Audit Trail" name="audit_trail">
+                        <group>
+                            <group string="Created">
+                                <field name="create_uid" readonly="1"/>
+                                <field name="create_date" readonly="1"/>
+                            </group>
+                            <group string="Last Updated">
+                                <field name="write_uid" readonly="1"/>
+                                <field name="write_date" readonly="1"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </xpath>
+
+            <xpath expr="//sheet" position="after">
+                <chatter/>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
+

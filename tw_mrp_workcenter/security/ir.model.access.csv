@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_mrp_workcenter_read,tw_mrp_workcenter read,mrp.model_mrp_workcenter,group_tw_mrp_workcenter_read,1,0,0,0
+access_tw_mrp_workcenter_update,tw_mrp_workcenter update,mrp.model_mrp_workcenter,group_tw_mrp_workcenter_update,0,1,1,0
+access_tw_mrp_workcenter_delete,tw_mrp_workcenter delete,mrp.model_mrp_workcenter,group_tw_mrp_workcenter_delete,0,0,0,1

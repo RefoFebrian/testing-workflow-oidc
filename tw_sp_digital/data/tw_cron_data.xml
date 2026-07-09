@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_ir_cron_generate_sp_digital" model="ir.cron">
+            <field name="name">Monthly Generate SP Digital</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="nextcall" eval="(DateTime.now().replace(hour=2, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="model_id" ref="model_tw_sp_digital"/>
+            <field name="code">model.generate_sp_digital()</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <record id="tw_ir_cron_generate_sp_final" model="ir.cron">
+            <field name="name">Monthly Generate SP Final</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="nextcall" eval="(DateTime.now().replace(hour=2, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="model_id" ref="model_tw_sp_digital"/>
+            <field name="code">model.generate_sp_final()</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <record id="tw_ir_cron_generate_sp_active" model="ir.cron">
+            <field name="name">Monthly Generate SP Active</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="nextcall" eval="(DateTime.now().replace(hour=2, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="model_id" ref="model_tw_sp_digital"/>
+            <field name="code">model.generate_sp_active()</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <record id="tw_ir_cron_generate_notification_open" model="ir.cron">
+            <field name="name">Monthly Generate SP Notification Open</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="nextcall" eval="(DateTime.now().replace(hour=2, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="model_id" ref="model_tw_sp_digital"/>
+            <field name="code">model.generate_notification_open()</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <record id="tw_ir_cron_generate_notification_confirm" model="ir.cron">
+            <field name="name">Monthly Generate SP Notification Confirm</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="nextcall" eval="(DateTime.now().replace(hour=2, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="model_id" ref="model_tw_sp_digital"/>
+            <field name="code">model.generate_notification_confirm()</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+        
+        <record id="tw_ir_cron__monthly_calculate_evaluation_performance_team_leader" model="ir.cron">
+            <field name="name">Calculate Evaluation Performance Team Leader</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="nextcall" eval="(DateTime.now().replace(hour=2, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="model_id" ref="tw_sp_digital.model_hr_employee"/>
+            <field name="code">model.cron_calculate_evaluation_performance()</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+    </data>
+</odoo>

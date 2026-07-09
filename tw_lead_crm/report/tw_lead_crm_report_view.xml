@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+
+        <!-- Wizard Form View -->
+        <record id="tw_lead_crm_report_wizard_form_view" model="ir.ui.view">
+			<field name="name">tw.lead.crm.report.wizard.form</field>
+			<field name="model">tw.lead.crm.report</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Laporan FU Lead CRM">
+                    <group invisible="state_x == 'get'">
+						<field name="periode_by" required="1" style="width: 47%%;"/>
+                        <label for="start_date" string="Periode CRM"/>
+                        <div>
+                            <field name="start_date" required="1" placeholder="Start date" style="width: 47%% !important; margin-right: 3px;"/>
+                            <field name="end_date" required="1" placeholder="End date" style="width: 47%%;"/>
+                        </div>
+						<field name="employee_ids" widget="many2many_tags" style="width: 47%%;" options="{'no_show': True, 'no_create': True, 'no_open': True}"/>
+                    </group>
+					<notebook invisible="state_x == 'get'">
+						<page string="Branches">
+							<field name="company_ids" colspan="4" nolabel="1" options="{'no_show': True, 'no_create': True, 'no_open': True}">
+								<list create="1" delete="1" editable="bottom" edit="0">
+									<field name="code"/>
+									<field name="name"/>
+								</list>
+							</field>
+						</page>
+					</notebook>
+                	<field name="state_x" invisible="1"/>
+                	<newline/>
+                	<group col="4" fill="0" invisible="state_x != 'get'">
+	                    <separator colspan="4" string="Excel Export Generated. Click link below to download ..." invisible="state_x == 'choose'"/>
+	                    <field name="file" invisible="1" width="100"/>
+	                    <field name="data_x" nolabel="1" readonly="0" width="100" filename="file" invisible="state_x == 'choose'"/>
+	                </group> 
+	                <footer>
+	                    <button name="excel_laporan" string="Export Data" type="object" class="oe_highlight" invisible="state_x == 'get'"/>
+	                    <button string="Cancel" special="cancel" class="btn btn-default" invisible="state_x == 'get'"/>
+	                </footer>
+				</form>
+			</field>
+		</record>
+
+        <!-- Action View -->
+        <record id="tw_lead_crm_report_action" model="ir.actions.server">
+            <field name="name">Laporan Lead CRM</field>
+            <field name="model_id" ref="tw_lead_crm.model_tw_lead_crm_report"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.lead.crm.report'].action_lead_crm_report_tree()
+            </field>
+        </record>
+
+	</data>
+</odoo>

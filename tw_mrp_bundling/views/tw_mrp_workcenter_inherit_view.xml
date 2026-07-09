@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_mrp_workcenter_inherit_form_view" model="ir.ui.view">
+            <field name="name">mrp.workcenter.form</field>
+            <field name="model">mrp.workcenter</field>
+            <field name="inherit_id" ref="mrp.mrp_workcenter_view" />
+            <field name="arch" type="xml">
+                <field name="expense_account_id" position="attributes">
+                    <attribute name="required">1</attribute>
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                <field name="expense_account_id" position="after">
+                    <field name="bundling_account_id" required="1" options="{'no_create': True}"/>
+                    <field name="partner_id" required="1" options="{'no_create': True}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

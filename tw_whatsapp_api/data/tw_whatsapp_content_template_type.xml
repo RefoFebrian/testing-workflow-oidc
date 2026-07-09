@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    
+        <record id="tw_selection_type_wo_invoice" model="tw.selection">
+	    	<field name="name">Work Order Invoice</field>
+            <field name="value">Work Order Invoice</field>
+	    	<field name="type">TemplateWhatsapp</field> 
+        </record>
+        <record id="tw_selection_type_cp_kwitansi" model="tw.selection">
+	    	<field name="name">Customer Payment Kwitansi</field>
+            <field name="value">Customer Payment Kwitansi</field>
+	    	<field name="type">TemplateWhatsapp</field> 
+        </record>
+        <record id="tw_selection_type_dso_invoice" model="tw.selection">
+	    	<field name="name">DSO Invoice</field>
+            <field name="value">DSO Invoice</field>
+	    	<field name="type">TemplateWhatsapp</field> 
+        </record>
+        <record id="tw_selection_type_other" model="tw.selection">
+	    	<field name="name">Other</field>
+            <field name="value">Other</field>
+	    	<field name="type">TemplateWhatsapp</field> 
+        </record>
+
+    </data>
+</odoo>

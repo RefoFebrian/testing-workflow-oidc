@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Api URL Selection -->
+            <record id="tw_selection_api_url_other" model="tw.selection">
+                <field name="name">-</field>
+                <field name="value">-</field>
+                <field name="type">ApiURL</field>
+            </record>
+            
+            <record id="tw_selection_api_url_authorization" model="tw.selection">
+                <field name="name">Authorization</field>
+                <field name="value">authorization</field>
+                <field name="type">ApiURL</field>
+            </record>
+            
+            <record id="tw_selection_api_url_util_signature" model="tw.selection">
+                <field name="name">Utilities Signature</field>
+                <field name="value">utilities_signature</field>
+                <field name="type">ApiURL</field>
+            </record>
+            
+            <record id="tw_selection_api_url_corporates" model="tw.selection">
+                <field name="name">Corporates</field>
+                <field name="value">corporates</field>
+                <field name="type">ApiURL</field>
+            </record>
+            
+            <record id="tw_selection_api_url_get_token_qris" model="tw.selection">
+                <field name="name">Get Token QRIS</field>
+                <field name="value">get_token_qris</field>
+                <field name="type">ApiURL</field>
+            </record>
+            
+            <record id="tw_selection_api_url_generate_qris" model="tw.selection">
+                <field name="name">Generate QRIS</field>
+                <field name="value">generate_qris</field>
+                <field name="type">ApiURL</field>
+            </record>
+            
+            <record id="tw_selection_api_url_inquiry_payment_qris" model="tw.selection">
+                <field name="name">Inquiry Payment QRIS</field>
+                <field name="value">inquiry_payment_qris</field>
+                <field name="type">ApiURL</field>
+            </record>
+            
+            <record id="tw_selection_api_url_inquiry_payment_va" model="tw.selection">
+                <field name="name">Inquiry Payment VA</field>
+                <field name="value">inquiry_payment_va</field>
+                <field name="type">ApiURL</field>
+            </record>
+        <!-- Api URL Selection -->
+
+        <!-- Payment Usage Selection -->
+            <record id="tw_selection_payment_usage_qris" model="tw.selection">
+                <field name="name">QRIS</field>
+                <field name="value">qris</field>
+                <field name="type">PaymentUsage</field>
+            </record>
+            
+            <record id="tw_selection_payment_usage_va" model="tw.selection">
+                <field name="name">Virtual Account</field>
+                <field name="value">va</field>
+                <field name="type">PaymentUsage</field>
+            </record>
+        <!-- Payment Usage Selection -->
+        
+    </data>
+</odoo>

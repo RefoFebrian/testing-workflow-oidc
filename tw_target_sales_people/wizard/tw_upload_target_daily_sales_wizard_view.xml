@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_upload_target_daily_sales_wizard_view" model="ir.ui.view">
+            <field name="name">tw.upload.target.daily.sales.wizard.view</field>
+            <field name="model">tw.upload.target.daily.sales.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="alert alert-info" role="alert">
+                            <h4><i class="fa fa-info-circle" title="Info"/> Format File Excel</h4>
+                            <ul>
+                                <li>Pastikan file Excel memiliki 3 kolom dengan urutan sebagai berikut:</li>
+                            </ul>
+                            <table class="table table-bordered" style="width: 80%; margin: 10px 0 20px 20px;">
+                                <tr>
+                                    <th style="padding: 8px; border: 1px solid #dee2e6;">Kolom 1</th>
+                                    <th style="padding: 8px; border: 1px solid #dee2e6;">Kolom 2</th>
+                                    <th style="padding: 8px; border: 1px solid #dee2e6;">Kolom 3</th>
+                                    <th style="padding: 8px; border: 1px solid #dee2e6;">Kolom 4</th>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">Kode Cabang</td>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">Bulan</td>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">Series</td>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">Target</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">KodeCabang</td>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">4</td>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">ADV150 ABS</td>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">10</td>
+                                </tr>
+                            </table>
+                            <p><strong>Catatan:</strong> Baris pertama akan dianggap sebagai header dan akan dilewati.</p>
+                        </div>
+                        <group>
+                            <div class="mt-2">
+                                <p class="text-muted">
+                                    <i class="fa fa-info-circle" title="Info"/> Unduh template untuk format yang benar
+                                </p>
+                                <button name="action_download_format_file" 
+                                        type="object" 
+                                        class="btn btn-outline-secondary">
+                                    <i class="fa fa-download me-2" title="Download"/>
+                                    Download Template Excel
+                                </button>
+                            </div>
+                            <field name="upload_file" filename="filename" string="Pilih File Excel"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_import" string="Import" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_tw_upload_target_daily_sales_wizard" model="ir.actions.act_window">
+            <field name="name">Upload Target Daily Sales</field>
+            <field name="res_model">tw.upload.target.daily.sales.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

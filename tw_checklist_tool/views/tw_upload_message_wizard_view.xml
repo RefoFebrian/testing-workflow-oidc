@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_import_result_message_wizard" model="ir.ui.view">
+            <field name="name">tw.import.message.wizard.form</field>
+            <field name="model">tw.upload.message.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Import Result">
+                    <group>
+                        <field name="message" nolabel="1" />
+                    </group>
+                    <footer>
+                        <button string="Ya" type="object" name="action_confirm" class="btn-primary"/>
+                        <button string="Close" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_tw_import_message_wizard" model="ir.actions.act_window">
+            <field name="name">Import Message</field>
+            <field name="res_model">tw.upload.message.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_tw_import_result_message_wizard"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

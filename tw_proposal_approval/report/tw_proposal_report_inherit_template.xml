@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="proposal_report_approval_ext"
+                inherit_id="tw_proposal.proposal_report"
+                name="Proposal Report Approval Extention">
+                    
+            <xpath expr="//div[@name='fund_detail_section']" position="after">
+                <div class="row my-1" name="approval_section">
+                    <div class="col-12">
+                        <span class="ps-1 bolder italic"><u>Approved by</u></span><br />
+                        <div class="d-flex flex-row justify-content-center">
+                            <t t-foreach="o.approval_ids" t-as="line">
+                                <div class="p-2 text-center italic">
+                                    <span t-esc="line.approver_id.name" /><br />
+                                    <span t-esc="line.tanggal" t-options="{'widget': 'date', 'format': 'yyyy-MM-dd'}"/><br />
+                                    APPROVED BY SYSTEM<br />
+                                    <span t-esc="line.group_id.name" class="bolder"/><br />
+                                    (<span t-esc="line.limit" t-options="{'widget': 'monetary', 'display_currency': o.company_id.currency_id}"/>)<br />
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+
+        </template>
+
+    </data>
+</odoo>

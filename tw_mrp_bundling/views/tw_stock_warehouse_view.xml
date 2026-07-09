@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_warehouse_form_inherit_bundling" model="ir.ui.view">
+        <field name="name">stock.warehouse.form.inherit.bundling</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="mrp.view_warehouse_inherit_mrp"/>
+        <field name="arch" type="xml">
+            <field name="pbm_loc_id" position="after">
+                <field name="bundling_location_id"/>
+            </field>
+        </field>
+    </record>
+</odoo>

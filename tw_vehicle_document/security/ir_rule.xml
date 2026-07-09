@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_vehicle_document_request_rule" model="ir.rule">
+            <field name="name">Vehicle Document Request multi-company</field>
+            <field name="model_id" ref="model_tw_vehicle_document_request"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        <record id="tw_vehicle_document_receive_rule" model="ir.rule">
+            <field name="name">Vehicle Document Receive multi-company</field>
+            <field name="model_id" ref="model_tw_vehicle_document_receive"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+ 	</data>
+ </odoo>

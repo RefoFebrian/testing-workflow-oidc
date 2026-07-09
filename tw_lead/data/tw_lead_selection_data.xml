@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ApiType -->
+            <record id="tw_lead_api_configuration_type" model="tw.selection">
+                <field name="name">Amazon Web Service</field>
+                <field name="value">aws</field> 
+                <field name="type">ApiType</field> 
+            </record>
+        <!-- ApiType -->
+        
+        <!-- SalesChannel -->
+            <record id="tw_lead_sales_channel_walk_in" model="tw.selection">
+                <field name="name">Walk In</field>
+                <field name="value">Walk In</field> 
+                <field name="type">SalesChannel</field> 
+            </record>
+            <record id="tw_lead_sales_channel_showroom" model="tw.selection">
+                <field name="name">Showroom</field>
+                <field name="value">Showroom</field> 
+                <field name="type">SalesChannel</field> 
+                <field name="context">{'requires_act_type': True}</field>
+            </record>
+            <record id="tw_lead_sales_channel_pos" model="tw.selection">
+                <field name="name">POS</field>
+                <field name="value">POS</field> 
+                <field name="type">SalesChannel</field> 
+                <field name="context">{'is_pos': True, 'requires_act_type': True}</field>
+            </record>
+            <record id="tw_lead_sales_channel_channel" model="tw.selection">
+                <field name="name">Channel</field>
+                <field name="value">Channel</field> 
+                <field name="type">SalesChannel</field> 
+                <field name="context">{'requires_act_type': True}</field>
+            </record>
+            <record id="tw_lead_sales_channel_website" model="tw.selection">
+                <field name="name">Website</field>
+                <field name="value">Website</field> 
+                <field name="type">SalesChannel</field> 
+            </record>
+            <record id="tw_lead_sales_channel_social_media" model="tw.selection">
+                <field name="name">Social Media</field>
+                <field name="value">Social Media</field> 
+                <field name="type">SalesChannel</field> 
+            </record>
+            <record id="tw_lead_sales_channel_data_predictive" model="tw.selection">
+                <field name="name">Data Predictive</field>
+                <field name="value">Data Predictive</field> 
+                <field name="type">SalesChannel</field> 
+            </record>
+            <record id="tw_lead_sales_channel_external_parties" model="tw.selection">
+                <field name="name">External Parties</field>
+                <field name="value">External Parties</field> 
+                <field name="type">SalesChannel</field> 
+            </record>
+        <!-- SalesChannel -->
+        
+        <!-- MotorOwnership -->
+            <record id="tw_lead_motor_ownership_self" model="tw.selection">
+                <field name="name">Sendiri</field>
+                <field name="value">self</field> 
+                <field name="type">MotorOwnership</field> 
+            </record>
+            <record id="tw_lead_motor_ownership_other" model="tw.selection">
+                <field name="name">Orang Lain</field>
+                <field name="value">other</field> 
+                <field name="type">MotorOwnership</field> 
+            </record>
+        <!-- MotorOwnership -->
+
+        <!-- UnitAvailibility -->
+            <record id="tw_lead_unit_availibility_ready" model="tw.selection">
+                <field name="name">Ready</field>
+                <field name="value">ready</field> 
+                <field name="type">UnitAvailibility</field> 
+            </record>
+            <record id="tw_lead_unit_availibility_indent" model="tw.selection">
+                <field name="name">Indent</field>
+                <field name="value">indent</field> 
+                <field name="type">UnitAvailibility</field> 
+            </record>
+        <!-- UnitAvailibility -->
+        
+        <!-- Interest -->
+            
+            <record id="tw_lead_interest_cold" model="tw.selection">
+                <field name="name">Cold</field>
+                <field name="value">cold</field> 
+                <field name="type">Interest</field> 
+            </record>
+            <record id="tw_lead_interest_hot" model="tw.selection">
+                <field name="name">Hot</field>
+                <field name="value">hot</field> 
+                <field name="type">Interest</field> 
+            </record>
+        <!-- Interest -->
+        
+        <!-- MaritalStatus -->
+            <record id="tw_lead_marital_status_single" model="tw.selection">
+                <field name="name">Single</field>
+                <field name="value">single</field>
+                <field name="type">MaritalStatus</field>
+            </record>
+            <record id="tw_lead_marital_status_married" model="tw.selection">
+                <field name="name">Married</field>
+                <field name="value">married</field>
+                <field name="type">MaritalStatus</field>
+            </record>
+            <record id="tw_lead_marital_status_divorced" model="tw.selection">
+                <field name="name">Divorced</field>
+                <field name="value">divorced</field>
+                <field name="type">MaritalStatus</field>
+            </record>
+            <record id="tw_lead_marital_status_widowed" model="tw.selection">
+                <field name="name">Widowed</field>
+                <field name="value">widowed</field>
+                <field name="type">MaritalStatus</field>
+            </record>
+            <record id="tw_lead_marital_status_prefer_not_to_say" model="tw.selection">
+                <field name="name">Prefer Not to Say</field>
+                <field name="value">prefer_not_to_say</field>
+                <field name="type">MaritalStatus</field>
+            </record>
+        <!-- MaritalStatus -->
+        
+        <!-- AddressType -->
+            <record id="tw_lead_address_type_residential" model="tw.selection">
+                <field name="name">KTP</field>
+                <field name="value">ktp</field> 
+                <field name="type">AddressType</field> 
+            </record>
+            <record id="tw_lead_address_type_domicile" model="tw.selection">
+                <field name="name">Domisili</field>
+                <field name="value">domisili</field> 
+                <field name="type">AddressType</field> 
+            </record>
+            <record id="tw_lead_address_type_business" model="tw.selection">
+                <field name="name">Kantor</field>
+                <field name="value">kantor</field> 
+                <field name="type">AddressType</field> 
+            </record>
+        <!-- AddressType -->
+
+        <!-- LogCategory -->
+            <record id="tw_lead_log_category_type_follow_up" model="tw.selection">
+                <field name="name">Follow Up</field>
+                <field name="value">follow_up</field> 
+                <field name="type">LogCategory</field>
+            </record>
+            <record id="tw_lead_log_category_type_communication" model="tw.selection">
+                <field name="name">Communication</field>
+                <field name="value">communication</field> 
+                <field name="type">LogCategory</field>
+            </record>
+            <record id="tw_lead_log_category_type_general" model="tw.selection">
+                <field name="name">General</field>
+                <field name="value">general</field> 
+                <field name="type">LogCategory</field>
+            </record>
+            <record id="tw_lead_log_category_type_reassign" model="tw.selection">
+                <field name="name">Reassign</field>
+                <field name="value">reassign</field> 
+                <field name="type">LogCategory</field>
+            </record>
+        <!-- LogCategory -->
+        
+        <!-- CustomerGrade -->
+            <record id="tw_lead_customer_grade_platinum" model="tw.selection">
+                <field name="name">Platinum</field>
+                <field name="value">platinum</field> 
+                <field name="type">CustomerGrade</field>
+            </record>
+            <record id="tw_lead_customer_grade_gold" model="tw.selection">
+                <field name="name">Gold</field>
+                <field name="value">gold</field> 
+                <field name="type">CustomerGrade</field>
+            </record>
+            <record id="tw_lead_customer_grade_silver" model="tw.selection">
+                <field name="name">Silver</field>
+                <field name="value">silver</field> 
+                <field name="type">CustomerGrade</field>
+            </record>
+            <record id="tw_lead_customer_grade_bronze_green" model="tw.selection">
+                <field name="name">Bronze Green</field>
+                <field name="value">bronze_green</field> 
+                <field name="type">CustomerGrade</field>
+            </record>
+            <record id="tw_lead_customer_grade_bronze_red" model="tw.selection">
+                <field name="name">Bronze Red</field>
+                <field name="value">bronze_red</field> 
+                <field name="type">CustomerGrade</field>
+            </record>
+        <!-- CustomerGrade -->
+        
+        <!-- DataSource -->
+            <record id="tw_lead_data_source_apps" model="tw.selection">
+                <field name="name">Apps</field>
+                <field name="value">apps</field> 
+                <field name="type">DataSource</field>
+            </record>
+            <record id="tw_lead_data_source_web" model="tw.selection">
+                <field name="name">Web</field>
+                <field name="value">web</field> 
+                <field name="type">DataSource</field>
+            </record>
+            <record id="tw_lead_data_source_dgi" model="tw.selection">
+                <field name="name">DGI</field>
+                <field name="value">dgi</field> 
+                <field name="type">DataSource</field>
+            </record>
+            <record id="tw_lead_data_source_s3_aws" model="tw.selection">
+                <field name="name">S3 AWS</field>
+                <field name="value">s3_aws</field> 
+                <field name="type">DataSource</field>
+            </record>
+        <!-- DataSource -->
+
+
+     </data>
+</odoo>

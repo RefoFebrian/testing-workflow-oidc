@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="nrfs_gejala_lecet" model="tw.selection">
+            <field name="type">GejalaNrfs</field>
+            <field name="value">SY2001</field>
+	    	<field name="name">Lecet</field>
+        </record>
+        <record id="nrfs_gejala_rusak" model="tw.selection">
+            <field name="type">GejalaNrfs</field>
+            <field name="value">SY2002</field>
+	    	<field name="name">Rusak</field>
+        </record>
+        <record id="nrfs_gejala_robek" model="tw.selection">
+            <field name="type">GejalaNrfs</field>
+            <field name="value">SY2003</field>
+	    	<field name="name">Robek</field>
+        </record>
+        <record id="nrfs_gejala_pecah" model="tw.selection">
+            <field name="type">GejalaNrfs</field>
+            <field name="value">SY2004</field>
+	    	<field name="name">Pecah</field>
+        </record>
+        <record id="nrfs_gejala_hilang" model="tw.selection">
+            <field name="type">GejalaNrfs</field>
+            <field name="value">SY2005</field>
+	    	<field name="name">Hilang</field>
+        </record>
+        <record id="nrfs_gejala_others" model="tw.selection">
+            <field name="type">GejalaNrfs</field>
+            <field name="value">SY2006</field>
+	    	<field name="name">Lain-lain</field>
+        </record>
+    </data>
+</odoo>

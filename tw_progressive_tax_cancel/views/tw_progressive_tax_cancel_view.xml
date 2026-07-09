@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="tw_progressive_tax_cancel_view_list">
+      <field name="name">tw.progressive.tax.cancel.list</field>
+      <field name="model">tw.progressive.tax.cancel</field>
+      <field name="arch" type="xml">
+        <list string="Progressive Tax Cancel">
+          <field name="name" />
+          <field name="company_id" />
+          <field name="division" />
+          <field name="progressive_tax_id" />
+          <field name="date" />
+          <field name="state" />
+        </list>
+      </field>
+    </record>
+
+    <record id="tw_progressive_tax_cancel_view_search" model="ir.ui.view">
+      <field name="name">tw.progressive.tax.cancel.search</field>
+      <field name="model">tw.progressive.tax.cancel</field>
+      <field name="arch" type="xml">
+        <search string="Search Progressive Tax Cancel">
+          <field name="name" />
+          <field name="company_id" />
+          <field name="progressive_tax_id" />
+        </search>
+      </field>
+    </record>
+
+    <!-- Form View -->
+    <record model="ir.ui.view" id="tw_progressive_tax_cancel_inherit_view_form">
+      <field name="name">tw.progressive.tax.cancel.form</field>
+      <field name="model">tw.progressive.tax.cancel</field>
+      <field name="inherit_id" ref="tw_cancellation.tw_cancellation_form_view" />
+      <field name="arch" type="xml">
+        <xpath expr="//button[@name='action_request_approval']" position="attributes">
+            <attribute name="groups">tw_progressive_tax_cancel.group_tw_progressive_tax_cancel_rfa_approve</attribute>
+        </xpath>
+        <xpath expr="//button[@name='action_reject_or_cancel' and contains(@context, 'Cancel')]" position="attributes">
+            <attribute name="groups">tw_progressive_tax_cancel.group_tw_progressive_tax_cancel_approval_cancel</attribute>
+        </xpath>
+        <xpath expr="//button[@name='action_confirm']" position="attributes">
+            <attribute name="groups">tw_progressive_tax_cancel.group_tw_progressive_tax_cancel_approval_confirm</attribute>
+        </xpath>
+        <field name="transaction_name" position="after">
+          <field name="progressive_tax_id" readonly="state != 'draft'"
+            options="{'no_create':True,'no_open':True}"
+            domain="[('company_id','=',company_id),('division','=',division),('state','=','confirmed')]"
+            required="context.get('default_model_type') == 'tw.progressive.tax' and context.get('default_model_type')"
+            invisible="context.get('default_model_type') != 'tw.progressive.tax'" />
+          <field name="progressive_tax_line_ids" widget="many2many_tags" readonly="state != 'draft'"
+            options="{'no_create':True,'no_open':True}"
+            domain="[('progressive_tax_id','=',progressive_tax_id),('progressive_tax_id.company_id','=',company_id),('progressive_tax_id.state','=','confirmed')]"
+            required="context.get('default_model_type') == 'tw.progressive.tax' and context.get('default_model_type')"
+            invisible="context.get('default_model_type') != 'tw.progressive.tax'" />
+        </field>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="tw_progressive_tax_cancel_action">
+      <field name="name">Progressive Tax Cancel</field>
+      <field name="res_model">tw.progressive.tax.cancel</field>
+      <field name="search_view_id" ref="tw_progressive_tax_cancel_view_search" />
+      <field name="context"
+        eval="
+            {
+            'default_model_id': ref('tw_progressive_tax.model_tw_progressive_tax'),
+            'default_model_type': 'tw.progressive.tax',
+            }
+            " />
+      <field name="domain">
+        ['|',('progressive_tax_id','!=',False),('model_id.model','=','tw.progressive.tax')]</field>
+    </record>
+
+    <!-- Action -->
+    <record id="tw_progressive_tax_cancel_action_tree" model="ir.actions.act_window.view">
+      <field eval="1" name="sequence" />
+      <field name="view_mode">list</field>
+      <field name="view_id" ref="tw_progressive_tax_cancel_view_list" />
+      <field name="act_window_id" ref="tw_progressive_tax_cancel_action" />
+    </record>
+
+    <record id="tw_progressive_tax_cancel_action_form" model="ir.actions.act_window.view">
+      <field eval="2" name="sequence" />
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="tw_progressive_tax_cancel_inherit_view_form" />
+      <field name="act_window_id" ref="tw_progressive_tax_cancel_action" />
+    </record>
+  </data>
+</odoo>

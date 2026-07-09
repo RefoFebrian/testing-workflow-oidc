@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="purchase.action_report_purchase_order" model="ir.actions.report">
+            <field name="report_name">tw_purchase_order_report.custom_report_purchaseorder</field>
+            <field name="report_file">tw_purchase_order_report.custom_report_purchaseorder</field>
+            <field name="binding_model_id" eval="False"/>
+            <field name="paperformat_id" ref="tw_web.tw_report_paperformat_a4"/>
+        </record>
+
+    </data>
+</odoo>

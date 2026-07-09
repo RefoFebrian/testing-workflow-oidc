@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Form View -->
+        <record id="tw_trial_balance_report_form_view" model="ir.ui.view">
+            <field name="name">tw.trial.balance.report.form</field>
+            <field name="model">tw.trial.balance.report</field>
+            <field name="arch" type="xml">
+                <form string="Trial Balance Report">
+                    <sheet>
+                        <group string="Filter Periode">
+                            <group>
+                                <field name="period_id" required="1"/>
+                            </group>
+                            <group>
+                                <label for="start_date" string="Tanggal Posting"/>
+                                <div class="o_row">
+                                    <field name="start_date" nolabel="1" placeholder="Dari"/>
+                                    <span class="oe_inline mx-2">s/d</span>
+                                    <field name="end_date" nolabel="1" placeholder="Sampai"/>
+                                </div>
+                            </group>
+                        </group>
+                        <group string="Filter Data">
+                            <group>
+                                <field name="status"/>
+                                <field name="company_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="account_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                                <field name="journal_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_download" string="Download" type="object" class="oe_highlight" icon="fa-download"/>
+                        <button string="Tutup" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="tw_trial_balance_report_action" model="ir.actions.act_window">
+            <field name="name">Trial Balance Report</field>
+            <field name="res_model">tw.trial.balance.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

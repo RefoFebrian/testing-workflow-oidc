@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+    <!-- TW Setting API Payment Group Read -->
+        <record id="group_tw_setting_api_payment_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Setting API Payment Read</field>
+        </record>
+        <record id="access_tw_setting_api_payment_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_setting_api_payment"/>
+            <field name="name">tw_setting_api_payment read</field>
+            <field name="group_id" ref="group_tw_setting_api_payment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- TW Setting API Payment Group Update -->
+        <record id="group_tw_setting_api_payment_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Setting API Payment Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_setting_api_payment_read'))]"/>
+        </record>
+        <record id="access_tw_setting_api_payment_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_setting_api_payment"/>
+            <field name="name">tw_setting_api_payment update</field>
+            <field name="group_id" ref="group_tw_setting_api_payment_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- TW Setting API Payment Group Delete -->
+        <record id="group_tw_setting_api_payment_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Setting API Payment Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_setting_api_payment_read'))]"/>
+        </record>
+        <record id="access_tw_setting_api_payment_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_setting_api_payment"/>
+            <field name="name">tw_setting_api_payment delete</field>
+            <field name="group_id" ref="group_tw_setting_api_payment_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_tw_setting_api_payment_read')),
+                (4,ref('group_tw_setting_api_payment_update')),
+                (4,ref('group_tw_setting_api_payment_delete')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+        <!-- Cancel Button -->
+        <record id="group_tw_bank_reconcile_cancel_button_rfa" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Request Approval Bank Reconcile Cancel</field>
+        </record>
+        <record id="access_tw_bank_reconcile_cancel_button_rfa" model="ir.model.access">
+            <field name="model_id" ref="model_tw_bank_reconcile_cancel"/>
+            <field name="name">tw_bank_reconcile_cancel_button_rfa update</field>
+            <field name="group_id" ref="group_tw_bank_reconcile_cancel_button_rfa"/>
+            <field name="perm_write">1</field>
+        </record>
+    
+        <!-- Cancel Approve Bank Reconcile Cancel Button -->
+		<record id="group_tw_bank_reconcile_cancel_button_cancel_approve" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Cancel Approve Bank Reconcile Cancel</field>
+        </record>
+        <record id="access_tw_bank_reconcile_cancel_button_cancel_approve" model="ir.model.access">
+            <field name="model_id" ref="model_tw_bank_reconcile_cancel"/>
+            <field name="name">tw_bank_reconcile_cancel_button_cancel_approve update</field>
+            <field name="group_id" ref="group_tw_bank_reconcile_cancel_button_cancel_approve"/>
+            <field name="perm_write">1</field>
+        </record>
+		
+        <!-- Cancel Confirm Bank Reconcile Cancel Button -->
+		<record id="group_tw_bank_reconcile_cancel_button_cancel_confirm" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Cancel Confirm Bank Reconcile Cancel</field>
+        </record>
+        <record id="access_tw_bank_reconcile_cancel_button_cancel_confirm" model="ir.model.access">
+            <field name="model_id" ref="model_tw_bank_reconcile_cancel"/>
+            <field name="name">tw_bank_reconcile_cancel_button_cancel_confirm update</field>
+            <field name="group_id" ref="group_tw_bank_reconcile_cancel_button_cancel_confirm"/>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <!-- Cancel Set Draft Bank Reconcile Cancel Button -->
+		<record id="group_tw_bank_reconcile_cancel_button_cancel_set_draft" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Cancel Set Draft Bank Reconcile Cancel</field>
+        </record>
+        <record id="access_tw_bank_reconcile_cancel_button_cancel_set_draft" model="ir.model.access">
+            <field name="model_id" ref="model_tw_bank_reconcile_cancel"/>
+            <field name="name">tw_bank_reconcile_cancel_button_cancel_set_draft update</field>
+            <field name="group_id" ref="group_tw_bank_reconcile_cancel_button_cancel_set_draft"/>
+            <field name="perm_write">1</field>
+        </record>
+
+	</data>
+    <data>
+		<record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_tw_bank_reconcile_cancel_button_rfa')),
+                (4,ref('group_tw_bank_reconcile_cancel_button_cancel_approve')),
+                (4,ref('group_tw_bank_reconcile_cancel_button_cancel_confirm')),
+                (4,ref('group_tw_bank_reconcile_cancel_button_cancel_set_draft')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

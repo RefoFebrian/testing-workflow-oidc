@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_api_type_list" model="ir.ui.view">
+            <field name="name">tw.api.type.list</field>
+            <field name="model">tw.selection</field>
+            <field name="arch" type="xml">
+                <list string="API Type" create="1" delete="0" editable="top">
+                    <field name="name" required="1" string="API Type Name"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_tw_api_type" model="ir.actions.act_window">
+            <field name="name">API Type</field>
+            <field name="res_model">tw.selection</field>
+            <field name="view_mode">list</field>
+            <field name="domain">[('type','=','ApiType')]</field>
+            <field name="context">{'default_type': 'ApiType'}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No API type found. Let's create one!
+                </p>
+            </field>
+        </record>
+
+        <record id="tw_api_type_action_list" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="view_tw_api_type_list"/>
+            <field name="act_window_id" ref="action_tw_api_type"/>
+        </record>
+    </data>
+</odoo>

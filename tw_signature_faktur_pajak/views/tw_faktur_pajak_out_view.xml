@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Inherit Form View to add signature_id field -->
+		<record id="tw_faktur_pajak_out_form_view_inherit_signature" model="ir.ui.view">
+			<field name="name">tw.faktur.pajak.out.form.inherit.signature</field>
+			<field name="model">tw.faktur.pajak.out</field>
+			<field name="inherit_id" ref="tw_faktur_pajak.tw_faktur_pajak_out_form_view"/>
+			<field name="arch" type="xml">
+				<field name="printed_count" position="before">
+					<field name="signature_id" options="{'no_open':True,'no_create_edit':True}"/>
+				</field>
+			</field>
+		</record>
+
+		<!-- Inherit List View to add signature_id field -->
+		<record id="tw_faktur_pajak_out_list_view_inherit_signature" model="ir.ui.view">
+			<field name="name">tw.faktur.pajak.out.list.inherit.signature</field>
+			<field name="model">tw.faktur.pajak.out</field>
+			<field name="inherit_id" ref="tw_faktur_pajak.tw_faktur_pajak_out_list_view"/>
+			<field name="arch" type="xml">
+				<field name="state" position="before">
+					<field name="signature_id" optional="hide"/>
+				</field>
+			</field>
+		</record>
+	</data>
+</odoo>

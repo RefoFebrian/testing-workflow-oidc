@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_lead_activity_result_01" model="tw.lead.activity.result">
+            <field name="name">Tidak minat beli</field>
+            <field name="description">Not Ok - Belum butuh</field>
+            <field name="sequence">0</field>
+            <field name="is_end_of_process">True</field>
+            <field name="interest_id" ref="tw_lead.tw_lead_interest_cold" />
+        </record>
+
+        <record id="tw_lead_activity_result_02" model="tw.lead.activity.result">
+            <field name="name">Tertarik beli - Medium (Estimasi Pembelian kurang lebih 1 bulan)</field>
+            <field name="description">Pending - Medium</field>
+            <field name="sequence">0</field>
+            <field name="is_end_of_process">False</field>
+            <field name="interest_id" ref="tw_lead.tw_lead_interest_medium" />
+        </record>
+
+        <record id="tw_lead_activity_result_03" model="tw.lead.activity.result">
+            <field name="name">Tertarik beli - Hot (Estimasi Pembelian kurang lebih 2 minggu)</field>
+            <field name="description">Pending - Hot</field>
+            <field name="sequence">0</field>
+            <field name="is_end_of_process">False</field>
+            <field name="interest_id" ref="tw_lead.tw_lead_interest_hot" />
+        </record>
+
+        <record id="tw_lead_activity_result_04" model="tw.lead.activity.result">
+            <field name="name">Tertarik beli - Cold (Estimasi Pembelian &gt; 1 bulan)</field>
+            <field name="description">Pending - Cold</field>
+            <field name="sequence">0</field>
+            <field name="is_end_of_process">False</field>
+            <field name="interest_id" ref="tw_lead.tw_lead_interest_cold" />
+        </record>
+
+        <record id="tw_lead_activity_result_05" model="tw.lead.activity.result">
+            <field name="name">Pembelian sudah ke kompetitor</field>
+            <field name="description">Not Ok - Beli ke kompetitor</field>
+            <field name="sequence">0</field>
+            <field name="is_end_of_process">True</field>
+            <field name="interest_id" ref="tw_lead.tw_lead_interest_cold" />
+        </record>
+
+        <record id="tw_lead_activity_result_06" model="tw.lead.activity.result">
+            <field name="name">Pembelian sudah ke dealer lain</field>
+            <field name="description">Not Ok - Beli ke dealer lain</field>
+            <field name="sequence">0</field>
+            <field name="is_end_of_process">True</field>
+            <field name="interest_id" ref="tw_lead.tw_lead_interest_cold" />
+        </record>
+
+        <record id="tw_lead_activity_result_07" model="tw.lead.activity.result">
+            <field name="name">Overdue</field>
+            <field name="description">Tidak Melakukan Follow Up</field>
+            <field name="sequence">0</field>
+            <field name="is_end_of_process">False</field>
+            <field name="interest_id" ref="tw_lead.tw_lead_interest_cold" />
+        </record>
+
+        <record id="tw_lead_activity_result_08" model="tw.lead.activity.result">
+            <field name="name">Nomor Tidak Aktif - Nomor di luar service area</field>
+            <field name="description">Telpon tidak terhubung - Unreachable</field>
+            <field name="sequence">0</field>
+            <field name="is_end_of_process">False</field>
+            <field name="interest_id" ref="tw_lead.tw_lead_interest_cold" />
+        </record>
+
+        <record id="tw_lead_activity_result_09" model="tw.lead.activity.result">
+            <field name="name">Nomor salah sambung</field>
+            <field name="description">Telpon tidak terhubung - Rejected</field>
+            <field name="sequence">0</field>
+            <field name="is_end_of_process">False</field>
+            <field name="interest_id" ref="tw_lead.tw_lead_interest_cold" />
+        </record>
+
+        <record id="tw_lead_activity_result_10" model="tw.lead.activity.result">
+            <field name="name">Nomor  belum diangkat oleh konsumen</field>
+            <field name="description">Telpon tidak terhubung - Rejected</field>
+            <field name="sequence">0</field>
+            <field name="is_end_of_process">False</field>
+            <field name="interest_id" ref="tw_lead.tw_lead_interest_cold" />
+        </record>
+
+        <record id="tw_lead_activity_result_11" model="tw.lead.activity.result">
+            <field name="name">Lain-lain</field>
+            <field name="description">Lain-lain</field>
+            <field name="sequence">0</field>
+            <field name="is_end_of_process">False</field>
+            <field name="interest_id" ref="tw_lead.tw_lead_interest_cold" />
+        </record>
+
+        <record id="tw_lead_activity_result_12" model="tw.lead.activity.result">
+            <field name="name">Deal</field>
+            <field name="description">Deal</field>
+            <field name="sequence">0</field>
+            <field name="is_end_of_process">True</field>
+            <field name="interest_id" ref="tw_lead.tw_lead_interest_hot" />
+        </record>
+
+        <record id="tw_lead_activity_result_13" model="tw.lead.activity.result">
+            <field name="name">Belum sempat dihubungi</field>
+            <field name="description">Telpon tidak terhubung - Workload</field>
+            <field name="sequence">0</field>
+            <field name="is_end_of_process">False</field>
+            <field name="interest_id" ref="tw_lead.tw_lead_interest_cold" />
+        </record>
+
+    </data>
+</odoo>

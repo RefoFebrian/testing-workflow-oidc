@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="tw_pricelist_form_view">
+            <field name="name">tw.pricelist.form</field>
+            <field name="model">tw.pricelist.transient</field>
+            <field name="arch" type="xml">
+                <form string="Check Prices" create="false">
+                    <header>
+                        <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" invisible="not (harga_beli != harga_beli_previous or harga_jual != harga_jual_previous or harga_jual_bbn_hitam != harga_jual_bbn_hitam_previous or harga_jual_bbn_merah != harga_jual_bbn_merah_previous)" groups="tw_inventory_check.tw_pricelist_transient_group_update" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="is_sparepart" invisible="True" />
+                                <field name="is_unit" invisible="True" />
+                                <field name="available_division_ids" invisible="True" />
+                                <field name="division" invisible="True" options="{'no_open':True,'no_create':True}" force_save="1" />
+                                <field name="division_id" required="1" domain="[('id', 'in', available_division_ids)]" options="{'no_open':True,'no_create':True}"/>
+                                <field name="product_id" options="{'no_open':True,'no_create':True}" required="1" domain="[('division','=',division),('is_asset','=',False)]"/>
+                            </group>
+                            <group>
+                                <field name="company_id" string="Branch" options="{'no_open':True,'no_create':True}" required="1"/>
+                            </group>
+                            <group string="Pricelist Purchase">
+                                <field name="pricelist_purchase_unit_id" invisible="division != 'Unit'" readonly="True" options="{'no_open':True,'no_create':True}" force_save="1" />
+                                <field name="pricelist_purchase_sparepart_id" invisible="division != 'Sparepart'" readonly="True" options="{'no_open':True,'no_create':True}" force_save="1" />
+                                <field name="pricelist_bbn_hitam_id" invisible="division != 'Unit'" readonly="True" options="{'no_open':True,'no_create':True}" force_save="1" />
+                            </group>
+                            <group string="Pricelist Sale">
+                                <field name="pricelist_sale_unit_id" invisible="division != 'Unit'" readonly="True" options="{'no_open':True,'no_create':True}" force_save="1" />
+                                <field name="pricelist_sale_sparepart_id" invisible="division != 'Sparepart'" readonly="True" options="{'no_open':True,'no_create':True}" force_save="1" />
+                                <field name="pricelist_bbn_merah_id" invisible="division != 'Unit'" readonly="True" options="{'no_open':True,'no_create':True}" force_save="1" />
+                            </group>
+                            <group string="Price">
+                                <field name="harga_beli_previous" readonly="1" force_save="1"/>
+                                <field name="harga_jual_bbn_hitam_previous" invisible="division != 'Unit'" readonly="1" force_save="1"/>
+                                <field name="harga_jual_previous" readonly="1" force_save="1"/>
+                                <field name="harga_jual_bbn_merah_previous" invisible="division != 'Unit'" readonly="1" force_save="1"/>
+                            </group>
+                            <group string="Update Price">
+                                <field name="harga_beli" string="Update Harga Beli" groups="tw_inventory_check.tw_pricelist_transient_group_update" />
+                                <field name="harga_jual_bbn_hitam" invisible="division != 'Unit'" string="Update Harga Jual BBN Hitam" groups="tw_inventory_check.tw_pricelist_transient_group_update" />
+                                <field name="harga_jual" string="Update Harga Jual" groups="tw_inventory_check.tw_pricelist_transient_group_update" />
+                                <field name="harga_jual_bbn_merah" invisible="division != 'Unit'" string="Update Harga Jual BBN Merah" groups="tw_inventory_check.tw_pricelist_transient_group_update" />
+                            </group>
+                            <separator string="Stock" colspan="4" />
+                            <group>
+                                <field name="total_stock" readonly="True" force_save="1" />
+                                <field name="stock_available" readonly="True" force_save="1" />
+                                <field name="stock_rfa_approved" readonly="True" force_save="1" invisible="not is_sparepart" />
+                                <!-- TODO: [RKU] sementara aktifkan Stock RFA / Approved untuk product tipe Sparepart dulu -->
+                                <separator string="Create Loss Demand" invisible="(not product_id or not company_id) or stock_available &gt; 0" />
+                                <button name="action_create_loss_demand" string="Loss Demand" class="btn btn-danger" type="object" invisible="(not product_id or not company_id) or stock_available &gt; 0" context="{'company_id': company_id, 'product_id': product_id, 'is_loss_demand': True}" />
+                            </group>
+                            <group>
+                                <field name="stock_intransit" readonly="True" force_save="1" />
+                                <field name="stock_reserved" readonly="True" force_save="1" />
+                            </group>
+                        </group>
+                        <separator string="Stock Other Branch" colspan="4" />
+                        <field colspan="4" name="pricelist_branch_other_ids" nolabel="1" widget="one2many_list">
+                            <list string="" edit="false" create="false" delete="false">
+                                <field name="branch_code" />
+                                <field name="branch_name" />
+                                <field name="stock_available" />
+                            </list>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="tw_pricelist_transient_showroom_action">
+            <field name="name">Check Prices</field>
+            <field name="res_model">tw.pricelist.transient</field>
+            <field name="view_mode">form</field>
+            <field name="context" eval="{'default_division': 'Unit', 'default_is_unit': True}" />
+        </record>
+
+        <record model="ir.actions.act_window" id="tw_pricelist_transient_workshop_action">
+            <field name="name">Check Prices</field>
+            <field name="res_model">tw.pricelist.transient</field>
+            <field name="view_mode">form</field>
+            <field name="context" eval="{'default_division': 'Sparepart', 'default_is_sparepart': True}" />
+        </record>
+
+    </data>
+
+</odoo>

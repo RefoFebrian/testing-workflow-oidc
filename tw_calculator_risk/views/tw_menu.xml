@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<menuitem id="tw_calculator_risk_menuitem" 
+			name="Calculator Risk" 
+			parent="tw_menu.submenu_tw_backoffice_misc" 
+			action="tw_calculator_risk.tw_calculator_risk_action" 
+			sequence="100" 
+			groups="tw_calculator_risk.group_tw_calculator_risk_read"/>
+	</data>
+</odoo>

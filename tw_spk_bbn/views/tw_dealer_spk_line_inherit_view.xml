@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<odoo>
+    <data>
+        <!-- <record id="tw_dealer_spk_line_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.dealer.spk.line.inherit.form</field>
+            <field name="model">tw.dealer.spk</field>
+            <field name="inherit_id" ref="tw_spk.tw_dealer_spk_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_stnk_id']" position="after">
+                    <field name="is_bbn" required="1"/>
+                </xpath>
+            </field>
+        </record> -->
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_incentive_inherit_hr_job_form" model="ir.ui.view">
+            <field name="name">tw.incentive.inherit.hr.job.form</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="tw_hr.tw_job_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='job_category_id']" position="after">
+                    <field name="sales_category" />
+                </xpath>        
+            </field>
+        </record>
+
+    </data>
+</odoo>

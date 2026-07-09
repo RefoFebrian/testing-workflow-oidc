@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="ir_config_recalculate_day_limit" model="ir.config_parameter">
+            <field name="key">tw_incentive.recalculate_day_limit</field>
+            <field name="value">2</field>
+        </record>
+
+        <record id="ir_cron_settlement_incentive" model="ir.cron">
+            <field name="name">Settlement pending incentive</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="model_id" ref="tw_incentive.model_tw_employee_incentive"/>
+            <field name="state">code</field>
+            <field name="code">model._schedulle_settlement_incentive()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+        </record>
+
+        <record id="ir_cron_check_and_calculate_incentive" model="ir.cron">
+            <field name="name">Check and calculate incentive</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="model_id" ref="tw_incentive.model_tw_employee_incentive"/>
+            <field name="state">code</field>
+            <field name="code">model.check_incentive()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+        </record>
+
+        <record id="ir_cron_redraft_error_incentive" model="ir.cron">
+            <field name="name">Redraft error incentive</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="model_id" ref="tw_incentive.model_tw_employee_incentive"/>
+            <field name="state">code</field>
+            <field name="code">model._schedulle_redraft_incentive()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+        </record>
+
+        <record id="ir_cron_expire_incentive" model="ir.cron">
+            <field name="name">Expire incentive more than 21 days</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="model_id" ref="tw_incentive.model_tw_employee_incentive"/>
+            <field name="state">code</field>
+            <field name="code">model._schedulle_expire_incentive()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+        </record>
+
+        <record id="ir_cron_send_incentive_result_notification" model="ir.cron">
+            <field name="name">Send incentive result notification</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="model_id" ref="tw_incentive.model_tw_employee_incentive"/>
+            <field name="state">code</field>
+            <field name="code">model._schedulle_send_incentive_result_notification()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+        </record>
+
+
+
+    </data>
+</odoo>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_non_petty_cash_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="data_res" t-value="o._get_data_non_pettycash()"/>
+                <t t-call="web.basic_layout">
+                    <div class="page">
+                        <style type="text/css">
+                            .table-header { background-color: #FFFF00; font-size: 10px; font-weight: bold; text-align: center; border: 1px solid black; }
+                            .table-content { font-size: 9px; border: 1px solid black; }
+                            .total-row { background-color: #FFFF00; font-weight: bold; font-size: 10px; border: 1px solid black; }
+                            .summary-text, .summary-text tr, .summary-text td { border: none !important; border-top: none !important; border-bottom: none !important; }
+                        </style>
+                        
+                        <div class="row">
+                            <div class="col-12">
+                                <p style="font-size: 10px; margin-bottom: 0;">PT. TUNAS DWIPA MATRA</p>
+                                <p style="font-size: 10px; font-weight: bold;">LAPORAN PENERIMAAN DAN PENGELUARAN HARIAN</p>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <table class="table table-sm table-borderless" style="font-size: 11px;">
+                                    <tr>
+                                        <td width="30%">Options</td>
+                                        <td width="5%">:</td>
+                                        <td><span t-field="o.option"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tanggal</td>
+                                        <td>:</td>
+                                        <td>
+                                            <span t-field="o.start_date" t-options='{"widget": "date", "format": "dd-MM-yyyy"}'/> s/d <span t-field="o.end_date" t-options='{"widget": "date", "format": "dd-MM-yyyy"}'/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr class="table-header">
+                                    <th style="width: 5%;">No</th>
+                                    <th>Cabang</th>
+                                    <th>Tanggal</th>
+                                    <th>Jam</th>
+                                    <th>No Kwitansi</th>
+                                    <th>REK</th>
+                                    <th>Keterangan</th>
+                                    <th>Saldo Awal</th>
+                                    <th>Tunai</th>
+                                    <th>Bank Checks</th>
+                                    <th>EDC</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="no" t-value="1"/>
+                                <t t-foreach="data_res" t-as="line">
+                                    <tr class="table-content">
+                                        <td class="text-center"><t t-esc="no"/><t t-set="no" t-value="no + 1"/></td>
+                                        <td><t t-esc="line['Kode Cabang']"/></td>
+                                        <td><t t-esc="line['Tanggal']"/></td>
+                                        <td><t t-esc="line['Jam']"/></td>
+                                        <td><t t-esc="line['No Kwitansi']"/></td>
+                                        <td><t t-esc="line['REK']"/></td>
+                                        <td><t t-esc="line['Keterangan']"/></td>
+                                        <td class="text-end"><t t-esc="line['Saldo Awal']" t-options='{"widget": "float", "precision": 2}'/></td>
+                                        <td class="text-end"><t t-esc="line['Tunai']" t-options='{"widget": "float", "precision": 2}'/></td>
+                                        <td class="text-end"><t t-esc="line['Bank &amp; Checks']" t-options='{"widget": "float", "precision": 2}'/></td>
+                                        <td class="text-end"><t t-esc="line['EDC']" t-options='{"widget": "float", "precision": 2}'/></td>
+                                        <td class="text-end"><t t-esc="line['Total']" t-options='{"widget": "float", "precision": 2}'/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        
+                        <div class="row mt-4" style="font-size: 11px;">
+                            <div class="col-4 text-center">
+                                <p>Pembuat</p>
+                                <br/><br/><br/>
+                                <p>_________________</p>
+                                <p>( <span t-field="o.create_uid.name"/> )</p>
+                            </div>
+                            <div class="col-4 text-center">
+                                <p>Admin</p>
+                                <br/><br/><br/>
+                                <p>_________________</p>
+                                <p>(...............................)</p>
+                            </div>
+                            <div class="col-4 text-center">
+                                <p>Kacab</p>
+                                <br/><br/><br/>
+                                <p>_________________</p>
+                                <p>(...............................)</p>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_petty_cash_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="data_res" t-value="o._get_data_pattycash()"/>
+                <t t-set="total_debit" t-value="sum(l['debit'] for l in data_res['ress'])"/>
+                <t t-set="total_credit" t-value="sum(l['credit'] for l in data_res['ress'])"/>
+                <t t-set="saldo_akhir" t-value="data_res['saldo_awal'] + total_debit - total_credit"/>
+                
+                <t t-call="web.basic_layout">
+                    <div class="page">
+                        <style type="text/css">
+                            .table-header { background-color: #FFFF00; font-size: 8px; font-weight: bold; text-align: center; border: 1px solid black; }
+                            .table-content { font-size: 7px; border: 1px solid black; vertical-align: middle; }
+                            .summary-text { font-size: 9px; border: none !important; border-collapse: collapse; }
+                            .summary-text tr, .summary-text td { border: none !important; border-top: none !important; }
+                        </style>
+                        
+                        <div class="row">
+                            <div class="col-12">
+                                <p style="font-size: 10px; margin-bottom: 0;">PT. TUNAS DWIPA MATRA</p>
+                                <p style="font-size: 10px; font-weight: bold;">Laporan Buku Besar Harian Per Posting</p>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-2 summary-text">
+                            <div class="col-7">
+                                <div class="row">
+                                    <div class="col-3">Option</div>
+                                    <div class="col-1">:</div>
+                                    <div class="col-8">Petty Cash</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3">Tanggal</div>
+                                    <div class="col-1">:</div>
+                                    <div class="col-8"><span t-field="o.start_date" t-options='{"widget": "date", "format": "dd-MM-yyyy"}'/> s/d <span t-field="o.end_date" t-options='{"widget": "date", "format": "dd-MM-yyyy"}'/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3">No.Rekening</div>
+                                    <div class="col-1">:</div>
+                                    <div class="col-8"><t t-esc="data_res['default_account_code']"/> - <t t-esc="data_res['default_account_name']"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3">No.Sun</div>
+                                    <div class="col-1">:</div>
+                                    <div class="col-8"><t t-esc="data_res['default_account_sap']"/></div>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="row">
+                                    <div class="col-7">Saldo Awal Tanggal</div>
+                                    <div class="col-1">:</div>
+                                    <div class="col-4 text-end"><t t-esc="data_res['saldo_awal']" t-options='{"widget": "float", "precision": 2}'/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-7">Mutasi Debit</div>
+                                    <div class="col-1">:</div>
+                                    <div class="col-4 text-end"><t t-esc="total_debit" t-options='{"widget": "float", "precision": 2}'/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-7">Mutasi Credit</div>
+                                    <div class="col-1">:</div>
+                                    <div class="col-4 text-end"><t t-esc="total_credit" t-options='{"widget": "float", "precision": 2}'/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-7">Saldo Akhir Tanggal</div>
+                                    <div class="col-1">:</div>
+                                    <div class="col-4 text-end"><t t-esc="saldo_akhir" t-options='{"widget": "float", "precision": 2}'/></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <table class="table table-sm table-bordered mt-2">
+                            <thead>
+                                <tr class="table-header">
+                                    <th width="3%">No</th>
+                                    <th width="10%">Tgl Konf</th>
+                                    <th width="8%">Status</th>
+                                    <th width="12%">No Mutasi</th>
+                                    <th width="10%">Partner</th>
+                                    <th width="15%">Keterangan</th>
+                                    <th width="10%">Debet</th>
+                                    <th width="10%">Credit</th>
+                                    <th width="10%">Saldo</th>
+                                    <th width="7%">Posting</th>
+                                    <th width="5%">Jam</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="no" t-value="1"/>
+                                <t t-set="running_bal" t-value="data_res['saldo_awal']"/>
+                                <t t-foreach="data_res['ress']" t-as="line">
+                                    <t t-set="running_bal" t-value="running_bal + line['debit'] - line['credit']"/>
+                                    <tr class="table-content">
+                                        <td class="text-center"><t t-esc="no"/><t t-set="no" t-value="no + 1"/></td>
+                                        <td><t t-esc="line.get('date_display')"/></td>
+                                        <td class="text-center"><t t-esc="line['state']"/></td>
+                                        <td><t t-esc="line['move_line_name']"/></td>
+                                        <td><t t-esc="line['partner_name']"/></td>
+                                        <td><t t-esc="line['keterangan']"/></td>
+                                        <td class="text-end"><t t-esc="line['debit']" t-options='{"widget": "float", "precision": 2}'/></td>
+                                        <td class="text-end"><t t-esc="line['credit']" t-options='{"widget": "float", "precision": 2}'/></td>
+                                        <td class="text-end"><t t-esc="running_bal" t-options='{"widget": "float", "precision": 2}'/></td>
+                                        <td><t t-esc="line['user_name']"/></td>
+                                        <td class="text-center"><t t-esc="line['jam']"/></td>
+                                    </tr>
+                                </t>
+                                <tr class="table-header">
+                                    <td colspan="6" class="text-center">Total Per Tanggal</td>
+                                    <td class="text-end"><t t-esc="total_debit" t-options='{"widget": "float", "precision": 2}'/></td>
+                                    <td class="text-end"><t t-esc="total_credit" t-options='{"widget": "float", "precision": 2}'/></td>
+                                    <td></td><td></td><td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="row mt-4" style="font-size: 8px;">
+                            <div class="col-12">
+                                <span><t t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M:%S')"/></span>
+                                <span class="ms-2"><t t-esc="user.name"/></span>
+                            </div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <table class="table table-sm table-bordered" style="font-size: 9px; width: 100%; border: 1px solid black;">
+                                <tr class="text-center" style="font-weight: bold;">
+                                    <td width="20%">OPERATOR</td>
+                                    <td width="20%">DIPERIKSA</td>
+                                    <td width="20%">DIPERIKSA2</td>
+                                    <td width="20%">DICEK ULANG</td>
+                                    <td width="20%">DISETUJUI</td>
+                                </tr>
+                                <tr class="text-center">
+                                    <td>Bag.Komputer</td>
+                                    <td>Bag. Arsip</td>
+                                    <td>Kep. Kasir</td>
+                                    <td>Petugas Kas</td>
+                                    <td>Pimpinan</td>
+                                </tr>
+                                <tr style="height: 60px;">
+                                    <td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr class="text-center">
+                                    <td>(...................)</td>
+                                    <td>(...................)</td>
+                                    <td>(...................)</td>
+                                    <td>(...................)</td>
+                                    <td>(...................)</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

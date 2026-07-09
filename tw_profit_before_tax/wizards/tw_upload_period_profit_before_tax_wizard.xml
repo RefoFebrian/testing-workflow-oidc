@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="tw_upload_period_profit_before_tax_wizard" model="ir.ui.view">
+			<field name="name">tw.upload.period.profit.before.tax.wizard</field>
+			<field name="model">tw.upload.period.profit.before.tax</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Upload Period Profit Before Tax">
+                	<sheet>
+						<group colspan="4" col="4" invisible="state_x == 'get'">
+                            <group colspan="2">
+								<field name="file" filename="filename" string="Upload File"/>
+                            </group>
+                            <group colspan="2">
+                                <label for="action_download_format_file" string="Contoh Template File"/>
+                                <div>                   
+                                    <button name="action_download_format_file" type="object" class="oe_highlight" icon="fa-download" string="Download Format Upload File"/>
+                                </div>
+                            </group>
+                        </group>
+		                <field invisible="1" name="state_x"/>
+		                <newline/>    
+		                <group col="4" fill="0" invisible="state_x != 'get'">
+							<separator colspan="4" string="Hasil Upload Target:" invisible="state_x == 'choose'"/>
+							<field name="messages" readonly="1" class="oe_inline" style="margin-right: 5px; color:#7c7bad; white-space: pre-wrap" invisible="messages == False"/>
+		                </group>
+		                <footer>
+		                    <button name="action_import" invisible="state_x == 'get'" required="1" string="Import" type="object" class="oe_highlight" context="{'state_x': 'get'}"/>
+		                    <button string="Cancel" invisible="state_x == 'get'" class="oe_link" special="cancel" />
+		                </footer>
+	                </sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_upload_period_profit_before_tax_wizard" model="ir.actions.act_window">
+			<field name="name">Upload Period Profit Before Tax</field> 
+			<field name="res_model">tw.upload.period.profit.before.tax</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="tw_upload_period_profit_before_tax_wizard"/>
+			<field name="target">new</field>
+		</record>
+
+	</data>
+</odoo>

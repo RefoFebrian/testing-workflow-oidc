@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_b2b_file_stock_lot_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.lot.b2b.file.form</field>
+            <field name="model">stock.lot</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_lot_form_view" />
+            <field name="arch" type="xml">
+                <group name="receive_group" position="inside">
+                    <field name="supplier_invoice_number" readonly="1"/>
+                    <field name="sipb_number" readonly="1"/>
+                    <field name="ship_list_number" readonly="1"/>
+                    <field name="ship_list_date" readonly="1"/>
+                    <field name="expedition_ship" readonly="1"/>
+                </group>
+            </field>
+        </record>
+    </data>
+</odoo>

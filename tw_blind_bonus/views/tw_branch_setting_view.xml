@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Branch Setting View -->
+    <record id="view_branch_setting_form_inherit_blind_bonus" model="ir.ui.view">
+        <field name="name">tw.branch.setting.form.inherit.blind.bonus</field>
+        <field name="model">tw.branch.setting</field>
+        <field name="inherit_id" ref="tw_branch_setting.tw_branch_setting_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='page_4']" position="after">
+                <page string="Blind Bonus">
+                    <group>
+                        <field name="sale_blind_bonus_amount" string="Blind Bonus Sales"/>
+                        <field name="purchase_blind_bonus_amount" string="Blind Bonus Purchase"/>
+                        <field name="purchase_performance_blind_bonus_amount" string="Blind Bonus Purchase Performance"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

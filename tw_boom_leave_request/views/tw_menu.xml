@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="tw_boom_leave_request_menu" action="action_tw_boom_leave_request" name="Leave Request" parent="tw_boom.tw_boom_menu" sequence="10"/>
+    </data>
+</odoo>

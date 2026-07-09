@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tw_report_tracking_quantity_form" model="ir.ui.view">
+        <field name="name">tw.report.tracking.quantity.form</field>
+        <field name="model">tw.report.tracking.quantity</field>
+        <field name="arch" type="xml">
+            <form string="Laporan Tracking Quantity">
+                <group>
+                    <group>
+                        <field name="division" readonly="1" force_save="1"/>
+                        <label for="start_date" string="Tanggal"/>
+                        <div class="o_row">
+                            <field name="start_date" widget="date" class="oe_inline"/>
+                            <i class="fa fa-long-arrow-right mx-2" aria-label="Arrow icon" title="Arrow"/>
+                            <field name="end_date" widget="date" class="oe_inline"/>
+                        </div>
+                    </group>
+                </group>
+                <notebook>
+                    <page string="Branches">
+                        <field name="company_ids"/>
+                    </page>
+                </notebook>
+                <footer>
+                    <button name="action_print_report" string="Export Report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_tw_report_tracking_quantity_showroom" model="ir.actions.act_window">
+        <field name="name">Laporan Tracking Quantity</field>
+        <field name="res_model">tw.report.tracking.quantity</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_division': 'Unit'}</field>
+    </record>
+
+    <record id="action_tw_report_tracking_quantity_workshop" model="ir.actions.act_window">
+        <field name="name">Laporan Tracking Quantity</field>
+        <field name="res_model">tw.report.tracking.quantity</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_division': 'Sparepart'}</field>
+    </record>
+</odoo>

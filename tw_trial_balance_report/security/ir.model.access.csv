@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_trial_balance_report_read,tw.trial.balance.report.read,tw_trial_balance_report.model_tw_trial_balance_report,group_trial_balance_report,1,0,0,0

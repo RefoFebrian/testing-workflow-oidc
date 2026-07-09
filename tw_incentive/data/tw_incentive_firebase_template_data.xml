@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="firebase_content_template_monthly_incentive" model="tw.firebase.content.template">
+            <field name="name">Monthly Incentive</field>
+            <field name="content" type="html">
+                <p>
+                   <p><b>Hi %penerima%</b> <br /> Berikut pencapaian Insentif mu bulan %bulan% :</p>
+                   <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                    <tbody>
+                        <tr>
+                            <td style="width: 35%;">Insentif Earned</td>
+                            <td style="width: 5%;">:</td>
+                            <td style="width: 60%;">%earned% </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 35%;">Insentif Pending</td>
+                            <td style="width: 5%;">:</td>
+                            <td style="width: 60%;">%pending% </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 35%;">Potongan Insentif</td>
+                            <td style="width: 5%;">:</td>
+                            <td style="width: 60%;">%potongan% </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 35%;"><b>Total</b></td>
+                            <td style="width: 5%;"><b>:</b></td>
+                            <td style="width: 60%;"><b>%total% </b></td>
+                        </tr>
+                    </tbody>
+                  </table>
+                </p>
+            </field>
+        </record>
+
+        
+        <record id="firebase_notification_category_monthly_incentive" model="tw.firebase.notification.category">
+			<field name="name">Notification Incentive Bulanan</field>
+			<field name="title">Notifikasi Incentive Bulanan</field>
+			<field name="sumber_data">proactive</field>
+			<field name="jenis_reminder">reminder</field>
+			<field name="content_template_id" ref="tw_incentive.firebase_content_template_monthly_incentive"/>
+		</record>
+    </data>
+</odoo>

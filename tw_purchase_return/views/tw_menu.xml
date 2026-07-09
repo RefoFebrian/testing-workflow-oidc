@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu Items -->
+    <menuitem id="menu_purchase_return_root" 
+        name="Purchase Returns" 
+        sequence="50"
+        parent="tw_menu.submenu_tw_showroom_purchase"/>
+        
+    <menuitem id="menu_purchase_return" 
+        name="Purchase Returns" 
+        parent="menu_purchase_return_root"
+        action="action_tw_purchase_return"
+        sequence="10"
+        groups='tw_purchase_return.group_tw_purchase_return_read'/>
+</odoo>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_payment_b2b_bank_payment_provider_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.payment.b2b.bank.payment.provider.inherit.form</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='credentials']" position="after">
+                <page name="api_payment_setting" string="API Payment Settings">
+                    <field name="api_payment_setting_ids" options="{'no_create': True, 'no_edit': True}">
+                        <list editable="top">
+                            <field name="payment_provider_id" column_invisible="1"/>
+                            <field name="division" required="1"/>
+                            <field name="payment_usage" required="1"/>
+                            <field name="provider_id" required="1"/>
+                            <field name="channel_id"/>
+                            <field name="merchant_id"/>
+                            <field name="terminal_id"/>
+                            <field name="x_partner_id"/>
+                            <field name="x_partner_id_notify"/>
+                            <field name="sub_company"/>
+                            <field name="service_code"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

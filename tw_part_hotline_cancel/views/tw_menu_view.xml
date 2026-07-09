@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <menuitem id="menu_tw_part_hotline_cancel" parent="tw_cancellation.submenu_workshop_tw_cancellation" action="action_tw_part_hotline_cancel" sequence="3"/>
+    </data>
+
+</odoo>

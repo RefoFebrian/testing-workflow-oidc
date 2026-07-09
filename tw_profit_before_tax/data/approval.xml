@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+
+        <record id="tw_series_res_margin_approval" model="tw.master.approval">
+            <field name="model_name">tw.profit.before.tax.line</field>
+        </record>
+
+        <record id="tw_series_res_margin_group_approval" model="tw.master.approval.line">
+            <field name="approval_id" ref="tw_profit_before_tax.tw_series_res_margin_approval" />
+            <field name="group_id" ref="tw_job.groups_area_manager" />
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="tw_res_margin_approval" model="tw.master.approval">
+            <field name="model_name">tw.profit.before.tax</field>
+        </record>
+
+        <record id="tw_res_margin_group_approval" model="tw.master.approval.line">
+            <field name="approval_id" ref="tw_profit_before_tax.tw_res_margin_approval" />
+            <field name="group_id" ref="tw_job.groups_operation_after_sales_general_manager" />
+            <field name="sequence">1</field>
+        </record>
+
+    </data>
+</odoo>

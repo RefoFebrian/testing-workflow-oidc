@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>	
+        <record id="tw_config_files_list_view" model="ir.ui.view">
+            <field name="name">tw.config.files.tree.view</field>
+            <field name="model">tw.config.files</field>
+            <field name="arch" type="xml">
+                <list string="Configuration of Saved Files">
+                    <field name="name"/>
+                    <field name="local_path"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_config_files_form_view" model="ir.ui.view">
+            <field name="name">tw.config.files.form.view</field>
+            <field name="model">tw.config.files</field>            
+            <field name="arch" type="xml">
+                <form string="Configuration of Saved Files">
+                    <header></header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="e.g. SL, INV, PMP .." />
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="active"/>
+                            <field name="type_id" required="1" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="local_path"/>
+                        </group>
+                        <notebook>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"></field>
+                                        <field name="create_date" readonly="1"></field>
+                                    </group>
+                                    <group>							
+                                        <field name="write_uid" readonly="1"></field>
+                                        <field name="write_date" readonly="1"></field>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>   	                    
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_config_files_filter" model="ir.ui.view">
+            <field name="name">tw.config.files.filter</field>
+            <field name="model">tw.config.files</field>
+            <field name="arch" type="xml">
+                <search string="Search Configuration of Saved Files">
+                    <field name="name"/>
+                    <field name="local_path" />
+                </search>
+            </field>
+        </record>  
+
+        <record model="ir.actions.act_window" id="tw_config_files_action">
+            <field name="name">Saved Files Configuration</field>
+            <field name="res_model">tw.config.files</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem id="tw_menuitem_saved_file"
+                  name="Saved File Path Config"
+                  parent="tw_menu.submenu_tw_configuration"
+                  groups="tw_config_files.group_tw_config_files_read"
+                  action="tw_config_files_action"
+                  sequence="1" />
+	
+    </data>
+</odoo>

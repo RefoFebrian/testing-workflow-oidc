@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Button Access Groups for BPKB Request -->
+        <record id="group_vehicle_request_bpkb_button_on_process" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling" />
+            <field name="name">TW Button - On Process BPKB Request</field>
+            <field name="implied_ids" eval="[(4, ref('tw_vehicle_document_mutation.group_vehicle_request_bpkb_read'))]"/>
+        </record>
+
+        <record id="group_vehicle_request_bpkb_button_process" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling" />
+            <field name="name">TW Button - Process BPKB Request</field>
+            <field name="implied_ids" eval="[(4, ref('tw_vehicle_document_mutation.group_vehicle_request_bpkb_read'))]"/>
+        </record>
+
+        <record id="group_vehicle_request_bpkb_button_receive" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling" />
+            <field name="name">TW Button - Receive BPKB Request</field>
+            <field name="implied_ids" eval="[(4, ref('tw_vehicle_document_mutation.group_vehicle_request_bpkb_read'))]"/>
+        </record>
+
+        <record id="group_vehicle_request_bpkb_button_print" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling" />
+            <field name="name">TW Button - Print BPKB Request</field>
+            <field name="implied_ids" eval="[(4, ref('tw_vehicle_document_mutation.group_vehicle_request_bpkb_read'))]"/>
+        </record>
+
+        <!-- Button Access Groups for Print Out Mutation Report -->
+        <record id="group_document_mutation_stnk_button_report" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling" />
+            <field name="name">TW Button - Print Out Registration Mutation</field>
+            <field name="implied_ids" eval="[(4, ref('tw_vehicle_document_mutation.group_tw_document_mutation_read'))]"/>
+        </record>
+
+        <record id="group_document_mutation_bpkb_button_report" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling" />
+            <field name="name">TW Button - Print Out Ownership Mutation</field>
+            <field name="implied_ids" eval="[(4, ref('tw_vehicle_document_mutation.group_tw_document_mutation_read'))]"/>
+        </record>
+
+        
+
+        <!-- Button Access Groups for Document Mutation Outgoing -->
+        <record id="group_document_mutation_outgoing_confirm_button" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling" />
+            <field name="name">TW Button Confirm Mutation Confirm</field>
+        </record>
+
+        <record id="access_tw_document_mutation_outgoing_confirm_button" model="ir.model.access">
+            <field name="model_id" ref="tw_vehicle_document_mutation.model_tw_document_mutation"/>
+            <field name="name">tw_stock_distribution_close_order update</field>
+            <field name="group_id" ref="group_document_mutation_outgoing_confirm_button"/>
+            <field name="perm_write">1</field>
+        </record>
+
+
+
+    </data>
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+            (4,ref('group_vehicle_request_bpkb_button_on_process')),
+            (4,ref('group_vehicle_request_bpkb_button_process')),
+            (4,ref('group_vehicle_request_bpkb_button_receive')),
+            (4,ref('group_vehicle_request_bpkb_button_print')),
+            (4,ref('group_document_mutation_stnk_button_report')),
+            (4,ref('group_document_mutation_bpkb_button_report')),
+            (4,ref('group_document_mutation_outgoing_confirm_button')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

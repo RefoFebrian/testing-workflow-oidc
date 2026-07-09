@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_work_order_inherit_claim_view_form" model="ir.ui.view">
+            <field name="name">tw.work.order.claim.inherit.form</field>
+            <field name="model">tw.work.order</field>
+            <field name="inherit_id" ref="tw_work_order.tw_work_order_form_view" />
+            <field name="arch" type="xml">
+                <field name="mechanic_id" position="before">
+                    <field name="claim_number" invisible="type not in ['CLA','Claim Program']"
+                        required="state == 'finished' and claim_type_id.value == 'Claim Program'"
+                        readonly="state in ('sale','done')" />
+                </field>
+                <field name="type_id" position="after">
+                <label for="claim_type_id" invisible="type not in ['CLA','Claim Program']"/>
+                    <div>
+                        <field name="claim_type" invisible="1"/>
+                        <field name="claim_type_id" invisible="type not in ['CLA','Claim Program']" class="oe_inline" required="type in ['CLA','Claim Program']" readonly="state != 'draft'" options="{'no_open':True, 'no_create':True}"/>
+                        <button name="action_fill_products_from_claim"
+                                type="object"
+                                string="Isi Produk dari Master Claim"
+                                icon="fa-magic"
+                                class="btn-secondary ms-2"
+                                invisible="type not in ['CLA','Claim Program'] or not claim_type_id or state != 'draft'"
+                                confirm="Produk dari master claim akan ditambahkan ke order lines. Lanjutkan?"/>
+                    </div>
+                </field>
+                
+                <!-- Add claim_partner_id to order_line -->
+                <xpath expr="//field[@name='order_line']/list/field[@name='location_id']" position="after">
+                    <field name="claim_partner_id" 
+                           readonly="1" 
+                           force_save="1"
+                           string="Claim To"
+                           optional="show"
+                           width="100"
+                           column_invisible="parent.type not in ['CLA','Claim Program']"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Claim Distribution panel — shown ABOVE tax_totals, only for CLA type -->
+        <record id="tw_work_order_form_claim_summary_inherit" model="ir.ui.view">
+            <field name="name">tw.work.order.form.claim.summary.inherit</field>
+            <field name="model">tw.work.order</field>
+            <field name="inherit_id" ref="tw_work_order.tw_work_order_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='sale_total']//field[@name='tax_totals']" position="before">
+                    <field
+                        name="claim_summary_html"
+                        widget="html"
+                        nolabel="1"
+                        readonly="1"
+                        invisible="not claim_summary_html"
+                    />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

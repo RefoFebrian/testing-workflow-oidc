@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!-- Menu Item -->
+    <menuitem id="menu_schedule_shipment_root" 
+        name="RPA Distribution" 
+        parent="tw_menu.submenu_tw_workshop_configuration"
+        sequence="70"/>
+
+    <menuitem id="menu_schedule_shipment" 
+        name="Schedule Shipment" 
+        parent="tw_rpa_sparepart_distribution.menu_schedule_shipment_root"
+        action="action_schedule_shipment"
+        sequence="10"
+        groups="tw_rpa_sparepart_distribution.group_tw_schedule_shipment_read"/>
+    <menuitem id="menu_master_dealer_group" 
+        name="Master Dealer Group" 
+        parent="tw_rpa_sparepart_distribution.menu_schedule_shipment_root"
+        action="action_tw_master_dealer_group"
+        sequence="20"
+        groups="tw_rpa_sparepart_distribution.group_tw_schedule_shipment_read"/>
+    </data>
+</odoo>

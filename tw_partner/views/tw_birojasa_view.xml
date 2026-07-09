@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+         <!-- Biro Jasa-->
+
+         <record model="ir.ui.view" id="tw_service_bureau_inherit_partner_tree">
+            <field name="name">Biro Jasa</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <list string="Supplier">
+                    <field name="code"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_tw_service_bureau_inherit_filter" model="ir.ui.view">
+            <field name="name">tw.supplier.res.partner.select</field>
+            <field name="model">res.partner</field>
+            <field name="priority">50</field>
+            <field name="arch" type="xml">
+                <search string="Supplier">
+                    <field name="name" filter_domain="['|', '|', ('name', 'ilike', self), ('parent_id', 'ilike', self), ('ref' , '=', self)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_tw_service_bureau_inherit_partner">
+            <field name="name">Biro Jasa</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">kanban,list,form,activity</field>
+            <field name="search_view_id" ref="view_tw_service_bureau_inherit_filter"/>
+            <field name="domain">[('company_type','=','company'),('category_id.name','=','Birojasa')]</field>
+            <field name="context" eval="
+            {
+                'form_type': 'Biro Jasa',
+                'default_company_type': 'company',
+                'is_readonly': True,
+                'default_category_id': [ref('tw_partner.contact_tags_birojasa')]
+            }
+            " />
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                  Add a new Biro Jasa
+                </p><p>
+                  TEDS 2.0 helps you easily track all activities related to a Biro Jasa's Data
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_tw_service_bureau_inherit_partner_view_tree">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_service_bureau_inherit_partner_tree"/>
+            <field name="act_window_id" ref="action_tw_service_bureau_inherit_partner"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_tw_service_bureau_inherit_partner_view_form">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_partner_contact_form_view"/>
+            <field name="act_window_id" ref="action_tw_service_bureau_inherit_partner"/>
+        </record>
+         <record model="ir.actions.act_window.view" id="action_tw_service_bureau_inherit_partner_view_kanban">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="base.res_partner_kanban_view"/>
+            <field name="act_window_id" ref="action_tw_service_bureau_inherit_partner"/>
+        </record>
+
+</odoo>

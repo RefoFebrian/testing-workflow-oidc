@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+		<!-- TW Expedition -->
+		<record id="group_tw_expedition_read" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_role"/>
+			<field name="name">TW Master Expedition Read</field>
+		</record>
+
+		<record id="access_tw_expedition_read" model="ir.model.access">
+			<field name="model_id" ref="tw_partner.model_res_partner"/>
+			<field name="name">tw_expedition read</field>
+			<field name="group_id" ref="group_tw_expedition_read" />
+			<field name="perm_read">1</field>
+		</record>
+
+		<record id="group_tw_expedition_update" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_role"/>
+			<field name="name">TW Master Expedition Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_expedition_read'))]" />
+		</record>
+
+		<record id="access_tw_expedition_update" model="ir.model.access">
+			<field name="model_id" ref="tw_partner.model_res_partner"/>
+			<field name="name">tw_expedition update</field>
+			<field name="group_id" ref="group_tw_expedition_update" />
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+		<record id="access_tw_expedition_validate_picking_update" model="ir.model.access">
+			<field name="model_id" ref="model_tw_stock_inbound"/>
+			<field name="name">tw_expedition validate picking update</field>
+			<field name="group_id" ref="tw_stock.group_tw_stock_picking_button_validate_read" />
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+		<record id="group_tw_expedition_delete" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_role"/>
+			<field name="name">TW Master Expedition Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_expedition_read'))]" />
+		</record>
+
+		<record id="access_tw_expedition_delete" model="ir.model.access">
+			<field name="model_id" ref="tw_partner.model_res_partner"/>
+			<field name="name">tw_expedition delete</field>
+			<field name="group_id" ref="group_tw_expedition_delete" />
+			<field name="perm_unlink">1</field>
+		</record>
+
+		<record id="group_tw_partner_driver_read" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_role"/>
+			<field name="name">TW Master Driver Read</field>
+		</record>
+
+		<record id="access_tw_partner_driver_read" model="ir.model.access">
+			<field name="model_id" ref="tw_partner.model_res_partner"/>
+			<field name="name">tw_partner_driver read</field>
+			<field name="group_id" ref="group_tw_partner_driver_read" />
+			<field name="perm_read">1</field>
+		</record>
+
+		<record id="group_tw_partner_driver_update" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_role"/>
+			<field name="name">TW Master Driver Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_partner_driver_read'))]" />
+		</record>
+
+		<record id="access_tw_partner_driver_update" model="ir.model.access">
+			<field name="model_id" ref="tw_partner.model_res_partner"/>
+			<field name="name">tw_partner_driver update</field>
+			<field name="group_id" ref="group_tw_partner_driver_update" />
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+		<record id="group_tw_partner_driver_delete" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_role"/>
+			<field name="name">TW Master Driver Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_partner_driver_read'))]" />
+		</record>
+
+		<record id="access_tw_partner_driver_delete" model="ir.model.access">
+			<field name="model_id" ref="tw_partner.model_res_partner"/>
+			<field name="name">tw_partner_driver delete</field>
+			<field name="group_id" ref="group_tw_partner_driver_delete" />
+			<field name="perm_unlink">1</field>
+		</record>
+
+		<!-- TW Stock Inbound -->
+		<record id="group_tw_stock_inbound_read" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_role"/>
+			<field name="name">TW Stock Inbound Read</field>
+		</record>
+
+		<record id="access_tw_stock_inbound_read" model="ir.model.access">
+			<field name="model_id" ref="model_tw_stock_inbound" />
+			<field name="name">tw_stock_inbound read</field>
+			<field name="group_id" ref="group_tw_stock_inbound_read" />
+			<field name="perm_read">1</field>
+		</record>
+
+		<record id="access_tw_stock_inbound_line_read" model="ir.model.access">
+			<field name="model_id" ref="model_tw_stock_inbound_line" />
+			<field name="name">tw_stock_inbound_line read</field>
+			<field name="group_id" ref="group_tw_stock_inbound_read" />
+			<field name="perm_read">1</field>
+		</record>
+
+		<record id="group_tw_stock_inbound_update" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_role"/>
+			<field name="name">TW Stock Inbound Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_stock_inbound_read'))]" />
+		</record>
+
+		<record id="access_tw_stock_inbound_update" model="ir.model.access">
+			<field name="model_id" ref="model_tw_stock_inbound" />
+			<field name="name">"tw_stock_inbound update</field>
+			<field name="group_id" ref="group_tw_stock_inbound_update" />
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+		<record id="access_tw_stock_inbound_line_update" model="ir.model.access">
+			<field name="model_id" ref="model_tw_stock_inbound_line" />
+			<field name="name">"tw_stock_inbound_line update</field>
+			<field name="group_id" ref="group_tw_stock_inbound_update" />
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+		<record id="group_tw_stock_inbound_delete" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_role"/>
+			<field name="name">TW Stock Inbound Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_stock_inbound_read'))]" />
+		</record>
+
+		<record id="access_tw_stock_inbound_delete" model="ir.model.access">
+			<field name="model_id" ref="model_tw_stock_inbound" />
+			<field name="name">tw_stock_inbound delete</field>
+			<field name="group_id" ref="group_tw_stock_inbound_delete" />
+			<field name="perm_unlink">1</field>
+		</record>
+
+		<record id="access_tw_stock_inbound_line_delete" model="ir.model.access">
+			<field name="model_id" ref="model_tw_stock_inbound_line" />
+			<field name="name">tw_stock_inbound_line delete</field>
+			<field name="group_id" ref="group_tw_stock_inbound_delete" />
+			<field name="perm_unlink">1</field>
+		</record>
+
+	</data>
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_tw_expedition_read')),
+                (4,ref('group_tw_expedition_update')),
+                (4,ref('group_tw_expedition_delete')),
+                (4,ref('group_tw_partner_driver_read')),
+                (4,ref('group_tw_partner_driver_update')),
+                (4,ref('group_tw_partner_driver_delete')),
+                (4,ref('group_tw_stock_inbound_read')),
+                (4,ref('group_tw_stock_inbound_update')),
+                (4,ref('group_tw_stock_inbound_delete')),
+                ]" />
+        </record>  
+	</data>
+</odoo>

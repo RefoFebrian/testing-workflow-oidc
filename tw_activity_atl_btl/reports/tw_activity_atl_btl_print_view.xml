@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_tw_activity_atl_btl" model="report.paperformat">
+            <field name="name">Proposal Activity ATL &amp; BTL</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="css_margins" eval="True"/>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+    
+        <record id="tw_activity_atl_btl_report" model="ir.actions.report">
+            <field name="name">Print Activity ATL &amp; BTL</field>
+            <field name="model">tw.activity.atl.btl</field> 
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_activity_atl_btl.tw_activity_atl_btl_print</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+            <field name="paperformat_id" ref="tw_activity_atl_btl.paperformat_tw_activity_atl_btl"/>
+            <!-- <field name="binding_type">report</field> -->
+        </record>
+    </data>    
+</odoo>

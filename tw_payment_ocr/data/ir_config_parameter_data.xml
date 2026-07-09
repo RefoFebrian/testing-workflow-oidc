@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="config_tw_payment_ocr_project_id" model="ir.config_parameter">
+        <field name="key">tw_payment_ocr.project_id</field>
+        <field name="value">688716427641</field>
+    </record>
+
+    <record id="config_tw_payment_ocr_location" model="ir.config_parameter">
+        <field name="key">tw_payment_ocr.location</field>
+        <field name="value">asia-southeast1</field>
+    </record>
+
+    <record id="config_tw_payment_ocr_processor_id" model="ir.config_parameter">
+        <field name="key">tw_payment_ocr.processor_id</field>
+        <field name="value">cb3c4034f5ba19d1</field>
+    </record>
+
+    <!-- Optional: Path to the JSON service account file if needed -->
+    <record id="config_tw_payment_ocr_credentials_path" model="ir.config_parameter">
+        <field name="key">tw_payment_ocr.credentials_path</field>
+        <field name="value"></field>
+    </record>
+</odoo>

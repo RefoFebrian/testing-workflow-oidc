@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <!-- Workshop -->
+        <!-- Pick of Spareparts -->
+        <record id="action_tw_stock_picking_out_sparepart" model="ir.actions.act_window">
+            <field name="name">Pick of Spareparts</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{
+                'default_division': 'Sparepart', 
+                'default_state':'draft', 
+                'search_default_waiting': 1, 
+                'search_default_available': 1
+            }" />
+            <field name="domain" eval="[('division', '=', 'Sparepart'), ('picking_type_id.code', '=', 'internal'), ('picking_type_id.sequence_code', 'in', ['PICK','pick','Pick'])]"/>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+        </record>
+
+        <record id="action_tw_stock_picking_out_sparepart_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="stock.vpicktree"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_out_sparepart"/>
+        </record>
+
+        <record id="action_tw_stock_picking_out_sparepart_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="stock.view_picking_form"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_out_sparepart"/>
+        </record>
+
+        <!-- Pack of Spareparts -->
+        <record id="action_tw_stock_picking_pack_sparepart" model="ir.actions.act_window">
+            <field name="name">Pack of Spareparts</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{
+                'default_division': 'Sparepart', 
+                'default_state':'draft', 
+                'search_default_waiting': 1, 
+                'search_default_available': 1
+            }" />
+            <field name="domain" eval="[('division', '=', 'Sparepart'), ('picking_type_id.code', '=', 'internal'), ('picking_type_id.sequence_code', 'in', ['PACK','pack','Pack'])]"/>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+        </record>
+
+        <record id="action_tw_stock_picking_pack_sparepart_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="stock.vpicktree"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_pack_sparepart"/>
+        </record>
+
+        <record id="action_tw_stock_picking_pack_sparepart_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="stock.view_picking_form"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_pack_sparepart"/>
+        </record>
+
+        <!-- Delivery Orders of Spareparts -->
+        <record id="action_tw_stock_picking_delivery_order_sparepart" model="ir.actions.act_window">
+            <field name="name">Delivery Orders of Spareparts</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{
+                'default_division': 'Sparepart', 
+                'default_state':'draft', 
+                'search_default_waiting': 1, 
+                'search_default_available': 1
+            }" />
+            <field name="domain" eval="[('division', '=', 'Sparepart'), ('picking_type_id.code', '=', 'outgoing')]"/>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+        </record>
+
+        <record id="action_tw_stock_picking_delivery_order_sparepart_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="stock.vpicktree"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_delivery_order_sparepart"/>
+        </record>
+
+        <record id="action_tw_stock_picking_delivery_order_sparepart_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="stock.view_picking_form"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_delivery_order_sparepart"/>
+        </record>
+
+        <!-- Showroom -->
+        <!-- Pick of Unit -->
+        <record id="action_tw_stock_picking_out_unit" model="ir.actions.act_window">
+            <field name="name">Pick of Units</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{
+                'default_division': 'Unit', 
+                'default_state':'draft', 
+                'search_default_waiting': 1, 
+                'search_default_available': 1
+            }" />
+            <field name="domain" eval="[('division', '=', 'Unit'), ('picking_type_id.code', '=', 'internal'), ('picking_type_id.sequence_code', 'in', ['PICK','pick','Pick'])]"/>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+        </record>
+
+        <record id="action_tw_stock_picking_out_unit_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="stock.vpicktree"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_out_unit"/>
+        </record>
+
+        <record id="action_tw_stock_picking_out_unit_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="stock.view_picking_form"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_out_unit"/>
+        </record>
+
+        <!-- Pack of Unit -->
+        <record id="action_tw_stock_picking_pack_unit" model="ir.actions.act_window">
+            <field name="name">Pack of Units</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{
+                'default_division': 'Unit', 
+                'default_state':'draft', 
+                'search_default_waiting': 1, 
+                'search_default_available': 1
+            }" />
+            <field name="domain" eval="[('division', '=', 'Unit'), ('picking_type_id.code', '=', 'internal'), ('picking_type_id.sequence_code', 'in', ['PACK','pack','Pack'])]"/>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+        </record>
+
+        <record id="action_tw_stock_picking_pack_unit_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="stock.vpicktree"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_pack_unit"/>
+        </record>
+
+        <record id="action_tw_stock_picking_pack_unit_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="stock.view_picking_form"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_pack_unit"/>
+        </record>
+
+        <!-- Delivery Orders of Unit -->
+        <record id="action_tw_stock_picking_delivery_order_unit" model="ir.actions.act_window">
+            <field name="name">Delivery Orders of Units</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{
+                'default_division': 'Unit', 
+                'default_state':'draft', 
+                'search_default_waiting': 1, 
+                'search_default_available': 1
+            }" />
+            <field name="domain" eval="[('division', '=', 'Unit'), ('picking_type_id.code', '=', 'outgoing')]"/>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+        </record>
+
+        <record id="action_tw_stock_picking_delivery_order_unit_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="stock.vpicktree"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_delivery_order_unit"/>
+        </record>
+
+        <record id="action_tw_stock_picking_delivery_order_unit_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="stock.view_picking_form"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_delivery_order_unit"/>
+        </record>
+    </data>
+</odoo>

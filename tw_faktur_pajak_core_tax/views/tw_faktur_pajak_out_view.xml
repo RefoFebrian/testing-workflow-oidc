@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="tw_faktur_pajak_core_tax_form_view" model="ir.ui.view">
+            <field name="name">tw.faktur.core.tax.pajak.form</field>
+            <field name="model">tw.faktur.pajak.out</field>
+            <field name="inherit_id" ref="tw_faktur_pajak.tw_faktur_pajak_out_form_view"/>
+            <field name="arch" type="xml">
+                <page name="audit_trail" position="before">
+                    <page name="line_ids" string="Detail">
+                        <field name="line_ids"/>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+        <record id="tw_faktur_pajak_core_tax_list_view" model="ir.ui.view">
+            <field name="name">tw.faktur.core.tax.pajak.list</field>
+            <field name="model">tw.faktur.pajak.out.line</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="product_name" readonly="1"/>
+                    <field name="qty" readonly="1"/>
+                    <field name="amount" readonly="1"/>
+                    <field name="total_discount" readonly="1"/>
+                    <field name="untaxed_amount" readonly="1"/>
+                    <field name="ppn" readonly="1"/>
+                    <field name="kode_barang" readonly="1"/>
+                    <field name="uom" readonly="1"/>
+                </list>
+            </field>
+        </record>
+    </data>
+
+</odoo>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_dealer_spk_list_view" model="ir.ui.view">
+            <field name="name">tw.dealer.spk.list</field>
+            <field name="model">tw.dealer.spk</field>
+            <field name="arch" type="xml">
+                <list string="Dealer SPK" default_order="date_order desc">
+                    <field name="name" />
+                    <field name="company_id" />
+                    <field name="date_order" />
+                    <field name="partner_id" />
+                    <field name="finco_id" optional="hide"/>
+                    <field name="sales_id" />
+                    <field name="sales_coordinator_id" optional="hide"/>
+                    <field name="state" widget="badge"
+                           decoration-danger="state == 'cancelled'"
+                           decoration-primary="state == 'progress'"
+                           decoration-success="state == 'so'"
+                           decoration-info="state == 'done'" />
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_dealer_spk_form_view" model="ir.ui.view">
+            <field name="name">tw.dealer.spk.form</field>
+            <field name="model">tw.dealer.spk</field>
+            <field name="arch" type="xml">
+                <form string="Dealer SPK Form">
+                    <header>
+                        <button name="action_confirm_spk" type="object" string="Confirm" class="btn-primary" groups="tw_spk.group_button_tw_confirm_spk" invisible="state != 'draft'" />
+                        <button name="action_create_so" type="object" string="Create SO" class="btn-primary"  groups="tw_spk.group_button_tw_create_so" invisible="state not in ('progress','so') or dealer_sale_order_id" />
+                        <button name="action_cancel_spk_wizard" type="object" string="Cancel" class="btn-secondary" groups="tw_spk.group_button_tw_cancel_spk" invisible="state != 'progress'" />
+                        <button name="action_state_draft" type="object" string="Set to Draft" class="btn-secondary" groups="tw_spk.group_button_tw_set_draft_spk" invisible="1" />
+                        <field name="state" widget="statusbar"
+                            statusbar_visible="draft,progress,so,done"
+                            statusbar_colors='{"draft": "blue", "progress": "orange", "so": "green", "cancelled": "red", "done": "grey"}' />
+                    </header>
+                    <sheet>
+                        <field name="dso_count" invisible="1" />
+                        <div class="oe_button_box" name="button_box" groups="tw_spk.group_button_tw_view_so">
+                            <button name="action_view_so" type="object" class="oe_stat_button" icon="fa-motorcycle" invisible="dso_count == 0">
+                                <field name="dso_count" widget="statinfo" string="SO"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="company_id" required="1" readonly="state != 'draft'" options="{'no_open': True, 'no_create': True}" />
+                                <field name="date_order" required="1" />
+                                <field name="partner_id" required="1" readonly="state != 'draft'" options="{'no_open': True, 'no_create': True}" />
+                                <field name="sales_id" required="1" readonly="state != 'draft'" options="{'no_open': True, 'no_create': True}" />
+                                <field name="sales_coordinator_id" required="1" options="{'no_open': True, 'no_create': True}" />
+                                <field name="finco_id" readonly="state != 'draft'" options="{'no_open': True, 'no_create': True}" invisible="payment_type != 'Credit'"/>
+                                <field name="delivery_address" />
+                            </group>
+                            <group>
+                                <field name="division" readonly="1"/>
+                                <field name="identification_number" />
+                                <field name="product_category_ids" invisible="1" widget="many2many_tags" />
+                                <field name="payment_type_id" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="payment_type" invisible="1"/>
+                                <field name="lead_reference" invisible="1" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Details">
+                                <field name="line_ids" readonly="state != 'draft'" context="{'default_dealer_spk_id': id}">
+                                    <list>
+                                        <field name="product_id" required="1" options="{'no_open': True, 'no_create': True}" />
+                                        <field name="product_qty" required="1"/>
+                                        <field name="is_bbn" required="1"/>
+                                        <field name="partner_stnk_id" required="is_bbn" options="{'no_open': True, 'no_create': True}" />
+                                        <field name="down_payment"/>
+                                        <field name="discount"/>
+                                    </list>
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="spk_id" invisible="1" />
+                                                    <field name="product_id" required="1" options="{'no_open': True, 'no_create': True}" />
+                                                    <field name="product_qty" readonly="1"/>
+                                                    <field name="down_payment" required="parent.payment_type == 'Credit'" invisible="parent.payment_type != 'Credit'"/>
+                                                    <field name="tenor" required="parent.payment_type == 'Credit'" invisible="parent.payment_type != 'Credit'"/>
+                                                    <field name="installment" required="parent.payment_type == 'Credit'" invisible="parent.payment_type != 'Credit'"/>
+                                                    <field name="discount" />
+                                                </group>
+                                                <group>
+                                                    <field name="is_bbn" />
+                                                    <field name="partner_stnk_id" required="is_bbn" options="{'no_open': True, 'no_create': True}" />
+                                                    <field name="plate_id" required="is_bbn" options="{'no_open': True, 'no_create': True}" />
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                            <page name="audit_trail" string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_date" readonly="1" />
+                                        <field name="create_uid" readonly="1" />
+                                    </group>
+                                    <group>
+                                        <field name="write_date" readonly="1" />
+                                        <field name="write_uid" readonly="1" />
+                                    </group>
+                                    <group>
+                                        <field name="cancel_date" readonly="1" invisible="cancel_date != False"/>
+                                        <field name="cancel_uid" readonly="1" invisible="cancel_uid != False"/>
+                                    </group>
+                                    <group>
+                                        <field name="confirm_date" readonly="1" invisible="confirm_date != False"/>
+                                        <field name="confirm_uid" readonly="1" invisible="confirm_uid != False"/>
+                                    </group>
+                                    <group>
+                                        <field name="sale_order_date" readonly="1" invisible="sale_order_date != False"/>
+                                        <field name="sale_order_uid" readonly="1" invisible="sale_order_uid != False"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_dealer_spk_view_filter" model="ir.ui.view">
+            <field name="name">tw.dealer.spk.view.filter</field>
+            <field name="model">tw.dealer.spk</field>
+            <field name="priority" eval="15"/>
+            <field name="arch" type="xml">
+                <search string="Search Dealer SPK">
+                    <field name="name" string="No SPK" filter_domain="['|', ('name', 'ilike', self), ('partner_id', 'child_of', self)]"/>
+                    <field name="partner_id" string="Customer"/>
+                    <field name="company_id" string="Branch"/>
+                    <field name="identification_number" string="No KTP"/>
+                    <field name="finco_id" string="Finco"/>
+                    <field name="sales_id" string="Salesperson"/>
+                    <field name="state" string="Status"/>
+
+                    
+                    
+                    <group expand="0" string="Group By">
+                        <filter string="Salesperson" name="salesperson" domain="[]" context="{'group_by': 'sales_id'}" />
+                        <filter string="Branch" name="company_id" domain="[]" context="{'group_by': 'company_id'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="tw_dealer_spk_action_server" model="ir.actions.server">
+            <field name="name">Dealer SPK</field>
+            <field name="path">dealer-spk</field>
+            <field name="model_id" ref="tw_spk.model_tw_dealer_spk"/>
+            <field name="binding_model_id" ref="tw_spk.model_tw_dealer_spk"/>
+            <field name="binding_view_types">list,form</field>
+            <field name="state">code</field>
+            <field name="code">action = env['tw.dealer.spk'].action_spk_list()</field>
+            <field name="groups_id" eval="[(4, ref('tw_spk.group_tw_dealer_spk_read'))]" />
+        </record>
+
+    </data>
+</odoo>

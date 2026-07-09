@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="tw_vehicle_list_view" model="ir.ui.view">
+		    <field name="name">tw.vehicle.list</field>
+		    <field name="model">tw.vehicle</field>
+		    <field name="arch" type="xml">
+		        <list string="Vehicle" duplicate="0">
+                    <field name="plate_number"/>
+                    <field name="partner_id"/>
+		        </list>
+		    </field>
+		</record>
+		
+		<record id="tw_vehicle_form_view" model="ir.ui.view">
+			<field name="name">tw.vehicle.form</field>
+			<field name="model">tw.vehicle</field>
+			<field name="arch" type="xml">
+				<form string="Vehicle" duplicate="0">
+					<sheet>
+						<group>
+							<group>
+								<field name="plate_number" required="1" help="Please pay Attention to Writing the Expedition Police Number or Plate Number."/>
+								<field name="partner_id" required="1" options="{'no_open':True, 'no_create':True}"/>
+							</group>
+						</group>
+						<notebook>
+							<page string="Audit Trail">
+								<group>
+									<group>
+										<field name="create_uid" readonly="1" invisible="create_uid == False"></field>
+										<field name="create_date" readonly="1" invisible="create_date == False"></field>
+									</group>
+									<group>							
+										<field name="write_uid" readonly="1" invisible="write_uid == False"></field>
+										<field name="write_date" readonly="1" invisible="write_date == False"></field>
+									</group>
+								</group>
+							</page> 
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="tw_vehicle_search_view" model="ir.ui.view">
+			<field name="name">tw.vehicle.search</field>
+			<field name="model">tw.vehicle</field>
+			<field name="arch" type="xml">
+				<search string="Vehicle">
+					<field name="plate_number"/>
+					<field name="partner_id"/>
+					<filter name="partner_id" string="Expedition"  context="{'group_by': 'partner_id'}" />
+				</search>
+        	</field>
+    	</record>
+
+		<record id="tw_vehicle_action" model="ir.actions.act_window">
+			<field name="name">Master Vehicle</field> 
+			<field name="res_model">tw.vehicle</field>
+			<field name="view_mode">list,form</field>
+			<field name="help" type="html">
+        		<p class="oe_view_nocontent_create">Master Vehicle</p>
+        	</field>
+		</record>
+          	
+	</data>
+</odoo>

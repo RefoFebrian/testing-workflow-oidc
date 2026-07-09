@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="paperformat_sp" model="report.paperformat">
+            <field name="name">SP Digital</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">15</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">15</field>
+            <field name="margin_right">15</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">3</field>
+            <field name="dpi">80</field>
+        </record>
+    </data>
+
+    <data>
+        <template id="sp_layout_standard">
+            <div t-attf-class="header o_company_sp_layout" t-att-style="report_header_style">
+                <div class="row">
+                    <div class="col-3 mb4">
+                        <img src="/tw_sp_digital/static/src/img/honda_wing.jpg" style="max-height: 45px;" alt="Logo"/>
+                    </div>
+                    <div class="col-3 mb4" style="position:absolute;right:130px">
+                        <img src="/tw_sp_digital/static/src/img/tunas_honda.jpg" style="max-height: 45px;" alt="Logo"/>
+                    </div>
+                </div>
+            </div>
+
+            <div t-attf-class="article o_report_layout_standard o_company_sp_layout" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <div class="pt-5">
+                    <t t-call="web.address_layout"/>
+                </div>
+                <t t-raw="0"/>
+            </div>
+
+            <div t-attf-class="footer" style="min-height:150px !important">
+                <div class="text-center mb3" style="border-top: 1px solid black;">
+                    <br style="font-size=40">
+                        <b>PT TUNAS DWIPA MATRA</b>
+                    </br>
+                    <br style="font-size=30">
+                        <b>Member of PT Tunas Ridean Tbk</b>
+                    </br>
+                    <br>Office Address: Jl. Raya Pasar Minggu No. 7, Jakarta Selatan, 12740</br>
+                    <br>Phone: +6221 794 4788 Fax:+6221 799 5621</br>
+                </div>
+            </div>
+        </template>
+
+        <template id="sp_digital_pdf">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="data">
+                    <div class="oe_structure"/>
+                    <div class="row">
+                        <style type="text/css">
+                                body {
+                                    margin: 0;
+                                    padding: 0;
+                                }
+                                
+                                div {
+                                    min-height: 10px;
+                                }
+                        </style>
+                        <div t-attf-class="header o_company_sp_layout">
+                            <div class="row">
+                                <div class="col-3 mb4">
+                                    <img src="/tw_sp_digital/static/src/img/honda_wing.jpg" style="max-height: 45px;" alt="Logo"/>
+                                </div>
+                                <div class="col-3 mb4" style="position:absolute;right:130px">
+                                    <img src="/tw_sp_digital/static/src/img/tunas_honda.jpg" style="max-height: 45px;" alt="Logo"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding-top:50px;">
+                            <table style="display: block; height: 500px; overflow: auto;border-collapse: collapse; border: 1px solid black;font-size:14;font-family: Times;" cellpadding="10">
+                                <tbody>
+                                    <tr style="text-align: center;">
+                                        <td width="23%"></td>
+                                        <td width="44%" style="font-family: Times;">
+                                            <b>
+                                                <u style="font-size: 22px;">
+                                                    SURAT PERINGATAN <t t-out="sp_level_romawi"></t>
+                                                </u>
+                                            </b>
+                                            <t t-out="sp_obj.name"></t>
+                                        </td>
+                                        <td width="23%"></td>
+                                    </tr>
+                                    <tr style="">
+                                        <td width="33%"></td>
+                                        <td width="34%"></td>
+                                        <td width="33%">
+                                            <div style="border-collapse: collapse; border: 1px solid black; display: inline-block;padding-right:35px;padding-left:35px;padding-top:20px;padding-bottom:20px;">
+					                        CONFIDENTIAL
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr style="">
+                                        <td width="33%">Kepada Yth.</td>
+                                        <td width="34%"></td>
+                                        <td width="33%"></td>
+                                    </tr>
+                                    <tr style="border-collapse: collapse; border: 1px solid black;">
+                                        <td width="33%" style="border-collapse: collapse; border: 1px solid black;">Nama Karyawan</td>
+                                        <td width="67%" colspan="2" style="border-collapse: collapse; border: 1px solid black;margin-left:10px">
+                                            <t t-out="sp_obj.employee_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-collapse: collapse; border: 1px solid black;">
+                                        <td width="33%" style="border-collapse: collapse; border: 1px solid black;">NIK</td>
+                                        <td width="67%" colspan="2" style="border-collapse: collapse; border: 1px solid black;">
+                                            <t t-out="sp_obj.employee_id.registry_number"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-collapse: collapse; border: 1px solid black;">
+                                        <td width="33%" style="border-collapse: collapse; border: 1px solid black;">Jabatan</td>
+                                        <td width="67%" colspan="2" style="border-collapse: collapse; border: 1px solid black;">
+                                            <t t-out="sp_obj.employee_id.job_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-collapse: collapse; border: 1px solid black;">
+                                        <td width="33%" style="border-collapse: collapse; border: 1px solid black;">Cabang</td>
+                                        <td width="67%" colspan="2" style="border-collapse: collapse; border: 1px solid black;">
+                                            <t t-out="sp_obj.employee_id.company_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <t t-if="biggest_sp.type == 'performance'">
+                                        <tr style="border-collapse: collapse; border-top: 1px solid black;">
+                                            <td colspan="3">Sehubungan dengan Pencapaian yang saudara raih yaitu,<br/>Tidak mencapai target sesuai dengan SK NO 009/TDM-HRD/MI/XII/2013</td>
+                                        </tr>
+                                    </t>
+                                    <t t-else="">
+                                        <tr style="border-collapse: collapse; border-top: 1px solid black;">
+                                            <td colspan="3">Sehubungan dengan Indisipliner yang saudara lakukan yaitu,<br/><t t-out="biggest_sp.keterangan"/></td>
+                                        </tr>
+                                    </t>
+                                    <tr style="border-collapse: collapse; border-top: 1px solid black;">
+                                        <td colspan="3">
+                                            Maka kepada Saudara diberikan Surat Peringatan Tertulis, sesuai dengan Peraturan Perusahaan 
+                                            PT. Tunas Dwipa Matra tahun 2020 &#8211; 2022 Pasal 25 tentang Pemberitahuan Surat Peringatan yaitu Perusahaan memberikan Surat Peringatan tertulis kepada setiap karyawan yang melakukan pelanggaran tata tertib perusahaan.
+                                        </td>
+                                    </tr>
+                                    <t t-if="biggest_sp.type == 'performance'">
+                                        <tr style="">
+                                            <td colspan="3">
+                                            Dan sesuai dengan Memo HRD tanggal 09 January 2013 mengenai Target Salesman, maka Saudara diberikan sanksi berupa SURAT PERINGATAN TINGKAT <t t-out="sp_level_romawi"> dengan kategori Under Target</t>.
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <t t-else="">
+                                        <tr style="">
+                                            <td colspan="3">
+                                            Dan sesuai dengan Memo HRD tanggal 22 Februari 2006 mengenai Tindakan Disipliner, maka Saudara diberikan sanksi berupa SURAT PERINGATAN TINGKAT <t t-out="sp_level_romawi"> dengan kategori indisipliner</t>.
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <tr style="border-collapse: collapse; border-top: 1px solid black;">
+                                        <td colspan="3">
+                                        Setelah Saudara menerima SURAT PERINGATAN ini, diharapkan dapat memperbaiki kinerja Saudara.
+                                        Apabila ternyata Saudara kembali berbuat sesuatu kesalahan atau pelanggaran lagi yang dapat diberikan sanksi, maka kepada Saudara akan diberikan sanksi yang lebih keras dan dapat berakibat pemutusan hubungan kerja antara perusahaan dengan Saudara.
+                                        </td>
+                                    </tr>
+                                    <tr style="">
+                                        <td colspan="3">
+                                        Surat Peringatan ini berlaku selama 6 (enam) bulan terhitung mulai tanggal <t t-out="fomonth"/> - <t t-out="six_month_latter"/>
+                                        Mudah-mudahan dapat dimengerti dan dimaklumi.
+                                        </td>
+                                    </tr>
+                                    <tr style="border-collapse: collapse; border-top: 1px solid black;text-align: center;">
+                                        <td width="33%">Karyawan yang bersangkutan</td>
+                                        <td style="border-collapse: collapse; border-right: 1px solid black;border-left: 1px solid black;" width="34%">Atasan Langsung</td>
+                                        <td width="33%">Mengetahui</td>
+                                    </tr>
+                                    <tr style="height:20px;border-collapse: collapse; border-bottom: 1px solid black;text-align: center;">
+                                        <td width="33%">
+                                            <div>
+                                                <br/>
+                                                <br/>
+                                                <br/>
+                                                <br/>
+                                                <br/>
+                                            </div>
+                                            <t t-out="sp_obj.employee_id.name"/>
+                                            <br/>
+                                            <t t-if="sp_obj.job_title != null">
+                                                <t t-out="sp_obj.job_title"/>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-out="sp_obj.employee_id.job_id.name"/>
+                                            </t>
+                                        </td>
+                                        <td width="34%" class="uppercase" style="border-collapse: collapse; border-right: 1px solid black;border-left: 1px solid black;text-align: center;">
+                                            <div>
+                                                <br/>
+                                                <br/>
+                                                <br/>
+                                                <br/>
+                                                <br/>
+                                            </div>
+                                            <t t-if="sp_obj.employee_id.parent_id.name != null">
+                                                <t t-out="sp_obj.employee_id.parent_id.name"/>
+                                            </t>
+                                            <br/>
+                                            <t t-if="sp_obj.employee_id.parent_id.job_id.name != null">
+                                                <t t-out="sp_obj.employee_id.parent_id.job_id.name"/>
+                                            </t>
+                                        </td>
+                                        <td width="33%" style="text-align: center;">
+                                                <div align="center" class="img-container center autowidth fullwidth" style="padding-right: 0px;padding-left: 0px;">
+                                                    <div style="font-size:1px;line-height:0px"> </div><img align="center" alt="Image" border="0" class="center autowidth fullwidth" src="https://i.ibb.co/6WVfhP4/ttd-pak-yongky.jpg" style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; max-height: 100px; max-width: 200px; display: block;" title="Image" width="634"/>
+                                                </div>
+                                            Yongky Lesmana
+                                            <br/>
+                                            HRD MANAGER
+                                        </td>
+                                    </tr>
+                                    <tr style="">
+                                        <td width="33%" style="border-collapse: collapse; border: 1px solid black;">Tanggal:</td>
+                                        <td width="33%" style="border-collapse: collapse; border: 1px solid black;">Tanggal:</td>
+                                        <td width="33%" style="border-collapse: collapse; border: 1px solid black;"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <footer style="width:100%;position:absolute;bottom:0px;transform:translate(-50,-50);text-align: center;">
+                            <div style="width:100%;text-align: center;font-family: Times;">
+                                <br>
+                                    <b style="font-size:20px">PT TUNAS DWIPA MATRA</b>
+                                </br>
+                                <br>
+                                    <b style="font-size:18px">Member of PT Tunas Ridean Tbk.</b>
+                                </br>
+                                <br>Office Address: Jl. Raya Pasar Minggu No. 7, Jakarta Selatan, 12740</br>
+                                <br>Phone: +6221 794 4788 Fax:+6221 799 5621</br>
+                            </div>
+                        </footer>
+                    </div>
+                </t>
+            </t>
+        </template>
+        
+        <record id="action_sp_digital_pdf_report" model="ir.actions.report">
+            <field name="name">SP Digital</field>
+            <field name="model">tw.sp.digital</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_sp_digital.sp_digital_pdf</field>
+            <field name="report_file">tw_sp_digital.sp_digital_pdf</field>
+            <field name="paperformat_id" ref="tw_sp_digital.paperformat_sp"/>
+        </record>
+
+    </data>
+</odoo>

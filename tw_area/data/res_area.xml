@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <odoo>
+        <data noupdate="1">
+
+        <record id="area_hho" model="res.area">
+            <field name="description">Head Office</field>
+            <field name="name">HHO</field>
+            <field name="code">HHO</field>
+            <field eval="[(6, 0, [ref('tw_branch.tw_branch_hho')])]" name="company_ids"/>
+        </record>
+    
+        <record id="area_md" model="res.area">
+            <field name="description">Main Dealer</field>
+            <field name="name">MD</field>
+            <field name="code">MD</field>
+            <field eval="[(6, 0, [ref('tw_branch.tw_branch_md')])]" name="company_ids"/>
+        </record>
+
+        <!-- <record id="area_lampung" model="res.area">
+            <field name="description">Area Lampung</field>
+            <field name="name">Area Lampung</field>
+            <field name="code">AREA_LAMPUNG</field>
+            <field eval="[(6, 0, [
+                ref('tw_branch.tw_branch_md'),
+                ref('tw_branch.tw_branch_hho'),
+            ])]" name="company_ids"/>
+        </record> -->
+    
+        <record id="area_all_branch" model="res.area">
+            <field name="description">All Branch</field>
+            <field name="name">All Branch</field>
+            <field name="code">ALL</field>
+            <field eval="[(6, 0, [
+                ref('tw_branch.tw_branch_hho'),
+                ref('tw_branch.tw_branch_md'),
+            ])]" name="company_ids"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_ir_cron_tw_api_work_order_bundling" model="ir.cron">
+            <field name="name">TW API Work Order Bundling</field>
+            <field name="model_id" ref="model_tw_work_order" />
+            <field name="state">code</field>
+            <field name="code">model.api_work_order_bundling()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+        </record>
+
+        <record id="tw_ir_cron_tw_api_work_order_limit" model="ir.cron">
+            <field name="name">TW API Work Order Limit</field>
+            <field name="model_id" ref="model_tw_work_order" />
+            <field name="state">code</field>
+            <field name="code">model.send_work_order_limit()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+        </record>
+        
+        <record id="tw_ir_cron_tw_api_work_order_error" model="ir.cron">
+            <field name="name">TW API Work Order Error</field>
+            <field name="model_id" ref="model_tw_work_order" />
+            <field name="state">code</field>
+            <field name="code">model.send_work_order_error()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+        </record> 
+    </data>
+</odoo>

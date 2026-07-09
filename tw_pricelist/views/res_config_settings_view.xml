@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_inherit_account_form_view" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.account</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="10"/>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <block name="default_taxes_setting_container" position="before">
+                <block title="Pricelist" name="default_pricelist_setting_container">
+                    <setting id="only_use_pricelist" string="Only Use Pricelist" title="The product price is determined globally using the pricelist. If checked and the pricelist is not available, a warning will be shown to obtain the product price." help="The product price is determined globally using the pricelist. If checked and the pricelist is not available, a warning will be shown to obtain the product price.">
+                        <field name="is_only_use_pricelist"/>
+                    </setting>
+                </block>
+            </block>
+        </field>
+    </record> 
+</odoo>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+        <!-- Wizard View -->
+        <record id="tw_advance_finco_import_wizard_view" model="ir.ui.view">
+            <field name="name">tw.advance.finco.import.wizard</field>
+            <field name="model">tw.advance.finco.import</field>
+            <field name="arch" type="xml">
+                <form>
+                	<sheet>
+						<group colspan="4" col="4" invisible="state_x == 'get'">
+                            <group colspan="2">
+                                <field name="company_id" required="1" options="{'no_open': True, 'no_create_edit': True}"/>
+    							<field name="partner_id" required="1" options="{'no_open': True, 'no_create_edit': True}"/>
+    							<field name="move_line_id" required="1" options="{'no_open': True, 'no_create_edit': True}"/>
+    							<field name="amount_unreconcile" readonly="1"/>
+    							<field name="journal_id" required="1" options="{'no_open': True, 'no_create_edit': True}"/>
+                            </group>
+                            <group colspan="2">
+                                <field name="division" required="1"/>
+    							<field name="file_import" required="1"/>
+                                <label for="action_download_format_file" string="Contoh File" style="font-weight: bold"/>
+                                <div>                   
+                                    <button name="action_download_format_file" type="object" class="btn btn-outline-secondary btn-sm">
+                                        <i class="fa fa-download me-1" title="Download"/>
+                                        Download Template Excel
+                                    </button>
+                                </div>
+    							<field name="state_x" invisible="1"/>
+                            </group>
+                        </group>
+		                <newline/>    
+		                <group col="4" fill="0" invisible="state_x != 'get'">
+		                    <separator colspan="4" string="Generate Advance Finco Success ..." invisible="state_x == 'choose'"/>
+		                </group>
+		                <footer>
+		                    <button name="action_import" invisible="state_x == 'get'" required="1" string="Import" type="object" class="oe_highlight"/>
+		                    <button string="Cancel" invisible="state_x == 'get'" class="oe_link" special="cancel" />
+		                </footer>
+	                </sheet>
+	            </form>
+            </field>
+        </record>
+
+        <!-- Action View -->
+        <record id="tw_advance_finco_import_action" model="ir.actions.server">
+            <field name="name">Advance Finco (Import)</field>
+            <field name="model_id" ref="tw_advance_finco_import.model_tw_advance_finco_import"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.advance.finco.import'].action_advance_finco_import_tree()
+            </field>
+        </record>
+        
+    </data>
+</odoo>

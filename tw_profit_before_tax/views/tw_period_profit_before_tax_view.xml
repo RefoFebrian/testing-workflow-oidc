@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Master Period Profit Before Tax -->
+        <record id="view_tw_period_profit_before_tax_list" model="ir.ui.view">
+            <field name="name">view.tw.period.profit.before.tax.list</field>
+            <field name="model">tw.period.profit.before.tax</field>
+            <field name="arch" type="xml">
+                <list string="Master Period Profit Before Tax" create="false" edit="false" delete="false">
+                    <field name="company_id"/>
+                    <field name="period_time_formated"/>
+                    <field name="opex_avg"/>
+                    <field name="total_unit_lm" readonly="1"/>
+                    <field name="total_net_margin_lm" readonly="1"/>
+                    <field name="pbt_propose_lm" readonly="1"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_tw_period_profit_before_tax_form" model="ir.ui.view">
+            <field name="name">view.tw.period.profit.before.tax.form</field>
+            <field name="model">tw.period.profit.before.tax</field>
+            <field name="arch" type="xml">
+                <form string="Master Period Profit Before Tax" create="false" edit="false" delete="false">
+                    <sheet>
+                        <group string="Master Period Profit Before Tax">
+                            <group>
+                                <field name="name" invisible="1"/>
+                                <field name="company_id" readonly="1" options="{'no_open':True,'no_create':True}"/>
+                                <field name="period_time_formated" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="opex_avg" readonly="1"/>
+                                <field name="total_unit_lm" readonly="1"/>
+                                <field name="total_net_margin_lm" readonly="1"/>
+                                <field name="refund_lm" readonly="1"/>
+                                <field name="pbt_propose_lm" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="audit_trail_page" string="Audit Trail" invisible="create_date == False">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1" />
+                                        <field name="create_date" readonly="1" />
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1" />
+                                        <field name="write_date" readonly="1" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_tw_period_profit_before_tax_search" model="ir.ui.view">
+            <field name="name">tw.period.profit.before.tax.search</field>
+            <field name="model">tw.period.profit.before.tax</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="company_id"/>
+                    <field name="period_time_formated"/>
+                    <field name="opex_avg"/>
+                    <field name="total_unit_lm"/>
+                    <field name="total_net_margin_lm"/>
+                    <field name="pbt_propose_lm"/>
+                    <separator/>
+                    <group string="Group By">
+                        <filter name="company_id" string="Branch" context="{'group_by': 'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Master Period Profit Before Tax - Action -->
+        <record id="action_tw_period_profit_before_tax" model="ir.actions.server">
+            <field name="name">Master Period Profit Before Tax</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="tw_profit_before_tax.model_tw_period_profit_before_tax"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.period.profit.before.tax'].action_period_profit_before_tax_list()
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

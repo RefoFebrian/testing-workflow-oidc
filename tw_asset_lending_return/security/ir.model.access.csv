@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_asset_lending,tw_rent_return_asset.tw_asset_lending,model_tw_asset_lending,base.group_user,1,0,0,0
+access_tw_asset_lending_line,tw_rent_return_asset.tw_asset_lending_line,model_tw_asset_lending_line,base.group_user,1,0,0,0
+access_tw_asset_return,tw_rent_return_asset.tw_asset_return,model_tw_asset_return,base.group_user,1,0,0,0
+access_tw_asset_return_line,tw_rent_return_asset.tw_asset_return_line,model_tw_asset_return_line,base.group_user,1,0,0,0
+access_tw_master_rent_reason_asset,tw_rent_return_asset.tw_master_rent_reason_asset,model_tw_master_rent_reason_asset,base.group_user,1,0,0,0
+
+

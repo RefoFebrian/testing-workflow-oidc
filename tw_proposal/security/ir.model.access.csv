@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_proposal,tw_proposal all,model_tw_proposal,base.group_user,1,0,0,0
+access_tw_proposal_line,tw_proposal_line all,model_tw_proposal_line,base.group_user,1,0,0,0
+access_tw_proposal_sponsor,tw_proposal_sponsor all,model_tw_proposal_sponsor,base.group_user,1,0,0,0
+access_tw_proposal_schedule,tw_proposal_schedule all,model_tw_proposal_schedule,base.group_user,1,0,0,0
+access_tw_proposal_attachment,tw_proposal_attachment all,model_tw_proposal_attachment,base.group_user,1,0,0,0
+access_tw_proposal_payment,tw_proposal_payment all,model_tw_proposal_payment,base.group_user,1,0,0,0
+access_tw_proposal_budget_reject,tw_proposal_budget_reject all,model_tw_proposal_budget_reject,base.group_user,1,0,0,0
+access_tw_proposal_attachment,tw_proposal_attachment all,model_tw_proposal_attachment,base.group_user,1,0,0,0
+

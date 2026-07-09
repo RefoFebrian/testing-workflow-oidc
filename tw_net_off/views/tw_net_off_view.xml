@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- List/List View -->
+        <record id="tw_net_off_list_view" model="ir.ui.view">
+            <field name="name">tw.net.off.list</field>
+            <field name="model">tw.net.off</field>
+            <field name="arch" type="xml">
+                <list string="Net Off" default_order="id desc">
+                    <field name="name" string="Number"/>
+                    <field name="description" optional="show"/>
+                    <field name="company_id"/>
+                    <field name="account_id"/>
+                    <field name="partner_id"/>
+                    <field name="total_debit" widget="monetary" string="Debit"/>
+                    <field name="total_credit" widget="monetary" string="Credit"/>
+                    <field name="date"/>
+                    <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'confirm'"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="tw_net_off_form_view" model="ir.ui.view">
+            <field name="name">tw.net.off.form</field>
+            <field name="model">tw.net.off</field>
+            <field name="arch" type="xml">
+                <form string="Net Off">
+                    <header>
+                        <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" invisible="state != 'draft'" groups="tw_net_off.group_tw_net_off_confirm"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm"/>
+                    </header>
+                    <sheet>
+                        <field name="company_id" invisible="1"/>
+                        <field name="currency_id" invisible="1"/>
+                        <div class="oe_title">
+                            <h1 invisible="name"><span>Draft</span></h1>
+                            <h1 invisible="not name"><field name="name" readonly="1"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="company_id" required="1" string="Branch" options="{'no_open': True,'no_create':True}" readonly="state != 'draft'"/>
+                                <field name="account_id" required="1" string="Account" options="{'no_open': True,'no_create':True}" readonly="state != 'draft'"/>
+                                <field name="partner_id" string="Partner" options="{'no_open': True,'no_create':True}" readonly="state != 'draft'"/>
+                                <field name="description" placeholder="Description..." readonly="state != 'draft'"/>
+                            </group>
+                            <group>
+                                <field name="date" required="1" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Detil">
+                                <field name="line_ids" context="{'default_company_id': company_id}" readonly="state != 'draft'">
+                                    <list editable="bottom" string="Journal Items">
+                                        <field name="move_line_id" required="not parent.partner_id" column_invisible="parent.partner_id" options="{'no_open': True, 'no_create': True}" domain="[('company_id','=',parent.company_id),('account_id','=',parent.account_id),('reconciled', '=', False)]"/>
+                                        <field name="move_line_id" required="parent.partner_id" column_invisible="not parent.partner_id" options="{'no_open': True, 'no_create': True}" domain="[('company_id','=',parent.company_id),('account_id','=',parent.account_id),('reconciled', '=', False),('partner_id','=',parent.partner_id)]"/>
+                                        <field name="account_id" readonly="1" options="{'no_open': True,'no_create': True}" force_save="1"/>
+                                        <field name="company_id" readonly="1" options="{'no_open': True,'no_create': True}" force_save="1" optional="show"/>
+                                        <field name="partner_id" readonly="1" options="{'no_open': True,'no_create': True}" force_save="1"/>
+                                        <field name="debit" readonly="1" string="Debit" class="text-right" force_save="1"/>
+                                        <field name="credit" readonly="1" string="Credit" class="text-right" force_save="1"/>
+                                        <field name="name" readonly="1" force_save="1" optional="show"/>
+                                        <field name="matching_number" readonly="1" force_save="1" optional="show"/>
+                                    </list>
+                                </field>
+                                <group col="12" class="oe_invoice_lines_tab overflow-hidden">
+                                    <group colspan="8">
+                                    
+                                    </group>    
+                                    <group colspan="4">
+                                        <group class="oe_subtotal_footer">
+                                            <table class="oe_subtotal_footer">
+                                                <tr>
+                                                    <td><b>Total Debit</b></td>
+                                                    <td> : </td>
+                                                    <td class="text-right">
+                                                        <field name="total_debit" style="margin-bottom: 0px;" options="{'currency_field': 'currency_id'}" nolabel="1"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Total Credit</b></td>
+                                                    <td> : </td>
+                                                    <td class="text-right">
+                                                        <field name="total_credit" style="margin-bottom: 0px;" options="{'currency_field': 'currency_id'}" nolabel="1"/>
+                                                    </td>
+                                                </tr>
+                                                <tr class="oe_subtotal_footer_separator">
+                                                    <td><b>Total Residual</b></td>
+                                                    <td> : </td>
+                                                    <td class="text-right">
+                                                        <field name="total_residual" options="{'currency_field': 'currency_id'}" nolabel="1" class="text-danger"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </group>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Journal Items" invisible="not move_line_ids">
+                                <field name="move_line_ids" readonly="1"/>
+                            </page>
+                            
+                            <page name="audit_trail" string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"></field>
+                                        <field name="create_date" readonly="1"></field>
+                                        <field name="confirm_uid" readonly="1"></field>
+                                        <field name="confirm_date" readonly="1"></field>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1"></field>
+                                        <field name="write_date" readonly="1"></field>
+                                    </group>
+                                </group>
+                            </page>		
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="tw_net_off_filter" model="ir.ui.view">
+            <field name="name">tw.net.off.filter</field>
+            <field name="model">tw.net.off</field>
+            <field name="arch" type="xml">
+                <search string="Net Off">
+                    <field name="name" filter_domain="[('name', 'ilike', self)]"/>
+                    <field name="description" />
+                    <field name="company_id" filter_domain="[('company_id', '=', self)]" groups="base.group_multi_company"/>
+                    <field name="account_id" filter_domain="[('account_id', '=', self)]"/>
+                    <field name="partner_id" filter_domain="[('partner_id', '=', self)]"/>
+                    <field name="line_ids" string="Journal Items" filter_domain="[('line_ids.move_line_id','ilike', self)]"/>
+                    <field name="line_ids" string="Detail Partner" filter_domain="[('line_ids.partner_id','ilike', self)]"/>
+                    <field name="line_ids" string="Detail Label" filter_domain="[('line_ids.name','ilike', self)]"/>
+                    <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                    <filter string="Confirmed" name="confirmed" domain="[('state','=','confirm')]"/>
+                    <filter string="Cancelled" name="cancelled" domain="[('state','=','cancel')]"/>
+                    <filter string="Outstanding" name="outstanding" domain="[('state','not in',('confirm','cancel'))]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                        <filter string="Date" name="group_date" context="{'group_by': 'date'}"/>
+                        <filter string="Branch" name="group_branch" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                        <filter string="Account" name="group_account" context="{'group_by': 'account_id'}"/>
+                        <filter string="Partner" name="group_partner" context="{'group_by': 'partner_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="tw_action_net_off" model="ir.actions.act_window">
+            <field name="name">Net Off</field>
+            <field name="res_model">tw.net.off</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="
+                {
+                    'search_default_outstanding': 1,
+                }
+            " />
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first net off
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

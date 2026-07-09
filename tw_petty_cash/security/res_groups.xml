@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Petty Cash Out -->
+	
+        <record id="group_petty_cash_out_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Petty Cash Out Read</field>
+        </record>
+
+        <record id="access_petty_cash_out_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_out"/>
+            <field name="name">petty_cash_out read</field>
+            <field name="group_id" ref="group_petty_cash_out_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_petty_cash_out_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Petty Cash Out Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_petty_cash_out_read'))]"/>            	            	
+        </record>
+
+        <record id="access_petty_cash_out_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_out"/>
+            <field name="name">petty_cash_out update</field>
+            <field name="group_id" ref="group_petty_cash_out_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_petty_cash_out_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Petty Cash Out Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_petty_cash_out_read'))]"/>
+        </record>
+
+        <record id="access_petty_cash_out_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_out"/>
+            <field name="name">petty_cash_out delete</field>
+            <field name="group_id" ref="group_petty_cash_out_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Petty Cash Out Line -->
+	
+        <record id="group_petty_cash_out_line_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Petty Cash Out Line Read</field> 
+        </record>
+
+        <record id="access_petty_cash_out_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_out_line"/>
+            <field name="name">petty_cash_out_line read</field>
+            <field name="group_id" ref="group_petty_cash_out_line_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_petty_cash_out_line_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Petty Cash Out Line Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_petty_cash_out_line_read'))]"/>            	            	
+        </record>
+
+        <record id="access_petty_cash_out_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_out_line"/>
+            <field name="name">petty_cash_out_line update</field>
+            <field name="group_id" ref="group_petty_cash_out_line_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_petty_cash_out_line_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Petty Cash Out Line Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_petty_cash_out_line_read'))]"/>
+        </record>
+
+        <record id="access_petty_cash_out_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_out_line"/>
+            <field name="name">petty_cash_out_line delete</field>
+            <field name="group_id" ref="group_petty_cash_out_line_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Petty Cash In -->
+
+        <record id="group_petty_cash_in_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Petty Cash In Read</field>
+        </record>
+
+        <record id="access_petty_cash_in_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_in"/>
+            <field name="name">petty_cash_in read</field>
+            <field name="group_id" ref="group_petty_cash_in_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_petty_cash_in_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Petty Cash In Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_petty_cash_in_read'))]"/>
+        </record>
+
+        <record id="access_petty_cash_in_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_in"/>
+            <field name="name">petty_cash_in update</field>
+            <field name="group_id" ref="group_petty_cash_in_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_petty_cash_in_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Petty Cash In Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_petty_cash_in_read'))]"/>
+        </record>
+
+        <record id="access_petty_cash_in_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_in"/>
+            <field name="name">petty_cash_in delete</field>
+            <field name="group_id" ref="group_petty_cash_in_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Petty Cash in Line -->
+	
+        <record id="group_petty_cash_in_line_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Petty Cash in Line Read</field> 
+        </record>
+
+        <record id="access_petty_cash_in_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_in_line"/>
+            <field name="name">petty_cash_in_line read</field>
+            <field name="group_id" ref="group_petty_cash_in_line_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_petty_cash_in_line_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Petty Cash in Line Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_petty_cash_in_line_read'))]"/>            	            	
+        </record>
+
+        <record id="access_petty_cash_in_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_in_line"/>
+            <field name="name">petty_cash_in_line update</field>
+            <field name="group_id" ref="group_petty_cash_in_line_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_petty_cash_in_line_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Petty Cash in Line Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_petty_cash_in_line_read'))]"/>
+        </record>
+
+        <record id="access_petty_cash_in_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_in_line"/>
+            <field name="name">petty_cash_in_line delete</field>
+            <field name="group_id" ref="group_petty_cash_in_line_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Reimbursement Petty Cash -->
+
+        <record id="group_reimbursement_petty_cash_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Reimbursement Petty Cash Read</field>
+        </record>
+
+        <record id="access_reimbursement_petty_cash_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_reimbursement_petty_cash"/>
+            <field name="name">reimbursement_petty_cash read</field>
+            <field name="group_id" ref="group_reimbursement_petty_cash_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_reimbursement_petty_cash_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Reimbursement Petty Cash Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_reimbursement_petty_cash_read'))]"/>
+        </record>
+
+        <record id="access_reimbursement_petty_cash_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_reimbursement_petty_cash"/>
+            <field name="name">reimbursement_petty_cash update</field>
+            <field name="group_id" ref="group_reimbursement_petty_cash_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_reimbursement_petty_cash_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Reimbursement Petty Cash Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_reimbursement_petty_cash_read'))]"/>
+        </record>
+
+        <record id="access_reimbursement_petty_cash_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_reimbursement_petty_cash"/>
+            <field name="name">reimbursement_petty_cash delete</field>
+            <field name="group_id" ref="group_reimbursement_petty_cash_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Petty Cash Type -->
+
+        <record id="group_petty_cash_type_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Petty Cash Type Read</field>
+        </record>
+
+        <record id="access_petty_cash_type_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_type"/>
+            <field name="name">petty_cash_type_read read</field>
+            <field name="group_id" ref="group_petty_cash_type_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_petty_cash_type_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Petty Cash Type Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_petty_cash_type_read'))]"/>
+        </record>
+
+        <record id="access_petty_cash_type_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_type"/>
+            <field name="name">petty_cash_type_read update</field>
+            <field name="group_id" ref="group_petty_cash_type_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_petty_cash_type_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Petty Cash Type Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_petty_cash_type_read'))]"/>
+        </record>
+
+        <record id="access_petty_cash_type_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_type"/>
+            <field name="name">petty_cash_type_read delete</field>
+            <field name="group_id" ref="group_petty_cash_type_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Petty Cash Type Line -->
+	
+        <record id="group_petty_cash_type_line_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Petty Cash type Line Read</field> 
+        </record>
+
+        <record id="access_petty_cash_type_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_type_line"/>
+            <field name="name">petty_cash_type_line read</field>
+            <field name="group_id" ref="group_petty_cash_type_line_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_petty_cash_type_line_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Petty Cash type Line Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_petty_cash_type_line_read'))]"/>            	            	
+        </record>
+
+        <record id="access_petty_cash_type_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_type_line"/>
+            <field name="name">petty_cash_type_line update</field>
+            <field name="group_id" ref="group_petty_cash_type_line_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_petty_cash_type_line_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Petty Cash type Line Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_petty_cash_type_line_read'))]"/>
+        </record>
+
+        <record id="access_petty_cash_type_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_type_line"/>
+            <field name="name">petty_cash_type_line delete</field>
+            <field name="group_id" ref="group_petty_cash_type_line_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Include to System Admin -->
+        
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_petty_cash_type_read')),
+                (4,ref('group_petty_cash_type_update')),
+                (4,ref('group_petty_cash_type_delete')),
+                (4,ref('group_petty_cash_type_line_read')),
+                (4,ref('group_petty_cash_type_line_update')),
+                (4,ref('group_petty_cash_type_line_delete')),
+                (4,ref('group_petty_cash_out_read')),
+                (4,ref('group_petty_cash_out_update')),
+                (4,ref('group_petty_cash_out_delete')),
+                (4,ref('group_petty_cash_out_line_read')),
+                (4,ref('group_petty_cash_out_line_update')),
+                (4,ref('group_petty_cash_out_line_delete')),
+                (4,ref('group_petty_cash_in_read')),
+                (4,ref('group_petty_cash_in_update')),
+                (4,ref('group_petty_cash_in_delete')),
+                (4,ref('group_petty_cash_in_line_read')),
+                (4,ref('group_petty_cash_in_line_update')),
+                (4,ref('group_petty_cash_in_line_delete')),
+                (4,ref('group_reimbursement_petty_cash_read')),
+                (4,ref('group_reimbursement_petty_cash_update')),
+                (4,ref('group_reimbursement_petty_cash_delete')),
+                ]"/>
+        </record>
+                
+    </data>
+</odoo>

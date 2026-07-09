@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <template id="reg_mutation_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <style>
+                            .page {
+                                font-family: 'Arial', sans-serif;
+                                padding: 25px;
+                                color: #000;
+                                line-height: 1.4;
+                            }
+                            .header-table {
+                                width: 100%;
+                                border-collapse: collapse;
+                                margin-bottom: 15px;
+                            }
+                            .header-table td {
+                                vertical-align: top;
+                                padding: 0;
+                            }
+                            .header-left {
+                                font-size: 15px;
+                                line-height: 1.6;
+                                text-align: left;
+                                padding-right: 15px;
+                            }
+                            .header-left strong {
+                                font-size: 17px;
+                                display: block;
+                                margin-bottom: 3px;
+                            }
+                            .header-right {
+                                text-align: left;
+                                padding-left: 160px;
+                            }
+                            .header-right h3 {
+                                margin-top: 5px;
+                                font-size: 17px;
+                                font-weight: bold;
+                            }
+                            .info-table {
+                                width: 100%;
+                                border-collapse: collapse;
+                                font-size: 13px;
+                                margin: 20px 0 15px 0;
+                            }
+                            .info-table td {
+                                border: 1px solid #000;
+                                padding: 6px 8px;
+                                vertical-align: middle;
+                            }
+                            .info-table .label-cell {
+                                width: 130px;
+                                font-weight: bold;
+                                background-color: #f0f0f0;
+                            }
+                            .data-table {
+                                width: 100%;
+                                border-collapse: collapse;
+                                margin: 0 0 30px 0;
+                                font-size: 13px;
+                            }
+                            .data-table th,
+                            .data-table td {
+                                border: 1px solid #000;
+                                padding: 6px 8px;
+                                text-align: left;
+                            }
+                            .data-table th {
+                                background-color: #f0f0f0;
+                                font-weight: bold;
+                                text-align: center;
+                            }
+                            .data-table td:first-child {
+                                text-align: center;
+                                width: 35px;
+                            }
+                            .signature-section {
+                                margin-top: 40px;
+                            }
+                            .signature-table {
+                                width: 100%;
+                                font-size: 14px;
+                                border-collapse: collapse;
+                            }
+                            .signature-table td {
+                                vertical-align: top;
+                            }
+                            .signature-left {
+                                padding-right: 190px;
+                            }
+                            .signature-right {
+                                padding-left: 190px;
+                            }
+                            .signature-line {
+                                margin-top: 80px;
+                                border-bottom: 1px solid #000;
+                                padding-bottom: 2px;
+                                width: 100%;
+                            }
+                            .signature-info {
+                                font-size: 13px;
+                                margin-top: 6px;
+                            }
+                        </style>
+
+                        <table class="header-table">
+                            <tr>
+                                <td style="width:55%;">
+                                    <div class="header-left">
+                                        <strong>
+                                            <t t-esc="o.company_id.parent_id.name or o.company_id.name"/>
+                                        </strong>
+                                        <t t-esc="o.company_id.name"/>
+                                        <br/>
+                                        <t t-esc="o.company_id.street"/>
+                                        <br/>
+                                        <t t-esc="o.company_id.state_id.name"/>
+                                    </div>
+                                </td>
+                                <td style="width:45%;">
+                                    <div class="header-right">
+                                        <h3>MUTASI STNK</h3>
+                                        <p class="nobukti">No : <t t-esc="o.name"/></p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table class="info-table">
+                            <tr>
+                                <td class="label-cell">Tujuan</td>
+                                <td colspan="3"><t t-esc="o.company_id.name"/></td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">Tanggal Mutasi</td>
+                                <td colspan="3">
+                                    <t t-esc="o.done_date.strftime('%d-%m-%Y') if o.done_date else ''"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">Lokasi Asal</td>
+                                <td colspan="3"><t t-esc="o.stnk_source_location_id.name"/></td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">Lokasi Tujuan</td>
+                                <td colspan="3"><t t-esc="o.stnk_dest_location_id.name"/></td>
+                            </tr>
+                        </table>
+
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%;">No.</th>
+                                    <th>No Mesin</th>
+                                    <th>No Rangka</th>
+                                    <th>Atas Nama</th>
+                                    <th>No STNK</th>
+                                    <th>Tgl JTP STNK</th>
+                                    <th>No Polisi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.document_mutation_line_ids" t-as="k">
+                                    <tr>
+                                        <td><span t-esc="k_index + 1"/></td>
+                                        <td><t t-esc="k.lot_id.name"/></td>
+                                        <td class="text-end"><t t-esc="k.chassis_number"/></td>
+                                        <td><t t-esc="k.lot_id.customer_stnk_id.name if k.lot_id.customer_stnk_id else ''"/></td>
+                                        <td class="text-end"><t t-esc="k.lot_id.vehicle_registration_number"/></td>
+                                        <td>
+                                            <t t-esc="k.lot_id.stnk_date.strftime('%d-%m-%Y') if k.lot_id.stnk_date else ''"/>
+                                        </td>
+                                        <td class="text-end"><t t-esc="k.lot_id.plate_number"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <div class="signature-section">
+                            <table class="signature-table">
+                                <tr>
+                                    <td class="signature-left" style="width:50%;">Dicetak Oleh :</td>
+                                    <td class="signature-right" style="width:50%;">Penerima :</td>
+                                </tr>
+                                <tr>
+                                    <td class="signature-left">
+                                        <div class="signature-line"></div>
+                                        <div class="signature-info">
+                                            <t t-esc="user.name"/>
+                                            <t t-esc="tgl()"/>
+                                        </div>
+                                        <p style="text-align: left; font-size: 12px; margin-top: 15px;">
+                                            Lembar ke-1 Pengirim / Lembar ke-2 Penerima
+                                        </p>
+                                    </td>
+                                    <td class="signature-right">
+                                        <div class="signature-line"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

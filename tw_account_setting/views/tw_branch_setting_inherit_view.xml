@@ -1,0 +1,27 @@
+<odoo>
+  <data>
+    <record id="tw_account_branch_setting_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.account.branch.setting.inherit.view.form</field>
+        <field name="model">tw.branch.setting</field>
+        <field name="inherit_id" ref="tw_branch_setting.tw_branch_setting_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Readonly Purchase Order Vendor Price -->
+            <xpath expr="//div[@name='branch_name']" position="after">
+              <div name="account_setting" class="oe_title" groups="tw_account_setting.group_tw_account_setting_read">
+                  <label for="account_setting_id"/>
+                  <h3>
+                      <field name="account_setting_id" required="1"/>
+                  </h3>
+              </div>
+            </xpath>
+            <xpath expr="//page[@name='page_1']" position="after">
+              <page name="account_setting_page" string="Intercompany">
+                <group name="account_setting_group">
+                    <field name="inter_company_account_id" options="{'no_open': True, 'no_create': True}" required="1"/>
+                </group>
+              </page>
+            </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>

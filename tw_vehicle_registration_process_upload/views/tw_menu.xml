@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <menuitem id="tw_vehicle_registration_process_upload_menu_sub" name="Upload STNK/BPKB Process" parent="tw_vehicle_registration_process.tw_vehicle_registration_process_menu_sub" sequence="100"/>
+    <menuitem id="tw_vehicle_registration_process_upload_menuitem" name="Upload Proses STNK/BPKB" parent="tw_vehicle_registration_process_upload_menu_sub" action="tw_vehicle_registration_process_upload_wizard_action" sequence="10" groups="tw_vehicle_registration_process_upload.group_tw_vehicle_registration_process_upload_read"/>
+  </data>
+</odoo>

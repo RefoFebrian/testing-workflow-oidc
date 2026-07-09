@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+        <menuitem id="submenu_tw_advance_payment_non_trade" name="Advance Payment" parent="tw_menu.submenu_tw_backoffice_non_trade" groups="tw_advance_payment.group_tw_advance_payment_read" action="tw_advance_payment.action_advance_payment" sequence="5"/>
+    
+    </data>
+    
+
+</odoo>

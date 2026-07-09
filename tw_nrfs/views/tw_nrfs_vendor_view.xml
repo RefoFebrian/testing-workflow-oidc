@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <!-- NRFS -->
+        <record id="tw_nrfs_vendor_list_view" model="ir.ui.view" >
+            <field name="name">tw.nrfs.vendor.list</field>
+            <field name="model">tw.nrfs</field>
+            <field name="arch" type="xml">
+            	<list string="Outstanding NRFS Vendor" create="false" delete="false">
+            		<field name="name" />
+                    <field name="origin" />
+                    <field name="nrfs_date" />
+                    <field name="product_id" />
+                    <field name="branch_partner_id"/>
+                    <field name="state" />
+            	</list>
+            </field>
+        </record>
+
+        <record id="tw_nrfs_vendor_form_view" model="ir.ui.view" >
+            <field name="name">tw.nrfs.vendor.form</field>
+            <field name="model">tw.nrfs</field>
+            <field name="arch" type="xml">
+            	<form string="Outstanding NRFS Vendor" create="false" delete="false">
+            		<header>
+                        <button name="action_check_availability" string="Check Availability" type="object" invisible="state in ['in_progress','done']" groups="tw_nrfs.tw_nrfs_admin_check_availability_group_button_read"/>
+                        <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" invisible="state != 'approved'" groups="tw_nrfs.tw_nrfs_confirm_group_button_read,tw_nrfs.tw_nrfs_admin_confirm_group_button_read"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,rfa,approved,confirmed,in_progress,done" readonly="1" />
+                    </header>
+            		<sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1" invisible="name == False" class="oe_inline" />
+                            </h1>
+                        </div>
+						<group>
+                            <group>
+                                <field name="company_id" readonly="1" options="{'no_create': True, 'no_open': True}" />
+                                <field name="origin" readonly="1" />
+                                <field name="product_id" readonly="1" options="{'no_create': True, 'no_open': True}" />
+                                <field name="backorder_id" readonly="state != 'draft'" options="{'no_create': True, 'no_open': True}" />
+                                <field name="is_send_to_ahm" readonly="state != 'draft'" string="Send MFT"/>
+                            </group>
+                            <group>
+                                <field name="nrfs_date" readonly="1" />
+                                <field name="examiner_id" required="1" readonly="state != 'draft'" options="{'no_create': True, 'no_open': True}" />
+                                <field name="nrfs_type" readonly="1"/>
+                                <field name="vehicle_id" readonly="state != 'draft'" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="driver_id" readonly="state != 'draft'" options="{'no_create': True, 'no_open': True}" />
+                                <field name="expedition_ship" readonly="state != 'draft'"/>
+                            </group>
+                            <group string="Estimasi Penanganan" name="est_penanganan">
+                                <field name="branch_partner_id" readonly="1" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="est_completion_date" required="1" readonly="state != 'approved'"/>
+                                <field name="act_completion_date" readonly="1" />
+                                <field name="is_order_sparepart" invisible="1" />
+                                <field name="is_fulfilled_sparepart" invisible="1" />
+                                <field name="is_p2p_md" invisible="1" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="detail" string="Detail">
+                                <field name="line_ids" nolabel="1" readonly="state != 'approved'" context="{'default_rel_partner_id': branch_partner_id}" options="{'no_open':True, 'no_create': True}">
+                                    <list create="false" delete="false">
+                                        <field name="rel_partner_id" column_invisible="1" />
+                                        <field name="available_sparepart_ids" column_invisible="1" />
+                                        <field name="product_sparepart_id" required="1" options="{'no_create': True, 'no_open': True}" domain="[('id', 'in', available_sparepart_ids)]"/>
+                                        <field name="description" />
+                                        <field name="qty" />
+                                        <field name="total_stock" readonly="1" />
+                                        <field name="total_stock_md" column_invisible="1" />
+                                        <field name="total_stock_all" readonly="1" />
+                                        <field name="vendor_handling_id" options="{'no_create': True, 'no_open': True}"/>
+                                        <field name="is_order_sparepart" column_invisible="1" />
+                                        <field name="handling_id" column_invisible="1" />
+                                        <field name="distribution_number" readonly="1" />
+                                    </list>
+                                    <form create="false" delete="false">
+                                        <sheet>
+                                            <div>
+                                                <label for="product_sparepart_id" />
+                                                <h1 style="margin-top: 0%; margin-right: 15px;">
+                                                    <field name="product_sparepart_id" readonly="1" options="{'no_open':True, 'no_create': True}" />
+                                                </h1>
+                                            </div>
+                                            <group>
+                                                <group name='detail'>
+                                                    <field name="rel_partner_id" readonly="1" options="{'no_open':True, 'no_create': True}"/>
+                                                    <field name="qty" readonly="1" />
+                                                    <field name="total_stock" readonly="1" />
+                                                    <div invisible="is_stock_ok == False" colspan="2" style="margin-top: 1px; margin-bottom: 1px;">
+                                                        <span style="font-weight: bold; color: #006400;">
+                                                            &#160;Stok sparepart tersedia
+                                                        </span>
+                                                    </div>
+                                                    <div invisible="is_stock_ok != False" colspan="2" style="margin-top: 1px; margin-bottom: 1px;">
+                                                        <span style="font-weight: bold; color: red;">
+                                                            &#160;Stok sparepart tidak tersedia
+                                                        </span>
+                                                    </div>
+                                                    <field name="is_stock_ok" invisible="1" />
+                                                    <field name="total_stock_md" invisible="1" />
+                                                    <field name="total_stock_all" readonly="1" />
+                                                    <field name="vendor_handling_id" required="1" options="{'no_open':True, 'no_create': True}" />
+                                                    <field name="is_order_sparepart" invisible="1" />
+                                                    <field name="handling_id" invisible="1"/>
+                                                </group>
+                                                <group>
+                                                    <field name="indication_ids" readonly="1" options="{'no_open':True, 'no_create': True}" widget="many2many_tags" />
+                                                    <field name="reason_ids" readonly="1" options="{'no_open':True, 'no_create': True}" widget="many2many_tags" />
+                                                    <field name="service_ids" required="1" options="{'no_open':True, 'no_create': True}" widget="many2many_tags" domain="[('division', '=', 'Service')]"/>
+                                                    <field name="description" invisible="1" />
+                                                    <field name="distribution_number" readonly="1" />
+                                                </group>
+                                            </group>
+                                            <notebook>
+                                                <page string="Info Stok">
+                                                    <field name="stock_ids" readonly="1">
+                                                        <list>
+                                                            <field name="qty_stock" readonly="1" sum="Total" />
+                                                            <field name="qty_intransit_in" readonly="1" sum="Total" />
+                                                        </list>
+                                                        <form>
+                                                            <sheet>
+                                                                <group>
+                                                                    <field name="qty_stock" readonly="1" />
+                                                                    <field name="qty_intransit_in" readonly="1" />
+                                                                </group>
+                                                            </sheet>
+                                                        </form>
+                                                    </field>
+                                                </page>
+                                            </notebook>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                            <page name="audit_trail" string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1" />
+                                        <field name="create_date" readonly="1" />
+                                        <field name="confirm_uid" readonly="1" />
+                                        <field name="confirm_date" readonly="1" />
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1" />
+                                        <field name="write_date" readonly="1" />
+                                        <field name="cancel_uid" readonly="1" invisible="cancel_uid == False"/>
+                                        <field name="cancel_date" readonly="1" invisible="cancel_date == False"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+            		</sheet>
+            	</form>
+            </field>
+        </record>
+        <record id="tw_nrfs_vendor_search_view" model="ir.ui.view">
+            <field name="name">tw.nrfs.vendor.search</field>
+            <field name="model">tw.nrfs</field>
+            <field name="arch" type="xml">
+                <search string="Search NRFS">
+                    <field name="name" string="Nomor NRFS"/>
+                    <field name="nrfs_date" />
+                    <field name="product_id" />
+                    <field name="branch_partner_id" />
+                    <field name="nrfs_type" string="Tipe NRFS"/>
+                    <field name="origin" string="Source Document"/>
+                    <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                    <filter string="Waiting For Approval" name="waiting_approval" domain="[('state','=','waiting_approval')]"/>
+					<filter string="Approved" name="approved" domain="[('state','=','approved')]"/>
+                    <filter string="Confirmed" name="confirmed" domain="[('state','=','confirmed')]"/>
+                    <filter string="In Progress" name="in_progress" domain="[('state','=','in_progress')]"/>
+                    <filter string="Done" name="done" domain="[('state','=','done')]"/>
+					<group string="Group By" name="groupby">
+                        <filter name="state_groupby" string="Status" context="{'group_by': 'state'}"/>
+                        <filter name="nrfs_date_groupby" string="Date" context="{'group_by': 'nrfs_date'}"/>
+                        <filter name="branch_partner_id_groupby" string="AHASS Vendor" context="{'group_by': 'branch_partner_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="tw_nrfs_vendor_action" model="ir.actions.act_window">
+            <field name="name">Outstanding NRFS Vendor</field>
+            <field name="res_model">tw.nrfs</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('state','not in',['cancel','draft','rfa']), ('division', '=', 'Unit')]</field>
+            <field name="context">{
+                'default_division': 'Unit',
+                'search_default_approved': 1,
+                'search_default_confirmed': 1,
+                'search_default_in_progress': 1,
+            }</field>
+            <field name="search_view_id" ref="tw_nrfs.tw_nrfs_vendor_search_view" />
+        </record>
+
+        <record id="tw_nrfs_vendor_action_list" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_nrfs_vendor_list_view"/>
+            <field name="act_window_id" ref="tw_nrfs_vendor_action"/>
+        </record>
+
+        <record id="tw_nrfs_vendor_action_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_nrfs_vendor_form_view"/>
+            <field name="act_window_id" ref="tw_nrfs_vendor_action"/>
+        </record>
+    </data>
+</odoo>

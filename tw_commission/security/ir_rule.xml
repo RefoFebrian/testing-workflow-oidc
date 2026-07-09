@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_commission_rule" model="ir.rule">
+            <field name="name">tw.commission rule</field>
+            <field name="model_id" ref="model_tw_commission"/>
+            <field name="domain_force">[('company_id', 'parent_of', company_ids)]</field>
+        </record>
+    </data>
+</odoo>

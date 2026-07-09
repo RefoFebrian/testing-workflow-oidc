@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem 
+            id="menu_tw_faktur_pajak_other"
+            name="Faktur Pajak Other"
+            parent="tw_faktur_pajak.tw_backoffice_tax_submenu" 
+            action="tw_faktur_pajak_other_action"
+            sequence="30"
+            groups="tw_faktur_pajak_other.group_fpo_read"/>
+    </data>
+</odoo>

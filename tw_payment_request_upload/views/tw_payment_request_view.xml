@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_payment_request_form_upload_inherit" model="ir.ui.view">
+            <field name="name">tw.payment.request.form.upload.inherit</field>
+            <field name="model">tw.payment.request</field>
+            <field name="inherit_id" ref="tw_payment_request.view_payment_request_form"/>
+            <field name="arch" type="xml">
+                <button name="action_validate" position="after">
+                    <button name="action_upload_line" type="object" invisible="state != 'draft'" string="Upload Line" groups="tw_payment_request_upload.group_tw_upload_payment_button_read"/>
+                </button>
+            </field>
+        </record>
+
+    </data>
+</odoo>

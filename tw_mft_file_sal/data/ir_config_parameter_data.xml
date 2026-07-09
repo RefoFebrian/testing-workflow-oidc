@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="ir_config_param_list_requester_partner_code_mo_mft_file_sal" model="ir.config_parameter">
+            <field name="key">mft_file_sal.list_requester_partner_code_mo</field>
+            <field name="value">['CKL', 'CV.TEKNIK', 'DPP', 'OTOMAX(UMUM)', 'U0002', 'U0003', 'U0005', 'U0006', 'U0009', 'UMUM']</field>
+        </record>
+
+    </data>
+</odoo>

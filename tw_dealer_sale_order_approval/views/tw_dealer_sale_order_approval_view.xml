@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="tw_dealer_sale_order_approval_inherit_view_filter" model="ir.ui.view">
+			<field name="name">tw.dealer.sale.order.view.search.inherit.quotation</field>
+			<field name="model">tw.dealer.sale.order</field>
+			<field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_sales_order_view_filter"/>
+			<field name="arch" type="xml">
+
+				<filter name="quotation_filter" position="after">
+					<filter string="Waiting for Approval" domain="[('state', '=', 'rfa')]" name="rfa_filter" />
+					<filter string="Approved" domain="[('state', '=', 'approved')]" name="approved_filter" />
+				</filter>
+
+			</field>
+		</record>
+		
+		<record id="tw_dealer_order_approval_discount_inherit_view_form" model="ir.ui.view">
+			<field name="name">tw.dealer.order.approval.discount.inherit.view.form</field>
+			<field name="model">tw.dealer.sale.order</field>
+			<field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_order_view_form" />
+			<field name="arch" type="xml">
+
+				<field name="state" position="replace">
+					<field name="state" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,sale,done"/>
+				</field>
+
+				<button name="action_confirm" position="replace">
+					<button name="action_confirm" id="action_confirm" data-hotkey="q"
+							string="Confirm" class="btn-primary" type="object" context="{'validate_analytic': True}"
+							invisible="state not in ['approved']"/>
+				</button>
+
+				<button name="action_confirm" position="after">
+					<button name="action_rfa" string="RFA" type="object" data-hotkey="r" class="oe_highlight" invisible="state != 'draft'" groups="tw_dealer_sale_order_approval.group_tw_dealer_sale_order_rfa"/>
+					<button name="action_approve" string="Approve" type="object" data-hotkey="a" class="oe_highlight" invisible="state != 'waiting_for_approval'"/>
+					<button name="action_reject" string="Reject" type="object" data-hotkey="d" invisible="state != 'waiting_for_approval'"/>
+					<button name="action_cancel_approval" string="Cancel Approval" type="object" data-hotkey="c" invisible="state not in ('waiting_for_approval', 'approved')" context="{'window_title': 'Cancel'}" groups="tw_dealer_sale_order_approval.group_tw_dealer_sale_order_cancel_button"/>
+				</button>
+
+				<page name="summary_discounts" position="after">
+					<page name="approval_line" string="Approval Discount">
+						<field name="approval_ids" widget="one2many_list" readonly="1" />
+					</page>
+				</page>
+
+			</field>
+		</record>
+	</data>
+</odoo>

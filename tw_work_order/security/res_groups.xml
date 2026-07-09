@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- TW Work Order Group Read -->
+        <record id="tw_work_order_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Work Order Read</field>
+        </record>
+
+        <record id="tw_work_order_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_work_order" />
+            <field name="name">tw_work_order read</field>
+            <field name="group_id" ref="tw_work_order_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="tw_work_order_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Work Order Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_work_order_group_read'))]" />
+        </record>
+
+        <record id="tw_work_order_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_work_order" />
+            <field name="name">tw_work_order update</field>
+            <field name="group_id" ref="tw_work_order_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_work_order_lot_access_update" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_lot" />
+            <field name="name">tw_work_order_lot update</field>
+            <field name="group_id" ref="tw_work_order_group_update" />
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_work_order_picking_access_update" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_picking" />
+            <field name="name">tw_work_order_picking update</field>
+            <field name="group_id" ref="tw_work_order_group_update" />
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_work_order_sale_order_option_access_update" model="ir.model.access">
+            <field name="model_id" ref="sale_management.model_sale_order_option" />
+            <field name="name">tw_work_order_sale_order_option update</field>
+            <field name="group_id" ref="tw_work_order_group_update" />
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_work_order_stock_warehouse_orderpoint_access_update" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_warehouse_orderpoint" />
+            <field name="name">tw_work_order_stock_warehouse_orderpoint update</field>
+            <field name="group_id" ref="tw_work_order_group_update" />
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_work_order_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Work Order Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_work_order_group_read'))]" />
+        </record>
+
+        <record id="tw_work_order_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_work_order" />
+            <field name="name">tw_work_order delete</field>
+            <field name="group_id" ref="tw_work_order_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="tw_work_order_line_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_work_order_line" />
+            <field name="name">tw_work_order_line read</field>
+            <field name="group_id" ref="tw_work_order_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="tw_work_order_line_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_work_order_line" />
+            <field name="name">tw_work_order_line update</field>
+            <field name="group_id" ref="tw_work_order_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_work_order_line_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_work_order_line" />
+            <field name="name">tw_work_order_line delete</field>
+            <field name="group_id" ref="tw_work_order_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+        
+        <record id="tw_workshop_category_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Workshop Category Read</field>
+        </record>
+
+        <record id="tw_workshop_category_access_read" model="ir.model.access">
+            <field name="model_id" ref="tw_selection.model_tw_selection" />
+            <field name="name">access_tw_workshop_category read</field>
+            <field name="group_id" ref="tw_workshop_category_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+        
+        <record id="tw_workshop_category_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Workshop Category Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_workshop_category_group_read'))]"/>
+        </record>
+
+        <record id="tw_workshop_category_access_update" model="ir.model.access">
+            <field name="model_id" ref="tw_selection.model_tw_selection" />
+            <field name="name">access_tw_workshop_category update</field>
+            <field name="group_id" ref="tw_workshop_category_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <record id="tw_workshop_type_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Workshop Type Read</field>
+        </record>
+
+        <record id="tw_workshop_type_access_read" model="ir.model.access">
+            <field name="model_id" ref="tw_selection.model_tw_selection" />
+            <field name="name">access_tw_workshop_type read</field>
+            <field name="group_id" ref="tw_workshop_type_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+        
+        <record id="tw_workshop_type_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Workshop Type Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_workshop_type_group_read'))]"/>
+        </record>
+
+        <record id="tw_workshop_type_access_update" model="ir.model.access">
+            <field name="model_id" ref="tw_selection.model_tw_selection" />
+            <field name="name">access_tw_workshop_type update</field>
+            <field name="group_id" ref="tw_workshop_type_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('tw_work_order_group_read')),
+                (4,ref('tw_work_order_group_update')),
+                (4,ref('tw_work_order_group_delete')),
+                (4,ref('tw_workshop_category_group_read')),
+                (4,ref('tw_workshop_category_group_update')),
+                (4,ref('tw_workshop_type_group_read')),
+                (4,ref('tw_workshop_type_group_update')),
+            ]" />
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Master Lead CRM -->
+        <menuitem id="submenu_tw_showroom_lead_crm" name="CRM" parent="tw_menu.menu_tw_showroom" sequence="10"/>
+
+        <!-- Menu Item -->
+        <menuitem id="tw_lead_crm_raw_data_menuitem" name="Data Raw CRM" parent="submenu_tw_showroom_lead_crm" action="tw_lead_crm_raw_data_action" sequence="01" groups="tw_lead_crm.group_tw_lead_crm_raw_data_read"/>
+        <menuitem id="tw_lead_crm_lead_assign_data_menuitem" name="Lead Assignment" parent="submenu_tw_showroom_lead_crm" action="tw_lead_crm_lead_assign_data_action" sequence="02" groups="tw_lead_crm.group_tw_lead_crm_lead_assign_data_read"/>
+        
+        <menuitem id="tw_lead_crm_master_matrix_assignment_menuitem" name="Matrix Lead Assignment" parent="tw_menu.submenu_tw_showroom_configuration_misc" action="tw_lead_crm_matrix_assignment_action" sequence="03" groups="tw_lead_crm.group_tw_lead_crm_master_matrix_assignment_read"/>
+
+        <menuitem id="tw_lead_crm_report_menuitem" name="Laporan Lead CRM" parent="tw_menu.submenu_tw_showroom_report" action="tw_lead_crm_report_action" sequence="01" groups="tw_lead_crm.group_tw_lead_crm_report_all"/>
+    </data>
+</odoo>

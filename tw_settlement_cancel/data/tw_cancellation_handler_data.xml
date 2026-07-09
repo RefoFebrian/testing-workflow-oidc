@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Handler Registration for tw.settlement -->
+        <record id="tw_cancellation_handler_settlement" model="tw.cancellation.handler">
+            <field name="model">tw.settlement</field>
+            <field name="module">tw_settlement_cancel</field>
+        </record>
+        
+    </data>
+</odoo>

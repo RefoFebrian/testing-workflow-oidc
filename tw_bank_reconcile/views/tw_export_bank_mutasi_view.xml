@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <!-- Wizard View -->
+        <record id="tw_export_bank_mutasi_wizard_view" model="ir.ui.view">
+            <field name="name">tw.export.bank.mutasi.wizard</field>
+            <field name="model">tw.export.bank.mutasi</field>
+            <field name="arch" type="xml">
+                <form>
+                	<sheet>
+                        <group invisible="state_x == 'get'">
+                            <group>
+                                <field name="options" required="1"/>
+                                <field name="status" required="1"/>
+                                <label for="start_date" string="Periode Mutasi"/>
+                                <div>
+                                    <field name="start_date" class="oe_inline"/>
+                                    <field name="end_date"/>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="company_id" required="1" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="account_id" options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+                        </group>
+		                <field invisible="1" name="state_x"/>
+		                <newline/>    
+		                <group col="4" fill="0" invisible="state_x != 'get'">
+		                    <separator colspan="4" string="Generate Export Bank Mutasi Success ..." invisible="state_x == 'choose'"/>
+		                </group>
+		                <footer>
+		                    <button name="action_export" invisible="state_x == 'get'" required="1" string="Export Data" type="object" class="oe_highlight"/>
+		                    <button string="Cancel" invisible="state_x == 'get'" class="oe_link" special="cancel" />
+		                </footer>
+	                </sheet>
+	            </form>
+            </field>
+        </record>
+
+        <!-- Action View -->
+        <record id="tw_export_bank_mutasi_action" model="ir.actions.server">
+            <field name="name">Export Bank Mutasi</field>
+            <field name="model_id" ref="tw_bank_reconcile.model_tw_export_bank_mutasi"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.export.bank.mutasi'].action_export_bank_mutasi_tree()
+            </field>
+        </record>
+	     
+	</data>
+</odoo>

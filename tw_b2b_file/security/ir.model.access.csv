@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_b2b_file_config,tw_b2b_file_config.tw_b2b_file_config,model_tw_b2b_file_config,base.group_user,1,0,0,0
+access_tw_b2b_file,tw_b2b_file.tw_b2b_file,model_tw_b2b_file,base.group_user,1,0,0,0
+access_tw_b2b_file_content,tw_b2b_file.tw_b2b_file_content,model_tw_b2b_file_content,base.group_user,1,0,0,0
+access_tw_b2b_file_content_line,tw_b2b_file.tw_b2b_file_content_line,model_tw_b2b_file_content_line,base.group_user,1,0,0,0
+access_tw_b2b_error_log,tw_b2b_file.tw_b2b_error_log,model_tw_b2b_error_log,base.group_user,1,0,0,0

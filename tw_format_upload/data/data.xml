@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_file_format_upload" model="tw.config.files">
+            <field name="name">FORMAT-UPLOAD</field>
+            <field name="type_id" ref="tw_config_files.selection_umum_type_configfiles" />
+            <field name="local_path">/opt/local/file/path/FORMAT-UPLOAD</field>
+        </record>
+
+    </data>
+</odoo>

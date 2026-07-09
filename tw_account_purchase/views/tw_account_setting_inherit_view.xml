@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+        <record id="tw_purchase_account_setting_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.account.setting.inherit.view.form</field>
+            <field name="model">tw.account.setting</field>
+            <field name="inherit_id" ref="tw_account_setting.tw_account_setting_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='page_1']" position="before">
+                    <page string="Purchase" name="account_purchase">
+                        <group>
+                            <group string="Purchase" name="purchase_journal_group">
+                                <field name="journal_purchase_unit_id" options='{"no_quick_create": True}'/>
+                                <field name="journal_purchase_sparepart_id" options='{"no_quick_create": True}'/>
+                                <field name="journal_purchase_umum_id" options='{"no_quick_create": True}'/>
+                            </group>
+                            <group string="Blind Bonus" name="purchase_blind_bonus"/>
+                        </group>
+                        <group>
+                            <group string="Discount" name="purchase_config_group">
+                                <field name="account_purchase_discount_cash_id" options='{"no_quick_create": True}'/>
+                            </group>
+                            <group string="Journal Cancel" name="purchase_journal_cancel"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

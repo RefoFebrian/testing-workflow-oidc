@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Master Ring Group Read -->
+        <record id="group_tw_ring_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Ring Read</field>
+        </record>
+        <record id="access_tw_ring_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_ring"/>
+            <field name="name">tw_ring read</field>
+            <field name="group_id" ref="group_tw_ring_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Master Ring Group Update -->
+        <record id="group_tw_ring_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Ring Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_ring_read'))]"/>
+        </record>
+        <record id="access_tw_ring_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_ring"/>
+            <field name="name">tw_ring update</field>
+            <field name="group_id" ref="group_tw_ring_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Master Ring Group Delete -->
+        <record id="group_tw_ring_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Ring Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_ring_read'))]"/>
+        </record>
+        <record id="access_tw_ring_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_ring"/>
+            <field name="name">tw_ring delete</field>
+            <field name="group_id" ref="group_tw_ring_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Master Ring Kecamatan Group Read -->
+        <record id="group_tw_ring_kecamatan_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Ring Kecamatan Read</field>
+        </record>
+        <record id="access_tw_ring_kecamatan_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_ring_kecamatan"/>
+            <field name="name">tw_ring_kecamatan read</field>
+            <field name="group_id" ref="group_tw_ring_kecamatan_read"/>
+            <field name="perm_read">1</field>
+        </record>
+        <record id="access_tw_ring_kecamatan_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_ring_kecamatan_line"/>
+            <field name="name">tw_ring_kecamatan_line read</field>
+            <field name="group_id" ref="group_tw_ring_kecamatan_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Master Ring Kecamatan Group Update -->
+        <record id="group_tw_ring_kecamatan_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Ring Kecamatan Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_ring_kecamatan_read'))]"/>
+        </record>
+        <record id="access_tw_ring_kecamatan_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_ring_kecamatan"/>
+            <field name="name">tw_ring_kecamatan update</field>
+            <field name="group_id" ref="group_tw_ring_kecamatan_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        <record id="access_tw_ring_kecamatan_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_ring_kecamatan_line"/>
+            <field name="name">tw_ring_kecamatan_line update</field>
+            <field name="group_id" ref="group_tw_ring_kecamatan_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Master Ring Kecamatan Group Delete -->
+        <record id="group_tw_ring_kecamatan_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Ring Kecamatan Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_ring_kecamatan_read'))]"/>
+        </record>
+        <record id="access_tw_ring_kecamatan_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_ring_kecamatan"/>
+            <field name="name">tw_ring_kecamatan delete</field>
+            <field name="group_id" ref="group_tw_ring_kecamatan_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+        <record id="access_tw_ring_kecamatan_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_ring_kecamatan_line"/>
+            <field name="name">tw_ring_kecamatan_line delete</field>
+            <field name="group_id" ref="group_tw_ring_kecamatan_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_tw_ring_read')),
+                (4,ref('group_tw_ring_update')),
+                (4,ref('group_tw_ring_delete')),
+                (4,ref('group_tw_ring_kecamatan_read')),
+                (4,ref('group_tw_ring_kecamatan_update')),
+                (4,ref('group_tw_ring_kecamatan_delete')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

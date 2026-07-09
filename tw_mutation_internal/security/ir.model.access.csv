@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_stock_picking_showroom_line,tw_mutation_internal.tw_stock_picking_showroom_line,model_tw_stock_picking_line,base.group_user,1,0,0,0
+access_tw_stock_picking_workshop_line,tw_mutation_internal.tw_stock_picking_workshop_line,model_tw_stock_picking_line,base.group_user,1,0,0,0

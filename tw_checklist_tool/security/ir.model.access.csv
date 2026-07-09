@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_master_tools,tw_master_tools,model_tw_master_tools,base.group_user,1,0,0,0
+access_tw_master_tools_line,tw_master_tools_line,model_tw_master_tools_line,base.group_user,1,0,0,0
+access_tw_checklist_tool,tw_checklist_tool,model_tw_checklist_tools,base.group_user,1,0,0,0
+access_tw_checklist_tool_line,tw_checklist_tool_line,model_tw_checklist_tools_line,base.group_user,1,0,0,0
+access_tw_checklist_tool_detail,tw_checklist_tool_detail,model_tw_checklist_tools_detail,base.group_user,1,0,0,0
+access_tw_upload_message_wizard,tw_upload_message_wizard,model_tw_upload_message_wizard,base.group_user,1,1,1,1

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_mrp_inherit_extras_form_view" model="ir.ui.view">
+            <field name="name">mrp.inherit.extras.form</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <page name="miscellaneous" position="attributes">
+                    <attribute name="invisible">type == 'extras'</attribute>
+                </page>
+                
+                <field name="product_qty" position="attributes">
+                    <attribute name="invisible">type == 'extras'</attribute>
+                </field>
+                <field name="product_uom_id" position="attributes">
+                    <attribute name="invisible">type == 'extras'</attribute>
+                </field>
+
+                <!-- Filter Product (product_tmpl_id) to only show Division = Unit for Extras & Bundling -->
+                <field name="product_tmpl_id" position="attributes">
+                    <attribute name="domain">type in ('extras', 'normal') and [('division', '=', 'Unit')] or []</attribute>
+                </field>
+
+                <!-- Filter Product Variant (product_id) to only show Division = Unit for Extras & Bundling -->
+                <!-- Also filter by product_tmpl_id to only show variants of selected product -->
+                <field name="product_id" position="attributes">
+                    <attribute name="required">type not in ('extras', 'normal')</attribute>
+                    <attribute name="domain">type in ('extras', 'normal') and [('division', '=', 'Unit'), ('product_tmpl_id', '=', product_tmpl_id)] or [('product_tmpl_id', '=', product_tmpl_id)]</attribute>
+               </field>
+
+                <!-- Target the visible company_id field (second occurrence, with groups attribute) -->
+                <xpath expr="//field[@name='company_id'][@groups='base.group_multi_company']" position="attributes">
+                    <attribute name="string">Branch</attribute>
+                    <attribute name="required">type == 'extras'</attribute>
+                    <attribute name="invisible">type != 'extras' and context.get('parent_production_id')</attribute>
+                    <attribute name="groups"></attribute>
+                </xpath>
+                
+                <field name="type" position="attributes">
+                    <attribute name="force_save">1</attribute>
+                </field>
+
+                <field name="product_id" position="after">
+                    <field name="product_origin_id" readonly="1" force_save="1" options="{'no_create': True}"/>
+                    <field name="bom_origin_id" readonly="1" force_save="1" options="{'no_create': True}"/>
+                </field>
+
+                <xpath expr="//field[@name='bom_line_ids']//field[@name='product_id']" position="attributes">
+                    <attribute name="domain">product_domain</attribute>
+                    <attribute name="column_invisible">parent.type == 'extras'</attribute>
+                </xpath>
+                <xpath expr="//field[@name='bom_line_ids']//field[@name='product_id']" position="after">
+                    <field name="product_id" 
+                        context="{'default_is_storable': True,'action_name': 'Extras'}" 
+                        options="{'no_quick_create': True}" 
+                        column_invisible="parent.type != 'extras'"
+                        domain="product_domain" 
+                        string="Product Variant" 
+                        readonly="component_template_id" 
+                        required="not component_template_id" 
+                        force_save="1" 
+                        on_change="1" 
+                        can_create="True" 
+                        can_write="True"/>
+               </xpath>
+                
+                <xpath expr="//field[@name='bom_line_ids']//field[@name='product_id']" position="before">
+                    <field name="product_domain" column_invisible="1"/>
+                    <field name="type" column_invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_inherit_mrp_bom_filter" model="ir.ui.view">
+            <field name="name">tw.inherit.mrp.bom.filter</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.view_mrp_bom_filter"/>
+            <field name="arch" type="xml">
+                <field name="product_tmpl_id" position="after">
+                    <field name="type"/>
+                    <field name="company_id" string="Branch"/>
+                    <field name="product_id"/>
+                    <field name="bom_line_ids" string="Product Variant" filter_domain="[('bom_line_ids.product_id','ilike', self)]"/>
+                </field>
+                <filter name="product" position="after">
+                    <filter name="company" string="Branch" domain="[('company_id', '=', 'value')]" context="{'group_by': 'company_id'}" />
+                </filter>
+            </field>
+        </record>
+
+
+        <record id="tw_mrp_inherit_extras_action" model="ir.actions.act_window">
+            <field name="name">Extras</field>
+            <field name="res_model">mrp.bom</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain" eval="[('type', '=', 'extras')]"/>
+            <!-- <field name="search_view_id" ref="tw_inherit_mrp_bom_filter" /> -->
+            <field name="context" eval="{
+                'default_type': 'extras',
+                'readonly_by_pass': 1,
+			}"/>
+        </record>
+        
+    
+    </data>
+</odoo>

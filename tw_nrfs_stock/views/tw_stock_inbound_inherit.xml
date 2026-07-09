@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_stock_inbound_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.inbound.inherit.form</field>
+            <field name="model">tw.stock.inbound</field>
+            <field name="inherit_id" ref="tw_stock_inbound.tw_stock_inbound_form_view" />
+            <field name="arch" type="xml">
+                <field name="driver_id" position="after">
+                    <field name="id_expedisi_ahm" required="1" readonly="state != 'draft'"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

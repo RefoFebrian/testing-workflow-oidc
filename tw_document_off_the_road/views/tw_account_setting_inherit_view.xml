@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_account_setting_document_offtr_view" model="ir.ui.view">
+            <field name="name">tw.account.setting.document.offtr.view</field>
+            <field name="model">tw.account.setting</field>
+            <field name="inherit_id" ref="tw_birojasa_billing_process.tw_account_settings_birojasa_inherit_view" />
+            <field name="arch" type="xml">
+                <field name="journal_birojasa_bbn_id" position="before">
+                    <field name="journal_customer_bbn_id" options="{ 'no_open': True, 'no_create': True }" />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

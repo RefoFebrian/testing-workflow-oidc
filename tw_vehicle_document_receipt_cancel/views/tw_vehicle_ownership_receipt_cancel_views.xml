@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <!-- Search View -->
+        <record id="view_vehicle_ownership_receipt_cancel_search" model="ir.ui.view">
+            <field name="name">tw.vehicle.ownership.receipt.cancel.search</field>
+            <field name="model">tw.vehicle.ownership.receipt.cancel</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="date"/>
+                    <field name="ownership_receipt_id"/>
+                    <field name="state"/>
+                    <field name="cancel_line_ids" string="Engine Number" filter_domain="[('cancel_line_ids.lot_id', 'ilike', self)]"/>
+                    <field name="cancel_line_ids" string="Chassis Number" filter_domain="[('cancel_line_ids.chassis_number', 'ilike', self)]"/>
+                    <filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+                    <filter name="confirmed" string="Confirmed" domain="[('state','=','confirmed')]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_state" string="Status" context="{'group_by':'state'}"/>
+                        <filter name="group_by_date" string="Date" context="{'group_by':'date'}"/>
+                        <filter name="group_by_company" string="Branch" context="{'group_by':'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <!-- List View -->
+        <record id="view_vehicle_ownership_receipt_cancel_list" model="ir.ui.view">
+            <field name="name">tw.vehicle.ownership.receipt.cancel.list</field>
+            <field name="model">tw.vehicle.ownership.receipt.cancel</field>
+            <field name="arch" type="xml">
+                <list string="Cancel Penerimaan BPKB" decoration-muted="state == 'cancel'" decoration-success="state == 'done'" decoration-info="state in ['draft', 'waiting_for_approval']">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="ownership_receipt_id"/>
+                    <field name="date"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+        
+        <!-- Form View -->
+        <record id="view_vehicle_ownership_receipt_cancel_form" model="ir.ui.view">
+            <field name="name">tw.vehicle.ownership.receipt.cancel.form</field>
+            <field name="model">tw.vehicle.ownership.receipt.cancel</field>
+            <field name="inherit_id" ref="tw_cancellation.tw_cancellation_form_view"/>
+            <field name="arch" type="xml">
+                <!-- Replace header to only show Confirm button and draft/confirmed states -->
+                <xpath expr="//header" position="replace">
+                    <header>
+                        <button name="action_confirm" data-hotkey="r" invisible="state != 'draft'" string="Confirm" type="object" class="oe_highlight" groups="tw_vehicle_document_receipt_cancel.tw_vehicle_ownership_receipt_cancel_confirm_button"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
+                    </header>
+                </xpath>
+                
+                <!-- Hide approval page -->
+                <xpath expr="//page[@name='approval']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <field name="transaction_name" position="after">
+                    <field name="ownership_receipt_id" required="context.get('default_model_type') == 'tw.vehicle.ownership.receipt.cancel'" 
+                           readonly="state != 'draft'" 
+                           options="{'no_create':True,'no_open':True}" 
+                           invisible="context.get('default_model_type') != 'tw.vehicle.ownership.receipt.cancel'"
+                           domain="[('id', 'in', available_ownership_receipt_ids)]"/>
+                </field>
+                <xpath expr="//page[@name='approval']" position="before">
+                    <page string="Engine Details" name="cancel_lines" required="context.get('default_model_type') == 'tw.vehicle.ownership.receipt.cancel'" 
+                          invisible="context.get('default_model_type') != 'tw.vehicle.ownership.receipt.cancel'">
+                        <field name="available_ownership_receipt_ids" invisible="1"/>
+                        <field name="available_lot_ids" invisible="1"/>
+                        <field name="cancel_line_ids" nolabel="1" readonly="state != 'draft'">
+                            <list editable="bottom">
+                                <field name="lot_id" string="Engine Number" domain="[('id', 'in', parent.available_lot_ids)]" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="chassis_number" string="Chassis Number" readonly="1"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        
+        <!-- Action -->
+        <record id="action_vehicle_ownership_receipt_cancel" model="ir.actions.act_window">
+            <field name="name">Cancel Penerimaan BPKB</field>
+            <field name="res_model">tw.vehicle.ownership.receipt.cancel</field>
+            <field name="search_view_id" ref="view_vehicle_ownership_receipt_cancel_search"/>
+            <field name="context" eval="
+            {
+            'default_model_id': ref('tw_vehicle_document_receipt_cancel.model_tw_vehicle_ownership_receipt_cancel'),
+            'default_model_type': 'tw.vehicle.ownership.receipt.cancel',
+            'default_division': 'Unit',
+            'readonly_division': True,
+            }
+            "/>
+            <field name="domain">['|',('ownership_receipt_id','!=',False),('model_id.model','=','tw.vehicle.ownership.receipt.cancel')]</field>
+        </record>
+        
+        <record id="tw_vehicle_ownership_receipt_cancel_action_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="view_vehicle_ownership_receipt_cancel_list"/>
+            <field name="act_window_id" ref="action_vehicle_ownership_receipt_cancel"/>
+        </record>
+        
+        <record id="tw_vehicle_ownership_receipt_cancel_action_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_vehicle_ownership_receipt_cancel_form"/>
+            <field name="act_window_id" ref="action_vehicle_ownership_receipt_cancel"/>
+        </record>
+        
+    </data>
+</odoo>

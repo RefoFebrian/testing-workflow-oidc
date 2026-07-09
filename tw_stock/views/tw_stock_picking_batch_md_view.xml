@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data> 
+        <record id="tw_stock_picking_batch_quality_check_form" model="ir.ui.view">
+            <field name="name">stock.picking.batch.quality.check.form</field>
+            <field name="model">stock.picking.batch</field>
+            <field name="arch" type="xml">
+                <form string="Stock Batch Transfer" duplicate="0">
+                    <field name="type" invisible="1"/>
+                    <field name="picking_type_code" invisible="1"/>
+                    <header>
+                        <button name="action_confirm" invisible="state != 'draft'" string="Confirm" type="object" class="oe_highlight" groups="tw_stock.group_tw_stock_picking_batch_button_confirm_read"/>
+                        <button name="action_done" string="Validate" type="object" class="oe_highlight"
+                            invisible="state != 'in_progress'" groups="tw_stock.group_tw_stock_picking_batch_button_validate_read"/>
+                        <button name="action_cancel" string="Cancel" type="object" invisible="state != 'in_progress'" groups="tw_stock.group_tw_stock_picking_batch_button_cancel_read"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_pickings" string="View Pickings" type="object" class="oe_stat_button" icon="fa-list" invisible="not source_picking_ids"/>
+                            <button name="action_view_next_batch" string="View Next Batch" type="object" class="oe_stat_button" icon="fa-truck" invisible="not batch_next_id"/>
+                            <button name="action_view_backorder_batch" string="View Backorder Batch" type="object" class="oe_stat_button" icon="fa-share" invisible="not batch_backorder_id"/>
+                        </div>
+                        <div class="oe_title">
+                            <h1><field name="name" class="oe_inline"/></h1>
+                        </div>
+                        <group>
+                            <group id="batch_delivery_data">
+                                <field name="company_id" groups="base.group_multi_company" string="Branch" readonly="state != 'draft'" force_save="1" options="{'no_create': True,'no_open': True}"/>
+                                <field name="picking_type_id" required="1" invisible="state != 'draft'" options="{'no_create': True,'no_open': True}"/>
+                                <field name="is_without_source" invisible="1"/>
+                                <field name="allowed_picking_ids" invisible="1"/>
+                                <field name="source_picking_ids" string="Source Document" widget="many2many_tags" required="1"
+                                    readonly="state != 'draft'"
+                                    options="{'no_create': True,'no_open': True}"
+                                    domain="[
+                                        ('company_id', '=', company_id),
+                                        ('picking_type_id', '=', picking_type_id),
+                                        ('batch_id','=',False),
+                                        ('division','=',division),
+                                        ('state', 'in', ['assigned','confirmed','waiting'])
+                                    ]"/>
+                                <field name="domain_result_package_ids" invisible="1" options="{'no_create': True,'no_open': True}"/>
+                                <field name="domain_product_ids" invisible="1" options="{'no_create': True,'no_open': True}"/>
+                                <field name="result_package_id" invisible="state != 'in_progress'" options="{'no_create': True,'no_open': True}" domain="[('id','in',domain_result_package_ids)]"/>
+                                <field name="product_id" invisible="state != 'in_progress'" options="{'no_create': True,'no_open': True}" domain="[('id','in',domain_product_ids)]"/>
+                                <button name="action_process_quality_check" string="Search" invisible="state != 'in_progress'" type="object" icon="fa-search"/>
+                            </group>
+                            <group>
+                                <field name="division" placeholder="e.g. Division" required="1" readonly="context.get('is_readonly', state != 'draft')" force_save="1"/>
+                                <field name="date" readonly="1" force_save="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Batch Lines" name="batch_line">
+                                <label for="batch_line_ids" string="Unit" invisible="division == 'Sparepart'"/>
+                                <field name="batch_line_ids" readonly="state != 'draft'">
+                                    <list string="Batch Lines" editable="bottom">
+                                        <field name="division" column_invisible="1"/>
+                                        <field name="lot_ids" column_invisible="1"/>
+                                        <field name="package_number" required="parent.division == 'Sparepart'" column_invisible="parent.division != 'Sparepart'"/>
+                                        <field name="sequence_number" required="parent.division == 'Sparepart'" column_invisible="parent.division != 'Sparepart'"/>
+                                        <field name="lot_id" required="parent.division == 'Unit'" column_invisible="parent.division != 'Unit'" options="{'no_open': True, 'no_create': True}" domain="[('id','in',lot_ids)]"/>
+                                        <field name="product_id" readonly="1" column_invisible="parent.division != 'Unit'" options="{'no_open': True, 'no_create': True}" force_save="1"/>
+                                        <field name="move_id" optional="hide"/>
+                                        <field name="location_dest_id" required="parent.division == 'Unit'" column_invisible="parent.division != 'Unit'" options="{'no_open': True, 'no_create': True}" domain="[('usage','=','internal'),('company_id','=',parent.company_id)]"/>
+                                        <field name="residual_capacity" readonly="1" column_invisible="parent.division != 'Unit'"/>
+                                        <field name="location_capacity" readonly="1" column_invisible="parent.division != 'Unit'" force_save="1"/>
+                                        <field name="is_rfs" column_invisible="parent.division != 'Unit'"/>
+                                        <field name="quantity" readonly="1" column_invisible="parent.division != 'Unit'" sum="Total Quantity" force_save="1"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Detailed Operations" name="page_detailed_operations" invisible="state == 'draft'">
+                                <field name="move_line_ids" readonly="state not in ['draft', 'in_progress']">
+                                    <list editable="top" decoration-muted="state == 'cancel'" string="Move Lines" default_order="location_id" create="0" delete="0" duplicate="0">
+                                        <field name="tracking" column_invisible="1"/>
+                                        <field name="state" column_invisible="1"/>
+                                        <field name="domain_lot_ids" column_invisible="1"/>
+                                        <field name="company_id" groups="base.group_multi_company" force_save="1" column_invisible="1"/>
+                                        <field name="product_id" context="{'default_is_storable': True}" required="1" readonly="id" options="{'no_create': True,'no_open': True}"/>
+                                        <field name="is_rfs"/>
+                                        <field name="picking_id" required="1" readonly="id" column_invisible="1"
+                                            options="{'no_create_edit': True}" domain="[('id', 'in', parent.source_picking_ids)]"/>
+                                        <field name="lot_id"   groups="stock.group_production_lot" 
+                                            readonly="tracking not in ['lot', 'serial']" 
+                                            column_invisible="parent.show_lots_text" 
+                                            required="tracking in ['lot', 'serial']"
+                                            domain="[('id', 'in', domain_lot_ids)]"
+                                            options="{'no_create': True,'no_open': True}"/>
+                                        <field name="lot_name" groups="stock.group_production_lot" readonly="tracking not in ['lot', 'serial']" column_invisible="not parent.show_lots_text"/>
+                                        <field name="result_package_id" groups="stock.group_tracking_lot" readonly="1" force_save="1"
+                                            options="{'no_create': True,'no_open': True}"
+                                            domain="[('picking_id', '=', picking_id), ('product_id', '=', product_id)]"/>
+                                        <field name="location_id" string="Source Location" 
+                                            options="{'no_create': True,'no_open': True}"
+                                            readonly="1" force_save="1"/>
+                                        <field name="location_dest_id" string="Destination Location" 
+                                            options="{'no_create': True,'no_open': True}"
+                                            domain="[('usage','=','internal'),('company_id','=',company_id)]"
+                                            readonly="1" force_save="1" optional="hide"/>
+                                        <field name="location_qc_id" string="Destination Location" 
+                                            options="{'no_create': True,'no_open': True}"
+                                            domain="[('usage','=','internal'),('company_id','=',company_id)]"
+                                            required="1" optional="show"/>
+                                        <field name="package_id" groups="stock.group_tracking_lot" column_invisible="1"/>
+                                        <field name="product_uom_id" options="{'no_create': True}" column_invisible="1"
+                                            groups="uom.group_uom" readonly="1" force_save="1"/>
+                                        <field name="supply_qty" string="Supply Qty"/>
+                                        <field name="quantity" readonly="1" force_save="1"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1" options="{'no_create': True,'no_open': True}"></field>
+                                        <field name="create_date" readonly="1"></field>
+                                        <field name="validate_uid" readonly="1" options="{'no_create': True,'no_open': True}"></field>
+                                        <field name="validate_date" readonly="1"></field>
+                                    </group>
+                                    <group>							
+                                        <field name="write_uid" readonly="1" options="{'no_create': True,'no_open': True}"></field>
+                                        <field name="write_date" readonly="1"></field>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+    <!-- Incoming-->
+        <!-- Workshop -->
+        <record id="action_tw_stock_picking_batch_md_receipt_sparepart" model="ir.actions.act_window">
+            <field name="name">Picking Batch Receipt</field>
+            <field name="res_model">stock.picking.batch</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{
+                'sequence_code': 'IN',
+                'default_type': 'MD', 
+                'default_division': 'Sparepart', 
+                'default_state':'draft',
+                'default_has_batch_line': True,
+                'search_default_in_progress': 1,
+                'is_readonly': True
+            }" />
+            <field name="domain" eval="[('division', '=', 'Sparepart'), ('picking_type_id.sequence_code', 'in', ['IN','In','in']), ('type', '=', 'MD')]"/>
+            <field name="search_view_id" ref="stock_picking_batch.stock_picking_batch_filter"/>
+        </record>
+
+        <record id="action_tw_stock_picking_batch_md_receipt_sparepart_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="stock_picking_batch.stock_picking_batch_tree"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_batch_md_receipt_sparepart"/>
+        </record>
+
+        <record id="action_tw_stock_picking_batch_md_receipt_sparepart_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="stock_picking_batch.stock_picking_batch_form"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_batch_md_receipt_sparepart"/>
+        </record>
+
+        <record id="action_tw_stock_picking_batch_md_qc_sparepart" model="ir.actions.act_window">
+            <field name="name">Picking Batch QC</field>
+            <field name="res_model">stock.picking.batch</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{
+                'sequence_code': 'QC',
+                'default_type': 'MD', 
+                'default_division': 'Sparepart', 
+                'default_state':'draft',
+                'search_default_in_progress': 1,
+                'is_readonly': True
+            }" />
+            <field name="domain" eval="[('division', '=', 'Sparepart'), ('picking_type_id.sequence_code', 'in', ['QC','Qc','qc']), ('type', '=', 'MD')]"/>
+            <field name="search_view_id" ref="stock_picking_batch.stock_picking_batch_filter"/>
+        </record>
+
+        <record id="action_tw_stock_picking_batch_md_qc_sparepart_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="stock_picking_batch.stock_picking_batch_tree"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_batch_md_qc_sparepart"/>
+        </record>
+
+        <record id="action_tw_stock_picking_batch_md_qc_sparepart_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_stock_picking_batch_quality_check_form"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_batch_md_qc_sparepart"/>
+        </record>
+
+        <record id="action_tw_stock_picking_batch_md_store_sparepart" model="ir.actions.act_window">
+            <field name="name">Picking Batch Store</field>
+            <field name="res_model">stock.picking.batch</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{
+                'sequence_code': 'STOR',
+                'default_type': 'MD', 
+                'default_division': 'Sparepart', 
+                'default_state':'draft',
+                'search_default_in_progress': 1,
+                'is_readonly': True
+            }" />
+            <field name="domain" eval="[('division', '=', 'Sparepart'), ('picking_type_id.sequence_code', 'in', ['STOR','Stor','stor']), ('type', '=', 'MD')]"/>
+            <field name="search_view_id" ref="stock_picking_batch.stock_picking_batch_filter"/>
+        </record>
+
+        <record id="action_tw_stock_picking_batch_md_store_sparepart_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="stock_picking_batch.stock_picking_batch_tree"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_batch_md_store_sparepart"/>
+        </record>
+
+        <record id="action_tw_stock_picking_batch_md_store_sparepart_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_stock_picking_batch_quality_check_form"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_batch_md_store_sparepart"/>
+        </record>
+
+        <!-- Showroom -->
+        <record id="action_tw_stock_picking_batch_md_receipt_unit" model="ir.actions.act_window">
+            <field name="name">Picking Batch Receipt</field>
+            <field name="res_model">stock.picking.batch</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{
+                'sequence_code': 'IN',
+                'default_type': 'MD', 
+                'default_division': 'Unit', 
+                'default_state':'draft',
+                'default_has_batch_line': True,
+                'search_default_in_progress': 1,
+                'is_readonly': True
+            }" />
+            <field name="domain" eval="[('division', '=', 'Unit'), ('picking_type_id.sequence_code', 'in', ['IN','In','in']), ('type', '=', 'MD')]"/>
+            <field name="search_view_id" ref="stock_picking_batch.stock_picking_batch_filter"/>
+        </record>
+
+        <record id="action_tw_stock_picking_batch_md_receipt_unit_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="stock_picking_batch.stock_picking_batch_tree"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_batch_md_receipt_unit"/>
+        </record>
+
+        <record id="action_tw_stock_picking_batch_md_receipt_unit_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="stock_picking_batch.stock_picking_batch_form"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_batch_md_receipt_unit"/>
+        </record>
+
+        <record id="action_tw_stock_picking_batch_md_qc_unit" model="ir.actions.act_window">
+            <field name="name">Picking Batch QC</field>
+            <field name="res_model">stock.picking.batch</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{
+                'sequence_code': 'QC',
+                'default_type': 'MD', 
+                'default_division': 'Unit', 
+                'default_state':'draft',
+                'default_has_batch_line': True,
+                'search_default_in_progress': 1,
+                'is_readonly': True
+            }" />
+            <field name="domain" eval="[('division', '=', 'Unit'), ('picking_type_id.sequence_code', 'in', ['QC','Qc','qc']), ('type', '=', 'MD')]"/>
+            <field name="search_view_id" ref="stock_picking_batch.stock_picking_batch_filter"/>
+        </record>
+
+        <record id="action_tw_stock_picking_batch_md_qc_unit_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="stock_picking_batch.stock_picking_batch_tree"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_batch_md_qc_unit"/>
+        </record>
+
+        <record id="action_tw_stock_picking_batch_md_qc_unit_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="stock_picking_batch.stock_picking_batch_form"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_batch_md_qc_unit"/>
+        </record>
+
+        <record id="action_tw_stock_picking_batch_md_store_unit" model="ir.actions.act_window">
+            <field name="name">Picking Batch Store</field>
+            <field name="res_model">stock.picking.batch</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{
+                'sequence_code': 'STOR',
+                'default_type': 'MD', 
+                'default_division': 'Unit', 
+                'default_state':'draft',
+                'default_has_batch_line': True,
+                'search_default_in_progress': 1,
+                'is_readonly': True
+            }" />
+            <field name="domain" eval="[('division', '=', 'Unit'), ('picking_type_id.sequence_code', 'in', ['STOR','Stor','stor']), ('type', '=', 'MD')]"/>
+            <field name="search_view_id" ref="stock_picking_batch.stock_picking_batch_filter"/>
+        </record>
+
+        <record id="action_tw_stock_picking_batch_md_store_unit_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="stock_picking_batch.stock_picking_batch_tree"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_batch_md_store_unit"/>
+        </record>
+
+        <record id="action_tw_stock_picking_batch_md_store_unit_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="stock_picking_batch.stock_picking_batch_form"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_batch_md_store_unit"/>
+        </record>
+    </data>
+</odoo>

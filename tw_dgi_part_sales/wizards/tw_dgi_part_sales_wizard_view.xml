@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Wizard Form View -->
+    <record id="tw_dgi_part_sales_wizard_view_form" model="ir.ui.view">
+        <field name="name">tw.dgi.part.sales.wizard.form</field>
+        <field name="model">tw.dgi.part.sales.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Get DGI Data - Part Sales">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>Get Data from DGI</h1>
+                        <p>Retrieve Part Sales data from DGI API for the specified time</p>
+                    </div>
+                    <!-- Filters -->
+                    <group string="Filters">
+                        <group>
+                            <field name="company_id" string="Branch" options="{'no_create': True,'no_open': True}" />
+                            <label for="from_time" string="Date Range"/>
+                            <div>
+                                <field name="from_time" class="oe_inline" style="width: 45%;"/>
+                                <span style="margin: 0 10px;">to</span>
+                                <field name="to_time" class="oe_inline" style="width: 45%;"/>
+                            </div>
+                            <div class="alert alert-warning" role="alert" style="margin-top: 8px;">
+                                <i class="fa fa-warning" title="Warning"/> <strong>Note:</strong> Maximum period is 3 days
+                            </div>
+                            <field name="no_part_sales" string="ID Part Sales" placeholder="e.g., 15537-SPK-25002757" />
+                        </group>
+                    </group>
+                    <group string="Results" invisible="not found_count">
+                        <field name="found_count" />
+                    </group>
+                    <group string="Process Log" invisible="not process_log">
+                        <field name="process_log"
+                            widget="text"
+                            readonly="1"
+                            nolabel="1"
+                            colspan="2" />
+                    </group>
+                    <footer>
+                        <button string="Get DGI Data"
+                            name="action_get_dgi_data"
+                            type="object"
+                            class="btn-primary"
+                            icon="fa-download" />
+                        <button string="Cancel" special="cancel" class="btn-secondary" />
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

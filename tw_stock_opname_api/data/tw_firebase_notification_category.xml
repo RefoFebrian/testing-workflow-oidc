@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="1">
+		<record id="firebase_notification_category_stock_opname_outstanding_photo" model="tw.firebase.notification.category">
+			<field name="name">Notification Stock Opname Outstanding Photo</field>
+			<field name="title">Stock Opname Outstanding Photo</field>
+			<field name="sumber_data">proactive</field>
+			<field name="jenis_reminder">harian</field>
+			<field name="content_template_id" ref="tw_stock_opname_api.firebase_content_template_stock_opname_outstanding_photo"/>
+		</record>
+  </data>
+</odoo>

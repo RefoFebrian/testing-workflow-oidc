@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="tw_service_rate_report_menu" parent="tw_menu.submenu_tw_workshop_report" action="action_tw_service_rate_report" name="Laporan Service Rate" sequence="10" groups="tw_service_rate_report.group_tw_service_rate_report_read"/>
+    </data>
+</odoo>

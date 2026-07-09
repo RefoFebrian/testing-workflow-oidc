@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tw_product_category_serial_number_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.product.category.serial.number.inherit.form.view</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="stock.product_category_form_view_inherit"/>
+        <field name="arch" type="xml">
+            <group name="logistics" position="after">
+                <group name="group_product_category_serial_number" string="Serial Number Settings">
+                    <label for="serial_number_length" />
+                    <div >
+                        <field name="serial_number_length"/>
+                    </div>
+                    <label for="chassis_number_length" />
+                    <div >
+                        <field name="chassis_number_length"/>
+                    </div>
+                    <label for="tracking" />
+                    <div >
+                        <field name="tracking" readonly="0"/>
+                    </div>
+                </group>
+            </group>
+        </field>
+    </record>
+
+
+    <record id="tw_product_category_search_inherit_view" model="ir.ui.view">
+        <field name="name">tw.product.category.search.inherit.view</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_search_view"/>
+        <field name="arch" type="xml">
+            <field name="parent_id" position="after">
+                <filter string="Root Category" name="root_category" domain="[]" context="{'group_by':'root_category_id'}"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="product.product_category_action_form" model="ir.actions.act_window">
+        <field name="context" eval="
+            {
+                'search_default_root_category': 1,
+            }
+        " />
+    </record>
+    
+
+</odoo>

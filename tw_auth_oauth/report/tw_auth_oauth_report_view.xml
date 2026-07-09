@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_auth_oauth_report_view" model="ir.ui.view">
+			<field name="name">tw.auth.oauth.report.view</field>
+			<field name="model">tw.auth.oauth.report</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Laporan SSO Tunas">
+					<group>
+						<field name="option" required="1"/>
+                    </group>
+                    <footer>
+                        <button name="action_download" type="object" string="Download" icon="fa-download" class="oe_highlight"/>
+                        <button special="cancel" string="Cancel" class="oe_link"/>
+                    </footer>
+                </form>
+			</field>
+		</record>
+
+		<record id="action_tw_auth_oauth_report" model="ir.actions.act_window">
+			<field name="name">Laporan SSO Tunas</field> 
+			<field name="res_model">tw.auth.oauth.report</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="tw_auth_oauth_report_view"/>
+			<field name="target">new</field>
+		</record>
+    </data>
+</odoo>

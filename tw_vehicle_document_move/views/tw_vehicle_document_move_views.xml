@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- list View -->
+    <record id="view_vehicle_document_move_list" model="ir.ui.view">
+        <field name="name">tw.vehicle.document.move.list</field>
+        <field name="model">tw.vehicle.document.move</field>
+        <field name="arch" type="xml">
+            <list string="Vehicle Document Moves" create="false" edit="false">
+                <field name="date"/>
+                <field name="reference"/>
+                <field name="document_type"/>
+                <field name="lot_id"/>
+                <field name="document_number"/>
+                <field name="source_location_id"/>
+                <field name="destination_location_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_vehicle_document_move_form" model="ir.ui.view">
+        <field name="name">tw.vehicle.document.move.form</field>
+        <field name="model">tw.vehicle.document.move</field>
+        <field name="arch" type="xml">
+            <form string="Vehicle Document Move" create="false" edit="false" delete="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="reference"/>
+                            <field name="document_type"/>
+                            <field name="document_number"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="lot_id"/>
+                            <field name="company_id" readonly="1" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group string="Movement">
+                        <group>
+                            <field name="source_location_id"/>
+                        </group>
+                        <group>
+                            <field name="destination_location_id"/>
+                        </group>
+                    </group>
+                    <group string="Audit Trail">
+                        <group>
+                            <field name="create_uid" string="Created by" readonly="1"/>
+                            <field name="create_date" string="Created on" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_vehicle_document_move_search" model="ir.ui.view">
+        <field name="name">tw.vehicle.document.move.search</field>
+        <field name="model">tw.vehicle.document.move</field>
+        <field name="arch" type="xml">
+            <search string="Vehicle Document Moves">
+                <field name="reference"/>
+                <field name="lot_id"/>
+                <field name="document_number"/>
+                <field name="source_location_id"/>
+                <field name="destination_location_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="date"/>
+                
+                <filter string="STNK" name="filter_stnk" domain="[('document_type', '=', 'vehicle_registration')]"/>
+                <filter string="BPKB" name="filter_bpkb" domain="[('document_type', '=', 'vehicle_ownership')]"/>
+                
+                <separator/>
+                <filter string="This Month" name="filter_this_month" 
+                        domain="[('date', '&gt;=', (context_today() - relativedelta(day=1)).strftime('%Y-%m-%d')), 
+                                ('date', '&lt;=', (context_today() + relativedelta(day=31)).strftime('%Y-%m-%d'))]"/>
+                <filter string="Last Month" name="filter_last_month" 
+                        domain="[('date', '&gt;=', (context_today() - relativedelta(months=1, day=1)).strftime('%Y-%m-%d')), 
+                                ('date', '&lt;=', (context_today() - relativedelta(months=1, day=31)).strftime('%Y-%m-%d'))]"/>
+                
+                <group expand="0" string="Group By">
+                    <filter string="Document Type" name="group_by_type" context="{'group_by': 'document_type'}"/>
+                    <filter string="Source Location" name="group_by_source" context="{'group_by': 'source_location_id'}"/>
+                    <filter string="Destination Location" name="group_by_dest" context="{'group_by': 'destination_location_id'}"/>
+                    <filter string="Branch" name="group_by_company" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                    <filter string="Date" name="group_by_date" context="{'group_by': 'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_vehicle_document_move_stnk" model="ir.actions.act_window">
+        <field name="name">STNK Movements</field>
+        <field name="res_model">tw.vehicle.document.move</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('document_type', '=', 'vehicle_registration')]</field>
+        <field name="context">{'default_document_type': 'vehicle_registration', 'search_default_filter_stnk': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No STNK movements recorded yet
+            </p>
+            <p>
+                STNK movements are created automatically when:
+                - STNK is received
+                - STNK is transferred between locations (mutation)
+                - STNK is handed over to customer
+            </p>
+        </field>
+    </record>
+
+    <record id="action_vehicle_document_move_bpkb" model="ir.actions.act_window">
+        <field name="name">BPKB Movements</field>
+        <field name="res_model">tw.vehicle.document.move</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('document_type', '=', 'vehicle_ownership')]</field>
+        <field name="context">{'default_document_type': 'vehicle_ownership', 'search_default_filter_bpkb': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No BPKB movements recorded yet
+            </p>
+            <p>
+                BPKB movements are created automatically when:
+                - BPKB is received
+                - BPKB is transferred between locations (mutation)
+                - BPKB is handed over to customer
+            </p>
+        </field>
+    </record>
+
+
+</odoo>

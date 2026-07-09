@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_nrfs_mft_ppo_form_view" model="ir.ui.view">
+            <field name="name">tw.nrfs.mft.ppo.form</field>
+            <field name="model">tw.nrfs</field>
+            <field name="inherit_id" ref="tw_nrfs.tw_nrfs_po_urgent_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_check_availability']" position="after">
+                    <button name="action_confirm_md_sparepart" string="Confirm H3 MD" type="object" class="oe_highlight" invisible="is_p2p_md != False or is_urgent_po != False" groups="tw_nrfs_mft_file_ppo.tw_nrfs_confirm_md_group_button_read"/>
+                </xpath>
+                <xpath expr="//page[@name='detail']/field[@name='line_ids']/list/field[@name='handling_id']" position="after">
+                    <field name="is_urgent_po" invisible="1"/>
+                    <field name="urgent_po_number" invisible="1"/>
+                    <field name="urgent_po_date" invisible="1"/>
+                </xpath>
+                <xpath expr="//page[@name='detail']/field[@name='line_ids']/form/sheet/group/group[@name='detail']/field[@name='handling_id']" position="after">
+                    <field name="is_urgent_po" invisible="1"/>
+                    <field name="urgent_po_number" readonly="1"/>
+                    <field name="urgent_po_date" readonly="1"/>
+                </xpath>
+                <xpath expr="//group[@name='est_penanganan']" position="after">
+                    <group string="PO Urgent" name="po_urgent" invisible="is_urgent_po == False">
+                        <field name="is_urgent_po" invisible="1"/>
+                        <field name="urgent_po_number" readonly="1"/>
+                        <field name="urgent_po_date" readonly="1"/>
+                        <field name="urgent_ppo_filename" readonly="1" invisible="urgent_ppo_filename == False" />
+                        <field name="urgent_ppo_send_date" readonly="1" invisible="urgent_ppo_send_date == False" />
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_nrfs_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.nrfs.inherit.form</field>
+            <field name="model">tw.nrfs</field>
+            <field name="inherit_id" ref="tw_nrfs.tw_nrfs_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='est_penanganan']" position="after">
+                    <group string="PO Urgent" name="po_urgent" invisible="is_urgent_po == False">
+                        <field name="is_urgent_po" invisible="1" />
+                        <field name="urgent_po_number" readonly="1" />
+                        <field name="urgent_po_date" readonly="1" />
+                    </group>
+                </xpath>
+                <xpath expr="//page[@name='detail']" position="after">
+                    <page name="history_mft_nrfs" string="History MFT NRFS">
+                        <field name="mft_nrfs_history_ids" readonly="1">
+                            <list>
+                                <field name="nrfs_filename" />
+                                <field name="nrfs_send_date" />
+                            </list>
+                            <form>
+                                <sheet>
+                                    <group colspan="4" col="4">
+                                        <field name="nrfs_filename" readonly="1" />
+                                        <field name="nrfs_send_date" readonly="1" />
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_nrfs_vendor_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.nrfs.vendor.inherit.form</field>
+            <field name="model">tw.nrfs</field>
+            <field name="inherit_id" ref="tw_nrfs.tw_nrfs_vendor_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='detail']" position="after">
+                    <page name="history_mft_nrfs" string="History MFT NRFS" groups="tw_base.group_system_admin">
+                        <field name="mft_nrfs_history_ids" readonly="1">
+                            <list>
+                                <field name="nrfs_filename" />
+                                <field name="nrfs_send_date" />
+                            </list>
+                            <form>
+                                <sheet>
+                                    <group colspan="4" col="4">
+                                        <field name="nrfs_filename" readonly="1" />
+                                        <field name="nrfs_send_date" readonly="1" />
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

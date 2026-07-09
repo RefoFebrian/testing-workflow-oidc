@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Account Move Line -->
+        <record id="tw_account_move_line_bank_reconcile_list_view" model="ir.ui.view">
+            <field name="name">tw.account.move.line.bank.reconcile.list</field>
+            <field name="model">account.move.line</field>
+            <field name="priority">50</field>
+            <field name="arch" type="xml">
+        		<list>
+        			<field name="period_id" options="{'no_open': True, 'no_create': True}"/>
+					<field name="date"/>
+		     		<field name="name"/>
+		     		<field name="ref"/>
+		     		<field name="debit" sum="Total Debit"/>
+		     		<field name="credit" sum="Toral Credit"/>
+				</list>
+			</field>
+		</record>
+
+        <record id="tw_account_move_line_bank_reconcile_form_view" model="ir.ui.view">
+            <field name="name">tw.account.move.line.bank.reconcile.form</field>
+            <field name="model">account.move.line</field>
+            <field name="priority">50</field>
+            <field name="arch" type="xml">
+        		<form>
+        			<group>
+						<field name="period_id" options="{'no_open': True, 'no_create': True}" readonly="1"/>
+						<field name="date" readonly="1"/>
+			     		<field name="partner_id" readonly="1"/>
+			     		<field name="name" readonly="1"/>
+			     		<field name="ref" readonly="1"/>
+			     		<field name="account_id" options="{'no_open': True, 'no_create': True}" readonly="1"/>
+			     		<field name="debit" sum="Total Debit" readonly="1"/>
+			     		<field name="credit" sum="Toral Credit" readonly="1"/>
+			     	</group>
+			     </form>
+			</field>
+		</record>
+        
+        <!-- Bank Mutasi View -->
+        <record id="tw_bank_mutasi_bank_reconcile_list_view" model="ir.ui.view">
+	        <field name="name">tw.bank.mutasi.bank.reconcile.list</field>
+	        <field name="model">tw.bank.mutasi</field>
+	        <field name="priority">10</field>
+	        <field name="arch" type="xml">
+	        	<list>
+					<field name="date"/>
+					<field name="name"/>
+					<field name="remark"/>
+					<field name="no_sistem"/>
+					<field name="debit" sum="Total Debit"/>
+					<field name="credit" sum="Total Credit"/>
+				</list>
+	    	</field>
+	    </record>
+
+        <record id="tw_bank_mutasi_bank_reconcile_form_view" model="ir.ui.view">
+	        <field name="name">tw.bank.mutasi.bank.reconcile.form</field>
+	        <field name="model">tw.bank.mutasi</field>
+	        <field name="priority">10</field>
+	        <field name="arch" type="xml">
+	        	<form>
+	        		<group>
+	        			<field name="name" readonly="1"/>
+					 	<field name="remark" readonly="1"/>
+		 	            <field name="bank_reconcile_id" readonly="1"/>
+		                <field name="debit" readonly="1"/>
+		                <field name="credit" readonly="1"/>
+		                <field name="amount" readonly="1"/>
+		                <field name="coa" readonly="1"/>
+		                <field name="no_sistem" readonly="1"/>
+		                <field name="date" readonly="1" string="Tanggal RK"/>
+		                <field name="account_id" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+		                <field name="journal_id" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+		                <field name="format" readonly="1"/>
+		                <field name="date_upload" readonly="1"/>
+	        		</group>
+	        	</form>
+	        </field>
+	    </record>
+        
+        <!-- List View -->
+        <record id="tw_bank_reconcile_list_view" model="ir.ui.view">
+            <field name="name">tw.bank.reconcile.list</field>
+            <field name="model">tw.bank.reconcile</field>
+            <field name="type">list</field>
+            <field name="arch" type="xml">
+                <list string="Bank Reconcile" default_order="id desc">
+                    <field name="name"/>
+	                <field name="company_id"/>
+		            <field name="account_id"/>
+		            <field name="date"/>
+		            <field name="state" widget="badge" decoration-success="state in ('posted','auto_reconciled')" decoration-muted="state == 'draft'" decoration-danger="state == 'cancel'"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="tw_bank_reconcile_form_view" model="ir.ui.view">
+            <field name="name">tw.bank.reconcile.form</field>
+            <field name="model">tw.bank.reconcile</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Bank Reconcile">
+                    <header>
+                        <button name="action_confirm" invisible="state != 'draft'" string="Confirm" type="object" class="oe_highlight" groups="tw_bank_reconcile.group_tw_bank_reconcile_button_confirm"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft, posted, auto_reconciled" statusbar_colors="{'draft': 'red', 'posted': 'done', 'auto_reconciled': 'done'}"/>
+					</header>
+                    <sheet>
+                        <div class="oe_title">
+		       				<h1>
+					            <field name="name" class="oe_inline" readonly="1"/>
+		    			    </h1>
+	                    </div>
+                        <group>
+	                    	<group>
+				    			<field name="company_id" required="1" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'"/>
+					         	<field name="confirm_uid" readonly = "1" invisible="state == 'draft'"/>
+					         	<field name="confirm_date" readonly = "1" invisible="state == 'draft'"/>
+					        </group>
+                            <group>
+					         	<field name="account_id" required="1" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'"/>
+                            </group>
+						</group>
+                        <notebook>
+							<page string="Detail">
+					    		<group>
+					    			<div class="col-sm-12">
+					    				<separator string="Mutasi Bank"/>
+										<field name="bank_mutasi_ids" nolabel="1" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'" invisible="account_id == False" domain="[('account_id','=',account_id), ('reconciled','=',False), ('date','!=',False)]" context="{'list_view_ref': 'tw_bank_reconcile.tw_bank_mutasi_bank_reconcile_list_view', 'form_view_ref': 'tw_bank_reconcile.tw_bank_mutasi_bank_reconcile_form_view'}"/>
+										<separator string="Journal"/>
+										<field name="move_line_ids" nolabel="1" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'" invisible="account_id == False" domain="[('account_id','=',account_id), ('reconciled_rk','=',False)]" context="{'list_view_ref': 'tw_bank_reconcile.tw_account_move_line_bank_reconcile_list_view', 'form_view_ref': 'tw_bank_reconcile.tw_account_move_line_bank_reconcile_form_view'}"/>
+					    			</div>
+								</group>
+							</page>
+							<page string="Audit Trail">
+								<group>
+									<group>
+										<field name="create_uid" readonly="1"/>
+										<field name="create_date" readonly="1"/>
+										<field name="cancel_uid" readonly="1" invisible="cancel_uid == False"/>
+										<field name="cancel_date" readonly="1" invisible="cancel_date == False"/>
+									</group>
+									<group>
+										<field name="write_uid" readonly="1"/>
+										<field name="write_date" readonly="1"/>
+									</group>
+								</group>
+							</page>
+						</notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="tw_bank_reconcile_search_view" model="ir.ui.view">
+            <field name="name">tw.bank.reconcile.search</field>
+            <field name="model">tw.bank.reconcile</field>
+            <field name="arch" type="xml">
+                <search string="Bank Reconcile">
+                    <field name="name" string="Name"/>
+                    <field name="account_id" string="Account"/>
+                    <field name="company_id" string="Branch"/>
+                    <field name="date" string="Date"/>
+                    <field name="bank_mutasi_ids" filter_domain="[('bank_mutasi_ids.name', '=', self)]" string="Bank Mutasi"/>
+		            <field name="move_line_ids" filter_domain="['|', ('move_line_ids.name', '=', self), ('move_line_ids.ref', '=', self)]" string="Journal"/>
+                    <filter name="state_draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                    <filter name="state_posted" string="Posted" domain="[('state', '=', 'posted')]"/>
+                    <filter name="state_auto_reconcile" string="Auto Reconcile" domain="[('state', '=', 'auto_reconciled')]"/>
+                    <filter name="state_cancel" string="Cancelled" domain="[('state', '=', 'cancel')]"/>
+                    <group string="Group By.." expand="1">
+                        <filter string="Account" domain="[]" name="group_by_account_id" context="{'group_by': 'account_id'}"/>
+                        <filter string="Branch" domain="[]" name="group_by_company_id" context="{'group_by': 'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action View -->
+        <record id="tw_bank_reconcile_action" model="ir.actions.server">
+            <field name="name">Bank Reconcile</field>
+            <field name="model_id" ref="tw_bank_reconcile.model_tw_bank_reconcile"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.bank.reconcile'].action_bank_reconcile_tree()
+            </field>
+        </record>
+        
+    </data>
+</odoo>

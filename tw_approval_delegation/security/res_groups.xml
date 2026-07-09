@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- READ -->
+        <record id="group_tw_approval_delegation_read" model="res.groups">
+            <field name="category_id" ref="tw_approval.group_category_approval_matrix"/>
+            <field name="name">TW Approval Delegation Read</field>
+        </record>
+
+        <record id="access_tw_approval_delegation_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_approval_delegation"/>
+            <field name="name">tw_approval_delegation read</field>
+            <field name="group_id" ref="group_tw_approval_delegation_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- UPDATE -->
+        <record id="group_tw_approval_delegation_update" model="res.groups">
+            <field name="category_id" ref="tw_approval.group_category_approval_matrix"/>
+            <field name="name">TW Approval Delegation Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_approval_delegation_read'))]"/>
+        </record>
+
+        <record id="access_tw_approval_delegation_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_approval_delegation"/>
+            <field name="name">tw_approval_delegation update</field>
+            <field name="group_id" ref="group_tw_approval_delegation_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- DELETE -->
+        <record id="group_tw_approval_delegation_delete" model="res.groups">
+            <field name="category_id" ref="tw_approval.group_category_approval_matrix"/>
+            <field name="name">TW Approval Delegation Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_approval_delegation_read'))]"/>
+        </record>
+
+        <record id="access_tw_approval_delegation_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_approval_delegation"/>
+            <field name="name">tw_approval_delegation delete</field>
+            <field name="group_id" ref="group_tw_approval_delegation_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_approval_delegation_read')),
+                (4, ref('group_tw_approval_delegation_update')),
+                (4, ref('group_tw_approval_delegation_delete'))
+            ]"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- Menu under Cancellation -->
+        <menuitem 
+            id="menu_good_receive_cancel"
+            name="Good Receive Cancel"
+            parent="tw_cancellation.submenu_backoffice_tw_cancellation"
+            action="tw_good_receive_cancel_action"
+            sequence="20"/>
+
+    </data>
+</odoo>

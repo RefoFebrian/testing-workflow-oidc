@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="filter_account_account_branch_grading" model="ir.filters">
+            <field name="name">Default Account Branch Grading</field>
+            <field name="model_id">account.account</field>
+            <field name="domain">[('code', 'in', ('11210202', '11210203', '11319902', '11319904', '11319912', '11319914'))]</field>
+            <field name="user_id" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

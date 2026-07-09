@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+      <record id="self_register_non_active" model="website.page">
+        <field name="url"></field>
+        <field name="is_published">False</field>
+        <field name="website_indexed" eval="True" />
+        <field name="name">Self Register Non Active</field>
+        <field name="type">qweb</field>
+        <field name="key">website_self_register.self_register_non_active</field>
+        <field name="arch" type="xml">
+            <t t-name="website.not-found-branch">
+                <t t-call="website.layout">
+                    <main class="sr-error-page">
+                        <div class="sr-error-card">
+                            <!-- Icon -->
+                            <div class="sr-error-icon">
+                                ⚠️
+                            </div>
+
+                            <!-- Title -->
+                            <h2>Mohon Maaf</h2>
+
+                            <!-- Dynamic Message -->
+                            <p><t t-esc="message"/></p>
+
+                            <!-- Helpdesk Button -->
+                            <a href="javascript:history.back()" class="btn-helpdesk">
+                                <i class="fa fa-arrow-left" title="Back"/>
+                                Kembali
+                            </a>
+                        </div>
+                    </main>
+                </t>
+            </t>
+        </field>
+      </record>
+    </data>
+  </odoo>

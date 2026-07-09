@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+      <record id="self_register_thank_you" model="website.page">
+        <field name="url"></field>
+        <field name="is_published">False</field>
+        <field name="website_indexed" eval="True" />
+        <field name="name">Self Register Thank You</field>
+        <field name="type">qweb</field>
+        <field name="key">website_self_register.self_register_thank_you</field>
+        <field name="arch" type="xml">
+            <t t-name="website.thank_you">
+                <t t-call="website.layout">
+                    <main class="sr-error-page">
+                        <div class="sr-error-card">
+                            <!-- Icon -->
+                            <div class="sr-error-icon" style="background: linear-gradient(135deg, #E8F5E9, #C8E6C9);">
+                                ✅
+                            </div>
+
+                            <!-- Title -->
+                            <h2>Terima Kasih!</h2>
+
+                            <!-- Message -->
+                            <p>
+                                <t t-esc="message"/>
+                            </p>
+
+                            <!-- Registration Number -->
+                            <t t-if="no_self_register">
+                                <div class="registration-number" style="max-width: 360px; margin: 16px auto;">
+                                    <input type="text" t-att-value="no_self_register" readonly="readonly"/>
+                                </div>
+                            </t>
+                        </div>
+                    </main>
+                </t>
+            </t>
+        </field>
+      </record>
+    </data>
+  </odoo>

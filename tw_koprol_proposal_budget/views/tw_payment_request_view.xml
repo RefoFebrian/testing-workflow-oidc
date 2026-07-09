@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <!-- Inherit Views -->
+         <record id="view_payment_request_form_budget_proposal_inherit" model="ir.ui.view">
+            <field name="name">tw.payment.request.form.budget_proposal.inherit</field>
+            <field name="model">tw.payment.request</field>
+            <field name="inherit_id" ref="tw_payment_request.view_payment_request_form"/>
+            <field name="arch" type="xml">
+                <field name="is_paid" position="after">
+                    <field name="budget_proposal_line_id" options="{'no_open': True, 'no_create': True}"/>
+                    <field name="initial_budget_amount" readonly="1" invisible="not budget_proposal_line_id"/>
+                    <field name="reserved_budget_amount" readonly="1" invisible="not budget_proposal_line_id"/>
+                    <field name="realization_budget_amount" readonly="1" invisible="not budget_proposal_line_id"/>
+                    <field name="available_budget_amount" readonly="1" invisible="not budget_proposal_line_id"/>
+
+                </field>
+            </field>
+        </record>
+
+    </data>
+
+</odoo>

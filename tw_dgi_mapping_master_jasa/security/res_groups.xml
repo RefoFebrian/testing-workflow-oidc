@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Proses STNK Upload -->
+        <record id="group_tw_dgi_mapping_master_jasa_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Mapping Master Jasa Read</field>
+        </record>
+        
+        <!-- Main Model Access -->
+        <record id="access_tw_dgi_mapping_master_jasa_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dgi_mapping_master_jasa"/>
+            <field name="name">tw_dgi_mapping_master_jasa read</field>
+            <field name="group_id" ref="group_tw_dgi_mapping_master_jasa_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_dgi_mapping_master_jasa_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dgi_mapping_master_jasa_line"/>
+            <field name="name">tw_dgi_mapping_master_jasa_line read</field>
+            <field name="group_id" ref="group_tw_dgi_mapping_master_jasa_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_upload_mapping_jasa_wizard_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_upload_mapping_jasa_wizard"/>
+            <field name="name">tw_upload_mapping_jasa_wizard read</field>
+            <field name="group_id" ref="group_tw_dgi_mapping_master_jasa_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_upload_mapping_jasa_result_wizard_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_upload_mapping_jasa_result_wizard"/>
+            <field name="name">tw_upload_mapping_jasa_result_wizard read</field>
+            <field name="group_id" ref="group_tw_dgi_mapping_master_jasa_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Update Group -->
+        <record id="group_tw_dgi_mapping_master_jasa_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Mapping Master Jasa Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_dgi_mapping_master_jasa_read'))]"/>
+        </record>
+        
+        <record id="access_tw_dgi_mapping_master_jasa_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dgi_mapping_master_jasa"/>
+            <field name="name">tw_dgi_mapping_master_jasa update</field>
+            <field name="group_id" ref="group_tw_dgi_mapping_master_jasa_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_dgi_mapping_master_jasa_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dgi_mapping_master_jasa_line"/>
+            <field name="name">tw_dgi_mapping_master_jasa_line update</field>
+            <field name="group_id" ref="group_tw_dgi_mapping_master_jasa_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+       <record id="access_tw_upload_mapping_jasa_wizard_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_upload_mapping_jasa_wizard"/>
+            <field name="name">tw_upload_mapping_jasa_wizard update</field>
+            <field name="group_id" ref="group_tw_dgi_mapping_master_jasa_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        <record id="access_tw_upload_mapping_jasa_result_wizard_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_upload_mapping_jasa_result_wizard"/>
+            <field name="name">tw_upload_mapping_jasa_result_wizard update</field>
+            <field name="group_id" ref="group_tw_dgi_mapping_master_jasa_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Delete Group -->
+        <record id="group_tw_dgi_mapping_master_jasa_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Mapping Master Jasa Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_dgi_mapping_master_jasa_read'))]"/>
+        </record>
+        
+        <record id="access_tw_dgi_mapping_master_jasa_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dgi_mapping_master_jasa"/>
+            <field name="name">tw_dgi_mapping_master_jasa delete</field>
+            <field name="group_id" ref="group_tw_dgi_mapping_master_jasa_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_dgi_mapping_master_jasa_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dgi_mapping_master_jasa_line"/>
+            <field name="name">tw_dgi_mapping_master_jasa_line delete</field>
+            <field name="group_id" ref="group_tw_dgi_mapping_master_jasa_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_upload_mapping_jasa_wizard_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_upload_mapping_jasa_wizard"/>
+            <field name="name">tw_upload_mapping_jasa_wizard delete</field>
+            <field name="group_id" ref="group_tw_dgi_mapping_master_jasa_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+        <record id="access_tw_upload_mapping_jasa_result_wizard_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_upload_mapping_jasa_result_wizard"/>
+            <field name="name">tw_upload_mapping_jasa_result_wizard delete</field>
+            <field name="group_id" ref="group_tw_dgi_mapping_master_jasa_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+    </data>
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+            (4,ref('group_tw_dgi_mapping_master_jasa_read')),
+            (4,ref('group_tw_dgi_mapping_master_jasa_update')),
+            (4,ref('group_tw_dgi_mapping_master_jasa_delete')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

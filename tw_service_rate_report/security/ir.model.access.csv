@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_service_rate_report,tw_service_rate_report,model_tw_service_rate_report,base.group_user,1,0,0,0
+
+
+

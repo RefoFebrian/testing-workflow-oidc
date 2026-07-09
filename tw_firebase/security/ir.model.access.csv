@@ -1,0 +1,7 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+access_all_tw_firebase_user,access_all_tw_firebase_user,model_tw_firebase_user,base.group_user,1,0,0,0
+access_all_tw_firebase_message,access_all_tw_firebase_message,model_tw_firebase_message,base.group_user,1,0,0,0
+access_all_tw_firebase_message_line,access_all_tw_firebase_message_line,model_tw_firebase_message_line,base.group_user,1,0,0,0
+access_all_tw_firebase_notification,access_all_tw_firebase_notification,model_tw_firebase_notification,base.group_user,1,0,0,0
+access_all_tw_firebase_content_template,access_all_tw_firebase_content_template,model_tw_firebase_content_template,base.group_user,1,0,0,0
+access_all_tw_firebase_notification_category,access_all_tw_firebase_notification_category,model_tw_firebase_notification_category,base.group_user,1,0,0,0

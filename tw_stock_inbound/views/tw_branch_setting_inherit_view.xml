@@ -1,0 +1,16 @@
+<odoo>
+  <data>
+    <record id="tw_stock_inbound_branch_setting_inherit_form_view" model="ir.ui.view">
+      <field name="name">tw.stock.inbound.branch.setting.inherit.view.form</field>
+      <field name="model">tw.branch.setting</field>
+      <field name="inherit_id" ref="tw_branch_setting.tw_branch_setting_form_view"/>
+      <field name="arch" type="xml">
+        <!-- Readonly Purchase Order Vendor Price -->
+        <field name="cashier_id" position="after">
+          <field name="expedition_id" options='{"no_create": True}'/>
+        </field>
+      </field>
+    </record>
+  </data>
+</odoo>
+  

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Menu Items -->
+        <menuitem id="menu_vehicle_document_move_root"
+                  name="Document Move"
+                  parent="tw_vehicle_registration_process.tw_vehicle_registration_process_menu_sub"
+                  sequence="100"/>
+
+        <menuitem id="menu_vehicle_document_move_stnk"
+                  name="STNK Movements"
+                  parent="menu_vehicle_document_move_root"
+                  action="action_vehicle_document_move_stnk"
+                  sequence="10"/>
+
+        <menuitem id="menu_vehicle_document_move_bpkb"
+                  name="BPKB Movements"
+                  parent="menu_vehicle_document_move_root"
+                  action="action_vehicle_document_move_bpkb"
+                  sequence="20"/>
+    </data>
+</odoo>

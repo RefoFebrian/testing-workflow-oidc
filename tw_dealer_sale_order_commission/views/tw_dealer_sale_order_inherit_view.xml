@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_dealer_sale_order_commision_form_view" model="ir.ui.view">
+            <field name="name">tw.dealer.sale.order.commision.form</field>
+            <field name="model">tw.dealer.sale.order</field>
+            <field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_order_view_form"/>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+
+                <field name="amount_receivable" position="before">
+                    <field name="amount_commission" readonly="1"/>
+                </field>
+                <field name="mediator_id" position="attributes">
+                    <attribute name="required">amount_commission != 0</attribute>
+                </field>
+
+                <xpath expr="//field[@name='summary_discount_ids']/list/field[@name='product_qty']" position="after">
+					<field name="expense_commission" readonly="1"/>
+				</xpath>
+
+            </field>
+        </record>
+
+        <record id="tw_dealer_sale_order_line_commision_form_view" model="ir.ui.view">
+            <field name="name">tw.dealer.sale.order.line.commision.form</field>
+            <field name="model">tw.dealer.sale.order.line</field>
+            <field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_sale_order_line_view_form"/>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='page_lines']" position="after">
+					<page string="Hutang Komisi" name="dso_line_commission">
+						<group>
+                            <group readonly="parent.state != 'draft'">
+                                <field name="available_commission_ids" invisible="1"/>
+                                <field name="commission_id" domain="[('id', 'in', available_commission_ids)]" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="amount_commission" required="commission_id" readonly="commission_type == 'fix'" invisible="not commission_id" force_save="1"/>
+                            </group>
+                            <group readonly="parent.state != 'draft'" invisible="not commission_id">
+                                <field name="commission_type" readonly="1" force_save="1"/>
+                                <field name="commission_tax_id" readonly="1" force_save="1"/>
+                                <field name="amount_commission_master" readonly="1" force_save="1"/>
+                                <field name="amount_commission_pph" readonly="1" force_save="1"/>
+                            </group>
+                        </group>
+					</page>
+				</xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

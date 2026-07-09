@@ -1,0 +1,741 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+        <record id="tw_module_category_asset" model="ir.module.category">
+            <field name="name">TW Assets</field>
+        </record>
+        
+        <record id="group_location_asset_read" model="res.groups">
+           <field name="category_id" ref="tw_base.tw_module_category_asset" />
+           <field name="name">TW Location Assets Read</field>
+       </record>
+         <!-- Asset PO READ -->
+         <record id="group_purchase_order_asset_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Purchase Order Asset Read</field>
+        </record>
+        
+        <record id="access_tw_purchase_order_asset_read" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_purchase_order_asset" />
+            <field name="name">tw_purchase_order_asset read</field>
+            <field name="group_id" ref="group_purchase_order_asset_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_purchase_order_line_asset_read" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_purchase_order_asset_line" />
+            <field name="name">tw_purchase_order_line_asset read</field>
+            <field name="group_id" ref="group_purchase_order_asset_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_good_receive_collecting_read" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive_collecting" />
+            <field name="name">tw_good_receive_collecting read</field>
+            <field name="group_id" ref="group_purchase_order_asset_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_good_receive_collecting_line_read" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive_collecting_line" />
+            <field name="name">tw_good_receive_collecting_line read</field>
+            <field name="group_id" ref="group_purchase_order_asset_read" />
+            <field name="perm_read">1</field>
+        </record>
+        
+        <record id="access_tw_good_receive_assets_read" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive_assets" />
+            <field name="name">tw_good_receive_assets read</field>
+            <field name="group_id" ref="group_purchase_order_asset_read" />
+            <field name="perm_read">1</field>
+        </record>
+        
+        <record id="access_tw_stock_warehouse_asset_read" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_warehouse" />
+            <field name="name">tw_stock_warehouse_asset read</field>
+            <field name="group_id" ref="group_purchase_order_asset_read" />
+            <field name="perm_read">1</field>
+        </record>
+        
+        <record id="access_tw_stock_location_read" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_location" />
+            <field name="name">tw_stock_location read</field>
+            <field name="group_id" ref="group_purchase_order_asset_read" />
+            <field name="perm_read">1</field>
+        </record>
+        
+        <record id="access_tw_stock_picking_type_read" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_picking_type" />
+            <field name="name">tw_stock_picking_type read</field>
+            <field name="group_id" ref="group_purchase_order_asset_read" />
+            <field name="perm_read">1</field>
+        </record>
+        
+        <record id="access_tw_asset_user_history_read" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_asset_user_history" />
+            <field name="name">tw_asset_user_history read</field>
+            <field name="group_id" ref="group_purchase_order_asset_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+    <!-- asset UPDATE -->
+        <record id="group_purchase_order_asset_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Purchase Order Asset Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_purchase_order_asset_read'))]" />
+        </record>
+
+        <record id="access_tw_purchase_order_asset_update" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_purchase_order_asset" />
+            <field name="name">tw_purchase_order_asset update</field>
+            <field name="group_id" ref="group_purchase_order_asset_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <record id="access_tw_purchase_order_line_asset_update" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_purchase_order_asset_line" />
+            <field name="name">tw_purchase_order_line_asset update</field>
+            <field name="group_id" ref="group_purchase_order_asset_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_good_receive_collecting_update" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive_collecting" />
+            <field name="name">tw_good_receive_collecting update</field>
+            <field name="group_id" ref="group_purchase_order_asset_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_good_receive_collecting_line_update" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive_collecting_line" />
+            <field name="name">tw_good_receive_collecting_line update</field>
+            <field name="group_id" ref="group_purchase_order_asset_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_good_receive_assets_update" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive_assets" />
+            <field name="name">tw_good_receive_assets update</field>
+            <field name="group_id" ref="group_purchase_order_asset_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_stock_warehouse_asset_update" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_warehouse" />
+            <field name="name">tw_stock_warehouse_asset update</field>
+            <field name="group_id" ref="group_purchase_order_asset_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_stock_location_update" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_location" />
+            <field name="name">tw_stock_location update</field>
+            <field name="group_id" ref="group_purchase_order_asset_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_stock_picking_type_update" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_picking_type" />
+            <field name="name">tw_stock_picking_type update</field>
+            <field name="group_id" ref="group_purchase_order_asset_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+  
+        <record id="access_tw_asset_user_history_update" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_asset_user_history" />
+            <field name="name">tw_asset_user_history update</field>
+            <field name="group_id" ref="group_purchase_order_asset_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+    <!-- asset DELETE -->
+        <record id="group_purchase_order_asset_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Purchase Order Asset Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_purchase_order_asset_read'))]" />
+        </record>
+
+        <record id="access_tw_purchase_order_asset_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_purchase_order_asset" />
+            <field name="name">tw_purchase_order_asset delete</field>
+            <field name="group_id" ref="group_purchase_order_asset_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+        
+        <record id="access_tw_purchase_order_line_asset_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_purchase_order_asset_line" />
+            <field name="name">tw_purchase_order_line_asset delete</field>
+            <field name="group_id" ref="group_purchase_order_asset_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_good_receive_collecting_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive_collecting" />
+            <field name="name">tw_good_receive_collecting delete</field>
+            <field name="group_id" ref="group_purchase_order_asset_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+        
+        <record id="access_tw_good_receive_collecting_line_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive_collecting_line" />
+            <field name="name">tw_good_receive_collecting_line delete</field>
+            <field name="group_id" ref="group_purchase_order_asset_delete" />
+            <field name="perm_unlink">1</field>
+        </record>        
+        
+        <record id="access_tw_good_receive_assets_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive_assets" />
+            <field name="name">tw_good_receive_assets delete</field>
+            <field name="group_id" ref="group_purchase_order_asset_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+        
+        <record id="access_tw_stock_warehouse_asset_delete" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_warehouse" />
+            <field name="name">tw_stock_warehouse_asset delete</field>
+            <field name="group_id" ref="group_purchase_order_asset_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+        
+        <record id="access_tw_stock_location_delete" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_location" />
+            <field name="name">tw_stock_location delete</field>
+            <field name="group_id" ref="group_purchase_order_asset_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+        
+        <record id="access_tw_stock_picking_type_delete" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_picking_type" />
+            <field name="name">tw_stock_picking_type delete</field>
+            <field name="group_id" ref="group_purchase_order_asset_delete" />
+            <field name="perm_unlink">1</field>
+        </record>        
+        
+        <record id="access_tw_asset_user_history_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_asset_user_history" />
+            <field name="name">tw_asset_user_history delete</field>
+            <field name="group_id" ref="group_purchase_order_asset_delete" />
+            <field name="perm_unlink">1</field>
+        </record>        
+
+        <!-- Good Receive READ -->
+         <record id="group_good_receive_asset_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Good Receive Asset Read</field>
+        </record>
+        
+        <record id="access_good_receive_asset_new_read" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive" />
+            <field name="name">good_receive_asset read</field>
+            <field name="group_id" ref="group_good_receive_asset_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_good_receive_line_asset_read" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive_asset_line" />
+            <field name="name">good_receive_line_asset read</field>
+            <field name="group_id" ref="group_good_receive_asset_read" />
+            <field name="perm_read">1</field>
+        </record>
+        
+        <record id="access_good_receive_attachment_asset_read" model="ir.model.access">
+            <field name="model_id" ref="tw_attachment.model_tw_attachment" />
+            <field name="name">good_receive_attachment_asset read</field>
+            <field name="group_id" ref="group_good_receive_asset_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+    <!-- asset UPDATE -->
+        <record id="group_good_receive_asset_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Good Receive Asset Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_good_receive_asset_read'))]" />
+        </record>
+
+        <record id="access_good_receive_asset_new_update" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive"/>
+            <field name="name">good_receive_asset update</field>
+            <field name="group_id" ref="group_good_receive_asset_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <record id="access_good_receive_line_asset_update" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive_asset_line" />
+            <field name="name">good_receive_line_asset update</field>
+            <field name="group_id" ref="group_good_receive_asset_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <record id="access_good_receive_attachment_asset_update" model="ir.model.access">
+            <field name="model_id" ref="tw_attachment.model_tw_attachment" />
+            <field name="name">good_receive_attachment_asset update</field>
+            <field name="group_id" ref="group_good_receive_asset_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+    <!-- asset DELETE -->
+        <record id="group_good_receive_asset_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Good Receive Asset Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_good_receive_asset_read'))]" />
+        </record>
+
+        <record id="access_good_receive_asset_new_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive"/>
+            <field name="name">good_receive_asset delete</field>
+            <field name="group_id" ref="group_good_receive_asset_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+        
+        <record id="access_good_receive_line_asset_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive_asset_line" />
+            <field name="name">good_receive_line_asset delete</field>
+            <field name="group_id" ref="group_good_receive_asset_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+        
+        <record id="access_good_receive_attachment_asset_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_attachment.model_tw_attachment" />
+            <field name="name">good_receive_attachment_asset delete</field>
+            <field name="group_id" ref="group_good_receive_asset_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+
+        <!-- Product Template Asset -->
+		<record id="group_tw_product_template_assets_read" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_module_category_asset" />
+			<field name="name">TW Product (Assets) Read</field>
+		</record>
+
+		<record id="tw_product_template_assets_access_read" model="ir.model.access">
+			<field name="model_id" ref="model_product_template" />
+			<field name="name">tw_product_template_assets read</field>
+			<field name="group_id" ref="group_tw_product_template_assets_read" />
+			<field name="perm_read">1</field>
+		</record>
+
+		<record id="tw_product_template_assets_category_access_read" model="ir.model.access">
+			<field name="model_id" ref="model_account_asset_category" />
+			<field name="name">tw_product_template_assets_category read</field>
+			<field name="group_id" ref="group_tw_product_template_assets_read" />
+			<field name="perm_read">1</field>
+		</record>
+        
+        <!-- Product Template Asset Update -->
+
+		<record id="group_tw_product_template_assets_update" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_module_category_asset" />
+			<field name="name">TW Product (Assets) Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_product_template_assets_read'))]" />
+		</record>
+
+		<record id="tw_product_template_assets_access_update" model="ir.model.access">
+			<field name="model_id" ref="model_product_template" />
+			<field name="name">"tw_product_template_assets update</field>
+			<field name="group_id" ref="group_tw_product_template_assets_update" />
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+		<record id="group_tw_product_template_assets_delete" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_module_category_asset" />
+			<field name="name">TW Product (Assets) Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_product_template_assets_read'))]" />
+		</record>
+
+		<record id="tw_product_template_assets_access_delete" model="ir.model.access">
+			<field name="model_id" ref="model_product_template" />
+			<field name="name">tw_product_template_assets delete</field>
+			<field name="group_id" ref="group_tw_product_template_assets_delete" />
+			<field name="perm_unlink">1</field>
+		</record>
+
+        <!-- Product Product Assets -->
+		<record id="group_tw_product_product_assets_read" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_module_category_asset" />
+			<field name="name">Product Variant Assets Read</field>
+		</record>
+
+		<record id="tw_product_product_assets_access_read" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">tw_product_product_assets read</field>
+			<field name="group_id" ref="group_tw_product_product_assets_read" />
+			<field name="perm_read">1</field>
+		</record>
+
+		<record id="group_tw_product_product_assets_update" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_module_category_asset" />
+			<field name="name">Product Variant Assets Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_product_product_assets_read'))]" />
+		</record>
+
+		<record id="tw_product_product_assets_access_update" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">"tw_product_product_assets update</field>
+			<field name="group_id" ref="group_tw_product_product_assets_update" />
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+		<record id="group_tw_product_product_assets_delete" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_module_category_asset" />
+			<field name="name">Product Variant Assets Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_product_product_assets_read'))]" />
+		</record>
+
+		<record id="tw_product_product_assets_access_delete" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">tw_product_product_assets delete</field>
+			<field name="group_id" ref="group_tw_product_product_assets_delete" />
+			<field name="perm_unlink">1</field>
+		</record>
+
+
+         <!-- Good Receive Collecting READ -->
+         <record id="group_good_receive_asset_collecting_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Good Receive Collecting Asset Read</field>
+        </record>
+        
+        <record id="access_good_receive_asset_collecting_read" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive_collecting" />
+            <field name="name">good_receive_asset_collecting read</field>
+            <field name="group_id" ref="group_good_receive_asset_collecting_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_good_receive_line_asset_collecting_line_read" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive_collecting_line" />
+            <field name="name">good_receive_line_asset_collecting_line read</field>
+            <field name="group_id" ref="group_good_receive_asset_collecting_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+    <!-- Collecting UPDATE -->
+        <record id="group_good_receive_asset_collecting_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Good Receive Collecting Asset Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_good_receive_asset_collecting_read'))]" />
+        </record>
+
+        <record id="access_good_receive_asset_collecting_update" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive_collecting"/>
+            <field name="name">good_receive_asset_collecting update</field>
+            <field name="group_id" ref="group_good_receive_asset_collecting_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <record id="access_good_receive_line_asset_collecting_update" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive_collecting_line" />
+            <field name="name">good_receive_line_asset_collecting update</field>
+            <field name="group_id" ref="group_good_receive_asset_collecting_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+    <!-- Collecting DELETE -->
+        <record id="group_good_receive_asset_collecting_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Good Receive Collecting Asset Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_good_receive_asset_collecting_read'))]" />
+        </record>
+
+        <record id="access_good_receive_asset_collecting_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive_collecting"/>
+            <field name="name">good_receive_asset_collecting delete</field>
+            <field name="group_id" ref="group_good_receive_asset_collecting_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+        
+        <record id="access_good_receive_line_asset_collecting_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_good_receive_collecting_line" />
+            <field name="name">good_receive_line_asset_collecting delete</field>
+            <field name="group_id" ref="group_good_receive_asset_collecting_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+    
+        <record id="group_tw_account_asset_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Assets Read</field>
+        </record>
+
+
+        <record id="access_tw_account_asset_read" model="ir.model.access">
+            <field name="model_id" ref="om_account_asset.model_account_asset_asset" />
+            <field name="name">tw_account_asset read</field>
+            <field name="group_id" ref="group_tw_account_asset_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_account_asset_write" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Assets Update</field>
+        </record>
+        
+        <record id="access_tw_account_asset_write" model="ir.model.access">
+            <field name="model_id" ref="om_account_asset.model_account_asset_asset" />
+            <field name="name">tw_account_asset write</field>
+            <field name="group_id" ref="group_tw_account_asset_write" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <record id="group_tw_account_asset_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Assets Delete</field>
+        </record>
+        
+        <record id="access_tw_account_asset_delete" model="ir.model.access">
+            <field name="model_id" ref="om_account_asset.model_account_asset_asset" />
+            <field name="name">tw_account_asset delete</field>
+            <field name="group_id" ref="group_tw_account_asset_write" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+
+        <!-- Asset Categories READ -->
+        <record id="group_tw_account_asset_category_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Assets Category Read</field>
+        </record>
+        <record id="access_tw_account_asset_category_read" model="ir.model.access">
+            <field name="model_id" ref="om_account_asset.model_account_asset_category" />
+            <field name="name">tw_account_asset_category read</field>
+            <field name="group_id" ref="group_tw_account_asset_category_read" />
+            <field name="perm_read">1</field>
+        </record>
+        <record id="access_tw_account_asset_category_account_read" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_account" />
+            <field name="name">tw_account_asset_category_account read</field>
+            <field name="group_id" ref="group_tw_account_asset_category_read" />
+            <field name="perm_read">1</field>
+        </record>
+        <record id="access_tw_account_asset_category_analytic_read" model="ir.model.access">
+            <field name="model_id" ref="analytic.model_account_analytic_account" />
+            <field name="name">tw_account_asset_category_analytic read</field>
+            <field name="group_id" ref="group_tw_account_asset_category_read" />
+            <field name="perm_read">1</field>
+        </record>
+        <record id="access_tw_account_asset_category_journal_read" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_journal" />
+            <field name="name">tw_account_asset_category_journal read</field>
+            <field name="group_id" ref="group_tw_account_asset_category_read" />
+            <field name="perm_read">1</field>
+        </record>
+        <record id="access_tw_account_asset_category_company_read" model="ir.model.access">
+            <field name="model_id" ref="base.model_res_company" />
+            <field name="name">tw_account_asset_category_company read</field>
+            <field name="group_id" ref="group_tw_account_asset_category_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Asset Categories UPDATE -->
+        <record id="group_tw_account_asset_category_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Assets Category Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_account_asset_category_read'))]" />
+        </record>
+        <record id="access_tw_account_asset_category_update" model="ir.model.access">
+            <field name="model_id" ref="om_account_asset.model_account_asset_category" />
+            <field name="name">tw_account_asset_category update</field>
+            <field name="group_id" ref="group_tw_account_asset_category_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        <record id="access_tw_account_asset_category_account_update" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_account" />
+            <field name="name">tw_account_asset_category_account update</field>
+            <field name="group_id" ref="group_tw_account_asset_category_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        <record id="access_tw_account_asset_category_journal_update" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_journal" />
+            <field name="name">tw_account_asset_category_journal update</field>
+            <field name="group_id" ref="group_tw_account_asset_category_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        <record id="access_tw_account_asset_category_company_update" model="ir.model.access">
+            <field name="model_id" ref="base.model_res_company" />
+            <field name="name">tw_account_asset_category_company update</field>
+            <field name="group_id" ref="group_tw_account_asset_category_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <!-- Asset Categories DELETE -->
+        <record id="group_tw_account_asset_category_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Assets Category Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_account_asset_category_read'))]" />
+        </record>
+        <record id="access_tw_account_asset_category_delete" model="ir.model.access">
+            <field name="model_id" ref="om_account_asset.model_account_asset_category" />
+            <field name="name">tw_account_asset_category delete</field>
+            <field name="group_id" ref="group_tw_account_asset_category_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+        <record id="access_tw_account_asset_category_account_delete" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_account" />
+            <field name="name">tw_account_asset_category_account delete</field>
+            <field name="group_id" ref="group_tw_account_asset_category_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+        <record id="access_tw_account_asset_category_analytic_delete" model="ir.model.access">
+            <field name="model_id" ref="analytic.model_account_analytic_account" />
+            <field name="name">tw_account_asset_category_analytic delete</field>
+            <field name="group_id" ref="group_tw_account_asset_category_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+        <record id="access_tw_account_asset_category_journal_delete" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_journal" />
+            <field name="name">tw_account_asset_category_journal delete</field>
+            <field name="group_id" ref="group_tw_account_asset_category_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+        <record id="access_tw_account_asset_category_company_delete" model="ir.model.access">
+            <field name="model_id" ref="base.model_res_company" />
+            <field name="name">tw_account_asset_category_company delete</field>
+            <field name="group_id" ref="group_tw_account_asset_category_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+
+        <!-- Asset Acquisition READ -->
+        <record id="group_asset_acquisition_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Asset Acquisition Read</field>
+        </record>
+        
+        <record id="access_tw_asset_acquisition_read" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_asset_acquisition" />
+            <field name="name">tw_asset_acquisition read</field>
+            <field name="group_id" ref="group_asset_acquisition_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_asset_acquisition_line_read" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_asset_acquisition_line" />
+            <field name="name">tw_asset_acquisition_line read</field>
+            <field name="group_id" ref="group_asset_acquisition_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_asset_acquisition_user_read" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_asset_acquisition_user" />
+            <field name="name">tw_asset_acquisition_user read</field>
+            <field name="group_id" ref="group_asset_acquisition_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Asset Acquisition UPDATE -->
+        <record id="group_asset_acquisition_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Asset Acquisition Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_asset_acquisition_read'))]" />
+        </record>
+
+        <record id="access_tw_asset_acquisition_update" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_asset_acquisition" />
+            <field name="name">tw_asset_acquisition update</field>
+            <field name="group_id" ref="group_asset_acquisition_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_asset_acquisition_line_update" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_asset_acquisition_line" />
+            <field name="name">tw_asset_acquisition_line update</field>
+            <field name="group_id" ref="group_asset_acquisition_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_asset_acquisition_user_update" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_asset_acquisition_user" />
+            <field name="name">tw_asset_acquisition_user update</field>
+            <field name="group_id" ref="group_asset_acquisition_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Asset Acquisition DELETE -->
+        <record id="group_asset_acquisition_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset" />
+            <field name="name">TW Asset Acquisition Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_asset_acquisition_read'))]" />
+        </record>
+
+        <record id="access_tw_asset_acquisition_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_asset_acquisition" />
+            <field name="name">tw_asset_acquisition delete</field>
+            <field name="group_id" ref="group_asset_acquisition_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_asset_acquisition_line_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_asset_acquisition_line" />
+            <field name="name">tw_asset_acquisition_line delete</field>
+            <field name="group_id" ref="group_asset_acquisition_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_asset_acquisition_user_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_asset_management.model_tw_asset_acquisition_user" />
+            <field name="name">tw_asset_acquisition_user delete</field>
+            <field name="group_id" ref="group_asset_acquisition_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+
+        
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_purchase_order_asset_read')),
+                (4, ref('group_purchase_order_asset_update')),
+                (4, ref('group_purchase_order_asset_delete')),
+                (4, ref('group_good_receive_asset_read')),
+                (4, ref('group_good_receive_asset_update')),
+                (4, ref('group_good_receive_asset_delete')),
+                (4, ref('group_good_receive_asset_collecting_read')),
+                (4, ref('group_good_receive_asset_collecting_update')),
+                (4, ref('group_good_receive_asset_collecting_delete')),
+                (4,ref('group_tw_product_product_assets_read')),
+                (4,ref('group_tw_product_product_assets_update')),
+                (4,ref('group_tw_product_product_assets_delete')),
+                (4,ref('group_tw_product_template_assets_read')),
+                (4,ref('group_tw_product_template_assets_update')),
+                (4,ref('group_tw_product_template_assets_delete')),
+                (4,ref('group_location_asset_read')),
+                (4,ref('group_tw_account_asset_read')),
+                (4,ref('group_tw_account_asset_write')),
+                (4,ref('group_tw_account_asset_delete')),
+                (4,ref('group_asset_acquisition_read')),
+                (4,ref('group_asset_acquisition_update')),
+                (4,ref('group_asset_acquisition_delete')),
+            ]" />
+        </record>
+    </data>
+    
+
+</odoo>

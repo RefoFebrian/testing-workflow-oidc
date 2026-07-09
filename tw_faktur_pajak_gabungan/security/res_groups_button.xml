@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+    
+        <record id="group_tw_faktur_pajak_gabungan_confirm_button" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Faktur Pajak Gabungan Confirm</field>
+        </record>
+        <record id="access_tw_faktur_pajak_gabungan_confirm_button" model="ir.model.access">
+            <field name="model_id" ref="model_tw_faktur_pajak_gabungan"/>
+            <field name="name">tw_faktur_pajak_gabungan confirm update</field>
+            <field name="group_id" ref="group_tw_faktur_pajak_gabungan_confirm_button"/>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_faktur_pajak_gabungan_cancel_button" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Faktur Pajak Gabungan Cancel</field>
+        </record>
+        <record id="access_tw_faktur_pajak_gabungan_cancel_button" model="ir.model.access">
+            <field name="model_id" ref="model_tw_faktur_pajak_gabungan"/>
+            <field name="name">tw_faktur_pajak_gabungan cancel update</field>
+            <field name="group_id" ref="group_tw_faktur_pajak_gabungan_cancel_button"/>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_faktur_pajak_gabungan_set_to_draft_button" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Faktur Pajak Gabungan Set to Draft</field>
+        </record>
+        <record id="access_tw_faktur_pajak_gabungan_set_to_draft_button" model="ir.model.access">
+            <field name="model_id" ref="model_tw_faktur_pajak_gabungan"/>
+            <field name="name">tw_faktur_pajak_gabungan set to draft update</field>
+            <field name="group_id" ref="group_tw_faktur_pajak_gabungan_set_to_draft_button"/>
+            <field name="perm_write">1</field>
+        </record>
+    
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_faktur_pajak_gabungan_confirm_button')),
+                (4, ref('group_tw_faktur_pajak_gabungan_cancel_button')),
+                (4, ref('group_tw_faktur_pajak_gabungan_set_to_draft_button')),
+            ]"/>
+        </record>
+    </data>
+    
+
+</odoo>

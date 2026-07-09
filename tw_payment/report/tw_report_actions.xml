@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="action_report_tw_payment" model="ir.actions.report">
+            <field name="name">Payment</field>
+            <field name="model">tw.account.payment</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_payment.report_tw_account_payment</field>
+            <field name="report_file">tw_payment.report_tw_account_payment</field>
+        </record>
+
+        <record id="action_report_tw_customer_payment" model="ir.actions.report">
+            <field name="name">Customer Payment</field>
+            <field name="model">tw.account.payment</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_payment.report_tw_customer_payment</field>
+            <field name="report_file">tw_payment.report_tw_customer_payment</field>
+            <field name="paperformat_id" ref="tw_web.tw_paperformat_kwitansi"/>
+        </record>
+
+        <record id="action_report_tw_supplier_payment" model="ir.actions.report">
+            <field name="name">Supplier Payment</field>
+            <field name="model">tw.account.payment</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_payment.report_tw_supplier_payment</field>
+            <field name="report_file">tw_payment.report_tw_supplier_payment</field>
+            <field name="paperformat_id" ref="tw_web.tw_report_paperformat_a4"/>
+        </record>
+        
+    </data>
+</odoo>

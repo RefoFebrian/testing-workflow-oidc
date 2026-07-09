@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="view_tw_payment_klik_monitoring_verification_form" model="ir.ui.view">
+	        <field name="name">tw.payment.klik.monitoring.verification.form</field>
+	        <field name="model">tw.payment.klik.monitoring</field>
+	        <field name="type">form</field>
+	        <field name="arch" type="xml">
+	            <form create='false' delete='false'>
+	            	<header>
+	            		<h1>Verification Payment Klik</h1>
+	            	</header>
+            		<group>
+        				<group>
+        					<field name="bank_id" options="{'no_create':True,'no_open':True}" required="1"/>
+							<field name="data_shown" widget="radio" required="1" readonly="create_date != False"/>
+						</group>
+						<group>
+        					<field name="filter_payment_klik_uid" options="{'no_create':True,'no_open':True}"/>
+							<label for="history_start_date" string="Tanggal History" invisible="data_shown != 'all'"/>
+							<div invisible="data_shown != 'all'">
+								<field name="history_start_date" class="oe_inline" style="margin-right: 3px;"/>&#160;s/d&#160;
+								<field name="history_end_date" class="oe_inline"/>
+							</div>
+							<field name="monitoring_type" invisible="1"/>
+						</group>
+            		</group>
+					<group>
+						<group>
+							<button name="action_search" type="object" string="Search" class="oe_highlight" invisible="create_date"/>
+							<button name="action_search" type="object" string="Search" invisible="not create_date"/>
+						</group>
+					</group>
+					<field name="create_date" invisible="1"/>
+					<!-- <separator/> -->
+            		<notebook invisible="not create_date">
+						<page string="Data">
+							<group>
+								<button name="action_set_all" type="object" string="Set All" class="oe_highlight" invisible="not create_date"/>
+								<button name="action_execute" type="object" string="Confirm" class="oe_highlight" invisible="not create_date"/>
+							</group>
+							<group>
+								<group>
+									<field name="new_verification_state"/>
+								</group>
+								<group>
+									<field name="new_is_single_click"/>
+								</group>
+								<strong><field name="data_count" class="oe_inline" readonly="1" invisible="not create_date"/></strong>
+							</group>
+							<field name="line_ids" nolabel="1">
+								<list editable="bottom" create="0" delete="0" default_order="paid_amount desc">
+									<field name="name" readonly="1"/>
+									<field name="paid_amount" readonly="1"/>
+									<field name="rek_tujuan" readonly="1"/>
+									<field name="bank_tujuan" readonly="1"/>
+									<field name="bank_sumber" readonly="1"/>
+									<field name="nama_tujuan" readonly="1"/>
+									<field name="payment_klik_by" readonly="1"/>
+									<field name="state" readonly="1"/>
+									<field name="verification_state"/>
+									<field name="is_single_click"/>
+								</list>
+							</field>
+						</page>
+						<page string="History" invisible="data_shown != 'all'">
+							<group>
+								<strong><field name="history_data_count" class="oe_inline" readonly="1" invisible="not create_date"/></strong>
+							</group>
+							<field name="history_line_ids" readonly="1" nolabel="1">
+								<list editable="bottom" default_order="paid_amount desc">
+									<field name="name" readonly="1"/>
+									<field name="paid_amount" readonly="1"/>
+									<field name="rek_tujuan" readonly="1"/>
+									<field name="bank_tujuan" readonly="1"/>
+									<field name="bank_sumber" readonly="1"/>
+									<field name="nama_tujuan" readonly="1"/>
+									<field name="payment_klik_by" readonly="1"/>
+									<field name="state" readonly="1"/>
+									<field name="is_single_click" readonly="1"/>
+									<field name="verify_date" readonly="1"/>
+									<field name="verify_uid" readonly="1"/>
+								</list>
+							</field>
+						</page>
+					</notebook>
+	            </form>
+	        </field>
+	    </record>
+
+		<record id="view_tw_payment_klik_monitoring_approval_form" model="ir.ui.view">
+	        <field name="name">tw.payment.klik.monitoring.approval.form</field>
+	        <field name="model">tw.payment.klik.monitoring</field>
+	        <field name="type">form</field>
+	        <field name="arch" type="xml">
+	            <form create='false' delete='false'>
+	            	<header>
+	            		<h1>Approval Payment Klik</h1>
+	            	</header>
+            		<group>
+        				<group>
+        					<field name="bank_id" options="{'no_create':True,'no_open':True}" required="1"/>
+							<field name="data_shown" widget="radio" required="1" readonly="create_date != False"/>
+						</group>
+						<group>
+        					<field name="filter_payment_klik_uid" options="{'no_create':True,'no_open':True}"/>
+							<label for="history_start_date" string="Tanggal History" invisible="data_shown != 'all'"/>
+							<div invisible="data_shown != 'all'">
+								<field name="history_start_date" class="oe_inline" style="margin-right: 3px;"/>&#160;s/d&#160;
+								<field name="history_end_date" class="oe_inline"/>
+							</div>
+							<field name="monitoring_type" invisible="1"/>
+						</group>
+            		</group>
+					<button name="action_search"
+						type="object"
+						string="Search"
+						class="oe_highlight"
+						invisible="create_date"/>
+					<button name="action_search"
+						type="object"
+						string="Search"
+						invisible="not create_date"/>
+					<field name="create_date" invisible="1"/>
+					<separator/>
+            		<notebook invisible="not create_date">
+						<page string="Data">
+							<group>
+								<group>
+									<field name="new_approval_state"/>
+								</group>
+								<group>
+									<field name="new_reject_reason"/>
+								</group>
+								<group>
+									<button name="action_set_all" type="object" string="Set All" class="oe_highlight"/>
+									<button name="action_execute" type="object" string="Confirm" class="oe_highlight" invisible="not create_date"/>
+								</group>
+								<strong><field name="data_count" class="oe_inline" readonly="1" invisible="not create_date"/></strong>
+							</group>
+							<field name="line_ids" nolabel="1">
+								<list editable="bottom" create="0" delete="0" default_order="paid_amount desc">
+									<field name="name" readonly="1"/>
+									<field name="paid_amount" readonly="1"/>
+									<field name="rek_tujuan" readonly="1"/>
+									<field name="bank_tujuan" readonly="1"/>
+									<field name="bank_sumber" readonly="1"/>
+									<field name="nama_tujuan" readonly="1"/>
+									<field name="payment_klik_by" readonly="1"/>
+									<field name="state" readonly="1"/>
+									<field name="approval_state"/>
+									<field name="reject_reason" readonly="approval_state != 'reject'" required="approval_state == 'reject'"/>
+									<field name="is_single_click" readonly="1"/>
+								</list>
+							</field>
+						</page>
+						<page string="History" invisible="data_shown != 'all'">
+							<group>
+								<strong><field name="history_data_count" class="oe_inline" readonly="1" invisible="not create_date"/></strong>
+							</group>
+							<field name="history_line_ids" readonly="1" nolabel="1">
+								<list editable="bottom" default_order="paid_amount desc">
+									<field name="name" readonly="1"/>
+									<field name="paid_amount" readonly="1"/>
+									<field name="rek_tujuan" readonly="1"/>
+									<field name="bank_tujuan" readonly="1"/>
+									<field name="bank_sumber" readonly="1"/>
+									<field name="nama_tujuan" readonly="1"/>
+									<field name="payment_klik_by" readonly="1"/>
+									<field name="state" readonly="1"/>
+									<field name="is_single_click" readonly="1"/>
+									<field name="approve_1_date" readonly="1"/>
+									<field name="approve_1_uid" readonly="1"/>
+									<field name="approve_date" readonly="1"/>
+									<field name="approve_uid" readonly="1"/>
+									<field name="reject_date" readonly="1"/>
+									<field name="reject_uid" readonly="1"/>
+								</list>
+							</field>
+						</page>
+					</notebook>
+	            </form>
+	        </field>
+	    </record>
+
+		<record id="view_tw_payment_klik_monitoring_process_form" model="ir.ui.view">
+	        <field name="name">tw.payment.klik.monitoring.process.form</field>
+	        <field name="model">tw.payment.klik.monitoring</field>
+	        <field name="type">form</field>
+	        <field name="arch" type="xml">
+	            <form create='false' delete='false'>
+	            	<header>
+	            		<h1>Processing Payment Klik</h1>
+	            	</header>
+            		<group>
+        				<group>
+        					<field name="bank_id"
+								options="{'no_create':True,'no_open':True}" required="1"/>
+							<field name="data_shown" widget="radio" required="1"
+								readonly="create_date != False"/>
+						</group>
+						<group>
+        					<field name="filter_payment_klik_uid"
+								options="{'no_create':True,'no_open':True}"/>
+							<label for="history_start_date" string="Tanggal History"
+								invisible="data_shown != 'all'"/>
+							<div invisible="data_shown != 'all'">
+								<field name="history_start_date" class="oe_inline" style="margin-right: 3px;"/>&#160;s/d&#160;
+								<field name="history_end_date" class="oe_inline"/>
+							</div>
+							<field name="monitoring_type" invisible="1"/>
+						</group>
+            		</group>
+                    <button name="action_search"
+						type="object"
+						string="Search"
+						class="oe_highlight"
+						invisible="create_date"/>
+					<button name="action_search"
+						type="object"
+						string="Search"
+						invisible="not create_date"/>
+                    <field name="create_date" invisible="1"/>
+					<separator/>
+            		<notebook invisible="not create_date">
+						<page string="Data">
+							<group>
+								<group>
+									<field name="new_process_state"/>
+								</group>
+								<group>
+									<button name="action_set_all" type="object"
+										string="Set All" class="oe_highlight"/>
+									<button name="action_execute"
+										type="object"
+										string="Confirm"
+										class="oe_highlight"
+										invisible="not create_date"/>
+								</group>
+								<strong><field name="data_count" class="oe_inline" readonly="1" invisible="not create_date"/></strong>
+							</group>
+							<field name="line_ids" nolabel="1">
+								<list editable="bottom" create="0" delete="0" default_order="paid_amount desc">
+									<field name="name" readonly="1"/>
+									<field name="paid_amount" readonly="1"/>
+									<field name="rek_tujuan" readonly="1"/>
+									<field name="bank_tujuan" readonly="1"/>
+									<field name="bank_sumber" readonly="1"/>
+									<field name="nama_tujuan" readonly="1"/>
+									<field name="payment_klik_by" readonly="1"/>
+									<field name="state" readonly="1"/>
+									<field name="process_state" readonly="state == 'reject'"/>
+									<field name="is_single_click" readonly="1"/>
+									<field name="process_date" invisible="1"/>
+								</list>
+							</field>
+						</page>
+						<page string="History" invisible="data_shown != 'all'">
+							<group>
+								<strong><field name="history_data_count" class="oe_inline" readonly="1" invisible="not create_date"/></strong>
+							</group>
+							<field name="history_line_ids" readonly="1" nolabel="1">
+								<list editable="bottom" default_order="paid_amount desc">
+									<field name="name" readonly="1"/>
+									<field name="paid_amount" readonly="1"/>
+									<field name="rek_tujuan" readonly="1"/>
+									<field name="bank_tujuan" readonly="1"/>
+									<field name="bank_sumber" readonly="1"/>
+									<field name="nama_tujuan" readonly="1"/>
+									<field name="payment_klik_by" readonly="1"/>
+									<field name="state" readonly="1"/>
+									<field name="is_single_click" readonly="1"/>
+									<field name="process_date" readonly="1"/>
+									<field name="process_uid" readonly="1"/>
+								</list>
+							</field>
+						</page>
+					</notebook>
+	            </form>
+	        </field>
+	    </record>
+
+
+		<!-- Verification -->
+		<record id="tw_payment_klik_verification_action"
+			model="ir.actions.act_window">
+			<field name="name">Verification Payment Klik</field> 
+			<field name="res_model">tw.payment.klik.monitoring</field>
+			<field name="binding_view_types">form</field>
+			<field name="view_mode">form</field>
+	     	<field name="target">inline</field>
+			<field name="context">{'default_monitoring_type': 'verification'}</field>
+		</record>
+		<record id="tw_payment_klik_verification_action_form" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_tw_payment_klik_monitoring_verification_form"/>
+            <field name="act_window_id" ref="tw_payment_klik_verification_action"/>
+        </record>
+
+		<!-- Approval -->
+		<record id="tw_payment_klik_approval_action"
+			model="ir.actions.act_window">
+			<field name="name">Approval Payment Klik</field> 
+			<field name="res_model">tw.payment.klik.monitoring</field>
+			<field name="binding_view_types">form</field>
+			<field name="view_mode">form</field>
+	     	<field name="target">inline</field>
+			<field name="context">{'default_monitoring_type': 'approval'}</field>
+		</record>
+		<record id="tw_payment_klik_approval_action_form" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_tw_payment_klik_monitoring_approval_form"/>
+            <field name="act_window_id" ref="tw_payment_klik_approval_action"/>
+        </record>
+
+		<!-- Process -->
+		<record id="tw_payment_klik_process_action"
+			model="ir.actions.act_window">
+			<field name="name">Processing Payment Klik</field> 
+			<field name="res_model">tw.payment.klik.monitoring</field>
+			<field name="binding_view_types">form</field>
+			<field name="view_mode">form</field>
+	     	<field name="target">inline</field>
+			 <field name="context">{'default_monitoring_type': 'process'}</field>
+		</record>
+		<record id="tw_payment_klik_process_action_form" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_tw_payment_klik_monitoring_process_form"/>
+            <field name="act_window_id" ref="tw_payment_klik_process_action"/>
+        </record>
+
+
+	</data>
+</odoo>

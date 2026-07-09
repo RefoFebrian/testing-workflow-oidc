@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+        
+        <record id="tw_account_account_inherit_list_view" model="ir.ui.view">
+            <field name="name">tw.account.account.inherit.list</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_list"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="sap" optional="show"/>
+                </field>
+                <field name="code" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+                <field name="company_ids" position="replace">
+                    <field name="company_ids" readonly="0" required="1" widget="many2many_tags" options="{'no_open': True, 'no_create': True}"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="tw_account_account_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.account.account.inherit.form</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_form"/>
+            <field name="arch" type="xml">
+                <field name="account_type" position="after">
+                    <field name="parent_id" options="{'no_create': True}"/>
+                    <field name="sap"/>
+                    <field name="is_can_be_collected"/>
+                </field>
+                <field name="company_ids" position="replace">
+                    <field name="company_ids" readonly="0" required="1" widget="many2many_tags" groups="base.group_multi_company"/>
+                    <field name="sla"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

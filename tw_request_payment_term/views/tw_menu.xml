@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Showroom -->
+    <menuitem id="menu_request_payment_term" name="Request Payment Term" action="tw_request_payment_term_act_window" parent="tw_menu.submenu_tw_showroom_configuration" groups="group_tw_request_payment_term_read" sequence="150"/>
+</odoo>

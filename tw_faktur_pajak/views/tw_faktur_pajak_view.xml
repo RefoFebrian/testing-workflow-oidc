@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="tw_faktur_pajak_list_view" model="ir.ui.view">
+            <field name="name">tw.faktur.pajak.list</field>
+            <field name="model">tw.faktur.pajak</field>
+            <field name="arch" type="xml">
+                <list string="Generate Faktur Pajak">
+					<field name="company_id"/>
+					<field name="name"/>
+                    <field name="date"/>
+                    <field name="prefix"/>
+                    <field name="counter_start"/>
+                    <field name="counter_end"/>
+                    <field name="release_date"/>
+                </list>
+            </field>
+     	</record>
+
+        <record id="tw_faktur_pajak_form_view" model="ir.ui.view">
+            <field name="name">tw.faktur.pajak.form</field>
+            <field name="model">tw.faktur.pajak</field>
+            <field name="arch" type="xml">
+                <form string="Generate Faktur Pajak">
+					<header>
+						<button name="action_post" invisible="state != 'draft'" string="Post" class="oe_highlight" type="object" groups="tw_faktur_pajak.group_tw_faktur_pajak_button_post"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,posted"/>
+					</header>
+                	<sheet>
+                   		<div class="oe_title">
+							<h1>
+								<field name="name" readonly="1" force_save="1"/>
+							</h1>
+						</div>
+	                    <group>
+	                   		<group>
+								<field name="company_id" readonly="state != 'draft'" options="{'no_create': True}"/>
+		                    	<field name="counter_start" readonly="state != 'draft'" />
+			                	<field name="counter_end" readonly="state != 'draft'" />
+			                	<field name="prefix" placeholder="ex. 001.15." readonly="state != 'draft'" />
+			                	<field name="padding" readonly="state != 'draft'" />
+							</group>
+	                   		<group>
+			           			<field name="date" readonly="1" force_save="1"/>
+			                    <field name="release_date" readonly="state != 'draft'" required="1"/>
+			                    <field name="year" readonly="state != 'draft'" required="1"/>
+			                    <field name="origin" string="No. Document" readonly="state != 'draft'"/>
+							</group>
+						</group>
+						<notebook> 
+	                  		<page string="No. Faktur Pajak" name="no_faktur_pajak">
+			                	<field name="faktur_pajak_ids">
+		                    		<list editable="top">
+		                    			<field name="name"/>
+		                    			<field name="state"/>
+		                    		</list>
+			                    </field>
+		                  	</page>
+							<page string="Audit Trail" name="audit_trail">
+								<group>
+									<group>
+										<field name="create_uid" readonly="1"></field>
+										<field name="create_date" readonly="1"></field>
+										<field name="confirm_uid" readonly="1"></field>
+										<field name="confirm_date" readonly="1"></field>
+									</group>
+									<group>
+										<field name="write_uid" readonly="1"></field>
+										<field name="write_date" readonly="1"></field>
+									</group>
+								</group>
+							</page>
+						</notebook>
+                	</sheet>
+                </form>
+			</field>
+      	</record>
+
+		<record id="tw_faktur_pajak_search_view" model="ir.ui.view">
+            <field name="name">tw.faktur.pajak.search</field>
+            <field name="model">tw.faktur.pajak</field>
+            <field name="arch" type="xml">
+                <search string="Generate Faktur Pajak">
+                	<field name="name"/>
+					<field name="date"/>
+        			<field name="prefix"/>
+                    <field name="company_id"/>
+					<filter name="date" string="Date" domain="[]" context="{'group_by': 'date'}"/>
+                    <filter name="company" string="Branch" domain="[]" context="{'group_by': 'company_id'}"/>
+					<separator/>
+					<!-- <filter name="my_branch" string="Branch Saya" domain="[('company_id', 'in', company_ids)]"/> -->
+					<separator/>
+					<filter name="date_this_day" string="Hari Ini" domain="[('release_date', '&gt;=', (context_today() - relativedelta(day=1)).strftime('%%Y-%%m-%%d')), ('release_date', '&lt;=', (context_today() + relativedelta(day=31)).strftime('%%Y-%%m-%%d'))]"/>
+					<filter name="date_this_month" string="Bulan Ini" domain="[('release_date', '&gt;=', (context_today() - relativedelta(day=1)).strftime('%%Y-%%m-%%d')), ('release_date', '&lt;=', (context_today() + relativedelta(day=31)).strftime('%%Y-%%m-%%d'))]"/>
+					<filter name="date_this_quarter" string="Kuartal Ini" domain="[('release_date', '&gt;=', (context_today() - relativedelta(day=1, months=((context_today().month - 1) %% 3))).strftime('%%Y-%%m-%%d')), ('release_date', '&lt;', (context_today() + relativedelta(day=1, months=3 - ((context_today().month - 1) %% 3))).strftime('%%Y-%%m-%%d'))]"/>
+					<filter name="date_this_year" string="Tahun Ini" domain="[('release_date', '&gt;=', (context_today() - relativedelta(day=1, month=1)).strftime('%%Y-%%m-%%d')), ('release_date', '&lt;=', (context_today() + relativedelta(day=31, month=12)).strftime('%%Y-%%m-%%d'))]"/>
+					<separator/>
+					<group expand="0" string="Group By">
+						<filter name="group_by_company" string="Branch" context="{'group_by': 'company_id'}"/>
+						<filter name="group_by_date" string="Periode Faktur" context="{'group_by': 'release_date:month'}"/>
+						<filter name="group_by_state" string="Status" context="{'group_by': 'state'}"/>
+					</group>
+                </search>
+            </field>
+        </record>
+		
+		<record id="tw_faktur_pajak_action" model="ir.actions.act_window">
+		    <field name="name">Generate Faktur Pajak</field>
+			<field name="res_model">tw.faktur.pajak</field>
+		    <field name="view_mode">list,form</field>
+		</record>
+    </data>
+</odoo>

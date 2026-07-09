@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_stock_picking_batch_inbound_list_view" model="ir.ui.view">
+            <field name="name">tw.stock.picking.batch.inbound.list</field>
+            <field name="model">stock.picking.batch</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_picking_batch_inherit_list_view" />
+            <field name="arch" type="xml">
+                <field name="division" position="after">
+                    <field name="stock_inbound_id" optional="show" readonly="1" options="{'no_create': True,'no_open': True}"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="tw_stock_picking_batch_inbound_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.picking.batch.inbound.form</field>
+            <field name="model">stock.picking.batch</field>
+            <field name="priority">1</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_picking_batch_inherit_form_view" />
+            <field name="arch" type="xml">
+                <field name="source_picking_ids" position="after">
+                    <field name="stock_inbound_id" 
+                        placeholder="e.g. Stock Inbound" 
+                        options="{'no_create': True,'no_open': True}" 
+                        required="picking_type_code=='incoming' and branch_type=='MD' and division in ('Unit','Sparepart','Umum')" 
+                        readonly="state != 'draft'" 
+                        force_save="1" 
+                        domain="[('state' ,'=','open'),('division','=',division)]"
+                    />
+                    <field name="amount_of_load" readonly="1" force_save="1"/>
+                </field>
+                <xpath expr="//field[@name='date']" position="after">
+                    <field name="rope_condition" required="stock_inbound_id and division == 'Unit'" readonly="state != 'draft'" invisible="division != 'Unit'"/>
+                    <field name="sponge_count" required="stock_inbound_id and division == 'Unit'" readonly="state != 'draft'" invisible="division != 'Unit'"/>
+                    <field name="steel_count" required="stock_inbound_id and division == 'Unit'" readonly="state != 'draft'" invisible="division != 'Unit'"/>
+                    <field name="saddle_count" required="stock_inbound_id and division == 'Unit'" readonly="state != 'draft'" invisible="division != 'Unit'"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

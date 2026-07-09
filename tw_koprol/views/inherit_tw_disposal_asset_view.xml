@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_inherit_tw_disposal_asset_form" model="ir.ui.view" >
+		    <field name="name">inherit.tw.disposal.asset.form</field>
+		    <field name="model">tw.asset.disposal</field>
+		    <field name="inherit_id" ref="tw_asset_disposal.tw_disposal_asset_form_view"/>
+		    <field name="arch" type="xml">
+		    	<xpath expr="//field[@name='write_date']" position="after">
+                    <field name="last_modified_date" readonly="1"/>
+                </xpath>
+		    	<xpath expr="//field[@name='division']" position="after">
+                    <field name="koprol_code" readonly="1"/>
+                </xpath>
+		    </field>
+		</record>
+	</data>
+</odoo>

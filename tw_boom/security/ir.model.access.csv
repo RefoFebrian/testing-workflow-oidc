@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_boom_main_category,access_tw_boom_main_category,model_tw_boom_main_category,base.group_user,1,0,0,0
+access_tw_boom_sub_category,access_tw_boom_sub_category,model_tw_boom_sub_category,base.group_user,1,0,0,0
+access_tw_boom_category,access_tw_boom_category,model_tw_boom_category,base.group_user,1,0,0,0
+access_tw_boom_master_escalation,access_tw_boom_master_escalation,model_tw_boom_master_escalation,base.group_user,1,0,0,0
+access_tw_boom_master_quotes,access_tw_boom_master_quotes,model_tw_boom_master_quotes,base.group_user,1,0,0,0
+
+access_tw_boom_task,access_tw_boom_task,model_tw_boom_task,base.group_user,1,0,0,0
+access_tw_boom_task_escalation,access_tw_boom_task_escalation,model_tw_boom_task_escalation,base.group_user,1,0,0,0
+access_tw_boom_task_history_user,access_tw_boom_task_history_user,model_tw_boom_task_history_user,base.group_user,1,0,0,0
+access_tw_boom_delegation_task,access_tw_boom_delegation_task,model_tw_boom_delegation_task,base.group_user,1,0,0,0
+
+access_tw_boom_task_history,access_tw_boom_task_history,model_tw_boom_task_history,base.group_user,1,0,0,0
+

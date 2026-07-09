@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <!-- Menu -->
+        <menuitem id="tw_stock_opname_asset_menu" name="Stock Opname" parent="tw_menu.submenu_tw_general_affair_configuration" sequence="5"/>
+        
+        <!-- Menu Item -->
+        <menuitem id="tw_stock_opname_asset_menuitem" name="Stock Opname Asset" groups="group_tw_stock_opname_asset_read" action="action_tw_stock_opname_asset" parent="tw_stock_opname_asset.tw_stock_opname_asset_menu" sequence="1"/>
+    </data>
+
+</odoo>

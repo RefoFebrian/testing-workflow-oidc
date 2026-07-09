@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<menuitem id="tw_signature_menuitem" 
+			name="Signature" 
+			parent="tw_faktur_pajak.tw_backoffice_tax_submenu" 
+			action="tw_signature.tw_signature_action" 
+			sequence="300" 
+			groups="tw_signature.group_tw_signature_read"/>
+	</data>
+</odoo>

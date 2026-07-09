@@ -1,0 +1,10 @@
+.oe_statusbar_vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Agar status sejajar ke kiri */
+}
+
+.oe_statusbar_vertical .o_statusbar_status {
+    width: auto;
+    margin-bottom: 5px;
+}

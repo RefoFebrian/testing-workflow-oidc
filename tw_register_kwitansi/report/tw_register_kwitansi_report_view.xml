@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="tw_report_register_kwitansi_view_wizard" model="ir.ui.view">
+			<field name="name">tw.report.register.kwitansi.wizard</field>
+			<field name="model">tw.report.register.kwitansi</field>
+			<field name="arch" type="xml">
+				<form string="Report Register Kwitansi">
+					<group>
+						<field name="company_ids" widget="many2many_tags" placeholder="Branch" required="1" options="{'no_create': True,'no_open': True}"/>
+						<label for="bulan" string="Periode"/>
+						<div>
+							<field name="bulan" class="oe_inline" placeholder="Bulan" required="1"/>
+ - 
+							<field name="tahun" class="oe_inline" placeholder="Tahun" required="1"/>
+						</div>
+					</group>
+					<footer>
+						<button name="excel_report" string="Export Data" type="object" class="oe_highlight" />
+						<span>or</span>
+						<button string="Cancel" special="cancel" class="btn btn-default"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="tw_report_register_kwitansi_action_wizard" model="ir.actions.act_window">
+			<field name="name">Laporan Register Kwitansi</field>
+			<field name="res_model">tw.report.register.kwitansi</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="tw_register_kwitansi.tw_report_register_kwitansi_view_wizard"/>
+			<field name="target">new</field>
+		</record>
+	</data>
+</odoo>

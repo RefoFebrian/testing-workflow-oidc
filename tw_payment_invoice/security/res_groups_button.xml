@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+
+        <!-- Generate Auto Customer Payment (AR) Manual from Invoice Button -->
+		<record id="group_tw_payment_invoice_button_generate_ar_payment_manual_invoice" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Generate AR Payment Manual Invoice</field>
+        </record>
+        <record id="access_tw_payment_invoice_button_generate_ar_payment_manual_invoice" model="ir.model.access">
+            <field name="model_id" ref="model_account_move"/>
+            <field name="name">tw_payment_invoice_button_generate_ar_payment_manual_invoice update</field>
+            <field name="group_id" ref="group_tw_payment_invoice_button_generate_ar_payment_manual_invoice"/>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <!-- Generate Auto Customer Payment (AR) QRIS from Invoice Button -->
+		<record id="group_tw_payment_invoice_button_generate_ar_payment_qris_invoice" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Generate AR Payment QRIS Invoice</field>
+        </record>
+        <record id="access_tw_payment_invoice_button_generate_ar_payment_qris_invoice" model="ir.model.access">
+            <field name="model_id" ref="model_account_move"/>
+            <field name="name">tw_payment_invoice_button_generate_ar_payment_qris_invoice update</field>
+            <field name="group_id" ref="group_tw_payment_invoice_button_generate_ar_payment_qris_invoice"/>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <!-- Generate Auto Customer Payment (AR) VA from Invoice Button -->
+		<record id="group_tw_payment_invoice_button_generate_ar_payment_va_invoice" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Generate AR Payment VA Invoice</field>
+        </record>
+        <record id="access_tw_payment_invoice_button_generate_ar_payment_va_invoice" model="ir.model.access">
+            <field name="model_id" ref="model_account_move"/>
+            <field name="name">tw_payment_invoice_button_generate_ar_payment_va_invoice update</field>
+            <field name="group_id" ref="group_tw_payment_invoice_button_generate_ar_payment_va_invoice"/>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Generate Auto Customer Payment (AR) QRIS from WO Button -->
+		<record id="group_tw_payment_invoice_button_generate_ar_payment_qris_wo" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Generate AR Payment QRIS WO</field>
+        </record>
+        <record id="access_tw_payment_invoice_button_generate_ar_payment_qris_wo" model="ir.model.access">
+            <field name="model_id" ref="model_tw_work_order"/>
+            <field name="name">tw_payment_invoice_button_generate_ar_payment_qris_wo update</field>
+            <field name="group_id" ref="group_tw_payment_invoice_button_generate_ar_payment_qris_wo"/>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <!-- Generate Auto Customer Payment (AR) VA from DSO Button -->
+		<record id="group_tw_payment_invoice_button_generate_ar_payment_va_dso" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Generate AR Payment VA DSO</field>
+        </record>
+        <record id="access_tw_payment_invoice_button_generate_ar_payment_va_dso" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order"/>
+            <field name="name">tw_payment_invoice_button_generate_ar_payment_va_dso update</field>
+            <field name="group_id" ref="group_tw_payment_invoice_button_generate_ar_payment_va_dso"/>
+            <field name="perm_write">1</field>
+        </record>
+
+		<record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_tw_payment_invoice_button_generate_ar_payment_manual')),
+                (4,ref('group_tw_payment_invoice_button_generate_ar_payment_qris')),
+                (4,ref('group_tw_payment_invoice_button_generate_ar_payment_va')),
+                (4,ref('group_tw_payment_invoice_button_generate_ar_payment_qris_wo')),
+                (4,ref('group_tw_payment_invoice_button_generate_ar_payment_va_dso')),
+            ]"/>
+        </record>
+
+	</data>
+</odoo>

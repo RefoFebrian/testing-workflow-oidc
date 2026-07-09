@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_sale_report_undelivered_view" model="ir.ui.view">
+            <field name="name">tw.sale.report.undelivered.wizard</field>
+            <field name="model">tw.sale.report.undelivered</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="SO Undelivered Report">
+                    <group>
+                        <group>
+                            <field name="options" required="1"/>
+                            <field name="division"/>
+                        </group>
+                        <group>
+                            <label for="start_date" string="Periode"/> 
+                            <div>
+                                <field name="start_date" class="oe_inline" placeholder="Start Date"/> - 
+                                <field name="end_date" class="oe_inline" placeholder="End Date"/>
+                            </div>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Branches">
+							<field name="company_ids">
+								<list>
+									<field name="code"/>
+									<field name="name"/>
+								</list>
+							</field>
+						</page>
+                        <page string="Partner">
+							<field name="partner_ids">
+								<list>
+									<field name="code"/>
+									<field name="name"/>
+								</list>
+							</field>
+						</page>
+                    </notebook>
+                    <footer>
+                        <button name="action_export_report" string="Generate" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+	  	<record id="tw_sale_report_undelivered_action" model="ir.actions.act_window">
+            <field name="name">Laporan SO Undelivered</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.sale.report.undelivered</field>
+            <field name="view_id" ref="tw_sale_report_undelivered_view"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

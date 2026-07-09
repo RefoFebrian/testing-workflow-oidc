@@ -1,0 +1,1 @@
+from . import astrapay_qris_endpoint

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_config_files_mft_ssu_form_view" model="ir.ui.view">
+            <field name="name">tw.config.files.mft.ssu.form</field>
+            <field name="model">tw.config.files</field>
+            <field name="inherit_id" ref="tw_config_files.tw_config_files_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="ssu_received_md" string="SSU Received" type="object" class="oe_highlight"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

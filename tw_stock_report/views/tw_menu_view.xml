@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Showroom -->
+        <menuitem id="tw_travel_document_showroom_report_menuitem" name="Laporan Surat Jalan" parent="tw_menu.submenu_tw_showroom_report" action="tw_travel_document_report_action" sequence="1" groups="tw_stock_report.group_tw_travel_document_showroom_laporan"/>
+        <menuitem id="tw_stock_picking_showroom_report_menuitem" name="Laporan Stock Picking" parent="tw_menu.submenu_tw_showroom_report" action="tw_stock_picking_report_action" sequence="2" groups="tw_stock_report.group_tw_stock_picking_showroom_laporan"/>
+        <menuitem id="tw_stock_movement_showroom_report_menuitem" name="Laporan Stock Movement" parent="tw_menu.submenu_tw_showroom_report" action="tw_stock_movement_report_action" sequence="3" groups="tw_stock_report.group_tw_stock_movement_showroom_laporan"/>
+        <menuitem id="tw_stock_inbound_showroom_report_menuitem" name="Laporan Stock Inbound" parent="tw_menu.submenu_tw_showroom_report" action="tw_stock_inbound_report_action" sequence="4" groups="tw_stock_report.group_tw_stock_inbound_showroom_laporan"/>
+        <menuitem id="tw_stock_showroom_report_menuitem" name="Laporan Stock" parent="tw_menu.submenu_tw_showroom_report" action="tw_stock_showroom_report_action" sequence="5" groups="tw_stock_report.group_tw_stock_laporan_showroom"/>
+        <menuitem id="tw_stock_available_showroom_report_menuitem" name="Laporan Stock Available" parent="tw_menu.submenu_tw_showroom_report" action="tw_stock_available_showroom_report_action" sequence="6" groups="tw_stock_report.group_tw_stock_available_laporan_showroom"/>
+        <menuitem id="tw_nrfs_showroom_report_menuitem" name="Laporan NRFS" parent="tw_menu.submenu_tw_showroom_report" action="tw_nrfs_report_action" sequence="7" groups="tw_stock_report.group_tw_nrfs_laporan_showroom"/>
+        <menuitem id="tw_stock_umum_report_menuitem" name="Laporan Stock Umum (Direct gift)" parent="tw_menu.submenu_tw_showroom_report" action="tw_stock_umum_report_action" sequence="8" groups="tw_stock_report.group_tw_stock_laporan_umum"/>
+        <menuitem id="tw_stock_extras_report_menuitem" name="Laporan Stock Extras" parent="tw_menu.submenu_tw_showroom_report" action="tw_stock_extras_report_action" sequence="9" groups="tw_stock_report.group_tw_stock_laporan_extras"/>
+
+        <!-- workshop -->
+        <menuitem id="tw_travel_document_workshop_report_menuitem" name="Laporan Surat Jalan" parent="tw_menu.submenu_tw_workshop_report" action="tw_travel_document_report_action" sequence="1" groups="tw_stock_report.group_tw_travel_document_workshop_laporan"/>
+        <menuitem id="tw_stock_picking_workshop_report_menuitem" name="Laporan Stock Picking" parent="tw_menu.submenu_tw_workshop_report" action="tw_stock_picking_report_action" sequence="2" groups="tw_stock_report.group_tw_stock_picking_workshop_laporan"/>
+        <menuitem id="tw_stock_movement_workshop_report_menuitem" name="Laporan Stock Movement" parent="tw_menu.submenu_tw_workshop_report" action="tw_stock_movement_report_action" sequence="3" groups="tw_stock_report.group_tw_stock_movement_workshop_laporan"/>
+        <menuitem id="tw_stock_inbound_workshop_report_menuitem" name="Laporan Stock Inbound" parent="tw_menu.submenu_tw_workshop_report" action="tw_stock_inbound_report_action" sequence="4" groups="tw_stock_report.group_tw_stock_inbound_workshop_laporan"/>
+        <menuitem id="tw_stock_workshop_report_menuitem" name="Laporan Stock" parent="tw_menu.submenu_tw_workshop_report" action="tw_stock_workshop_report_action" sequence="5" groups="tw_stock_report.group_tw_stock_laporan_workshop"/>
+        <menuitem id="tw_stock_available_workshop_report_menuitem" name="Laporan Stock Available" parent="tw_menu.submenu_tw_workshop_report" action="tw_stock_available_workshop_report_action" sequence="6" groups="tw_stock_report.group_tw_stock_available_laporan_workshop"/>
+        <menuitem id="tw_nrfs_workshop_report_menuitem" name="Laporan NRFS" parent="tw_menu.submenu_tw_workshop_report" action="tw_nrfs_report_action" sequence="7" groups="tw_stock_report.group_tw_nrfs_laporan_workshop"/>
+        <menuitem id="tw_po_supply_sparepart_workshop_report_menuitem" name="Laporan PO Supply Sparepart" parent="tw_menu.submenu_tw_workshop_report" action="tw_po_supply_sparepart_report_action" sequence="8" groups="tw_stock_report.group_tw_po_supply_sparepart_laporan"/>
+
+        <!-- Warehouse -->
+        <menuitem id="tw_travel_document_warehouse_report_menuitem" name="Laporan Surat Jalan" parent="tw_menu.submenu_tw_warehouse_report" action="tw_travel_document_report_action" sequence="1" groups="tw_stock_report.group_tw_travel_document_laporan"/>
+        <menuitem id="tw_stock_picking_warehouse_report_menuitem" name="Laporan Stock Picking" parent="tw_menu.submenu_tw_warehouse_report" action="tw_stock_picking_report_action" sequence="2" groups="tw_stock_report.group_tw_stock_picking_laporan"/>
+        <menuitem id="tw_stock_movement_warehouse_report_menuitem" name="Laporan Stock Movement" parent="tw_menu.submenu_tw_warehouse_report" action="tw_stock_movement_report_action" sequence="3" groups="tw_stock_report.group_tw_stock_movement_laporan"/>
+        <menuitem id="tw_stock_inbound_warehouse_report_menuitem" name="Laporan Stock Inbound" parent="tw_menu.submenu_tw_warehouse_report" action="tw_stock_inbound_report_action" sequence="4" groups="tw_stock_report.group_tw_stock_inbound_laporan"/>
+        <menuitem id="tw_stock_warehouse_report_menuitem" name="Laporan Stock" parent="tw_menu.submenu_tw_warehouse_report" action="tw_stock_report_action" sequence="5" groups="tw_stock_report.group_tw_stock_laporan"/>
+        <menuitem id="tw_stock_available_warehouse_report_menuitem" name="Laporan Stock Available" parent="tw_menu.submenu_tw_warehouse_report" action="tw_stock_available_report_action" sequence="6" groups="tw_stock_report.group_tw_stock_available_laporan"/>
+        <menuitem id="tw_nrfs_warehouse_report_menuitem" name="Laporan NRFS" parent="tw_menu.submenu_tw_warehouse_report" action="tw_nrfs_report_action" sequence="7" groups="tw_stock_report.group_tw_nrfs_laporan"/>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="group_tw_activity_atl_btl_settlement_button" model="res.groups">
+            <field name="category_id" ref="tw_activity_atl_btl.tw_role_activity_atl_btl"/>
+            <field name="name">TW Button Settlement Activity ATL &amp; BTL</field>
+        </record>   
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_activity_atl_btl_settlement_button')),
+            ]" />
+        </record>
+    </data>
+</odoo>

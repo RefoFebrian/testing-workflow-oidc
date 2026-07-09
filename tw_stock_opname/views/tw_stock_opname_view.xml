@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_stock_opname_tree" model="ir.ui.view">
+            <field name="name">tw.stock.opname.tree</field>
+            <field name="model">tw.stock.opname</field>
+            <field name="arch" type="xml">
+                <list string="Stock Opname">
+                    <field name="company_id" readonly="1"/>
+                    <field name="name" readonly="1"/>
+                    <field name="date" readonly="1"/>
+                    <field name="total_data" readonly="1"/>
+                    <field name="counted" readonly="1"/>
+                    <field name="type_so" readonly="1"/>
+                    <field name="division" readonly="1"/>
+                    <field name="state" readonly="1"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_tw_stock_opname_form" model="ir.ui.view">
+            <field name="name">tw.stock.opname.form</field>
+            <field name="model">tw.stock.opname</field>
+            <field name="type">form</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <form string="Form Stock Opname">
+                    <header>
+                        <button name="action_partial" type="object" string="Generate" class="oe_highlight" invisible="state != 'draft'" groups="tw_stock_opname.group_tw_stock_opname_button_generate"/>
+                        <button name="action_recount" type="object" string="Recount" class="oe_highlight" invisible="state not in ['in_progress','recount']" groups="tw_stock_opname.group_tw_stock_opname_button_recount"/>
+                        <button name="action_done" type="object" string="Done" class="oe_highlight" invisible="state not in ['recount','in_progress']" groups="tw_stock_opname.group_tw_stock_opname_button_done"/>
+                        <button name="action_baso" type="object" string="Berita Acara" invisible="state != 'done'" groups="tw_stock_opname.group_tw_stock_opname_button_baso"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,open,in_progress,recount,done" statusbar_colors='{"draft":"red","done":"blue"}'/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" class="oe_inline" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group> 
+                            <group>
+                                <field name="division" readonly="1" string="Division" force_save="1" options="{'no_create': True,'no_open':True}"/>
+                                <field name="company_id" required="1" options="{'no_create': True,'no_open':True}" string="Branch" readonly="state != 'draft'"/>
+                                <field name="date" string="Date" readonly="1" />
+                                <field name="employee_id" required="1" options="{'no_create': True,'no_open':True}" readonly="state != 'draft'"/>
+                                <field name="type_so" readonly="1" invisible="type_so == False"/>
+                                <label for="periode_awal" string="Periode" required="1"/>
+                            <div>                               
+                                <field name="periode_awal" required="1" class="oe_inline" style="font-family:'monospace';font-weight: bold" readonly="state == 'done'"/> s/d <field name="periode_akhir" required="1" class="oe_inline" style="font-family:'monospace';font-weight: bold" readonly="state == 'done'"/>
+                            </div>
+                            </group>
+                            <group invisible="state == 'draft'">
+                                <field name="total_data" readonly="1" force_save="1"/>
+                                <label for="counted" string="Counted" readonly="1"/>
+                                    <div>
+                                        <field name="counted" readonly="1" force_save="1" class="oe_inline"/> (<field name="counted_percentage" readonly="1" force_save="1" class="oe_inline"/>%)
+                                    </div>
+                                <label for="not_counted" string="Not Counted" readonly="1"/>
+                                    <div>
+                                        <field name="not_counted" readonly="1" force_save="1" class="oe_inline"/> (<field name="not_counted_percentage" readonly="1" force_save="1" class="oe_inline"/>%)
+                                    </div>
+                                <label for="anomali" string="Anomali" readonly="1"/>
+                                    <div>
+                                        <field name="anomali" readonly="1" force_save="1" class="oe_inline"/> (<field name="anomali_percentage" readonly="1" force_save="1" class="oe_inline"/>%)
+                                    </div>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Detail">
+                                <header invisible="state not in ['open','recount']">
+                                    <button name="action_input_pic" invisible="state == 'draft'" string="Input PIC" type="object" class="oe_highlight"/>
+                                </header>
+                                <field name="detail_opname_ids">
+                                    <list create="false" delete="false">
+                                        <field name="product_code"/>
+                                        <field name="location_id" force_save="1"/>
+                                        <field name="qty_system"/>
+                                        <field name="qty_count"/>
+                                        <field name="selisih"/>
+                                        <field name="employee_id"/>
+                                        <field name="count_date"/>
+                                        <field name="perhitungan_ke"/>
+                                        <field name="state"/>
+                                    </list>
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="product_code" readonly="1" />
+                                                    <field name="location_id" readonly="1" force_save="1"/>
+                                                    <field name="qty_system" readonly="1" />
+                                                    <field name="qty_count" readonly="1" />
+                                                </group>
+                                                <group>
+                                                    <field name="selisih" readonly="1" />
+                                                    <field name="count_date" readonly="1" />
+                                                    <field name="state" readonly="1" />
+                                                </group>
+                                            </group>
+                                            <notebook>
+                                                <page string="History">
+                                                    <field name="history_opname_ids">
+                                                        <list create="false" delete="false">
+                                                            <field name="employee_id" readonly="1"/>
+                                                            <field name="perhitungan_ke" readonly="1"/>
+                                                            <field name="qty_count" readonly="1"/>
+                                                            <field name="count_date" readonly="1"/>
+                                                            <field name="state" readonly="1"/>
+                                                        </list>
+                                                    </field>
+                                                </page>
+                                            </notebook>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Selisih">
+                                <header invisible="state not in ['open','recount']">
+                                    <button name="action_input_pic" invisible="state == 'draft'" string="Input PIC" type="object" class="oe_highlight"/>
+                                </header>
+                                <field name="selisih_opname_ids">
+                                     <list create="false" delete="false">
+                                        <field name="product_code"/>
+                                        <field name="location_id" force_save="1"/>
+                                        <field name="qty_system"/>
+                                        <field name="qty_count"/>
+                                        <field name="selisih"/>
+                                        <field name="employee_id"/>
+                                        <field name="count_date"/>
+                                        <field name="perhitungan_ke"/>
+                                        <field name="state"/>
+                                    </list>
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="product_code" readonly="1" />
+                                                    <field name="location_id" readonly="1" force_save="1"/>
+                                                    <field name="qty_system" readonly="1" />
+                                                    <field name="qty_count" readonly="1" />
+                                                </group>
+                                                <group>
+                                                    <field name="selisih" readonly="1" />
+                                                    <field name="count_date" readonly="1" />
+                                                    <field name="state" readonly="1" />
+                                                </group>
+                                            </group>
+                                            <notebook>
+                                                <page string="History">
+                                                    <field name="history_opname_ids">
+                                                        <list create="false" delete="false">
+                                                            <field name="employee_id" readonly="1"/>
+                                                            <field name="perhitungan_ke" readonly="1"/>
+                                                            <field name="qty_count" readonly="1"/>
+                                                            <field name="count_date" readonly="1"/>
+                                                            <field name="state" readonly="1"/>
+                                                        </list>
+                                                    </field>
+                                                </page>
+                                            </notebook>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"></field>
+                                        <field name="open_uid" readonly="1" invisible="open_uid == False"></field>
+                                        <field name="confirm_uid" readonly="1" invisible="confirm_uid == False"></field>
+                                        <field name="recount_uid" readonly="1" invisible="recount_uid == False"></field>
+                                        <field name="done_uid" readonly="1"  invisible="done_uid == False"></field>
+                                    </group>
+                                    <group>
+                                        <field name="create_date" readonly="1"></field>
+                                        <field name="open_date" readonly="1" invisible="open_date == False"></field>
+                                        <field name="confirm_date" readonly="1" invisible="confirm_date == False"></field>
+                                        <field name="recount_date" readonly="1" invisible="recount_date == False"></field>
+                                        <field name="done_date" readonly="1"  invisible="done_date == False"></field>
+                                    </group>
+                                </group>
+                            </page> 
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_tw_stock_opname_search" model="ir.ui.view">
+            <field name="name">tw.stock.opname.search</field>
+            <field name="model">tw.stock.opname</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" string="Name"/>
+                    <field name="company_id" string="Branch"/>
+                    <field name="state" string="Status"/>
+                    <field name="type_so" string="Tipe"/>
+                    <field name="employee_id" string="Penanggung Jawab"/>
+                    <field name="date" string="Date"/>
+                    <field name="detail_opname_ids" string="Product Code" filter_domain="[('detail_opname_ids.product_code', 'ilike', self)]" />
+
+                    <!-- Optional predefined filters -->
+                    <filter name="filter_draft" string="Draft" domain="[('state','=','draft')]"/>
+                    <filter name="filter_done" string="Done" domain="[('state','=','done')]"/>
+                    <filter name="filter_open" string="Open" domain="[('state','=','open')]"/>
+                    <filter name="filter_in_progress" string="In Progress" domain="[('state','=','in_progress')]"/>
+                    <filter name="filter_recount" string="Recount" domain="[('state','=','recount')]"/>
+                    <filter name="filter_today" string="Today" domain="[('date', '=', context_today())]"/>
+
+                    <group name="tw_stock_opname_groupby" string="Group By">
+						<filter name="name_groupby" string="Name" context="{'group_by':'name'}"/>
+                        <filter name="branch_groupby" string="Branch" context="{'group_by':'company_id'}"/>
+						<filter name="date_groupby" string="Date" context="{'group_by':'date'}"/>
+						<filter name="division_groupby" string="Division" context="{'group_by':'division'}"/>
+                        <filter name="type_so_groupby" string="Type" context="{'group_by':'type_so'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="action_stock_opname" model="ir.actions.act_window">
+            <field name="name">Stock Opname</field> 
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.stock.opname</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain" eval="[('division', '=', 'Sparepart')]"/>
+            <field name="context" eval="{
+				'default_division': 'Sparepart',
+                'search_default_filter_draft': 1,
+                'search_default_filter_open': 1,
+                'search_default_filter_in_progress': 1,
+			}"/>
+        </record>
+
+        <record id="actions_tw_stock_opname_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="view_tw_stock_opname_tree"/>
+            <field name="act_window_id" ref="action_stock_opname"/>
+        </record>
+
+        <record id="actions_tw_stock_opname_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_tw_stock_opname_form"/>
+            <field name="act_window_id" ref="action_stock_opname"/>
+        </record>
+
+        <menuitem id="tw_stock_opname_menuitem" name="Stock Opname" parent="tw_stock_opname.submenu_stock_opname_workshop" action="action_stock_opname" sequence="10" groups="tw_stock_opname.tw_stock_opname_group_read"/> 
+
+    </data>
+</odoo>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ===================== -->
+        <!-- Groups from tw_faktur_pajak_report (original) -->
+        <!-- ===================== -->
+        <record id="group_tw_faktur_pajak_report_print" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Faktur Pajak Report Print</field>
+            <field name="implied_ids" eval="[(4, ref('tw_faktur_pajak.group_tw_faktur_pajak_read'))]"/>
+        </record>
+
+        <!-- Access Rights for Print Wizard -->
+        <record id="access_tw_faktur_pajak_print_wizard" model="ir.model.access">
+            <field name="model_id" ref="model_tw_faktur_pajak_print_wizard"/>
+            <field name="name">tw_faktur_pajak_print_wizard access</field>
+            <field name="group_id" ref="group_tw_faktur_pajak_report_print"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- ===================== -->
+        <!-- Groups from tw_report_detail_faktur_pajak -->
+        <!-- ===================== -->
+        <record id="group_tw_report_detail_faktur_pajak_read" model="res.groups">
+            <field name="name">TW Laporan Detail Faktur Pajak Read</field>
+            <field name="category_id" ref="tw_base.tw_role"/>
+        </record>
+
+        <record id="access_tw_report_detail_faktur_pajak_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_detail_faktur_pajak_masukan"/>
+            <field name="name">tw.report_detail_faktur_pajak read</field>
+            <field name="group_id" ref="group_tw_report_detail_faktur_pajak_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_report_detail_faktur_pajak_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Detail Faktur Pajak Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_report_detail_faktur_pajak_read'))]"/>
+        </record>
+
+        <record id="access_tw_report_detail_faktur_pajak_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_detail_faktur_pajak_masukan"/>
+            <field name="name">tw.report_detail_faktur_pajak update</field>
+            <field name="group_id" ref="group_tw_report_detail_faktur_pajak_update"/>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+        </record>
+
+        <record id="group_tw_report_detail_faktur_pajak_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Detail Faktur Pajak Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_report_detail_faktur_pajak_read'))]"/>
+        </record>
+
+        <record id="access_tw_report_detail_faktur_pajak_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_detail_faktur_pajak_masukan"/>
+            <field name="name">tw.report_detail_faktur_pajak delete</field>
+            <field name="group_id" ref="group_tw_report_detail_faktur_pajak_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- ===================== -->
+        <!-- Groups from tw_report_faktur_pajak -->
+        <!-- ===================== -->
+        <record id="group_tw_report_faktur_pajak_read" model="res.groups">
+            <field name="name">TW Laporan Faktur Pajak Read</field>
+            <field name="category_id" ref="tw_base.tw_role"/>
+        </record>
+
+        <record id="access_tw_report_faktur_pajak_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_report_faktur_pajak"/>
+            <field name="name">tw.report_faktur_pajak read</field>
+            <field name="group_id" ref="group_tw_report_faktur_pajak_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_report_faktur_pajak_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Faktur Pajak Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_report_faktur_pajak_read'))]"/>
+        </record>
+
+        <record id="access_tw_report_faktur_pajak_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_report_faktur_pajak"/>
+            <field name="name">tw.report_faktur_pajak update</field>
+            <field name="group_id" ref="group_tw_report_faktur_pajak_update"/>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+        </record>
+
+        <record id="group_tw_report_faktur_pajak_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Faktur Pajak Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_report_faktur_pajak_read'))]"/>
+        </record>
+
+        <record id="access_tw_report_faktur_pajak_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_report_faktur_pajak"/>
+            <field name="name">tw.report_faktur_pajak delete</field>
+            <field name="group_id" ref="group_tw_report_faktur_pajak_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    </data>
+
+    <data>
+        <!-- System Admin gets all groups -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_faktur_pajak_report_print')),
+                (4, ref('group_tw_report_detail_faktur_pajak_read')),
+                (4, ref('group_tw_report_detail_faktur_pajak_update')),
+                (4, ref('group_tw_report_detail_faktur_pajak_delete')),
+                (4, ref('group_tw_report_faktur_pajak_read')),
+                (4, ref('group_tw_report_faktur_pajak_update')),
+                (4, ref('group_tw_report_faktur_pajak_delete')),
+            ]"/>
+        </record>
+    </data>
+
+</odoo>

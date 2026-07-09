@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+
+        <!-- TW Part Hotline Cancel -->
+        <record id="group_tw_part_hotline_cancel_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Part Hotline Cancel Read</field>
+        </record>
+
+        <record id="access_tw_part_hotline_cancel_read" model="ir.model.access">
+            <field name="model_id" ref="tw_part_hotline_cancel.model_tw_part_hotline_cancel" />
+            <field name="name">tw_part_hotline_cancel read</field>
+            <field name="group_id" ref="group_tw_part_hotline_cancel_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_part_hotline_cancel_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">Part Hotline Cancel Update</field>
+        </record>
+
+        <record id="access_tw_part_hotline_cancel_update" model="ir.model.access">
+            <field name="model_id" ref="tw_part_hotline_cancel.model_tw_part_hotline_cancel" />
+            <field name="name">tw_part_hotline_cancel update</field>
+            <field name="group_id" ref="group_tw_part_hotline_cancel_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_part_hotline_cancel_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Part Hotline Cancel Delete</field>
+        </record>
+
+        <record id="access_tw_part_hotline_cancel_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_part_hotline_cancel.model_tw_part_hotline_cancel" />
+            <field name="name">tw_part_hotline_cancel delete</field>
+            <field name="group_id" ref="group_tw_part_hotline_cancel_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids"
+                eval="[
+                (4,ref('group_tw_part_hotline_cancel_read')),
+                (4,ref('group_tw_part_hotline_cancel_update')),
+                (4,ref('group_tw_part_hotline_cancel_delete')),
+            ]" />
+        </record>
+
+    </data>
+
+
+</odoo>

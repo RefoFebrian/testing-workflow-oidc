@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit Search View - Add DGI filters -->
+    <record id="stock_picking_batch_view_filter_dgi_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.batch.view.filter.dgi.inherit</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="dgi_delivery_document_id" string="DGI BAST Ref"/>
+                <separator/>
+                <filter name="filter_is_dgi" string="From DGI" domain="[('is_dgi', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit List View - Add Sync DGI BAST button (only visible on Batch Out Showroom) -->
+    <record id="stock_picking_batch_list_dgi_bast_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.batch.list.dgi.bast.inherit</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="inherit_id" ref="tw_stock.tw_stock_picking_batch_retail_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <header>
+                    <button name="action_open_dgi_bast_wizard"
+                        type="object"
+                        class="btn-secondary"
+                        string="Sync DGI BAST"
+                        icon="fa-cloud-download"
+                        display="always"
+                        groups="tw_dgi_bast.tw_dgi_bast_button_group"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Form View - Add Sync DGI BAST button (only visible on Batch Out Showroom) -->
+    <record id="stock_picking_batch_form_dgi_bast_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.batch.form.dgi.bast.inherit</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="inherit_id" ref="tw_stock.tw_stock_picking_batch_retail_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_open_dgi_bast_wizard"
+                    type="object"
+                    class="btn-secondary"
+                    string="Sync DGI BAST"
+                    icon="fa-cloud-download"
+                    invisible="division != 'Unit' or picking_type_id.sequence_code not in ['OUT', 'Out', 'out']"
+                    groups="tw_dgi_bast.tw_dgi_bast_button_group"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

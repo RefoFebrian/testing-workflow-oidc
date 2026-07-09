@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record model="ir.ui.view" id="tw_purchase_order_type_list_view">
+		    <field name="name">tw.purchase.order.type.tree</field>
+		    <field name="model">tw.purchase.order.type</field>
+		    <field name="arch" type="xml">
+		        <list string="List PO Type">
+		            <field name="division"/> 
+		            <field name="name"/>
+		            <field name="start_date_id" options="{'no_open': True, 'no_create': True}"/>
+		            <field name="end_date_id" options="{'no_open': True, 'no_create': True}"/>
+					<field name="code" readonly="1" force_save="1" optional="hide"/>
+		        </list>
+		   	</field>
+		</record>
+		
+		<record model="ir.ui.view" id="tw_purchase_order_type_form_view">
+		    <field name="name">tw.purchase.order.type.form</field>
+		    <field name="model">tw.purchase.order.type</field>
+		    <field name="type">form</field>
+		    <field name="arch" type="xml">
+		        <form string="Purchase Order Type">
+		            <group>
+						<field name="company_id" placeholder="Leave empty to make this record available for all companies"/>
+						<field name="division" required="1"/>
+						<field name="name" required="1"/>
+						<field name="start_date_id" required="1" options="{'no_open': True, 'no_create': True}"/>
+						<field name="end_date_id" required="1" options="{'no_open': True, 'no_create': True}"/>							
+					</group>
+					<notebook>
+						<page string="Operation Types">
+							<group>
+								<group string="Default Operation Types">
+									<field name="default_incoming_type_id" 
+										   help="Default operation type for incoming shipments"/>
+									<field name="default_outgoing_type_id" 
+										   help="Default operation type for outgoing shipments"/>
+									<field name="default_internal_type_id" 
+										   help="Default operation type for internal transfers"/>
+								</group>
+							</group>
+						</page>
+						<page string="Audit Trail">
+							<group>
+								<group>
+									<field name="create_uid" readonly="1"></field>
+									<field name="create_date" readonly="1"></field>
+								</group>
+								<group>							
+									<field name="write_uid" readonly="1"></field>
+									<field name="write_date" readonly="1"></field>
+								</group>
+							</group>
+						</page>	
+					</notebook>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_tw_purchase_order_type_filter" model="ir.ui.view">
+            <field name="name">purchase.order.type.list.select</field>
+            <field name="model">tw.purchase.order.type</field>
+            <field name="arch" type="xml">
+                <search string="Search Purchase Order Type">
+                    <field name="name"/>
+					<field name="start_date_id"/>
+					<field name="end_date_id"/>
+					<filter name="unit" string="Unit" domain="[('division', '=', 'Unit')]"  />
+					<filter name="sparepart" string="Sparepart" domain="[('division', '=', 'Sparepart')]"  />
+					<filter name="service" string="Service" domain="[('division', '=', 'Service')]"  />
+					<filter name="umum" string="Umum" domain="[('division', '=', 'Umum')]"  />
+					<filter name="extras" string="Extras" domain="[('division', '=', 'Extras')]"  />
+					<filter name="finance" string="Finance" domain="[('division', '=', 'Finance')]"  />
+					<group expand="0" string="Group By">
+						<filter name="name" string="Name" context="{'group_by': 'name'}" />
+						<filter name="division" string="Division" domain="[('division', '=', 'value')]" context="{'group_by': 'division'}" />
+						<filter name="start_date_id" string="Start Date" context="{'group_by': 'start_date_id'}" />
+						<filter name="end_date_id" string="End Date" context="{'group_by': 'end_date_id'}" />
+					</group>
+                </search>
+            </field>
+        </record>
+		
+		<record id="tw_purchase_order_showroom_purchase_order_type_action_server" model="ir.actions.server">
+			<field name="name">Purchase Order Type</field>
+			<field name="path">purchase-order-type-showroom</field>
+			<field name="model_id" ref="tw_purchase_order.model_tw_purchase_order_type"/>
+			<field name="binding_model_id" ref="tw_purchase_order.model_tw_purchase_order_type" />
+			<field name="binding_view_types">form,list</field>
+			<field name="state">code</field>
+			<field name="code">
+				action = env['tw.purchase.order.type'].action_act_window_purchase_order_type('Showroom')
+			</field>
+		</record>
+
+		<record id="tw_purchase_order_workshop_purchase_order_type_action_server" model="ir.actions.server">
+			<field name="name">Purchase Order Type</field>
+			<field name="path">purchase-order-type-workshop</field>
+			<field name="model_id" ref="tw_purchase_order.model_tw_purchase_order_type"/>
+			<field name="binding_model_id" ref="tw_purchase_order.model_tw_purchase_order_type" />
+			<field name="binding_view_types">form,list</field>
+			<field name="state">code</field>
+			<field name="code">
+				action = env['tw.purchase.order.type'].action_act_window_purchase_order_type('Workshop')
+			</field>
+		</record>
+
+		<record id="tw_purchase_order_general_purchase_order_type_action_server" model="ir.actions.server">
+			<field name="name">Purchase Order Type</field>
+			<field name="path">purchase-order-type-general</field>
+			<field name="model_id" ref="tw_purchase_order.model_tw_purchase_order_type"/>
+			<field name="binding_model_id" ref="tw_purchase_order.model_tw_purchase_order_type" />
+			<field name="binding_view_types">form,list</field>
+			<field name="state">code</field>
+			<field name="code">
+				action = env['tw.purchase.order.type'].action_act_window_purchase_order_type('General')
+			</field>
+		</record>
+		
+	</data>
+</odoo>

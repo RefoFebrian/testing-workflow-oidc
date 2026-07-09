@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="tw_stock_distribution_approval_form_view" model="ir.ui.view">
+			<field name="name">tw.stock.distribution.approval.form</field>
+			<field name="model">tw.stock.distribution</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="tw_stock_distribution.tw_stock_distribution_form_view"/>
+			<field name="arch" type="xml">
+				<xpath expr="//button[@name='action_confirm_qty']" position="replace">
+				</xpath>
+				<xpath expr="//button[@name='action_create_order']" position="before">
+					<button name="action_request_approval" string="RFA" type="object" class="oe_highlight" invisible="state != 'draft'" groups="tw_stock_distribution_approval.group_tw_stock_distribution_approval_rfa"/>
+					<button name="action_approval" string="Approve" type="object" class="oe_highlight" invisible="state != 'waiting_for_approval'"/>
+					<button name="action_confirm_qty" string="Confirm" type="object" class="oe_highlight" invisible="state != 'approved'" groups="tw_stock_distribution.group_tw_stock_distribution_confirm"/>
+					<button name="action_reject_or_cancel" string="Reject" type="object" invisible="state != 'waiting_for_approval'" context="{'window_title': 'Reject'}"/>
+					<button name="action_reject_or_cancel" string="Cancel Approval" type="object" invisible="state not in ('waiting_for_approval', 'approved')" groups="tw_stock_distribution_approval.group_tw_stock_distribution_approval_cancel" context="{'window_title': 'Cancel'}"/>
+				</xpath>
+				<xpath expr="//page[@name='stock_distribution_ids']" position="after">
+					<page string="Approval">
+						<field name="approval_ids" readonly="True"/>
+					</page>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>

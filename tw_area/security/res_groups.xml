@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- TW Res Area Group Read -->
+
+        <record id="tw_res_area_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Res Area Read</field>
+        </record>
+
+        <record id="tw_res_area_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_res_area"/>
+            <field name="name">tw_res_area read</field>
+            <field name="group_id" ref="tw_res_area_group_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- TW Res Area Group Update -->
+
+        <record id="tw_res_area_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Res Area Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_res_area_group_read'))]"/>
+        </record>
+
+        <record id="tw_res_area_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_res_area"/>
+            <field name="name">tw_res_area update</field>
+            <field name="group_id" ref="tw_res_area_group_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- TW Res Area Group Delete -->
+
+        <record id="tw_res_area_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Res Area Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_res_area_group_read'))]"/>
+        </record>
+
+        <record id="tw_res_area_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_res_area"/>
+            <field name="name">tw_res_area delete</field>
+            <field name="group_id" ref="tw_res_area_group_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- TW Res Area Master Master Group Read -->
+
+        <record id="tw_res_area_master_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Area Master Read</field>
+        </record>
+
+        <record id="tw_res_area_master_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_res_area"/>
+            <field name="name">tw_res_area_master read</field>
+            <field name="group_id" ref="tw_res_area_master_group_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        
+        <!-- TW Res Area Master Group Update -->
+
+        <record id="tw_res_area_master_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Area Master Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_res_area_master_group_read'))]"/>
+        </record>
+
+        <record id="tw_res_area_master_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_res_area"/>
+            <field name="name">tw_res_area_master update</field>
+            <field name="group_id" ref="tw_res_area_master_group_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <!-- TW Res Area Master Group Delete -->
+
+        <record id="tw_res_area_master_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Area Master Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_res_area_master_group_read'))]"/>
+        </record>
+
+        <record id="tw_res_area_master_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_res_area"/>
+            <field name="name">tw_res_area_master delete</field>
+            <field name="group_id" ref="tw_res_area_master_group_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('tw_res_area_group_read')),
+                (4,ref('tw_res_area_group_update')),
+                (4,ref('tw_res_area_group_delete')),
+                (4,ref('tw_res_area_master_group_read')),
+                (4,ref('tw_res_area_master_group_update')),
+                (4,ref('tw_res_area_master_group_delete')),
+                ]"/>
+        </record>
+    </data>
+</odoo>

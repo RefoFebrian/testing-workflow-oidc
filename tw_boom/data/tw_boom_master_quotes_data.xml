@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+         <record id="tw_master_quotes_01" model="tw.boom.master.quotes">
+            <field name="name">Genius is one percent inspiration and ninety-nine percent perspiration.</field>
+            <field name="is_active">1</field>
+            <field name="author">Thomas Edison</field>
+        </record>
+
+        <record id="tw_master_quotes_02" model="tw.boom.master.quotes">
+            <field name="name">You can observe a lot just by watching.</field>
+            <field name="is_active">1</field>
+            <field name="author">Yogi Berra</field>
+        </record>
+
+        <record id="tw_master_quotes_03" model="tw.boom.master.quotes">
+            <field name="name">A house divided against itself cannot stand.</field>
+            <field name="is_active">1</field>
+            <field name="author">Abraham Lincoln</field>
+        </record>
+
+        <record id="tw_master_quotes_04" model="tw.boom.master.quotes">
+            <field name="name">Difficulties increase the nearer we get to the goal.</field>
+            <field name="is_active">1</field>
+            <field name="author">Johann Wolfgang von Goethe</field>
+        </record>
+
+        <record id="tw_master_quotes_05" model="tw.boom.master.quotes">
+            <field name="name">Fate is in your hands and no one elses</field>
+            <field name="is_active">1</field>
+            <field name="author">Byron Pulsifer</field>
+        </record>
+
+        <record id="tw_master_quotes_06" model="tw.boom.master.quotes">
+            <field name="name">Be the chief but never the lord.</field>
+            <field name="is_active">1</field>
+            <field name="author">Lao Tzu</field>
+        </record>
+
+        <record id="tw_master_quotes_07" model="tw.boom.master.quotes">
+            <field name="name">Nothing happens unless first we dream.</field>
+            <field name="is_active">1</field>
+            <field name="author">Carl Sandburg</field>
+        </record>
+
+        <record id="tw_master_quotes_08" model="tw.boom.master.quotes">
+            <field name="name">Well begun is half done.</field>
+            <field name="is_active">1</field>
+            <field name="author">Aristotle</field>
+        </record>
+
+        <record id="tw_master_quotes_09" model="tw.boom.master.quotes">
+            <field name="name">Life is a learning experience, only if you learn.</field>
+            <field name="is_active">1</field>
+            <field name="author">Yogi Berra</field>
+        </record>
+
+        <record id="tw_master_quotes_10" model="tw.boom.master.quotes">
+            <field name="name">Self-complacency is fatal to progress.</field>
+            <field name="is_active">1</field>
+            <field name="author">Margaret Sangster</field>
+        </record>
+
+        <record id="tw_master_quotes_11" model="tw.boom.master.quotes">
+            <field name="name">Peace comes from within. Do not seek it without.</field>
+            <field name="is_active">1</field>
+            <field name="author">Buddha</field>
+        </record>
+
+        <record id="tw_master_quotes_12" model="tw.boom.master.quotes">
+            <field name="name">What you give is what you get.</field>
+            <field name="is_active">1</field>
+            <field name="author">Byron Pulsifer</field>
+        </record>
+    </data>
+</odoo>

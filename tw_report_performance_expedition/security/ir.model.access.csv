@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_report_performance_expedition,tw_report_performance_expedition.tw_report_performance_expedition,model_tw_report_performance_expedition,base.group_user,1,0,0,0

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_selection_api_type_koprol_2" model="tw.selection">
+	    	<field name="name">Koprol 2.0</field>
+            <field name="value">koprol_2</field> 
+	    	<field name="type">ApiType</field> 
+        </record>
+
+        <!-- Base API Configuration for Koprol -->
+        <record id="tw_api_configuration_koprol" model="tw.api.configuration">
+            <field name="name">Koprol Integration</field>
+            <field name="code">koprol</field>
+            <field name="base_url">https://koprol.api.example.com</field>
+            <field name="api_type_id" ref="tw_selection_api_type_koprol_2"/>
+        </record>
+
+     </data>
+</odoo>

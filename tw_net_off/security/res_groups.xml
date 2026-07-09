@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Net Off Read Group -->
+        <record id="group_tw_net_off_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Net Off Read</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <!-- Net Off Update Group -->
+        <record id="group_tw_net_off_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Net Off Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_net_off_read'))]"/>
+        </record>
+
+        <!-- Net Off Delete Group -->
+        <record id="group_tw_net_off_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Net Off Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_net_off_read'))]"/>
+        </record>
+        
+        <!-- Add groups to System Admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_net_off_read')),
+                (4, ref('group_tw_net_off_update')),
+                (4, ref('group_tw_net_off_delete')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

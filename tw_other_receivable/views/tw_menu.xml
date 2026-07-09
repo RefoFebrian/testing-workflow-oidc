@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="menu_other_receivable" name="Other Receivable" parent="tw_menu.submenu_tw_backoffice_non_trade" action="action_other_receivable" sequence="10" groups="tw_other_receivable.group_other_receivable_read"/>
+        
+    </data>
+</odoo>

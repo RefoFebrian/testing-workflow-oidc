@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_api_configuration,access_tw_api_configuration,model_tw_api_configuration,base.group_user,1,0,0,0
+access_tw_api_log,access_tw_api_log,model_tw_api_log,base.group_user,0,0,0,0
+access_tw_endpoint_configuration,access_tw_endpoint_configuration,model_tw_endpoint_configuration,base.group_user,0,0,0,0
+access_tw_api_log_detail,tw_api_log_detail,model_tw_api_log_detail,base.group_user,0,0,0,0

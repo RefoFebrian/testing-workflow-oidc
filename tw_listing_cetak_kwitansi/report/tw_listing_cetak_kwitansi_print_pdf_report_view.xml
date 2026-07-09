@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- Print PDF -->
+        <record id="paperformat_listing_cetak_kwitansi" model="report.paperformat">
+            <field name="name">Listing Cetak Kwitansi PDF</field>
+            <field name="default" eval="True"/>
+            <field name="format">A5</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="tw_listing_cetak_kwitansi_print_pdf_action_report" model="ir.actions.report">
+            <field name="name">Listing Cetak Kwitansi PDF</field>
+            <field name="model">tw.listing.cetak.kwitansi</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_listing_cetak_kwitansi.tw_list_cetak_kwt_print</field>
+            <field name="print_report_name">'Print_Listing_Cetak_Kwitansi_%s.pdf' % (object.origin)</field>
+            <field name="paperformat_id" ref="paperformat_listing_cetak_kwitansi"/>
+        </record>
+
+    </data>
+</odoo>

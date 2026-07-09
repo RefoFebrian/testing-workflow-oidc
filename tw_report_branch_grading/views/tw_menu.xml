@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="tw_report_branch_grading_menuitem" 
+            name="Laporan Branch Grading" 
+            parent="tw_menu.submenu_tw_backoffice_report" 
+            action="tw_report_branch_grading.action_server_tw_report_branch_grading" 
+            sequence="110" 
+            groups="tw_report_branch_grading.group_report_branch_grading"/>
+    </data>
+</odoo>
+

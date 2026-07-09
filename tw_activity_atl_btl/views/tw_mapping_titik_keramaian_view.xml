@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_mapping_titik_keramaian_list" model="ir.ui.view">
+            <field name="name">tw.mapping.titik.keramaian.list</field>
+            <field name="model">tw.mapping.titik.keramaian</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="company_id" string="Branch"/>
+                    <field name="activity_point_id"/>
+                    <field name="ring_id"/>
+                    <field name="distance"/>
+                    <field name="estimated_travel_time"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_tw_mapping_titik_keramaian_form" model="ir.ui.view">
+            <field name="name">tw.mapping.titik.keramaian.form</field>
+            <field name="model">tw.mapping.titik.keramaian</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="company_id" string="Branch" required="1" options="{'no_open':True,'no_create':True}"/>
+                            <field name="available_activity_point_ids" invisible="1"/>
+                            <field name="activity_point_id" required="1" options="{'no_open':True,'no_create':True}" domain="[('id', 'in', available_activity_point_ids)]"/>
+                            <field name="ring_id" required="1" options="{'no_open':True,'no_create':True}"/>
+                            <field name="distance"/>
+                            <field name="estimated_travel_time"/>
+                            <field name="profile_consumen_ids" widget="many2many_tags" context="{'default_type': 'ProfileConsumen'}"/>
+                            <field name="competitor_ids" widget="many2many_tags" context="{'default_type': 'DealerCompetitor'}"/>
+                        </group>
+                        <notebook>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                        <field name="create_date" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                        <field name="write_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_tw_mapping_titik_keramaian_search" model="ir.ui.view">
+            <field name="name">tw.mapping.titik.keramaian.search</field>
+            <field name="model">tw.mapping.titik.keramaian</field>
+            <field name="arch" type="xml">
+                <search string="Search Mapping Titik Keramaian">
+                    <field name="company_id" string="Branch"/>
+                    <field name="activity_point_id"/>
+                    <field name="ring_id"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Branch" name="group_by_branch" context="{'group_by':'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+		</record>
+
+        <!-- Action View -->
+        <record id="action_tw_mapping_titik_keramaian" model="ir.actions.server">
+            <field name="name">Mapping Titik Keramaian</field>
+            <field name="model_id" ref="tw_activity_atl_btl.model_tw_mapping_titik_keramaian"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.mapping.titik.keramaian'].action_tw_mapping_titik_keramaian_list()
+            </field>
+        </record>
+
+    </data>
+</odoo>

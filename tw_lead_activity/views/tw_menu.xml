@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <menuitem id="tw_lead_activity_result_menu"
+                  name="Lead Activity Result"
+                  parent="tw_lead.submenu_tw_showroom_configuration_lead"
+                  action="tw_lead_activity_result_action"
+                  groups="tw_lead_activity.group_tw_lead_activity_result_read"
+                  sequence="20" />
+	</data>
+</odoo>

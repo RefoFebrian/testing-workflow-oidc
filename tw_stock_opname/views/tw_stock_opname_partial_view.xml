@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_stock_opname_partial_wizard" model="ir.ui.view">
+            <field name="name">tw.stock.opname.partial.wizard</field>
+            <field name="model">tw.stock.opname.partial</field>
+            <field name="arch" type="xml">
+                <form string="Form Stock Opname Partial">
+                    <field name="company_id" invisible="1"/>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="opname_id" class="oe_inline" options="{'no_open':True,'no_create_edit':True}" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="type_so"/>
+                        </group>
+                        <notebook invisible="type_so == 'stock_opname' or (type_so == 'cycle_count' and context.get('default_division') != 'Unit')">
+                            <page string="List Stock">
+                                <separator string="UNIT"/>
+                                <field name="partial_line_ids" context="{'default_line_type': 'unit'}">
+                                    <list editable="bottom" edit="true">
+                                        <field name="location_id" options="{'no_open':True,'no_create_edit':True}" domain="[('company_id', '=', parent.company_id), ('usage', '=', 'internal')]"/>
+                                        <field name="qty" readonly="1"/>
+                                        <field name="line_type" column_invisible="1"/>
+                                    </list>
+                                </field>
+                                <separator string="ACCESSORIES"/>
+                                <field name="partial_accessories_line_ids" context="{'default_line_type': 'accessory'}">
+                                    <list editable="bottom" edit="true">
+                                        <field name="location_id" options="{'no_open':True,'no_create_edit':True}" domain="[('company_id', '=', parent.company_id), ('usage', '=', 'internal')]"/>
+                                        <field name="qty" readonly="1"/>
+                                        <field name="line_type" column_invisible="1"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                        <notebook invisible="type_so == 'stock_opname' or (type_so == 'cycle_count'  and context.get('default_division') != 'Sparepart')">
+                            <page string="List Stock">
+                                <separator string="SPAREPART"/>
+                                <field name="partial_line_ids">
+                                    <list editable="bottom" edit="true">
+                                        <field name="location_id" options="{'no_open':True,'no_create_edit':True}" domain="[('company_id', '=', parent.company_id), ('usage', '=', 'internal')]"/>
+                                        <field name="qty" readonly="1"/>
+                                        <field name="line_type" column_invisible="1"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <footer>
+                        <button name="action_confirm_generate" string="Generate" type="object" class="oe_highlight"/>
+                        <button name="action_delete_partial" string="Delete List" type="object" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

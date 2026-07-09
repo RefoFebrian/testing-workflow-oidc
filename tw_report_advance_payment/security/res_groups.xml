@@ -1,0 +1,24 @@
+<odoo>
+    <data noupdate="1">
+
+        <record id="group_report_advance_payment" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Advance Payment</field>
+        </record>
+
+        <record id="access_tw_report_advance_payment_group" model="ir.model.access">
+            <field name="name">tw.report.advance.payment.group</field>
+            <field name="model_id" ref="model_tw_report_advance_payment"/>
+            <field name="group_id" ref="group_report_advance_payment"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[(4, ref('group_report_advance_payment'))]"/>
+        </record>
+
+    </data>
+</odoo>

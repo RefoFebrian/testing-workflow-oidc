@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- list view -->
+        <record id="tw_firebase_user_view_list" model="ir.ui.view">
+            <field name="name">tw.firebase.user.list</field>
+            <field name="model">tw.firebase.user</field>
+            <field name="type">list</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="Firebase user" delete="0">
+                    <field name='user_id'/>
+                    <field name='firebase_id'/>
+                    <field name='firebase_token'/>
+                    <field name='device_id'/>
+                    <field name='name'/>
+                </list>
+            </field>
+        </record>
+        <!-- form view -->
+        <record id="tw_firebase_user_view_form" model="ir.ui.view">
+            <field name="name">tw.firebase.user.form</field>
+            <field name="model">tw.firebase.user</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Firebase user" delete="0">
+                    <header>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <!--button type="object" name="action_view_detail" class="oe_stat_button" icon="fa-pencil-square-o"-->
+                                <!--field name="detail_count" widget="statinfo" string="Detail(s)"/-->
+                                <!--field name="detail_ids" invisible="1"/-->
+                            <!--/button-->
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" string="Firebase user Name"/>
+                            <h1><field name="name" readonly="create_date"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="user_id" readonly="create_date" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="firebase_id" readonly="create_date"/>
+                                <field name="firebase_token" readonly="create_date"/>
+                                <field name="device_id" readonly="create_date"/>
+                                <field name="name" readonly="create_date"/>
+                                <field name="active" readonly="create_date"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="audit_trail" string="Audit Trail">
+                                <group>
+                                    <group col="2">
+                                        <field name="create_uid" readonly="1"/>
+                                        <field name="create_date" readonly="1"/>
+                                    </group>
+                                    <group col="2">							
+                                        <field name="write_uid" readonly="1"/>
+                                        <field name="write_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- search -->
+        <record id="tw_firebase_user_view_search" model="ir.ui.view">
+            <field name="name">tw.firebase.user.search</field>
+            <field name="model">tw.firebase.user</field>
+            <field name="arch" type="xml">
+                <search string="Firebase user">
+                    <filter string="Firebase" name="filter_by_firebase_id" domain="[('firebase_id','=','')]" />
+                    <filter string="Firebase token" name="filter_by_firebase_token" domain="[('firebase_token','=','')]" />
+                    <filter string="Access token" name="filter_by_access_token" domain="[('access_token','=','')]" />
+                    <filter string="Device" name="filter_by_device_id" domain="[('device_id','=','')]" />
+                    <filter string="Device name" name="filter_by_device_name" domain="[('device_name','=','')]" />
+                    <filter string="Version" name="filter_by_version" domain="[('version','=','')]" />
+                    <filter string="Version code" name="filter_by_version_code" domain="[('version_code','=','')]" />
+                    <filter string="Version name" name="filter_by_version_name" domain="[('version_name','=','')]" />
+                    <filter string="Active" name="filter_by_active" domain="[('active','=',True)]" />
+                    <filter string="Inactive" name="filter_by_inactive" domain="[('active','=',False)]" />
+                    <field name="firebase_id" select="True"/>
+                    <field name="firebase_token" select="True"/>
+                    <field name="access_token" select="True"/>
+                    <field name="device_id" select="True"/>
+                    <field name="device_name" select="True"/>
+                    <field name="version" select="True"/>
+                    <field name="version_code" select="True"/>
+                    <field name="version_name" select="True"/>
+                    <field name="active" select="True"/>
+                    <field name="user_id" select="True"/>
+                    <group string="Group By..">
+                        <filter string="User" domain="[]" name="group_by_user_id" context="{'group_by':'user_id'}"/>
+                        <filter string="Active" domain="[('active','=',True)]" name="group_by_active" context="{'group_by':'active'}"/>
+                        <filter string="Inactive" domain="[('active','=',False)]" name="group_by_inactive" context="{'group_by':'active'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <!-- kanban , to show image, please add image_small in the model -->
+        <record id="tw_firebase_user_view_kanban" model="ir.ui.view" >
+            <field name="name">tw.firebase.user.kanban</field>
+            <field name="model">tw.firebase.user</field>
+            <field name="arch" type="xml">
+                <kanban version="7.0">
+                    <field name="id" />
+                    <field name="firebase_id" />
+                    <field name="firebase_token" />
+                    <field name="access_token" />
+                    <field name="device_id" />
+                    <field name="device_name" />
+                    <field name="version" />
+                    <field name="version_code" />
+                    <field name="version_name" />
+                    <field name="active" />
+                    <field name="user_id" />
+                    <templates>
+                        <t t-name="card">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <a type="open"><field name="name"/></a>
+                                    </h4>
+                                    <ul>
+                                        <li>
+                                            Field1: <field name="name"></field>
+                                        </li>
+                                        <li>
+                                            Field2: <field name="name"></field>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- calendar if a date field exists -->
+        <!-- graph -->
+        <record id="tw_firebase_user_view_graph" model="ir.ui.view">
+            <field name="name">tw.firebase.user.graph</field>
+            <field name="model">tw.firebase.user</field>
+            <field name="arch" type="xml">
+                <graph string="Firebase user" type="bar">
+                    <field name="user_id"/>
+                </graph>
+            </field>
+        </record>
+        <!-- action window -->
+        <record id="tw_firebase_user_action" model="ir.actions.act_window">
+            <field name="name">Firebase User</field>
+            <field name="path">firebase-user</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.firebase.user</field>
+            <field name="view_mode">kanban,list,form,graph</field>
+            <field name="context">{
+                'search_default_group_by_active':1,
+            }</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Firebase user
+                </p><p>
+                Click the Create button to add a new Firebase user
+                </p>
+            </field>
+        </record>
+        
+        <record id="action_activate_tw_firebase_user" model="ir.actions.server">
+            <field name="name">Activate</field>
+            <field name="model_id" ref="model_tw_firebase_user"/>
+            <field name="binding_model_id" ref="model_tw_firebase_user"/>
+            <field name="binding_type">action</field>
+            <field name="state">code</field>
+            <field name="code">records.action_activate()</field>
+        </record>
+        
+        <record id="action_deactivate_tw_firebase_user" model="ir.actions.server">
+            <field name="name">Deactivate</field>
+            <field name="model_id" ref="model_tw_firebase_user"/>
+            <field name="binding_model_id" ref="model_tw_firebase_user"/>
+            <field name="binding_type">action</field>
+            <field name="state">code</field>
+            <field name="code">records.action_deactivate()</field>
+        </record>
+
+    </data>
+</odoo>

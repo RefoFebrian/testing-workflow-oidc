@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    
+        <record id="tw_selection_type_escalation_boom" model="tw.selection">
+			<field name="name">Boom</field>
+            <field name="value">Boom</field>
+			<field name="type">EscalationWhatsapp</field> 
+        </record>
+    
+    </data>
+</odoo>

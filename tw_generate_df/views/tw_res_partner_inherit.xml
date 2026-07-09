@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="inherit_rl_permata_number_form" model="ir.ui.view">
+            <!-- <field name="name">inherit.rl.permata.number.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="tw_partner.tw_partner_contact_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='code']" position="after">
+                    <field name="rl_permata_number" invisible="not is_company"/>
+                    <field name="rl_bri_number" invisible="not is_company"/>
+                </xpath>
+            </field> -->
+
+        <field name="name">view.tw.sale.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="tw_sale_plafond.view_tw_sale_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='drawdown_sparepart']" position="after">
+                <field name="rl_permata_number" invisible="not is_company"/>
+                <field name="rl_bri_number" invisible="not is_company"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

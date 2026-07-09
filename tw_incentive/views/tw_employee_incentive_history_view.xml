@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- list view -->
+        <record id="tw_employee_incentive_history_view_list" model="ir.ui.view">
+            <field name="name">tw.employee.incentive.history.list</field>
+            <field name="model">tw.employee.incentive.history</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="Employee incentive history" create="0" edit="0" delete="0">
+                    <field name="date" />
+                    <field name="description" />
+                    <field name="value" />
+                    <field name="type" />
+                    <field name="state" />
+                    <field name="success_date" />
+                    <field name="reject_date" />
+                    <field name="alasan_reject" />
+                    <field name="success_uid" />
+                    <field name="reject_uid" />
+                </list>
+            </field>
+        </record>
+        <!-- form view -->
+        <record id="tw_employee_incentive_history_view_form" model="ir.ui.view">
+            <field name="name">tw.employee.incentive.history.form</field>
+            <field name="model">tw.employee.incentive.history</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Employee incentive history" create="0" edit="0" delete="0">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date" />
+                                <field name="description" />
+                                <field name="type" />
+                                <field name="value" />
+                                <field name="state" />
+                            </group>
+                            <group>
+                                <field name="success_uid" />
+                                <field name="success_date" />
+                                <field name="reject_date" />
+                                <field name="reject_uid" />
+                                <field name="alasan_reject" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- search -->
+        <record id="tw_employee_incentive_history_view_search" model="ir.ui.view">
+            <field name="name">tw.employee.incentive.history.search</field>
+            <field name="model">tw.employee.incentive.history</field>
+            <field name="arch" type="xml">
+                <search string="Employee incentive history">
+                    <filter string="Pending" name="filter_by_pending" domain="[('state','=','pending')]" />
+                    <filter string="Success" name="filter_by_success" domain="[('state','=','success')]" />
+                    <filter string="Rejected" name="filter_by_rejected" domain="[('state','=','rejected')]" />
+                    <field name="date" select="True"/>
+                    <field name="description" select="True"/>
+                    <field name="value" select="True"/>
+                    <field name="type" select="True"/>
+                    <field name="state" select="True"/>
+                    <field name="success_date" select="True"/>
+                    <field name="reject_date" select="True"/>
+                    <field name="alasan_reject" select="True"/>
+                    <field name="success_uid" select="True"/>
+                    <field name="reject_uid" select="True"/>
+                    <group string="Group By..">
+                        <filter string="Success uid" domain="[]" name="group_by_success_uid" context="{'group_by':'success_uid'}"/>
+                        <filter string="Reject uid" domain="[]" name="group_by_reject_uid" context="{'group_by':'reject_uid'}"/>
+                        <filter string="Date" name="filter_by_tgl" context="{'group_by':'date'}" />
+                        <filter string="Type" name="filter_by_type" context="{'group_by':'type'}" />
+                        <filter string="State" name="filter_by_state" context="{'group_by':'state'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+        <!-- action window -->
+        <record id="tw_employee_incentive_history_action" model="ir.actions.act_window">
+            <field name="name">Employee Incentive History</field>
+            <field name="path">tw-employee-incentive-history</field>
+            <field name="res_model">tw.employee.incentive.history</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{"search_default_fieldname":1}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Employee incentive history
+                </p><p>
+                Click the Create button to add a new Employee incentive history
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_b2b_file_upload,tw_b2b_file_management.tw_b2b_file_upload,model_tw_b2b_file_upload,base.group_user,1,0,0,0
+access_tw_b2b_file_monitoring,tw_b2b_file_management.tw_b2b_file_monitoring,model_tw_b2b_file_monitoring,base.group_user,1,0,0,0
+access_tw_b2b_file_monitoring_line,tw_b2b_file_management.tw_b2b_file_monitoring_line,model_tw_b2b_file_monitoring_line,base.group_user,1,0,0,0

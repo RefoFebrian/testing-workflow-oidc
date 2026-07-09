@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_purchase_order_hotline_approval_view_form" model="ir.ui.view">
+            <field name="name">tw.purchase.order.hotline.approval.view.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="tw_part_hotline.tw_purchase_order_hotline_view_form" />
+            <field name="arch" type="xml">
+                <field name="part_hotline_id" position="replace">
+                    <field name="part_hotline_id"
+                        invisible="type_value != 'HOTLINE' or division != 'Sparepart'"
+                        required="type_value == 'HOTLINE' and division == 'Sparepart' and date_order >= '2019-10-07 00:00:00'"
+                        readonly="state != 'draft'"
+                        domain="[('company_id','=',company_id),('state','=','approved'),('status_po','=','draft'),('is_fully_po','=',False)]"
+                        options="{'no_open':True,'no_create':True}" />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

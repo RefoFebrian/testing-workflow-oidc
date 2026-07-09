@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		<!-- views and menus -->
+        <!-- Tree View -->
+        <record id="tw_collecting_list_view" model="ir.ui.view">
+            <field name="name">tw.collecting.list.view</field>
+            <field name="model">tw.collecting</field>
+            <field name="arch" type="xml">
+                <list string="Collecting Entries" default_order="id desc" decoration-muted="state == 'cancel'" decoration-success="state == 'done'">
+                    <field name="company_id" string="Branch"/>
+                    <field name="partner_id"/>
+                    <field name="name" string="Reference"/>
+                    <field name="division"/>
+                    <field name="date"/>
+                    <field name="type" widget="selection"/>
+                    <field name="account_id" groups="account.group_account_readonly"/>
+                    <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'confirm'"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="tw_collecting_form_view" model="ir.ui.view">
+            <field name="name">tw.collecting.form_view</field>
+            <field name="model">tw.collecting</field>
+            <field name="arch" type="xml">
+                <form string="Collecting Entries">
+                    <header>
+                        <button name="action_confirm" type="object" string="Confirm" class="oe_highlight" invisible="amount == 0 or state != 'draft'" groups="tw_collecting.group_tw_collecting_confirm"/>
+                        <button name="action_get_detail" type="object" string="Get Detail" class="oe_highlight" invisible="amount != 0 or state != 'draft'"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm"/>
+                    </header>
+                    <sheet>
+                        
+                        <div class="oe_title">
+                            <h1 invisible="name"><span>Draft</span></h1>
+                            <h1 invisible="not name"><field name="name" readonly="1"/></h1>
+                        </div>
+                        
+                        <field name="available_account_ids" invisible="1"/>
+                        <field name="is_branch_menu" invisible="1"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="collected_move_id" invisible="1"/>
+                        <field name="currency_id" invisible="1"/>
+
+                        <group>
+                            <group>
+                                <field name="company_id" string="Branch" required="1" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft' or name"/>
+                                <field name="partner_id" required="1" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'" context="{'show_vat': True}"/>
+                                <field name="amount_type" required="1" readonly="state != 'draft'"/>
+                                <field name="account_id" required="1" domain="[('id', 'in', available_account_ids)]" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'"/>
+                                <field name="journal_id" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'" domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]"/>
+                                <field name="description" readonly="state != 'draft'" placeholder="Enter description here..."/>
+                            </group>
+                            
+                            <group>
+                                <field name="division" required="1" readonly="state != 'draft'"/>
+                                <field name="date" readonly="1"/>
+                                <label for="date_start" string="Filter Date"/>
+                                <div class="o_row">
+                                    <field name="date_start" widget="date" readonly="state not in ('draft')"/>
+                                    <span><strong>to</strong></span>
+                                    <field name="date_end" widget="date" readonly="state not in ('draft')"/>
+                                </div>
+                                <field name="date_maturity" readonly="state != 'draft'"/>
+                                <field name="amount" readonly="1" groups="account.group_account_manager"/>
+                            </group>
+                        </group>
+                        <!-- Notebook Section -->
+                        <notebook>
+                            <!-- Move Lines Page -->
+                            <page string="Move Lines" name="move_lines_tab">
+                                <field name="move_line_ids" nolabel="1" colspan="4" readonly="1" force_save="1">
+                                    <list string="Move Lines" editable="bottom" create="false" delete="false">
+                                        <field name="move_id" string="Entries" options="{'no_create': True}" readonly="1"/>
+                                        <field name="currency_id" column_invisible="1"/>
+                                        <field name="name" string="Label"/>
+                                        <field name="ref" string="Reference"/>
+                                        <field name="journal_id"/>
+                                        <field name="date" />
+                                        <field name="debit" sum="Total Debit" />
+                                        <field name="credit" sum="Total Credit" />
+                                        <field name="matching_number" string="Reconcile ID" column_invisible="parent.state != 'confirm'"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Result Journal Items" invisible="not collected_move_line_ids">
+                                <field name="collected_move_line_ids" readonly="1" force_save="1"/>
+                            </page>
+                            <!-- Audit Trail Page -->
+                            <page string="Audit Trail" name="audit_trail">
+                                <group string="Creation">
+                                    <label for="create_uid" string="Created by"/>
+                                    <div>
+                                        <field name="create_uid" readonly="1" class="oe_inline"/>
+                                        <field name="create_date" string="on" readonly="1" class="oe_inline" style="margin-left: 5px;"/>
+                                    </div>
+                                </group>
+                                
+                                <group string="Last Updated" groups="base.group_no_one">
+                                    <label for="write_uid" string="Last Updated by"/>
+                                    <div>
+                                        <field name="write_uid" readonly="1" class="oe_inline"/>
+                                        <field name="write_date" string="on" readonly="1" class="oe_inline" style="margin-left: 5px;"/>
+                                    </div>
+                                </group>
+                                
+                                <group string="Confirmation" invisible="not confirm_uid">
+                                    <label for="confirm_uid" string="Confirmed by"/>
+                                    <div>
+                                        <field name="confirm_uid" readonly="1" class="oe_inline"/>
+                                        <field name="confirm_date" string="on" readonly="1" class="oe_inline" style="margin-left: 5px;"/>
+                                    </div>
+                                </group>
+                            </page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+					</div>
+				</form>
+			</field>
+		</record>
+
+        <!-- Search View -->
+        <record id="tw_collecting_filter" model="ir.ui.view">
+            <field name="name">tw.collecting.filter</field>
+            <field name="model">tw.collecting</field>
+            <field name="arch" type="xml">
+                <search string="Collecting">
+                    <field name="name" string="Reference"/>
+                    <field name="partner_id" />
+                    <field name="company_id"/>
+                    <field name="date"/>
+                    <field name="account_id"/>
+                    <field name="journal_id"/>
+                    <field name="description"/>
+                    <field name="move_line_ids" string="Move Line Entries" filter_domain="[('move_line_ids.move_id','ilike', self)]"/>
+                    <field name="move_line_ids" string="Move Line Label" filter_domain="[('move_line_ids.name','ilike', self)]"/>
+                    <field name="move_line_ids" string="Move Line Reference" filter_domain="[('move_line_ids.ref','ilike', self)]"/>
+                    <field name="move_line_ids" string="Move Line Journal" filter_domain="[('move_line_ids.journal_id','ilike', self)]"/>
+                    <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                    <filter string="Confirmed" name="confirmed" domain="[('state','=','confirm')]"/>
+                    <filter string="Cancelled" name="cancelled" domain="[('state','=','cancel')]"/>
+                    <filter string="Outstanding" name="outstanding" domain="[('state','not in',('confirm','cancel'))]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                        <filter string="Date" name="group_date" context="{'group_by': 'date'}"/>
+                        <filter string="Branch" name="group_branch" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                        <filter string="Account" name="group_account" context="{'group_by': 'account_id'}"/>
+                        <filter string="Partner" name="group_partner" context="{'group_by': 'partner_id'}"/>
+                        <filter string="Division" name="group_division" context="{'group_by': 'division'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="tw_collecting_action" model="ir.actions.act_window">
+            <field name="name">Collecting Entries</field>
+            <field name="res_model">tw.collecting</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{'search_default_outstanding': '1'}" />
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first collecting Entries
+                </p>
+            </field>
+        </record>
+
+        <record id="action_tw_collecting_list" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_collecting_list_view"/>
+            <field name="act_window_id" ref="tw_collecting_action"/>
+        </record>
+
+        <record id="action_tw_collecting_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_collecting_form_view"/>
+            <field name="act_window_id" ref="tw_collecting_action"/>
+        </record>
+
+	</data>
+</odoo>

@@ -1,0 +1,11 @@
+<odoo>
+  <data>
+    <menuitem
+      id="menuitem_tw_qty_stock_ideal_wizard"
+      parent="tw_menu.submenu_tw_workshop_report"
+      sequence="3"
+      action="action_tw_qty_stock_ideal_wizard"
+      groups="tw_qty_ideal_stock_report.group_tw_qty_ideal_stock_report_read"
+    />
+  </data>
+</odoo>

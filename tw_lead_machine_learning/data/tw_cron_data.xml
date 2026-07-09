@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_ir_cron_generate_crm_s3" model="ir.cron">
+            <field name="name">Generate CRM S3</field>
+            <field name="model_id" ref="model_tw_lead_crm"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="nextcall" eval="(DateTime.now().replace(hour=2, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="state">code</field>
+            <field name="code">model.get_crm_s3()</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <record id="tw_ir_cron_generate_cdb_mml" model="ir.cron">
+            <field name="name">Generate CDB Lead CRM (Main Dealer)</field>
+            <field name="model_id" ref="model_tw_lead_crm"/>
+            <field name="interval_number">10</field>
+            <field name="interval_type">minutes</field>
+            <field name="nextcall" eval="(DateTime.now().replace(hour=2, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="state">code</field>
+            <field name="code">model.generate_lead_cdb('MML', 100)</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <!-- <record id="tw_ir_cron_generate_cdb_mma" model="ir.cron">
+            <field name="name">Generate CDB Lead CRM (MMA)</field>
+            <field name="model_id" ref="model_tw_lead_crm"/>
+            <field name="interval_number">10</field>
+            <field name="interval_type">minutes</field>
+            <field name="nextcall" eval="(DateTime.now().replace(hour=2, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="doall" eval="False"/>
+            <field name="state">code</field>
+            <field name="code">model.generate_lead_cdb('MMA', 100)</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record> -->
+        
+        <record id="tw_ir_cron_generate_assigment_crm" model="ir.cron">
+            <field name="name">Generate Assignment CRM</field>
+            <field name="model_id" ref="model_tw_lead_crm"/>
+            <field name="interval_number">10</field>
+            <field name="interval_type">minutes</field>
+            <field name="nextcall" eval="(DateTime.now().replace(hour=3, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="state">code</field>
+            <field name="code">model.generate_lead_assigment(100)</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <record id="tw_ir_cron_distribution_lead_crm_s3" model="ir.cron">
+            <field name="name">Generate Distribution Leads CRM S3</field>
+            <field name="model_id" ref="model_tw_lead_crm"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="nextcall" eval="(DateTime.now().replace(hour=2, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="state">code</field>
+            <field name="code">model.generate_distribution_lead()</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <record id="tw_ir_cron_generate_reassigment_crm" model="ir.cron">
+            <field name="name">Generate Re-Assignment CRM</field>
+            <field name="model_id" ref="model_tw_lead_crm"/>
+            <field name="interval_number">30</field>
+            <field name="interval_type">minutes</field>
+            <field name="nextcall" eval="(DateTime.now().replace(hour=1, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="state">code</field>
+            <field name="code">model.reassign_sales_lead(100)</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <record id="tw_ir_cron_generate_firebase_notif_crm_12" model="ir.cron">
+            <field name="name">Send Firebase Notification Leads CRM (jam 9)</field>
+            <field name="model_id" ref="model_tw_firebase_notification"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="nextcall" eval="(DateTime.now().replace(hour=9, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="state">code</field>
+            <field name="code">model.schedule_notification_followup_crm_daily()</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <record id="tw_ir_cron_generate_firebase_notif_crm_15" model="ir.cron">
+            <field name="name">Send Firebase Notification Leads CRM (jam 15)</field>
+            <field name="model_id" ref="model_tw_firebase_notification"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="nextcall" eval="(DateTime.now().replace(hour=15, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="state">code</field>
+            <field name="code">model.schedule_notification_followup_crm_daily()</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <record id="tw_ir_cron_generate_firebase_notif_crm_17" model="ir.cron">
+            <field name="name">Send Firebase Notification Leads CRM (jam 17)</field>
+            <field name="model_id" ref="model_tw_firebase_notification"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="nextcall" eval="(DateTime.now().replace(hour=17, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="state">code</field>
+            <field name="code">model.schedule_notification_followup_crm_daily()</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+    </data>
+</odoo>

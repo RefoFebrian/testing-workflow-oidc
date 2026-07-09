@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="tw_part_hotline_change_product_view_form" model="ir.ui.view" >
+            <field name="name">tw.part.hotline.change.product.view.form</field>
+            <field name="model">tw.part.hotline</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_picking" type="object" class="oe_stat_button" icon="fa-truck" invisible="picking_count == 0">
+                                <field name="picking_count" widget="statinfo" string="Pickings"/>
+                            </button>
+                        </div>
+                        <group string="Detail Part">
+                            <field name="part_detail_ids" nolabel="1" widget="one2many_list">
+                                <list editable="top" create="false" delete="false">
+                                    <field name="hotline_id" readonly="1"/>
+                                    <field name="product_id" options="{'no_open':True,'no_create':True}" required="1"/>
+                                    <field name="name"/>
+                                    <field name="qty" required="1"/>
+                                    <field name="qty_reserved" required="1"/>
+                                    <field name="no_po"/>
+                                    <field name="no_wo"/>
+                                    <field name="no_ps"/>
+                                    <field name="price" readonly="1" force_save="1"/>
+                                    <field name="tax_id" widget="many2many_tags" readonly="1" force_save="1"/>
+                                    <field name="price_tax" invisible="1"/>
+                                    <field name="subtotal" readonly="1"/>
+                                    <field name="state" readonly="1" invisible="1"/>
+                                    <field name="is_available" readonly="1"/>
+                                </list>
+                            </field>
+                        </group>
+                        <footer>
+                            <button name="action_change_product_form" string="Confirm" type="object" class="oe_highlight" /> 
+                            <button string="Cancel" class="oe_link" special="cancel" />
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="tw_part_hotline_lot_view_form" model="ir.ui.view" >
+            <field name="name">tw.part.hotline.lot.view.form</field>
+            <field name="model">stock.lot</field>
+            <field name="arch" type="xml">
+                <form string="Form">
+                    <group col="4">
+                        <field name="name" string="Engine No" readonly="create_date != False"/>
+                        <field name="chassis_number" readonly="create_date != False"/>
+                        <field name="plate_number"/>
+                    </group>
+                    <group col="4">
+                        <field name="product_id" readonly="create_date != False"/>
+                        <field name="partner_id" required="True" context="{'form_view_ref':'tw_work_order.tw_customer_form_wizard_view'}"/>
+                        <field name="state" invisible="1"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="create_date" invisible="1"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_part_hotline_view_list" model="ir.ui.view">
+            <field name="name">tw.part.hotline.view.list</field>            
+            <field name="model">tw.part.hotline</field>            
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="company_id"/>
+                    <field name="name"/>
+                    <field name="lot_id"/>
+                    <field name="customer_id"/>
+                    <field name="customer_name"/>
+                    <field name="mobile"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+        
+        <record id="tw_part_hotline_view_form" model="ir.ui.view">
+            <field name="name">tw.part.hotline.view.form</field>            
+            <field name="model">tw.part.hotline</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_print_form" string="Print" type="object" invisible="state in ('draft','cancel')"/>
+                        <button name="action_change_product" string="Change Product" type="object" invisible="purchase_order_id or state == 'cancel'" groups="tw_part_hotline.group_button_change_product_part_hotline"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_purchase_order" string="Purchases" icon="fa-pencil-square-o" class="oe_stat_button" type="object" invisible="not purchase_order_id"/>
+                            <button name="action_view_work_order" string="Work Order" icon="fa-pencil-square-o" class="oe_stat_button" type="object" invisible="not work_order_id"/>
+                            <button name="action_view_part_sales" string="Part Sales" icon="fa-pencil-square-o" class="oe_stat_button" type="object" invisible="not part_sales_id"/>
+                            <button name="action_view_picking" type="object" class="oe_stat_button" icon="fa-truck" invisible="picking_count == 0">
+                                <field name="picking_count" widget="statinfo" string="Pickings"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">                      
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="create_date" invisible="1"/>
+                                <field name="company_id" options="{'no_open':True,'no_create':True}" required="1" readonly="create_date != False" string="Branch"/>
+                                <field name="lot_id" 
+                                    domain="[('state','in',['paid','workshop','sold_offtr','sold','stock']),('division','=','Unit')]" 
+                                    context="{'form_view_ref':'tw_part_hotline.tw_part_hotline_lot_view_form','default_state':'workshop','default_company_id':company_id}" 
+                                    required="1" readonly="state != 'draft'"
+                                    options="{'no_quick_create': True}"/>
+                                <field name="chassis_number"/>
+                                <field name="plate_number"/>
+                                <field name="customer_id" context="{'form_view_ref':'tw_work_order.tw_customer_form_wizard_view'}" 
+                                    required="1" readonly="1"
+                                    options="{'no_open':True,'no_create':True}"/>
+                                <!-- <field name="is_check_available" invisible="1"/> -->
+                                <field name="status_po" invisible="state not in ('approved','done')" readonly="1"/>
+                                <field name="po_order_date" required="1" readonly="state != 'draft'"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                                <field name="division" readonly="1"/>
+                                <field name="po_claim_type" required="1" readonly="state != 'draft'"/>
+                                <field name="customer_name" required="1" readonly="state != 'draft'"/>
+                                <field name="mobile" required="1" readonly="state != 'draft'"/>
+                                <field name="is_exception" readonly="state != 'draft'"/>
+                                <field name="is_used" readonly="1" invisible="1" string="Used?"/>
+                                <field name="is_fully_po" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="detail_part" string="Detail Part">
+                                <field name="part_detail_ids" nolabel="1" widget="one2many_list" readonly="state != 'draft'">
+                                    <list editable="top">
+                                        <field name="product_id" options="{'no_open':True,'no_create':True}" required="1" readonly="state != 'draft'"/>
+                                        <field name="name"/>
+                                        <field name="qty" required="1" readonly="state != 'draft'"/>
+                                        <field name="qty_po" readonly="1" force_save="1" column_invisible="1"/>
+                                        <field name="qty_available" readonly="1"/>
+                                        <field name="qty_reserved" readonly="1"/>
+                                        <field name="price" readonly="1" force_save="1"/>
+                                        <field name="tax_id" widget="many2many_tags" readonly="1" force_save="1"/>
+                                        <field name="price_tax" column_invisible="1"/>
+                                        <field name="subtotal" readonly="1"/>
+                                        <field name="state" readonly="1" column_invisible="1"/>
+                                        <field name="is_available" readonly="1"/>
+                                    </list>
+                                </field>
+                                
+                                <group>
+                                    <group class="oe_subtotal_footer oe_right">
+                                        <field name="amount_untaxed"/>
+                                        <field name="amount_tax"/>
+                                        <field name="amount_total" class="oe_subtotal_footer_separator"/>
+                                    </group>   
+                                </group>       
+                                <label for="minimal_dp" string="Minimal DP"/>
+                                <div>
+                                    <field name="minimal_dp" readonly="1"/>
+                                </div>
+                                <group string="Alokasi DP">
+                                    <field name="alocation_dp_ids" nolabel="1" readonly="state != 'draft'">
+                                        <list editable="top">
+                                            <field name="hl_id" options="{'no_open':True,'no_create':True}" required="1" domain="[('company_id','=',parent.company_id),('partner_id','=',parent.customer_id),('division','=','Sparepart'),('account_id.account_type','=','liability_payable'),('full_reconcile_id','=',False),('credit','>',0)]"/>
+                                            <field name="amount_hl_original"  readonly="1" force_save="1"/>
+                                            <field name="amount_hl_balance"  readonly="1" force_save="1"/>
+                                            <field name="amount_hl_allocation" required="1" sum="Total"/>
+                                        </list>
+                                    </field>
+                                </group>
+                                <group string="Stock Available">
+                                    <field name="part_hotline_available_ids" readonly="1" nolabel="1">
+                                        <list>
+                                            <field name="company_id"/>
+                                            <field name="name"/>
+                                            <field name="product_id"/>
+                                            <field name="qty"/>
+                                            <field name="aging"/>
+                                        </list>
+                                        <form>
+                                            <sheet>
+                                                <group>
+                                                    <field name="company_id" options="{'no_open':True,'no_create':True}"/>
+                                                    <field name="name"/>
+                                                    <field name="product_id" options="{'no_open':True,'no_create':True}"/>
+                                                    <field name="qty"/>
+                                                    <field name="aging"/>
+                                                </group>
+                                            </sheet>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+                            <page name="audit_trail" string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"></field>
+                                        <field name="create_date" readonly="1"></field>
+                                        <field name="cancel_uid" readonly="1" invisible="cancel_uid == False"/>
+                                        <field name="cancel_date" readonly="1" invisible="cancel_date == False"/>
+                                    </group>
+                                    <group>                         
+                                        <field name="write_uid" readonly="1"></field>
+                                        <field name="write_date" readonly="1"></field>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_part_hotline_view_search" model="ir.ui.view">
+            <field name="name">tw.part.hotline.view.search</field>
+            <field name="model">tw.part.hotline</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="customer_id"/>
+                    <field name='name'/>
+                    <field name="lot_id"/>
+                    <field name='customer_name'/>
+                    <field name="company_id"/>  
+                    <filter string="Draft" name="state_draft" domain="[('state','=','draft')]" />
+                    <filter string="Done" name="state_done" domain="[('state','=','done')]"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Branch" name="group_by_branch" domain="[('company_id','!=',False)]" context="{'group_by':'company_id'}"/>
+                    </group>     
+                </search>
+            </field>
+        </record>     
+        
+        <record id="action_tw_part_hotline" model="ir.actions.act_window">
+            <field name="name">Part Hotline</field>
+            <field name="res_model">tw.part.hotline</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{
+                'readonly_by_pass':1,
+                'search_default_state_draft':1,
+            }</field>
+        </record>
+
+        <record id="paperformat_tw_part_hotline_print_pdf" model="report.paperformat">
+            <field name="name">TW Part Hotline Print PDF</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="css_margins" eval="True"/>
+            <field name="header_spacing">3</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="action_tw_part_hotline_print_pdf" model="ir.actions.report">
+            <field name="name">Print TW Part Hotline</field>
+            <field name="model">tw.part.hotline</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_part_hotline.tw_part_hotline_print_pdf</field>
+            <field name="report_file">tw_part_hotline.tw_part_hotline_print_pdf</field>
+            <field name="paperformat_id" ref="tw_part_hotline.paperformat_tw_part_hotline_print_pdf" />
+          </record>
+
+    </data>
+</odoo>

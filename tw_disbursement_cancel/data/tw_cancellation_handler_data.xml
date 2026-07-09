@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="cancellation_handler_disbursement" model="tw.cancellation.handler">
+            <field name="model">tw.disbursement.cancel</field>
+            <field name="module">tw_disbursement_cancel</field>
+        </record>
+    </data>
+</odoo>

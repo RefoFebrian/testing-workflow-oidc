@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Master Sales Program Subsidi Barang Group Read -->
+        <record id="group_tw_sale_report_undelivered_all" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Sale Order Undelivered</field>
+        </record>
+        <record id="access_tw_sale_report_undelivered_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sale_report_undelivered"/>
+            <field name="name">tw_sale_report_undelivered read</field>
+            <field name="group_id" ref="group_tw_sale_report_undelivered_all"/>
+            <field name="perm_read">1</field>
+        </record>
+        <record id="access_tw_sale_report_undelivered_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sale_report_undelivered"/>
+            <field name="name">tw_sale_report_undelivered update</field>
+            <field name="group_id" ref="group_tw_sale_report_undelivered_all"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        <record id="access_tw_sale_report_undelivered_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sale_report_undelivered"/>
+            <field name="name">tw_sale_report_undelivered delete</field>
+            <field name="group_id" ref="group_tw_sale_report_undelivered_all"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_tw_sale_report_undelivered_all')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

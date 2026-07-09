@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+        <!-- RFA Mutation Order -->
+        <record id="group_tw_mutation_order_approval_rfa" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button RFA Mutation Order</field>
+        </record>
+
+        <record id="access_tw_mutation_order_approval_rfa" model="ir.model.access">
+            <field name="model_id" ref="model_tw_mutation_order"/>
+            <field name="name">tw_mutation_order_approval_rfa update</field>
+            <field name="group_id" ref="group_tw_mutation_order_approval_rfa"/>
+            <field name="perm_write">1</field>
+        </record>
+
+        
+        <!-- Approval Mutation Order -->
+        <record id="group_tw_mutation_order_approval_approve" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Approve Mutation Order</field>
+        </record>
+
+        <record id="access_tw_mutation_order_approval_approve" model="ir.model.access">
+            <field name="model_id" ref="model_tw_mutation_order"/>
+            <field name="name">tw_mutation_order_approval_approve update</field>
+            <field name="group_id" ref="group_tw_mutation_order_approval_approve"/>
+            <field name="perm_write">1</field>
+        </record>
+             
+        <record id="group_tw_mutation_order_approval_cancel" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Cancel Mutation Order</field>
+        </record>
+        <record id="access_tw_mutation_order_approval_cancel" model="ir.model.access">
+            <field name="model_id" ref="model_tw_mutation_order"/>
+            <field name="name">tw_mutation_order_approval_cancel update</field>
+            <field name="group_id" ref="group_tw_mutation_order_approval_cancel"/>
+            <field name="perm_write">1</field>
+        </record>
+        
+                     
+        <record id="group_tw_mutation_order_approval_reject" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Reject Mutation Order</field>
+        </record>
+        <record id="access_tw_mutation_order_approval_reject" model="ir.model.access">
+            <field name="model_id" ref="model_tw_mutation_order"/>
+            <field name="name">tw_mutation_order_approval_reject update</field>
+            <field name="group_id" ref="group_tw_mutation_order_approval_reject"/>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <record id="tw_base.group_system_admin" model="res.groups">
+			<field name="implied_ids" eval="[
+                (4,ref('group_tw_mutation_order_approval_rfa')),
+                (4,ref('group_tw_mutation_order_approval_approve')),
+                (4,ref('group_tw_mutation_order_approval_cancel')),
+                (4,ref('group_tw_mutation_order_approval_reject')),
+            ]">
+			</field>
+		</record>
+	
+	</data>
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <menuitem id="submenu_tw_auth_oauth" name="Laporan SSO Tunas" parent="tw_menu.submenu_tw_report" action="action_tw_auth_oauth_report" groups="tw_auth_oauth.group_tw_auth_oauth_read" sequence="10"/>
+    
+    </data>
+    
+
+</odoo>

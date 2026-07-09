@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- list view -->
+        <record id="tw_master_target_margin_view_list" model="ir.ui.view">
+            <field name="name">tw.master.target.margin.list</field>
+            <field name="model">tw.master.target.margin</field>
+            <field name="type">list</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <list string="Master target margin">
+                    <field name="company_id" />
+                    <field name="job" />
+                    <field name="date" />
+                    <field name="create_date" />
+                    <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'active'"/>
+                </list>
+            </field>
+        </record>
+        <!-- form view -->
+        <record id="tw_master_target_margin_view_form" model="ir.ui.view">
+            <field name="name">tw.master.target.margin.form</field>
+            <field name="model">tw.master.target.margin</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <form string="Master target margin">
+                    <header>
+                        <button name="action_confirm" type="object" class="oe_highlight" string="Confirm" invisible="state != 'draft'" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,active,expired" readonly="1" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="company_id" options="{'no_create': True,'no_open':True}" required="1" readonly="state != 'draft'"/>
+                                <field name="job" required="1" readonly="state != 'draft'"/>
+                            </group>
+                            <group>
+                                <field name="date" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="target_margin_line" string="Target Margin Line">
+                                <field name="target_margin_line_ids" readonly="state != 'draft'">
+                                    <list editable="bottom">
+                                        <field name="series_id" required="1" />
+                                        <field name="year" required="1"/>
+                                        <field name="cash" />
+                                        <field name="credit" />
+                                    </list>
+                                </field>
+                            </page>
+
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1" />
+                                        <field name="create_date" readonly="1" />
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1" />
+                                        <field name="write_date" readonly="1" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- search -->
+        <record id="tw_master_target_margin_view_search" model="ir.ui.view">
+            <field name="name">tw.master.target.margin.search</field>
+            <field name="model">tw.master.target.margin</field>
+            <field name="arch" type="xml">
+                <search string="Master target margin">
+                    <field name="company_id" select="True" />
+                    <field name="job" select="True" />
+                    <field name="date" select="True" />
+                    <field name="create_date" select="True" />
+                    <filter name="default_state" string="Draft and Active" domain="[('state', 'in', ('draft','active'))]"/>
+                    <filter name="expired" string="Expired" domain="[('state', '=', 'expired')]"/>
+                    <filter name="rejected" string="Rejected" domain="[('state', '=', 'rejected')]"/>
+                    <group string="Group By..">
+                        <filter string="Branch" domain="[]" name="group_by_company_id" context="{'group_by':'company_id'}" />
+                        <filter string="Job" domain="[]" name="group_by_job" context="{'group_by':'job'}" />
+                        <filter string="State" domain="[]" name="group_by_state" context="{'group_by':'state'}" />
+                        <filter string="Active Date" domain="[]" name="group_by_date" context="{'group_by':'date'}" />
+                        <filter string="Create On" domain="[]" name="group_by_create_date" context="{'group_by':'create_date'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+        <!-- action window -->
+        <record id="tw_master_target_margin_action" model="ir.actions.act_window">
+            <field name="name">Master Target Margin</field>
+            <field name="path">tw-master-target-margin</field>
+            <field name="res_model">tw.master.target.margin</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{"search_default_default_state":1}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Klik create untuk membuat master target margin baru
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

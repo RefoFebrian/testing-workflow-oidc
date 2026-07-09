@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="group_vehicle_document_cancel_button" model="res.groups">
+            <field name="name">TW Button Cancel Vehicle Document</field>
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+        </record>
+        <record id="access_tw_vehicle_document_cancel_button" model="ir.model.access">
+                <field name="model_id" ref="tw_vehicle_document.model_tw_vehicle_document_request"/>
+                <field name="name">tw_vehicle_document_cancel_button update</field>
+                <field name="group_id" ref="group_vehicle_document_cancel_button"/>
+                <field name="perm_write">1</field>
+        </record>
+        
+        <record id="group_vehicle_document_reject_button" model="res.groups">
+            <field name="name">TW Button Reject Vehicle Document</field>
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+        </record>
+        <record id="access_tw_vehicle_document_reject_button" model="ir.model.access">
+                <field name="model_id" ref="tw_vehicle_document.model_tw_vehicle_document_request"/>
+                <field name="name">tw_vehicle_document_reject_button update</field>
+                <field name="group_id" ref="group_vehicle_document_reject_button"/>
+                <field name="perm_write">1</field>
+        </record>
+
+    </data>
+    
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+				<field name="implied_ids" eval="[
+                (4,ref('group_vehicle_document_cancel_button')),
+                (4,ref('group_vehicle_document_reject_button')),
+            ]">
+				</field>
+			</record>
+	</data>
+</odoo>

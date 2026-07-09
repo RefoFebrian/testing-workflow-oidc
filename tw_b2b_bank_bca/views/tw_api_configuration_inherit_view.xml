@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_api_configuration_b2b_bank_bca_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.api.configuration.b2b.bank.bca.inherit.form</field>
+        <field name="model">tw.api.configuration</field>
+        <field name="inherit_id" ref="tw_api.tw_api_configuration_form_view"/>
+        <field name="arch" type="xml">
+            <button name="action_get_token" position="after">
+                <button name="action_get_token_bca_manual" invisible="api_type_value != 'bca'" type="object" string="Get Token BCA" class="oe_highlight"/>
+                <button name="schedule_balance_bca" invisible="api_type_value != 'bca'" type="object" string="Balance BCA" class="oe_highlight"/>
+		    	<button name="schedule_statements_bca" invisible="api_type_value != 'bca'" type="object" string="Statements BCA" class="oe_highlight"/>
+            </button>
+        </field>
+    </record>
+
+</odoo>

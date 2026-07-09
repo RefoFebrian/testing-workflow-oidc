@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_stock_quality_check_incoming_form_view" model="ir.ui.view">
+			<field name="name">tw.stock.quality.check.incoming</field>
+			<field name="model">tw.stock.quality.check.incoming</field>
+			<field name="arch" type="xml">
+				<form>
+					<group>
+                        <field name="company_id" invisible="1"/>
+						<field name="picking_id" readonly="1" options="{'no_create': True,'no_open': True}" force_save="1"/>
+						<field name="move_line_id" readonly="1" options="{'no_create': True,'no_open': True}" force_save="1"/>
+						<field name="result_package_id" readonly="1" options="{'no_create': True,'no_open': True}" force_save="1"/>
+						<field name="product_id" readonly="1" options="{'no_create': True,'no_open': True}" force_save="1"/>
+                        <field name="categ_tracking" invisible="1"/>
+						<field name="lot_id" required="categ_tracking == 'serial'" invisible="categ_tracking != 'serial'" options="{'no_create': True,'no_open': True}" force_save="1"/>
+						<field name="location_dest_id" required="1" options="{'no_create': True,'no_open': True}" domain="[('usage','=','internal'),('company_id', '=', company_id)]"/>
+						<field name="initial_quantity" readonly="1" force_save="1"/>
+                        <field name="quantity" required="1"/>
+					</group>
+					<footer>
+						<button name="action_confirm" string="Confirm" type="object" class="oe_highlight"/>
+						<button string="Close" class="oe_link" special="cancel" />
+					</footer>
+				</form>
+			</field>
+		</record>
+
+        <record id="action_tw_stock_quality_check_incoming" model="ir.actions.act_window">
+            <field name="name">Quality Check Incoming</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.stock.quality.check.incoming</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_stock_quality_check_incoming_form_view"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

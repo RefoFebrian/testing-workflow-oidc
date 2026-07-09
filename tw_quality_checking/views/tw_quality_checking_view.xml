@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_tw_quality_checking_list" model="ir.ui.view">
+            <field name="name">tw.quality.checking.list</field>
+            <field name="model">tw.quality.checking</field>
+            <field name="arch" type="xml">
+                <list string="Quality Checking" decoration-danger="state == 'draft'" duplicate="0">
+                    <field name="name"/>
+					<field name="company_id"/>
+					<field name="date" string="Date"/>
+					<field name="state" string="Status"/>
+		        </list>
+            </field>
+		</record>
+
+        <record id="view_tw_quality_checking_form" model="ir.ui.view">
+            <field name="name">tw.quality.checking.form</field>
+            <field name="model">tw.quality.checking</field>
+            <field name="arch" type="xml">
+                <form string="Quality Checking" duplicate="0">
+                    <header>
+                        <button name="action_confirm" string="Confirm" invisible="state != 'draft'" type="object" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" class="oe_inline" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="company_id" string="Branch" required="1" readonly="state != 'draft'"/>
+                                <field name="stockcard_ids"
+                                    widget="many2many_tags"
+                                    options="{'no_open':True, 'no_create':True}" 
+                                    domain="[
+                                        ('company_id','=',company_id),
+                                        ('division','=','Sparepart'),
+                                        ('picking_type_id.code','=','outgoing'),
+                                        ('state','=','done'),
+                                        ('quality_checking_id','=',False)
+                                    ]"
+                                    required="1"
+                                    readonly="state != 'draft'"
+                                />
+                                <field name="print_counter" string="Jumlah Cetak" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="date" string="Date" required="1" readonly="state != 'draft'"/>
+                                <field name="cardboard_id" string="Dimensi Kardus" options="{'no_open':True, 'no_create':True}" required="1" readonly="state != 'draft'"/>
+                                <field name="weight_box" string="Berat Kardus" readonly="1"/>
+                                <field name="number_of_boxes" string="Jumlah Kardus" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Sparepart">
+                                <field name="quality_checking_ids">
+                                    <list editable="bottom" create="0" delete="0">
+                                        <field name="picking_id" string="Source Document"
+                                            options="{'no_open':True, 'no_create':True}"
+                                            domain="[('division','=','Sparepart')]"
+                                            readonly="1" force_save="1"/>
+
+                                        <field name="product_id" string="Kode Produk"
+                                            options="{'no_open':True, 'no_create':True}"
+                                            domain="[('division','=','Sparepart')]"
+                                            readonly="1" force_save="1"/>
+                                        
+                                        <!-- TODO : Turn on if you have already run the EV schema -->
+                                        <!-- <field name="is_ev" readonly="1" force_save="1"/> -->
+
+                                        <!-- <field name="lot_id"
+                                            options="{'no_open':True, 'no_create':True}"
+                                            column_invisible="parent.division == 'Sparepart'"
+                                            /> -->
+
+                                        <field name="quantity" string="Qty" sum="Total Qty" readonly="1" force_save="1"/>
+                                        <field name="qty_supply" string="Qty Supply" sum="Total Qty Supply"/>
+                                        <field name="weight" string="Berat (gram)" sum="Total Berat"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"/>
+                                        <field name="create_date" readonly="1"/>
+                                        <field name="confirm_uid" readonly="1" invisible="confirm_uid == False"/>
+                                        <field name="confirm_date" readonly="1" invisible="confirm_date == False"/>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1"/>
+                                        <field name="write_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page> 
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_tw_quality_checking" model="ir.actions.act_window">
+            <field name="name">Quality Checking</field>
+            <field name="res_model">tw.quality.checking</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+    </data>
+</odoo>

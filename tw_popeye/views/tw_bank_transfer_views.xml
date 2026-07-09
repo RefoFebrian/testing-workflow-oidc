@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="tw_bank_transfer_popeye_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.bank.transfer.popeye.form</field>
+            <field name="inherit_id" ref="tw_bank_transfer.tw_bank_transfer_form_view"/>
+            <field name="model">tw.bank.transfer</field>
+            <field name="arch" type="xml">
+                <!-- Add Popeye buttons after action_confirm -->
+                <button name="action_confirm" position="after">
+                    <field name="payment_method" invisible="1"/>
+                    <button name="action_send_to_popeye" string="Send to Popeye" type="object" invisible="state != 'draft' or payment_method != 'popeye'"/>
+                    <button name="action_check_status_popeye" string="Check Status Popeye" type="object" invisible="status_api_payment == 'draft' or payment_method != 'popeye' or not send_uid"/>
+                    <button name="action_open_cancel_popeye_wizard" string="Cancel Popeye" type="object" class="btn-danger" invisible="state != 'wfp' or payment_method != 'popeye'"/>
+                </button>
+
+                <!-- Add Popeye status bar after existing header -->
+                <xpath expr="//header[last()]" position="after">
+                    <header>
+                        <field name="status_api_payment" invisible="payment_method != 'popeye' or not send_uid" widget="statusbar" statusbar_visible="draft,send,waiting_request_approval,paid"/>
+                    </header>
+                </xpath>
+
+                <!-- Add bulky_type after payment_method_id -->
+                <field name="payment_method_id" position="after">
+                    <field name="bulky_type" readonly="state != 'draft'" invisible="payment_method != 'popeye'" required="payment_method == 'popeye'"/>
+                </field>
+
+                <!-- Add Popeye reference fields after partner_bank_id -->
+                <field name="partner_bank_id" position="after">
+                    <field name="payment_reference_number" readonly="1" invisible="not payment_reference_number"/>
+                    <field name="payment_payment_number" readonly="1" invisible="not payment_payment_number"/>
+                    <field name="reason_reject" readonly="1" invisible="not reason_reject"/>
+                </field>
+
+                <!-- Add audit trail fields in Audit Trail page -->
+                <field name="cancel_date" position="after">
+                    <field name="send_uid" readonly="1"/>
+                    <field name="send_date" readonly="1"/>
+                    <field name="wfp_uid" readonly="1"/>
+                    <field name="wfp_date" readonly="1"/>
+                    <field name="verifying_uid" readonly="1"/>
+                    <field name="verifying_date" readonly="1"/>
+                    <field name="on_approval_uid" readonly="1"/>
+                    <field name="on_approval_date" readonly="1"/>
+                    <field name="queuing_uid" readonly="1"/>
+                    <field name="queuing_date" readonly="1"/>
+                    <field name="paid_uid" readonly="1"/>
+                    <field name="paid_date" readonly="1"/>
+                    <field name="reject_api_uid" readonly="1"/>
+                    <field name="reject_api_date" readonly="1"/>
+                    <field name="cancel_popeye_uid" readonly="1" invisible="not cancel_popeye_uid"/>
+                    <field name="cancel_popeye_date" readonly="1" invisible="not cancel_popeye_uid"/>
+                    <field name="cancel_popeye_reason" readonly="1" invisible="not cancel_popeye_reason"/>
+                </field>
+            </field>
+        </record>
+    </data>
+
+</odoo>

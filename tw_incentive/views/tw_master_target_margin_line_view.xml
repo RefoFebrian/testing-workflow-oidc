@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- form view -->
+        <record id="tw_master_target_margin_line_view_form" model="ir.ui.view">
+            <field name="name">tw.master.target.margin.line.form</field>
+            <field name="model">tw.master.target.margin.line</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <form string="Master target margin" create="False" edit="False" delete="False">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" readonly="1"/>
+                                <field name="target_margin_id" readonly="1"/>
+                                <field name="series_id" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                                <field name="year" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="cash" readonly="1"/>
+                                <field name="credit" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

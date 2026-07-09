@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_ownership_mutation_request_view_search" model="ir.ui.view">
+            <field name="name">tw.ownership.mutation.request.search</field>
+            <field name="model">tw.ownership.mutation.request</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" />
+                    <field name="company_id" />
+                    <field name="division" />
+                    <field name="bpkb_source_location_id" />
+                    <field name="bpkb_dest_location_id" />
+                    <field name="ownership_mutation_request_line_ids" string="Engine No" filter_domain="[('ownership_mutation_request_line_ids.lot_id', 'ilike', self)]"/>
+                    <field name="ownership_mutation_request_line_ids" string="Customer BPKB" filter_domain="[('ownership_mutation_request_line_ids.customer_bpkb_id', 'ilike', self)]"/>
+                    <field name="ownership_mutation_request_line_ids" string="BPKB No" filter_domain="[('ownership_mutation_request_line_ids.bpkb_number', 'ilike', self)]"/>
+                    <field name="state" />
+                    <filter name="draft" string="Draft" domain="[('state','=','draft')]" />
+                    <filter name="on_process" string="On Process" domain="[('state','=','on_process')]" />
+                    <filter name="processed" string="Processed" domain="[('state','=','processed')]" />
+                    <filter name="done" string="Done" domain="[('state','=','done')]" />
+                    <filter name="cancelled" string="Cancelled" domain="[('state','=','cancel')]" />
+                    <filter name="group_by_state" string="Group by State" context="{'group_by':'state'}" />
+                    <filter name="group_by_branch" string="Branch" context="{'group_by':'company_id'}" />
+                    <filter name="group_by_division" string="Group by Division" context="{'group_by':'division'}" />
+                </search>
+            </field>
+        </record>
+
+        <record id="tw_ownership_mutation_request_view_list" model="ir.ui.view">
+            <field name="name">tw.ownership.mutation.request.list</field>
+            <field name="model">tw.ownership.mutation.request</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name" />
+                    <field name="company_id" />
+                    <field name="division" />
+                    <field name="bpkb_source_location_id" />
+                    <field name="bpkb_dest_location_id" />
+                    <field name="state" />
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_ownership_mutation_request_view_form" model="ir.ui.view">
+            <field name="name">tw.ownership.mutation.request.form</field>
+            <field name="model">tw.ownership.mutation.request</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_on_process" data-hotkey="o" invisible="state != 'draft'" string="On Process" type="object" class="oe_highlight" groups="tw_vehicle_document_mutation.group_vehicle_request_bpkb_button_on_process" />
+                        <button name="action_process" data-hotkey="c" invisible="state != 'on_process' or is_inter_branch" string="Process" type="object" class="oe_highlight" groups="tw_vehicle_document_mutation.group_vehicle_request_bpkb_button_process" />
+                        <button name="action_receive" data-hotkey="r" invisible="state != 'processed' or is_inter_branch" string="Receive" type="object" class="oe_highlight" groups="tw_vehicle_document_mutation.group_vehicle_request_bpkb_button_receive" />
+                        <button name="action_print_ownership_mutation_request" data-hotkey="p" invisible="state != 'done'" string="Print" type="object" class="oe_highlight" groups="tw_vehicle_document_mutation.group_vehicle_request_bpkb_button_print" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,on_process,processed,done" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_document_mutation" type="object" class="o_stat_button" icon="fa-file-text-o" groups="tw_vehicle_document_mutation.group_vehicle_request_bpkb_button_receive" invisible="not document_mutation_id">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="document_mutation_id" widget="statinfo" string="Mutation" />
+                                    </span>
+                                </div>
+                            </button>
+                            <button name="action_view_outgoing_mutation" type="object" class="o_stat_button" icon="fa-arrow-up" invisible="not outgoing_mutation_id">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Outgoing</span>
+                                    <span class="o_stat_value">
+                                        <field name="outgoing_count" />
+                                    </span>
+                                </div>
+                            </button>
+                            <button name="action_view_incoming_mutation" type="object" class="o_stat_button" icon="fa-arrow-down" invisible="not incoming_mutation_id">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Incoming</span>
+                                    <span class="o_stat_value">
+                                        <field name="incoming_count" />
+                                    </span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <span class="o_form_label">Permohonan Mutasi BPKB</span>
+                            <h1>
+                                <field name="name" class="oe_inline" invisible="not name" />
+                                <span invisible="name">Draft</span>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Source">
+                                <field name="company_id" string="Branch" options="{'no_create': True,'no_open': True}" readonly="state != 'draft'" />
+                                <field name="bpkb_source_location_id" string="BPKB Location" options="{'no_create': True,'no_open': True}" readonly="state != 'draft'" required="1" />
+                            </group>
+                            <group string="Info">
+                                <field name="division" readonly="1" />
+                                <field name="date" readonly="1" />
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Destination">
+                                <field name="destination_company_id" string="Branch" required="1" options="{'no_create': True,'no_open': True}" readonly="state != 'draft'" />
+                                <!-- available_dest_location_ids di-compute via sudo() untuk bypass ir.rule multi-company -->
+                                <field name="available_dest_location_ids" invisible="1" />
+                                <field name="bpkb_dest_location_id" string="BPKB Location (Branch Tujuan)" options="{'no_create': True,'no_open': True}" required="is_inter_branch" readonly="state != 'draft'" domain="[('id', 'in', available_dest_location_ids)]" />
+                                <!-- Transit otomatis dari holding — tampil setelah on_process -->
+                                <field name="transit_location_id" string="Transit Location (Auto)" readonly="1" invisible="not transit_location_id" />
+                                <field name="is_inter_branch" invisible="1" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="BPKB Documents">
+                                <field name="lot_ids" invisible="1" />
+                                <field name="ownership_mutation_request_line_ids" readonly="state != 'draft'">
+                                    <list editable="bottom">
+                                        <field name="lot_id" required="1" options="{'no_create': True,'no_open': True}" domain="[('id', 'in', parent.lot_ids)]" />
+                                        <field name="customer_bpkb_id" readonly="1" />
+                                        <field name="bpkb_number" readonly="1" />
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1" />
+                                        <field name="create_date" readonly="1" />
+                                        <field name="process_uid" readonly="1" />
+                                        <field name="process_date" readonly="1" />
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1" />
+                                        <field name="write_date" readonly="1" />
+                                        <field name="receipt_uid" readonly="1" />
+                                        <field name="receipt_date" readonly="1" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="tw_ownership_mutation_request_view_form_wizard" model="ir.ui.view">
+            <field name="name">tw.ownership.mutation.request.form</field>
+            <field name="model">tw.ownership.mutation.request</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="sender" required="1" />
+                                <field name="tracking_number" invisible="sender != 'SAP'" required="sender == 'SAP'" />
+                                <field name="courier_name" invisible="sender != 'Branch'" required="sender == 'Branch'" />
+                            </group>
+                            <group>
+
+                            </group>
+                        </group>
+                        <footer>
+                            <button name="action_submit" data-hotkey="s" string="Submit" type="object" class="oe_highlight" />
+                            <button string="Cancel" special="cancel" />
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_ownership_mutation_request_action" model="ir.actions.act_window">
+            <field name="name">Permohonan Mutasi BPKB</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.ownership.mutation.request</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{'search_default_draft': '1','search_default_on_process': '1','search_default_processed': '1'}"/>
+        </record>
+
+        <record id="tw_ownership_mutation_request_action_list" model="ir.actions.act_window.view">
+            <field name="sequence" eval="10" />
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_ownership_mutation_request_view_list" />
+            <field name="act_window_id" ref="tw_ownership_mutation_request_action" />
+        </record>
+
+        <record id="tw_ownership_mutation_request_action_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="20" />
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_ownership_mutation_request_view_form" />
+            <field name="act_window_id" ref="tw_ownership_mutation_request_action" />
+        </record>
+
+    </data>
+</odoo>

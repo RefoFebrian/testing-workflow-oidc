@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="tw_boom_dashboard.GreetingChart" owl="1">
+        <div class="greeting_chart_container d-flex align-items-center h-100 w-100" 
+             t-att-class="'justify-content-' + (props.record.text_align === 'right' ? 'end' : (props.record.text_align === 'left' ? 'start' : 'center'))"
+             t-att-style="'background-color:' + (props.record.background_color || 'transparent') + '; padding: 10px; border-radius: 8px; height: 100%; width: 100%;'">
+            <div class="greeting-content" t-att-style="'text-align:' + (props.record.text_align || 'center')">
+                <h2 t-esc="state.content" t-att-style="'color:' + (props.record.font_color || '#000') + '; margin: 0; font-size:' + (props.record.font_size || 24) + 'px; font-weight:' + (props.record.font_weight_bold || props.record.font_weight || 700) + '; font-style:' + (props.record.font_style || 'normal') + '; font-family:' + (props.record.font_family || 'Arial') + ';'"/>
+            </div>
+        </div>
+    </t>
+</templates>

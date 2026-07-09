@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_pricelist_branch_birojasa_setting_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.pricelist.branch.birojasa.setting.inherit.view.form</field>
+            <field name="model">tw.branch.setting</field>
+            <field name="inherit_id" ref="tw_pricelist_branch.tw_pricelist_branch_setting_inherit_form_view" />
+            <field name="arch" type="xml">
+
+                <field name="pricelist_sale_unit_id" position="after">
+                    <field name="pricelist_sale_bbn_hitam_id"  required="branch_category in ('H1','H123')" options="{'no_quick_create': True}"/>
+                    <!-- TODO: Active again if pricelist sale bbn putih is needed-->
+                    <!-- <field name="pricelist_sale_bbn_putih_id"  required="branch_category in ('H1','H123')" options="{'no_quick_create': True}"/> -->
+                    <field name="pricelist_sale_bbn_merah_id"  required="branch_category in ('H1','H123')" options="{'no_quick_create': True}"/>
+                </field>
+                
+                <page name="pricelist" position="after">
+                    <page name="pricelist_birojasa" string="Pricelist Birojasa">
+                        <field name="birojasa_setting_ids" options="{'no_create': True, 'no_edit': True}" >
+                            <list editable="top">
+                                <field name="branch_setting_id" column_invisible="1" />
+                                <field name="name"/>
+                                <field name="default" required="1"/>
+                                <field name="biro_jasa_id" required="1" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="pricelist_ids" required="1" widget="many2many_tags" options="{'no_create': True}"/>
+                                <button string="Open" name="action_open_pricelist" icon="fa-eye" type="object"/>
+                            </list>
+                        </field>
+                    </page>
+                </page>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

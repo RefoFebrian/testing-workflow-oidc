@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="tw_dealer_sale_order_menu_root"
+                  name="Dealer Sales Order"
+                  parent="tw_menu.submenu_tw_dealers_sale_showroom"
+                  groups="group_tw_dealer_sale_order_read"
+                  action="tw_dealer_sale_order.tw_dealer_sale_order_action_server"
+                  active="True"
+                  sequence="3" />
+
+        <menuitem id="tw_dso_data_consumen_report_showroom_menuitem" 
+                action="tw_dealer_sale_order.tw_dso_data_consumen_report_action" 
+                parent="tw_menu.submenu_tw_showroom_report" 
+                groups="tw_dealer_sale_order.group_tw_dso_data_consumen_report_read"
+                sequence="05" />
+
+        <menuitem id="tw_dso_report_sales_all_showroom_menuitem" 
+                name="Laporan Penjualan"
+                action="tw_dealer_sale_order.tw_dso_report_sales_all_action" 
+                parent="tw_menu.submenu_tw_showroom_report" 
+                groups="tw_dealer_sale_order.group_tw_dso_report_sales_all_read"
+                sequence="06" />
+
+        <menuitem id="tw_dso_report_sales_salesman_showroom_menuitem" 
+                name="Laporan Penjualan Salesman"
+                action="tw_dealer_sale_order.tw_dso_report_sales_salesman_action" 
+                parent="tw_menu.submenu_tw_showroom_report" 
+                groups="tw_dealer_sale_order.group_tw_dso_report_sales_salesman_read"
+                sequence="07" />
+
+        <menuitem id="tw_dso_report_sales_konsumen_showroom_menuitem" 
+                name="Laporan Penjualan Konsumen"
+                action="tw_dealer_sale_order.tw_dso_report_sales_konsumen_action" 
+                parent="tw_menu.submenu_tw_showroom_report" 
+                groups="tw_dealer_sale_order.group_tw_dso_report_sales_konsumen_read"
+                sequence="08" />
+
+        <menuitem id="tw_dso_report_sales_direct_gift_showroom_menuitem" 
+                action="tw_dealer_sale_order.tw_dso_report_sales_direct_gift_action" 
+                parent="tw_menu.submenu_tw_showroom_report" 
+                groups="tw_dealer_sale_order.group_tw_dso_report_sales_direct_gift_read"
+                sequence="09" />
+
+    </data>
+</odoo>

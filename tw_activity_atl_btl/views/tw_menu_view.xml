@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+        <menuitem id="tw_activity_atl_btl_menu" parent="tw_menu.menu_tw_marketing" name="Sales Activity &amp; BTL" sequence="2"/>
+        <menuitem id="tw_activity_atl_btl_report_menu" parent="tw_menu.menu_tw_marketing" name="Laporan" sequence="5"/>
+        <menuitem id="tw_configure_act_plan_menu" parent="tw_menu.menu_tw_marketing" name="Configuration" sequence="10"/>
+
+        <menuitem id="tw_mapping_titik_keramaian_master_menuitem" name="Mapping Titik Keramaian" parent="tw_menu.submenu_tw_branch" action="tw_activity_atl_btl.action_tw_mapping_titik_keramaian" sequence="26" groups="tw_activity_atl_btl.group_tw_mapping_titik_keramaian_read"/>
+        <menuitem id="tw_titik_keramaian_master_menuitem" name="Titik Keramaian" parent="tw_menu.submenu_tw_branch" action="tw_activity_atl_btl.tw_titik_keramaian_action" sequence="27" groups="tw_activity_atl_btl.group_tw_titik_keramaian_read"/>
+
+        <menuitem id="tw_master_activity_type_menuitem" action="action_tw_master_activity_type" parent="tw_activity_atl_btl.tw_configure_act_plan_menu" sequence="01" groups="tw_activity_atl_btl.group_tw_master_act_type_read"/>
+        <menuitem id="tw_mapping_titik_keramaian_master_conf_menuitem" name="Mapping Titik Keramaian" parent="tw_activity_atl_btl.tw_configure_act_plan_menu" action="tw_activity_atl_btl.action_tw_mapping_titik_keramaian" sequence="02" groups="tw_activity_atl_btl.group_tw_mapping_titik_keramaian_read"/>
+        <menuitem id="tw_titik_keramaian_master_conf_menuitem" name="Titik Keramaian" parent="tw_activity_atl_btl.tw_configure_act_plan_menu" action="tw_activity_atl_btl.tw_titik_keramaian_action" sequence="03" groups="tw_activity_atl_btl.group_tw_titik_keramaian_read"/>
+        <menuitem id="tw_ring_master_conf_menuitem" name="Master Ring" parent="tw_activity_atl_btl.tw_configure_act_plan_menu" action="tw_ring.tw_ring_action" sequence="04" groups="tw_ring.group_tw_ring_read"/>
+        <menuitem id="tw_ring_kecamatan_master_conf_menuitem" name="Ring Kecamatan" parent="tw_activity_atl_btl.tw_configure_act_plan_menu" action="tw_ring.tw_ring_kecamatan_action" sequence="05" groups="tw_ring.group_tw_ring_kecamatan_read"/>
+
+        <menuitem id="tw_activity_atl_btl_menuitem" action="tw_activity_atl_btl_action" parent="tw_activity_atl_btl.tw_activity_atl_btl_menu" sequence="03" groups="tw_activity_atl_btl.group_tw_activity_atl_btl_read"/>
+        <menuitem id="tw_outstanding_atl_btl_menuitem" action="tw_outstanding_atl_btl_action" parent="tw_activity_atl_btl.tw_activity_atl_btl_menu" sequence="05" groups="tw_activity_atl_btl.group_tw_outstanding_btl_read"/>
+        <menuitem id="tw_lpj_atl_btl_menuitem" action="tw_lpj_atl_btl_action" parent="tw_activity_atl_btl.tw_activity_atl_btl_menu" sequence="06" groups="tw_activity_atl_btl.group_tw_activity_atl_btl_lpj_read"/>
+        <menuitem id="tw_activity_atl_btl_results_menuitem" action="tw_activity_atl_btl_results_action" parent="tw_activity_atl_btl.tw_activity_atl_btl_menu" sequence="07" groups="tw_activity_atl_btl.group_tw_activity_atl_btl_results_read"/>
+        
+        <menuitem id="tw_act_plan_report_wizard_menuitem" action="tw_act_plan_report_wizard_action" parent="tw_activity_atl_btl.tw_activity_atl_btl_report_menu" sequence="02" groups="tw_activity_atl_btl.group_tw_activity_atl_btl_laporan"/> 
+        <menuitem id="tw_act_plan_insurance_report_wizard_menuitem" action="tw_act_plan_insurance_report_wizard_action" parent="tw_activity_atl_btl.tw_activity_atl_btl_report_menu" sequence="03" groups="tw_activity_atl_btl.group_tw_activity_atl_btl_insurance_laporan"/> 
+
+        <menuitem
+            id="menuitem_tw_selection_sumber_pembayaran_btl"
+            name="Sumber Pembayaran BTL"
+            parent="tw_selection.submenu_tw_selection"
+            action="tw_selection_sumber_pembayaran_btl_action"
+            sequence="21"
+            groups="tw_activity_atl_btl.group_tw_selection_sumber_pembayaran_btl"
+        />
+
+        <menuitem
+            id="menuitem_tw_selection_profile_consumen"
+            name="Profile Consumen"
+            parent="tw_selection.submenu_tw_selection"
+            action="tw_selection_profile_consumen_action"
+            sequence="22"
+            groups="tw_activity_atl_btl.group_tw_selection_profile_consumen"
+        />
+
+        <menuitem
+            id="menuitem_tw_selection_dealer_competitor"
+            name="Dealer Competitor"
+            parent="tw_selection.submenu_tw_selection"
+            action="tw_selection_dealer_competitor_action"
+            sequence="23"
+            groups="tw_activity_atl_btl.group_tw_selection_dealer_competitor"
+        />
+
+        <menuitem
+            id="menuitem_tw_selection_titik_keramaian_category"
+            name="Titik Keramaian Category"
+            parent="tw_selection.submenu_tw_selection"
+            action="tw_selection_titik_keramaian_category_action"
+            sequence="24"
+            groups="tw_activity_atl_btl.group_tw_selection_titik_keramaian_category"
+        />
+    </data>
+</odoo>

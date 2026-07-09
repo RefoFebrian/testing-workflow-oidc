@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+
+        <!-- <menuitem id="tw_outstanding_claim_kpb_menuitem" name="Outstanding Claim KPB"
+            parent="tw_menu.submenu_tw_workshop_collecting" sequence="1"
+            action="tw_outstanding_claim_kpb_action" />
+
+        <menuitem id="tw_work_order_collecting_menuitem" name="Collecting KPB"
+            parent="tw_menu.submenu_tw_workshop_collecting" sequence="2"
+            action="tw_work_order_collecting_kpb_action" /> -->
+
+    </data>
+
+</odoo>

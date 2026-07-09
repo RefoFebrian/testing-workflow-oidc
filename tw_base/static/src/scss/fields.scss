@@ -1,0 +1,216 @@
+/*
+Fitur CSS Field
+1. Membuat field mandatory menjadi berwarna ungu seperti versi lama
+2. Menambah height field menjadi 32px
+3. Improve field yang terlalu kotak menjadi punya border-radius 4px
+4. Menambah padding x field menjadi 4px supaya text tidak terlalu dekat dengan border
+5. Improve field yang di hover dan focus menjadi terhighlight dengan border biru dan glow biru
+*/
+
+:root {
+    /* Colors */
+    --tw-mandatory-bg-color: #d3d2fe;
+    --tw-mandatory-border-color: #1f12e0aa;
+    --tw-mandatory-hover-glow: rgba(21, 52, 230, 0.603);
+
+    /* Dimensions */
+    --tw-field-height: 32px;
+    --tw-field-radius: 4px;
+    --tw-input-padding-x: 4px;
+}
+
+/* Hover / focus glow on any field widget */
+.o_field_widget:not(.o_readonly_modifier):hover,
+.o_field_widget:not(.o_readonly_modifier):focus-within {
+    .o_input,
+    .o_input_dropdown .o_input,
+    textarea.o_input,
+    select.o_input {
+        border-color: #4dabf7 !important;
+        box-shadow: 0 2px 4px -1px var(--tw-mandatory-hover-glow) !important;
+        border-radius: var(--tw-field-radius) !important;
+        position: relative;
+    }
+}
+
+/* Base editable fields (all types) */
+.o_field_widget:not(.o_readonly_modifier) {
+    .o_input,
+    .o_input_dropdown .o_input,
+    select.o_input {
+        min-height: var(--tw-field-height) !important;
+        border-radius: var(--tw-field-radius) !important;
+        display: flex;
+        align-items: center;
+    }
+
+    input.o_input,
+    textarea.o_input,
+    select.o_input {
+        padding: 0 var(--tw-input-padding-x) !important;
+    }
+}
+
+/* Required + invalid + NOT focused → red background */
+.o_required_modifier.o_field_invalid:not(.o_readonly_modifier):not(:focus-within) {
+    .o_input,
+    .o_datepicker_input,
+    textarea,
+    select,
+    .o_input_dropdown .o_input {
+        background-color: var(--danger-bg, #f8d7da) !important; /* tweak color as you like */
+    }
+}
+
+
+/* Non-mandatory editable fields => white background */
+.o_field_widget:not(.o_readonly_modifier):not(.o_required_modifier) {
+    .o_input,
+    .o_input_dropdown .o_input,
+    select.o_input {
+        background-color: #ffffff !important;
+    }
+}
+
+/* Monetary fields (visibility & layout) */
+.o_field_monetary:not(.o_readonly_modifier) {
+    input.o_input {
+        color: var(--body-color, #212529) !important;
+        -webkit-text-fill-color: var(--body-color, #212529) !important;
+        box-shadow: none !important;
+        position: relative;
+        z-index: 10; /* key line: above overlays */
+    }
+
+    .o_input > input.o_input,
+    .o_monetary_input > input.o_input {
+        background-color: transparent !important;
+    }
+
+    .o_monetary_input {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        > span {
+            position: relative;
+            z-index: 2;
+            margin-right: 4px;
+        }
+
+        > input.o_input {
+            position: relative;
+            z-index: 1;
+        }
+    }
+}
+
+/* Invalid fields – red bottom border, keep background */
+.o_field_invalid:not(.o_readonly_modifier) {
+    --o-input-border-color: var(--danger, #dc3545) !important;
+
+    .o_input,
+    input,
+    textarea,
+    select {
+        border-bottom-color: var(--danger, #dc3545) !important;
+    }
+
+    &.o_data_cell {
+        .o_input,
+        input,
+        textarea,
+        select {
+            border-bottom-color: var(--danger, #dc3545) !important;
+        }
+    }
+}
+
+/* Required fields (form and list) – purple background & border */
+.o_required_modifier:not(.o_readonly_modifier) {
+    --o-input-background-color: var(--tw-mandatory-bg-color);
+    --o-input-border-color: var(--tw-mandatory-border-color);
+
+    .o_input,
+    .o_datepicker_input,
+    textarea,
+    select,
+    .o_input_dropdown .o_input {
+        background-color: var(--tw-mandatory-bg-color) !important;
+    }
+
+    &:not(.o_field_invalid) {
+        .o_input:hover,
+        .o_datepicker_input:hover,
+        textarea:hover,
+        select:hover {
+            box-shadow: 0 0 8px var(--tw-mandatory-hover-glow) !important;
+            border-color: var(--tw-mandatory-border-color) !important;
+        }
+    }
+
+    /* Monetary required – wrapper colored, inner transparent */
+    &.o_field_monetary {
+        .o_input {
+            background-color: var(--tw-mandatory-bg-color) !important;
+
+            input {
+                background-color: transparent !important;
+            }
+        }
+    }
+}
+
+/* Required + invalid but focused – keep mandatory bg for dropdowns */
+.o_required_modifier:not(.o_readonly_modifier).o_field_invalid:focus-within {
+    --o-input-background-color: var(--tw-mandatory-bg-color);
+
+    &.o_field_many2one,
+    &.o_field_selection,
+    &.o_field_many2many_tags {
+        .o_input_dropdown .o_input {
+            background-color: var(--tw-mandatory-bg-color) !important;
+        }
+    }
+}
+
+/* Required in editable list views */
+.o_list_view .o_data_cell.o_required_modifier:not(.o_readonly_modifier):not(.o_field_invalid) {
+    --o-input-background-color: var(--tw-mandatory-bg-color);
+    --o-input-border-color: var(--tw-mandatory-border-color);
+
+    .o_input,
+    input,
+    textarea,
+    select {
+        background-color: var(--tw-mandatory-bg-color) !important;
+    }
+}
+
+/* Section and note text – vertically centered */
+.o_field_section_and_note_text:not(.o_readonly_modifier) {
+    textarea {
+        padding: 0 !important;
+        line-height: var(--tw-field-height) !important;
+        height: var(--tw-field-height) !important;
+        min-height: var(--tw-field-height) !important;
+        max-height: var(--tw-field-height) !important;
+        vertical-align: middle !important;
+        overflow: hidden !important;
+    }
+
+    input {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+}
+
+/* List view alignment for section_and_note_text */
+.o_list_view .o_data_cell.o_field_section_and_note_text:not(.o_readonly_modifier) {
+    vertical-align: middle !important;
+
+    textarea,
+    div {
+        margin: 0 !important;
+    }
+}

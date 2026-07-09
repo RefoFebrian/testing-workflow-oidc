@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Advance Finco Import Menu -->
+        <menuitem id="tw_advance_finco_import_menuitem"
+            name="Advance Finco (Import)"
+            parent="tw_menu.submenu_tw_backoffice_bank_cash"
+            action="tw_advance_finco_import_action"
+            sequence="160"
+            groups="group_tw_advance_finco_import_read"
+        />
+
+    </data>
+</odoo>

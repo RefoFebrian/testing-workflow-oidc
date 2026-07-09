@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- RFA Payment Term -->
+		
+        <record id="group_tw_request_payment_term_rfa" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Request Approval Payment Term</field>
+        </record>
+
+        <record id="access_tw_request_payment_term_rfa" model="ir.model.access">
+            <field name="model_id" ref="model_tw_request_payment_term"/>
+            <field name="name">tw_request_payment_term_rfa</field>
+            <field name="group_id" ref="group_tw_request_payment_term_rfa"/>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <!-- Cancel Payment Term -->		
+        <record id="group_tw_request_payment_term_cancel_approval" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Cancel Payment Term</field>
+        </record>
+        <record id="access_tw_request_payment_term_cancel_approval" model="ir.model.access">
+            <field name="model_id" ref="model_tw_request_payment_term"/>
+            <field name="name">tw_request_payment_term_cancel_approval</field>
+            <field name="group_id" ref="group_tw_request_payment_term_cancel_approval"/>
+            <field name="perm_write">1</field>
+        </record>
+                
+        <!-- Reject Payment Term -->		
+        <record id="group_tw_request_payment_term_reject_approval" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Reject Payment Term</field>
+        </record>
+        <record id="access_tw_request_payment_term_reject_approval" model="ir.model.access">
+            <field name="model_id" ref="model_tw_request_payment_term"/>
+            <field name="name">tw_request_payment_term_reject_approval</field>
+            <field name="group_id" ref="group_tw_request_payment_term_reject_approval"/>
+            <field name="perm_write">1</field>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_request_payment_term_rfa')),
+                (4, ref('group_tw_request_payment_term_cancel_approval')),
+                (4, ref('group_tw_request_payment_term_reject_approval')),
+            ]"/>
+        </record>
+    </data>
+
+</odoo>

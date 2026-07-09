@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem action="tw_regenerate_faktur_pajak_action" sequence="201" id="menu_tw_regenerate_faktur_pajak" parent="tw_faktur_pajak.tw_backoffice_tax_submenu" groups="tw_regenerate_faktur_pajak.group_tw_regenerate_faktur_pajak_read"/>
+
+</odoo>

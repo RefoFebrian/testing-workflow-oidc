@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_stock_opname_foto_selfie_wizard" model="ir.ui.view">
+            <field name="name">tw.stock.opname.foto.selfie</field>
+            <field name="model">tw.stock.opname.location</field>
+            <field name="priority">100</field>
+            <field name="arch" type="xml">
+            	<form string="File Foto Selfie">
+                    <sheet>
+                    	<group string="File Foto Selfie">
+                    		<field name="filename_upload_foto_selfie" invisible="1"/>
+                            <label for="file_foto_selfie_show" string="File"/>
+                            <div>
+ 								<field name="file_foto_selfie_show" widget="image" img_width="200" img_height="200" invisible="filename_upload_foto_selfie == False"/>
+                            </div>
+                    	</group>
+                    	<footer>
+                    		<button string="Cancel" class="oe_link" special="cancel"/>
+                    	</footer>
+                	</sheet>
+            	</form>	
+            </field>
+        </record>
+        
+        <record id="view_tw_stock_opname_foto_all_stock_wizard" model="ir.ui.view">
+            <field name="name">tw.stock.opname.foto.all.stock</field>
+            <field name="model">tw.stock.opname.location</field>
+            <field name="priority">100</field>
+            <field name="arch" type="xml">
+            	<form string="File Foto All Stock">
+                    <sheet>
+                    	<group string="File Foto All Stock">
+                    		<field name="filename_upload_foto_all_stock" invisible="1"/>
+                            <label for="file_foto_all_stock_show" string="File"/>
+                            <div>
+ 								<field name="file_foto_all_stock_show" widget="image" img_width="200" img_height="200" invisible="filename_upload_foto_all_stock == False"/>
+                            </div>
+                    	</group>
+                    	<footer>
+                    		<button string="Cancel" class="oe_link" special="cancel"/>
+                    	</footer>
+                	</sheet>
+            	</form>	
+            </field>
+        </record>
+
+        <record id="view_tw_stock_opname_foto_unit_wizard" model="ir.ui.view">
+            <field name="name">tw.stock.opname.foto.unit</field>
+            <field name="model">tw.stock.opname.detail</field>
+            <field name="priority">100</field>
+            <field name="arch" type="xml">
+            	<form string="File Foto Unit">
+                    <sheet>
+                    	<group string="File Foto Unit">
+                    		<field name="filename_upload" invisible="1"/>
+                            <label for="file_foto_show" string="File"/>
+                            <div>
+ 								<field name="file_foto_show" widget="image" img_width="200" img_height="200" invisible="filename_upload == False"/>
+                            </div>
+                    	</group>
+                    	<footer>
+                    		<button string="Cancel" class="oe_link" special="cancel"/>
+                    	</footer>
+                	</sheet>
+            	</form>	
+            </field>
+        </record>
+
+        <record id="view_tw_stock_opname_maps_wizard" model="ir.ui.view">
+            <field name="name">tw.stock.opname.maps</field>
+            <field name="model">tw.stock.opname.detail</field>
+            <field name="priority">100</field>
+            <field name="arch" type="xml">
+            	<form string="Maps">
+                    <sheet>
+                    	<group string="Maps">
+                            <field name="maps" readonly="1" widget="url"/>
+                            <label for="latitude" string="Koordinat*"/>
+                            <div>
+                                <field name="latitude" class="oe_inline" readonly="1"/>,
+                                <field name="longtitude" class="oe_inline" readonly="1"/>
+                            </div>
+                    	</group>
+                        <div>
+                            <p>
+                                (*) <span style="font-style: italic;">
+                                    Latitude, Longitude
+                                </span>
+                            </p>
+                        </div>
+                        <div>
+                            <field name="maps_embed" widget="html" readonly="1"/>
+                    	</div>
+                        <footer>
+                    		<button string="Cancel" class="oe_link" special="cancel"/>
+                    	</footer>
+                	</sheet>
+            	</form>	
+            </field>
+        </record>
+
+        <record id="view_tw_stock_opname_foto_accessories_wizard" model="ir.ui.view">
+            <field name="name">tw.stock.opname.foto.accessories</field>
+            <field name="model">tw.stock.opname.accessories</field>
+            <field name="priority">100</field>
+            <field name="arch" type="xml">
+            	<form string="File Foto Accessories">
+                    <sheet>
+                    	<group string="File Foto Accessories">
+                    		<field name="filename_upload" invisible="1"/>
+                            <label for="file_foto_show" string="File"/>
+                            <div>
+ 								<field name="file_foto_show" widget="image" img_width="200" img_height="200" invisible="filename_upload == False"/>
+                            </div>
+                    	</group>
+                    	<footer>
+                    		<button string="Cancel" class="oe_link" special="cancel"/>
+                    	</footer>
+                	</sheet>
+            	</form>	
+            </field>
+        </record>
+
+    </data>
+</odoo>

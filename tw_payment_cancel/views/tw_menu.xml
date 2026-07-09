@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>      
+        
+        <menuitem action="payment_cancel_action" id="payment_cancel_menu" parent="tw_cancellation.submenu_backoffice_tw_cancellation" groups="tw_payment_cancel.group_tw_payment_cancel_read" sequence="1"/>
+    </data>
+</odoo>

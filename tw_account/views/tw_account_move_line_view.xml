@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <record id="view_tw_account_move_line_tree" model="ir.ui.view">
+            <field name="name">view.tw.account.move.line.tree</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_tree"/>
+            <field name="arch" type="xml">
+                <field name="matching_number" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </field>
+                <field name="account_id" position="replace">
+                    <field name="account_id" options="{'no_open': True, 'no_create': True}" domain="[('deprecated', '=', False), ('company_ids', 'parent_of', company_id)]"/>
+                </field>
+                <field name="company_id" position="attributes">
+                    <attribute name="optional">show</attribute>
+                </field>
+                <field name="ref" position="attributes">
+                    <attribute name="optional">show</attribute>
+                </field>
+                <field name="company_id" position="after">
+                    <field name="division" readonly="state != 'draft'" optional="show"/>
+                </field>
+                <field name="debit" position="attributes">
+                    <attribute name="width">125%</attribute>
+                </field>
+                <field name="credit" position="attributes">
+                    <attribute name="width">125%</attribute>
+                </field>
+                <field name="matching_number" position="before">
+                    <field name="date_maturity" optional="hide"/>
+                </field>
+                <field name="matching_number" position="attributes">
+                    <attribute name="string">Reconcile ID</attribute>
+                </field>
+                
+            </field>
+        </record>
+
+        <record id="view_account_move_line_inherit_filter" model="ir.ui.view">
+            <field name="name">view.tw.account.move.line.tree</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+            <field name="arch" type="xml">
+                <field name="invoice_date" position="after">
+                    <field name="matching_number"  string="Reconcile ID"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

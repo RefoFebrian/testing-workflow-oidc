@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="paperformat_vehicle_document" model="report.paperformat">
+            <field name="name">Stock Opname Direct Gift</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="css_margins" eval="True"/>
+            <field name="header_spacing">3</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="action_report_bakso_bpkb" model="ir.actions.report">
+            <field name="name">Stock Opname BPKB Bakso</field>
+            <field name="model">tw.vehicle.document.stock.opname</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_vehicle_document_stock_opname.so_bpkb_bakso</field>
+            <field name="paperformat_id" ref="paperformat_vehicle_document"/>
+        </record>
+
+        <record id="action_report_bakso_stnk" model="ir.actions.report">
+            <field name="name">Stock Opname STNK Bakso</field>
+            <field name="model">tw.vehicle.document.stock.opname</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_vehicle_document_stock_opname.so_stnk_bakso</field>
+            <field name="paperformat_id" ref="paperformat_vehicle_document"/>
+        </record>
+
+        <record id="action_report_validasi_bpkb" model="ir.actions.report">
+            <field name="name">Print Validasi SO BPKB</field>
+            <field name="model">tw.vehicle.document.stock.opname</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_vehicle_document_stock_opname.bpkb_print_validasi</field>
+            <field name="report_file">tw_vehicle_document_stock_opname.bpkb_print_validasi</field>
+            <field name="print_report_name">'Validasi_SO_BPKB_' + object.name</field>
+            <field name="paperformat_id" ref="paperformat_vehicle_document"/>
+        </record>
+
+        <record id="action_report_validasi_stnk" model="ir.actions.report">
+            <field name="name">Print Validasi SO STNK</field>
+            <field name="model">tw.vehicle.document.stock.opname</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_vehicle_document_stock_opname.stnk_print_validasi</field>
+            <field name="report_file">tw_vehicle_document_stock_opname.stnk_print_validasi</field>
+            <field name="print_report_name">'Validasi_SO_STNK_' + object.name</field>
+            <field name="paperformat_id" ref="paperformat_vehicle_document"/>
+        </record>
+
+    </data>
+</odoo>

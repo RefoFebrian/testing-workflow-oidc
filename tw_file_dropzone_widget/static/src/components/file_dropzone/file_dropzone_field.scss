@@ -1,0 +1,23 @@
+.tw-file-dropzone {
+    .tw-dropzone-area {
+        min-height: 150px;
+        background-color: #f8f9fa;
+        transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    &.o_web_dropzone,
+    &.o_dragover,
+    .o_web_dropzone &,
+    .o_dragover & {
+        .tw-dropzone-area {
+            border-color: var(--o-brand-primary);
+            background-color: rgba(13, 110, 253, 0.08);
+        }
+    }
+
+    .o_attachments {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 12px;
+    }
+}

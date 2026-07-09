@@ -1,0 +1,1 @@
+from . import tw_dealer_sale_order_invoice_report_inherit

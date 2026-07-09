@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+         <record id="group_petty_cash_out_button_rfa" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Button Petty Cash Out RFA</field>
+        </record>
+        <record id="group_petty_cash_out_button_rfa_access" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_out" />
+            <field name="name">petty_cash_out_button_rfa_access write</field>
+            <field name="group_id" ref="group_petty_cash_out_button_rfa" />
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_petty_cash_in_button_rfa" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Button Petty Cash In RFA</field>
+            <field name="implied_ids" eval="[(4, ref('tw_petty_cash.group_petty_cash_in_read'))]"/>
+        </record>
+
+        <record id="group_petty_cash_in_button_rfa_access" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_in" />
+            <field name="name">petty_cash_in_button_rfa_access write</field>
+            <field name="group_id" ref="group_petty_cash_in_button_rfa" />
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_reimbursement_petty_cash_button_rfa" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Button Reimbursement Petty Cash RFA</field>
+            <field name="implied_ids" eval="[(4, ref('tw_petty_cash.group_reimbursement_petty_cash_read'))]"/>
+        </record>
+
+        <record id="group_reimbursement_petty_cash_button_rfa_access" model="ir.model.access">
+            <field name="model_id" ref="model_tw_reimbursement_petty_cash" />
+            <field name="name">reimbursement_petty_cash_button_rfa_access write</field>
+            <field name="group_id" ref="group_reimbursement_petty_cash_button_rfa" />
+            <field name="perm_write">1</field>
+        </record>
+        
+        <record id="group_petty_cash_out_button_cancel_approval" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Button Cancel Petty Cash Out</field>
+        </record>
+        <record id="access_group_petty_cash_out_button_cancel_approval" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_out"/>
+            <field name="name">tw_petty_cash_out_button_cancel_approval</field>
+            <field name="group_id" ref="group_petty_cash_out_button_cancel_approval"/>
+            <field name="perm_write">1</field>
+        </record>
+
+                
+        <record id="group_petty_cash_out_button_reject_approval" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Button Reject Petty Cash Out</field>
+        </record>
+        <record id="access_group_petty_cash_out_button_reject_approval" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_out"/>
+            <field name="name">tw_petty_cash_out_button_reject_approval</field>
+            <field name="group_id" ref="group_petty_cash_out_button_reject_approval"/>
+            <field name="perm_write">1</field>
+        </record>
+
+        
+        <record id="group_reimbursement_petty_cash_button_cancel_approval" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Button Cancel Reimbursement Petty Cash</field>
+        </record>
+        <record id="access_group_reimbursement_petty_cash_button_cancel_approval" model="ir.model.access">
+            <field name="model_id" ref="model_tw_reimbursement_petty_cash"/>
+            <field name="name">tw_reimbursement_petty_cash_button_cancel_approval</field>
+            <field name="group_id" ref="group_reimbursement_petty_cash_button_cancel_approval"/>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <record id="group_reimbursement_petty_cash_button_reject_approval" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Button Reject Reimbursement Petty Cash</field>
+        </record>
+        <record id="access_group_reimbursement_petty_cash_button_reject_approval" model="ir.model.access">
+            <field name="model_id" ref="model_tw_reimbursement_petty_cash"/>
+            <field name="name">tw_reimbursement_petty_cash_button_reject_approval</field>
+            <field name="group_id" ref="group_reimbursement_petty_cash_button_reject_approval"/>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_petty_cash_in_cancel_approval" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Button Cancel Petty Cash In</field>
+        </record>
+        <record id="access_group_petty_cash_in_cancel_approval" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_in"/>
+            <field name="name">tw_petty_cash_in_button_cancel</field>
+            <field name="group_id" ref="group_petty_cash_in_cancel_approval"/>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <record id="group_petty_cash_in_reject_approval" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Button Reject Petty Cash In</field>
+        </record>
+        <record id="access_group_petty_cash_in_reject_approval" model="ir.model.access">
+            <field name="model_id" ref="model_tw_petty_cash_in"/>
+            <field name="name">tw_petty_cash_in_button_reject</field>
+            <field name="group_id" ref="group_petty_cash_in_reject_approval"/>
+            <field name="perm_write">1</field>
+        </record>
+        
+    </data>
+    
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_petty_cash_out_button_rfa')),
+                (4,ref('group_petty_cash_in_button_rfa')),
+                (4,ref('group_reimbursement_petty_cash_button_rfa')),
+                (4, ref('group_petty_cash_in_cancel_approval')),
+                (4, ref('group_petty_cash_in_reject_approval')),
+                (4, ref('group_petty_cash_out_button_cancel_approval')),
+                (4, ref('group_petty_cash_out_button_reject_approval')),
+                (4, ref('group_reimbursement_petty_cash_button_cancel_approval')),
+                (4, ref('group_reimbursement_petty_cash_button_reject_approval')),
+            ]"/>
+        </record>
+    </data>
+
+</odoo>

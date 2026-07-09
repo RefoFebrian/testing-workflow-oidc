@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>   	
+		<record id="tw_approval_line_notebook_list_view" model="ir.ui.view" >
+		    <field name="name">tw.approval.line.notebook.tree</field>
+		    <field name="model">tw.approval.line</field>
+			<field name="priority">0</field>
+		    <field name="arch" type="xml" >
+		        <list string="Approval Matrix Biaya" default_order="id desc" create="0"  edit="0" delete="0">
+		        	<field name="group_id"/>
+                    <field name="company_id" optional="hide"/>
+		        	<field name="division" optional="hide"/>
+		        	<field name="limit"/>
+		        	<field name="value" optional="show"/>
+		        	<field name="state" widget="badge" decoration-info="state in ('open')" decoration-warning="state in ('rejected', 'cancel')" decoration-success="state in ('approve')"/>
+		        	<field name="reason"/>
+		        	<field name="approver_id" optional="show"/>
+		        	<field name="transaction_no" optional="hide"/>
+		        	<field name="model_id" optional="hide" groups="base.group_erp_manager"/>
+		        	<field name="create_date" string="Tanggal" widget="date" optional="hide"/>
+		        	<field name="is_must_approve" column_invisible="True"/>
+		        </list>
+		     </field>
+		</record>
+
+		<record id="tw_approval_line_notebook_form_view" model="ir.ui.view">
+		    <field name="name">tw.approval.line.notebook.form</field>
+		    <field name="model">tw.approval.line</field>
+			<field name="priority">0</field>
+		    <field name="arch" type="xml" >
+		        <form string="Approval Matrix Biaya" create="0"  edit="0" delete="0">
+					<group>
+						<group>
+							<field name="company_id" options="{'no_open': True, 'no_create': True}" readonly="1"/>
+							<field name="division" readonly="1"/>
+							<field name="transaction_no" readonly="1"/>
+							<field name="model_id" options="{'no_open': True, 'no_create': True}" readonly="1" groups="base.group_erp_manager"/>
+						</group>
+						<group>
+							<field name="state" readonly="1"/>
+							<field name="group_id" options="{'no_open': True, 'no_create': True}" readonly="1"/>
+							<field name="value" readonly="1"/>
+							<field name="is_must_approve" readonly="1"/>
+							<field name="create_date" string="Tanggal" widget="date" readonly="1"/>
+						</group>
+					</group>
+		        </form>
+		     </field>
+		</record>
+
+		<record id="tw_approval_reject_wizard_form_view" model="ir.ui.view">
+		    <field name="name">tw.approval.reject.wizard.form</field>
+		    <field name="model">tw.approval</field>
+		    <field name="arch" type="xml">
+		        <form string="REASON" version="7.0">
+		            <group>
+		                <field name="reason"/>
+		            </group>
+		            <footer>
+		                <button name="action_approval_reject" string="Submit" type="object" class="oe_highlight"/>
+		                or
+		                <button string="Discard" class="oe_link" special="cancel" />
+		            </footer>
+		        </form>
+		    </field>
+		</record>
+			
+		<record model="ir.actions.act_window" id="tw_approval_reject_wizard_action">
+		    <field name="name">Reason Reject</field>
+		    <field name="res_model">tw.approval</field>
+		    <field name="view_mode">form</field>
+		    <field name="target">new</field>
+			<field name="view_id" ref="tw_approval.tw_approval_reject_wizard_form_view"/>
+		</record>
+		
+		<record id="tw_cancel_approval_wizard_form_view" model="ir.ui.view">
+			<field name="name">tw.cancel.approval.wizard.form</field>
+			<field name="model">tw.approval</field>
+			<field name="arch" type="xml">
+				<form string="REASON" version="7.0">
+					<group>
+						<field name="reason"/>
+					</group>
+					<footer>
+						<button name="action_approval_cancel" string="Submit" type="object" class="oe_highlight"/>
+						or
+						<button string="Cancel" class="oe_link" special="cancel" />
+					</footer>
+				</form>
+			</field>
+		</record>
+		
+		<record id="tw_cancel_approval_wizard" model="ir.actions.act_window">
+		    <field name="name">Cancel Approval</field>
+		    <field name="res_model">tw.approval</field>
+		    <field name="view_mode">form</field>
+		    <field name="target">new</field>
+		</record>
+			
+		<record id="tw_approval_cancel_wizard_action" model="ir.actions.act_window">
+		    <field name="name">Reason Cancel</field>
+		    <field name="res_model">tw.approval</field>
+		    <field name="view_mode">form</field>
+		    <field name="target">new</field>
+			<field name="view_id" ref="tw_approval.tw_cancel_approval_wizard_form_view"/>
+		</record>
+				
+ 	</data>
+ </odoo>
+       		
+       		
+	

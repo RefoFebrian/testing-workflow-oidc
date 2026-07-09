@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+		<record id="tw_activity_atl_btl_line_reject_list_view" model="ir.ui.view">
+			<field name="name">tw.activity.atl.btl.reject.list</field>
+			<field name="model">tw.activity.atl.btl.line</field>
+			<field name="arch" type="xml">
+				<list create="0" delete="0">
+					<field name="company_id"/>
+					<field name="sales_channel_id" options="{'no_open':True,'no_create':True}"/>
+					<field name="name"/>
+					<field name="act_type_id" options="{'no_open':True,'no_create':True}"/>
+					<field name="ring_id" options="{'no_open':True,'no_create':True}"/>
+					<field name="district_id" options="{'no_open':True,'no_create':True}"/>
+					<field name="submission_type"/>
+					<field name="location_id"/>
+					<field name="start_date"/>
+					<field name="end_date"/>
+					<field name="display_unit"/>
+					<field name="state"/>
+				</list>
+			</field>
+		</record>
+
+		<record id="tw_activity_atl_btl_line_reject_filter" model="ir.ui.view">
+            <field name="name">tw.activity.atl.btl.reject.filter</field>
+            <field name="model">tw.activity.atl.btl.line</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <field name="activity_id" string="Activity Plan"/>
+                    <field name="company_id"/>
+                    <field name='act_type_id'/>
+                    <field name="mapping_activity_id"/>
+                    <field name="pic_id"/>
+                    <field name="location_id"/>
+					<field name="start_date"/>
+					<field name="end_date"/>
+
+                    <group expand="1" string="Group By">
+                        <filter string="Branch" name="group_by_branch" context="{'group_by':'company_id'}"/>
+                        <filter string="Activity Type" name="group_by_act_type_id" context="{'group_by':'act_type_id'}"/>
+                    </group>     
+                </search>
+            </field>
+        </record>
+
+        <record id="tw_activity_atl_btl_status_reject_action" model="ir.actions.server">
+            <field name="name">Activity BTL Reject</field>
+            <field name="model_id" ref="tw_activity_atl_btl.model_tw_activity_atl_btl_line"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.activity.atl.btl.line'].action_act_plan_status_reject_list()
+            </field>
+        </record>
+
+	</data>
+</odoo>

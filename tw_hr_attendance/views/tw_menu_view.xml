@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menuitem_tw_employee_attendance" name="Attendance" parent="tw_menu.menu_tw_employee" sequence="3" groups="tw_hr.group_tw_employee_read"/>
+        <menuitem id="menuitem_tw_attendance_sub" name="Attendance" parent="menuitem_tw_employee_attendance" sequence="1" action="tw_employee_attendance_action" groups="tw_hr.group_tw_employee_read"/>
+        <menuitem id="menuitem_tw_timekeeping_sub" name="Request Attendance" parent="menuitem_tw_employee_attendance" sequence="2" action="tw_attendance_request_action" groups="tw_hr.group_tw_employee_read"/>
+
+        <!-- Report Menu -->
+        <menuitem id="menuitem_tw_employee_attendance_report" name="Laporan Absensi" parent="menuitem_tw_employee_attendance" sequence="3" action="action_employee_attendance_report" groups="tw_hr.group_tw_employee_read"/>
+    </data>
+</odoo>

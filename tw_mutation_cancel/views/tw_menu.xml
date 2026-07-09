@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>      
+        
+        <menuitem action="mutation_order_cancel_action" id="mutation_order_cancel_menu" parent="tw_cancellation.submenu_showroom_tw_cancellation" groups="tw_mutation_cancel.group_tw_mutation_order_cancel_read" sequence="1"/>
+        <menuitem action="mutation_order_cancel_action" id="mutation_order_cancel_workshop_menu" parent="tw_cancellation.submenu_workshop_tw_cancellation" groups="tw_mutation_cancel.group_tw_mutation_order_cancel_read" sequence="1"/>
+    </data>
+</odoo>

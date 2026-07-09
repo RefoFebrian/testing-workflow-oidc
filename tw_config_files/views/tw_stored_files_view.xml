@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_stored_files_wizard_form_view" model="ir.ui.view">
+            <field name="name">tw.stored.files.wizard.form.view</field>
+            <field name="model">tw.stored.files.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Stored Files">
+                    <sheet>
+                        <group>
+                            <field invisible="name == False" name="name"/>
+                            <field invisible="config_id != False" name="config_id"/>
+                        </group>
+                        <notebook>
+                            <page string="File List">
+                                <field name="file_ids" nolabel="1" options="{'no_create': True,'no_open':True}">
+                                    <list create="false">
+                                        <field name="name"/>
+                                        <field filename="name" invisible="1" name="file"/>
+                                        <button class="oe_highlight" icon="gtk-ok" name="action_export_file" string="Download" type="object"/>
+                                    </list></field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form></field>
+        </record>
+        <record id="tw_stored_files_wizard_action" model="ir.actions.act_window">
+            <field name="name">Stored Files</field>
+            <field name="res_model">tw.stored.files.wizard</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <menuitem id="menuitem_tw_stored_files"
+                  name="Monitoring Saved Files"
+                  parent="tw_menu.submenu_tw_configuration"
+                  action="tw_stored_files_wizard_action"
+                  groups="tw_config_files.group_tw_stored_files_read"
+                  sequence="2"/>
+    </data>
+</odoo>

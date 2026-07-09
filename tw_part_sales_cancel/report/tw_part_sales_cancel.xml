@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="action_tw_part_sales_cancel_print" model="ir.actions.report">
+            <field name="name">Print Part Sales Cancel</field>
+            <field name="model">tw.part.sales.cancel</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_part_sales_cancel.tw_part_sales_cancel_print</field>
+            <field name="report_file">tw_part_sales_cancel.tw_part_sales_cancel_print</field>
+            <field name="print_report_name">'Part Sales Cancel - %s' % object.name</field>
+            <!-- <field name="paperformat_id" ref="paperformat_tw_part_sales_print_thermal"/> -->
+        </record>
+    </data>
+</odoo>

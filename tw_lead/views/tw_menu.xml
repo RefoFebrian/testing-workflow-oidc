@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="crm.crm_menu_root" model="ir.ui.menu">
+			<field name="parent_id" ref="tw_menu.menu_tw_odoo_default" />
+		</record>
+
+		<!-- MENU -->
+		<menuitem id="submenu_tw_showroom_lead"
+				  name="Lead"
+				  action="tw_lead.tw_lead_action_window"
+				  parent="tw_menu.submenu_tw_dealers_sale_showroom"
+				  groups="tw_lead.group_tw_lead_crm_lead_read"
+				  sequence="1" />
+
+		<menuitem id="submenu_tw_showroom_configuration_lead"
+				  name="Lead"
+				  parent="tw_menu.submenu_tw_showroom_configuration"
+				  sequence="10"/>
+
+		<menuitem id="submenu_tw_lead_stage"
+				  name="Lead Stage"
+				  action="crm.crm_stage_action"
+				  parent="submenu_tw_showroom_configuration_lead"
+				  sequence="10" 
+				  groups="tw_lead.group_tw_lead_stages_read"/>
+
+		<menuitem
+            id="menuitem_tw_selection_sales_channel"
+            name="Sales Channel"
+            parent="tw_selection.submenu_tw_selection"
+            action="tw_selection_sales_channel_action"
+            sequence="7"
+            groups="tw_lead.group_tw_selection_sales_channel"
+        />
+
+		<menuitem
+            id="menuitem_tw_selection_customer_grade"
+            name="Customer Grade"
+            parent="tw_selection.submenu_tw_selection"
+            action="tw_selection_customer_grade_action"
+            sequence="8"
+            groups="tw_lead.group_tw_selection_customer_grade"
+        />
+
+		<menuitem
+            id="menuitem_tw_selection_data_source"
+            name="Data Source"
+            parent="tw_selection.submenu_tw_selection"
+            action="tw_selection_data_source_action"
+            sequence="9"
+            groups="tw_lead.group_tw_selection_data_source"
+        />
+
+		<menuitem
+            id="menuitem_tw_selection_lead_web_source"
+            name="Lead Web Source"
+            parent="tw_selection.submenu_tw_selection"
+            action="tw_selection_lead_web_source_action"
+            sequence="10"
+            groups="tw_lead.group_tw_selection_lead_web_source"
+        />
+	</data>
+</odoo>

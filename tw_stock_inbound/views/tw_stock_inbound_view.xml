@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="tw_stock_inbound_list_view" model="ir.ui.view">
+			<field name="name">tw.stock.inbound.list</field>
+			<field name="model">tw.stock.inbound</field>
+			<field name="arch" type="xml">
+				<list string="Stock Inbound" decoration-danger="state=='draft'" delete="0" duplicate="0">
+					<field name="name"/>
+					<field name="expedition_id"/>
+					<field name="vehicle_id"/>
+					<field name="driver_id"/>
+					<field name="date"/>
+					<field name="division"/>
+					<field name="amount_of_load"/>
+					<field name="state"/>
+				</list>
+			</field>
+		</record>
+
+		<record id="tw_stock_inbound_form_view" model="ir.ui.view">
+			<field name="name">tw.stock.inbound.form</field>
+			<field name="model">tw.stock.inbound</field>
+			<field name="arch" type="xml">
+				<form string="Stock Inbound" duplicate="0">
+					<header>
+						<button name="action_process" type="object" string="Process" invisible="state != 'draft'" groups="tw_stock_inbound.group_button_process_stock_inbound"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,open,done"/>
+					</header>
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+						<button name="action_view_pickings" type="object" class="oe_stat_button" icon="fa-truck">
+							<field name="picking_count" widget="statinfo" string="Pickings"/>
+						</button>
+					</div>
+					<div class="oe_title">
+						<h1>
+							<field name="name" class="oe_inline" readonly="1"/>
+						</h1>
+					</div>
+						<group>
+							<group>
+								<field name="expedition_id" required="1" options="{'no_open':True, 'no_create':True}" readonly="state != 'draft'"/>
+								<field name="vehicle_id" required="1" domain="[('partner_id','=',expedition_id)]" readonly="state != 'draft'" help="Please pay Attention to Writing the Expedition Police Number or Plate Number."/>
+								<field name="driver_id" options="{'no_open':True, 'no_create':True}" required="1" readonly="state != 'draft'"/>
+								<label for="amount_of_load" string="Amount of Load"/>
+								<div class="o_row">
+									<field name="amount_of_load" required="1" readonly="state == 'done'" nolabel="1"/>
+									<field name="amount_of_load_uom" required="1" readonly="state == 'done'" nolabel="1"/>
+								</div>
+								<field name="booking_number" required="1" readonly="state != 'draft'"/>
+								<field name="amount_receipt" readonly="1"/>
+							</group>
+							<group>
+								<field name="division" required="1" readonly="state != 'draft'" options="{'no_open':True, 'no_create':True}"/>
+								<field name="date" readonly="1"/>
+								<field name="rope_condition" readonly="1"/>
+								<field name="sponge_count" readonly="1"/>
+								<field name="steel_count" readonly="1"/>
+								<field name="saddle_count" readonly="1"/>
+							</group>
+						</group>
+						<notebook>
+							<page string="Audit Trail">
+								<group>
+									<group>
+										<field name="create_uid" readonly="1" invisible="create_uid == False"></field>
+										<field name="create_date" readonly="1" invisible="create_date == False"></field>
+										<field name="confirm_uid" readonly="1" invisible="confirm_uid == False"></field>
+										<field name="confirm_date" readonly="1" invisible="confirm_date == False"></field>
+									</group>
+									<group>
+										<field name="write_uid" readonly="1" invisible="write_uid == False"></field>
+										<field name="write_date" readonly="1" invisible="write_date == False"></field>
+										<field name="done_uid" readonly="1" invisible="done_uid == False"></field>
+										<field name="done_date" readonly="1" invisible="done_date == False"></field>
+									</group>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="tw_stock_inbound_search_view" model="ir.ui.view">
+			<field name="name">tw.stock.inbound.search</field>
+			<field name="model">tw.stock.inbound</field>
+			<field name="arch" type="xml">
+				<search string="Stock Inbound">
+					<filter name="filter_by_draft" string="Draft" domain="[('state', '=', 'draft')]" help="Draft Moves"/>
+					<filter name="filter_by_open" string="Open" domain="[('state', '=', 'open')]" help="Open Moves"/>
+					<filter name="filter_by_done" string="Done" domain="[('state', '=', 'done')]" help="Done Moves"/>
+					<field name="name"/>
+					<field name="expedition_id"/>
+					<field name="vehicle_id"/>
+					<field name="driver_id"/>
+					<field name="date"/>
+					<filter name="group_by_date" string="Group By Date" context="{'group_by':'date'}"/>
+					<filter name="group_by_division" string="Group By Division" context="{'group_by':'division'}"/>
+					<filter name="group_by_expedition_id" string="Group By Expedition" context="{'group_by':'expedition_id'}"/>
+					<filter name="group_by_vehicle_id" string="Group By Vehicle" context="{'group_by':'vehicle_id'}"/>
+					<filter name="group_by_driver_id" string="Group By Driver" context="{'group_by':'driver_id'}"/>
+					<filter name="group_by_rope_condition" string="Group By Kondisi Tali Pengikatan" context="{'group_by':'rope_condition'}"/>
+				</search>
+			</field>
+		</record>
+
+		<record id="tw_stock_inbound_action" model="ir.actions.act_window">
+			<field name="name">Stock Inbound</field>
+			<field name="res_model">tw.stock.inbound</field>
+			<field name="view_mode">list,form</field>
+			<field name="context">{"search_default_filter_by_draft":1,"search_default_filter_by_open":1}</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Stock Inbound</p>
+			</field>
+		</record>
+
+	</data>
+</odoo>

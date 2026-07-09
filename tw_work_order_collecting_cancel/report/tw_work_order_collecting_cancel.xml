@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="action_tw_work_order_collecting_cancel_print" model="ir.actions.report">
+            <field name="name">Print Work Order Collecting Cancel</field>
+            <field name="model">tw.work.order.collecting.cancel</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_work_order_collecting_cancel.tw_work_order_collecting_cancel_print</field>
+            <field name="report_file">tw_work_order_collecting_cancel.tw_work_order_collecting_cancel_print</field>
+            <field name="print_report_name">'Work Order Collecting Cancel - %s' % object.name</field>
+        </record>
+    </data>
+</odoo>

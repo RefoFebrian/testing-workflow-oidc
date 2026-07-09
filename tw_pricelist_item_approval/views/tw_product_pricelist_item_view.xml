@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="product_pricelist_item_approval_inherit_form_view" model="ir.ui.view">
+        <field name="name">product.pricelist.item.inherit.view.form</field>
+        <field name="model">product.pricelist.item</field>
+        <field name="inherit_id" ref="tw_pricelist.tw_product_pricelist_item_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Tambahkan header -->
+
+            <xpath expr="//header" position="inside">
+                <button name="action_approval" data-hotkey="a" invisible="state != 'waiting_for_approval'" string="Approve" type="object" class="oe_highlight"/>
+                <button name="%(tw_approval.tw_approval_reject_wizard_action)d" invisible="state != 'waiting_for_approval'" string="Reject" type="action" context="{'model_name':'product.pricelist.item','update_value':{'state':'new'}}"/>
+                <button name="%(tw_approval.tw_approval_cancel_wizard_action)d" invisible="state not in ('waiting_for_approval','approved')" string="Cancel Approval" groups="tw_pricelist_item_approval.group_tw_product_pricelist_item_cancel_approval" type="action"  context="{'model_name':'product.pricelist.item','update_value':{'state':'new'}}"/>		
+            </xpath>
+            
+            <!-- Replace Price Rules to Items -->
+            <xpath expr="//notebook" position="inside">
+                <page name="approval_page" string="Approval" invisible="state not in ('waiting_for_approval','approved','active') and not approval_ids">
+                    <field name="approval_ids"/>
+                </page>
+            </xpath>
+        </field>
+    </record> 
+</odoo>

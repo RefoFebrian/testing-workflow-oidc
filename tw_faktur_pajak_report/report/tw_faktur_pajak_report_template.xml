@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- QWeb Report Template for Faktur Pajak -->
+		<template id="report_faktur_pajak">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="web.external_layout">
+						<div class="page">
+							<!-- Header Info -->
+							<div style="text-align: right; font-size: 9pt; margin-bottom: 10px;">
+								<p style="margin: 0;">Lembar ke 1 : Untuk Pembeli BKP/Penerima JKP</p>
+								<p style="margin: 0;">sebagai bukti Pajak Masukan</p>
+								<p style="margin: 0;">Lembar ke 2 : Untuk Penjual BKP/Pemberi JKP</p>
+								<p style="margin: 0;">sebagai bukti Pajak Keluaran</p>
+							</div>
+
+							<!-- Title -->
+							<h2 style="text-align: center; font-weight: bold; margin-bottom: 20px;">
+								<t t-esc="o.get_faktur_pajak_name()"/>
+							</h2>
+
+							<!-- Kode dan Nomor Seri -->
+							<table class="table table-bordered" style="width: 100%; margin-bottom: 5px;">
+								<tr>
+									<td style="padding: 5px;">
+										<strong>Kode dan Nomor Seri Faktur Pajak : </strong>
+										<t t-esc="o.transaction_code or ''"/>.<t t-esc="o.name"/>
+									</td>
+								</tr>
+							</table>
+
+							<!-- Pengusaha Kena Pajak -->
+							<table class="table table-bordered" style="width: 100%; margin-bottom: 5px;">
+								<tr>
+									<td style="padding: 5px;">
+										<strong>Pengusaha Kena Pajak</strong>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 5px;">
+										<table style="width: 100%;">
+											<tr>
+												<td style="width: 80px;">Nama</td>
+												<td style="width: 20px;">:</td>
+												<td><t t-esc="o.company_id.name or ''"/></td>
+											</tr>
+											<tr>
+												<td>Alamat</td>
+												<td>:</td>
+												<td>
+													<t t-esc="o.company_id.partner_id.street or ''"/>
+													<t t-if="o.company_id.partner_id.city"> - <t t-esc="o.company_id.partner_id.city"/></t>
+												</td>
+											</tr>
+											<tr>
+												<td>NPWP</td>
+												<td>:</td>
+												<td><t t-esc="o.company_id.partner_id.vat or ''"/></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+
+							<!-- Pembeli Barang Kena Pajak -->
+							<table class="table table-bordered" style="width: 100%; margin-bottom: 5px;">
+								<tr>
+									<td style="padding: 5px;">
+										<strong>Pembeli Barang Kena Pajak / Penerima Jasa Kena Pajak</strong>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 5px;">
+										<table style="width: 100%;">
+											<tr>
+												<td style="width: 80px;">Nama</td>
+												<td style="width: 20px;">:</td>
+												<td><t t-esc="o.partner_id.name or ''"/></td>
+											</tr>
+											<tr>
+												<td>Alamat</td>
+												<td>:</td>
+												<td>
+													<t t-esc="o.partner_id.street or ''"/>
+													<t t-if="o.partner_id.city"> - <t t-esc="o.partner_id.city"/></t>
+												</td>
+											</tr>
+											<tr>
+												<td>NPWP</td>
+												<td>:</td>
+												<td><t t-esc="o.partner_id.vat or ''"/></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+
+							<!-- Detail Barang/Jasa -->
+							<table class="table table-bordered" style="width: 100%; margin-bottom: 5px;">
+								<thead>
+									<tr>
+										<th style="width: 50px; text-align: center; padding: 5px;">No Urut</th>
+										<th style="text-align: center; padding: 5px;">Nama Barang Kena Pajak / Jasa Kena Pajak</th>
+										<th style="width: 180px; text-align: center; padding: 5px;">Harga Jual/Penggantian/Uang Muka/Termin (Rp)</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr style="height: 100px; vertical-align: top;">
+										<td style="text-align: center; padding: 5px;">1</td>
+										<td style="padding: 5px;">
+											<t t-esc="o.get_remark_for_report()"/>
+										</td>
+										<td style="text-align: right; padding: 5px;" class="text-end">
+											<t t-esc="'{:,.2f}'.format(o.untaxed_amount)"/>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+
+							<!-- Summary -->
+							<table class="table table-bordered" style="width: 100%; margin-bottom: 5px;">
+								<tr>
+									<td style="padding: 5px;">Harga Jual/Penggantian/Uang Muka/Termin *)</td>
+									<td style="width: 180px; text-align: right; padding: 5px;" class="text-end">
+										<t t-esc="'{:,.2f}'.format(o.untaxed_amount)"/>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 5px;">Dikurangi Potongan Harga</td>
+									<td style="text-align: right; padding: 5px;">0</td>
+								</tr>
+								<tr>
+									<td style="padding: 5px;">Dikurangi Uang Muka yang telah diterima</td>
+									<td style="text-align: right; padding: 5px;">0</td>
+								</tr>
+								<tr>
+									<td style="padding: 5px;"><strong>DPP</strong></td>
+									<td style="text-align: right; padding: 5px;" class="text-end">
+										<strong><t t-esc="'{:,.2f}'.format(o.untaxed_amount)"/></strong>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 5px;"><strong>PPN</strong></td>
+									<td style="text-align: right; padding: 5px;" class="text-end">
+										<strong><t t-esc="'{:,.2f}'.format(o.tax_amount)"/></strong>
+									</td>
+								</tr>
+							</table>
+
+							<!-- PPnBM Section -->
+							<table class="table table-bordered" style="width: 100%; margin-bottom: 20px;">
+								<tr>
+									<td style="padding: 5px;">
+										<strong>Pajak Penjualan Atas Barang Mewah</strong>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 10px;">
+										<table class="table table-bordered" style="width: 50%;">
+											<thead>
+												<tr>
+													<th style="text-align: center;">Tarif</th>
+													<th style="text-align: center;">DPP</th>
+													<th style="text-align: center;">PPnBM</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>.............. %</td>
+													<td>Rp .............</td>
+													<td>Rp .........................</td>
+												</tr>
+											</tbody>
+										</table>
+										<p style="margin-top: 10px;"><strong>Jumlah:</strong> Rp .........................</p>
+									</td>
+								</tr>
+							</table>
+
+							<!-- Footer Note -->
+							<p style="font-size: 9pt;">*) Coret yang tidak perlu</p>
+
+							<!-- Signature -->
+							<div style="float: right; width: 250px; text-align: center; margin-top: 20px;">
+								<p style="margin: 0;">
+									<t t-esc="o.company_id.city or 'Jakarta'"/>, tgl ...........................
+								</p>
+								<br/><br/><br/>
+								<p style="margin: 0;">.................................</p>
+								<table style="width: 100%;">
+									<tr>
+										<td style="text-align: center;">Nama</td>
+										<td style="text-align: left;">
+											<t t-esc="o.signature_id.name or ''"/>
+										</td>
+									</tr>
+								</table>
+							</div>
+
+							<div style="clear: both;"/>
+						</div>
+					</t>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>

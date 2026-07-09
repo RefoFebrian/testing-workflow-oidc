@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_lead_crm,tw_lead_crm.tw_lead_crm,model_tw_lead_crm,base.group_user,1,0,0,0
+access_tw_lead_crm_matrix_assignment,tw_lead_crm.tw_lead_crm_matrix_assignment,model_tw_lead_crm_matrix_assignment,base.group_user,1,0,0,0
+access_tw_lead_crm_matrix_assignment_line,tw_lead_crm.tw_lead_crm_matrix_assignment_line,model_tw_lead_crm_matrix_assignment_line,base.group_user,1,0,0,0
+access_tw_lead_crm_report,tw_lead_crm.tw_lead_crm_report,model_tw_lead_crm_report,base.group_user,1,0,0,0

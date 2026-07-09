@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- List View -->
+        <record id="tw_sp_digital_target_list_view" model="ir.ui.view">
+            <field name="name">tw.sp.digital.target.list</field>
+            <field name="model">tw.sp.digital.target</field>
+            <field name="type">list</field>
+            <field name="arch" type="xml">
+                <list string="Sp Digital Target">
+                    <field name="company_id"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="tw_sp_digital_target_form_view" model="ir.ui.view">
+            <field name="name">tw.sp.digital.target.form</field>
+            <field name="model">tw.sp.digital.target</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Sp Digital">
+                    <header>
+					</header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                        </div> 
+                        <div class="oe_title">
+                            <label for="company_id" class="oe_edit_only" string=" "/>
+                            <h1><field name="company_id" placeholder="Branch" required="1" options="{'no_open': True, 'no_create': True}"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="line_ids" string="Target">
+                                <field name="line_ids" readonly="0">
+                                    <list editable="bottom">
+                                        <field name="job_id" required="1" options="{'no_open': True, 'no_create': True}"/>
+                                        <field name="qty" required="1"/>
+                                        <field name="sp_digital_target_id" invisible="1"/>
+                                    </list>
+                                    <form>
+                                        <sheet>
+                                            <group colspan="4" col="4">
+                                                <field name="job_id"/>
+                                                <field name="qty"/>
+                                                <field name="sp_digital_target_id" invisible="1"/>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Audit Trail" invisible="create_uid == False">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"/>
+                                        <field name="create_date" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1"/>
+                                        <field name="write_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="tw_sp_digital_target_search_view" model="ir.ui.view">
+            <field name="name">tw.sp.digital.target.search</field>
+            <field name="model">tw.sp.digital.target</field>
+            <field name="arch" type="xml">
+                <search string="Sp Digital Target">
+                    <field name="company_id" select="True"/>
+                    <group string="Group By..">
+                        <filter string="Branch" domain="[]" name="group_by_company_id" context="{'group_by': 'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action View -->
+        <record id="tw_sp_digital_target_action" model="ir.actions.server">
+            <field name="name">Master Target SP Digital</field>
+            <field name="model_id" ref="tw_sp_digital.model_tw_sp_digital_target"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.sp.digital.target'].action_sp_digital_target_tree()
+            </field>
+        </record>
+        
+    </data>
+</odoo>

@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+        <record id="tw_disbursement_account_payment_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.disbursement.account.payment.inherit.view.form</field>
+            <field name="model">tw.account.payment</field>
+            <field name="inherit_id" ref="tw_payment.tw_account_payment_form_view"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="journal_type" invisible="1"/>
+                </field>
+                <xpath expr="//notebook[2]/page[@name='details']" position="after">                  
+                    <page name="disbursement" string="Disbursement EDC" invisible="journal_type != 'edc'">
+                        <group>
+                            <field name="account_number" required="journal_type == 'edc'" readonly="state != 'draft'"/>
+                            <field name="account_holder" required="journal_type == 'edc'" readonly="state != 'draft'"/>
+                            <field name="approval_code" required="journal_type == 'edc'" readonly="state != 'draft'"/>
+                            <field name="percentage" required="journal_type == 'edc'" readonly="state != 'draft'"/>
+                            <field name="amount_edc" required="journal_type == 'edc'" readonly="state != 'draft'"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <record id="tw_disbursement_account_payment_inherit_receive_payment_form_view" model="ir.ui.view">
+            <field name="name">tw.disbursement.receive.payment.form.view</field>
+            <field name="model">tw.account.payment</field>
+            <field name="inherit_id" ref="tw_payment.tw_account_payment_receive_payment_form_view"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="journal_type" invisible="1"/>
+                </field>
+                <xpath expr="//page[@name='receive_detail']" position="after">                  
+                    <page name="disbursement" string="Disbursement EDC" invisible="journal_type != 'edc'">
+                        <group>
+                            <field name="account_number" required="journal_type == 'edc'" readonly="state != 'draft'"/>
+                            <field name="account_holder" required="journal_type == 'edc'" readonly="state != 'draft'"/>
+                            <field name="approval_code" required="journal_type == 'edc'" readonly="state != 'draft'"/>
+                            <field name="percentage" required="journal_type == 'edc'" readonly="state != 'draft'"/>
+                            <field name="amount_edc" required="journal_type == 'edc'" readonly="state != 'draft'"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+  

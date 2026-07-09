@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_tw_account_payment_kwitansi">
+        <t t-set="scale" t-value="0.9"/>
+        <t t-set="size_26" t-value="26 * scale"/>
+        <t t-set="size_24" t-value="24 * scale"/>
+        <t t-set="size_22" t-value="22 * scale"/>
+        <t t-set="size_20" t-value="20 * scale"/>
+        <t t-set="size_18" t-value="18 * scale"/>
+        <t t-set="size_16" t-value="16 * scale"/>
+        <t t-set="size_15" t-value="15 * scale"/>
+        <t t-set="size_14" t-value="14 * scale"/>
+        <t t-set="size_13" t-value="13 * scale"/>
+        <t t-set="size_12" t-value="12 * scale"/>
+        <t t-set="size_11" t-value="11 * scale"/>
+        <t t-set="size_10" t-value="10 * scale"/>
+        <t t-set="size_9" t-value="9 * scale"/>
+        <t t-set="size_8" t-value="8 * scale"/>
+        <t t-set="size_7" t-value="7 * scale"/>
+        <t t-set="size_6" t-value="6 * scale"/>
+        <t t-set="size_5" t-value="5 * scale"/>
+        <t t-set="size_4" t-value="4 * scale"/>
+        <t t-set="size_3" t-value="3 * scale"/>
+        <t t-set="size_2" t-value="2 * scale"/>
+        <t t-set="size_1" t-value="1 * scale"/>
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <table width="100%" class="table table-borderless" t-attf-style="font-size: {{size_14}}px;">
+                        <tr>
+                            <td width="77%"></td>
+                            <td width="23%" style="text-align:right;">
+                                <b><span t-field="doc.company_id"/></b><br/>
+                                <span t-field="doc.company_id.street"/><br/>
+                                <span t-field="doc.company_id.state_id.name"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table table-borderless" width="100%" t-attf-style="font-size: {{size_14}}px;">
+                        <tr>
+                            <td width="26%" style="padding: 0px; margin: 0px;">No Transaksi</td>
+                            <td style="padding: 0px; margin: 0px;">:</td>
+                            <td style="padding: 0px; margin: 0px;"><span t-esc="doc.name"/></td>
+                        </tr>
+                        <tr>
+                            <td width="26%" style="padding: 0px; margin: 0px;">No Kwitansi</td>
+                            <td style="padding: 0px; margin: 0px;">:</td>
+                            <td style="padding: 0px; margin: 0px;"><span t-esc="get_reference_transaction(doc.id, 'kwitansi')"/></td>
+                        </tr>
+                        <tr>
+                            <td width="26%" style="padding: 0px; margin: 0px;">Sudah terima dari</td>
+                            <td style="padding: 0px; margin: 0px;">:</td>
+                            <td style="padding: 0px; margin: 0px;"><span t-esc="doc.partner_id.name"/></td>
+                        </tr>
+                        <tr>
+                            <td width="26%" style="padding: 0px; margin: 0px;">Banyaknya uang</td>
+                            <td style="padding: 0px; margin: 0px;">:</td>
+                            <td style="padding: 0px; margin: 0px;" class="text-end">
+                                <span>Rp </span>
+                                <span t-esc="'{0:,.2f}'.format(doc.amount).replace(',', '.')"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="26%" style="padding: 0px; margin: 0px;">Terbilang</td>
+                            <td style="padding: 0px; margin: 0px;">:</td>
+                            <td style="padding: 0px; margin: 0px;" class="text-end">## <span t-esc="terbilang(doc.amount)"/> ##</td>
+                        </tr>
+                        <tr>
+                            <td width="26%" style="padding: 0px; margin: 0px;">Payment Method</td>
+                            <td style="padding: 0px; margin: 0px;">:</td>
+                            <td style="padding: 0px; margin: 0px;"><span t-esc="doc.journal_id.name"/></td>
+                        </tr>
+                        <tr>
+                            <td width="26%" style="padding: 0px; margin: 0px;">Untuk pembayaran</td>
+                            <td style="padding: 0px; margin: 0px;">:</td>
+                            <td style="padding: 0px; margin: 0px;"><span t-esc="get_reference_transaction(doc.id, 'reference')"/></td>
+                        </tr>
+                        <tr><td colspan="4" style="padding-top:18px"><span t-esc="doc.company_id.state_id.name" /></td></tr>
+                        <tr><td colspan="4" style="padding-bottom:38px"><span t-esc="doc.date.strftime('%d-%m-%Y') if doc.date else ''" /></td></tr>
+                        <tr><td colspan="4"><span t-esc="doc.create_uid.name" />, <span t-esc="get_local_time()" /></td></tr>
+                        <tr><td colspan="4">Putih:Konsumen; Kuning:Finance; Hijau:Accounting; Biru:Finance Company (Leasing); Merah:Kasir</td></tr>
+                        <tr><td colspan="4">Cetakan ke: &#160;<span t-esc="print_counter(doc.id)"/></td></tr>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

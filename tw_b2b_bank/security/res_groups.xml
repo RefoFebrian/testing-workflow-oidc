@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+    <!-- TW API URL Group Read -->
+        <record id="group_tw_api_url_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW API URL Read</field>
+        </record>
+        <record id="access_tw_api_url_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_api_url"/>
+            <field name="name">tw_api_url read</field>
+            <field name="group_id" ref="group_tw_api_url_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- TW API URL Group Update -->
+        <record id="group_tw_api_url_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW API URL Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_api_url_read'))]"/>
+        </record>
+        <record id="access_tw_api_url_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_api_url"/>
+            <field name="name">tw_api_url update</field>
+            <field name="group_id" ref="group_tw_api_url_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- TW API URL Group Delete -->
+        <record id="group_tw_api_url_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW API URL Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_api_url_read'))]"/>
+        </record>
+        <record id="access_tw_api_url_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_api_url"/>
+            <field name="name">tw_api_url delete</field>
+            <field name="group_id" ref="group_tw_api_url_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    <!-- TW API Schedule Group Read -->
+        <record id="group_tw_api_schedule_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW API Schedule Read</field>
+        </record>
+        <record id="access_tw_api_schedule_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_api_schedule"/>
+            <field name="name">tw_api_schedule read</field>
+            <field name="group_id" ref="group_tw_api_schedule_read"/>
+            <field name="perm_read">1</field>
+        </record>
+        <record id="access_tw_api_schedule_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_api_schedule_line"/>
+            <field name="name">tw_api_schedule_line read</field>
+            <field name="group_id" ref="group_tw_api_schedule_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- TW API Schedule Group Update -->
+        <record id="group_tw_api_schedule_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW API Schedule Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_api_schedule_read'))]"/>
+        </record>
+        <record id="access_tw_api_schedule_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_api_schedule"/>
+            <field name="name">tw_api_schedule update</field>
+            <field name="group_id" ref="group_tw_api_schedule_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        <record id="access_tw_api_schedule_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_api_schedule_line"/>
+            <field name="name">tw_api_schedule_line update</field>
+            <field name="group_id" ref="group_tw_api_schedule_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- TW API Schedule Group Delete -->
+        <record id="group_tw_api_schedule_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW API Schedule Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_api_schedule_read'))]"/>
+        </record>
+        <record id="access_tw_api_schedule_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_api_schedule"/>
+            <field name="name">tw_api_schedule delete</field>
+            <field name="group_id" ref="group_tw_api_schedule_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+        <record id="access_tw_api_schedule_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_api_schedule_line"/>
+            <field name="name">tw_api_schedule_line delete</field>
+            <field name="group_id" ref="group_tw_api_schedule_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_tw_api_url_read')),
+                (4,ref('group_tw_api_url_update')),
+                (4,ref('group_tw_api_url_delete')),
+                (4,ref('group_tw_api_schedule_read')),
+                (4,ref('group_tw_api_schedule_update')),
+                (4,ref('group_tw_api_schedule_delete')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

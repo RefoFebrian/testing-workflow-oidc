@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_source_payment_leasing" model="tw.selection">
+            <field name="name">Leasing</field>
+            <field name="value">Leasing</field> 
+	    	<field name="type">SumberPembayaranBTL</field>
+        </record>
+        <record id="tw_source_payment_opex" model="tw.selection">
+            <field name="name">Opex</field>
+            <field name="value">Opex</field> 
+	    	<field name="type">SumberPembayaranBTL</field>
+        </record>
+    </data>
+</odoo>

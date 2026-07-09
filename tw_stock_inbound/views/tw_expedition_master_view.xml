@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+         <record model="ir.ui.view" id="tw_expedition_inherit_partner_tree">
+            <field name="name">tw.stock.inbound</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <list string="Expedition">
+                    <field name="code"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_tw_partner_master_expedition">
+            <field name="name">Expedition</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">kanban,list,form,activity</field>
+            <field name="search_view_id" ref="tw_partner.view_tw_all_partner_inherit_filter"/>
+            <field name="domain">[('company_type','=','company'),('category_id.name','=','Expedition')]</field>
+            <field name="context" eval="{
+                'form_type': 'Expedition',
+                'is_readonly': True,
+                'default_company_type': 'company',
+                'default_category_id': [ref('tw_stock_inbound.contact_tags_expedition')]
+            }" />
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                  Add a new Expedition
+                </p><p>
+                  TEDS 2.0 helps you easily track all activities related to a Expedition's Data
+                </p>
+            </field>
+        </record>
+        
+        <record id="view_partner_expedition_pricelist" model="ir.ui.view">
+            <field name="name">res.partner.expedition.pricelist</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="tw_partner.tw_partner_contact_form_view"/>
+            <field name="priority" eval="50"/>
+            <field name="arch" type="xml">
+                <!-- Hide the original property_product_pricelist for expedition partners -->
+                <field name="property_product_pricelist" position="attributes">
+                    <attribute name="invisible">is_expedition</attribute>
+                </field>
+            </field>
+        </record>
+
+
+        <record id="view_partner_expedition_pricelist_group" model="ir.ui.view">
+            <field name="name">res.partner.expedition.pricelist.group</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="tw_partner.tw_partner_contact_form_view"/>
+            <field name="priority" eval="55"/>
+            <field name="arch" type="xml">
+                <!-- Add pricelist expedition group after tax_info group (after alamat PKP), only visible for expedition partners -->
+                <group name="tax_info" position="after">
+                    <group name="pricelist_expedition" string="Pricelist Ekspedisi" invisible="not is_expedition">
+                        <field name="pricelist_expedition_unit_id"
+                               string="Pricelist Unit"
+                               invisible="not is_expedition"
+                               required="is_expedition"
+                               domain="[('type', '=', 'expedition')]"
+                               options="{'no_open': True, 'no_create': True}"/>
+                        <field name="pricelist_expedition_sparepart_id"
+                               string="Pricelist Sparepart"
+                               invisible="not is_expedition"
+                               required="is_expedition"
+                               domain="[('type', '=', 'expedition')]"
+                               options="{'no_open': True, 'no_create': True}"/>
+                    </group>
+                </group>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_tw_expedition_inherit_partner_list_view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_expedition_inherit_partner_tree"/>
+            <field name="act_window_id" ref="action_tw_partner_master_expedition"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_tw_expedition_inherit_partner_form_view">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_partner.tw_partner_contact_form_view"/>
+            <field name="act_window_id" ref="action_tw_partner_master_expedition"/>
+        </record>
+
+         <record model="ir.actions.act_window.view" id="action_tw_expedition_inherit_partner_view_kanban">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="base.res_partner_kanban_view"/>
+            <field name="act_window_id" ref="action_tw_partner_master_expedition"/>
+        </record>
+
+</odoo>

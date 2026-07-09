@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+    <record id="view_report_workshop_wizard" model="ir.ui.view">
+		<field name="name">Print Workshop</field>
+		<field name="model">tw.report.workshop.wizard</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+	        <form string="Laporan Workshop">
+	        	<group>
+					<group>
+						<field name="options"/>
+						<field name="division"/>
+						<field name="state" invisible="options != 'detail'"/>
+					</group>
+					<group>
+						<label for="start_date" string="Date"/>
+						<div>
+							<field name="start_date" required="1" class="oe_inline"/> - <field name="end_date" required="1" class="oe_inline"/>
+						</div>
+						<field name="product_ids"
+							widget="many2many_tags"
+							options="{'no_open':True,'no_create_edit':True}"
+							domain="[('categ_id', 'in', available_categ_ids)]"
+						/>
+						<field name="available_categ_ids" invisible="1"/>
+					</group>
+	          	</group>
+	          	
+				<notebook colspan="5">
+		      		<page string="Branch">
+						<field name="company_ids" colspan="4" nolabel="1" options="{'no_open':True,'no_create_edit':True}"/>
+		      		</page>
+		           	<page string="Customers">
+		          		<field name="partner_ids" colspan="4" nolabel="1" options="{'no_open':True,'no_create_edit':True}"/>
+		          	</page>
+	        	</notebook>
+                <footer>
+                    <button name="excel_report" string="Export Report" type="object" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+	          	
+	        </form>
+    	</field>
+    </record>
+
+    <record id="action_report_workshop_wizard" model="ir.actions.act_window">
+		<field name="name">Laporan Workshop</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">tw.report.workshop.wizard</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_report_workshop_wizard"/>
+		<field name="target">new</field>
+    </record>
+
+	</data>
+</odoo>

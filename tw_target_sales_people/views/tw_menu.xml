@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="submenu_tw_master_target_sales_people" name="Target Sales" parent="tw_menu.submenu_tw_miscellaneous" sequence="100"/>
+        
+        <!-- SUBMENU -->
+        <menuitem id="submenu_tw_master_target" name="Target" parent="submenu_tw_master_target_sales_people" sequence="01"/>
+        <menuitem id="submenu_tw_master_upload" name="Upload" parent="submenu_tw_master_target_sales_people" sequence="02"/>
+
+        <menuitem 
+            id="menu_tw_master_target" 
+            action="action_tw_master_target" 
+            parent="submenu_tw_master_target" 
+            sequence="01" 
+            groups="tw_target_sales_people.group_tw_master_target_read"
+        />
+
+        <menuitem 
+            id="submenu_tw_target_sales_people" 
+            action="action_tw_target_sales_people" 
+            name="Target Sales People" 
+            parent="submenu_tw_master_target" 
+            sequence="02"
+            groups="tw_target_sales_people.group_tw_target_sales_people_read"
+        />
+
+        <menuitem 
+            id="submenu_tw_target_daily_sales" 
+            action="action_tw_target_daily_sales" 
+            name="Target Daily Sales" 
+            parent="submenu_tw_master_target" 
+            sequence="03"
+            groups="tw_target_sales_people.group_tw_target_daily_sales_read"
+        />
+
+        <menuitem 
+            id="submenu_tw_upload_target_sales_people" 
+            action="action_tw_upload_target_sales_people_wizard" 
+            name="Upload Target Sales People" 
+            parent="submenu_tw_master_upload" 
+            sequence="01"
+            groups="tw_target_sales_people.group_tw_target_sales_people_read"
+        />
+
+        <menuitem 
+            id="submenu_tw_upload_target_daily_sales" 
+            action="action_tw_upload_target_daily_sales_wizard" 
+            name="Upload Target Daily Sales" 
+            parent="submenu_tw_master_upload" 
+            sequence="02"
+            groups="tw_target_sales_people.group_tw_target_daily_sales_read"
+        />
+        
+    </data>
+</odoo>

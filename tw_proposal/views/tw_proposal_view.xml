@@ -1,0 +1,263 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+	<data>
+    <!-- Reject budget proposal -->
+        <record id="view_tw_proposal_budget_reject_form" model="ir.ui.view">
+            <field name="name">tw.proposal.budget.reject.form.view</field>
+            <field name="model">tw.proposal.budget.reject</field>
+            <field name="arch" type="xml">
+                <form string="Alasan Reject">
+                    <group>
+                        <field name="proposal_id" invisible="1"/>
+                        <field name="reject_reason" required="1"/>
+                    </group>
+                    <footer>
+                        <button name="action_reject" string="Reject" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Discard" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    <!-- Proposal -->
+        <record id="view_tw_proposal_list" model="ir.ui.view">
+            <field name="name">tw.proposal.list</field>
+            <field name="model">tw.proposal</field>
+            <field name="arch" type="xml">
+            	<list string="Proposal" default_order="id desc">
+            		<field name="name"/>
+                    <field name="department_id"/>
+                    <field name="amount_total"/>
+                    <field name="amount_paid"/>
+                    <field name="budget_state"/>
+                    <field name="date"/>
+                    <field name="state" widget="badge" decoration-info="state in ('draft','cancel','rejected')" decoration-warning="state not in ('draft','canceled','rejected','done')" decoration-success="state == 'done'"/>
+            	</list>
+            </field>
+        </record>
+        
+        <record id="view_tw_proposal_form" model="ir.ui.view">
+            <field name="name">tw.proposal.form</field>
+            <field name="model">tw.proposal</field>
+            <field name="arch" type="xml">
+            	<form string="Proposal">
+            		<header>
+                        <button name="action_print_proposal" string="Print" type="object" class="oe_highlight" invisible="state != 'done'" groups="tw_proposal.group_tw_button_print_proposal"/>
+                        <button name="action_done" string="Done" type="object" class="oe_highlight" invisible="1"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done" readonly="1"/>
+                    </header>
+            		<sheet>
+                        
+                        <div class="oe_title">
+                            <h1 invisible="state != 'draft'"><span>New Proposal</span></h1>
+                            <h1 invisible="state == 'draft'"><field name="name" readonly="1"/></h1>
+                        </div>
+
+						<group>
+                            <group>
+                                <field name="company_id" required="1" readonly="state != 'draft'" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="event" required="1" readonly="state != 'draft'"/>
+                                <field name="code_budget" required="1" readonly="state != 'draft'"/>
+                                <field name="type_input_proposal" required="1" readonly="state != 'draft'"/>
+                                <field name="amount_approved" readonly="1" invisible="amount_approved &lt;= 100"/>
+                                <field name="is_print_prop_ok" invisible="1"/>
+                                <field name="is_coo" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="division" required="1" readonly="state != 'draft'"/>
+                                <field name="date" readonly="1"/>
+                                <field name="pic_id" required="1" readonly="state != 'draft'" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="department_id" force_save="1" readonly="1" required="1" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="category" required="1" readonly="state != 'draft'"/>
+                                <field name="budget_state" readonly="1" invisible="state == 'draft'"/>
+                                <field name="is_deviation" readonly="not is_coo or (state != 'rfa' and is_coo)" invisible="amount_total &lt;= 10000000"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="background" readonly="state != 'draft'" invisible="type_input_proposal == 'text'" required="type_input_proposal == 'text_with_image'" colspan="4"/>
+                            <field name="background_text" readonly="state != 'draft'" invisible="type_input_proposal == 'text_with_image'" required="type_input_proposal == 'text'" colspan="4"/>
+                            
+                            <field name="goals" readonly="state != 'draft'" invisible="type_input_proposal == 'text'" required="type_input_proposal == 'text_with_image'" colspan="4"/>
+                            <field name="goals_text" readonly="state != 'draft'" invisible="type_input_proposal == 'text_with_image'" required="type_input_proposal == 'text'" colspan="4"/>
+                            
+                            <field name="what" readonly="state != 'draft'" invisible="type_input_proposal == 'text'" required="type_input_proposal == 'text_with_image'" colspan="4"/>
+                            <field name="what_text" readonly="state != 'draft'" invisible="type_input_proposal == 'text_with_image'" required="type_input_proposal == 'text'" colspan="4"/>
+                            
+                            <field name="how" readonly="state != 'draft'" invisible="type_input_proposal == 'text'" required="type_input_proposal == 'text_with_image'" colspan="4"/>
+                            <field name="how_text" readonly="state != 'draft'" invisible="type_input_proposal == 'text_with_image'" required="type_input_proposal == 'text'" colspan="4"/>
+                        </group>
+                        <notebook>
+                            <page string="Detail">
+                                <field name="line_ids" nolabel="1" readonly="state != 'draft'">
+                                    <list editable="top">
+                                        <field name="description" required="1"/>
+                                        <field name="qty" required="1"/>
+                                        <field name="price_unit" required="1"/>
+                                        <field name="amount_total" force_save="1" string="Total" sum="Total" readonly="1"/>
+                                        <field name="pay_to" required="1"/>
+                                        <field name="cash_remark" required="pay_to == 'pic'" readonly="pay_to == 'vendor'"/>
+                                        <field name="supplier_id" domain="[('category_id.name','in',('Vendor','General Supplier'))]" required="pay_to == 'vendor'" readonly="pay_to == 'pic'" options="{'no_open':True, 'no_create': True}"/>
+                                        <field name="amount_reserved" force_save="1" sum="Total" readonly="1"/>
+                                        <field name="amount_paid" force_save="1" sum="Total" readonly="1"/>
+                                    </list>
+                                    <form>
+                                        <sheet>
+                                            <div class="oe_title">
+                                                <h1>
+                                                    <field name="description" readonly="1"/>
+                                                </h1>
+                                            </div>
+                                            <group>
+                                                <group>
+                                                    <field name="qty" readonly="1" style="width: 100%%"/>
+                                                    <field name="price_unit" readonly="1" style="width: 100%%"/>
+                                                    <field name="amount_total" readonly="1" force_save="1"/>
+                                                    <field name="amount_reserved" readonly="1" force_save="1"/>
+                                                </group>
+                                                <group>
+                                                    <field name="pay_to" readonly="1"/>
+                                                    <field name="cash_remark" readonly="1" invisible="not cash_remark"/>
+                                                    <field name="supplier_id" readonly="1" invisible="not supplier_id" options="{'no_create':True, 'no_open':True}"/>
+                                                    <field name="amount_paid" readonly="1" force_save="1"/>
+                                                </group>
+                                            </group>
+                                            <notebook>
+                                                <page string="Pembayaran">
+                                                    <field name="payment_ids" nolabel="1" readonly="1">
+                                                        <list>
+                                                            <field name="name"/>
+                                                            <field name="supplier_id" options="{'no_create': True, 'no_open': True}"/>
+                                                            <field name="pay_to"/>
+                                                            <field name="amount_paid"/>
+                                                        </list>
+                                                    </field>
+                                                </page>
+                                                <page string="Audit Trail">
+                                                    <group>
+                                                        <group>
+                                                            <field name="create_uid" readonly="1"/>
+                                                            <field name="create_date" readonly="1"/>
+                                                        </group>
+                                                        <group>
+                                                            <field name="write_uid" readonly="1"/>
+                                                            <field name="write_date" readonly="1"/>
+                                                        </group>
+                                                    </group>
+                                                </page>
+                                            </notebook>
+                                        </sheet>
+                                    </form>
+                                </field>
+                                <group>
+                                    <group class="oe_subtotal_footer oe_right">
+                                        <field name="amount_total" readonly="1"/>
+                                        <field name="amount_reserved" readonly="1"/>
+                                        <field name="amount_paid" readonly="1"/>
+                                        <field name="amount_remaining" readonly="1"/>
+                                        <field name="amount_over" readonly="1"/>
+                                    </group>   
+                                </group>
+                            </page>
+                            <page name="sponsor" string="Sponsor">
+                                <field name="sponsor_ids" nolabel="1" readonly="state != 'draft'">
+                                    <list editable="top">
+                                        <field name="supplier_id" required="1" domain="[('category_id.name','in',('Vendor','General Supplier'))]" options="{'no_create': True, 'no_open': True}"/>
+                                        <field name="amount" required="1"/>
+                                    </list>
+                                </field>
+                                <group>
+                                    <group class="oe_subtotal_footer oe_right">
+                                        <field name="amount_total_sponsor" readonly="1" class="oe_subtotal_footer_separator"/>
+                                    </group>   
+                                </group>
+                            </page>
+                            <page string="Schedule">
+                                <field name="schedule_ids" nolabel="1" readonly="state != 'draft'">
+                                    <list editable="top">
+                                        <field name="location" required="1" force_save="1"/>
+                                        <field name="date_start" required="1" force_save="1"/>
+                                        <field name="date_end" required="1" force_save="1"/>
+                                        <field name="day_count" readonly="1" force_save="1"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Lampiran">
+                                <field name="attachment_ids" nolabel="1" readonly="state != 'draft'"/>
+                            </page>
+                            <page string="Pembayaran">
+                                <field name="payment_ids" nolabel="1" readonly="1">
+                                    <list>
+                                        <field name="name"/>
+                                        <field name="payment_name"/>
+                                        <field name="payment_date"/>
+                                        <field name="payment_amount" sum="Total"/>
+                                        <button name="action_open_payment_request" type="object" string="Lihat" icon="fa-eye" groups="tw_proposal.group_tw_button_open_payment_request"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"/>
+                                        <field name="create_date" readonly="1"/>
+                                        <field name="close_uid"/>
+                                        <field name="close_date"/>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1"/>
+                                        <field name="write_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+            		</sheet>
+            	</form>
+            </field>
+        </record>
+        
+        <record id="view_tw_proposal_filter" model="ir.ui.view">
+            <field name="name">tw.proposal.filter</field>
+            <field name="model">tw.proposal</field>
+            <field name="arch" type="xml">
+                <search string="Search Proposal">
+                    <field name="name" string="Nomor Proposal"/>
+                    <field name="company_id" string="Branch"/>
+                    <field name="department_id" string="Departemen"/>
+                    <field name="pic_id" string="PIC"/>
+                    <field name="event" string="Event"/>
+                    <field name="code_budget" string="Code Budget"/>
+                    <field name="background_text" string="Background"/>
+                    <field name="goals_text" string="Tujuan"/>
+                    <field name="what_text" string="What"/>
+                    <field name="how_text" string="How"/>
+                    <field name="line_ids" string="Deskripsi" filter_domain="[('line_ids.description','ilike',self)]" />
+                    <field name="line_ids" string="Keterangan" filter_domain="[('line_ids.cash_remark','ilike',self)]" />
+                    <field name="line_ids" string="Supplier" filter_domain="[('line_ids.supplier_id','ilike',self)]" />
+					<filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                    <filter string="Waiting for Approval" name="rfa" domain="[('state','=','rfa')]"/>
+                    <filter string="Approved" name="approved" domain="[('state','=','approved')]"/>
+                    <filter string="Done" name="done" domain="[('state','=','done')]"/>
+					<group string="Group By" name="groupby">
+                        <filter name="state_groupby" string="Status" context="{'group_by': 'state'}"/>
+                        <filter name="branch_groupby" string="Branch" context="{'group_by': 'company_id'}"/>
+                        <filter name="division_groupby" string="Division" context="{'group_by': 'division'}"/>
+                        <filter name="department_groupby" string="Department" context="{'group_by': 'department_id'}"/>
+                        <filter name="category_groupby" string="Category" context="{'group_by': 'category'}"/>
+                        <filter name="budget_state_groupby" string="Status Budget" context="{'group_by': 'budget_state'}"/>
+                        <filter name="event_groupby" string="Event" context="{'group_by': 'event'}"/>
+                        <filter name="pic_groupby" string="PIC" context="{'group_by': 'pic_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record> 
+        <record id="action_tw_proposal" model="ir.actions.server">
+            <field name="name">Proposal</field>
+            <field name="model_id" ref="tw_proposal.model_tw_proposal"/>
+            <field name="state">code</field>
+			<field name="code">
+                action = env['tw.proposal'].action_proposal_list()
+            </field>
+        </record>    
+    
+    </data>
+</odoo>

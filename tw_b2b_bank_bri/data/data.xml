@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Data Partner BRI -->
+        <record id="res_partner_b2b_bank_rakyat_indonesia" model="res.partner">
+    		<field name="name">PT. Bank Rakyat Indonesia (Persero) Tbk.</field>
+    		<field name="code">BRI</field>
+    		<field name="phone">+621500017</field>
+    		<field name="mobile">+621500017</field>
+    		<field name="is_company">True</field>
+    		<field name="is_bank">True</field>
+            <field name="street">Jl. Jenderal Sudirman Kav.44-46, Jakarta 10210, Indonesia</field>
+    		<field name="email">callbri@bri.co.id</field>
+    		<field name="website">https://bri.co.id/</field>
+            <field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_bank')])]"/>
+        </record>
+
+        <!-- Data User BRI -->
+        <record id="res_users_b2b_bank_rakyat_indonesia" model="res.users">
+    		<field name="name">PT. Bank Rakyat Indonesia (Persero) Tbk.</field>
+    		<field name="partner_id" ref="tw_b2b_bank_bri.res_partner_b2b_bank_rakyat_indonesia"/>
+            <field name="login">BRI</field>
+            <field name="email">callbri@bri.co.id</field>
+        </record>
+        
+    </data>
+</odoo>

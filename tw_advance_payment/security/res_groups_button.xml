@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Button Groups -->
+        <record id="group_tw_advance_payment_confirm" model="res.groups">
+            <field name="category_id" ref="tw_advance_payment.tw_module_category_advance_payment"/>
+            <field name="name">TW Button Advance Payment Confirm</field>
+        </record>
+        
+        <record id="group_tw_advance_payment_validate" model="res.groups">
+            <field name="category_id" ref="tw_advance_payment.tw_module_category_advance_payment"/>
+            <field name="name">TW Button Advance Payment Validate</field>
+        </record>
+        
+        <record id="group_tw_advance_payment_view_payment" model="res.groups">
+           <field name="category_id" ref="tw_advance_payment.tw_module_category_advance_payment"/>
+           <field name="name">TW Button Advance Payment View Payment</field> 
+        </record>
+    </data>
+    <data>
+        <!-- Add all button groups to System Admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_advance_payment_confirm')),
+                (4, ref('group_tw_advance_payment_validate')),
+                (4, ref('group_tw_advance_payment_view_payment')),
+            ]" />
+        </record>
+    </data>
+</odoo>

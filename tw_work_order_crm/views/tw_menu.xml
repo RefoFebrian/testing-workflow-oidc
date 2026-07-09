@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="menuitem_tw_selection_hubungan_dengan_pemilik"
+        name="Hubungan Dengan Pemilik"
+        parent="tw_selection.submenu_tw_selection"
+        action="tw_selection_hubungan_dengan_pemilik_action"
+        sequence="31"
+        groups="tw_work_order_crm.group_tw_selection_hubungan_dengan_pemilik"
+    />
+
+    <menuitem
+        id="menuitem_tw_selection_alasan_ke_ahass"
+        name="Alasan Ke AHASS"
+        parent="tw_selection.submenu_tw_selection"
+        action="tw_selection_alasan_ke_ahass_action"
+        sequence="32"
+        groups="tw_work_order_crm.group_tw_selection_alasan_ke_ahass"
+    />
+
+</odoo>

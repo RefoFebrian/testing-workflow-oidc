@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_selection_list_view" model="ir.ui.view">
+            <field name="name">tw.selection.list</field>
+            <field name="model">tw.selection</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+              <list delete="false" create="false" edit="false">
+                <field name="name"/>
+                <field name="value"/>
+                <field name="internal_value" optional="hide"/>
+                <field name="type"/>
+                <field name="active" widget="boolean_toggle"/>			
+                <field name="context" optional="hide"/>
+                <field name="code" readonly="1" force_save="1" optional="hide"/>
+              </list>
+            </field>
+        </record>
+
+        <record id="tw_selection_regular_list_view" model="ir.ui.view">
+            <field name="name">tw.selection.regular.list</field>
+            <field name="model">tw.selection</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+              <list delete="false" create="1" edit="1" editable="top">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="value" string="Code"/>
+                <field name="internal_value" string="Internal Code"/>
+                <field name="active" widget="boolean_toggle"/>			
+                <field name="context" optional="hide"/>
+                <field name="code" readonly="1" force_save="1" optional="hide"/>
+              </list>
+            </field>
+        </record>
+
+        <record id="tw_selection_master_list_view" model="ir.ui.view">
+            <field name="name">tw.selection.list</field>
+            <field name="model">tw.selection</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+              <list delete="false" editable="top">
+                <field name="sequence" widget="handle"/>
+                <field name="name" required="1"/>
+                <field name="value" required="1"/>
+                <field name="internal_value"/>
+                <field name="type" required="1"/>
+                <field name="active" widget="boolean_toggle"/>		
+                <field name="context" optional="hide"/>	
+                <field name="code" readonly="1" force_save="1" optional="hide"/>
+              </list>
+            </field>
+        </record>
+
+        <record id="tw_selection_name_only_list_view" model="ir.ui.view">
+            <field name="name">tw.selection.name.only.list</field>
+            <field name="model">tw.selection</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+              <list delete="false" editable="top">
+                <field name="name" required="1"/>
+                <field name="value" optional="hide"/>
+                <field name="internal_value" optional="hide"/>
+                <field name="type" optional="hide"/>
+                <field name="active" widget="boolean_toggle"/>			
+                <field name="context" optional="hide"/>
+              </list>
+            </field>
+        </record>
+
+        <record id="tw_selection_search_view" model="ir.ui.view">
+            <field name="name">tw.selection.filter</field>
+            <field name="model">tw.selection</field>
+            <field name="arch" type="xml">
+                <search string="Search selection">
+                    <field name="name"/>
+                    <field name="type"/> 
+                    <field name="value"/> 
+                    <field name="internal_value"/>
+                  <filter name="active" string="Active" domain="[('active', '=', True)]"/>
+                    <filter name="inactive" string="Inactive" domain="[('active', '=', False)]"/>
+                    <group string="Group By" name="groupby">
+                        <filter name="type_groupby" string="Type" context="{'group_by':'type'}"/>
+                        <filter name="name_groupby" string="Selection Name" context="{'group_by':'name'}"/>                       	                        	                    
+                    </group>
+                </search>
+            </field>
+        </record>        
+                        
+        <record model="ir.actions.act_window" id="tw_selection_action">
+            <field name="res_model">tw.selection</field>
+            <field name="name">Master Selection</field>
+            <field name="view_mode">list</field>
+            <field name="context">{'search_default_type_groupby':1}</field>
+        </record>
+
+        <record id="tw_selection_action_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_selection_master_list_view"/>
+            <field name="act_window_id" ref="tw_selection_action"/>
+        </record>
+
+        <record id="tw_selection_hobby_action" model="ir.actions.act_window">
+            <field name="name">Hobby</field>
+            <field name="res_model">tw.selection</field>
+            <field name="view_mode">list</field>
+            <field name="context">{'default_type': 'Hobby'}</field>
+            <field name="domain">[('type', '=', 'Hobby')]</field>
+            <field name="view_id" ref="tw_selection.tw_selection_regular_list_view" />
+        </record>
+
+        <record id="tw_selection_motor_utilization_action" model="ir.actions.act_window">
+            <field name="name">Motor Utilization</field>
+            <field name="res_model">tw.selection</field>
+            <field name="view_mode">list</field>
+            <field name="context">{'default_type': 'MotorUtilization'}</field>
+            <field name="domain">[('type', '=', 'MotorUtilization')]</field>
+            <field name="view_id" ref="tw_selection.tw_selection_regular_list_view" />
+        </record>
+        
+        <record id="tw_selection_expense_action" model="ir.actions.act_window">
+            <field name="name">Expense</field>
+            <field name="res_model">tw.selection</field>
+            <field name="view_mode">list</field>
+            <field name="context">{'default_type': 'Expense'}</field>
+            <field name="domain">[('type', '=', 'Expense')]</field>
+            <field name="view_id" ref="tw_selection.tw_selection_regular_list_view" />
+        </record>
+
+        <record id="tw_selection_income_action" model="ir.actions.act_window">
+            <field name="name">Income</field>
+            <field name="res_model">tw.selection</field>
+            <field name="view_mode">list</field>
+            <field name="context">{'default_type': 'Income'}</field>
+            <field name="domain">[('type', '=', 'Income')]</field>
+            <field name="view_id" ref="tw_selection.tw_selection_regular_list_view" />
+        </record>
+        
+        <record id="tw_selection_motor_brand_action" model="ir.actions.act_window">
+            <field name="name">Motor Brand</field>
+            <field name="res_model">tw.selection</field>
+            <field name="view_mode">list</field>
+            <field name="context">{'default_type': 'MotorBrand'}</field>
+            <field name="domain">[('type', '=', 'MotorBrand')]</field>
+            <field name="view_id" ref="tw_selection.tw_selection_regular_list_view" />
+        </record>
+        
+        <record id="tw_selection_motor_type_action" model="ir.actions.act_window">
+            <field name="name">Motor Type</field>
+            <field name="res_model">tw.selection</field>
+            <field name="view_mode">list</field>
+            <field name="context">{'default_type': 'MotorType'}</field>
+            <field name="domain">[('type', '=', 'MotorType')]</field>
+            <field name="view_id" ref="tw_selection.tw_selection_regular_list_view" />
+        </record>
+
+	</data>
+</odoo>

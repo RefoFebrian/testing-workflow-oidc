@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_bank_transfer,tw_bank_transfer.tw_bank_transfer,model_tw_bank_transfer,base.group_user,1,0,0,0
+access_tw_bank_transfer_line,tw_bank_transfer.tw_bank_transfer_line,model_tw_bank_transfer_line,base.group_user,1,0,0,0
+access_tw_bank_transfer_reconcile_line,tw_bank_transfer.tw_bank_transfer_reconcile_line,model_tw_bank_transfer_reconcile_line,base.group_user,1,0,0,0

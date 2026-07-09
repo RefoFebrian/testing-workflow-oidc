@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="segment_cub_low" model="tw.product.segment">
+            <field name="name">CUB LOW</field>
+            <field name="division">Unit</field>
+        </record>
+        <record id="segment_cub_mid" model="tw.product.segment">
+            <field name="name">CUB MID</field>
+            <field name="division">Unit</field>
+        </record>
+        <record id="segment_cub_high" model="tw.product.segment">
+            <field name="name">CUB HIGH</field>
+            <field name="division">Unit</field>
+        </record>
+
+        <record id="segment_at_low" model="tw.product.segment">
+            <field name="name">AT LOW</field>
+            <field name="division">Unit</field>
+        </record>
+        <record id="segment_at_mid" model="tw.product.segment">
+            <field name="name">AT MID</field>
+            <field name="division">Unit</field>
+        </record>
+        <record id="segment_at_high" model="tw.product.segment">
+            <field name="name">AT HIGH</field>
+            <field name="division">Unit</field>
+        </record>
+
+        <record id="segment_at_cbu" model="tw.product.segment">
+            <field name="name">AT CBU</field>
+            <field name="division">Unit</field>
+        </record>
+
+        <record id="segment_sport_low" model="tw.product.segment">
+            <field name="name">SPORT LOW</field>
+            <field name="division">Unit</field>
+        </record>
+        <record id="segment_sport_mid" model="tw.product.segment">
+            <field name="name">SPORT MID</field>
+            <field name="division">Unit</field>
+        </record>
+        <record id="segment_sport_high" model="tw.product.segment">
+            <field name="name">SPORT HIGH</field>
+            <field name="division">Unit</field>
+        </record>
+
+        <record id="segment_sport_cbu" model="tw.product.segment">
+            <field name="name">SPORT CBU</field>
+            <field name="division">Unit</field>
+        </record>
+
+        <record id="segment_kpb1" model="tw.product.segment">
+            <field name="name">KPB1</field>
+            <field name="division">Service</field>
+        </record>
+        <record id="segment_kpb2" model="tw.product.segment">
+            <field name="name">KPB2</field>
+            <field name="division">Service</field>
+        </record>
+        <record id="segment_kpb3" model="tw.product.segment">
+            <field name="name">KPB3</field>
+            <field name="division">Service</field>
+        </record>
+        <record id="segment_kpb4" model="tw.product.segment">
+            <field name="name">KPB4</field>
+            <field name="division">Service</field>
+        </record>
+
+        <record id="segment_cs" model="tw.product.segment">
+            <field name="name">CS</field>
+            <field name="division">Service</field>
+        </record>
+        <record id="segment_ls" model="tw.product.segment">
+            <field name="name">LS</field>
+            <field name="division">Service</field>
+        </record>
+        <record id="segment_or_plus" model="tw.product.segment">
+            <field name="name">OR +</field>
+            <field name="division">Service</field>
+        </record>
+
+        <record id="segment_or" model="tw.product.segment">
+            <field name="name">OR</field>
+            <field name="division">Service</field>
+        </record>
+
+         <record id="segment_lr" model="tw.product.segment">
+            <field name="name">LR</field>
+            <field name="division">Service</field>
+        </record>
+
+         <record id="segment_soh" model="tw.product.segment">
+            <field name="name">SOH</field>
+            <field name="division">Service</field>
+        </record>
+
+        <record id="segment_hr" model="tw.product.segment">
+            <field name="name">HR</field>
+            <field name="division">Service</field>
+        </record>
+
+         <record id="segment_cla" model="tw.product.segment">
+            <field name="name">CLA</field>
+            <field name="division">Service</field>
+        </record>
+
+        <record id="segment_battery" model="tw.product.segment">
+            <field name="name">BATTERY</field>
+            <field name="division">Extras</field>
+        </record>
+
+        <record id="segment_buku_manual" model="tw.product.segment">
+            <field name="name">BUKU MANUAL</field>
+            <field name="division">Extras</field>
+        </record>
+
+        <record id="segment_buku_service" model="tw.product.segment">
+            <field name="name">BUKU SERVICE</field>
+            <field name="division">Extras</field>
+        </record>
+
+        <record id="segment_helm" model="tw.product.segment">
+            <field name="name">HEML</field>
+            <field name="division">Extras</field>
+        </record>
+
+        <record id="segment_spion" model="tw.product.segment">
+            <field name="name">SPION</field>
+            <field name="division">Extras</field>
+        </record>
+
+        <record id="segment_tools" model="tw.product.segment">
+            <field name="name">TOOLS</field>
+            <field name="division">Extras</field>
+        </record>
+   </data>
+</odoo>

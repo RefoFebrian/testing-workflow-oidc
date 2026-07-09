@@ -1,0 +1,280 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+	<data>
+    <!-- Business Trip -->
+        <record id="view_tw_business_trip_list" model="ir.ui.view">
+            <field name="name">tw.business.trip.list</field>
+            <field name="model">tw.business.trip</field>
+            <field name="arch" type="xml">
+            	<list string="Perjalanan Dinas" default_order="id desc">
+            		<field name="name"/>
+                    <field name="pic_id"/>
+                    <field name="is_bs"/>
+                    <field name="is_domestic"/>
+                    <field name="objective"/>
+                    <field name="date"/>
+                    <field name="state" widget="badge" decoration-info="state in ('draft','revisi','reject')" decoration-warning="state not in ('draft','revisi','reject','done')" decoration-success="state == 'done'"/>
+            	</list>
+            </field>
+        </record>
+        
+        <record id="view_tw_business_trip_form" model="ir.ui.view">
+            <field name="name">tw.business.trip.form</field>
+            <field name="model">tw.business.trip</field>
+            <field name="arch" type="xml">
+            	<form string="Perjalanan Dinas">
+            		<header>
+                        <button name="action_departed" string="BERANGKAT" type="object" invisible="not ((state == 'approved' and is_bs == 'tidak' and is_airplane == 'tidak') or (state == 'advance_payment' and state_advance_payment == 'confirm' and is_bs == 'ya'))" class="oe_highlight"/>
+                        <button name="action_arrived" string="KEMBALI" type="object" invisible="state != 'departed'" class="oe_highlight"/>
+                        <button name="action_upload_ticket" string="Beli Tiket" type="object" invisible="state != 'approved' or is_airplane != 'ya'" class="oe_highlight" groups="tw_business_trip.group_button_upload_flight_ticket_business_trip"/>
+                        <button name="action_upload_flight_ticket_form" string="Upload Tiket Pesawat" type="object" invisible="state not in ('upload_ticket','selesai_upload_ticket','departed') or is_airplane != 'ya'" class="oe_highlight" groups="tw_business_trip.group_button_upload_flight_ticket_business_trip"/>
+                        <button name="action_create_payment_request" string="Create Payment Request" invisible="state != 'arrived' or is_bs == 'ya'" type="object" class="oe_highlight" confirm="Pastikan sudah menginputkan data aktual" groups="tw_business_trip.group_button_create_payment_request_business_trip"/>
+                        <button name="action_create_supplier_payment" string="Create Supplier Payment" invisible="state != 'payment_request' or is_bs == 'ya' or state_payment_request != 'paid'" type="object" class="oe_highlight" groups="tw_business_trip.group_button_create_supplier_payment_business_trip"/>
+                        <button name="action_create_advance_payment" string="Create Advance Payment" invisible="not (is_bs == 'ya' and ((is_airplane == 'ya' and state == 'selesai_upload_ticket') or (is_airplane == 'tidak' and state == 'approved')))" type="object" class="oe_highlight" groups="tw_business_trip.group_button_create_advance_payment_business_trip"/>
+                        <button name="action_create_settlement" string="Create Settlement" invisible="state != 'arrived' or is_bs != 'ya'" type="object" class="oe_highlight" groups="tw_business_trip.group_button_create_settlement_business_trip"/>
+                        <button name="action_done" string="Done" type="object" invisible="not ((state == 'supplier_payment' and state_supplier_payment == 'paid' and is_bs == 'tidak') or (state == 'settlement' and state_settlement == 'done' and is_bs == 'ya'))" class="oe_highlight" groups="tw_business_trip.group_button_done_business_trip"/>
+                        <button name="action_revisi_form" string="Revisi" type="object" class="btn-secondary" invisible="state in ('draft','revisi','reject','done')" groups="tw_business_trip.group_button_revisi_business_trip"/>
+                        <button name="action_selesai_revisi" string="Selesai Revisi" type="object" class="btn-secondary" invisible="state != 'revisi'"/>
+                        <button name="action_print_business_trip" string="PRINT" invisible="state in ('draft','revisi','reject','waiting_for_approval')" type="object" class="oe_highlight"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,departed,arrived,done" readonly="1"/>
+                    </header>
+                    <header>
+                        <field name="state_payment_request" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,paid" readonly="1" invisible="state != 'payment_request'"/>
+                        <field name="state_supplier_payment" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,paid" readonly="1" invisible="state != 'supplier_payment'"/>
+                        <field name="state_advance_payment" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,paid" readonly="1" invisible="state != 'advance_payment'"/>
+                        <field name="state_settlement" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,done" readonly="1" invisible="state != 'settlement'"/>
+                    </header>
+            		<sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_payment_request" type="object" class="oe_stat_button" invisible="payment_request_id == False" icon="fa-file-text-o" string="Payment Request" style="padding: 0px 5px; width: 160px !important; font-size: 15px; height: 40px;" groups="tw_business_trip.group_button_view_payment_request_business_trip"/>
+                            <button name="action_view_supplier_payment" type="object" class="oe_stat_button" invisible="supplier_payment_id == False" icon="fa-file-text-o" string="Supplier Payment" style="padding: 0px 5px; width: 160px !important; font-size: 15px; height: 40px;" groups="tw_business_trip.group_button_view_supplier_payment_business_trip"/>
+                            <button name="action_view_advance_payment" type="object" class="oe_stat_button" invisible="advance_payment_id == False" icon="fa-file-text-o" string="Advance Payment" style="padding: 0px 5px; width: 160px !important; font-size: 15px; height: 40px;" groups="tw_business_trip.group_button_view_advance_payment_business_trip"/>
+                            <button name="action_view_settlement" type="object" class="oe_stat_button" invisible="settlement_id == False" icon="fa-file-text-o" string="Settlement" style="padding: 0px 5px; width: 160px !important; font-size: 15px; height: 40px;" groups="tw_business_trip.group_button_view_settlement_business_trip"/>
+                        </div>
+                        <div class="oe_title">
+                            <h1 invisible="name == False"><field name="name" readonly="1"/></h1>
+                        </div>
+						<group>
+                            <group>
+                                <field name="company_id" required="1" readonly="1" force_save="1" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="pic_id" required="1" readonly="1" force_save="1" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="is_bs" required="1" readonly="state not in ('draft','revisi')"/>
+                                <field name="is_airplane" required="1" readonly="state not in ('draft','revisi')"/>
+                                <field name="lumpsum" required="1" class="oe_inline" readonly="state not in ('draft','revisi')"/>
+                                <field name="is_domestic" readonly="state not in ('draft','revisi')"/>
+                                <field name="region" invisible="is_domestic == True" required="is_domestic == False" class="oe_inline"/>
+                                <field name="previous_state" invisible="1"/>
+                                <field name="payment_request_id" invisible="1"/>
+                                <field name="supplier_payment_id" invisible="1"/>
+                                <field name="advance_payment_id" invisible="1"/>
+                                <field name="settlement_id" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="date" readonly="1"/>
+                                <field name="revisi_reason" readonly="1" invisible="revisi_reason == False"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Tujuan &amp; Jadwal Perjalanan">
+                                <span style="color:#026CA1; font-weight:bold">Berangkat - Kembali</span>
+                                <field name="planning_departure_date" class="oe_inline" required="1" readonly="state not in ('draft','revisi')"/>
+                                <field name="actual_departure_date" class="oe_inline" invisible="state not in ('arrived','done') and actual_departure_date == False" readonly="state != 'arrived'" required="state == 'arrived'"/>
+                                <field name="planning_arrival_date" class="oe_inline" required="1" readonly="state not in ('draft','revisi')"/>
+                                <field name="actual_arrival_date" class="oe_inline" invisible="state not in ('arrived','done') and actual_arrival_date == False" readonly="state != 'arrived'" required="state == 'arrived'"/>
+                                <span style="color:#026CA1; font-weight:bold">Tujuan &amp; Keperluan</span>
+                                <field name="objective" required="1" readonly="state not in ('draft','revisi')"/>
+                                <field name="necessary" required="1" readonly="state not in ('draft','revisi')"/>
+                                <field name="filename_upload_objective" invisible="1"/>
+                                <field name="filename_objective" invisible="1"/>
+                                <field name="files_objective" readonly="1" filename="filename_objective" invisible="filename_objective == False"/>
+                                <field name="files_upload_objective" string="File (Jika Ada)" filename="filename_upload_objective" invisible="state not in ('draft','revisi')"/>
+                            </group>
+                            <group string="Biaya Perjalanan Dinas">
+                                <div class="oe_inline">
+                                    <span style="color:#026CA1; font-weight:bold">Uang Makan / Saku</span>
+                                    <span style="margin-left:10px; color:red">
+                                        NOTE!! Plafon <field name="plafon_food_id" nolabel="1" class="oe_inline" readonly="1" options="{'no_create': True, 'no_open': True}"/>
+                                    </span>
+                                </div>
+                                <field name="planning_food_days" string="Hari Planning" class="oe_inline" required="1" readonly="state not in ('draft','revisi')"/>
+                                <field name="actual_food_days" string="Hari Actual " class="oe_inline" readonly="state in ('payment_request','supplier_payment','done')" required="state == 'arrived'" invisible="state not in ('payment_request','supplier_payment', 'arrived', 'done') or (is_bs == 'ya' and state in ('payment_request','supplier_payment'))"/>
+                                <field name="selisih_food_days" string="Selisih Hari" class="oe_inline" readonly="1" invisible="state not in ('payment_request', 'supplier_payment', 'arrived', 'done') or (is_bs == 'ya' and state in ('payment_request','supplier_payment'))"/>
+                                <field name="planning_food_cost" string="Biaya Planning" class="oe_inline" required="1" readonly="lumpsum == False or state not in ('draft','revisi')"/>
+                                <field name="actual_food_cost" string="Biaya Actual" class="oe_inline" readonly="lumpsum == False or state == 'done'" invisible="state not in ('payment_request', 'supplier_payment', 'arrived', 'done') or (is_bs == 'ya' and state in ('payment_request','supplier_payment'))" required="state == 'arrived'"/>
+                                <field name="selisih_food_cost" string="Selisih Biaya" class="oe_inline" readonly="1" invisible="state not in ('payment_request', 'supplier_payment', 'arrived', 'done') or (is_bs == 'ya' and state in ('payment_request','supplier_payment'))"/>
+                                <div class="oe_inline">
+                                    <span style="color:#026CA1; font-weight:bold">Akomodasi / Penginapan</span>
+                                    <span style="margin-left:10px; color:red">
+                                        NOTE!! Plafon <field name="plafon_accommodation_id" nolabel="1" class="oe_inline" readonly="1" options="{'no_create': True, 'no_open': True}"/>
+                                    </span>
+                                </div>
+                                <field name="planning_accommodation_days" string="Malam Planning" class="oe_inline" required="1" readonly="state not in ('draft','revisi')"/>
+                                <field name="actual_accommodation_days" string="Malam Actual" class="oe_inline" readonly="state in ('payment_request', 'supplier_payment','done')" required="state == 'arrived'" invisible="state not in ('payment_request', 'supplier_payment', 'arrived', 'done') or (is_bs == 'ya' and state in ('payment_request','supplier_payment'))"/>
+                                <field name="selisih_accommodation_days" string="Selisih Malam" class="oe_inline" readonly="1" invisible="state not in ('payment_request', 'supplier_payment', 'arrived', 'done') or (is_bs == 'ya' and state in ('payment_request','supplier_payment'))"/>
+                                <field name="planning_accommodation_cost" string="Biaya Planning"  class="oe_inline" readonly="lumpsum == False"/>
+                                <field name="actual_accommodation_cost" string="Biaya Actual " class="oe_inline" readonly="state in ('payment_request', 'supplier_payment','done')" required="state == 'arrived'" invisible="state not in ('payment_request', 'supplier_payment', 'arrived', 'done') or (is_bs == 'ya' and state in ('payment_request','supplier_payment'))"/>
+                                <field name="selisih_accommodation_cost" string="Selisih Biaya " class="oe_inline" readonly="1" invisible="state not in ('payment_request', 'supplier_payment', 'arrived', 'done') or (is_bs == 'ya' and state in ('payment_request','supplier_payment'))"/>
+                                <field name="filename_upload_accommodation" invisible="1"/>
+                                <field name="filename_accommodation" invisible="1"/>
+                                <field name="files_accommodation" readonly="1" filename="filename_accommodation" invisible="filename_accommodation == False"/>
+                                <field name="files_upload_accommodation" filename="filename_upload_accommodation" invisible="state != 'arrived'" required="state == 'arrived' and actual_accommodation_cost > 0 and filename_accommodation == False"/>
+                            </group>
+                        </group>
+                        <group>   
+                            <group string="Pesawat / Airplane" invisible="is_airplane != 'ya'">
+                                <field name="airline_id" string="Maskapai Berangkat" class="oe_inline" required="is_airplane == 'ya'" readonly="state not in ('draft','revisi')" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="scheduled_departure_time" class="oe_inline"  required="is_airplane == 'ya'" readonly="state not in ('draft','revisi')"/>
+                                <field name="airline_return_id" string="Maskapai Kembali" class="oe_inline"  required="is_airplane == 'ya'" readonly="state not in ('draft','revisi')" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="scheduled_return_time" class="oe_inline"  required="is_airplane == 'ya'" readonly="state not in ('draft','revisi')"/>
+                                <field name="filename_upload_flight_departure" invisible="1"/>
+                                <field name="filename_flight_departure" invisible="1"/>
+                                <field name="files_upload_flight_departure" invisible="1" filename="filename_upload_flight_departure"/>
+                                <field name="files_flight_departure" readonly="1" filename="filename_flight_departure" invisible=" filename_flight_departure == False"/>
+                                <field name="ticket_departure_time" class="oe_inline" readonly="1" invisible="ticket_departure_time == False"/>
+                                <field name="filename_upload_flight_return" invisible="1"/>
+                                <field name="filename_flight_return" invisible="1"/>
+                                <field name="files_upload_flight_return" invisible="1" filename="filename_upload_flight_return"/>
+                                <field name="files_flight_return" readonly="1" filename="filename_flight_return" invisible="filename_flight_return == False"/>
+                                <field name="ticket_return_time" class="oe_inline" readonly="1" invisible="ticket_return_time == False"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Transportasi">
+                                <field name="transportation_line_ids" nolabel="1" readonly="state not in ('draft','revisi','arrived')">
+                                    <list editable="top">
+                                        <field name="transportation" options="{'no_open':True, 'no_create': True}"/>
+                                        <field name="planning_cost" readonly="parent.state not in ('draft','revisi')" required="parent.state in ('draft','revisi')"/>
+                                        <field name="actual_cost" readonly="parent.state not in ('arrived','revisi')" required="parent.state in ('arrived','revisi')"/>
+                                        <field name="selisih_cost" readonly="1"/>
+                                        <field name="files_upload" filename="filename_upload" column_invisible="parent.state not in ('draft','revisi','arrived')" readonly="parent.state not in ('arrived','revisi')" required="actual_cost > 0"/>
+                                        <field name="filename_upload" string="" column_invisible="1" force_save="1" />
+                                        <field name="filename" readonly="1" force_save="1" />
+                                        <button name="action_download_file" string="Download" type="object" icon="fa-download" invisible="filename == False"/> 
+                                    </list>
+                                </field>
+                                <group>
+                                    <group class="oe_subtotal_footer oe_right">
+                                        <field name="planning_amount_total" readonly="1"/>
+                                        <field name="actual_amount_total" readonly="1"/>
+                                        <field name="selisih_amount_total" readonly="1"/>
+                                    </group>   
+                                </group>
+                            </page>
+                            <page name="detail_kegiatan" string="Detail Kegiatan" invisible="state not in ('payment_request', 'supplier_payment', 'arrived', 'revisi', 'done')">
+                                <field name="detail_activity_line_ids" nolabel="1" readonly="state not in ('draft','revisi','arrived')">
+                                    <list editable="top">
+                                        <field name="activity_date" required="1"/>
+                                        <field name="activity" required="1"/>
+                                        <field name="description" required="1"/>
+                                        <field name="result" required="1"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"/>
+                                        <field name="create_date" readonly="1"/>
+                                        <field name="rfa_uid"/>
+                                        <field name="rfa_date"/>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1"/>
+                                        <field name="write_date" readonly="1"/>
+                                        <field name="done_uid"/>
+                                        <field name="done_date"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+            		</sheet>
+            	</form>
+            </field>
+        </record>
+
+        <!-- Form Revisi -->
+        <record id="view_tw_business_trip_revisi_wizard_form" model="ir.ui.view" >
+            <field name="name">tw.business.trip.revisi.wizard.form</field>
+            <field name="model">tw.business.trip</field>
+            <field name="priority">150</field>
+            <field name="arch" type="xml">
+            	<form string="Revisi Perjalanan Dinas">
+            		<sheet>
+						<group>
+                            <group>
+                                <field name="revisi_reason" required="1"/>
+                            </group>
+                        </group>
+                        <footer>
+                            <button name="action_revisi" type="object" string="Save" class="oe_highlight"/>
+                            <button special="cancel" type="object" string="Cancel" class="oe_highlight"/>
+                        </footer>
+            		</sheet>
+            	</form>
+            </field>
+        </record>
+
+        <!-- Form Upload Flight Ticket -->
+        <record id="view_tw_business_trip_flight_ticket_wizard_form" model="ir.ui.view" >
+            <field name="name">tw.business.trip.flight.ticket.wizard.form</field>
+            <field name="model">tw.business.trip</field>
+            <field name="priority">150</field>
+            <field name="arch" type="xml">
+            	<form string="Tiket Pesawat Perjalanan Dinas">
+            		<sheet>
+						<group string="Tiket Berangkat">
+                            <field name="state" invisible="1"/>
+                            <field name="filename_upload_flight_departure" invisible="1"/>
+                            <field name="files_upload_flight_departure" filename="filename_upload_flight_departure"/>
+                            <field name="ticket_departure_time" class="oe_inline" required="1"/>
+                        </group>
+						<group string="Tiket kembali">
+                            <field name="filename_upload_flight_return" invisible="1"/>
+                            <field name="files_upload_flight_return" filename="filename_upload_flight_return"/>
+                            <field name="ticket_return_time" required="state == 'departed'" class="oe_inline"/>
+                        </group>
+                        <footer>
+                            <button name="action_save_flight_ticket" type="object" string="Simpan" class="oe_highlight"/>
+                            <button special="cancel" type="object" string="Cancel"/>
+                        </footer>
+            		</sheet>
+            	</form>
+            </field>
+        </record>
+        
+        <record id="view_tw_business_trip_filter" model="ir.ui.view">
+            <field name="name">tw.business.trip.filter</field>
+            <field name="model">tw.business.trip</field>
+            <field name="arch" type="xml">
+                <search string="Search Perjalanan Dinas">
+                    <field name="name" string="Nomor Perjalanan Dinas"/>
+                    <field name="company_id" string="Branch"/>
+                    <field name="pic_id" string="PIC"/>
+                    <field name="objective" string="Tujuan"/>
+                    <field name="necessary" string="Keperluan"/>
+					<filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                    <filter string="Waiting for Approval" name="rfa" domain="[('state','=','waiting_for_approval')]"/>
+                    <filter string="Approved" name="approved" domain="[('state','=','approved')]"/>
+                    <filter string="Done" name="done" domain="[('state','=','done')]"/>
+                    <filter string="Not Done" name="not_done" domain="[('state','!=','done')]"/>
+					<group string="Group By" name="groupby">
+                        <filter name="state_groupby" string="Status" context="{'group_by': 'state'}"/>
+                        <filter name="branch_groupby" string="Branch" context="{'group_by': 'company_id'}"/>
+                        <filter name="pic_groupby" string="PIC" context="{'group_by': 'pic_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record> 
+
+        <record id="action_tw_business_trip" model="ir.actions.server">
+            <field name="name">Perjalanan Dinas</field>
+            <field name="model_id" ref="tw_business_trip.model_tw_business_trip"/>
+            <field name="state">code</field>
+			<field name="code">
+                action=env['tw.business.trip'].action_business_trip_list()
+            </field>
+        </record>
+    
+    </data>
+</odoo>

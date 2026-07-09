@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_dgi_proses_stnk_wizard,access.dgi.proses.stnk.wizard,model_tw_dgi_proses_stnk_wizard,base.group_user,1,1,1,1
+access_dgi_receipt_stnk_wizard,access.dgi.receipt.stnk.wizard,model_tw_dgi_receipt_stnk_wizard,base.group_user,1,1,1,1
+access_dgi_receipt_bpkb_wizard,access.dgi.receipt.bpkb.wizard,model_tw_dgi_receipt_bpkb_wizard,base.group_user,1,1,1,1
+access_dgi_handover_stnk_wizard,access.dgi.handover.stnk.wizard,model_tw_dgi_handover_stnk_wizard,base.group_user,1,1,1,1
+access_dgi_handover_bpkb_wizard,access.dgi.handover.bpkb.wizard,model_tw_dgi_handover_bpkb_wizard,base.group_user,1,1,1,1

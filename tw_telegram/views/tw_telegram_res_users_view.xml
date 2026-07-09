@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="tw_telegram_res_users_form_view" model="ir.ui.view">
+			<field name="name">tw.telegram.res.users.view</field>
+			<field name="model">res.users</field>
+			<field name="inherit_id" ref="base.view_users_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//page[@name='access_rights']" position="after">
+					<page string="Telegram Oauth" name="telegram_oauth">
+						<group>
+							<field name="telegram_user"/>
+							<field name="telegram_chat_id" readonly="1"/>
+							<field name="telegram_is_delete_after_action"/>
+							<field name="telegram_is_send_notif_to_sender"/>
+						</group>
+						<button name="get_user_chat_id" string="Get User Chat ID" type="object" class="oe_highlight"/>
+					</page>
+				</xpath>
+			</field>
+		</record>
+
+		<record id="tw_telegram_res_users_profile_form_view" model="ir.ui.view">
+			<field name="name">tw.telegram.res.users.profile.view</field>
+			<field name="model">res.users</field>
+			<field name="inherit_id" ref="base.view_users_form_simple_modif" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='tz']" position="after">
+					<br/>
+					<br/>
+					<span class="alert alert-info" role="status" invisible="notification_type != 'telegram'">
+						<i class="fa fa-check-circle" title="Telegram Auth" invisible="telegram_chat_id == False"/>
+						<i class="fa fa-warning" title="Warning" invisible="telegram_chat_id != False"/>
+						<span>Telegram Auth</span>
+					</span>
+					<button name="action_generate_chat_id" string="Get User Chat ID" type="object" class="btn btn-info mx-6" invisible="notification_type != 'telegram'"/>
+					<br/>
+					<br/>
+					<field name="telegram_user" readonly="1" invisible="notification_type != 'telegram'"/>
+					<field name="telegram_chat_id" readonly="1" invisible="notification_type != 'telegram'"/>
+					<field name="telegram_is_delete_after_action" invisible="notification_type != 'telegram'"/>
+				</xpath>
+			</field>
+		</record>
+
+		<record id="tw_telegram_res_users_profile_wizard_view" model="ir.ui.view">
+			<field name="name">tw.telegram.res.users.profile.wizard.view</field>
+			<field name="model">res.users</field>
+			<field name="arch" type="xml">
+				<form string="Generate Chat ID">
+					<sheet>
+						<group>
+							<field name="telegram_user" required="1"/>
+							<field name="telegram_is_delete_after_action"/>
+						</group>  
+					</sheet>  
+					<footer>
+						<button name="get_user_chat_id" type="object" string="Generate Chat ID" class="oe_highlight"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+	</data>
+</odoo>

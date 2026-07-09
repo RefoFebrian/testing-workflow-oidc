@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+    <!-- Business Trip -->
+        <!-- Upload Flight Ticket -->
+        <record id="group_button_upload_flight_ticket_business_trip" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Upload Flight Ticket Business Trip</field>
+        </record>
+        <record id="group_button_upload_flight_ticket_business_trip_access" model="ir.model.access">
+            <field name="model_id" ref="model_tw_business_trip" />
+            <field name="name">business_trip_button_upload_flight_ticket_access write</field>
+            <field name="group_id" ref="group_button_upload_flight_ticket_business_trip" />
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Done -->
+        <record id="group_button_done_business_trip" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Done Business Trip</field>
+        </record>
+        <record id="group_button_done_business_trip_access" model="ir.model.access">
+            <field name="model_id" ref="model_tw_business_trip" />
+            <field name="name">business_trip_button_done_access write</field>
+            <field name="group_id" ref="group_button_done_business_trip" />
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Revisi -->
+        <record id="group_button_revisi_business_trip" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Revisi Business Trip</field>
+        </record>
+        <record id="group_button_revisi_business_trip_access" model="ir.model.access">
+            <field name="model_id" ref="model_tw_business_trip" />
+            <field name="name">business_trip_button_revisi_access write</field>
+            <field name="group_id" ref="group_button_revisi_business_trip" />
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- View Payment Request -->
+        <record id="group_button_view_payment_request_business_trip" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">View Payment Request Business Trip</field>
+        </record>
+        <record id="group_button_view_payment_request_business_trip_access" model="ir.model.access">
+            <field name="model_id" ref="model_tw_business_trip" />
+            <field name="name">business_trip_button_view_payment_request_access read</field>
+            <field name="group_id" ref="group_button_view_payment_request_business_trip" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- View Supplier Payment -->
+        <record id="group_button_view_supplier_payment_business_trip" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">View Supplier Payment Business Trip</field>
+        </record>
+        <record id="group_button_view_supplier_payment_business_trip_access" model="ir.model.access">
+            <field name="model_id" ref="model_tw_business_trip" />
+            <field name="name">business_trip_button_view_supplier_payment_access read</field>
+            <field name="group_id" ref="group_button_view_supplier_payment_business_trip" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- View Advance Payment -->
+        <record id="group_button_view_advance_payment_business_trip" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">View Advance Payment Business Trip</field>
+        </record>
+        <record id="group_button_view_advance_payment_business_trip_access" model="ir.model.access">
+            <field name="model_id" ref="model_tw_business_trip" />
+            <field name="name">business_trip_button_view_advance_payment_access read</field>
+            <field name="group_id" ref="group_button_view_advance_payment_business_trip" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- View Settlement -->
+        <record id="group_button_view_settlement_business_trip" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">View Settlement Business Trip</field>
+        </record>
+        <record id="group_button_view_settlement_business_trip_access" model="ir.model.access">
+            <field name="model_id" ref="model_tw_business_trip" />
+            <field name="name">business_trip_button_view_settlement_access read</field>
+            <field name="group_id" ref="group_button_view_settlement_business_trip" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Create Payment Request -->
+        <record id="group_button_create_payment_request_business_trip" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Create Payment Request Business Trip</field>
+        </record>
+        <record id="group_button_create_payment_request_business_trip_access" model="ir.model.access">
+            <field name="model_id" ref="model_tw_business_trip" />
+            <field name="name">business_trip_button_create_payment_request_access write</field>
+            <field name="group_id" ref="group_button_create_payment_request_business_trip" />
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Create Supplier Payment -->
+        <record id="group_button_create_supplier_payment_business_trip" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Create Supplier Payment Business Trip</field>
+        </record>
+        <record id="group_button_create_supplier_payment_business_trip_access" model="ir.model.access">
+            <field name="model_id" ref="model_tw_business_trip" />
+            <field name="name">business_trip_button_create_supplier_payment_access write</field>
+            <field name="group_id" ref="group_button_create_supplier_payment_business_trip" />
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Create Advance Payment -->
+        <record id="group_button_create_advance_payment_business_trip" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Create Advance Payment Business Trip</field>
+        </record>
+        <record id="group_button_create_advance_payment_business_trip_access" model="ir.model.access">
+            <field name="model_id" ref="model_tw_business_trip" />
+            <field name="name">business_trip_button_create_advance_payment_access write</field>
+            <field name="group_id" ref="group_button_create_advance_payment_business_trip" />
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Create Settlement -->
+        <record id="group_button_create_settlement_business_trip" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">Create Settlement Business Trip</field>
+        </record>
+        <record id="group_button_create_settlement_business_trip_access" model="ir.model.access">
+            <field name="model_id" ref="model_tw_business_trip" />
+            <field name="name">business_trip_button_create_settlement_access write</field>
+            <field name="group_id" ref="group_button_create_settlement_business_trip" />
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Include to System Admin -->
+
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_button_upload_flight_ticket_business_trip')),
+                (4,ref('group_button_done_business_trip')),
+                (4,ref('group_button_revisi_business_trip')),
+                (4,ref('group_button_view_payment_request_business_trip')),
+                (4,ref('group_button_view_supplier_payment_business_trip')),
+                (4,ref('group_button_view_advance_payment_business_trip')),
+                (4,ref('group_button_view_settlement_business_trip')),
+                (4,ref('group_button_create_payment_request_business_trip')),
+                (4,ref('group_button_create_supplier_payment_business_trip')),
+                (4,ref('group_button_create_advance_payment_business_trip')),
+                (4,ref('group_button_create_settlement_business_trip')),
+                ]"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="teds_api_popeye_partner_bank_account_inherit_form_view" model="ir.ui.view">
+        <field name="name">teds.api.popeye.partner.bank.account.inherit.form</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="tw_account.view_tw_partner_bank_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[last()]" position="inside">
+                <group>
+                    <field name="flag_check_account" />
+                    <field name="is_match_check_account"  readonly="1"/>
+                    <field name="is_use_account_name_popeye" invisible="not flag_check_account"/>
+                    <field name="remark" invisible="not remark" nolabel="1" style="font-size: 15px; font-weight: bold" readonly="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

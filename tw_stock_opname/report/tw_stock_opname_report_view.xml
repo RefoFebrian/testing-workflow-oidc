@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="view_stock_opname_report_wizard" model="ir.ui.view">
+			<field name="name">tw.stock.opname.report.wizard</field>
+			<field name="model">tw.stock.opname.report</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Laporan Lokasi Stockcard">
+					<group invisible="state_x == 'get'">
+						<field name="division" readonly="1"/>
+						<field name="status" required="1"/>
+						<label for="start_date" string="Date" required="1"/>
+						<div>
+							<field name="start_date" required="1" class="oe_inline"/>
+ s/d <field name="end_date" required="1" class="oe_inline"/>
+						</div>
+					</group>
+					<field invisible="1" name="state_x"/>
+					<newline/>
+					<group col="4" fill="0" invisible="state_x != 'get'">
+						<separator colspan="4" string="Excel Export Generated ..." invisible="state_x == 'choose'"/>
+						<field name="file" invisible="1" width="100"/>
+						<field name="data_x" nolabel="1" invisible="1" width="100" filename="file"/>
+					</group>
+
+					<footer>
+						<button name="excel_laporan" string="Export Data" type="object" class="oe_highlight" invisible="state_x == 'get'"/>
+						<button string="Cancel" special="cancel" class="btn btn-default" invisible="state_x == 'get'"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_stock_opname_report_unit_wizard" model="ir.actions.act_window">
+			<field name="name">Laporan Stock Opname</field>
+			<field name="res_model">tw.stock.opname.report</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_stock_opname_report_wizard"/>
+			<field name="target">new</field>
+			<field name="context">{'default_division': 'Unit'}</field>
+		</record>
+
+		<record id="action_stock_opname_report_sparepart_wizard" model="ir.actions.act_window">
+			<field name="name">Laporan Stock Opname</field>
+			<field name="res_model">tw.stock.opname.report</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_stock_opname_report_wizard"/>
+			<field name="target">new</field>
+			<field name="context">{'default_division': 'Sparepart'}</field>
+		</record>
+
+		<menuitem id="menuitem_tw_stock_opname_report_unit_wizard" parent="tw_menu.submenu_tw_showroom_report" action="action_stock_opname_report_unit_wizard" sequence="4" groups="tw_stock_opname.group_tw_stock_opname_report_unit"/>
+		<menuitem id="menuitem_tw_stock_opname_report_sparepart_wizard" parent="tw_menu.submenu_tw_workshop_report" action="action_stock_opname_report_sparepart_wizard" sequence="4" groups="tw_stock_opname.group_tw_stock_opname_report_sparepart"/>
+
+	</data>
+</odoo>

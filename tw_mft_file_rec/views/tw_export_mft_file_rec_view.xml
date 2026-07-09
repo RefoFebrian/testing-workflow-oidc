@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <!-- Wizard View -->
+        <record id="tw_export_mft_file_rec_wizard_view" model="ir.ui.view">
+            <field name="name">tw.export.mft.file.rec.wizard</field>
+            <field name="model">tw.export.mft.file.rec</field>
+            <field name="arch" type="xml">
+                <form>
+                	<sheet>
+                        <group invisible="state == 'get'">
+                            <group>
+                                <label for="start_date" string="Periode"/>
+                                <div>
+                                    <field name="start_date" required="1" class="oe_inline"/> -
+                                    <field name="end_date" required="1" class="oe_inline"/>
+                                </div>
+                                <div>
+                                    <span style="font-weight: bold; color: #006400;">
+                                        &#160;Tanggal Pengiriman Otomatis selanjutnya
+                                    </span>
+                                    <field name="nextcall_date" readonly="1" force_save="1" nolabel="1"/>
+                                </div>
+                                <field name="is_skip_scheduler"/>
+                            </group>
+                        </group>
+		                <field invisible="1" name="state"/>
+		                <newline/>    
+		                <group col="4" fill="0" invisible="state != 'get'">
+		                    <separator colspan="4" string="Generate Export MFT File REC Success ..." invisible="state == 'choose'"/>
+		                </group>
+		                <footer>
+		                    <button name="action_export" invisible="state == 'get'" string="Export Data" type="object" class="oe_highlight"/>
+		                    <button string="Cancel" invisible="state == 'get'" class="oe_link" special="cancel" />
+		                </footer>
+	                </sheet>
+	            </form>
+            </field>
+        </record>
+
+        <!-- Action View -->
+        <record id="tw_export_mft_file_rec_action" model="ir.actions.server">
+            <field name="name">Export MFT File REC</field>
+            <field name="model_id" ref="tw_mft_file_rec.model_tw_export_mft_file_rec"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.export.mft.file.rec'].action_export_mft_file_rec_tree()
+            </field>
+        </record>
+	     
+	</data>
+</odoo>

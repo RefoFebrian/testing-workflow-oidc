@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="berita_acara_mutasi_asset_print">
+            <t t-set="scale" t-value="1"/>
+            <t t-set="size_26" t-value="26 * scale"/>
+            <t t-set="size_24" t-value="24 * scale"/>
+            <t t-set="size_22" t-value="22 * scale"/>
+            <t t-set="size_20" t-value="20 * scale"/>
+            <t t-set="size_18" t-value="18 * scale"/>
+            <t t-set="size_16" t-value="16 * scale"/>
+            <t t-set="size_15" t-value="15 * scale"/>
+            <t t-set="size_14" t-value="14 * scale"/>
+            <t t-set="size_13" t-value="13 * scale"/>
+            <t t-set="size_12" t-value="12 * scale"/>
+            <t t-set="size_11" t-value="11 * scale"/>
+            <t t-set="size_10" t-value="10 * scale"/>
+            <t t-set="size_9" t-value="9 * scale"/>
+            <t t-set="size_8" t-value="8 * scale"/>
+            <t t-set="size_7" t-value="7 * scale"/>
+            <t t-set="size_6" t-value="6 * scale"/>
+            <t t-set="size_5" t-value="5 * scale"/>
+            <t t-set="size_4" t-value="4 * scale"/>
+            <t t-set="size_3" t-value="3 * scale"/>
+            <t t-set="size_2" t-value="2 * scale"/>
+            <t t-set="size_1" t-value="1 * scale"/>
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page" t-attf-style="font-size: #{size_14}px;">
+                        <div class="oe_structure"/>
+                        <div class="row"> 
+                            <table style="border-collapse: collapse; border: 1px solid black; width: 100%;">
+                                <tr style="border: 1px solid black;">
+                                    <td width="5%" style="padding: 10px 20px; vertical-align: middle;">
+                                        <div style="text-align: center;">
+                                            <img t-if="o.company_sender_id.logo"
+                                                 t-att-src="image_data_uri(o.company_sender_id.logo)"
+                                                 style="max-height:60px; display:block; margin:0 auto;"
+                                                 alt="Logo"/>
+                                    
+                                            <div t-attf-style="font-size: #{size_12}px; margin-top:5px;">
+                                                <b>Tunas Group</b>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td width="70%" style="padding: 10px 15px;">
+                                        <div t-attf-style="text-align: center; font-size: #{size_26}px">
+                                            <p style="margin: 0;">BERITA ACARA MUTASI ASSET</p>
+                                        </div>
+                                    </td>
+                                    <td width="15%" style="padding: 10px 15px;">
+                                        <div t-attf-style="text-align: right; font-size: #{size_11}px;">
+                                            <p></p>
+                                        </div>
+                                    </td>
+                                </tr> 
+                                <tr align="right">
+                                    <td colspan="3" t-attf-style="padding: 10px 10px 10px 10px; font-size: #{size_11}px;">Tanggal : &#160;<span t-esc="o.date.strftime('%d-%m-%Y')"/></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="padding: 10px;">
+                                        <table t-attf-style="width: 100%; text-align: left; border-collapse: collapse; padding: 20px; font-size: #{size_11}px;">
+                                            <tr>
+                                                <th width="10%" style="border-top:1px solid #dee2e6; padding:4px;">Dari Cabang</th>
+                                                <th width="2%" style="border-top:1px solid #dee2e6; padding:4px;">:</th>
+                                                <td style="border-top:1px solid #dee2e6; padding:4px;">
+                                                    <span t-field="o.company_sender_id.name"/>
+                                                </td>
+                                        
+                                                <th width="10%" style="border-top:1px solid #dee2e6; padding:4px;">Ke Cabang</th>
+                                                <th width="2%" style="border-top:1px solid #dee2e6; padding:4px;">:</th>
+                                                <td style="border-top:1px solid #dee2e6; padding:4px;">
+                                                    <span t-field="o.company_id.name"/>
+                                                </td>
+                                            </tr>
+                                        
+                                            <tr>
+                                                <th width="10%" style="border-top:1px solid #dee2e6; padding:4px;">Kode Lokasi</th>
+                                                <th width="2%" style="border-top:1px solid #dee2e6; padding:4px;">:</th>
+                                                <td style="border-top:1px solid #dee2e6; padding:4px;">
+                                                    <span t-field="o.company_sender_id.code"/>
+                                                </td>
+                                        
+                                                <th width="10%" style="border-top:1px solid #dee2e6; padding:4px;">Kode Lokasi</th>
+                                                <th width="2%" style="border-top:1px solid #dee2e6; padding:4px;">:</th>
+                                                <td style="border-top:1px solid #dee2e6; padding:4px;">
+                                                    <span t-field="o.company_id.code"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="padding: 20px;">
+                                        <table t-attf-style="width: 100%; border: 1px solid #dee2e6; border-collapse: collapse; font-size: #{size_11}px;">
+                                            <thead>
+                                                <tr>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">No</th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">Kode Asset</th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">Nama Asset</th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">Harga Beli</th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">Akum Penyusutan</th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">Nilai Buku</th>
+                                                    <th style="border: 1px solid #dee2e6; padding: 4px; text-align: left;">Alasan Mutasi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-set="no" t-value="0"/>
+                                                <tr t-foreach="o.detail_ids" t-as="l">
+                                                    <t t-set="no" t-value="no + 1"/>
+                                                    <td style="border: 1px solid #dee2e6; padding: 4px; text-align: center;"><span t-esc="no"/></td>
+                                                    <td style="border: 1px solid #dee2e6; padding: 4px; text-align: left;"><span t-field="l.code"/></td>
+                                                    <td style="border: 1px solid #dee2e6; padding: 4px; text-align: left;"><span t-field="l.asset_id.name"/></td>
+                                                    <td style="border: 1px solid #dee2e6; padding: 4px; text-align: left;" class="text-end"><span t-esc="'{0:,.2f}'.format(l.amount).replace(',', '.')"/></td>
+                                                    <td style="border: 1px solid #dee2e6; padding: 4px; text-align: left;" class="text-end"><span t-esc="'{0:,.2f}'.format(l.amount_depreciated).replace(',', '.')"/></td>
+                                                    <td style="border: 1px solid #dee2e6; padding: 4px; text-align: left;"><span t-esc="'{0:,.2f}'.format(l.book_value).replace(',', '.')"/></td>    
+                                                    <td style="border: 1px solid #dee2e6; padding: 4px; text-align: left;"><span t-field="l.note"/></td>    
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="padding: 20px;">
+                                        <table t-attf-style="width: 100%; border: 1px solid #dee2e6; border-collapse: collapse; font-size: #{size_9}px; line-height: 200%;">
+                                            <tr>
+                                                <th colspan="2" style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">Cabang Pengirim</th>
+                                                <th colspan="3" style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">Diketahui</th>
+                                                <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">Disetujui</th>
+                                                <th colspan="2" style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">Cabang Penerima</th>
+                                            </tr>
+                                            <tr style="height: 70px;">
+                                                <td style="border: 1px solid #dee2e6;"></td>
+                                                <td style="border: 1px solid #dee2e6;"></td>
+                                                <td style="border: 1px solid #dee2e6;"></td>
+                                                <td style="border: 1px solid #dee2e6;"></td>
+                                                <td style="border: 1px solid #dee2e6;"></td>
+                                                <td style="border: 1px solid #dee2e6;"></td>
+                                                <td style="border: 1px solid #dee2e6;"></td>
+                                                <td style="border: 1px solid #dee2e6;"></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">(ADH / SOH)</th>
+                                                <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center; width: 80px;">(AM)</th>
+                                                <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">(Admin / Part Manager)</th>
+                                                <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center; width: 90px;">(GM)</th>
+                                                <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">(Fixed Asset Spv)</th>
+                                                <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">(Operation Director)</th>    
+                                                <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center;">(ADH / SOH)</th>
+                                                <th style="border: 1px solid #dee2e6; padding: 4px; text-align: center; width: 80px;">(AM)</th>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>          
+                </t>
+            </t>
+        </template>
+
+        <!-- Paper Format -->
+        <record id="paperformat_berita_acara_mutasi_asset" model="report.paperformat">
+            <field name="name">Berita Acara Mutasi Asset</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">5</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <!-- Report Action -->
+        <record id="action_report_berita_acara_mutasi_asset" model="ir.actions.report">
+            <field name="name">Print Berita Acara (BAST)</field>
+            <field name="model">tw.asset.distribution</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_asset_mutation.berita_acara_mutasi_asset_print</field>
+            <field name="report_file">tw_asset_mutation.berita_acara_mutasi_asset_print</field>
+            <field name="print_report_name">'Berita Acara Mutasi Asset - %s' % object.name</field>
+            <field name="paperformat_id" ref="paperformat_berita_acara_mutasi_asset"/>
+        </record>
+
+    </data>
+</odoo>

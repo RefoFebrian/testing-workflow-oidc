@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_consolidate_invoice_showroom,access_tw_consolidate_invoice_showroom,model_tw_consolidate_invoice,base.group_user,1,0,0,0
+access_tw_consolidate_invoice_line_showroom,access_tw_consolidate_invoice_line_showroom,model_tw_consolidate_invoice_line,base.group_user,1,0,0,0
+access_tw_consolidate_invoice_workshop,access_tw_consolidate_invoice_workshop,model_tw_consolidate_invoice,base.group_user,1,0,0,0
+access_tw_consolidate_invoice_line_workshop,access_tw_consolidate_invoice_line_workshop,model_tw_consolidate_invoice_line,base.group_user,1,0,0,0
+
+

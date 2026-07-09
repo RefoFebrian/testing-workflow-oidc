@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_api_configuration_b2b_bank_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.api.configuration.b2b.bank.inherit.form</field>
+        <field name="model">tw.api.configuration</field>
+        <field name="inherit_id" ref="tw_api.tw_api_configuration_form_view"/>
+        <field name="arch" type="xml">
+            <field name="base_url" position="after">
+                <field name="corporate_id"/>
+                <field name="is_api_payment" invisible="auth_type != 'hmac'"/>
+                <field name="partner_id" options="{'no_open': True, 'no_create': True}" invisible="is_api_payment == False"/>
+                <field name="area_id" options="{'no_open': True, 'no_create': True}" invisible="is_api_payment == False or partner_id == False"/>
+            </field>
+
+            <xpath expr="//page[@name='hmac_auth']/group[1]" position="after">
+                <group invisible="auth_type != 'hmac'">
+                    <group string="Credentials Attachments">
+                        <field name="creds_public_file" filename="creds_public_filename"/>
+                        <field name="creds_public_filename" invisible="1"/>
+                        <field name="creds_private_file" filename="creds_private_filename"/>
+                        <field name="creds_private_filename" invisible="1"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_non_petty_cash" model="ir.actions.report">
+        <field name="name">Laporan Mutasi Harian</field>
+        <field name="model">tw.report.cash</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tw_report_cash.report_non_petty_cash_template</field>
+        <field name="report_file">tw_report_cash.report_non_petty_cash_template</field>
+        <field name="print_report_name">'Laporan Mutasi Harian'</field>
+    </record>
+
+    <record id="action_report_petty_cash" model="ir.actions.report">
+        <field name="name">Laporan Petty Cash</field>
+        <field name="model">tw.report.cash</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tw_report_cash.report_petty_cash_template</field>
+        <field name="report_file">tw_report_cash.report_petty_cash_template</field>
+        <field name="print_report_name">'Laporan Petty Cash'</field>
+    </record>
+</odoo>

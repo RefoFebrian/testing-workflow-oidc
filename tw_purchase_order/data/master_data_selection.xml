@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Start Date Data -->
+
+        <record id="selection_date_po_type_now" model="tw.selection">
+	    	<field name="name">Now</field>
+            <field name="value">now</field> 
+	    	<field name="type">DatePo</field> 
+        </record>
+    
+        <record id="selection_date_po_type_end_month" model="tw.selection">
+	    	<field name="name">End of Month</field>
+            <field name="value">end_of_month</field> 
+	    	<field name="type">DatePo</field> 
+        </record>
+
+        <record id="selection_date_po_type_next_month" model="tw.selection">
+	    	<field name="name">Beginning of Next Month</field>
+            <field name="value">next_month</field> 
+	    	<field name="type">DatePo</field> 
+        </record>
+        
+        <record id="selection_date_po_type_end_of_next_month" model="tw.selection">
+	    	<field name="name">End of Next Month</field>
+            <field name="value">end_of_next_month</field> 
+	    	<field name="type">DatePo</field> 
+        </record>
+    
+        <record id="selection_date_po_type_new_2_month" model="tw.selection">
+	    	<field name="name">Beginning of Next two Months</field>
+            <field name="value">next_2_months</field> 
+	    	<field name="type">DatePo</field> 
+        </record>
+    
+        <record id="selection_date_po_type_end_of_next_2_months" model="tw.selection">
+	    	<field name="name">End of Next two Months</field>
+            <field name="value">end_of_next_2_months</field> 
+	    	<field name="type">DatePo</field> 
+        </record>
+
+    </data>
+</odoo>

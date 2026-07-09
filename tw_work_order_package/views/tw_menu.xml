@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="tw_service_package_menuitem" name="Service Package"
+            parent="tw_work_order.submenu_tw_work_order_configuration"
+            sequence="30" action="tw_service_package_action"
+            groups="tw_work_order_package.tw_service_package_group_read" />
+
+    </data>
+</odoo>

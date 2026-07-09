@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">  
+
+        <record id="group_tw_stock_picking_batch_button_generate_extras_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Generate Extras</field> 
+        </record> 
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_tw_stock_picking_batch_button_generate_extras_read')),
+            ]"/>
+        </record>         
+    </data>
+</odoo>

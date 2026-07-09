@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="tw_purchase_order_ga_approval_form_view" model="ir.ui.view">
+			<field name="name">tw.purchase.order.ga.approval.form</field>
+			<field name="model">purchase.order.asset</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="tw_asset_management.tw_inherit_purchase_order_asset_form_view"/>
+			<field name="arch" type="xml">
+                <field name="state" position="attributes">
+                    <attribute name="statusbar_visible">draft,waiting_for_approval,approved,received,payment,purchase</attribute>
+                </field>
+                <button name="button_confirm" position="attributes">
+                    <attribute name="invisible">context.get('is_asset')</attribute>
+                </button>
+                
+                <button name="action_confirm" position="attributes">
+                    <attribute name="invisible">state != 'approved' or not context.get('is_asset')</attribute>
+                </button>
+
+                
+                <button name="action_rfq_send" position="before">
+                    <button name="action_request_approval" invisible="state != 'draft'" string="RFA" type="object" class="oe_highlight" groups="tw_asset_management_approval.group_tw_purchase_order_ga_approval_request"/>
+					<button name="action_approval" invisible="state != 'waiting_for_approval'" string="Approve" type="object" class="oe_highlight"/>
+					<button name="action_reject_or_cancel" invisible="state != 'waiting_for_approval'" string="Reject" type="object" context="{'window_title': 'Reject'}"/>
+					<button name="action_reject_or_cancel" invisible="state not in ('waiting_for_approval', 'approved')" string="Cancel Approval" type="object" context="{'window_title': 'Cancel'}" groups="tw_asset_management_approval.group_tw_purchase_order_ga_approval_cancel"/>
+                </button>
+                <button id="draft_confirm" position="attributes">
+                    <attribute name="invisible">state != 'approved' or context.get('is_asset')</attribute>
+                </button>	
+                
+			</field>
+		</record>
+
+		<record id="tw_inherit_purchase_order_asset_search_view_extend" model="ir.ui.view">
+			<field name="name">tw.inherit.purchase.order.asset.search.view.extend</field>
+			<field name="model">purchase.order.asset</field>
+			<field name="inherit_id" ref="tw_asset_management.tw_inherit_purchase_order_asset_search_view"/>
+			<field name="arch" type="xml">
+				<xpath expr="//filter[@name='received']" position="after">
+					<filter name="waiting_for_approval" string="Waiting for Approval" domain="[('state','=','waiting_for_approval')]"/>
+					<filter name="approved" string="Approved" domain="[('state','=','approved')]"/>
+				</xpath>
+			</field>
+		</record>
+		
+	</data>
+</odoo>

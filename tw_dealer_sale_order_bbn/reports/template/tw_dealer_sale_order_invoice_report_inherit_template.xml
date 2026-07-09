@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="invoice_dso_template_bbn_ext"
+              inherit_id="tw_dealer_sale_order.invoice_dso_template">
+                
+        <xpath expr="//th[@name='sub_total_thead_col']" position="inside">
+            <th name="bbn_thead">BBN</th>
+        </xpath>
+        
+        <xpath expr="//td[@name='sub_total_tbody_col']" position="after">
+            <td name="bbn_tbody" align="right"><span t-esc="line[1].bbn_amount" t-options="{'widget': 'float', 'precision': 0}"/></td>
+        </xpath>
+        
+        <xpath expr="//tr[@name='description_tfoot_row']" position="inside">
+            <td align="right" rowspan="4"><span t-esc="total_bbn_amount(doc)" t-options="{'widget': 'float', 'precision': 0}"/></td>
+        </xpath>
+
+        <xpath expr="//tr[@name='total_tfoot_row']/td[2]" position="attributes">
+            <attribute name="rowspan">2</attribute>
+        </xpath>
+
+        <xpath expr="//tr[@name='total_tfoot_row']" position="inside">
+            <tr name="total_bbn_tfoot_row" class="no-horizontal-border">
+                <td>Total + BBN</td>
+                <td align="right" rowspan="4">
+                    <span t-esc="total_pricelist_bbn()" t-options="{'widget': 'float', 'precision': 0}"/>
+                </td>
+            </tr>
+        </xpath>
+
+    </template>
+
+</odoo>
+

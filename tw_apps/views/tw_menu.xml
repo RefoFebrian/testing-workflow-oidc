@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu for App Version -->
+    <menuitem id="menu_tw_app_version_root" 
+              name="App Version" 
+              parent="tw_menu.submenu_tw_configuration" 
+              sequence="10"
+              groups="base.group_system"/>
+              
+    <menuitem id="menuitem_tw_app_version" 
+              name="App Versions" 
+              parent="tw_apps.menu_tw_app_version_root" 
+              action="tw_apps.action_tw_app_version" 
+              sequence="10"
+              groups="tw_apps.group_tw_app_version_read"/>
+
+    <menuitem id="menuitem_tw_app_version_mobile" 
+              name="App Versions" 
+              parent="tw_menu.tw_doodool_apps_top_menu" 
+              action="tw_apps.action_tw_app_version" 
+              sequence="10"
+              groups="tw_apps.group_tw_app_version_read"/>
+
+    <menuitem id="menuitem_tw_master_app_type" 
+              name="Master App Type" 
+              parent="tw_apps.menu_tw_app_version_root" 
+              action="tw_apps.action_tw_master_app_type" 
+              sequence="20"
+              groups="tw_apps.group_tw_app_version_read"/>
+
+    <menuitem id="menuitem_tw_master_app_type_mobile" 
+              name="Master App Type" 
+              parent="tw_menu.tw_doodool_apps_top_menu" 
+              action="tw_apps.action_tw_master_app_type" 
+              sequence="20"
+              groups="tw_apps.group_tw_app_version_read"/>
+</odoo>

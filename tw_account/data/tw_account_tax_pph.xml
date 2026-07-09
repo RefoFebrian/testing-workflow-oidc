@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_account_tax_pph_npwp" model="account.tax">
+            <field name="type_tax_use">purchase</field>
+            <field name="name">PPH 21 NPWP 2.5%</field>
+            <field name="description">PPH 21 NPWP 2.5% : Digunakan untuk generate otomatis PPH di Dealer Sale Order. 'Amount' dan 'Included in Price' tidak boleh di ubah.</field>
+            <field name="invoice_label">PPH 21 NPWP 2.5%</field>
+            <field name="amount">-2.5</field>
+            <field name="tax_group_id" ref="tw_account.tw_account_tax_group_default"/>
+            <field name="country_id" ref="base.id"/>
+            <field name="price_include_override">tax_excluded</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="tw_account_tax_pph_non_npwp" model="account.tax">
+            <field name="type_tax_use">purchase</field>
+            <field name="name">PPH 21 Non NPWP 3%</field>
+            <field name="description">PPH 21 Non NPWP 3% : Digunakan untuk generate otomatis PPH di Dealer Sale Order. 'Amount' dan 'Included in Price' tidak boleh di ubah.</field>
+            <field name="invoice_label">PPH 21 Non NPWP 3%</field>
+            <field name="amount">-3</field>
+            <field name="tax_group_id" ref="tw_account.tw_account_tax_group_default"/>
+            <field name="country_id" ref="base.id"/>
+            <field name="price_include_override">tax_excluded</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        
+    </data>
+</odoo>

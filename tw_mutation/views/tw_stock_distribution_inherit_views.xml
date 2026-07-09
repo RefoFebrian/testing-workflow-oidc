@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Stock Distribution Form View to add note about order type -->
+        <record id="view_stock_distribution_form_inherit_mutation" model="ir.ui.view">
+            <field name="name">tw.stock.distribution.form.inherit.mutation</field>
+            <field name="model">tw.stock.distribution</field>
+            <field name="inherit_id" ref="tw_stock_distribution.tw_stock_distribution_form_view"/>
+            <field name="arch" type="xml">
+                <!-- Menambahkan domain pada tombol action_create_order yang sudah ada -->
+                <xpath expr="//header/button[@name='action_create_order']" position="attributes">
+                    <attribute name="invisible">sale_order_id or state != 'open' or mutation_order_id</attribute>
+                </xpath>
+                <button name='action_view_sale_order' position="after">
+                    <button name="action_view_mutation_order" type="object" class="oe_stat_button" icon="fa-shopping-bag" invisible="not mutation_order_id">
+                        <div>
+                            <div>Mutation Order</div>
+                            <field name="mutation_order_id" string="Mutation Order" widget="statinfo" nolabel="1"/>
+                        </div>
+                    </button>
+                </button>
+
+                <!-- Add alert in the sheet after the title -->
+                <xpath expr="//sheet//div[hasclass('oe_title')]" position="before">
+                    <field name="is_internal" invisible="1"/>
+                    <div class="alert alert-info" role="alert" invisible="not is_internal">
+                        <i class="fa fa-info-circle me-2" title="Info"/>
+                        <span>This transaction will create a <strong>Mutation Order</strong></span>
+                    </div>
+                    <div class="alert alert-info" role="alert" invisible="is_internal">
+                        <i class="fa fa-info-circle me-2" title="Info"/>
+                        <span>This transaction will create a <strong>Sale Order</strong></span>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

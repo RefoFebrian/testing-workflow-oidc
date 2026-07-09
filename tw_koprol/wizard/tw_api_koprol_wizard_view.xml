@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_api_koprol_wizard_form" model="ir.ui.view">
+            <field name="name">tw.api.koprol.wizard.form</field>
+            <field name="model">tw.api.koprol.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Generate Data Master Koprol">
+                    <group>
+                        <group>
+                            <field name="options" required="1"/>
+                            <field name="koprol_code"/>
+                            <field name="product_code" invisible="options != 'goods'"/>
+                            <field name="category_code" invisible="options != 'goods'"/>
+                            <label for="start_date" string="Tanggal"/>
+                            <div>
+                                <field name="start_date" class="oe_inline" required="1"/> s.d <field name="end_date" class="oe_inline" required="1"/>
+                            </div>
+                            <label for="limit" string="Halaman"/>
+                            <div>
+                                <field name="limit" class="oe_inline"/> s.d <field name="offset" class="oe_inline"/>
+                            </div>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                    <newline/>
+                    <footer>
+                        <button name="generate_data" string="Generate" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_api_koprol_wizard_action" model="ir.actions.act_window">
+            <field name="name">API Data Master Koprol</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.api.koprol.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_api_koprol_wizard_form"/>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

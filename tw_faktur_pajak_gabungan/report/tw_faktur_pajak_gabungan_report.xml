@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_faktur_pajak_gabungan">
+            <t t-set="scale" t-value="1"/>
+            <t t-set="size_26" t-value="26 * scale"/>
+            <t t-set="size_24" t-value="24 * scale"/>
+            <t t-set="size_22" t-value="22 * scale"/>
+            <t t-set="size_20" t-value="20 * scale"/>
+            <t t-set="size_18" t-value="18 * scale"/>
+            <t t-set="size_16" t-value="16 * scale"/>
+            <t t-set="size_15" t-value="15 * scale"/>
+            <t t-set="size_14" t-value="14 * scale"/>
+            <t t-set="size_13" t-value="13 * scale"/>
+            <t t-set="size_12" t-value="12 * scale"/>
+            <t t-set="size_11" t-value="11 * scale"/>
+            <t t-set="size_10" t-value="10 * scale"/>
+            <t t-set="size_9" t-value="9 * scale"/>
+            <t t-set="size_8" t-value="8 * scale"/>
+            <t t-set="size_7" t-value="7 * scale"/>
+            <t t-set="size_6" t-value="6 * scale"/>
+            <t t-set="size_5" t-value="5 * scale"/>
+            <t t-set="size_4" t-value="4 * scale"/>
+            <t t-set="size_3" t-value="3 * scale"/>
+            <t t-set="size_2" t-value="2 * scale"/>
+            <t t-set="size_1" t-value="1 * scale"/>
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page" t-attf-style="font-size: #{size_13}px;">
+
+                        <!-- Lembar Info -->
+                        <table width="100%" t-attf-style="font-size: #{size_10}px;">
+                            <tr>
+                                <td width="52%"></td>
+                                <td width="10%">Lembar ke 1 :</td>
+                                <td>Untuk Pembeli BKP/Penerima JKP sebagai bukti Pajak Masukan</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Lembar ke 2 :</td>
+                                <td>Untuk Pembeli BKP/Penerima JKP sebagai bukti Pajak Masukan</td>
+                            </tr>
+                        </table>
+
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+
+                        <!-- Title -->
+                        <h1 t-attf-style="font-size: #{size_13}px; font-weight: bold; text-align: center; margin-bottom: 10px;">
+                            FAKTUR PAJAK GABUNGAN
+                        </h1>
+
+                        <!-- Main Table -->
+                        <table width="100%" t-attf-style="border: 1px solid #000; border-collapse: collapse;font-size:  #{size_10}px">
+
+                            <!-- Kode dan Nomor Seri -->
+                            <tr>
+                                <td colspan="3" style="border: 1px solid #000; padding: 4px;">
+                                    Kode dan Nomor Seri Faktur Pajak : 010.<span t-field="doc.faktur_pajak_out_id"/>
+                                </td>
+                            </tr>
+
+                            <!-- Pengusaha Kena Pajak -->
+                            <tr>
+                                <td colspan="3" style="border: 1px solid #000; padding: 4px;">
+                                    Pengusaha Kena Pajak
+                                </td>
+                            </tr>
+
+                            <!-- Detail PKP -->
+                            <tr>
+                                <td colspan="3" style="border: 1px solid #000; padding: 4px;">
+                                    <table width="80%" t-attf-style="border: none; font-size: #{size_10}px">
+                                        <tr>
+                                            <td width="10%">Nama</td>
+                                            <td width="1%">:</td>
+                                            <td>
+                                                <span t-field="doc.company_id"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Alamat</td>
+                                            <td>:</td>
+                                            <td>
+                                                <span t-field="doc.company_id.street"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>NPWP</td>
+                                            <td>:</td>
+                                            <td>
+                                                <span t-esc="doc.company_id.vat or ''"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <!-- Pembeli BKP -->
+                            <tr>
+                                <td colspan="3" style="border: 1px solid #000; padding: 4px;">
+                                    Pembeli Barang Kena Pajak / Penerima Jasa Kena Pajak
+                                </td>
+                            </tr>
+
+                            <!-- Detail Pembeli -->
+                            <tr>
+                                <td colspan="3" style="border: 1px solid #000; padding: 4px;">
+                                    <table width="80%" t-attf-style="border: none; font-size: #{size_10}px">
+                                        <tr>
+                                            <td width="10%">Nama</td>
+                                            <td width="1%">:</td>
+                                            <td>
+                                                <span t-field="doc.partner_id.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Alamat</td>
+                                            <td>:</td>
+                                            <td>
+                                                <span t-field="doc.partner_id.street"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>NPWP</td>
+                                            <td>:</td>
+                                            <td>
+                                                <span t-esc="doc.partner_id.vat or ''"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <!-- Header Tabel Detail -->
+                            <tr style="background-color: #FFFF00;">
+                                <td width="5%" style="border: 1px solid #000; padding: 4px; text-align: center;">No</td>
+                                <td width="53%" style="border: 1px solid #000; padding: 4px;">Nama Barang Kena Pajak / Jasa Kena Pajak</td>
+                                <td width="42%" style="border: 1px solid #000; padding: 4px;">Harga Jual/Penggantian/Uang Muka/Termin (Rp)</td>
+                            </tr>
+
+                            <!-- Isi Detail -->
+                            <t t-set="total_amount" t-value="sum(doc.pajak_gabungan_line.mapped('total_amount'))"/>
+                            <t t-set="untaxed_amount" t-value="sum(doc.pajak_gabungan_line.mapped('untaxed_amount'))"/>
+                            <t t-set="tax_amount" t-value="sum(doc.pajak_gabungan_line.mapped('tax_amount'))"/>
+
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center;">1</td>
+                                <td style="border: 1px solid #000; padding: 4px;">
+                                    <span t-esc="get_division_label(doc.division)"/>
+                                </td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <span t-esc="'{0:,.2f}'.format(total_amount).replace(',', '.')"/>
+                                </td>
+                            </tr>
+
+                            <!-- Empty row -->
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px;">
+                                    <p></p>
+                                </td>
+                                <td style="border: 1px solid #000; padding: 4px;">
+                                    <p></p>
+                                </td>
+                                <td style="border: 1px solid #000; padding: 4px;">
+                                    <p></p>
+                                </td>
+                            </tr>
+
+                            <!-- Harga Jual -->
+                            <tr>
+                                <td colspan="2" style="border: 1px solid #000; padding: 4px;">
+                                    Harga Jual/Penggantian/Uang Muka/Termin **)
+                                </td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <span t-esc="'{0:,.2f}'.format(total_amount).replace(',', '.')"/>
+                                </td>
+                            </tr>
+
+                            <!-- Potongan Harga -->
+                            <tr>
+                                <td colspan="2" style="border: 1px solid #000; padding: 4px;">
+                                    Dikurangi Potongan Harga
+                                </td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">0</td>
+                            </tr>
+
+                            <!-- Uang Muka -->
+                            <tr>
+                                <td colspan="2" style="border: 1px solid #000; padding: 4px;">
+                                    Dikurangi Uang Muka yang telah diterima
+                                </td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">0</td>
+                            </tr>
+
+                            <!-- DPP -->
+                            <tr>
+                                <td colspan="2" style="border: 1px solid #000; padding: 4px;">DPP</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <span t-esc="'{0:,.2f}'.format(untaxed_amount).replace(',', '.')"/>
+                                </td>
+                            </tr>
+
+                            <!-- PPN -->
+                            <tr>
+                                <td colspan="2" style="border: 1px solid #000; padding: 4px;">PPN</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <span t-esc="'{0:,.2f}'.format(tax_amount).replace(',', '.')"/>
+                                </td>
+                            </tr>
+
+                            <!-- PPnBM & Signature -->
+                            <tr>
+                                <td colspan="3">
+                                    <table width="100%" t-attf-style="font-size: #{size_10}px;">
+                                        <tr>
+                                            <td colspan="3">Pajak Penjualan Atas Barang Mewah</td>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <!-- PPnBM Table -->
+                                            <td>
+                                                <table width="40%" t-attf-style="border: 1px solid #000; border-collapse: collapse; font-size: #{size_10}px;">
+                                                    <tr>
+                                                        <td style="border: 1px solid #000; padding: 3px; text-align: center;">Tarif</td>
+                                                        <td style="border: 1px solid #000; padding: 3px; text-align: center;">PPnBM</td>
+                                                        <td style="border: 1px solid #000; padding: 3px; text-align: center;">DPP</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border: 1px solid #000; padding: 3px; text-align: right;">..........................%</td>
+                                                        <td style="border: 1px solid #000; padding: 3px; text-align: right;">Rp.........................</td>
+                                                        <td style="border: 1px solid #000; padding: 3px; text-align: right;">Rp.........................</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border: 1px solid #000; padding: 3px; text-align: right;">..........................%</td>
+                                                        <td style="border: 1px solid #000; padding: 3px; text-align: right;">Rp.........................</td>
+                                                        <td style="border: 1px solid #000; padding: 3px; text-align: right;">Rp.........................</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border: 1px solid #000; padding: 3px; text-align: right;">..........................%</td>
+                                                        <td style="border: 1px solid #000; padding: 3px; text-align: right;">Rp.........................</td>
+                                                        <td style="border: 1px solid #000; padding: 3px; text-align: right;">Rp.........................</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border: 1px solid #000; padding: 3px; text-align: right;">..........................%</td>
+                                                        <td style="border: 1px solid #000; padding: 3px; text-align: right;">Rp.........................</td>
+                                                        <td style="border: 1px solid #000; padding: 3px; text-align: right;">Rp.........................</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border: 1px solid #000; padding: 3px;" colspan="2">Jumlah</td>
+                                                        <td style="border: 1px solid #000; padding: 3px; text-align: right;">Rp.........................</td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+
+                                            <!-- Signature -->
+                                            <td width="35%" t-attf-style="vertical-align: top; text-align: center;">
+                                                <table width="100%" t-attf-style="font-size: #{size_10}px;">
+                                                    <tr>
+                                                        <td style="text-align: center;">BANDAR LAMPUNG,</td>
+                                                        <td>tgl <span t-esc="get_local_date()"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <p></p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <p></p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <p></p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <p></p>
+                                                        </td>
+                                                        <td style="text-align: center;">_________________</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="text-align: center;">Nama</td>
+                                                        <td style="text-align: center;">YULIANTI BUNAJATI</td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <!-- Paper Format -->
+        <record id="paperformat_faktur_pajak_gabungan" model="report.paperformat">
+            <field name="name">Faktur Pajak Gabungan</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">5</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <!-- Report Action -->
+        <record id="action_report_faktur_pajak_gabungan" model="ir.actions.report">
+            <field name="name">Faktur Pajak Gabungan</field>
+            <field name="model">tw.faktur.pajak.gabungan</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_faktur_pajak_gabungan.report_faktur_pajak_gabungan</field>
+            <field name="report_file">tw_faktur_pajak_gabungan.report_faktur_pajak_gabungan</field>
+            <field name="print_report_name">'Faktur Pajak Gabungan - %s' % object.name</field>
+            <field name="paperformat_id" ref="paperformat_faktur_pajak_gabungan"/>
+        </record>
+
+    </data>
+</odoo>

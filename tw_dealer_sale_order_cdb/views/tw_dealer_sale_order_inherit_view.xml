@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_dealer_sale_order_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.dealer.sale.order.cdb.inherit.form</field>
+            <field name="model">tw.dealer.sale.order</field>
+            <field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_order_view_form" />
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="cdb_stnk_id" readonly="1" invisible="not cdb_stnk_id"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

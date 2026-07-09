@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_b2b_file_upload_list_view" model="ir.ui.view">
+            <field name="name">tw.b2b.file.upload.list</field>
+            <field name="model">tw.b2b.file.upload</field>
+            <field name="arch" type="xml">
+                <list string="B2B File Uploaded" create="0" edit="0" delete="0">
+                    <field name="filename_upload"/>
+                    <field name="upload_count"/>
+                    <field name="date"/>
+                    <field name="extension" string="Format File"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_b2b_file_upload_form_view" model="ir.ui.view">
+            <field name="name">tw.b2b.file.upload.form</field>
+            <field name="model">tw.b2b.file.upload</field>
+            <field name="arch" type="xml">
+                <form string="B2B File Uploaded" create="0" edit="0" delete="0">
+                    <sheet>
+                        <group colspan="4" col="4">
+                            <group colspan="2" col="2">
+                                <field name="filename_upload" />
+                                <field name="upload_count" />
+                                <field name="date" />
+                                <field name="extension" string="Format File"/>
+                                <field name="uploaded_filenames" widget="text" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_b2b_file_upload_search_view" model="ir.ui.view">
+            <field name="name">tw.b2b.file.upload.search</field>
+            <field name="model">tw.b2b.file.upload</field>
+            <field name="arch" type="xml">
+                <search string="Search Data MFT File">
+                	<field name="name"/>
+                    <field name="extension"/>
+                    <group name="tw_b2b_file_upload_groupby" string="Group By">
+                        <filter name="extension_groupby" string="Extension" context="{'group_by':'extension'}"/>
+                        <filter name="type_groupby" string="Type" context="{'group_by':'type'}"/>
+                        <filter name="date_groupby" string="Date" context="{'group_by':'date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="tw_b2b_file_upload_action" model="ir.actions.act_window">
+			<field name="name">Data MFT File</field>
+			<field name="res_model">tw.b2b.file.upload</field>
+			<field name="view_mode">list,form</field>
+		</record>
+    </data>
+</odoo>

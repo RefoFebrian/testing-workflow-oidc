@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_upload_jm_net_off"
+              name="Upload Journal Memorial"
+              parent="tw_journal_memorial.menu_jm_net_off"
+              action="tw_upload_jm_net_off.action_tw_journal_memorial_upload_wizard"
+              sequence="300"
+              groups="tw_upload_jm_net_off.tw_group_upload_journal_memorial_upload_read"/>
+    <menuitem id="menu_upload_net_off"
+              name="Upload Net Off"
+              parent="tw_journal_memorial.menu_jm_net_off"
+              action="tw_upload_jm_net_off.action_tw_net_off_upload_wizard"
+              sequence="310"
+              groups="tw_upload_jm_net_off.tw_group_upload_net_off_upload_read"/>
+</odoo>

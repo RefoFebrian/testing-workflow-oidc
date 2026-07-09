@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="tw_part_sales_print_thermal">
+            <style type="text/css">
+                td {font-size: 13}
+                .td {font-size: 13}
+            </style>
+            <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <table width="100%">
+                                    <tr>
+                                        <td width="70.00%"><img src="/tw_work_order/static/src/img/ahass.jpg" style="widht:80px; height:25px; align:right;position:absolute"/></td>
+                                        <td width="50.00%" rowspan="8" align="right">
+                                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', barcodeX, 650, 100)" style="width:80px;height:80px;text-align:right"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 14px;"></td>
+                                    </tr>
+                                        <tr>
+                                        <td style="font-size: 14px;"></td>
+                                    </tr>
+                                        <tr>
+                                        <td style="font-size: 14px;"></td>
+                                    </tr>
+                                        <tr>
+                                        <td style="font-size: 14px;"></td>
+                                    </tr>
+                                        <tr>
+                                        <td style="font-size: 14px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 14px;"><span t-esc="o.company_id.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 14px;"><span t-esc="o.company_id.street"/></td> 
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 14px;">No. Telp <span t-esc="o.company_id.phone"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 16px;text-align: Center" colspan="2"><b>PART SALE</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 14px;" height="12">NO PS : &#160;<span t-esc="o.name"/></td>
+                                        <td style="font-size: 14px; text-align: right" height="12"><span t-esc="o.create_date.strftime('%d-%m-%Y') if o.create_date else ''"/></td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <td style="font-size: 14px;" colspan="2" height="12">Tipe Service : &#160;<span t-esc="o.type"/></td>
+                                    </tr> -->
+                                    <tr>
+                                        <td style="font-size: 14px;" colspan="2"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <table width="100%" style="font-size: 16px;">
+                        <tr>
+                            <td style="font-size: 14px;" colspan="3" height="16"><b>DATA KONSUMEN</b></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 13px;" width="37.00%" height="12">Nama STNK</td>
+                            <td style="font-size: 13px;" width="2.00%">:</td>
+                            <td style="font-size: 13px;" width="60.00%"><span t-esc="o.partner_id.name"/></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 13px;" width="27.00%" height="12">Nama Pembawa</td>
+                            <td style="font-size: 13px;" width="2.00%">:</td>
+                            <td style="font-size: 13px;" width="70.00%"><span t-esc="o.partner_id.name"/></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 13px;" width="27.00%" height="12">Alamat Pembawa</td>
+                            <td style="font-size: 13px;" width="2.00%">:</td>
+                            <td style="font-size: 13px;" width="70.00%"><span t-esc="o.partner_id.street"/></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 13px;" width="27.00%" height="12">No HP Pembawa</td>
+                            <td style="font-size: 13px;" width="2.00%">:</td>
+                            <td style="font-size: 13px;" width="70.00%"><span t-esc="o.partner_id.mobile"/></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 13px;" colspan="3"></td>
+                        </tr>
+                    </table>
+                    <table width="100%" style="font-size: 16px;">
+                        <tr>
+                            <td style="font-size: 14px;" colspan="3" height="16"><b>DATA KENDARAAN</b></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 13px;" width="37.00%" height="12">No Polisi</td>
+                            <td style="font-size: 13px;" width="2.00%">:</td>
+                            <td style="font-size: 13px;" width="60.00%" class="text-end"><span t-esc="o.lot_id.plate_number"/></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 13px;" width="27.00%" height="12">No Engine</td>
+                            <td style="font-size: 13px;" width="2.00%">:</td>
+                            <td style="font-size: 13px;" width="70.00%"><span t-esc="o.lot_id.name"/></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 13px;" width="27.00%" height="12">Tipe Motor</td>
+                            <td style="font-size: 13px;" width="2.00%">:</td>
+                            <td style="font-size: 13px;" width="70.00%"><span t-esc="o.product_id.name"/></td>
+                        </tr>
+                        <!-- <tr>
+                            <td style="font-size: 13px;" width="27.00%" height="12">Kilometer</td>
+                            <td style="font-size: 13px;" width="2.00%">:</td>
+                            <td style="font-size: 13px;" width="70.00%"><span t-esc="o.km"/></td>
+                        </tr> -->
+                        <!-- <tr>
+                            <td style="font-size: 13px;" width="27.00%" height="12">FUEL</td>
+                            <td style="font-size: 13px;" width="2.00%">:</td>
+                            <td style="font-size: 13px;" width="70.00%"><span t-esc="o.fuel"/>%</td>
+                        </tr> -->
+                        <!-- <tr>
+                            <td colspan="5"> </td>
+                        </tr> -->
+                    </table>
+                    
+                    <table width="100%" style="font-size: 13px;">
+                        <tr>
+                            <td style="font-size: 14px;" ><b>KELUHAN &amp; CATATAN : </b></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table width="100%" style="align:center; border: 1px solid black;">
+                                    <tr>
+                                        <td height="60" style="font-size: 13px;"><span t-esc="o.note"/></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <table width="100%" style="font-size: 13px;table-layout:fixed;">
+                        <tr>
+                            <td style="font-size: 14px;"><b><u>RINCIAN SUKU CADANG</u></b></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table width="100%" style="font-size: 13px;table-layout:fixed;">
+                                    <t t-if="o.order_line"> 
+                                        <tr>
+                                            <td style="font-size: 13px;" width="65.00%"><b>Suku Cadang</b></td>
+                                            <td width="10.00%" style="font-size: 13px;text-align:center;"><b>Qty</b></td>
+                                            <td width="25.00%" style="font-size: 13px;text-align:right;"><b>Estimasi Harga</b></td>
+                                        </tr>
+                                        <tr t-foreach="o.order_line" t-as="k" style="font-size: 14px;">
+                                            <t t-if="k.product_id.categ_id.name == 'Sparepart'"> 
+                                            <tr>
+                                                <td width="65.00%" style="font-size: 13px;white-space:nowrap; overflow: hidden; text-overflow: ellipsis;"><span t-esc="k.product_id.name"/></td>
+                                                <td width="10.00%" style="font-size: 13px;text-align:center;"><span t-esc="k.product_qty"/></td>
+                                                <td width="25.00%" style="font-size: 13px;text-align: right" class="text-end"><span t-esc="k.price_unit"/></td>
+                                            </tr>
+                                            </t>
+                                        </tr>
+                                    </t>
+                                    <tr>
+                                        <td width="100%" colspan="3">_____________________________________</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table width="100%" style="font-size: 13px;table-layout:fixed;">
+                                    <tr>
+                                        <td width="30.00%"><b>TOTAL</b></td>
+                                        <td width="0.00%" style="text-align: right"></td>
+                                        <td width="30.00%" style="text-align: right" class="text-end"><b>Rp. <span t-esc="o.amount_total"/></b></td>
+                                    </tr>
+                                        <tr>
+                                        <td width="100%" colspan="3">_____________________________________</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <!-- <table width="100%" style="font-size: 13px;table-layout:fixed;">
+                                    <tr>
+                                        <td style="font-size: 13px;" width="50.00%">Estimasi Waktu Selesai</td>
+                                        <td width="0.00%" style="font-size: 13px;text-align:center;"></td>
+                                        <td width="50.00%" style="font-size: 13px;text-align:right"><span t-esc="selesai"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3"></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50.00%" style="font-size: 13px;text-align:left;">Pembawa Kendaraan</td>
+                                        <td width="0.00%" style="font-size: 13px;text-align:center;"/>
+                                        <td width="50.00%" style="font-size: 13px;text-align:right;">Service Advisor</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3"></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3"></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3"></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3"></td>
+                                    </tr>
+                                </table> -->
+
+                                <!-- <table width="100%" style="font-size: 14px;table-layout:fixed;padding-top:10px;">
+                                    <tr>
+                                        <td width="50.00%" height="15" style="font-size: 13px;text-align:left;"><b>      <u>( <span t-esc="o.partner_id.name"/> )</u></b></td>
+                                        <td width="0.00%" style="font-size: 13px;text-align:center;"/>
+                                        <td width="50.00%" style="font-size: 13px;text-align:right;"><b>(                     )</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50.00%" style="font-size: 13px;text-align:left;">Tambahan Pekerjaan</td>
+                                        <td width="15.00%" style="font-size: 13px;text-align:center;"/>
+                                        <td width="35.00%" style="font-size: 13px;text-align:right;">Final Inspector</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50.00%" height="15" style="font-size: 13px;text-align:left;"><b>      <u>( <span t-esc="o.partner_id.name"/> )</u></b></td>
+                                        <td width="0.00%" style="font-size: 13px;text-align:center;"/>
+                                        <td width="50.00%" style="font-size: 13px;text-align:right;"><b>(                     )</b></td>
+                                    </tr>
+                                        
+                                    <tr>
+                                        <td width="50.00%" style="font-size: 13px;text-align:left;">Penyerahan Kendaraan</td>
+                                        <td width="25.00%" style="font-size: 13px;text-align:center;"/>
+                                        <td width="25.00%" style="font-size: 13px;text-align:right;">Mekanik     </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50.00%" height="15" style="font-size: 13px;text-align:left;"><b>      <u>( <span t-esc="o.partner_id.name"/> )</u></b></td>
+                                        <td width="0.00%" style="font-size: 13px;text-align:center;"/>
+                                        <td width="50.00%" style="font-size: 13px;text-align:right;"><b><u>( <span t-esc="o.mechanic_id.name"/> )</u></b></td>
+                                    </tr>
+                                </table> -->
+
+                                <!-- <table width="100%" style="font-size: 14px;table-layout:fixed;padding-top:10px;">
+                                    <tr>
+                                        <td width="100.00%" colspan="3"></td>
+                                    </tr>
+                                    <tr style="margin-top:10px;">
+                                        <td width="72.00%" style="font-size: 13px;text-align:left;">Penambahan Pekerjaan / Part</td>
+                                        <td width="0.00%" style="font-size: 13px;text-align:center;"/>
+                                        <td width="28.00%" style="font-size: 13px;text-align:left;">Part Bekas :</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="72.00%" style="font-size: 13px;text-align:left;">[<span style="color:white">__</span>] Konfirmasi Dulu</td>
+                                        <td width="0.00%" style="font-size: 13px;text-align:center;"/>
+                                        <td width="28.00%" style="font-size: 13px;text-align:left;">[<span style="color:white">__</span>] Dibawa</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="72.00%" height="15" style="font-size: 13px;text-align:left;">[<span style="color:white">__</span>] Langsung Dikerjakan</td>
+                                        <td width="0.00%" style="font-size: 13px;text-align:center;"/>
+                                        <td width="28.00%" style="font-size: 13px;text-align:left;">[<span style="color:white">__</span>] Tidak</td>
+                                    </tr>
+                                </table> -->
+                                <!-- <table width="100%" style="font-size: 10px;table-layout:fixed;margin-top:20px;">
+                                    <tr style="margin-top:10px;">
+                                        <td width="100.00%" height="18" colspan="3"><b><u>Syarat dan Ketentuan : </u></b></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3">- Formulir ini adalah surat kuasa pekerjan</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3">- Bengkel ini tidak bertanggung jawab terhadap sepeda motor yang tidak diambil dalam 30 hari</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3">- Bengkel tidak bertanggung jawab apabila terjadi force majeure</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3">- Garansi</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3">500 km/1 minggu* untuk service reguler</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3">1.000 km/1 bulan* untuk bongkar measin reguler</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3">1.000 km/1 minggu* untuk service CBR 250 dan PCX 150</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100.00%" colspan="3">1.500 km/45 hari* untuk Bongkar Mesin CBR 250 dan PCX 150</td>
+                                    </tr>
+                                </table> -->
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="oe_structure"> 
+                </div>
+            </div>
+            </t>
+            </t>
+        </template>
+    </data>
+</odoo>

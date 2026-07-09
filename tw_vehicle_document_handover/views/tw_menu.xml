@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem
+            id="tw_vehicle_handover_menu"
+            name="Penyerahan"
+            parent="tw_vehicle_registration_process.tw_vehicle_registration_process_menu_sub"
+            sequence="40"
+        />
+
+        <menuitem
+            id="tw_vehicle_registration_handover_menu"
+            name="Penyerahan STNK"
+            parent="tw_vehicle_handover_menu"
+            action="tw_vehicle_document_handover.tw_vehicle_registration_handover_action"
+            sequence="10"
+            groups="tw_vehicle_document_handover.group_vehicle_stnk_handover_read"
+        />
+
+        <menuitem
+            id="tw_vehicle_registration_handover_bpkb_menu"
+            name="Penyerahan BPKB"
+            parent="tw_vehicle_handover_menu"
+            action="tw_vehicle_document_handover.tw_vehicle_ownership_handover_action"
+            sequence="20"
+            groups="tw_vehicle_document_handover.group_vehicle_ownership_handover_read"
+        />
+    </data>
+</odoo>

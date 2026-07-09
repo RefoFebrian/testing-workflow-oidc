@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Search View for Stock Picking -->
+        <record id="tw_stock_picking_view_filter_dgi_inherit" model="ir.ui.view">
+            <field name="name">tw.stock.picking.view.filter.dgi.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <field name="md_reference_po" string="DGI PO Ref"/>
+                    <field name="md_reference_sl" string="DGI SL Ref"/>
+                    <separator/>
+                    <filter name="filter_is_dgi" string="From DGI" domain="[('is_dgi', '=', True)]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

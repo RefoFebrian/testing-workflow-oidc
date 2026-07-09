@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_bank_reconcile,tw_bank_reconcile.tw_bank_reconcile,model_tw_bank_reconcile,base.group_user,1,0,0,0
+access_tw_bank_mutasi,tw_bank_reconcile.tw_bank_mutasi,model_tw_bank_mutasi,base.group_user,1,0,0,0
+access_tw_export_bank_mutasi,tw_bank_reconcile.tw_export_bank_mutasi,model_tw_export_bank_mutasi,base.group_user,1,0,0,0
+access_tw_import_bank_mutasi,tw_bank_reconcile.tw_import_bank_mutasi,model_tw_import_bank_mutasi,base.group_user,1,0,0,0
+access_tw_bank_reconcile_report,tw_bank_reconcile.tw_bank_reconcile_report,model_tw_bank_reconcile_report,base.group_user,1,0,0,0

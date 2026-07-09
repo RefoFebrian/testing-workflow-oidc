@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="tw_part_sales_cancel_print">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div class="col-xs-12" align="center">
+                            <p style="font-size: 18px; font-weight: bold;">
+                                PART SALES CANCEL
+                            </p>
+                        </div>
+                        <div class="col-xs-12"
+                            style="font-size: 10px; margin-top: 20px; margin-left: 50px; margin-right: 50px;">
+                            <table style="border-collapse: collapse; width: 66%;" border="1">
+                                <tr style="border: 1px solid black;">
+                                    <td
+                                        style="font-weight: bold; border: 1px solid black; padding: 5px; width: 20%;">
+                                        Branch</td>
+                                    <td style="border: 1px solid black; padding: 5px; width: 5%;">:</td>
+                                    <td style="border: 1px solid black; padding: 5px; width: 75%;">
+                                        <span t-esc="o.company_id.name" />
+                                    </td>
+                                </tr>
+                                <tr style="border: 1px solid black;">
+                                    <td
+                                        style="font-weight: bold; border: 1px solid black; padding: 5px;">
+                                        Division</td>
+                                    <td style="border: 1px solid black; padding: 5px;">:</td>
+                                    <td style="border: 1px solid black; padding: 5px;">
+                                        <span t-esc="o.division" />
+                                    </td>
+                                </tr>
+                                <tr style="border: 1px solid black;">
+                                    <td
+                                        style="font-weight: bold; border: 1px solid black; padding: 5px;">
+                                        Date</td>
+                                    <td style="border: 1px solid black; padding: 5px;">:</td>
+                                    <td style="border: 1px solid black; padding: 5px;">
+                                        <span t-esc="o.date.strftime('%d-%m-%Y') if o.date else ''" />
+                                    </td>
+                                </tr>
+                                <tr style="border: 1px solid black;">
+                                    <td
+                                        style="font-weight: bold; border: 1px solid black; padding: 5px;">Part
+                                        Sales</td>
+                                    <td style="border: 1px solid black; padding: 5px;">:</td>
+                                    <td style="border: 1px solid black; padding: 5px;">
+                                        <span t-esc="o.part_sales_id.name" />
+                                    </td>
+                                </tr>
+                                <tr style="border: 1px solid black;">
+                                    <td
+                                        style="font-weight: bold; border: 1px solid black; padding: 5px;">
+                                        Reason</td>
+                                    <td style="border: 1px solid black; padding: 5px;">:</td>
+                                    <td style="border: 1px solid black; padding: 5px;">
+                                        <span t-esc="o.reason" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-xs-12"
+                            style="font-size:10px; margin-top: 20px; margin-left: 50px; margin-right: 50px;">
+                            <table style="border-collapse: collapse; width: 100%;" border="1">
+                                <tr style="border: 1px solid black;">
+                                    <td
+                                        style="border: 1px solid black; padding: 5px; text-align: center;">Diajukan
+                                        Oleh</td>
+                                    <td
+                                        style="border: 1px solid black; padding: 5px; text-align: center;"
+                                        colspan="2">Mengetahui</td>
+                                </tr>
+                                <tr style="border: 1px solid black;">
+                                    <td style="border: 1px solid black; padding: 5px; height: 50px;"></td>
+                                    <td style="border: 1px solid black; padding: 5px; height: 50px;"></td>
+                                    <td style="border: 1px solid black; padding: 5px; height: 50px;"></td>
+                                </tr>
+                                <tr style="border: 1px solid black;">
+                                    <td style="border: 1px solid black; padding: 5px; height: 20px;"></td>
+                                    <td style="border: 1px solid black; padding: 5px; height: 20px;"></td>
+                                    <td style="border: 1px solid black; padding: 5px; height: 20px;"></td>
+                                </tr>
+                                <tr style="border: 1px solid black;">
+                                    <td
+                                        style="border: 1px solid black; padding: 5px; text-align: center;">
+                                        Frontdesk</td>
+                                    <td
+                                        style="border: 1px solid black; padding: 5px; text-align: center;">
+                                        Kamek/SA(WS)</td>
+                                    <td
+                                        style="border: 1px solid black; padding: 5px; text-align: center;">
+                                        ADH</td>
+                                </tr>
+                            </table>
+                            <p style="margin-top: 10px;"><span t-esc="today" />, <span
+                                    t-esc="user.name" /></p>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

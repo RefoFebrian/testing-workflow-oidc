@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-name="tw_boom_dashboard.ProgressBarChart">
+        <div class="o_progress_bar_chart" t-att-style="containerStyle">
+            <div class="progress-label" t-att-style="labelStyle">
+                <span t-esc="state.name"/>
+            </div>
+            <div class="progress-container" t-att-style="progressContainerStyle">
+                <div class="progress-bar" t-att-style="progressBarStyle">
+                    <span t-if="state.showLabel and state.percentage &gt;= 15" 
+                          class="progress-text" 
+                          t-att-style="progressLabelStyle"
+                          t-esc="labelText"/>
+                </div>
+            </div>
+            <div t-if="state.showLabel and state.percentage &lt; 15" 
+                 class="progress-label-outside" 
+                 style="text-align: center; margin-top: 5px;">
+                <span t-att-style="labelStyle" t-esc="labelText"/>
+            </div>
+        </div>
+    </t>
+</templates>

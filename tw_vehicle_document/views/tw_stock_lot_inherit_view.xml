@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_production_lot_vehicle_document_form" model="ir.ui.view">
+            <field name="name">stock.lot.form</field>
+            <field name="model">stock.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//page[@name='description']" position="after">
+                    <page string="Document Handling" name="page_document_handling">
+                        <group>
+                            <group>
+                                <field name="document_state"/>
+                                <field name="cddb_state"/>
+                                <field name="vehicle_document_outstanding_date" readonly="1"/>
+                            </group>
+                        </group>
+                        <group name="vehicle_document" string="Proses Faktur">
+                            <group>
+                                <field name="vehicle_document_request_id" string="Permohonan Faktur" readonly="1"/>
+                                <field name="vehicle_document_request_date" string="Tanggal Permohonan Faktur" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="vehicle_document_receive_id" string="Penerimaan Faktur" readonly="1"/>
+                                <field name="vehicle_document_receive_date" string="Tanggal Penerimaan Faktur" readonly="1"/>
+                                <field name="print_date" string="Tanggal Cetak" readonly="1"/>
+                                <field name="doc_number" string="No Faktur STNK" readonly="1"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

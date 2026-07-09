@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    
+        <!-- TW Work Order Claim Group Read -->
+        <record id="tw_work_order_claim_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Work Order Claim Read</field>
+        </record>
+
+        <record id="tw_work_order_claim_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_work_order_claim" />
+            <field name="name">tw_work_order_claim read</field>
+            <field name="group_id" ref="tw_work_order_claim_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+        
+        <record id="tw_work_order_claim_line_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_work_order_claim_line" />
+            <field name="name">tw_work_order_claim_line read</field>
+            <field name="group_id" ref="tw_work_order_claim_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="tw_work_order_claim_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Work Order Claim Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_work_order_claim_group_read'))]" />
+        </record>
+
+        <record id="tw_work_order_claim_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_work_order_claim" />
+            <field name="name">tw_work_order_claim update</field>
+            <field name="group_id" ref="tw_work_order_claim_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_work_order_claim_line_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_work_order_claim_line" />
+            <field name="name">tw_work_order_claim_line update</field>
+            <field name="group_id" ref="tw_work_order_claim_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_work_order_claim_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Work Order Claim Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_work_order_claim_group_read'))]" />
+        </record>
+
+        <record id="tw_work_order_claim_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_work_order_claim" />
+            <field name="name">tw_work_order_claim delete</field>
+            <field name="group_id" ref="tw_work_order_claim_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="tw_work_order_claim_line_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_work_order_claim_line" />
+            <field name="name">tw_work_order_claim_line delete</field>
+            <field name="group_id" ref="tw_work_order_claim_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+        
+        <record id="tw_workshop_claim_type_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Workshop Claim Type Read</field>
+        </record>
+
+        <record id="tw_workshop_claim_type_access_read" model="ir.model.access">
+            <field name="model_id" ref="tw_selection.model_tw_selection" />
+            <field name="name">access_tw_workshop_claim_type read</field>
+            <field name="group_id" ref="tw_workshop_claim_type_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+        
+        <record id="tw_workshop_claim_type_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Workshop Claim Type Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_workshop_claim_type_group_read'))]"/>
+        </record>
+
+        <record id="tw_workshop_claim_type_access_update" model="ir.model.access">
+            <field name="model_id" ref="tw_selection.model_tw_selection" />
+            <field name="name">access_tw_workshop_claim_type update</field>
+            <field name="group_id" ref="tw_workshop_claim_type_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_selection_work_order_claim_type" model="res.groups">
+            <field name="category_id" ref="tw_selection.tw_module_category_selection"/>
+            <field name="name">TW Selection Work Order Claim Type</field>
+            <field name="implied_ids" eval="[(4,ref('tw_selection.group_tw_selection_update'))]"/>
+        </record>
+    
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('tw_work_order_claim_group_read')),
+                (4,ref('tw_work_order_claim_group_update')),
+                (4,ref('tw_work_order_claim_group_delete')),
+                (4,ref('tw_workshop_claim_type_group_read')),
+                (4,ref('tw_workshop_claim_type_group_update')),
+                (4,ref('group_tw_selection_work_order_claim_type')),
+                ]" />
+        </record>
+    </data>
+    
+</odoo>

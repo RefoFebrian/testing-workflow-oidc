@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_po_asset_cancel_read,tw_po_asset_cancel read,model_tw_purchase_order_asset_cancel,tw_po_asset_cancel.group_po_asset_cancel_read,1,0,0,0
+access_tw_po_asset_cancel_update,tw_po_asset_cancel update,model_tw_purchase_order_asset_cancel,tw_po_asset_cancel.group_po_asset_cancel_update,1,1,1,0
+access_tw_po_asset_cancel_delete,tw_po_asset_cancel delete,model_tw_purchase_order_asset_cancel,tw_po_asset_cancel.group_po_asset_cancel_delete,1,0,0,1

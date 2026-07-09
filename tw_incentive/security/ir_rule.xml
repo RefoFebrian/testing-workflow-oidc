@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_employee_incentive_rule" model="ir.rule">
+            <field name="name">tw.employee.incentive.rule</field>
+            <field name="model_id" ref="model_tw_employee_incentive"/>
+            <field name="domain_force">[('company_id', 'parent_of', company_ids)]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        
+        <record id="tw_master_incentive_rule" model="ir.rule">
+            <field name="name">tw.master.incentive.rule</field>
+            <field name="model_id" ref="model_tw_master_incentive"/>
+            <field name="domain_force">[('company_id', 'parent_of', company_ids)]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="tw_master_target_margin_rule" model="ir.rule">
+            <field name="name">tw.master.target.margin.rule</field>
+            <field name="model_id" ref="model_tw_master_target_margin"/>
+            <field name="domain_force">[('company_id', 'parent_of', company_ids)]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="tw_recalculate_incentive_rule" model="ir.rule">
+            <field name="name">tw.recalculate.incentive.rule</field>
+            <field name="model_id" ref="model_tw_recalculate_incentive"/>
+            <field name="domain_force">[('company_id', 'parent_of', company_ids)]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+    </data>
+</odoo>

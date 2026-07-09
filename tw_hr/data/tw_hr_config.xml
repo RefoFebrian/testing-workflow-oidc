@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="allow_non_branch_control_creation_for_hrd" model="ir.config_parameter">
+            <field name="key">tw_hr.allow_non_branch_control_creation_for_hrd</field>
+            <field name="value">True</field>
+        </record>
+
+        <record id="allow_hrd_group_names" model="ir.config_parameter">
+            <field name="key">tw_hr.allow_hrd_group_names</field>
+            <field name="value">SPV HRD, Manager HRD, Staff HRD</field>
+        </record>
+
+    </data>
+</odoo>

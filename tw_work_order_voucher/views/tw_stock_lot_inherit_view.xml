@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_stock_lot_work_order_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.lot.work.order.inherit.form</field>
+            <field name="model">stock.lot</field>
+            <field name="inherit_id" ref="tw_sales_voucher.tw_stock_lot_dealer_sale_order_inherit_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='voucher_ids']/list/field[@name='partner_id']" position="after">
+                    <field name="amount"/>
+                    <field name="used_amount"/>
+                    <field name="residual_amount"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

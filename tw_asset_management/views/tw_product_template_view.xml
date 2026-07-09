@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- List View Product Asset -->
+        <record id="tw_product_template_asset_list_view" model="ir.ui.view">
+            <field name="name">product.template.asset.view.list</field>
+            <field name="model">product.template</field>
+            <field name="priority" eval="60" />
+            <field name="arch" type="xml">
+            <list string="Product Assets" default_order="id desc">
+                    <field name="categ_id" optional="show"/>
+                    <field name="default_code" optional="show"/>
+                    <field name="name" optional="show"/>
+                    <field name="is_need_gr" optional="show"/>
+                    <field name="asset_category_id" optional="show"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_product_template_asset_form_inherit" model="ir.ui.view">
+            <field name="name">Product Template Assets</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                
+                <field name="sale_ok" position="attributes">
+                    <attribute name="readonly">asset_category_id</attribute>
+                </field>
+
+                <page name="inventory" position="after">
+                    <page string="Assets" name="asset" invisible="context.get('action_name') != 'Non-trade'">
+                        <group>
+                            <group string="Assets Information" name="assets_information_product">
+                                <field name="is_asset"/>
+                                <field name="is_need_gr"/>
+                                <field name="asset_category_id"
+                                    domain="[('type', '=', 'purchase')]"
+                                    context="{'default_type': 'purchase'}"
+                                    string="Asset Category"/>
+                            </group>
+                        </group>
+                        <group name="register_assets" string="Register Assets" readonly="1">
+                            <field name="account_asset_ids" readonly="1"/>
+                        </group>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+        <record id="view_product_template_account_form_inherit" model="ir.ui.view">
+            <field name="name">Product Template (form)</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="om_account_asset.view_product_template_form_inherit"/>
+            <field name="arch" type="xml">
+                <field name="asset_category_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="tw_product_template_assets_unit_action" model="ir.actions.act_window">
+            <field name="name">Products (Assets)</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain" eval="[('categ_id', 'ilike', 'Non-trade')]"/>
+            <field name="context" eval="{
+                'default_sale_ok': False,
+                'default_purchase_ok': True,
+                'default_is_asset': True,
+				'default_division': 'Umum',      
+                'default_categ_id': ref('tw_asset_management.product_category_asset'),
+                'action_name' : 'Non-trade'
+			}"/>
+        </record>
+
+          <record id="tw_product_template_assets_unit_tree_action_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_asset_management.tw_product_template_asset_list_view"/>
+            <field name="act_window_id" ref="tw_product_template_assets_unit_action"/>
+        </record>
+    </data>
+
+</odoo>

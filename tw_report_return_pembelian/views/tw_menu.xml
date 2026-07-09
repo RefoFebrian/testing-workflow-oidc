@@ -1,0 +1,5 @@
+<odoo>
+    <data>
+        <menuitem id="menu_tw_report_return_pembelian" name="Laporan Return Pembelian" parent="tw_menu.submenu_tw_showroom_report" action="action_tw_report_return_pembelian" groups="tw_report_return_pembelian.group_report_return_pembelian" sequence="2"/>
+    </data>
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Menu: Generate Detail Faktur Pajak Masukan -->
+        <menuitem id="tw_report_detail_faktur_pajak_masukan_menuitem"
+            name="Generate Detail Faktur Pajak Masukan"
+            parent="tw_menu.submenu_tw_backoffice_report"
+            sequence="950"
+            action="tw_report_detail_faktur_pajak_masukan_action"
+            groups="tw_faktur_pajak_report.group_tw_report_detail_faktur_pajak_read"/>
+
+        <!-- Menu: All Faktur Pajak Report -->
+        <menuitem id="tw_report_faktur_pajak_menuitem"
+            name="All Faktur Pajak"
+            parent="tw_menu.submenu_tw_backoffice_report"
+            sequence="4"
+            action="tw_report_faktur_pajak_action"
+            groups="tw_faktur_pajak_report.group_tw_report_faktur_pajak_read"/>
+    </data>
+</odoo>

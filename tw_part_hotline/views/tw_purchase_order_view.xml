@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_purchase_order_hotline_view_form" model="ir.ui.view">
+            <field name="name">tw.purchase.order.hotline.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="tw_purchase_order.tw_inherit_purchase_order_form_view" />
+            <field name="arch" type="xml">
+                <field name="purchase_order_type_id" position="after">
+                    <field name="type_value" invisible="1" />
+                    <field name="part_hotline_id" invisible="type_value != 'HOTLINE' or division != 'Sparepart'" required="type_value == 'HOTLINE' and division == 'Sparepart' and date_order >= '2019-10-07 00:00:00'" readonly="state != 'draft'" domain="[('company_id','=',company_id),('state','=','confirmed'),('status_po','=','draft'),('is_fully_po','=',False)]" options="{'no_open':True,'no_create':True}" />
+                </field>
+            </field>
+        </record>
+
+        <record id="purchase_order_hotline_view_form" model="ir.ui.view">
+            <field name="name">purchase.order.hotline.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form" />
+            <field name="arch" type="xml">
+                <button name="action_view_invoice" position="after">
+                    <button name="action_view_part_hotline" icon="fa-wrench" invisible="not part_hotline_id" string="Hotline" type="object" class="oe_stat_button"/>
+                </button>
+                <xpath expr="//field[@name='order_line']/list//field[@name='product_id']" position="before">
+                    <field name="part_hotline_product_ids" column_invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/list//field[@name='product_id']" position="attributes">
+                    <attribute name="domain">[('purchase_ok', '=', True), ('division', '=', parent.division)] + (parent.type_value == 'HOTLINE' and parent.part_hotline_id and [('id', 'in', part_hotline_product_ids)] or [])</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/list//field[@name='product_qty']" position="attributes">
+                    <attribute name="readonly">parent.type_value == 'HOTLINE'</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/list//field[@name='price_unit']" position="attributes">
+                    <attribute name="readonly">parent.type_value == 'HOTLINE'</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/list//field[@name='product_uom']" position="attributes">
+                    <attribute name="readonly">parent.type_value == 'HOTLINE'</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

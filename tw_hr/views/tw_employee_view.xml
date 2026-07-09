@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_hr_employee_list_view" model="ir.ui.view">
+            <field name="name">tw.hr.employee.tree</field>
+            <field name="model">hr.employee</field>
+            <field eval="1" name="priority"/>
+            <field name="arch" type="xml">
+                <list string="Employee">
+                    <field name="company_id"/>
+                    <field name="job_id"/>
+                    <field name="name"/>
+                    <field name="registry_number"/>
+                    <field name="work_phone" class="o_force_ltr" readonly="1" optional="hide"/>
+                    <field name="work_email" optional="hide"/>
+                    <field name="department_id" optional="hide"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_hr_employee_form_view" model="ir.ui.view">
+            <field name="name">tw.hr.view.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field eval="1" name="priority"/>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <header position="inside">
+                    <button name="action_employee_reactivate" string="Reactivate" type="object" class="btn btn-primary" invisible="active" confirm="Are you sure want to reactivate this employee?"/>
+                    <button name="action_employee_deactivate" string="Deactivate" type="object" class="btn btn-secondary" invisible="not active"/>
+                </header>
+
+                <field name="parent_id" position="after">
+                    <field invisible="1" name="state"/>
+                </field>
+                <xpath expr="//sheet/group/group/field[@name='company_id'][1]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//group[2]//field[@name='parent_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <field name="coach_id" position="replace">
+                    <field name="coach_id" widget="many2one_avatar_user"/>
+                    <field name="parent_id" widget="many2one_avatar_user"/>
+                </field>
+                <field name="work_email" position="before">
+                    <field name="company_id" options="{'no_open':True,'no_create':True}" required="1" string="Branch" readonly="state != 'draft'"/>
+                    <field name="company_id" invisible="1"/>
+                </field>
+                <field name="job_title" position="before">
+                    <field name="registry_number" placeholder="NIP" required="1"/>
+                </field>
+                <field name="employee_type" position="after">
+                    <field name="is_user"/>
+                </field>
+                <button name="action_create_user" position="after">
+                    <button string="Open User" class="btn btn-link" type="object" name="action_open_user" invisible="user_id == False" groups="tw_base.group_system_admin"/>
+                </button>
+
+                <field name="department_id" position="replace">
+                    <field name="department_id" invisible="1"/>
+                </field>
+
+                <field name="job_id" position="replace">
+                    <field name="job_id" required="1" options="{'no_open': True, 'no_create': True}" domain="['|',('company_id', 'parent_of', company_id), ('company_id', '=', False)]"/>
+                    <field name="department_id" options="{'no_open': True, 'no_create': True}"/>
+                </field>
+
+                <xpath expr="//notebook/page[@name='public']/div[@id='o_work_employee_container']/div[@id='o_work_employee_main']/group[1]" position="before">
+                    <group name="work_state" string="Status Employee">
+                        <field name="working_start_date" required="1"/>
+                        <field name="working_end_date" readonly="1"/>
+                        <field name="tax_number"/>
+                        <field name="contract_number"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='work_email']" position="attributes">
+                    <attribute name="required">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='identification_id']" position="attributes">
+                    <attribute name="required">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='bank_account_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <page name="personal_information" position="after">
+                    <page name="career_record" string="Career Records">
+                        <field name="employee_career_record_ids">
+                            <list delete="false" edit="false" create="false">
+                                <field name="type"/>
+                                <field name="model_name" optional="hide"/>
+                                <field name="date_assign"/>
+                                <field name="prev_id" optional="hide"/>
+                                <field name="curr_id" optional="hide"/>
+                                <field name="prev_name" optional="hide"/>
+                                <field name="curr_name" optional="hide"/>
+                                <field name="name"/>
+                                <field name="remark"/>
+                            </list>
+                        </field>
+                    </page>
+                </page>
+
+                <xpath expr="//page[@name='personal_information']//group" position="inside">
+                    <group name="bank_account_group" string="Bank Account">
+                        <field name="bank_account_id" context="{'default_partner_id': work_contact_id}" options="{'no_quick_create': True}" readonly="0" required="create_date" invisible="not create_date"/>
+                        <field name="bank_id" required="not create_date" invisible="create_date" options="{'no_open': True, 'no_create': True}"/>
+                        <field name="acc_number" required="not create_date" invisible="create_date"/>
+                        <field name="acc_holder_name" required="not create_date" invisible="create_date"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//page[last()]" position="after">
+                    <page name="audit_trail" string="Audit Trail">
+                        <group>
+                            <group>
+                                <field name="create_uid"/>
+                                <field name="create_date"/>
+                            </group>
+                            <group>
+                                <field name="write_uid"/>
+                                <field name="write_date"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_employee_form_view" model="ir.ui.view">
+            <field name="name">tw.hr.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field eval="1" name="priority"/>
+            <field name="inherit_id" ref="hr_skills.hr_employee_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='skills_resume']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_employee_filter_view" model="ir.ui.view">
+            <field name="name">tw.employee.filter.inherit.view</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_filter"/>
+            <field name="arch" type="xml">
+                <field name="job_id" position="after">
+                    <field name="identification_id" string="No KTP"/>
+                </field>
+                <field name="name" position="after">
+                    <field name="company_id" select="True"/>
+                </field>
+                <xpath expr="//filter[@name='group_manager']" position="after">
+                    <filter name="group_branch" string="Branch" domain="[]" context="{'group_by': 'company_id'}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- All Employee Action View -->
+        <record id="tw_employee_all_action" model="ir.actions.server">
+            <field name="name">All Employee</field>
+            <field name="model_id" ref="tw_hr.model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['hr.employee'].action_employee_tree()
+            </field>
+        </record>
+
+        <!-- Salesman Action View -->
+        <record id="tw_employee_salesman_action" model="ir.actions.server">
+            <field name="name">Salesman</field>
+            <field name="model_id" ref="tw_hr.model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['hr.employee'].action_employee_tree('salesman')
+            </field>
+        </record>
+
+        <!-- Mechanic Action View -->
+        <record id="tw_employee_mechanic_action" model="ir.actions.server">
+            <field name="name">Mechanic</field>
+            <field name="model_id" ref="tw_hr.model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['hr.employee'].action_employee_tree('mechanic')
+            </field>
+        </record>
+
+        <!-- Deactivate Employee Action View -->
+        <record id="tw_employee_deactivate_form_view" model="ir.ui.view">
+            <field name="name">hr.employee.deactivate.form</field>
+            <field name="model">hr.employee</field>
+            <field name="mode">primary</field>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <form string="Deactivate Employee">
+                    <group>
+                        <field name="working_end_date" required="1"/>
+                    </group>
+                    <footer>
+                        <button name="action_confirm_deactivate" string="Deactivate" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

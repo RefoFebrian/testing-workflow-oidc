@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_vehicle_registration_process,tw_vehicle_registration_process,model_tw_vehicle_registration_process,base.group_user,1,0,0,0
+access_tw_vehicle_registration_process_line,tw_vehicle_registration_process_line,model_tw_vehicle_registration_process_line,base.group_user,1,0,0,0
+

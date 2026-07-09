@@ -1,0 +1,5 @@
+<odoo>
+    <data>
+        <menuitem id="menu_report_supplier" parent="tw_menu.submenu_tw_general_affair_report" action="action_report_supplier" groups="tw_report_supplier.group_report_supplier" sequence="2"/>
+    </data>
+</odoo>

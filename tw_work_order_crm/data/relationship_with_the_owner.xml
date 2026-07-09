@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+        <record id="tw_work_order_crm_relationship_with_the_owner_sendiri_data" model="tw.selection">
+            <field name="name">Sendiri</field>
+            <field name="type">HubunganDenganPemilik</field>
+            <field name="value">sendiri</field>
+            <field name="internal_value">sendiri</field>
+        </record>
+        <record id="tw_work_order_crm_relationship_with_the_owner_anak_data" model="tw.selection">
+            <field name="name">Anak</field>
+            <field name="type">HubunganDenganPemilik</field>
+            <field name="value">anak</field>
+            <field name="internal_value">anak</field>
+        </record>
+        <record id="tw_work_order_crm_relationship_with_the_owner_ayah_data" model="tw.selection">
+            <field name="name">Ayah</field>
+            <field name="type">HubunganDenganPemilik</field>
+            <field name="value">ayah</field>
+            <field name="internal_value">ayah</field>
+        </record>
+        <record id="tw_work_order_crm_relationship_with_the_owner_ibu_data" model="tw.selection">
+            <field name="name">Ibu</field>
+            <field name="type">HubunganDenganPemilik</field>
+            <field name="value">ibu</field>
+            <field name="internal_value">ibu</field>
+        </record>
+        <record id="tw_work_order_crm_relationship_with_the_owner_suami_data" model="tw.selection">
+            <field name="name">Suami</field>
+            <field name="type">HubunganDenganPemilik</field>
+            <field name="value">suami</field>
+            <field name="internal_value">suami</field>
+        </record>
+        <record id="tw_work_order_crm_relationship_with_the_owner_istri_data" model="tw.selection">
+            <field name="name">Istri</field>
+            <field name="type">HubunganDenganPemilik</field>
+            <field name="value">istri</field>
+            <field name="internal_value">istri</field>
+        </record>
+        <record id="tw_work_order_crm_relationship_with_the_owner_kerabat_saudara_data" model="tw.selection">
+            <field name="name">Kerabat/Saudara</field>
+            <field name="type">HubunganDenganPemilik</field>
+            <field name="value">kerabat_saudara</field>
+            <field name="internal_value">kerabat_saudara</field>
+        </record>
+        <record id="tw_work_order_crm_relationship_with_the_owner_teman_data" model="tw.selection">
+            <field name="name">Teman</field>
+            <field name="type">HubunganDenganPemilik</field>
+            <field name="value">teman</field>
+            <field name="internal_value">teman</field>
+        </record>
+        
+    </data>
+
+</odoo>

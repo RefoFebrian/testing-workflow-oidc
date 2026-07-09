@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="tw_map_widget.MapWidget">
+        <div class="o_tw_map_widget">
+            <t t-if="!props.readonly">
+                <div class="tw-map-search-container input-group mb-2">
+                    <input type="text" t-ref="searchInput" class="form-control" placeholder="Search location..." t-on-keydown="onSearchKeyDown"/>
+                    <button class="btn btn-primary" type="button" t-on-click="onSearchClick">
+                        <i class="fa fa-search"/>
+                    </button>
+                </div>
+            </t>
+            <div class="tw-map-container" t-ref="mapContainer"></div>
+        </div>
+    </t>
+</templates>

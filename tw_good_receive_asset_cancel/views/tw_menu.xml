@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- GR Asset Cancel Menu -->
+        <menuitem 
+            id="tw_good_receive_asset_cancel_menuitem" 
+            name="GR Asset Cancel" 
+            parent="tw_po_asset_cancel.submenu_tw_general_affair_cancellation" 
+            action="tw_good_receive_asset_cancel.action_tw_good_receive_asset_cancel" 
+            groups="tw_good_receive_asset_cancel.group_gr_asset_cancel_read" 
+            sequence="20"/>
+
+    </data>
+</odoo>

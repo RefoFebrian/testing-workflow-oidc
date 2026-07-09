@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+<data>
+
+		<record model="ir.ui.view" id="tw_hutang_komisi_tree_view">
+		    <field name="name">tw.commission.tree</field>
+		    <field name="model">tw.commission</field>
+		    <field name="arch" type="xml">
+		        <list string="Hutang Komisi">
+		            <field name="name"/>
+		             <field name="area_id"/>
+		            <field name="company_id"/>
+					<field name="division"/>
+					<field name="commission_type"/>
+					<field name="state"/>
+		        </list>
+		     </field>
+		</record>
+		 
+
+   		<record model="ir.ui.view" id="tw_hutang_komisi_form_view">
+		    <field name="name">tw.commission.form</field>
+		    <field name="model">tw.commission</field>
+		    <field name="arch" type="xml">
+		        <form string="Hutang Komisi" version="7.0">
+ 		        	<header>
+						<button name="action_confirm" data-hotkey="c" invisible="state != 'draft'" string="Confirm" type="object" class="oe_highlight"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,confirm"/>	
+		        	</header>
+					<sheet>
+						<group>
+							<group>
+								<field name="company_id" readonly="state not in ['draft', 'on_revision']" options="{'no_create': True,'no_open': True}"/>
+								<field name="division" readonly="state not in ['draft', 'on_revision']"/>
+								<field name="area_id" domain="[('company_ids','=',company_id)]" readonly="state not in ['draft', 'on_revision']" options="{'no_create': True,'no_open': True}"/>
+								<field name="name" readonly="state not in ['draft', 'on_revision']"/>
+								<label for="date_start" string="Date Start"/>
+									<div>
+										<field name="date_start" class="oe_inline" nolabel="1" readonly="state not in ['draft', 'on_revision']"/> -
+										<field name="date_end" nolabel="1" class="oe_inline" readonly="state not in ['draft', 'editable', 'on_revision']"/>
+									</div>
+								<field name="commission_type" readonly="state not in ['draft', 'on_revision']"/>
+														
+							</group>
+							<group>
+								<field name="active" readonly="state not in ['draft', 'on_revision']"/> 	
+								<field name="description" readonly="state not in ['draft', 'on_revision']"/>
+								<field name="amount_commission"/>                                      	          	
+							</group>
+						</group>
+						<notebook>
+							<page name="hc_detail" string="Hutang Komisi Detail">		             
+							<field colspan="4" name="commission_line_ids" nolabel="1" readonly="state not in ['draft', 'on_revision']">
+								<list string="Hutang Komisi" editable="bottom">
+									<field name="product_template_id_domain" column_invisible="1"/>
+									<field name="product_template_id" required="1" domain="product_template_id_domain" options="{'no_create': True,'no_open': True}"/>
+									<field name="amount" required="1"/>
+								</list>			                
+							</field>
+						</page>
+					</notebook>
+				</sheet>
+			  </form>
+		    </field>
+		</record>
+
+		<record id="tw_commission_view_search" model="ir.ui.view">
+            <field name="name">tw.commission.search</field>
+            <field name="model">tw.commission</field>
+            <field name="arch" type="xml">
+                <search string="Hutang Komisi">
+                    <filter string="Draft" name="filter_by_draft" domain="[('state','=','draft')]" />
+                    <filter string="Confirm" name="filter_by_confirm" domain="[('state','=','confirm')]" />
+					<filter string="Tipe Komisi Fix" name="filter_by_fixed" domain="[('commission_type','=','fix')]" />
+					<filter string="Tipe Komisi Non Fix" name="filter_by_non_fixed" domain="[('commission_type','=','non')]" />
+                    <field name="name" select="True" />
+                    <field name="company_id" select="True" />
+                    <field name="division" select="True" />
+                    <field name="state" select="True" />
+                    <group string="Group By..">
+                        <filter string="Name" name="group_by_name" icon="terp-go-month" domain="[]"
+							context="{'group_by':'name'}" />
+						<filter string="Branch" name="group_by_company_id" icon="terp-go-month" domain="[]"
+							context="{'group_by':'company_id'}" />
+						<filter string="Division" name="group_by_division" icon="terp-go-month" domain="[]"
+							context="{'group_by':'division'}" />
+						<filter string="State" name="group_by_state" icon="terp-go-month" domain="[]"
+							context="{'group_by':'state'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+		<record model="ir.actions.act_window" id="tw_hutang_komisi_action">
+		    <field name="name">Hutang Komisi</field>
+			<field name="path">commission</field>
+		    <field name="res_model">tw.commission</field>
+		    <field name="view_mode">list,form</field>
+		</record>
+ 		
+</data>
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- 1. Data Partner AstraPay MD TDM -->
+        <record id="res_partner_astrapay_indonesia_md_tdm" model="res.partner">
+    		<field name="name">AstraPay MD TDM</field>
+    		<field name="code">astrapay_md_tdm</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+            <field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <!-- 1. Data User AstraPay MD TDM -->
+        <record id="res_users_astrapay_indonesia_md_tdm" model="res.users">
+    		<field name="name">AstraPay MD TDM</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_indonesia_md_tdm"/>
+            <field name="login">astrapay_md_tdm</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+    </data>
+</odoo>

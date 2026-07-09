@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+
+    <!-- Send to Popeye -->
+        <record id="group_button_send_to_popeye" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Button Send to Popeye</field>
+        </record>
+        
+    <!-- Button Reject -->
+        <record id="group_button_reject_outgoing_sp" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Button Reject Outgoing Payment</field>
+        </record>
+
+        <record id="tw_base.group_system_admin" model="res.groups">
+			<field name="implied_ids" eval="[
+				(4,ref('group_button_send_to_popeye')),
+				(4,ref('group_button_reject_outgoing_sp')),
+				]" />
+		</record>
+	</data>
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="invoice_sale_order_template_discount_inherit" inherit_id="tw_sale.invoice_sale_order_template">
+            <!-- Add dynamic discount rows after the Jumlah row -->
+            <xpath expr="//tr[@name='tr_jumlah']" position="after">
+                <t t-if="doc.discount_ids">
+                    <t t-foreach="doc.discount_ids" t-as="discount_line">
+                        <tr>
+                            <td colspan="2">
+                                <span t-esc="discount_line.name"/>
+                            </td>
+                            <td align="right" class="text-end">
+                                <span t-esc="discount_line.amount" t-options='{"widget": "float", "precision": 2}'/>
+                            </td>
+                        </tr>
+                    </t>
+                </t>
+            </xpath>
+            
+            <!-- Update the bank info rowspan dynamically to cover the new discount rows -->
+            <xpath expr="//td[@name='td_bank_info']" position="attributes">
+                <attribute name="t-att-rowspan">5 + len(doc.discount_ids)</attribute>
+            </xpath>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="tw_upload_supplier_payment_menu" name="Upload Supplier Payment" parent="tw_menu.submenu_tw_backoffice_configuration" groups="tw_upload_supplier_payment.group_tw_upload_supplier_payment_read" sequence="6" action="action_tw_upload_supplier_payment" />
+    </data>
+</odoo>

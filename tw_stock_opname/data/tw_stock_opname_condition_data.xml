@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_selection_so_condition_kunci_gembok" model="tw.selection">
+	    	<field name="name">Kunci Gembok</field>
+            <field name="value">kunci_gembok</field> 
+	    	<field name="type">SoCondition</field> 
+        </record>
+    
+        <record id="tw_selection_so_condition_pengaman_unit" model="tw.selection">
+	    	<field name="name">Pengaman Unit</field>
+            <field name="value">pengaman_unit</field> 
+	    	<field name="type">SoCondition</field> 
+        </record>
+
+        <record id="tw_selection_so_condition_rumah_gembok" model="tw.selection">
+	    	<field name="name">Rumah Gembok</field>
+            <field name="value">rumah_gembok</field> 
+	    	<field name="type">SoCondition</field> 
+        </record>
+
+        <record id="tw_selection_so_condition_kondisi_lain" model="tw.selection">
+	    	<field name="name">Condition Lain</field>
+            <field name="value">kondisi_lain</field> 
+	    	<field name="type">SoCondition</field> 
+        </record>
+     </data>
+</odoo>

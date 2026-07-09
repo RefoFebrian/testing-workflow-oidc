@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Cancellation -->
+        <record id="group_tw_cancellation_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Cancellation Read</field>
+        </record>
+        
+        <record id="access_tw_cancellation_read" model="ir.model.access">
+            <field name="model_id" ref="tw_cancellation.model_tw_cancellation"/>
+            <field name="name">tw_cancellation read</field>
+            <field name="group_id" ref="group_tw_cancellation_read"/>
+            <field name="perm_read">1</field>
+        </record> 
+        
+        <record id="access_tw_cancellation_handler_read" model="ir.model.access">
+            <field name="model_id" ref="tw_cancellation.model_tw_cancellation_handler"/>
+            <field name="name">tw_cancellation_handler read</field>
+            <field name="group_id" ref="group_tw_cancellation_read"/>
+            <field name="perm_read">1</field>
+        </record> 
+
+        <record id="group_tw_cancellation_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Cancellation Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_cancellation_read'))]"/>
+        </record>
+        
+        <record id="access_tw_cancellation_update" model="ir.model.access">
+            <field name="model_id" ref="tw_cancellation.model_tw_cancellation"/>
+            <field name="name">tw_cancellation update</field>
+            <field name="group_id" ref="group_tw_cancellation_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record> 
+        
+        <record id="access_tw_cancellation_handler_update" model="ir.model.access">
+            <field name="model_id" ref="tw_cancellation.model_tw_cancellation_handler"/>
+            <field name="name">tw_cancellation_handler update</field>
+            <field name="group_id" ref="group_tw_cancellation_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record> 
+
+        <record id="group_tw_cancellation_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Cancellation Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_cancellation_read'))]"/>
+        </record>
+        
+        <record id="access_tw_cancellation_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_cancellation.model_tw_cancellation"/>
+            <field name="name">tw_cancellation delete</field>
+            <field name="group_id" ref="group_tw_cancellation_delete"/>
+            <field name="perm_unlink">1</field>
+        </record> 
+        
+        <record id="access_tw_cancellation_handler_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_cancellation.model_tw_cancellation_handler"/>
+            <field name="name">tw_cancellation_handler delete</field>
+            <field name="group_id" ref="group_tw_cancellation_delete"/>
+            <field name="perm_unlink">1</field>
+        </record> 
+
+
+        <!-- Workshop -->
+        <record id="group_tw_cancellation_workshop_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Cancellation Workshop Read</field>
+        </record>
+
+        <record id="access_tw_cancellation_workshop_read" model="ir.model.access">
+            <field name="model_id" ref="tw_cancellation.model_tw_cancellation"/>
+            <field name="name">tw_cancellation_workshop read</field>
+            <field name="group_id" ref="group_tw_cancellation_workshop_read"/>
+            <field name="perm_read">1</field>
+        </record> 
+        
+        <record id="access_tw_cancellation_workshop_handler_read" model="ir.model.access">
+            <field name="model_id" ref="tw_cancellation.model_tw_cancellation_handler"/>
+            <field name="name">tw_cancellation_handler read</field>
+            <field name="group_id" ref="group_tw_cancellation_workshop_read"/>
+            <field name="perm_read">1</field>
+        </record> 
+
+        <record id="group_tw_cancellation_workshop_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Cancellation Workshop Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_cancellation_workshop_read'))]"/>
+        </record>
+        
+        <record id="access_tw_cancellation_workshop_update" model="ir.model.access">
+            <field name="model_id" ref="tw_cancellation.model_tw_cancellation"/>
+            <field name="name">tw_cancellation_workshop update</field>
+            <field name="group_id" ref="group_tw_cancellation_workshop_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record> 
+        
+        <record id="access_tw_cancellation_handler_workshop_update" model="ir.model.access">
+            <field name="model_id" ref="tw_cancellation.model_tw_cancellation_handler"/>
+            <field name="name">tw_cancellation_handler_workshop update</field>
+            <field name="group_id" ref="group_tw_cancellation_workshop_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record> 
+
+        <record id="group_tw_cancellation_workshop_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Cancellation Workshop Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_cancellation_workshop_read'))]"/>
+        </record>
+        
+        <record id="access_tw_cancellation_workshop_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_cancellation.model_tw_cancellation"/>
+            <field name="name">tw_cancellation_workshop delete</field>
+            <field name="group_id" ref="group_tw_cancellation_workshop_delete"/>
+            <field name="perm_unlink">1</field>
+        </record> 
+        
+        <record id="access_tw_cancellation_handler_workshop_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_cancellation.model_tw_cancellation_handler"/>
+            <field name="name">tw_cancellation_handler_workshop delete</field>
+            <field name="group_id" ref="group_tw_cancellation_workshop_delete"/>
+            <field name="perm_unlink">1</field>
+        </record> 
+
+        <!-- Backoffice -->
+        <record id="group_tw_cancellation_backoffice_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Cancellation Backoffice Read</field>
+        </record>
+
+        <record id="access_tw_cancellation_backoffice_read" model="ir.model.access">
+            <field name="model_id" ref="tw_cancellation.model_tw_cancellation"/>
+            <field name="name">tw_cancellation_backoffice read</field>
+            <field name="group_id" ref="group_tw_cancellation_backoffice_read"/>
+            <field name="perm_read">1</field>
+        </record> 
+        
+        <record id="access_tw_cancellation_backoffice_handler_read" model="ir.model.access">
+            <field name="model_id" ref="tw_cancellation.model_tw_cancellation_handler"/>
+            <field name="name">tw_cancellation_handler_backoffice read</field>
+            <field name="group_id" ref="group_tw_cancellation_backoffice_read"/>
+            <field name="perm_read">1</field>
+        </record> 
+
+        <record id="group_tw_cancellation_backoffice_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Cancellation Backoffice Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_cancellation_backoffice_read'))]"/>
+        </record>
+        
+        <record id="access_tw_cancellation_backoffice_update" model="ir.model.access">
+            <field name="model_id" ref="tw_cancellation.model_tw_cancellation"/>
+            <field name="name">tw_cancellation_backoffice update</field>
+            <field name="group_id" ref="group_tw_cancellation_backoffice_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record> 
+        
+        <record id="access_tw_cancellation_handler_backoffice_update" model="ir.model.access">
+            <field name="model_id" ref="tw_cancellation.model_tw_cancellation_handler"/>
+            <field name="name">tw_cancellation_handler_backoffice update</field>
+            <field name="group_id" ref="group_tw_cancellation_backoffice_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record> 
+
+        <record id="group_tw_cancellation_backoffice_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Cancellation Backoffice Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_cancellation_backoffice_read'))]"/>
+        </record>
+        
+        <record id="access_tw_cancellation_backoffice_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_cancellation.model_tw_cancellation"/>
+            <field name="name">tw_cancellation_backoffice delete</field>
+            <field name="group_id" ref="group_tw_cancellation_backoffice_delete"/>
+            <field name="perm_unlink">1</field>
+        </record> 
+        
+        <record id="access_tw_cancellation_handler_backoffice_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_cancellation.model_tw_cancellation_handler"/>
+            <field name="name">tw_cancellation_handler_backoffice delete</field>
+            <field name="group_id" ref="group_tw_cancellation_backoffice_delete"/>
+            <field name="perm_unlink">1</field>
+        </record> 
+        
+    </data>
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_cancellation_read')),
+                (4, ref('group_tw_cancellation_update')),
+                (4, ref('group_tw_cancellation_delete')),
+                (4, ref('group_tw_cancellation_workshop_read')),
+                (4, ref('group_tw_cancellation_workshop_update')),
+                (4, ref('group_tw_cancellation_workshop_delete')),
+                (4, ref('group_tw_cancellation_backoffice_read')),
+                (4, ref('group_tw_cancellation_backoffice_update')),
+                (4, ref('group_tw_cancellation_backoffice_delete')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- List View -->
+        <record id="view_payment_request_list" model="ir.ui.view">
+            <field name="name">tw.payment.request.list</field>
+            <field name="model">tw.payment.request</field>
+            <field name="arch" type="xml">
+                <list default_order="id desc">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="partner_id"/>
+                    <field name="amount" sum="Total"/>
+                    <field name="date"/>
+                    <field name="state" widget="badge" decoration-info="state in ('draft','cancel','rejected')" decoration-warning="state not in ('draft','canceled','rejected','paid')" decoration-success="state == 'paid'"/>
+                </list>
+            </field>
+        </record>
+        
+        <!-- Form View -->
+        <record id="view_payment_request_form" model="ir.ui.view">
+            <field name="name">tw.payment.request.form</field>
+            <field name="model">tw.payment.request</field>
+            <field name="arch" type="xml">
+                <form string="Payment Request">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,paid"/>
+                        <button name="action_validate" string="Validate" type="object" class="oe_highlight" groups="tw_payment_request.group_payment_request_validate" invisible="state != 'draft'"/>
+                        <button name="action_print_payment_request" string="Print" type="object" class="oe_highlight" groups="tw_payment_request.group_tw_payment_request_print" invisible="state != 'paid'"/>
+                    </header>
+                    
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <!-- Invoice stat button -->
+                            <button name="action_view_payment" string="View Payment" type="object" icon="fa-dollar" invisible="not account_payment_ids" groups="tw_payment_request.group_tw_payment_request_view_payment"/>
+                        </div>
+                        <div class="oe_title">
+                            <h1 invisible="state != 'draft'"><span>Draft</span></h1>
+                            <h1 invisible="state == 'draft'"><field name="name" readonly="1"/></h1>
+                        </div>
+
+                        <field name="id" invisible="1"/>
+                        <field name="is_sent" invisible="1"/>
+                        <field name="need_cancel_request" invisible="1"/>
+                        <field name="is_reconciled" invisible="1"/>
+                        <field name="is_matched" invisible="1"/>
+                        <field name="payment_method_code" invisible="1"/>
+                        <field name="show_partner_bank_account" invisible="1"/>
+                        <field name="require_partner_bank_account" invisible="1"/>
+                        <field name="available_partner_bank_ids" invisible="1"/>
+                        <field name="country_code" invisible="1"/>
+                        <field name="partner_type" invisible="1"/>
+                        <field name="reconciled_invoices_type" invisible="1"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="paired_internal_transfer_payment_id" invisible="1"/>
+                        <field name="available_journal_ids" invisible="1"/>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="journal_id" invisible="1"/>
+                        <field name="available_payment_method_line_ids" invisible="1"/>
+                        <field name="available_account_ids" invisible="1"/>
+                        <field name="payment_method_line_id" invisible="1"/>
+                        <field name="move_id" invisible="1"/>
+                        <field name="line_ids" invisible="1"/>
+                        <field name="type" invisible="1"/>
+                        
+                        <group>
+                            <group>
+                                <field name="company_id" required="True" readonly="state != 'draft'" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="transaction_type" required="True" readonly="state != 'draft'"/>
+                                <field name="payment_request_type_id" required="transaction_type == 'recurring'" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'" invisible="transaction_type != 'recurring'"/>
+                                <field name="partner_id" required="True" readonly="state != 'draft'" options="{'no_create': True}"/>
+                                <field name="partner_bank_id" readonly="state != 'draft'" options="{'no_create': True}"/>
+                                <field name="memo" placeholder="Memo..." readonly="state != 'draft'"/>
+                                <div colspan="2" col="2" style="margin-bottom: 30px;">
+                                    <p>(*) <span style="font-style: italic;color: red">Mohon perhatikan pengisian taxes!!</span></p>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="division" required="True" readonly="state != 'draft'"/>
+                                <field name="date" required="True" readonly="1"/>
+                                <field name="payment_type" readonly="1"/>
+                                <field name="schedule_date" required="True" readonly="state != 'draft'"/>
+                                <field name="due_date" required="True" readonly="state != 'draft'"/>
+                                <field name="document_number" readonly="state != 'draft'"/>
+                                <field name="document_date" readonly="state != 'draft'"/>
+                                <field name="is_paid" string="Paid?" readonly="1" invisible="not is_paid"/>
+                            </group>
+                        </group>
+                        
+                        <notebook>
+                            <page string="Bill Information">
+                                <field name="line_dr_ids" readonly="state != 'draft'" context="{'default_beneficiary_company_id': company_id}">
+                                    <list editable="bottom">
+                                        <field name="is_recurring" column_invisible="1"/>
+                                        <field name="beneficiary_company_id" string="Branch" options="{'no_open': True, 'no_create': True}"/>
+                                        <field name="payment_request_line_type_id" domain="[('type_id','=',parent.payment_request_type_id)]" required="parent.transaction_type == 'recurring'" options="{'no_open': True, 'no_create': True}" column_invisible="parent.transaction_type != 'recurring'"/>
+                                        <field name="account_id" domain="[('id','in',parent.available_account_ids)]" required="1" readonly="parent.transaction_type == 'recurring'" options="{'no_open': True, 'no_create': True}" force_save="1"/>
+                                        <field name="note" required="parent.transaction_type == 'recurring'" column_invisible="parent.transaction_type != 'recurring'"/>
+                                        <field name="name" required="1" readonly="parent.transaction_type == 'recurring'" force_save="1"/>
+                                        <field name="amount" required="1"/>
+                                        <field name="tax_ids" widget="many2many_tags" options="{'no_open': True, 'no_create': True}"/>
+                                        <field name="amount_included" readonly="1" force_save="1" optional="hide"/>
+                                        <field name="amount_subtotal" required="1"/>
+                                    </list>
+                                </field>
+
+                                <group col="12" class="oe_invoice_lines_tab overflow-hidden">
+                                    <group colspan="8">
+                                    
+                                    </group>    
+                                    <group colspan="4">
+                                        <button name="action_update_amount" type="object" string=" Update Amount" help="Recompute all amount" class="btn-link mb-1 px-0" icon="fa-refresh" invisible="state != 'draft'"/>
+                                        <group class="oe_subtotal_footer">
+                                            <span>Untaxed Amount</span>
+                                            <field name="amount_untaxed" nolabel="1" readonly="1" widget="monetary"/>
+                                            <span>Taxes</span>
+                                            <field name="amount_tax" nolabel="1" readonly="1" widget="monetary"/>
+                                            <span style="font-weight: bold">Total</span>
+                                            <field name="amount_total" nolabel="1" readonly="1" widget="monetary" style="font-weight: bold"/>
+                                        </group>
+                                    </group>
+                                </group>
+                            </page>
+
+                            <page string="Lampiran">
+                                <field name="attachment_ids" nolabel="1" readonly="state != 'draft'"/>
+                            </page>
+
+                            <page string="Journal Items" invisible="not move_id">
+                                <field name="move_ids" readonly="1" />
+                            </page>
+                            
+                            <page name="audit_trail" string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"></field>
+                                        <field name="create_date" readonly="1"></field>
+                                        <field name="confirm_uid" readonly="1"></field>
+                                        <field name="confirm_date" readonly="1"></field>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1"></field>
+                                        <field name="write_date" readonly="1"></field>
+                                        <field name="validate_uid" readonly="1"></field>
+                                        <field name="validate_date" readonly="1"></field>
+                                    </group>
+                                </group>
+                            </page>	
+                        </notebook>
+                        
+                        
+                    <chatter/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <!-- Search View -->
+        <record id="view_payment_request_search" model="ir.ui.view">
+            <field name="name">tw.payment.request.search</field>
+            <field name="model">tw.payment.request</field>
+            <field name="arch" type="xml">
+                <search string="Payment Request">
+                    <field name="name" filter_domain="[('name', 'ilike', self)]"/>
+                    <field name="memo" string="Memo"/>
+                    <field name="company_id" string="Branch"/>
+                    <field name="partner_id" string="Partner"/>
+                    <field name="state"/>
+                    <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                    <filter string="Posted" name="posted" domain="[('state', '=', 'posted')]"/>
+                    <filter string="Cancelled" name="cancel" domain="[('state', '=', 'cancel')]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Branch" name="branch" context="{'group_by':'company_id'}"/>
+                        <filter string="Partner" name="partner" context="{'group_by':'partner_id'}"/>
+                        <filter string="State" name="state" context="{'group_by':'state'}"/>
+                        <filter string="Bill Date" name="date" context="{'group_by':'date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <!-- Action -->
+        <record id="action_payment_request" model="ir.actions.act_window">
+            <field name="name">Payment Request</field>
+            <field name="res_model">tw.payment.request</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('type', '=', 'payment_request')]</field>
+            <field name="search_view_id" ref="view_payment_request_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first payment request
+                </p>
+            </field>
+        </record>
+
+
+        <!-- Need to be separated, because it cant read its own ID on install -->
+        <record id="tw_payment_request.action_payment_request" model="ir.actions.act_window">
+            <field name="context" eval="
+                {
+                    'default_type': 'payment_request',
+                    'default_payment_type': 'outbound',
+                    'default_partner_type': 'supplier',
+                    'action_id': ref('tw_payment_request.action_payment_request'),
+                    'search_default_draft': 1,
+                }
+            " />
+        </record>
+
+
+        <record id="tw_payment_request_tree_action_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="view_payment_request_list"/>
+            <field name="act_window_id" ref="action_payment_request"/>
+        </record>
+
+        <record id="tw_payment_requestform_action_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_payment_request_form"/>
+            <field name="act_window_id" ref="action_payment_request"/>
+        </record>
+        
+    </data>
+</odoo>

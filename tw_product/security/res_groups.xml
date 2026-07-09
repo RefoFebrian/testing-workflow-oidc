@@ -1,0 +1,935 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+
+        <record id="tw_module_category_product" model="ir.module.category">
+            <field name="name">TW Product</field>
+        </record>
+
+<!-- Form Groups -->
+		
+        <record id="group_tw_product_product_form_read" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Variant Form Read</field>
+		</record>
+
+        <record id="group_tw_product_template_form_read" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Template Form Read</field>
+		</record>
+
+<!-- Product Product All -->
+
+		<record id="group_tw_product_product_all_read" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Variants (All) Read</field>
+            <field name="implied_ids" eval="[(4,ref('group_tw_product_product_form_read'))]" />
+		</record>
+
+		<record id="tw_product_product_all_access_read" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">tw_product_product_all read</field>
+			<field name="group_id" ref="group_tw_product_product_all_read" />
+			<field name="perm_read">1</field>
+		</record>
+
+		<record id="group_tw_product_product_all_update" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Variants (All) Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_product_product_all_read'))]" />
+		</record>
+
+		<record id="tw_product_product_all_access_update" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">"tw_product_product_all update</field>
+			<field name="group_id" ref="group_tw_product_product_all_update" />
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+		<record id="group_tw_product_product_all_delete" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Variants (All) Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_product_product_all_read'))]" />
+		</record>
+
+		<record id="tw_product_product_all_access_delete" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">tw_product_product_all delete</field>
+			<field name="group_id" ref="group_tw_product_product_all_delete" />
+			<field name="perm_unlink">1</field>
+		</record>
+
+<!-- Product Category -->
+		<record id="group_tw_product_product_category_read" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Categories Read</field>
+		</record>
+
+		<record id="tw_product_category_access_access_read" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">tw_product_product_all read</field>
+			<field name="group_id" ref="group_tw_product_product_all_read" />
+			<field name="perm_read">1</field>
+		</record>
+
+		<record id="group_tw_product_product_category_update" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Categories Update</field>
+		</record>
+
+		<record id="tw_product_category_access_access_update" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">tw_product_product_all update</field>
+			<field name="group_id" ref="group_tw_product_product_all_update" />
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+        <record id="group_tw_product_product_category_warehouse_read" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Categories Warehouse Read</field>
+		</record>
+        <record id="tw_product_category_access_access_warehouse_read" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">tw_product_category_access_access_warehouse_read</field>
+			<field name="group_id" ref="group_tw_product_product_category_warehouse_read" />
+			<field name="perm_read">1</field>
+		</record>
+        <record id="group_tw_product_product_category_warehouse_update" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Categories Warehouse update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_product_product_category_warehouse_read'))]"/>
+		</record>
+        <record id="tw_product_category_access_access_warehouse_update" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">tw_product_category_access_access_warehouse_update</field>
+			<field name="group_id" ref="group_tw_product_product_category_warehouse_update" />
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+<!-- Product Product Unit -->
+		<record id="group_tw_product_product_unit_read" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Variant (Unit) Read</field>
+		</record>
+
+		<record id="tw_product_product_unit_access_read" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">tw_product_product_unit read</field>
+			<field name="group_id" ref="group_tw_product_product_unit_read" />
+			<field name="perm_read">1</field>
+		</record>
+
+		<record id="group_tw_product_product_unit_update" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Variant (Unit) Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_product_product_unit_read'))]" />
+		</record>
+
+		<record id="tw_product_product_unit_access_update" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">"tw_product_product_unit update</field>
+			<field name="group_id" ref="group_tw_product_product_unit_update" />
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+		<record id="group_tw_product_product_unit_delete" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Variant (Unit) Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_product_product_unit_read'))]" />
+		</record>
+
+		<record id="tw_product_product_unit_access_delete" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">tw_product_product_unit delete</field>
+			<field name="group_id" ref="group_tw_product_product_unit_delete" />
+			<field name="perm_unlink">1</field>
+		</record>
+
+        <record id="group_tw_product_product_unit_master_read" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Variant (Unit) Master Read</field>
+		</record>
+
+        <record id="tw_product_product_unit_access_master_read" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">tw_product_product_unit_master read</field>
+			<field name="group_id" ref="group_tw_product_product_unit_master_read" />
+			<field name="perm_read">1</field>
+		</record>
+
+        <record id="group_tw_product_product_unit_master_update" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Variant (Unit) Master update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_product_product_unit_master_read'))]" />
+		</record>
+        <record id="tw_product_product_unit_access_master_update" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">tw_product_product_unit_master update</field>
+			<field name="group_id" ref="group_tw_product_product_unit_master_update" />
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+        <record id="group_tw_product_product_unit_master_delete" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Variant (Unit) Master delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_product_product_unit_master_read'))]" />
+		</record>
+        <record id="tw_product_product_unit_access_master_delete" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">tw_product_product_unit_master delete</field>
+			<field name="group_id" ref="group_tw_product_product_unit_master_delete" />
+			<field name="perm_unlink">1</field>
+		</record>
+
+<!-- Product Product Sparepart -->
+		<record id="group_tw_product_product_sparepart_read" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Variant (Sparepart) Read</field>
+		</record>
+
+		<record id="product_product_sparepart_access_read" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">product_product_sparepart read</field>
+			<field name="group_id" ref="group_tw_product_product_sparepart_read" />
+			<field name="perm_read">1</field>
+		</record>
+
+		<record id="group_tw_product_product_sparepart_update" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Variant (Sparepart) Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_product_product_sparepart_read'))]" />
+		</record>
+
+		<record id="product_product_sparepart_access_update" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">"product_product_sparepart update</field>
+			<field name="group_id" ref="group_tw_product_product_sparepart_update" />
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+		<record id="group_tw_product_product_sparepart_delete" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Variant (Sparepart) Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_product_product_sparepart_read'))]" />
+		</record>
+
+		<record id="product_product_sparepart_access_delete" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">product_product_sparepart delete</field>
+			<field name="group_id" ref="group_tw_product_product_sparepart_delete" />
+			<field name="perm_unlink">1</field>
+		</record>
+
+<!-- Product Product Service -->
+		<record id="group_tw_product_product_service_read" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Variant (Service) Read</field>
+		</record>
+
+		<record id="product_product_service_access_read" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">product_product_service read</field>
+			<field name="group_id" ref="group_tw_product_product_service_read" />
+			<field name="perm_read">1</field>
+		</record>
+
+		<record id="group_tw_product_product_service_update" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Variant (Service) Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_product_product_service_read'))]" />
+		</record>
+
+		<record id="product_product_service_access_update" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">"product_product_service update</field>
+			<field name="group_id" ref="group_tw_product_product_service_update" />
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+		<record id="group_tw_product_product_service_delete" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product Variant (Service) Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_product_product_service_read'))]" />
+		</record>
+
+		<record id="product_product_service_access_delete" model="ir.model.access">
+			<field name="model_id" ref="model_product_product" />
+			<field name="name">product_product_service delete</field>
+			<field name="group_id" ref="group_tw_product_product_service_delete" />
+			<field name="perm_unlink">1</field>
+		</record>
+
+<!-- Product Template All -->
+		<record id="group_tw_product_template_all_read" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Products (All) Read</field>
+            <field name="implied_ids" eval="[(4,ref('group_tw_product_template_form_read'))]" />
+		</record>
+
+		<record id="tw_product_template_all_access_read" model="ir.model.access">
+			<field name="model_id" ref="model_product_template" />
+			<field name="name">tw_product_template_all read</field>
+			<field name="group_id" ref="group_tw_product_template_all_read" />
+			<field name="perm_read">1</field>
+		</record>
+
+		<record id="group_tw_product_template_all_update" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Products (All) Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_product_template_all_read'))]" />
+		</record>
+
+		<record id="tw_product_template_all_access_update" model="ir.model.access">
+			<field name="model_id" ref="model_product_template" />
+			<field name="name">"tw_product_template_all update</field>
+			<field name="group_id" ref="group_tw_product_template_all_update" />
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+		<record id="group_tw_product_template_all_delete" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Products (All) Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_product_template_all_read'))]" />
+		</record>
+
+		<record id="tw_product_template_all_access_delete" model="ir.model.access">
+			<field name="model_id" ref="model_product_template" />
+			<field name="name">tw_product_template_all delete</field>
+			<field name="group_id" ref="group_tw_product_template_all_delete" />
+			<field name="perm_unlink">1</field>
+		</record>
+
+<!-- Product Template Unit -->
+		<record id="group_tw_product_template_unit_read" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product (Unit) Read</field>
+		</record>
+
+		<record id="tw_product_template_unit_access_read" model="ir.model.access">
+			<field name="model_id" ref="model_product_template" />
+			<field name="name">tw_product_template_unit read</field>
+			<field name="group_id" ref="group_tw_product_template_unit_read" />
+			<field name="perm_read">1</field>
+		</record>
+
+		<record id="tw_product_template_attribute_value_unit_access_read" model="ir.model.access">
+			<field name="model_id" ref="model_product_template_attribute_value" />
+			<field name="name">tw_product_template_attribute_value_unit read</field>
+			<field name="group_id" ref="group_tw_product_template_unit_read" />
+			<field name="perm_read">1</field>
+		</record>
+
+		<record id="tw_product_template_attribute_line_unit_access_read" model="ir.model.access">
+			<field name="model_id" ref="product.model_product_template_attribute_line" />
+			<field name="name">tw_product_template_attribute_line_unit read</field>
+			<field name="group_id" ref="group_tw_product_template_unit_read" />
+			<field name="perm_read">1</field>
+		</record>
+
+		<record id="group_tw_product_template_unit_update" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product (Unit) Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_product_template_unit_read'))]" />
+		</record>
+
+		<record id="tw_product_template_unit_access_update" model="ir.model.access">
+			<field name="model_id" ref="model_product_template" />
+			<field name="name">"tw_product_template_unit update</field>
+			<field name="group_id" ref="group_tw_product_template_unit_update" />
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+		<record id="tw_product_template_attribute_value_unit_access_update" model="ir.model.access">
+			<field name="model_id" ref="model_product_template_attribute_value" />
+			<field name="name">tw_product_template_attribute_value_unit update</field>
+			<field name="group_id" ref="group_tw_product_template_unit_update" />
+			<field name="perm_read">1</field>
+			<field name="perm_write">1</field>
+			<field name="perm_create">1</field>
+		</record>
+
+		<record id="tw_product_template_attribute_line_unit_access_update" model="ir.model.access">
+			<field name="model_id" ref="product.model_product_template_attribute_line" />
+			<field name="name">tw_product_template_attribute_line_unit update</field>
+			<field name="group_id" ref="group_tw_product_template_unit_update" />
+			<field name="perm_read">1</field>
+			<field name="perm_write">1</field>
+			<field name="perm_create">1</field>
+		</record>
+
+		<record id="group_tw_product_template_unit_delete" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product (Unit) Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_product_template_unit_read'))]" />
+		</record>
+
+		<record id="tw_product_template_unit_access_delete" model="ir.model.access">
+			<field name="model_id" ref="model_product_template" />
+			<field name="name">tw_product_template_unit delete</field>
+			<field name="group_id" ref="group_tw_product_template_unit_delete" />
+			<field name="perm_unlink">1</field>
+		</record>
+
+		<record id="tw_product_template_attribute_value_unit_access_delete" model="ir.model.access">
+			<field name="model_id" ref="model_product_template_attribute_value" />
+			<field name="name">tw_product_template_attribute_value_unit delete</field>
+			<field name="group_id" ref="group_tw_product_template_unit_delete" />
+			<field name="perm_read">1</field>
+			<field name="perm_write">1</field>
+			<field name="perm_create">1</field>
+			<field name="perm_unlink">1</field>
+		</record>
+
+		<record id="tw_product_template_attribute_line_unit_access_delete" model="ir.model.access">
+			<field name="model_id" ref="product.model_product_template_attribute_line" />
+			<field name="name">tw_product_template_attribute_line_unit delete</field>
+			<field name="group_id" ref="group_tw_product_template_unit_delete" />
+			<field name="perm_read">1</field>
+			<field name="perm_write">1</field>
+			<field name="perm_create">1</field>
+			<field name="perm_unlink">1</field>
+		</record>
+
+        <record id="group_tw_product_template_unit_master_read" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product (Unit) Master Read</field>
+		</record>
+
+        <record id="tw_product_template_unit_access_master_read" model="ir.model.access">
+			<field name="model_id" ref="model_product_template" />
+			<field name="name">tw_product_template_unit_master_read</field>
+			<field name="group_id" ref="group_tw_product_template_unit_master_read" />
+			<field name="perm_read">1</field>
+		</record>
+
+        <record id="group_tw_product_template_unit_master_update" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product (Unit) Master update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_product_template_unit_master_read'))]" />
+		</record>
+        <record id="tw_product_template_unit_access_master_update" model="ir.model.access">
+			<field name="model_id" ref="model_product_template" />
+			<field name="name">tw_product_template_unit_master_update</field>
+			<field name="group_id" ref="group_tw_product_template_unit_master_update" />
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+        <record id="group_tw_product_template_unit_master_delete" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product (Unit) Master delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_product_template_unit_master_read'))]" />
+		</record>
+        <record id="tw_product_template_unit_access_master_delete" model="ir.model.access">
+			<field name="model_id" ref="model_product_template" />
+			<field name="name">tw_product_template_unit_master delete</field>
+			<field name="group_id" ref="group_tw_product_template_unit_master_delete" />
+			<field name="perm_unlink">1</field>
+		</record>
+
+<!-- Product Template Sparepart -->
+		<record id="group_tw_product_template_sparepart_read" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product (Sparepart) Read</field>
+		</record>
+
+		<record id="product_template_sparepart_access_read" model="ir.model.access">
+			<field name="model_id" ref="model_product_template" />
+			<field name="name">product_template_sparepart read</field>
+			<field name="group_id" ref="group_tw_product_template_sparepart_read" />
+			<field name="perm_read">1</field>
+		</record>
+
+		<record id="group_tw_product_template_sparepart_update" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product (Sparepart) Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_product_template_sparepart_read'))]" />
+		</record>
+
+		<record id="product_template_sparepart_access_update" model="ir.model.access">
+			<field name="model_id" ref="model_product_template" />
+			<field name="name">"product_template_sparepart update</field>
+			<field name="group_id" ref="group_tw_product_template_sparepart_update" />
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+		<record id="group_tw_product_template_sparepart_delete" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product (Sparepart) Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_product_template_sparepart_read'))]" />
+		</record>
+
+		<record id="product_template_sparepart_access_delete" model="ir.model.access">
+			<field name="model_id" ref="model_product_template" />
+			<field name="name">product_template_sparepart delete</field>
+			<field name="group_id" ref="group_tw_product_template_sparepart_delete" />
+			<field name="perm_unlink">1</field>
+		</record>
+
+<!-- Product Template Service -->
+		<record id="group_tw_product_template_service_read" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product (Service) Read</field>
+		</record>
+
+		<record id="product_template_service_access_read" model="ir.model.access">
+			<field name="model_id" ref="model_product_template" />
+			<field name="name">product_template_service read</field>
+			<field name="group_id" ref="group_tw_product_template_service_read" />
+			<field name="perm_read">1</field>
+		</record>
+
+		<record id="group_tw_product_template_service_update" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product (Service) Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_product_template_service_read'))]" />
+		</record>
+
+		<record id="product_template_service_access_update" model="ir.model.access">
+			<field name="model_id" ref="model_product_template" />
+			<field name="name">"product_template_service update</field>
+			<field name="group_id" ref="group_tw_product_template_service_update" />
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+		<record id="group_tw_product_template_service_delete" model="res.groups">
+			<field name="category_id" ref="tw_product.tw_module_category_product"/>
+			<field name="name">TW Product (Service) Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_tw_product_template_service_read'))]" />
+		</record>
+
+		<record id="product_template_service_access_delete" model="ir.model.access">
+			<field name="model_id" ref="model_product_template" />
+			<field name="name">product_template_service delete</field>
+			<field name="group_id" ref="group_tw_product_template_service_delete" />
+			<field name="perm_unlink">1</field>
+		</record>
+
+<!-- Attribute -->
+
+        <record id="group_tw_attribute_read" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Attribute Read</field> 
+        </record> 
+        
+        <record id="access_tw_attribute_read" model="ir.model.access">
+            <field name="model_id" ref="product.model_product_attribute"/>
+            <field name="name">tw_attribute read</field> 
+            <field name="group_id" ref="group_tw_attribute_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_attribute_update" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Attribute Update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_attribute_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_attribute_update" model="ir.model.access">
+            <field name="model_id" ref="product.model_product_attribute"/>
+            <field name="name">tw_attribute update</field> 
+            <field name="group_id" ref="group_tw_attribute_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_attribute_delete" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Attribute Delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_attribute_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_attribute_delete" model="ir.model.access">
+            <field name="model_id" ref="product.model_product_attribute"/>
+            <field name="name">tw_attribute delete</field> 
+            <field name="group_id" ref="group_tw_attribute_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>      
+
+<!-- Attribute Value -->
+
+        <record id="group_tw_attribute_value_read" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Attribute Value Read</field> 
+        </record> 
+        
+        <record id="access_tw_attribute_value_read" model="ir.model.access">
+            <field name="model_id" ref="product.model_product_attribute_value"/>
+            <field name="name">tw_attribute_value read</field> 
+            <field name="group_id" ref="group_tw_attribute_value_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_attribute_value_update" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Attribute Value Update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_attribute_value_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_attribute_value_update" model="ir.model.access">
+            <field name="model_id" ref="product.model_product_attribute_value"/>
+            <field name="name">tw_attribute_value update</field> 
+            <field name="group_id" ref="group_tw_attribute_value_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_attribute_value_delete" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Attribute Value Delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_attribute_value_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_attribute_value_delete" model="ir.model.access">
+            <field name="model_id" ref="product.model_product_attribute_value"/>
+            <field name="name">tw_attribute_value delete</field> 
+            <field name="group_id" ref="group_tw_attribute_value_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+<!-- Product Product Direct Gift -->
+
+        <record id="group_tw_product_variants_direct_gift_read" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Product Variant Direct Gift Read</field> 
+        </record> 
+        
+        <record id="access_tw_product_variants_direct_gift_read" model="ir.model.access">
+            <field name="model_id" ref="model_product_product"/>
+            <field name="name">tw_product_variants_direct_gift read</field> 
+            <field name="group_id" ref="group_tw_product_variants_direct_gift_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_product_variants_direct_gift_update" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Product Variant Direct Gift Update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_product_variants_direct_gift_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_product_variants_direct_gift_update" model="ir.model.access">
+            <field name="model_id" ref="model_product_product"/>
+            <field name="name">tw_product_variants_direct_gift update</field> 
+            <field name="group_id" ref="group_tw_product_variants_direct_gift_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_product_variants_direct_gift_delete" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Product Variant Direct Gift Delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_product_variants_direct_gift_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_product_variants_direct_gift_delete" model="ir.model.access">
+            <field name="model_id" ref="model_product_product"/>
+            <field name="name">tw_product_variants_direct_gift delete</field> 
+            <field name="group_id" ref="group_tw_product_variants_direct_gift_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>      
+
+<!-- Product Template Direct Gift -->
+
+        <record id="group_tw_product_direct_gift_read" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Product Direct Gift Read</field> 
+        </record> 
+        
+        <record id="access_tw_product_direct_gift_read" model="ir.model.access">
+            <field name="model_id" ref="model_product_template"/>
+            <field name="name">tw_product_direct_gift read</field> 
+            <field name="group_id" ref="group_tw_product_direct_gift_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_product_direct_gift_update" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Product Direct Gift Update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_product_direct_gift_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_product_direct_gift_update" model="ir.model.access">
+            <field name="model_id" ref="model_product_template"/>
+            <field name="name">tw_product_direct_gift update</field> 
+            <field name="group_id" ref="group_tw_product_direct_gift_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_product_direct_gift_delete" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Product Direct Gift Delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_product_direct_gift_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_product_direct_gift_delete" model="ir.model.access">
+            <field name="model_id" ref="model_product_template"/>
+            <field name="name">tw_product_direct_gift delete</field> 
+            <field name="group_id" ref="group_tw_product_direct_gift_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>      
+
+<!-- Product Variants Extras -->
+
+        <record id="group_tw_product_variants_extras_read" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Product Variant Extras Read</field>   
+        </record> 
+        
+        <record id="access_tw_product_variants_extras_read" model="ir.model.access">
+            <field name="model_id" ref="model_product_product"/>
+            <field name="name">tw_product_variants_extras read</field> 
+            <field name="group_id" ref="group_tw_product_variants_extras_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_product_variants_extras_update" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Product Variant Extras Update</field>     
+            <field name="implied_ids" eval="[(4, ref('group_tw_product_variants_extras_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_product_variants_extras_update" model="ir.model.access">
+            <field name="model_id" ref="model_product_product"/>
+            <field name="name">tw_product_variants_extras update</field> 
+            <field name="group_id" ref="group_tw_product_variants_extras_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_product_variants_extras_delete" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Product Variant Extras Delete</field>      
+            <field name="implied_ids" eval="[(4, ref('group_tw_product_variants_extras_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_product_variants_extras_delete" model="ir.model.access">
+            <field name="model_id" ref="model_product_product"/>
+            <field name="name">tw_product_variants_extras delete</field> 
+            <field name="group_id" ref="group_tw_product_variants_extras_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>      
+
+<!-- Product Product Extras -->
+
+        <record id="group_tw_product_extras_read" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Product Extras Read</field>   
+        </record> 
+        
+        <record id="access_tw_product_extras_read" model="ir.model.access">
+            <field name="model_id" ref="model_product_template"/>
+            <field name="name">tw_product_extras read</field> 
+            <field name="group_id" ref="group_tw_product_extras_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_product_extras_update" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Product Extras Update</field>      
+            <field name="implied_ids" eval="[(4, ref('group_tw_product_extras_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_product_extras_update" model="ir.model.access">
+            <field name="model_id" ref="model_product_template"/>
+            <field name="name">tw_product_extras update</field> 
+            <field name="group_id" ref="group_tw_product_extras_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_product_extras_delete" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Product Extras Delete</field>      
+            <field name="implied_ids" eval="[(4, ref('group_tw_product_extras_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_product_extras_delete" model="ir.model.access">
+            <field name="model_id" ref="model_product_template"/>
+            <field name="name">tw_product_extras delete</field> 
+            <field name="group_id" ref="group_tw_product_extras_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+<!-- Product Type -->
+
+        <record id="group_tw_product_type_read" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Product Types Read</field>
+        </record> 
+        
+        <record id="access_tw_product_type_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_product_type"/>
+            <field name="name">tw_product_type read</field> 
+            <field name="group_id" ref="group_tw_product_type_read"/>
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_product_type_update" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Product Types Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_product_type_read'))]"/>
+        </record>
+                        
+        <record id="access_tw_product_type_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_product_type"/>
+            <field name="name">tw_product_type update</field>
+            <field name="group_id" ref="group_tw_product_type_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_product_type_delete" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Product Types Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_product_type_read'))]"/>
+        </record>
+                        
+        <record id="access_tw_product_type_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_product_type"/>
+            <field name="name">tw_product_type delete</field>
+            <field name="group_id" ref="group_tw_product_type_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+<!-- Unit Parts -->
+
+        <record id="group_tw_unit_parts_read" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Parts Unit Read</field>
+        </record> 
+        
+        <record id="access_tw_unit_parts_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_unit_parts"/>
+            <field name="name">tw_unit_parts read</field> 
+            <field name="group_id" ref="group_tw_unit_parts_read"/>
+            <field name="perm_read">1</field> 
+        </record> 
+        
+        <record id="access_tw_unit_parts_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_unit_parts_line"/>
+            <field name="name">tw_unit_parts_line read</field> 
+            <field name="group_id" ref="group_tw_unit_parts_read"/>
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_unit_parts_update" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Parts Unit Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_unit_parts_read'))]"/>
+        </record>
+                        
+        <record id="access_tw_unit_parts_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_unit_parts"/>
+            <field name="name">tw_unit_parts update</field>
+            <field name="group_id" ref="group_tw_unit_parts_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_unit_parts_update_line" model="ir.model.access">
+            <field name="model_id" ref="model_tw_unit_parts_line"/>
+            <field name="name">tw_unit_parts_line update</field>
+            <field name="group_id" ref="group_tw_unit_parts_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_unit_parts_delete" model="res.groups">
+            <field name="category_id" ref="tw_product.tw_module_category_product"/>
+            <field name="name">TW Parts Unit Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_unit_parts_read'))]"/>
+        </record>
+                        
+        <record id="access_tw_unit_parts_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_unit_parts"/>
+            <field name="name">tw_unit_parts delete</field>
+            <field name="group_id" ref="group_tw_unit_parts_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+        
+        <record id="access_tw_unit_parts_delete_line" model="ir.model.access">
+            <field name="model_id" ref="model_tw_unit_parts_line"/>
+            <field name="name">tw_unit_parts_line delete</field>
+            <field name="group_id" ref="group_tw_unit_parts_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_tw_product_product_category_read')),
+                (4,ref('group_tw_product_product_category_update')),
+                (4,ref('group_tw_product_product_unit_read')),
+                (4,ref('group_tw_product_product_unit_update')),
+                (4,ref('group_tw_product_product_unit_delete')),
+                (4,ref('group_tw_product_product_sparepart_read')),
+                (4,ref('group_tw_product_product_sparepart_update')),
+                (4,ref('group_tw_product_product_sparepart_delete')),
+                (4,ref('group_tw_product_product_service_read')),
+                (4,ref('group_tw_product_product_service_update')),
+                (4,ref('group_tw_product_product_service_delete')),
+                (4,ref('group_tw_product_template_unit_read')),
+                (4,ref('group_tw_product_template_unit_update')),
+                (4,ref('group_tw_product_template_unit_delete')),
+                (4,ref('group_tw_product_template_sparepart_read')),
+                (4,ref('group_tw_product_template_sparepart_update')),
+                (4,ref('group_tw_product_template_sparepart_delete')),
+                (4,ref('group_tw_product_template_service_read')),
+                (4,ref('group_tw_product_template_service_update')),
+                (4,ref('group_tw_product_template_service_delete')),
+                (4,ref('group_tw_attribute_read')),
+                (4,ref('group_tw_attribute_update')),
+                (4,ref('group_tw_attribute_delete')),
+                (4,ref('group_tw_attribute_value_read')),
+                (4,ref('group_tw_attribute_value_update')),
+                (4,ref('group_tw_attribute_value_delete')),
+                (4,ref('group_tw_product_variants_direct_gift_read')),
+                (4,ref('group_tw_product_variants_direct_gift_update')),
+                (4,ref('group_tw_product_variants_direct_gift_delete')),
+                (4,ref('group_tw_product_direct_gift_read')),
+                (4,ref('group_tw_product_direct_gift_update')),
+                (4,ref('group_tw_product_direct_gift_delete')),
+                (4,ref('group_tw_product_variants_extras_read')),
+                (4,ref('group_tw_product_variants_extras_update')),
+                (4,ref('group_tw_product_variants_extras_delete')),
+                (4,ref('group_tw_product_extras_read')),
+                (4,ref('group_tw_product_extras_update')),
+                (4,ref('group_tw_product_extras_delete')),
+                (4,ref('group_tw_product_type_read')),
+                (4,ref('group_tw_product_type_update')),
+                (4,ref('group_tw_product_type_delete')),
+                (4,ref('group_tw_unit_parts_read')),
+                (4,ref('group_tw_unit_parts_update')),
+                (4,ref('group_tw_unit_parts_delete')),
+                (4,ref('group_tw_product_product_all_read')),
+                (4,ref('group_tw_product_product_all_update')),
+                (4,ref('group_tw_product_product_all_delete')),
+                (4,ref('group_tw_product_product_form_read')),
+                (4,ref('group_tw_product_template_form_read')),
+                (4,ref('group_tw_product_template_unit_master_read')),
+                (4,ref('group_tw_product_template_unit_master_update')),
+                (4,ref('group_tw_product_template_unit_master_delete')),
+                (4,ref('group_tw_product_product_unit_master_read')),
+                (4,ref('group_tw_product_product_unit_master_update')),
+                (4,ref('group_tw_product_product_unit_master_delete')),
+                (4,ref('group_tw_product_product_category_warehouse_read')),
+                (4,ref('group_tw_product_product_category_warehouse_update')),
+                ]" />
+        </record>  
+
+	</data>
+</odoo>

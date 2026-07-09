@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="tw_product_pricelist_version_form_view" model="ir.ui.view">
+        <field name="name">tw.product.pricelist.version.view.form</field>
+        <field name="model">tw.product.pricelist.version</field>
+        <field name="arch" type="xml">
+            <form string="Price List Version">
+                <header>
+                    <button name="action_confirm" type="object" string="Confirm" class="btn-primary" invisible="state not in ('draft')" data-hotkey="q" groups="tw_pricelist.tw_pricelist_group_button_confirm"/>
+                    <button name="action_add_new_item" type="object" string="Add new item" class="btn-primary" invisible="state != 'confirmed'" data-hotkey="w" groups="tw_pricelist.group_tw_product_pricelist_update"/>
+                    <button name="action_set_to_draft" type="object" string="Set to Draft" invisible="state == 'draft'" data-hotkey="d" groups="tw_pricelist.tw_pricelist_group_button_draft"/>
+                    <button name="action_copy" type="object" string="Copy this Pricelist Version" invisible="state != 'confirmed'" data-hotkey="e" groups="tw_pricelist.tw_pricelist_group_button_copy"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <label string="Version Name" for="name"/>
+                            <field name="name" readonly="state != 'draft'" placeholder="e.g. Pricelist Unit Retailers Jan 2024"/>
+                            <field name="pricelist_id" invisible="1" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="id" invisible="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="area_id" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="plate_id" options="{'no_create': True, 'no_open': True}"/>
+                        <label for="date_start" string="Validity"/>
+                        <div>
+                            <field name="date_start" class="oe_inline" readonly="state != 'draft'"/>
+                        -
+                            <field name="date_end" class="oe_inline"/>
+                        </div>
+                        <field name="pricelist_id" readonly="not context.get('default_get_pricelist_version_menu') or state in ('approved','confirmed')"/>
+                    </group>
+                    <notebook>
+                        <page name="item_list" string="Item List">
+                            <field name="item_ids" widget="one2many_search" options="{'reload_on_button': True}" context="{'form_view_ref' : 'tw_pricelist.tw_product_pricelist_item_form_view','default_pricelist_id' : pricelist_id, 'default_pricelist_version_id' : id,'default_date_start': date_start, 'default_date_end': date_end}" readonly="date_start == False or date_end == False or state not in ('draft')"/>
+                        </page>
+                        <page string="Upload Dokumen">
+							<field name="attachment_ids" nolabel="1" readonly="state != 'draft'"/>
+						</page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tw_pricelist_new_item_wizard_view" model="ir.ui.view">
+        <field name="name">tw.product.pricelist.new.item.wizard.view</field>
+        <field name="model">tw.product.pricelist.new.item</field>
+        <field name="arch" type="xml">
+            <form string="New Item">
+                <sheet>
+                    <group>
+                        <field name="pricelist_id" readonly="1"/>
+                        <field name="item_ids" required="1" context="{'form_view_ref': 'tw_pricelist.tw_product_pricelist_item_form_view', 'default_pricelist_id': pricelist_id, 'default_date_start': date_start, 'default_date_end': date_end, 'default_type': context.get('default_type')}"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_new_item" type="object" string="Add" class="oe_highlight"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="tw_product_pricelist_version_list_view" model="ir.ui.view">
+        <field name="name">tw.product.pricelist.version.view.tree</field>
+        <field name="model">tw.product.pricelist.version</field>
+        <field name="arch" type="xml">
+            <list string="Price List Version">
+                <field name="name"/>
+                <field name="area_id"/>
+                <field name="plate_id"/>
+                <field name="pricelist_id" options="{'no_open': True, 'no_create': True}"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="tw_pricelist_version_search_view" model="ir.ui.view">
+        <field name="name">tw.product.pricelist.version.search</field>
+        <field name="model">tw.product.pricelist.version</field>
+        <field name="priority">0</field>
+        <field name="arch" type="xml">
+            <search string="Price List Version Search">
+                <field name="name" string="Version Name"/>
+                <field name="area_id"/>
+                <field name="plate_id"/>
+                <field name="pricelist_id"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="item_ids" string="Appied On" filter_domain="[('item_ids.name','ilike',self)]"/>
+                <field name="item_ids" string="Company Item" filter_domain="[('item_ids.company_id','ilike',self)]"/>
+                <filter name="draft" string="draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="confimed" string="Active" domain="[('state', '=', 'confirmed')]"/>
+
+                <group expand="0" string="Group By">
+                    <filter string="Start Date" name="date_start" domain="[]" context="{'group_by': 'date_start'}" />
+                    <filter string="State" name="state" domain="[]" context="{'group_by': 'state'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="tw_product_pricelist_version_action" model="ir.actions.act_window">
+        <field name="name">Product Pricelist Version</field>
+        <field name="res_model">tw.product.pricelist.version</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'default_get_pricelist_version_menu': True}</field>
+    </record>
+
+</odoo>

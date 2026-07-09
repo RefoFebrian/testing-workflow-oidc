@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Form View - DGI Extensions -->
+        <record id="view_tw_endpoint_configuration_form_dgi" model="ir.ui.view">
+            <field name="name">tw.endpoint.configuration.form.dgi</field>
+            <field name="model">tw.endpoint.configuration</field>
+            <field name="inherit_id" ref="tw_api.view_tw_endpoint_configuration_form"/>
+            <field name="arch" type="xml">
+                <!-- Add DGI mode field -->
+                <xpath expr="//field[@name='method']" position="after">
+                    <field name="mode"/>
+                    <field name="target_model_id" options="{'no_create': True}"/>
+                    <field name="dgi_division_id" options="{'no_create': True, 'no_open': True}" invisible="parent.api_type_value != 'DGI'"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherit List View - Add DGI mode column -->
+        <record id="view_tw_endpoint_configuration_list_dgi" model="ir.ui.view">
+            <field name="name">tw.endpoint.configuration.list.dgi</field>
+            <field name="model">tw.endpoint.configuration</field>
+            <field name="inherit_id" ref="tw_api.view_tw_endpoint_configuration_list"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='method']" position="after">
+                    <field name="mode"/>
+                    <field name="target_model_id" options="{'no_create': True}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

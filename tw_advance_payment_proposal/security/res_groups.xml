@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="access_tw_advance_payment_proposal_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_advance_payment_proposal"/>
+            <field name="name">tw_advance_payment_proposal read</field>
+            <field name="group_id" ref="tw_advance_payment.group_tw_advance_payment_read"/>
+            <field name="perm_read">1</field>
+        </record>
+        <record id="access_tw_advance_payment_proposal_write" model="ir.model.access">
+            <field name="model_id" ref="model_tw_advance_payment_proposal"/>
+            <field name="name">tw_advance_payment_proposal write</field>
+            <field name="group_id" ref="tw_advance_payment.group_tw_advance_payment_write"/>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+        </record>
+        <record id="access_tw_advance_payment_proposal_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_advance_payment_proposal"/>
+            <field name="name">tw_advance_payment_proposal delete</field>
+            <field name="group_id" ref="tw_advance_payment.group_tw_advance_payment_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+    
+    </data>
+
+</odoo>

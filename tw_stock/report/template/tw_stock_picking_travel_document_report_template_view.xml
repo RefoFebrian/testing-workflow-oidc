@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="travel_document_template">
+            <t t-set="scale" t-value="1"/>
+            <t t-set="size_26" t-value="26 * scale"/>
+            <t t-set="size_24" t-value="24 * scale"/>
+            <t t-set="size_22" t-value="22 * scale"/>
+            <t t-set="size_20" t-value="20 * scale"/>
+            <t t-set="size_18" t-value="18 * scale"/>
+            <t t-set="size_16" t-value="16 * scale"/>
+            <t t-set="size_15" t-value="15 * scale"/>
+            <t t-set="size_14" t-value="14 * scale"/>
+            <t t-set="size_13" t-value="13 * scale"/>
+            <t t-set="size_12" t-value="12 * scale"/>
+            <t t-set="size_11" t-value="11 * scale"/>
+            <t t-set="size_10" t-value="10 * scale"/>
+            <t t-set="size_9" t-value="9 * scale"/>
+            <t t-set="size_8" t-value="8 * scale"/>
+            <t t-set="size_7" t-value="7 * scale"/>
+            <t t-set="size_6" t-value="6 * scale"/>
+            <t t-set="size_5" t-value="5 * scale"/>
+            <t t-set="size_4" t-value="4 * scale"/>
+            <t t-set="size_3" t-value="3 * scale"/>
+            <t t-set="size_2" t-value="2 * scale"/>
+            <t t-set="size_1" t-value="1 * scale"/>
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div class="row">
+                            <table width="100%" t-attf-style="font-size: {{size_11}}px;">
+                                <tr>
+                                    <td width="60%">
+                                        <b>
+                                            <span t-attf-style="font-size: #{size_11}px;" t-esc="o.company_id.name"/>
+                                        </b>
+                                    </td>
+                                    <td>
+                                        <t t-if="o.division == 'Sparepart'">
+                                            <b>
+                                                <span t-attf-style="font-size: #{size_11}px;">BUKTI PENERIMAAN BARANG</span>
+                                            </b>
+                                        </t>
+                                        <t t-if="o.division != 'Sparepart'">
+                                            <b>
+                                                <span t-attf-style="font-size: #{size_11}px;">Surat Jalan</span>
+                                            </b>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span t-attf-style="font-size: {{size_11}}px;" t-esc="o.company_id.street"/>
+                                        <br/>
+                                        <span t-attf-style="font-size: {{size_11}}px;" t-esc="o.company_id.state_id.name"/>
+                                    </td>
+                                    <td style="padding:0;margin:0;">
+                                        <table width="100%" t-attf-style="font-size: {{size_11}}px;">
+                                            <tr>
+                                                <td width="20%" style="padding:0;margin:0;">No </td>
+                                                <td>: <span t-esc="o.batch_id.name"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <t t-if="o.division != 'Sparepart'">
+                                                    <td width="20%" style="padding:0;margin:0;">Tanggal </td>
+                                                    <td>: <span t-field="o.date" t-options='{"format": "dd-MM-yyyy"}'/>
+                                                    </td>
+                                                </t>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table width="100%" t-attf-style="border: 1px solid; border-collapse: collapse; font-size: {{size_11}}px;">
+                                <t t-if="o.division != 'Sparepart'">
+                                    <tr>
+                                        <td width="50%">
+                                            <table width="100%" t-attf-style="font-size: {{size_11}}px;">
+                                                <tr>
+                                                    <td width="30%" style="padding: 2px">Kepada Yth</td>
+                                                    <td>: <span t-esc="dealer_address()[0]"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 2px">Alamat</td>
+                                                    <td>: <span t-esc="dealer_address()[1]"/>
+, RT/RW.<span t-esc="dealer_address()[2]"/>
+/                                                    <span t-esc="dealer_address()[3]"/>
+, KEL.<span t-esc="dealer_address()[4]"/>
+, KEC.<span t-esc="dealer_address()[5]"/>
+,                                            <span t-esc="dealer_address()[6]"/>
+,                                            <span t-esc="dealer_address()[7]"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30%" style="padding: 2px">Nomor HP/Telp</td>
+                                        <td>: <span t-esc="dealer_address()[8]"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 2px">No Invoice</td>
+                                        <td>: <span t-esc="_get_invoice(o).name if _get_invoice(o) else '-'"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+
+                            <td width="50%" style="padding: 5px;">
+                                <table width="100%" t-attf-style="font-size: {{size_11}}px;">
+                                    <tr>
+                                        <td width="30%" style="text-align:right; padding: 2px">Diambil</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 2px">No Pol</td>
+                                        <td class="text-end">: <span t-esc="o.vehicle_id.plate_number"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 2px">Sopir</td>
+                                        <td>: <span t-esc="o.driver_id.name"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </t>
+                    <t t-if="o.division == 'Sparepart'">
+                        <tr>
+                            <td style="padding: 5px;" colspan="2">
+                                <table width="100%" t-attf-style="font-size: {{size_11}}px;">
+                                    <tr>
+                                        <td width="20%" style="padding: 2px">Tanggal</td>
+                                        <td>: <span t-field="o.date" t-options='{"format": "dd-MM-yyyy"}'/>
+                                        </td>
+                                        <!-- TODO: hidupkan jika sudah migrasi API Stock Distribution (PO dari DMS)  -->
+                                        <!-- <t t-if="order_po() != False">
+                                                        <td width="10%" style="padding: 2px">Origin PO</td>
+                                                        <td text-align="right">: <span t-esc="order_po()"/></td>
+                                                    </t> -->
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 2px">Supplier</td>
+                                        <td>: <span t-esc="dealer_address()[0]"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 2px">Lokasi Gedung</td>
+                                        <td>: <span t-esc="o.picking_type_id.warehouse_id.name"/>
+-                                            <span t-esc="o.picking_type_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 2px">No Invoice</td>
+                                        <td>: <span t-esc="_get_invoice(o).name if _get_invoice(o) else '-'"/>
+-                                            <span t-esc="o.picking_type_id.name"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </t>
+                    <tr>
+                        <td colspan="2">
+                            <t t-if="o.division != 'Sparepart'">
+                                <table width="100%" t-attf-style="border: 1px solid; border-collapse: collapse; font-size: {{size_11}}px;">
+                                    <tr>
+                                        <td style="padding: 3px; border: 1px solid; text-align:center;">No</td>
+                                        <td style="padding: 3px; border: 1px solid; text-align:center;">No SO</td>
+                                        <t t-if="_get_invoice(o) and _get_invoice(o).invoice_date">
+                                            <td style="padding: 3px; border: 1px solid; text-align:center;">Tgl Inv</td>
+                                        </t>
+                                        <td style="padding: 3px; border: 1px solid; text-align:center;">Kode</td>
+                                        <td style="padding: 3px; border: 1px solid; text-align:center;">Keterangan</td>
+                                        <t t-if="o.division == 'Unit'">
+                                            <td style="padding: 3px; border: 1px solid; text-align:center;">Warna</td>
+                                            <td style="padding: 3px; border: 1px solid; text-align:center;">No Mesin</td>
+                                            <td style="padding: 3px; border: 1px solid; text-align:center;">No Rangka</td>
+                                        </t>
+                                        <t t-if="o.division == 'Umum'">
+                                            <td style="padding: 3px; border: 1px solid; text-align:center;">Serial Number</td>
+                                        </t>
+                                    </tr>
+                                    <tr t-foreach="doc_line(o.move_ids_without_package)" t-as="line">
+                                        <tr t-foreach="line[1].move_line_ids" t-as="move_line">
+                                            <td style="padding: 3px; border: 1px solid;">
+                                                <span t-esc="line[0]"/>
+                                            </td>
+                                            <td style="padding: 3px; border: 1px solid;">
+                                                <span t-esc="o.origin"/>
+                                            </td>
+                                            <t t-if="_get_invoice(o) and _get_invoice(o).invoice_date">
+                                                <td style="padding: 3px; border: 1px solid;">
+                                                    <span t-esc="_get_invoice(o).invoice_date.strftime('%d-%m-%Y')"/>
+                                                </td>
+                                            </t>
+                                            <td style="padding: 3px; border: 1px solid;">
+                                                <span t-esc="line[1].product_id.default_code"/>
+                                            </td>
+                                            <td style="padding: 3px; border: 1px solid;">
+                                                <span t-esc="line[1].product_id.description"/>
+                                            </td>
+                                            <t t-if="o.division == 'Unit'">
+                                                <td style="padding: 3px; border: 1px solid;">
+                                                    <span t-esc="product_color(line[1].product_id)"/>
+                                                </td>
+                                                <td style="padding: 3px; border: 1px solid;">
+                                                    <span t-esc="move_line.lot_id.name"/>
+                                                </td>
+                                                <td style="padding: 3px; border: 1px solid;" class="text-end">
+                                                    <span t-esc="move_line.lot_id.chassis_number"/>
+                                                </td>
+                                            </t>
+                                            <t t-if="o.division == 'Umum'">
+                                                <td style="padding: 3px; border: 1px solid;">
+                                                    <span t-esc="move_line.lot_id.name"/>
+                                                </td>
+                                            </t>
+                                        </tr>
+                                    </tr>
+                                </table>
+                            </t>
+                            <t t-if="o.division == 'Sparepart'">
+                                <table width="100%" t-attf-style="border: 1px solid; border-collapse: collapse; font-size: {{size_11}}px;">
+                                    <tr>
+                                        <td style="padding: 3px; border: 1px solid; text-align:center;">No</td>
+                                        <td style="padding: 3px; border: 1px solid; text-align:center;">Kode Barang</td>
+                                        <td style="padding: 3px; border: 1px solid; text-align:center;">Nama Barang</td>
+                                        <td style="padding: 3px; border: 1px solid; text-align:center;">Kondisi</td>
+                                        <td style="padding: 3px; border: 1px solid; text-align:center;">Jml</td>
+                                        <td style="padding: 3px; border: 1px solid; text-align:center;">Jml Pack</td>
+                                        <td style="padding: 3px; border: 1px solid; text-align:center;">No Picking</td>
+                                        <td style="padding: 3px; border: 1px solid; text-align:center;">No SO</td>
+                                        <td style="padding: 3px; border: 1px solid; text-align:center;">Lokasi</td>
+                                    </tr>
+                                    <tr t-foreach="doc_line(o.move_ids_without_package)" t-as="line">
+                                        <td style="padding: 3px; border: 1px solid;">
+                                            <span t-esc="line[0]"/>
+                                        </td>
+                                        <td style="padding: 3px; border: 1px solid;">
+                                            <span t-esc="line[1].product_id.default_code"/>
+                                        </td>
+                                        <td style="padding: 3px; border: 1px solid;">
+                                            <span t-esc="line[1].product_id.product_tmpl_id.name"/>
+                                        </td>
+                                        <td style="padding: 3px; border: 1px solid;">OK</td>
+                                        <td style="padding: 3px; border: 1px solid;">
+                                            <span t-esc="line[1].quantity"/>
+                                        </td>
+                                        <td style="padding: 3px; border: 1px solid;">
+                                            <span t-esc="line[1].quantity"/>
+                                        </td>
+                                        <td style="padding: 3px; border: 1px solid;">
+                                            <span t-esc="o.name"/>
+                                        </td>
+                                        <td style="padding: 3px; border: 1px solid;">
+                                            <span t-esc="o.origin"/>
+                                        </td>
+                                        <td style="padding: 3px; border: 1px solid;">
+                                            <span t-esc="line[1].location_dest_id.name"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </t>
+                        </td>
+                    </tr>
+                </table>
+                <t t-if="o.division != 'Sparepart'">
+                    <span t-attf-style="font-size: {{size_15}}px;">Note: Barang sudah diserahkan dengan keadaan baik dan lengkap</span>
+                </t>
+                <table width="100%" t-attf-style="font-size: {{size_11}}px;">
+                    <tr height="50px">
+                        <td width="20%">
+                            <t t-if="o.division != 'Sparepart'">Dicetak Oleh</t>
+                            <t t-if="o.division == 'Sparepart'">
+                                <br/>
+Pengirim</t>
+                        </td>
+                        <t t-if="o.division != 'Sparepart'">
+                            <td width="20%">Diserahkan</td>
+                        </t>
+                        <td width="20%">
+                            <t t-if="o.division != 'Sparepart'">Pengirim</t>
+                            <t t-if="o.division == 'Sparepart'">
+                                <br/>
+Kepala Gudang</t>
+                        </td>
+                    </tr>
+                    <tr height="11px">
+                        <td>_____________________</td>
+                        <t t-if="o.division != 'Sparepart'">
+                            <td>_____________________</td>
+                        </t>
+                        <td>_____________________</td>
+                        <t t-if="o.division == 'Sparepart'">
+                            <td t-attf-style="font-size: {{size_11}}px;" colspan="2" width="60%">
+                                <span t-esc="print_user()"/>, <span t-esc="time_date(o.date)"/>
+                                <br/>
+                                            Cetakan Ke: <span t-esc="print_counter()"/>
+                            </td>
+                        </t>
+                    </tr>
+                    <t t-if="o.division != 'Sparepart'">
+                        <tr height="15px">
+                            <td>
+                                <span t-esc="print_user()"/>, <span t-esc="time_date(o.date)"/>
+                            </td>
+                            <td>
+                                <t>PIC Gudang</t>
+                            </td>
+                        </tr>
+                    </t>
+                    <tr>
+                        <td colspan="3">
+                            <t t-if="o.division != 'Sparepart'">Lembar ke-1 : Pengirim / Lembar ke-2 : Penerima</t>
+                            <t t-if="o.division == 'Sparepart'">Lembar ke-1 Pengirim / Lembar ke-2 Gudang / Lembar ke-3 Finance</t>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </t>
+</t>
+</template>
+</data>
+</odoo>

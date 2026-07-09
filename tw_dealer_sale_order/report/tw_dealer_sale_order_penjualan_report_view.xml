@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_dso_report_sales_wizard_view" model="ir.ui.view">
+            <field name="name">tw.dso.report.sales.wizard</field>
+            <field name="model">tw.dealer.sale.order.penjualan.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group colspan="2">
+                            <field name="report_type" string="Tipe Laporan" required="1" width="50%" readonly="report_type != False"/>
+                        </group>
+                        <group colspan="4" invisible="report_type == '' or not report_type">
+                            <group>
+                                <field name="state_options" required="1"/>
+                                <field name="sales_id" options="{'no_create': True, 'no_open': True}" placeholder="Cari Sales.."/>
+                                <field name="sales_coordinator_id" options="{'no_create': True, 'no_open': True}" placeholder="Cari Sales Coordinator.."/>
+                            </group>
+                            <group>
+                                <label for="start_date" string="Periode"/>
+                                <div>
+                                    <field name="start_date" widget="daterange" options="{'end_date_field': 'end_date'}" required="1" />
+                                    <field name="end_date" invisible="1" />
+                                </div>
+                                <field name="product_ids" widget="many2many_tags" options="{'no_create': True, 'no_open': True}" placeholder="Cari Product.."/>
+                            </group>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Companies">
+                            <field name="company_ids" colspan="4" nolabel="1"/>
+                        </page>
+                        <page string="Finco">
+                            <field name="finco_ids" domain="[('category_id.name', '=', 'Finance Company')]" colspan="4" nolabel="1"/>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button name="action_export_report" string="Generate" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_dso_report_sales_action" model="ir.actions.act_window">
+            <field name="name">Laporan Penjualan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.dealer.sale.order.penjualan.report</field>
+            <field name="view_id" ref="tw_dso_report_sales_wizard_view"/>
+            <field name="target">new</field>
+        </record>
+
+        <record id="tw_dso_report_sales_all_action" model="ir.actions.act_window">
+            <field name="name">Laporan Penjualan</field>
+            <field name="res_model">tw.dealer.sale.order.penjualan.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'default_report_type': 'all'}</field>
+        </record>
+
+        <record id="tw_dso_report_sales_salesman_action" model="ir.actions.act_window">
+            <field name="name">Laporan Penjualan Salesman</field>
+            <field name="res_model">tw.dealer.sale.order.penjualan.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'default_report_type': 'salesman'}</field>
+        </record>
+
+        <record id="tw_dso_report_sales_konsumen_action" model="ir.actions.act_window">
+            <field name="name">Laporan Penjualan Konsumen</field>
+            <field name="res_model">tw.dealer.sale.order.penjualan.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'default_report_type': 'konsumen'}</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        
+        <!-- Extend MFT Config Form View with Telegram Settings -->
+        <record id="tw_mft_config_view_form_telegram" model="ir.ui.view">
+            <field name="name">tw.mft.config.view.form.telegram</field>
+            <field name="model">tw.mft.config</field>
+            <field name="inherit_id" ref="tw_monitoring_mft.tw_mft_config_view_form"/>
+            <field name="arch" type="xml">
+                <!-- Add Telegram button in header -->
+                <xpath expr="//header/button[@name='action_fetch_data']" position="after">
+                    <button name="action_send_telegram_notification" string="Send Telegram" type="object" 
+                            class="btn-secondary" icon="fa-telegram"
+                            invisible="not telegram_enabled"/>
+                </xpath>
+                
+                <!-- Add Telegram tab in notebook -->
+                <xpath expr="//notebook" position="inside">
+                    <page string="Telegram" name="telegram_settings">
+                        <group>
+                            <group string="Telegram Settings">
+                                <field name="telegram_enabled"/>
+                                <field name="telegram_notify_on_error" invisible="not telegram_enabled"/>
+                                <field name="telegram_notify_on_success" invisible="not telegram_enabled"/>
+                                <field name="telegram_last_notification_date" invisible="not telegram_enabled"/>
+                            </group>
+                        </group>
+                        <group string="Recipients" invisible="not telegram_enabled">
+                            <field name="telegram_user_ids" nolabel="1" widget="many2many_tags">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="telegram_user"/>
+                                </list>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+
+</odoo>

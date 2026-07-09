@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="selection_in_invoice_division" model="tw.selection">
+	    	<field name="name">IN Invoice</field>
+            <field name="value">in_invoice</field> 
+	    	<field name="type">TypeInvoice</field> 
+        </record>
+    
+        <record id="selection_out_invoice_invoice_division" model="tw.selection">
+	    	<field name="name">OUT Invoice</field>
+            <field name="value">out_invoice</field> 
+	    	<field name="type">TypeInvoice</field> 
+        </record>
+        
+        <record id="selection_md_sale_unit_invoice_division" model="tw.selection">
+	    	<field name="name">MD Sales Unit Invoice</field>
+            <field name="value">md_sale_unit</field> 
+	    	<field name="type">TypeInvoice</field> 
+        </record>
+    
+        <record id="selection_md_sale_sparepart_invoice_division" model="tw.selection">
+	    	<field name="name">MD Sales Sparepart Invoice</field>
+            <field name="value">md_sale_sparepart</field> 
+	    	<field name="type">TypeInvoice</field> 
+        </record>
+    </data>
+</odoo>

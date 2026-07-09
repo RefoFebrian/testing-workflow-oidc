@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="1">
+ 
+      <record id="firebase_content_template_stock_opname_outstanding_photo" model="tw.firebase.content.template">
+        <field name="name">Stock Opname Outstanding Photo</field>
+        <field name="content" type="html">
+            <p>
+                <p><b>Hi, %penerima%</b><br/></p>
+                <p>Terdapat unit stock opname dengan nomor transaksi <b>%transaction_number%</b> yang <b>belum dilengkapi foto</b>:</p>
+                <table border="1" width="100%" cellspacing="0" cellpadding="8" style="border-collapse: collapse; margin: 10px 0;">
+                    <thead>
+                        <tr style="background-color: #f0f0f0;">
+                            <th style="width: 40%; text-align: left;">Nomor Mesin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="width: 40%; text-align: left;">%engine_number%</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><b>⚠️ Harap segera upload foto unit untuk melengkapi data stock opname.</b></p>
+                <p>Jangan lupa untuk di follow up agar proses stock opname dapat diselesaikan.</p>
+                <br/>
+            </p>
+        </field>
+      </record>
+
+  </data>
+</odoo>

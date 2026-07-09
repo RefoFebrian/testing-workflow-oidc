@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    	
+        <record id="view_p2p_config_tree" model="ir.ui.view">
+            <field name="name">tw.p2p.config.line.tree</field>
+            <field name="model">tw.p2p.config</field>
+            <field eval="1" name="priority"/>
+            <field name="arch" type="xml">
+                <list string="P2P Configuration" create="true" editable="top">
+					<field name="active"/>
+                	<field name="supplier_id" required="1" options='{"no_create": True,"no_open":True}'/>               	
+                    <field name="tentative_1" required="1"/>
+                    <field name="tentative_2" required="1"/>
+                </list>
+            </field>
+        </record>    	
+ 
+		<record model="ir.ui.view" id="p2p_config_form_view">
+		    <field name="name">tw.p2p.config.form</field>
+		    <field name="model">tw.p2p.config</field>
+		    <field name="arch" type="xml">
+		        <form string="P2P Configuration">	        	
+		        	<sheet>
+						<field name="active"/>
+			        	<div class="oe_title">
+			        		<h2>
+				                <label for="supplier_id" string="P2P Configuration"/>    			
+			 				</h2>
+			        	</div>       
+						<group>   
+							<group colspan="2">
+								<field name="supplier_id" required="1" options="{'no_create': True,'no_open': True}"  />
+							</group>            
+	                    	<group>
+							    <field name="tentative_1" required="1" />								    	
+								<field name="tentative_2" required="1" />
+							</group>  
+						</group>	
+						
+						<notebook colspan="5">
+							<page string="Audit Trail">
+								<group>
+									<group>
+										<field name="create_uid" readonly="1"></field>
+										<field name="create_date" readonly="1"></field>
+									</group>
+									<group>							
+										<field name="write_uid" readonly="1"></field>
+										<field name="write_date" readonly="1"></field>
+									</group>
+								</group>
+							</page>			                    
+		                </notebook>				
+		           </sheet>
+		        </form>
+		    </field>
+		</record>
+
+ 		<record id="view_p2p_config_filter" model="ir.ui.view">
+            <field name="name">p2p.config.list.select</field>
+            <field name="model">tw.p2p.config</field>
+            <field name="arch" type="xml">
+                <search string="Search P2P Config">
+                    <field name="supplier_id"/> 
+					<filter string="Active" name="filter_active" domain="[('active','=', True)]"/>
+					<filter string="Inactive" name="filter_inactive" domain="[('active','=', False)]"/>
+					<filter name="Supplier" string="Supplier" domain="[('supplier_id', '=', 'value')]" context="{'group_by': 'supplier_id'}" />
+                </search>
+            </field>
+        </record>		
+		<record model="ir.actions.act_window" id="tw_p2p_config_action">
+		    <field name="name">P2P Config</field>
+		    <field name="res_model">tw.p2p.config</field>
+		    <field name="view_mode">list,form</field>
+		    <field name="context">{'search_default_filter_active': True}</field>
+			<field name="domain">[('active', 'in', [True, False])]</field>
+		    <field name="search_view_id" ref="view_p2p_config_filter"/>
+		</record>
+					
+		
+    </data>
+</odoo>
+    

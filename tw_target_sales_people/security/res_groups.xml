@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+<!-- Master Target -->
+        <record id="group_tw_master_target_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Target Read</field>
+        </record>
+
+        <record id="access_tw_master_target_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_target"/>
+            <field name="name">tw_master_target read</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_master_target_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_master_target_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Target Update</field>
+        </record>
+
+        <record id="access_tw_master_target_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_target"/>
+            <field name="name">tw_master_target update</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_master_target_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_master_target_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Target Delete</field>
+        </record>
+
+        <record id="access_tw_master_target_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_target"/>
+            <field name="name">tw_master_target delete</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_master_target_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+<!-- Target Sales People -->
+        <record id="group_tw_target_sales_people_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Target Sales People Read</field>
+        </record>
+
+        <record id="access_tw_target_sales_people_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_target_sales_people"/>
+            <field name="name">tw_target_sales_people read</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_target_sales_people_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_target_sales_people_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_target_sales_people_line"/>
+            <field name="name">tw_target_sales_people_line read</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_target_sales_people_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_upload_target_sales_people_wizard_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_upload_target_sales_people_wizard"/>
+            <field name="name">tw_upload_target_sales_people_wizard read</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_target_sales_people_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_target_sales_people_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Target Sales People Update</field>
+        </record>
+
+        <record id="access_tw_target_sales_people_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_target_sales_people"/>
+            <field name="name">tw_target_sales_people update</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_target_sales_people_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_target_sales_people_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_target_sales_people_line"/>
+            <field name="name">tw_target_sales_people_line update</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_target_sales_people_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_upload_target_sales_people_wizard_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_upload_target_sales_people_wizard"/>
+            <field name="name">tw_upload_target_sales_people_wizard update</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_target_sales_people_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_target_sales_people_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Target Sales People Delete</field>
+        </record>
+
+        <record id="access_tw_target_sales_people_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_target_sales_people"/>
+            <field name="name">tw_target_sales_people delete</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_target_sales_people_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_target_sales_people_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_target_sales_people_line"/>
+            <field name="name">tw_target_sales_people_line delete</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_target_sales_people_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_upload_target_sales_people_wizard_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_upload_target_sales_people_wizard"/>
+            <field name="name">tw_upload_target_sales_people_wizard delete</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_target_sales_people_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+<!-- Target Daily Sales -->
+        <record id="group_tw_target_daily_sales_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Target Daily Sales Read</field>
+        </record>
+
+        <record id="access_tw_target_daily_sales_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_target_daily_sales"/>
+            <field name="name">tw_target_daily_sales read</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_target_daily_sales_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_target_daily_sales_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_target_daily_sales_line"/>
+            <field name="name">tw_target_daily_sales_line read</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_target_daily_sales_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_upload_target_daily_sales_wizard_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_upload_target_daily_sales_wizard"/>
+            <field name="name">tw_upload_target_daily_sales_wizard read</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_target_daily_sales_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_target_daily_sales_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Target Daily Sales Update</field>
+        </record>
+
+        <record id="access_tw_target_daily_sales_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_target_daily_sales"/>
+            <field name="name">tw_target_daily_sales update</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_target_daily_sales_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_target_daily_sales_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_target_daily_sales_line"/>
+            <field name="name">tw_target_daily_sales_line update</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_target_daily_sales_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_upload_target_daily_sales_wizard_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_upload_target_daily_sales_wizard"/>
+            <field name="name">tw_upload_target_daily_sales_wizard update</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_target_daily_sales_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_target_daily_sales_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Target Daily Sales Delete</field>
+        </record>
+
+        <record id="access_tw_target_daily_sales_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_target_daily_sales"/>
+            <field name="name">tw_target_daily_sales delete</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_target_daily_sales_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_target_daily_sales_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_target_daily_sales_line"/>
+            <field name="name">tw_target_daily_sales_line delete</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_target_daily_sales_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_upload_target_daily_sales_wizard_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_upload_target_daily_sales_wizard"/>
+            <field name="name">tw_upload_target_daily_sales_wizard delete</field>
+            <field name="group_id" ref="tw_target_sales_people.group_tw_target_daily_sales_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    </data>
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_master_target_read')),
+                (4, ref('group_tw_master_target_update')),
+                (4, ref('group_tw_master_target_delete')),
+                (4, ref('group_tw_target_sales_people_read')),
+                (4, ref('group_tw_target_sales_people_update')),
+                (4, ref('group_tw_target_sales_people_delete')),
+                (4, ref('group_tw_target_daily_sales_read')),
+                (4, ref('group_tw_target_daily_sales_update')),
+                (4, ref('group_tw_target_daily_sales_delete')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

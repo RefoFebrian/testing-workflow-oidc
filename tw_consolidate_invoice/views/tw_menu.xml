@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="menu_tw_consolidate_invoice_showroom" name="Consolidate Invoice" parent="tw_menu.submenu_tw_showroom_purchase" action="tw_consolidate_invoice.tw_consolidate_invoice_showroom" groups="tw_consolidate_invoice.group_tw_consolidate_invoice_showroom_read" sequence="12"/>
+        <menuitem id="menu_tw_consolidate_invoice_workshop" name="Consolidate Invoice" parent="tw_menu.submenu_tw_workshop_purchase" action="tw_consolidate_invoice.tw_consolidate_invoice_workshop" groups="tw_consolidate_invoice.group_tw_consolidate_invoice_workshop_read" sequence="12"/>
+
+    </data>
+</odoo>

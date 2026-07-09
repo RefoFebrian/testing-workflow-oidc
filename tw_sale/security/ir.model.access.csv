@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_sale_order_showroom,tw_sale_order_showroom,model_tw_sale_order,base.group_user,1,0,0,0
+access_tw_sale_order_showroom_line,tw_sale_order_showroom_line,model_tw_sale_order,base.group_user,1,0,0,0
+access_tw_sale_order_workshop,tw_sale_order_workshop,model_tw_sale_order,base.group_user,1,0,0,0
+access_tw_sale_order_workshop_line,tw_sale_order_workshop_line,model_tw_sale_order,base.group_user,1,0,0,0

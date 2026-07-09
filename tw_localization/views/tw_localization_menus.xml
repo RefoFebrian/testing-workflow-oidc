@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Master -->
+    <menuitem id="tw_localization_master_submenu"
+        name="Localization"
+        sequence="10"
+        parent="tw_menu.submenu_tw_miscellaneous"
+        />
+
+    <menuitem id="menuitem_tw_res_country" name="Negara" parent='tw_localization_master_submenu' action='tw_res_country_action_tree' sequence="1" groups="tw_localization.group_tw_res_country_read"/>   
+    <menuitem id="menuitem_tw_res_country_state" name="Provinsi" parent='tw_localization_master_submenu' action='tw_res_country_state_action_tree' sequence="2" groups="tw_localization.group_tw_res_country_state_read"/>  
+    <menuitem id="menuitem_tw_res_city" name="Kabupaten/Kota" parent='tw_localization_master_submenu' action='tw_res_city_action' sequence="3" groups="tw_localization.group_tw_res_city_read"/>  
+    <menuitem id="menuitem_tw_res_district" name="Kecamatan" parent='tw_localization_master_submenu' action='tw_res_district_action_tree' sequence="4" groups="tw_localization.group_tw_res_district_read"/>	
+    <menuitem id="menuitem_tw_res_sub_district" name="Kelurahan" parent='tw_localization_master_submenu' action='tw_res_sub_district_action_tree' sequence="5" groups="tw_localization.group_tw_res_sub_district_read"/>	
+
+</odoo>

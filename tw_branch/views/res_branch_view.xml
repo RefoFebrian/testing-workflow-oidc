@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- tree view -->
+        <record id="tw_res_branch_list_view" model="ir.ui.view">
+            <field name="name">res.company.tree</field>
+            <field name="model">res.company</field>
+            <field name="type">list</field>
+            <field name="arch" type="xml">
+                <list string="Branch">
+                    <field name="code" />
+                    <field name="name" string="Branch"/>
+                    <field name="city_id" />
+                    <field name="street" />
+                </list>
+            </field>
+        </record>
+        <!-- form view -->
+        <record id="tw_res_branch_form_view" model="ir.ui.view">
+            <field name="name">res.company.form</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="inside">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="string">Name</attribute>
+                </xpath>
+                <xpath expr="//div[hasclass('o_address_format')]" position="replace">
+                    <div class="o_address_format">
+                        <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+                        <field name="street" placeholder="Street..." class="o_address_street"/>
+                        <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                        <field name="city_id" placeholder="City" class="o_address_state" options="{'no_open':True,'no_create':True}" invisible="not context.get('is_branch_menu')"/>
+                        <field name="city" placeholder="City" class="o_address_city"/>
+                        <field name="district_id" placeholder="Kecamatan" class="o_address_city" invisible="not context.get('is_branch_menu')"/>
+                        <field name="sub_district_id" placeholder="Kelurahan" class="o_address_city" invisible="not context.get('is_branch_menu')"/>
+                        <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
+                        <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                        <div invisible="not context.get('is_branch_menu')">
+                            <field name="rt" placeholder="RT" class="o_address_state"/>
+                            <field name="rw" placeholder="RW" class="o_address_state"/>
+                        </div>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="replace">
+                    <label for="partner_id"/>
+                    <div class="o_row">
+                        <field name="partner_id" readonly="1" required="0"/>
+                        <button name="action_sync_partner_data" type="object" class="btn btn-link" icon="fa-refresh" title="Sync Partner Data"/>
+                    </div>
+                    <field name="default_supplier_id" options="{'no_open':True,'no_create':True}" invisible="not context.get('is_branch_menu')"/>
+                    <field name="branch_type_id" invisible="not context.get('is_branch_menu')" options="{'no_open':True,'no_create':True}"/>
+                    <field name="is_supplier_is_internal" invisible="not context.get('is_branch_menu')"/>
+                    <field name="branch_class" invisible="not context.get('is_branch_menu')"/>
+                    <field name="branch_category_id" invisible="not context.get('is_branch_menu')"/>
+                    <field name="establishment_date" invisible="not context.get('is_branch_menu')"/>
+                    <field name="finance_email"/>
+                </xpath>
+                <xpath expr="//div[hasclass('oe_title')]" position="after">
+                    <div class="oe_title">
+                        <label for="code"/>
+                        <h1>
+                            <field name="code" required="1"/>
+                        </h1>
+                        <label for="atpm_code"/>
+                        <h1>
+                            <field name="atpm_code" required="context.get('is_branch_menu')"/>
+                        </h1>
+                        <label for="profit_centre"/>
+                        <h1>
+                            <field name="profit_centre" required="context.get('is_branch_menu')"/>
+                        </h1>
+                    </div>
+                </xpath>
+                <xpath expr="//page[@name='general_info']" position="after">
+                    <page name ="audit trail" string="Audit Trail">
+                        <group>
+                            <group>
+                                <field name="create_uid" readonly="1" />
+                                <field name="create_date" readonly="1" />
+                            </group>
+                            <group>
+                                <field name="write_uid" readonly="1" />
+                                <field name="write_date" readonly="1" />
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+                <xpath expr="//page[@name='branches']" position="attributes">
+                    <attribute name="invisible">context.get('is_branch_menu')</attribute>
+                </xpath>
+            </field>
+        </record>
+        <!-- search -->
+        <record id="tw_res_branch_view_search" model="ir.ui.view">
+            <field name="name">res.company.search</field>
+            <field name="model">res.company</field>
+            <field name="arch" type="xml">
+                <search string="Res Branch">
+
+                    <filter string="Name" name="filter_by_name" domain="[('name','=','')]" />
+                    <filter string="Code" name="filter_by_code" domain="[('code','=','')]" />
+                    <filter string="RT" name="filter_by_rt" domain="[('rt','=','')]" />
+                    <filter string="RW" name="filter_by_rw" domain="[('rw','=','')]" />
+                    <field name="name" select="True"/>
+                    <field name="code" select="True"/>
+                    <field name="rt" select="True"/>
+                    <field name="rw" select="True"/>
+                    <field name="state_id" select="True"/>
+                    <field name="city_id" select="True"/>
+                    <field name="district_id" select="True"/>
+                    <field name="sub_district_id" select="True"/>
+                    <field name="default_supplier_id" select="True"/>
+                    <group string="Group By..">
+                        <filter string="Country State" domain="[]" name="group_by_state_id" context="{'group_by':'state_id'}"/>
+                        <filter string="City" domain="[]" name="group_by_city_id" context="{'group_by':'city_id'}"/>
+                        <filter string="District" domain="[]" name="group_by_district_id" context="{'group_by':'district_id'}"/>
+                        <filter string="Sub-District" domain="[]" name="group_by_sub_district_id" context="{'group_by':'sub_district_id'}"/>
+                        <filter string="Active" domain="[]" name="group_by_active" context="{'group_by':'active'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- action window -->
+        <record id="tw_res_branch_action" model="ir.actions.act_window">
+            <field name="name">Branch</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.company</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{'is_branch_menu': True}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Branch
+                </p>
+                <p>
+                Click the Create button to add a new Res Branch
+                </p>
+            </field>
+        </record>
+
+        <record id="tw_res_branch_action_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_res_branch_list_view"/>
+            <field name="act_window_id" ref="tw_res_branch_action"/>
+        </record>
+
+        <menuitem id="menuitem_tw_res_branch" name="Branch" parent="tw_menu.submenu_tw_branch" action="tw_res_branch_action" sequence="1" groups="tw_branch.tw_res_branch_group_read"/>
+    </data>
+</odoo>

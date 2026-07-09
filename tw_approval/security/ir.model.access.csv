@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_approval_line_all,tw_approval_line all,model_tw_approval_line,base.group_user,1,1,1,0
+access_tw_approval_line_model_all,tw_approval_line_model all,base.model_ir_model,base.group_user,1,0,0,0
+access_tw_approval_config_all,tw_approval_config all,model_tw_approval_config,base.group_user,1,0,0,0
+access_tw_approval_matrix_all,tw_approval_matrix all,model_tw_approval_matrix,base.group_user,1,0,0,0
+access_tw_approval_matrix_line_all,tw_approval_matrix_line all,model_tw_approval_matrix_line,base.group_user,1,0,0,0
+access_tw_approval,tw_approval all,model_tw_approval,base.group_user,1,0,0,0
+access_tw_approval_copy,tw_approval_copy all,model_tw_approval_copy,base.group_user,1,0,0,0
+access_tw_approval,access_tw_approval,model_tw_approval,base.group_user,1,0,0,0

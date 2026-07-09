@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="tw_purchase_order_approval_form_view" model="ir.ui.view">
+			<field name="name">tw.purchase.order.approval.form</field>
+			<field name="model">purchase.order</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="purchase.purchase_order_form"/>
+			<field name="arch" type="xml">
+                <button name="action_rfq_send" position="before">
+                    <button name="button_confirm" type="object" invisible="state != 'confirmed' or context.get('is_asset')" context="{'validate_analytic': True}" string="Confirm Order" id="p2p_confirm" data-hotkey="q"/>
+                </button>
+
+				<field name="name" position="after">
+					<field name="is_invisible_button" invisible="1"/>
+				</field>
+
+				<!-- Smart button to view P2P -->
+				<xpath expr="//div[@name='button_box']" position="inside">
+					<button name="action_view_p2p" type="object" class="oe_stat_button" icon="fa-shopping-cart" invisible="not is_invisible_button">
+						<div class="o_field_widget o_stat_info">
+							<span class="o_stat_text">P2P Order</span>
+						</div>
+					</button>
+				</xpath>
+
+				<!-- hide unused button while PO from P2P -->
+				<xpath expr="//button[@name='action_create_invoice'][1]" position="attributes">
+					<attribute name="invisible">is_invisible_button or state not in ('purchase', 'done') or invoice_status in ('no', 'invoiced')</attribute>
+				</xpath>
+				<xpath expr="//button[@name='action_create_invoice'][2]" position="attributes">
+					<attribute name="invisible">is_invisible_button or state not in ('purchase', 'done') or invoice_status not in ('no', 'invoiced') or not order_line</attribute>
+				</xpath>
+				<xpath expr="//button[@name='action_view_picking']" position="attributes">
+					<attribute name="invisible">is_invisible_button or is_shipped or state not in ('purchase', 'done') or incoming_picking_count == 0</attribute>
+					<attribute name="groups">tw_purchase_order.group_tw_purchase_order_receive_product</attribute>
+				</xpath>
+
+			</field>
+		</record>
+	</data>
+</odoo>

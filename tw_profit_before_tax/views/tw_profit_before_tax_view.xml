@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Input Net Margin -->
+        <record id="view_tw_profit_before_tax_list" model="ir.ui.view">
+            <field name="name">view.tw.profit.before.tax.list</field>
+            <field name="model">tw.profit.before.tax</field>
+            <field name="arch" type="xml">
+                <list string="Input Net Margin" edit="false" delete="false">
+                    <field name="company_id" />
+                    <field name="area_manager_id" />
+                    <field name="period_time_formated" />
+                    <field name="opex_avg" />
+                    <field name="state" widget="badge"
+                           decoration-info="state == 'draft'"
+                           decoration-success="state == 'approved'"
+                           decoration-danger="state == 'rejected'" />
+                </list>
+            </field>
+        </record>
+
+        <record id="view_tw_profit_before_tax_form" model="ir.ui.view">
+            <field name="name">view.tw.profit.before.tax.form</field>
+            <field name="model">tw.profit.before.tax</field>
+            <field name="arch" type="xml">
+                <form string="Input Net Margin" edit="false" delete="false">
+                    <header>
+                        <button name="action_reject"
+                                type="object"
+                                string="Reject"
+                                groups="tw_profit_before_tax.tw_profit_before_tax_group_button_rejected"
+                                invisible="state != 'draft'" />
+                        <button name="action_confirm"
+                                type="object"
+                                string="Confirm"
+                                groups="tw_profit_before_tax.tw_profit_before_tax_group_button_confirmed"
+                                invisible="state != 'draft'" />
+                        <field name="state"
+                               widget="statusbar"
+                               statusbar_visible="draft,confirmed" />
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" class="oe_inline" placeholder="Name" /> 
+                            </h1>
+                        </div>
+                        <group string="Input Net Margin">
+                            <group>
+                                <field name="user_id" invisible="1" />
+                                <field name="is_administrator" invisible="1" />
+                                <field name="division" invisible="1" />
+                                <field name="product_category_ids" invisible="1" widget="many2many_tags" options="{'no_open': True, 'no_create': True}" />
+                                <field name="product_segment_ids" invisible="1" widget="many2many_tags" options="{'no_open': True, 'no_create': True}" />
+                                <field name="company_id" readonly="is_administrator == False and state != 'draft'" options="{'no_open':True,'no_create':True}" />
+                                <field name="area_manager_id" readonly="is_administrator == False and state != 'draft'" options="{'no_open':True,'no_create':True}" />
+                                <field name="period_time_formated" readonly="is_administrator == False and state != 'draft'" />
+                                <field name="opex_avg" string="Opex (avg. 6M)" readonly="is_administrator == False and state != 'draft'" />
+                                <field name="total_all_net_margin_cash" readonly="is_administrator == False and state != 'draft'" />
+                                <field name="total_all_net_margin_credit" readonly="is_administrator == False and state != 'draft'" />
+                            </group>
+                            <group>
+                                <field name="total_net_margin_salesman_cash" readonly="is_administrator == False and state != 'draft'" />
+                                <field name="total_net_margin_salesman_credit" readonly="is_administrator == False and state != 'draft'" />
+                                <field name="total_amount_net_margin_salesman" readonly="is_administrator == False and state != 'draft'" />
+                            </group>
+                            <group>
+                                <field name="total_unit_lm" readonly="is_administrator == False and state != 'draft'" />
+                                <field name="total_cash_lm" invisible="1" />
+                                <field name="total_credit_lm" invisible="1" />
+                                <field name="total_cash_lm_show" readonly="is_administrator == False and state != 'draft'" />
+                                <field name="total_credit_lm_show" readonly="is_administrator == False and state != 'draft'" />
+                                <field name="total_net_margin_lm" readonly="is_administrator == False and state != 'draft'" />
+                                <field name="total_refund_lm" readonly="is_administrator == False and state != 'draft'" />
+                                <field name="pbt_propose_lm" string="PBT (avg. 6M)" readonly="is_administrator == False and state != 'draft'" />
+                            </group>
+                            <group>
+                                <field name="total_net_margin_counter_cash" readonly="is_administrator == False and state != 'draft'" />
+                                <field name="total_net_margin_counter_credit" readonly="is_administrator == False and state != 'draft'" />
+                                <field name="total_amount_net_margin_counter" readonly="is_administrator == False and state != 'draft'" />
+                            </group>
+                            <group>
+                                <field name="total_unit" readonly="is_administrator == False and state != 'draft'" />
+                                <field name="total_cash" invisible="1" />
+                                <field name="total_credit" invisible="1" />
+                                <field name="total_cash_show" readonly="is_administrator == False and state != 'draft'" />
+                                <field name="total_credit_show" readonly="is_administrator == False and state != 'draft'" />
+                                <field name="total_net_margin" readonly="is_administrator == False and state != 'draft'" />
+                                <field name="total_refund" readonly="is_administrator == False and state != 'draft'" />
+                                <field name="pbt_propose" readonly="is_administrator == False and state != 'draft'" />
+                            </group>
+                            <group>
+                                <field name="total_net_margin_sco_cash" readonly="is_administrator == False and state != 'draft'" />
+                                <field name="total_net_margin_sco_credit" readonly="is_administrator == False and state != 'draft'" />
+                                <field name="total_amount_net_margin_sco" readonly="is_administrator == False and state != 'draft'" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Detail Input Net Margin">
+                                <field name="profit_before_tax_line_ids" widget="one2many_list">
+                                    <list string="Detail Input Net Margin">
+                                        <field name="series_id" options="{'no_open': True, 'no_create': True}" /> 
+                                        <field name="year" /> 
+                                        <field name="amount_net_proposed_margin" />
+                                        <field name="lm_amount_net_proposed_margin" />
+                                        <field name="description" />
+                                        <field name="ttl_sales" />
+                                        <field name="all_net_margin_cash" />
+                                        <field name="all_net_margin_credit" />
+                                        <field name="all_net_margin_amount" />
+                                        <field name="state" widget="badge"
+                                               decoration-info="state == 'draft'"
+                                               decoration-success="state == 'approved'"
+                                               decoration-danger="state == 'rejected'" />
+                                    </list>
+                                    <form create="false" edit="false">
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="company_id" options="{'no_open':True,'no_create':True}" />
+                                                    <field name="period_time_formated" readonly="parent.is_administrator == False and parent.state != 'draft'" />
+                                                    <field name="series_id" options="{'no_open': True, 'no_create': True}" />
+                                                    <field name="year" />
+                                                            <!-- domain="[('parent_id', 'in', parent.product_segment_ids)]" /> -->
+                                                    <field name="amount_net_proposed_margin" />
+                                                    <field name="lm_amount_net_proposed_margin" />                                                    
+                                                </group>
+                                                <group>
+                                                    <field name="description" />
+                                                    <field name="lm_ttl_sales" />
+                                                    <field name="lm_ttl_sales_cash" />
+                                                    <field name="lm_ttl_sales_credit" />
+                                                    <field name="ttl_sales" />
+                                                </group>
+                                                <group>
+                                                    <field name="salesman_net_proposed_margin" />
+                                                    <field name="lm_salesman_net_proposed_margin" />
+                                                    <field name="counter_net_proposed_margin" />
+                                                    <field name="lm_counter_net_proposed_margin" />
+                                                </group>
+                                                <group>
+                                                    <field name="sco_net_proposed_margin" />
+                                                    <field name="lm_sco_net_proposed_margin" />
+                                                    <field name="gp_bbn" />
+                                                    <field name="gp_unit" />
+                                                    <field name="ttl_gp" />
+                                                    <field name="refund" />
+                                                </group>
+                                                <group>
+                                                    <field name="unit_cash_salesman" />
+                                                    <field name="unit_cash_scounter" />
+                                                    <field name="unit_cash_sco" />
+                                                    <field name="amount_unit_cash" />
+                                                </group>                                                
+                                                <group>
+                                                    <field name="unit_credit_salesman" />
+                                                    <field name="unit_credit_scounter" />
+                                                    <field name="unit_credit_sco" />
+                                                    <field name="amount_unit_credit" />
+                                                </group>
+                                                <group>
+                                                    <field name="discount_cash_salesman" />
+                                                    <field name="discount_cash_counter" />
+                                                    <field name="discount_cash_sco" />
+                                                    <field name="amount_discount_cash" />
+                                                </group>
+                                                <group>
+                                                    <field name="discount_credit_salesman" />
+                                                    <field name="discount_credit_counter" />
+                                                    <field name="discount_credit_sco" />
+                                                    <field name="amount_discount_credit" />
+                                                </group>
+                                                <group>
+                                                    <field name="net_margin_salesman_cash" />
+                                                    <field name="net_margin_salesman_credit" />
+                                                    <field name="amount_net_margin_salesman" />
+                                                </group>
+                                                <group>
+                                                    <field name="net_margin_counter_cash" />
+                                                    <field name="net_margin_counter_credit" />
+                                                    <field name="amount_net_margin_counter" />
+                                                </group>
+                                                <group>
+                                                    <field name="net_margin_sco_cash" />
+                                                    <field name="net_margin_sco_credit" />
+                                                    <field name="amount_net_margin_sco" />
+                                                </group>
+                                                <group>
+                                                    <field name="all_net_margin_cash" />
+                                                    <field name="all_net_margin_credit" />
+                                                    <field name="all_net_margin_amount" />
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>                                
+                                </field>                            
+                            </page>
+                            <page name="audit_trail_page" string="Audit Trail" invisible="create_date == False">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1" />
+                                        <field name="create_date" readonly="1" />
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1" />
+                                        <field name="write_date" readonly="1" />
+                                    </group>
+                                    <group invisible="confirm_uid == False">
+                                        <field name="confirm_uid" readonly="1" />
+                                        <field name="confirm_date" readonly="1" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_tw_profit_before_tax_search" model="ir.ui.view">
+            <field name="name">tw.profit.before.tax.search</field>
+            <field name="model">tw.profit.before.tax</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" />
+                    <field name="company_id" />
+                    <field name="period_time_formated" />
+                    <field name="opex_avg" />
+                    <field name="total_unit" />
+                    <field name="total_net_margin" />
+                    <field name="pbt_propose" />
+                    <field string="State" name="profit_before_tax_line_ids" filter_domain="[('profit_before_tax_line_ids.state','=',self)]" />
+                    <filter name="draft" string="Draft" domain="[('profit_before_tax_line_ids.state','=','draft')]" />
+                    <filter name="reject" string="Reject" domain="[('profit_before_tax_line_ids.state','=','reject')]" />
+                    <filter name="approved" string="Approved" domain="[('profit_before_tax_line_ids.state','=','approved')]" />
+                    <separator/>
+                    <group string="Group By">
+                        <filter name="company_id" string="Branch" context="{'group_by': 'company_id'}" />
+                        <filter name="groupby_period_time_formated" string="Periode" context="{'group_by': 'period_time_formated'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Input Net Margin - Action -->
+        <record id="action_tw_profit_before_tax" model="ir.actions.server">
+            <field name="name">Input Net Margin</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="tw_profit_before_tax.model_tw_profit_before_tax" />
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.profit.before.tax'].action_net_margin_list()
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

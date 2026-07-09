@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_selection_api_type_popeye" model="tw.selection">
+	    	<field name="name">Popeye</field>
+            <field name="value">popeye</field> 
+	    	<field name="type">ApiType</field> 
+        </record>
+
+     </data>
+</odoo>

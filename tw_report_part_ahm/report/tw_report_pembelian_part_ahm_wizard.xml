@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+		<record id="tw_report_pembelian_part_ahm_wizard" model="ir.ui.view">
+			<field name="name">tw.report.pembelian.part.ahm.wizard</field>
+			<field name="model">tw.report.pembelian.part.ahm</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Laporan Pembelian Part AHM">
+					<group>
+						<group>
+							<label for="start_date" string="Periode"/>
+							<div>
+								<field name="start_date" class="oe_inline" placeholder="Start Date" required="1"/> -
+								<field name="end_date" class="oe_inline" placeholder="End Date" required="1"/>
+							</div>
+						</group>
+						<group>
+							<field name="division" readonly="1"/>
+						</group>
+					</group>
+					<notebook>
+						<page string="Branches">
+							<field name="company_ids" colspan="4" nolabel="1"/>
+						</page>
+					</notebook>               
+	                <footer>
+	                    <button name="generate_report" string="Export Data" type="object" class="oe_highlight"/>
+	                    <button string="Cancel" special="cancel" class="oe_link"/>
+	                </footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_tw_report_pembelian_part_ahm_wizard" model="ir.actions.act_window">
+			<field name="name">Laporan Pembelian Part AHM</field> 
+			<field name="res_model">tw.report.pembelian.part.ahm</field>
+			<field name="view_mode">form</field>
+	     	<field name="target">new</field>
+		</record>
+
+		<menuitem id="tw_report_pembelian_part_ahm_menuitem" parent="tw_menu.submenu_tw_workshop_report" action="action_tw_report_pembelian_part_ahm_wizard" sequence="100" groups="tw_report_part_ahm.group_tw_report_pembelian_part_ahm_read"/>
+	</data>
+
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_pricelist_transient,tw_inventory_check.tw_pricelist_transient,model_tw_pricelist_transient,base.group_user,1,1,1,1
+access_tw_pricelist_branch_other_transient,tw_inventory_check.tw_pricelist_branch_other_transient,model_tw_pricelist_branch_other_transient,base.group_user,1,1,1,1
+access_tw_loss_demand,tw_inventory_check.tw_loss_demand,model_tw_loss_demand,base.group_user,1,0,0,0
+access_tw_loss_demand_report,tw_inventory_check.tw_loss_demand_report,model_tw_loss_demand_report,base.group_user,1,1,1,1

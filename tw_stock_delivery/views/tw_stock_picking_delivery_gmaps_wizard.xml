@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_stock_picking_delivery_gmap_wizard" model="ir.ui.view">
+        <field name="name">tw.outstanding.delivery.map.wizard.form</field>
+        <field name="model">tw.stock.picking.delivery.gmaps.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Lokasi Pengiriman">
+                <div class="o_row">
+                    <group string="Company Address">
+                        <field name="company_street" string="Jalan" readonly="1"/>
+                        <field name="company_state" string="Provinsi" readonly="1" options="{'no_create': True,'no_edit': True,'no_open': True}"/>
+                        <field name="company_city" string="Kabupaten" readonly="1" options="{'no_create': True,'no_edit': True,'no_open': True}"/>
+                        <field name="company_district" string="Kecamatan" readonly="1" options="{'no_create': True,'no_edit': True,'no_open': True}"/>
+                        <field name="company_sub_district" string="Kelurahan" readonly="1" options="{'no_create': True,'no_edit': True,'no_open': True}"/>
+                        <field name="company_zip" string="Kode Pos" readonly="1"/>
+                    </group>
+                    <group string="Customer Address">
+                        <field name="cust_street" string="Jalan" />
+                        <field name="cust_state" string="Provinsi" options="{'no_create': True,'no_edit': True,'no_open': True}"/>
+                        <field name="cust_city" string="Kabupaten" options="{'no_create': True,'no_edit': True,'no_open': True}"/>
+                        <field name="cust_district" string="Kecamatan" options="{'no_create': True,'no_edit': True,'no_open': True}"/>
+                        <field name="cust_sub_district" string="Kelurahan" options="{'no_create': True,'no_edit': True,'no_open': True}"/>
+                        <field name="cust_zip" string="Kode Pos" />
+                    </group>
+                </div>
+                <div class="o_row">
+                    <group string="Address">
+                        <field name="company_address" string="Alamat Perusahaan" readonly="1"/>
+                        <field name="cust_address" string="Alamat Customer" readonly="1"/>
+                    </group>
+                </div>
+
+                <separator string="Google Maps"/>
+                <field name="map_html" nolabel="1"/>
+
+                <footer>
+                    <button string="Update Map" name="action_update_map" type="object" class="btn-primary"/>
+                    <button string="Close" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_outstanding_delivery_map_wizard" model="ir.actions.act_window">
+        <field name="name">Google Maps</field>
+        <field name="res_model">tw.stock.picking.delivery.gmaps.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+
+</odoo>

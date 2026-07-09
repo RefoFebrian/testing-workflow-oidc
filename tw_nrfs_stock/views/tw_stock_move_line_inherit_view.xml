@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_stock_move_line_nrfs_inherit_view_tree" model="ir.ui.view">
+            <field name="name">tw.stock.move.line.nrfs.inherit.list</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_move_line_operation_inherit_view_tree" />
+            <field name="arch" type="xml">
+                <field name="is_rfs" position="after">
+                    <field name="unit_position_id" placeholder="e.g. AB3" 
+                        options="{'no_create': True,'no_open': True}" 
+                        required="is_rfs == False and parent.has_tracking == 'serial' and parent.picking_code == 'incoming' and parent.use_existing_lots and parent.has_nrfs == 'have_nrfs'"
+                        column_invisible="parent.has_tracking != 'serial' or parent.picking_code != 'incoming' or parent.use_create_lots or parent.division != 'Unit' or parent.has_nrfs == 'no_nrfs'"
+                    />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

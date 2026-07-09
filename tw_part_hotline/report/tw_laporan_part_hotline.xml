@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_laporan_part_hotline_wizard" model="ir.ui.view">
+            <field name="name">tw.laporan.part.hotline.wizard</field>
+            <field name="model">tw.laporan.part.hotline.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Laporan Part Hotline">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="options" required="1"/>
+                                <field name="status" required="1"/>
+                            </group>
+                            <group>
+                                <label for="start_date" string="Periode"/>
+                                <div>
+                                    <field name="start_date" class="oe_inline"/>
+ -                                    <field name="end_date" class="oe_inline" required="1"/>
+                                </div>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Branches">
+                                <field name="company_ids" colspan="4" nolabel="1" options="{'no_open':True,'no_create_edit':True}"/>
+                            </page>
+                        </notebook>
+                        <footer>
+                            <button name="action_export" string="Export Report" type="object" class="oe_highlight"/>
+                            <button string="Cancel" class="oe_link" special="cancel" />
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_laporan_part_hotline_wizard_action" model="ir.actions.act_window">
+            <field name="name">Laporan Part Hotline</field>
+            <field name="res_model">tw.laporan.part.hotline.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

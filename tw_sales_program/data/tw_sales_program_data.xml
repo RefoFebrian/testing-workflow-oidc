@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Master Tipe Sales Program -->
+        <record id="tw_selection_type_master_sales_program_subsidi_barang" model="tw.selection">
+	    	<field name="name">Program Subsidi Barang</field>
+            <field name="value">Program Subsidi Barang</field> 
+	    	<field name="type">MasterSalesProgram</field> 
+        </record>
+        
+        <record id="tw_selection_type_master_sales_program_program_subsidi" model="tw.selection">
+	    	<field name="name">Program Subsidi</field>
+            <field name="value">Program Subsidi</field> 
+	    	<field name="type">MasterSalesProgram</field> 
+        </record>
+        
+        <record id="tw_selection_type_master_sales_program_program_voucher" model="tw.selection">
+	    	<field name="name">Program Voucher</field>
+            <field name="value">Program Voucher</field> 
+	    	<field name="type">MasterSalesProgram</field> 
+        </record>
+
+     </data>
+</odoo>

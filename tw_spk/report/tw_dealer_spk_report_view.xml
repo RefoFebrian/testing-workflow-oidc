@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tw_spk_report_filter" model="ir.ui.view">
+        <field name="name">dealer.spk.report.search</field>
+        <field name="model">tw.dealer.spk.report</field>
+        <field name="arch" type="xml">
+            <search string="Search Dealer SPK">
+                    <field name="company_id"/>
+                    <field name="product_id"/>
+                    <field name="date"/>
+
+                    <group expand="0" string="Group By">
+                        <!-- <filter string="Branch" context="{'group_by': 'company_id'}"/> -->
+                        <!-- <filter string="Product" context="{'group_by': 'product_id'}"/> -->
+                        <!-- <filter string="Date" context="{'group_by': 'date'}"/> -->
+                    </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="tw_spk_list_report_view" model="ir.ui.view">
+        <field name="name">dealer.spk.report.list</field>
+        <field name="model">tw.dealer.spk.report</field>
+        <field name="arch" type="xml">
+            <list string="Dealer SPK" create="false">
+                <field name="company_id"/>
+                <field name="date"/>
+                <field name="partner_id"/>
+                <field name="finco_id"/>
+                <field name="sales_id"/>
+                <field name="product_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="tw_dealer_spk_report_action" model="ir.actions.act_window">
+        <field name="name">Laporan SPK</field>
+        <field name="res_model">tw.dealer.spk.report</field>
+        <field name="view_mode">list</field>
+        <field name="search_view_id" ref="tw_spk_report_filter"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Laporan SPK
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="tw_dealer_spk_report_menuitem" parent="tw_menu.submenu_tw_showroom_report" action="tw_dealer_spk_report_action" groups="tw_spk.group_tw_dealer_spk_report_read" sequence="1"/>
+
+</odoo>

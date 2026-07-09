@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit stock.lot form view to add smart button -->
+    <record id="stock_lot_form_view_inherit_vehicle_document_move" model="ir.ui.view">
+        <field name="name">stock.lot.form.inherit.vehicle.document.move</field>
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form"/>
+        <field name="arch" type="xml">
+            <!-- Add smart button in buttonbox -->
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_vehicle_document_moves"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-exchange"
+                        invisible="vehicle_document_move_count == 0">
+                    <field name="vehicle_document_move_count" widget="statinfo" string="Doc Moves"/>
+                </button>
+            </xpath>
+            
+            <!-- Add invisible computed field for count -->
+            <xpath expr="//sheet" position="before">
+                <field name="vehicle_document_move_count" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="tw_res_sub_district_list_view" model="ir.ui.view">
+			<field name="name">tw.res.sub.district.tree</field>
+			<field name="model">res.sub.district</field>
+			<field name="arch" type="xml">
+				<list string="Kelurahan">
+				    <field name="name"/>
+				    <field name="code"/>
+				    <field name="zip_code"/>
+				    <field name="district_id"/>
+				    <field name="city_id"/>
+				    <field name="state_id"/>
+					<field name="sequence" widget="handle"/>
+				</list>
+			</field>
+		</record>
+
+		<record id="tw_res_sub_district_form_view" model="ir.ui.view">
+			<field name="name">tw.res.sub.district.form</field>
+			<field name="model">res.sub.district</field>
+			<field name="arch" type="xml">
+				<form string="Kelurahan">
+		        	<group>
+			    		<field name="name" required="1"/>
+		        		<field name="code" required="1"/>
+		        		<field name="zip_code"/>
+			    		<field name="district_id"/>
+			    		<field name="city_id"/>
+			    		<field name="state_id"/>
+						<field name="sequence" widget="handle"/>
+			    	</group>
+			    	<notebook>
+						<page string="Audit Trail">
+							<group>
+								<group>
+									<field name="create_uid" readonly="1"></field>
+									<field name="create_date" readonly="1"></field>
+								</group>
+								<group>							
+									<field name="write_uid" readonly="1"></field>
+									<field name="write_date" readonly="1"></field>
+								</group>
+							</group>
+						</page>							
+					</notebook>	
+				</form>
+			</field>
+		</record>
+
+		<record id="tw_res_sub_district_view_search" model="ir.ui.view">
+            <field name="name">tw_res_sub_district.search</field>
+            <field name="model">res.sub.district</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="zip_code"/>
+                    <field name="district_id"/>
+                    <field name="city_id"/>
+                    <field name="state_id"/>
+					<filter name="city" string="city" context="{'group_by': 'city_id'}" />
+					<filter name="district" string="district" context="{'group_by': 'district_id'}" />
+					<filter name="state" string="state" context="{'group_by': 'state_id'}" />
+                </search>
+            </field>
+    	</record>
+
+
+        <record id="tw_localization_res_district_inherit_form_view" model="ir.ui.view">
+		    <field name="name">res.district.inherit.form</field>
+		    <field name="model">res.district</field>
+		    <field name="inherit_id" ref="tw_localization.tw_res_district_form_view"/>
+		    <field name="arch" type="xml">   
+				<xpath expr="//group" position="after">
+                    <notebook>
+						<page string="Kelurahan">
+		                    <field name="sub_district_ids" nolabel="1" colspan="4">
+		                    	<list string="Kelurahan">
+		                    		<field name="name" />
+		                    		<field name="zip_code"/>
+		                    	</list>
+		                    </field>
+	                    </page>
+						<page string="Audit Trail">
+							<group>
+								<group>
+									<field name="create_uid" readonly="1"></field>
+									<field name="create_date" readonly="1"></field>
+								</group>
+								<group>							
+									<field name="write_uid" readonly="1"></field>
+									<field name="write_date" readonly="1"></field>
+								</group>
+							</group>
+						</page> 
+					</notebook>                   
+		    	</xpath>
+	        </field>
+	    </record> 
+
+		<record id='tw_res_sub_district_action_tree' model='ir.actions.act_window'>
+            <field name='name'>Kelurahan</field>
+            <field name='res_model'>res.sub.district</field>
+            <field name='view_mode'>list,form</field>
+			<field name="search_view_id" ref="tw_res_sub_district_view_search"/>
+            <field name="view_id" ref="tw_res_sub_district_list_view"></field>
+        </record>
+
+	</data>
+</odoo>

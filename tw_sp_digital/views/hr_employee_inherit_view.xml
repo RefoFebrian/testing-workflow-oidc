@@ -1,0 +1,93 @@
+<odoo>
+    <data>
+
+        <record id="tw_sp_digital_employee_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.sp.digital.employee.form</field>
+            <field name="inherit_id" ref="tw_hr.tw_hr_employee_form_view"/>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <xpath expr="//button[last()]" position="after">
+                    <button name="action_unsuspend_employee" string="Proses Unsuspend" type="object" invisible="is_suspend == False" groups="tw_sp_digital.group_tw_sp_digital_employee_button_unsuspend"/>
+                </xpath>
+                <page name="personal_information" position="after">
+                    <page string="SP">
+                        <group name="indisipliner" string="Indisipliner">
+                            <field name="sp_level" readonly="1" string="SP Level"/>
+                            <field name="evaluation_performance_level" invisible="evaluation_performance_level == False" readonly="1"/>
+                            <field name="is_suspend" invisible="is_suspend == False" readonly="1"/>
+                            <field name="suspend_reason" invisible="suspend_reason == False" readonly="1"/>
+                        </group>
+                        <separator string="SP Digital"/>
+                        <field name="sp_digital_ids" readonly="1">
+                            <list>
+                                <field name="name"/>
+                                <field name="date"/>
+                                <field name="amount_denda"/>
+                            </list>
+                        </field>
+                    </page>
+                    <page string="Detil SP">
+                        <field name="line_ids">
+                            <list editable="bottom" edit="0">
+                                <field name="name"/>
+                                <field name="date"/>
+                                <field name="sp_level"/>
+                                <field name="state"/>
+                            </list>
+                        </field>
+                    </page>
+                    <page string="Evaluation Performance" invisible="sales_category != 'sales_team_leader'">
+                        <field name="evaluation_performance_ids">
+                            <list>
+                                <field name="name" readonly="1"/>
+                                <field name="employee_id" readonly="1" invisible="1"/>
+                                <field name="minimum_point" readonly="1"/>
+                                <field name="total_point_result" readonly="1"/>
+                                <field name="is_achieve" readonly="1"/>
+                                <field name="start_date" readonly="1"/>
+                                <field name="end_date" readonly="1"/>
+                            </list>
+                            <form>
+                                <group>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="employee_id" invisible="1"/>
+                                        <field name="minimum_point"/>
+                                        <field name="total_point_result"/>
+                                        <field name="is_achieve"/>
+                                        <field name="start_date"/>
+                                        <field name="end_date"/>
+                                    </group>
+                                </group>
+                                <field name="line_ids">
+                                    <list>
+                                        <field name="name"/>
+                                        <field name="employee_ep_id" invisible="1"/>
+                                        <field name="target"/>
+                                        <field name="point"/>
+                                        <field name="result"/>
+                                        <field name="point_result"/>
+                                        <field name="is_achieve"/>
+                                    </list>
+                                </field>
+                            </form>
+                        </field>
+                    </page>
+                </page>
+
+                <field name="create_date" position="after">
+                    <field name="suspend_uid" invisible="suspend_uid == False" readonly="1"/>
+                    <field name="suspend_date" invisible="suspend_date == False" readonly="1"/>
+                </field>
+
+                <field name="write_date" position="after">
+                    <field name="unsuspend_uid" invisible="unsuspend_uid == False" readonly="1"/>
+                    <field name="unsuspend_date" invisible="unsuspend_date == False" readonly="1"/>
+                </field>
+
+                
+            </field>
+        </record>
+
+    </data>
+</odoo>

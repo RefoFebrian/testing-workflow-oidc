@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_work_order_claim_master_rule" model="ir.rule">
+            <field name="name">tw_work_order_claim_rule</field>
+            <field name="model_id" ref="tw_work_order_claim.model_tw_work_order_claim"/>
+            <field name="domain_force">['|', ('company_id', 'in', company_ids), ('area_id.company_ids', 'in', company_ids)]</field>
+            <field name="groups" eval="[(4, ref('tw_work_order_claim.tw_workshop_claim_type_group_read'))]"/>
+        </record>
+    </data>
+</odoo>

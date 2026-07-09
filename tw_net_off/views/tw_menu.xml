@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_net_off" name="Net Off" parent="tw_journal_memorial.menu_jm_net_off" action="tw_action_net_off" sequence="101" groups="tw_net_off.group_tw_net_off_read"/>
+    
+</odoo>

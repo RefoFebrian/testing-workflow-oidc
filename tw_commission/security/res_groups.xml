@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_group_commission_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice" />
+            <field name="name">TW Hutang Komisi Read</field>
+        </record> 
+        
+        <record id="access_commission_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_commission"/>
+            <field name="name">commission read</field> 
+            <field name="group_id" ref="tw_group_commission_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_commission_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_commission_line"/>
+            <field name="name">commission_line read</field> 
+            <field name="group_id" ref="tw_group_commission_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                        
+        <record id="tw_group_commission_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice" />
+            <field name="name">TW Hutang Komisi Update</field>
+			<field name="implied_ids" eval="[(4, ref('tw_group_commission_read'))]"/>            	            	
+        </record>
+                        
+        <record id="access_commission_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_commission"/>
+            <field name="name">commission update</field> 
+            <field name="group_id" ref="tw_group_commission_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="access_commission_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_commission_line"/>
+            <field name="name">commission_line update</field> 
+            <field name="group_id" ref="tw_group_commission_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record> 
+                
+        <record id="tw_group_commission_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice" />
+            <field name="name">TW Hutang Komisi Delete</field>
+			<field name="implied_ids" eval="[(4, ref('tw_group_commission_read'))]"/>            	            	
+        </record>
+                        
+        <record id="access_commission_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_commission"/>
+            <field name="name">commission delete</field> 
+            <field name="group_id" ref="tw_group_commission_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record> 
+
+        <record id="access_commission_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_commission_line"/>
+            <field name="name">commission_line delete</field> 
+            <field name="group_id" ref="tw_group_commission_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record> 
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('tw_group_commission_read')),
+                (4, ref('tw_group_commission_update')),
+                (4, ref('tw_group_commission_delete')),
+            ]" />
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_api_log_sanitize_sensitive_data_param" model="ir.config_parameter">
+            <field name="key">tw_api.log_sanitize_sensitive_data</field>
+            <field name="value">1</field>
+        </record>
+    </data>
+</odoo>

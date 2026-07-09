@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="view_laporan_sisa_margin_dso_wizard" model="ir.ui.view">
+			<field name="name">dms.laporan.sisa.margin.dso.wizard</field>
+			<field name="model">dms.laporan.sisa.margin.dso</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Laporan Sisa Margin DSO">
+                    <group invisible="state_x == 'get'">
+                        <label for="start_date" string="Periode"/>
+                        <div>
+                            <field name="start_date" required="1" placeholder="Start date" style="width: 47%% !important; margin-right: 3px;" />
+                            <field name="end_date" required="1" placeholder="End date" style="width: 47%%;" />
+                        </div>
+						<field name="employee_ids" widget="many2many_tags" style="width: 47%%;" options="{'no_show':True,'no_create':True,'no_open':True}"/>
+
+                    </group>
+					<notebook invisible="state_x == 'get'">
+						<page string="Branches">
+							<field name="branch_ids" colspan="4" nolabel="1" options="{'no_show':True,'no_create':True,'no_open':True}">
+								<tree create="1" delete="1" editable="bottom" edit="0">
+									<field name="kode_dealer"/>
+									<field name="name"/>
+								</tree>
+							</field>
+						</page>
+					</notebook>
+					
+                	<field invisible="1" name="state_x"/>                
+                	<newline/>    
+                	<group col="4" fill="0" invisible="state_x != 'get'">
+	                    <separator colspan="4" string="Excel Export Generated. Click link below to download ..." invisible="state_x == 'choose'"/>
+	                    <field name="file" invisible="1" width="100"/>
+	                    <field name="data_x" nolabel="1" readonly="0" width="100" filename="file" invisible="state_x == 'choose'"/>
+	                </group> 
+	                <footer>
+	                    <button name="excel_laporan" string="Export Data" type="object" class="oe_highlight" invisible="state_x == 'get'"/>
+	                    <!-- <label string=" or " invisible="state_x == 'get'"/> -->
+	                    <button string="Cancel" special="cancel" class="btn btn-default" invisible="state_x == 'get'"/>
+	                </footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_laporan_sisa_margin_dso_wizard" model="ir.actions.act_window">
+			<field name="name">Laporan Sisa Margin DSO</field> 
+			<field name="res_model">dms.laporan.sisa.margin.dso</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_laporan_sisa_margin_dso_wizard"/>
+			<field name="target">new</field>
+		</record>
+
+	  	<menuitem id="dms_laporan_sisa_margin_dso_incentive_wizard_menuitem" parent="dms_incentive_report_sub_menu" action="action_laporan_sisa_margin_dso_wizard" sequence="50" groups="dms_incentive.group_dms_laporan_sisa_margin_dso_group_read"/>
+	  	<menuitem id="dms_laporan_sisa_margin_dso_showroom_wizard_menuitem" parent="dms_menu.dms_showroom_report_sub_menu" action="action_laporan_sisa_margin_dso_wizard" sequence="50" groups="dms_incentive.group_dms_laporan_sisa_margin_dso_group_read"/>
+	</data>
+</odoo>

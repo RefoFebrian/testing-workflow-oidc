@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+
+        <record id="tw_vehicle_process_stnk_cancel_view_search" model="ir.ui.view">
+            <field name="name">tw.registration.process.cancel.search</field>
+            <field name="model">tw.registration.process.cancel</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+		            <field name="company_id"/>
+					<field name="division"/>
+		            <field name="date"/>
+		            <field name="vehicle_registration_process_id"/>
+		            <field name="state"/>
+                    <field name="vehicle_registration_cancel_line_ids" string="Engine Number" filter_domain="[('vehicle_registration_cancel_line_ids.lot_id', 'ilike', self)]"/>
+                    <field name="vehicle_registration_cancel_line_ids" string="Chassis Number" filter_domain="[('vehicle_registration_cancel_line_ids.chassis_no', 'ilike', self)]"/>
+					<filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+					<filter name="confirmed" string="Confirmed" domain="[('state','=','confirmed')]"/>
+					<filter name="group_by_state" string="Group by State" context="{'group_by':'state'}"/>
+					<filter name="group_by_branch" string="Branch" context="{'group_by':'company_id'}"/>
+					<filter name="group_by_division" string="Group by Division" context="{'group_by':'division'}"/>
+                </search>
+            </field>
+        </record>
+    	
+    	<record model="ir.ui.view" id="tw_vehicle_process_stnk_cancel_list_view">
+            <field name="name">tw.registration.process.cancel.list</field>
+            <field name="model">tw.registration.process.cancel</field>
+            <field name="arch" type="xml">
+                <list string="STNK Process Cancel">
+                	<field name="name"/>
+                    <field name="company_id"/>
+                    <field name="division"/>
+                	<field name="vehicle_registration_process_id"/>
+                    <field name="date"/>
+                    <field name="state"/>
+				</list>
+			</field>
+        </record>
+        
+        <record model="ir.ui.view" id="inherit_tw_vehicle_process_stnk_cancel_form_view">
+            <field name="name">tw.registration.process.cancel.form</field>
+            <field name="model">tw.registration.process.cancel</field>
+            <field name="inherit_id" ref="tw_cancellation.tw_cancellation_form_view"/>
+            <field name="arch" type="xml">
+                <!-- Replace header to only show Confirm button and draft/confirmed states -->
+                <xpath expr="//header" position="replace">
+                    <header>
+                        <button name="action_confirm" data-hotkey="r" invisible="state != 'draft'" string="Confirm" type="object" class="oe_highlight" groups="tw_vehicle_registration_process_cancel.tw_vehicle_registration_process_cancel_confirm_button"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
+                    </header>
+                </xpath>
+                
+                <!-- Hide approval page -->
+                <xpath expr="//page[@name='approval']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <field name="transaction_name" position="after">
+                    <field name="vehicle_registration_process_id" 
+                    required="context.get('default_model_type') == 'tw.registration.process.cancel'" 
+                    readonly="state != 'draft'" 
+                    options="{'no_create':True,'no_open':True}" 
+                    invisible="context.get('default_model_type') != 'tw.registration.process.cancel'"
+                    domain="[('id', 'in', available_process_ids)]"/>
+                </field>
+                <field name="date" position="after" >
+                    <div class="alert alert-info" role="alert" invisible="not note">
+                        <i class="fa fa-info-circle me-2 mt-1" title="Perhatian"/>
+                        <strong>Perhatian : </strong>
+                        <field name="note" readonly="1" nolabel="1" />
+                    </div>
+                </field>
+                <xpath expr="//page[@name='approval']" position="before">
+                    <page string="Engine Details" name="cancel_lines" required="context.get('default_model_type') == 'tw.registration.process.cancel'" invisible="context.get('default_model_type') != 'tw.registration.process.cancel'">
+                        <field name="available_process_ids" invisible="1"/>
+                        <field name="available_lot_ids" invisible="1"/>
+                        <field name="vehicle_registration_cancel_line_ids" nolabel="1" readonly="state != 'draft'">
+                            <list editable="bottom">
+                                <field name="lot_id" string="Engine No" domain="[('id', 'in', parent.available_lot_ids)]" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="chassis_no" string="Chassis No" readonly="1"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="tw_vehicle_process_stnk_cancel_action" model="ir.actions.act_window">
+            <field name="name">STNK Process Cancel</field>
+            <field name="res_model">tw.registration.process.cancel</field>
+            <field name="search_view_id" ref="tw_vehicle_process_stnk_cancel_view_search"/>
+            <field name="context" eval="
+            {
+            'default_model_id': ref('tw_vehicle_registration_process_cancel.model_tw_registration_process_cancel'),
+            'default_model_type': 'tw.registration.process.cancel',
+            'default_division': 'Unit',
+            'readonly_division': True,
+            'search_default_draft': True,
+            }
+            "/>
+            <field name="domain">['|',('vehicle_registration_process_id','!=',False),('model_id.model','=','tw.registration.process.cancel')]</field>
+        </record>
+        
+        <record id="tw_vehicle_process_stnk_cancel_action_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_vehicle_process_stnk_cancel_list_view"/>
+            <field name="act_window_id" ref="tw_vehicle_process_stnk_cancel_action"/>
+        </record>
+        
+        <record id="tw_vehicle_process_stnk_cancel_action_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="inherit_tw_vehicle_process_stnk_cancel_form_view"/>
+            <field name="act_window_id" ref="tw_vehicle_process_stnk_cancel_action"/>
+        </record>
+        
+	</data>
+</odoo>

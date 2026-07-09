@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="tw_progressive_tax_inherit_view_form" model="ir.ui.view">
+            <field name="name">tw.progressive.tax.inherit.form</field>
+            <field name="model">tw.progressive.tax</field>
+            <field name="inherit_id" ref="tw_progressive_tax.tw_progressive_tax_view_form" />
+            <field name="arch" type="xml">
+                <field name="write_date" position="after">
+                    <field name="cancel_uid" readonly="1" invisible="state != 'cancelled'"/>
+                    <field name="cancel_date" readonly="1" invisible="state != 'cancelled'"/>
+                </field>
+            </field>
+        </record>
+    </data>
+
+</odoo>

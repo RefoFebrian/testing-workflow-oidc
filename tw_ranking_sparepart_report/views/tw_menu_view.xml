@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="tw_ranking_sparepart_report_menuitem" name="Laporan Ranking Sparepart" parent="tw_menu.submenu_tw_workshop_report" action="tw_ranking_sparepart_report_action" sequence="10" groups="tw_ranking_sparepart_report.group_tw_ranking_sparepart_laporan"/>
+    </data>
+</odoo>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- List View -->
+        <record id="tw_bank_mutasi_list_view" model="ir.ui.view">
+            <field name="name">tw.bank.mutasi.list</field>
+            <field name="model">tw.bank.mutasi</field>
+            <field name="type">list</field>
+            <field name="arch" type="xml">
+                <list string="Bank Mutasi" create="1">
+                    <field name="name"/>
+	                <field name="company_id"/>
+	                <field name="remark"/>
+	                <field name="date" string="Tanggal RK"/>
+	                <field name="debit"/>
+	                <field name="credit"/>
+	                <field name="coa"/>	
+	                <field name="no_sistem"/>	
+	                <field name="format"/>
+	                <field name="date_upload"/>
+	                <field name="state"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="tw_bank_mutasi_form_view" model="ir.ui.view">
+            <field name="name">tw.bank.mutasi.form</field>
+            <field name="model">tw.bank.mutasi</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Bank Mutasi" create="0">
+                    <header>
+                        <button name="action_reconcile" invisible="state != 'Outstanding'" string="Auto" type="object" class="oe_highlight" groups="tw_bank_reconcile.group_tw_bank_mutasi_button_reconcile"/>
+					</header>
+                    <sheet>
+                        <group>
+						 	<field name="name" readonly="1"/>
+						 	<field name="remark" readonly="1"/>
+  			 	            <field name="bank_reconcile_id" readonly="1"/>
+			                <field name="debit" readonly="1"/>
+			                <field name="credit" readonly="1"/>
+			                <field name="amount" readonly="1"/>
+			                <field name="coa" readonly="1"/>
+			                <field name="no_sistem" readonly="date == False or state != 'Outstanding'"/>
+			                <field name="date" readonly="1"/>
+			                <field name="time" readonly="1"/>
+			                <field name="account_id" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+			                <field name="journal_id" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+			                <field name="format" readonly="1"/>
+			                <field name="state" readonly="1"/>
+			                <field name="date_upload" readonly="1"/>
+							<field name="is_posted" readonly="1"/>
+			        	</group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="tw_bank_mutasi_search_view" model="ir.ui.view">
+            <field name="name">tw.bank.mutasi.search</field>
+            <field name="model">tw.bank.mutasi</field>
+            <field name="arch" type="xml">
+                <search string="Bank Mutasi">
+                    <field name="name" string="Name" select="True"/>
+                    <field name="coa" string="COA" select="True"/>
+                    <field name="no_sistem" string="No Sistem" select="True"/>
+                    <field name="remark"/>
+                    <field name="format"/>
+                    <field name="date" string="Date Mutation"/>
+                    <filter name="outstanding" string="Outstanding" domain="[('state', '=', 'Outstanding')]"/>
+                    <filter name="pending" string="Pending" domain="[('date', '=', False)]"/>
+                    <filter name="reconciled" string="Reconciled" domain="[('state', '=', 'Reconciled')]"/>
+                    <filter name="auto_reconcile" string="Auto Reconcile" domain="[('state', '=', 'Auto Reconcile')]"/>
+                    <group string="Group By.." expand="1">
+                        <filter string="Account" domain="[]" name="group_by_account_id" context="{'group_by': 'account_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action View -->
+        <record id="tw_bank_mutasi_action" model="ir.actions.server">
+            <field name="name">Bank Mutasi</field>
+            <field name="model_id" ref="tw_bank_reconcile.model_tw_bank_mutasi"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.bank.mutasi'].action_bank_mutasi_tree()
+            </field>
+        </record>
+        
+    </data>
+</odoo>

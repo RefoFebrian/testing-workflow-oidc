@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+        <!-- Master Ring -->
+        <menuitem id="tw_ring_master_menuitem" name="Master Ring" parent="tw_menu.submenu_tw_branch" action="tw_ring_action" sequence="25" groups="tw_ring.group_tw_ring_read"/>
+        <menuitem id="tw_ring_master_menuitem" name="Master Ring" parent="tw_menu.submenu_tw_branch" action="tw_ring_action" sequence="25" groups="tw_ring.group_tw_ring_read"/>
+
+        <!-- Master Ring Kecamatan -->
+        <menuitem id="tw_ring_kecamatan_master_menuitem" name="Ring Kecamatan" parent="tw_menu.submenu_tw_branch" action="tw_ring_kecamatan_action" sequence="26" groups="tw_ring.group_tw_ring_kecamatan_read"/>
+    
+    </data>
+</odoo>

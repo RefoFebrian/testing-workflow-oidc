@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit Dealer Sale Order Form to Add Faktur Pajak Tab -->
+        <record id="tw_dealer_sale_order_faktur_pajak_form_view" model="ir.ui.view">
+            <field name="name">tw.dealer.sale.order.faktur.pajak.form</field>
+            <field name="model">tw.dealer.sale.order</field>
+            <field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_order_view_form"/>
+            <field name="arch" type="xml">
+
+                <!-- Add Faktur Pajak Tab after Other Info -->
+                <xpath expr="//page[@name='other_information']" position="after">
+                    <page string="Faktur Pajak" name="faktur_pajak" invisible="amount_tax == 0">
+                        <group>
+                            <group string="Faktur Pajak Info">
+                                <field name="is_combined_tax" 
+                                       string="Faktur Pajak Gabungan?" 
+                                       force_save="1"/>
+                                <field name="faktur_pajak_out_id" 
+                                       string="No. Faktur Pajak" 
+                                       readonly="1" 
+                                       invisible="not faktur_pajak_out_id"
+                                       force_save="1"/>
+                                <field name="number_faktur_pajak" 
+                                       string="Nomor Faktur Pajak" 
+                                       readonly="faktur_pajak_out_id != False"
+                                       invisible="faktur_pajak_out_id != False"/>
+                                <field name="date_faktur_pajak" 
+                                       string="Tanggal Faktur Pajak" 
+                                       readonly="faktur_pajak_out_id != False"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

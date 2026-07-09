@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <menuitem id="menuitem_tw_api" name="API" parent="tw_menu.submenu_tw_api" sequence="05"/>
+        <menuitem id="menuitem_tw_api_configuration" name="API Configuration" parent="tw_api.menuitem_tw_api" action="tw_api_configuration_action" sequence="01" groups="tw_api.tw_api_configuration_group_read"/>
+        <menuitem id="menuitem_tw_api_type" name="API Type" parent="tw_api.menuitem_tw_api" action="action_tw_api_type" sequence="20" groups="tw_api.group_tw_api_type_read"/>
+
+        <menuitem id='menuitem_tw_api_log' parent='menuitem_tw_api' action='tw_api_log_action' sequence='16' groups="tw_api.group_tw_api_log_read"/>
+
+    </data>
+</odoo>

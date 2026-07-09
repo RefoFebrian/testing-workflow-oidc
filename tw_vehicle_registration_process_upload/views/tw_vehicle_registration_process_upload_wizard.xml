@@ -1,0 +1,68 @@
+<odoo>
+    <data>
+      <record id="tw_vehicle_registration_process_upload_wizard_action" model="ir.actions.act_window">
+        <field name="name">Upload Proses STNK/BPKB</field>
+        <field name="res_model">tw.vehicle.document.upload.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+      </record>
+
+      <record id="tw_vehicle_registration_process_upload_wizard_view_form" model="ir.ui.view">
+        <field name="name">tw.vehicle.registration.process.upload.wizard.view.form</field>
+        <field name="model">tw.vehicle.document.upload.wizard</field>
+        <field name="arch" type="xml">
+          <form string="Upload Proses STNK">
+            <sheet>
+              <group>
+                <group>
+                  <field name="upload_type"/>
+                </group>
+                <!-- Tombol Download Template & Upload -->
+                <group>
+                  <field name="file" filename="file_name" widget="file" class="oe_highlight" />
+                  <field name="file_name" invisible="1"/>
+                </group>
+                <group>
+                    <group>
+                        <div class="mt-2">
+                            <p class="text-muted">
+                                <i class="fa fa-info-circle" title="Info"/> Unduh template untuk format yang benar
+                            </p>
+                            <button name="action_download_format_file"
+                                    type="object"
+                                    class="btn btn-outline-secondary"
+                                    >
+                                <i class="fa fa-download me-2" title="Download"/>
+                                Download Template Excel
+                            </button>
+                        </div>
+                    </group>
+                </group>
+              </group>
+              <div class="alert alert-info" role="alert" invisible="upload_type != 'registration'">
+                        <h4><i class="fa fa-info-circle" title="Info"/> Format File Excel</h4>
+                        <ul>
+                            <li>Pastikan file Excel memiliki 2 kolom dengan urutan sebagai berikut:</li>
+                        </ul>
+                        <table class="table table-bordered" style="width: 60%; margin: 10px 0 20px 20px;">
+                            <tr style="background-color: #f8f9fa;">
+                                <th style="padding: 8px; border: 1px solid #dee2e6;">Kode Branch</th>
+                                <th style="padding: 8px; border: 1px solid #dee2e6;">Kode Biro Jasa</th>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; border: 1px solid #dee2e6;">DMP</td>
+                                <td style="padding: 8px; border: 1px solid #dee2e6;">AND</td>
+                            </tr>
+                        </table>
+                        <p><strong>Catatan:</strong> Baris pertama dianggap sebagai header dan tidak akan diproses.</p>
+                </div>
+              <footer>
+                <button string="Upload" type="object" name="action_upload_transaction" class="oe_highlight"/>
+                <button string="Cancel" special="cancel" class="oe_highlight"/>
+              </footer>
+            </sheet>
+          </form>
+        </field>
+      </record>
+    </data>
+</odoo>

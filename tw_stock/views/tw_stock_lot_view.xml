@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_stock_lot_list_view" model="ir.ui.view">
+            <field name="name">tw.stock.lot.tree</field>
+            <field name="model">stock.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_tree" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="chassis_number" readonly="1"/>
+                    <field name="division" readonly="1"/>
+                </field>
+                <field name="product_qty" position="after">
+                    <field name="location_id" readonly="1"/>
+                    <field name="state" readonly="1"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="tw_stock_lot_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.lot.form</field>
+            <field name="model">stock.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_form" />
+            <field name="arch" type="xml">
+                <field name="name" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </field>
+                <field name="product_id" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </field>
+                <field name="ref" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </field>
+                <xpath expr="//group[@name='main_group']/group/field[@name='company_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <field name="location_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+
+                <field name="product_id" position="before">
+                    <field name="chassis_number" readonly="1"/>
+                    <field name="division" readonly="1" options="{'no_create': True,'no_open': True}"/>
+                </field>
+
+                <xpath expr="//group[@name='main_group']/group[2]" position="before">
+                    <group>
+                        <field name="state" readonly="1"/>
+                        <field name="company_id" readonly="1"/>
+                        <field name="initial_company_id" readonly="1" groups="tw_base.group_system_admin"/>
+                        <field name="location_id" readonly="1"/>
+                        <field name="production_year" readonly="1"/>
+                        <field name="ready_for_sale" readonly="1"/>
+                        <field name="batch_transfer_id" readonly="1" options="{'no_create': True}"/>
+                    </group>
+                </xpath>
+                <xpath expr="//group[@name='main_group']" position="after">
+                    <group name='delivery_group' string='Delivery Information'>
+                        <group name='receive_group' string='Receive Information'>
+                            <field name="receive_date" readonly="1"/>
+                        </group>
+                        <group name='distribution_group' string='Distribution Information'></group>
+                    </group>
+                </xpath>
+                <xpath expr="//page[@name='description']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//page[@name='description']" position="before">
+                    <page name="additional" string="Additional Information"></page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_stock_lot_search_view" model="ir.ui.view">
+			<field name="name">tw.stock.lot.search</field>
+			<field name="model">stock.lot</field>
+			<field name="arch" type="xml">
+				<search string="Stock Lot">
+                    <filter name="filter_by_intransit" string="Intransit" domain="[('state', '=', 'intransit')]" />
+					<filter name="filter_by_titipan" string="Titipan" domain="[('state', '=', 'titipan')]" />
+					<filter name="filter_by_stock" string="Stock" domain="[('state', '=', 'stock')]" />
+                    <filter name="filter_by_reserved" string="Reserved" domain="[('state', '=', 'reserved')]" />
+                    <filter name="filter_by_sold" string="Sold" domain="[('state', '=', 'sold')]" />
+                    <filter name="filter_by_paid" string="Paid" domain="[('state', '=', 'paid')]" />
+                    <filter name="filter_by_sold_offtr" string="Sold.offtr" domain="[('state', '=', 'sold_offtr')]" />
+                    <filter name="filter_by_paid_offtr" string="Paid.offtr" domain="[('state', '=', 'paid_offtr')]" />
+                    <filter name="filter_by_workshop" string="Workshop" domain="[('state', '=', 'workshop')]" />
+                    <filter name="filter_by_cancelled" string="Cancel" domain="[('state', '=', 'cancelled')]" />
+					<field name="name"/>
+					<field name="chassis_number"/>
+					<field name="ref"/>
+					<field name="product_id"/>
+					<field name="create_date"/>
+                    <field name="company_id" />
+                    <field name="location_id" />
+                    <field name="partner_id" />
+					<filter name="group_by_create_date" string="Group By Create Date" context="{'group_by':'create_date'}"/>
+					<filter name="group_by_division" string="Group By Division" context="{'group_by':'division'}"/>
+					<filter name="group_by_production_year" string="Group By Production Year" context="{'group_by':'production_year'}"/>
+					<filter name="group_by_ready_for_sale" string="Group By Ready For Sale" context="{'group_by':'ready_for_sale'}"/>
+					<filter name="group_by_state" string="Group By State" context="{'group_by':'state'}"/>
+                    <filter name="group_by_branch" string="Branch" context="{'group_by':'company_id'}"/>
+				</search>
+        	</field>
+    	</record>
+
+        <record id="action_tw_stock_lot" model="ir.actions.act_window">
+            <field name="name">Serial Number</field>
+            <field name="res_model">stock.lot</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="tw_stock_lot_search_view"/>
+        </record>
+
+        <record id="action_tw_stock_lot_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_stock_lot_list_view"/>
+            <field name="act_window_id" ref="action_tw_stock_lot"/>
+        </record>
+
+        <record id="action_tw_stock_lot_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_stock_lot_form_view"/>
+            <field name="act_window_id" ref="action_tw_stock_lot"/>
+        </record>
+    </data>
+</odoo>

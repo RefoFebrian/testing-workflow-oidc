@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Access Button Process B2B File -->
+        <record id="tw_b2b_file_group_button_read_folder_process" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">Group Button Read Folder Process</field>
+            <field name="implied_ids" eval="[(4, ref('tw_b2b_file.group_tw_b2b_file_read'))]" />
+        </record>
+
+        <record id="tw_b2b_file_access_button_read_folder_process" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_file" />
+            <field name="name">tw_b2b_file_access_button_read_folder_process write</field>
+            <field name="group_id" ref="tw_b2b_file_group_button_read_folder_process" />
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_b2b_file_content_access_button_read_folder_process" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_file_content" />
+            <field name="name">tw_b2b_file_content_access_button_read_folder_process write</field>
+            <field name="group_id" ref="tw_b2b_file_group_button_read_folder_process" />
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Access Button Re Open State -->
+        <record id="tw_b2b_file_group_button_re_open_state" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">Group Button Re Open State</field>
+            <field name="implied_ids" eval="[(4, ref('tw_b2b_file.group_tw_b2b_file_read'))]" />
+        </record>
+
+        <record id="tw_b2b_file_access_re_open_state" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_file" />
+            <field name="name">tw_b2b_file_access_re_open_state write</field>
+            <field name="group_id" ref="tw_b2b_file_group_button_re_open_state" />
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_b2b_file_content_access_re_open_state" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_file_content" />
+            <field name="name">tw_b2b_file_content_access_re_open_state write</field>
+            <field name="group_id" ref="tw_b2b_file_group_button_re_open_state" />
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Access Button Process Content -->
+        <record id="tw_b2b_file_group_button_process_content" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">Group Button Process Content</field>
+            <field name="implied_ids" eval="[(4, ref('tw_b2b_file.group_tw_b2b_file_read'))]" />
+        </record>
+
+        <record id="tw_b2b_file_content_access_process_content" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_file_content" />
+            <field name="name">tw_b2b_file_content_access_process_content write</field>
+            <field name="group_id" ref="tw_b2b_file_group_button_process_content" />
+            <field name="perm_write">1</field>
+        </record>
+        
+        <!-- Access Button Re Open Content -->
+        <record id="tw_b2b_file_group_button_re_open_content" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">Group Button Re Open Content</field>
+            <field name="implied_ids" eval="[(4, ref('tw_b2b_file.group_tw_b2b_file_read'))]" />
+        </record>
+
+        <record id="tw_b2b_file_content_access_re_open_content" model="ir.model.access">
+            <field name="model_id" ref="model_tw_b2b_file_content" />
+            <field name="name">tw_b2b_file_content_access_re_open_content write</field>
+            <field name="group_id" ref="tw_b2b_file_group_button_re_open_content" />
+            <field name="perm_write">1</field>
+        </record>
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('tw_b2b_file_group_button_read_folder_process')),
+                (4, ref('tw_b2b_file_group_button_re_open_state')),
+                (4, ref('tw_b2b_file_group_button_process_content')),
+                (4, ref('tw_b2b_file_group_button_re_open_content')),
+            ]" />
+        </record>
+    </data>
+</odoo>
+

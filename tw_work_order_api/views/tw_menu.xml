@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem
+        id="menuitem_tw_master_partner_bundling_configuration_workshop"
+        parent="tw_work_order.submenu_tw_work_order_configuration"
+        name="Master Partner Bundling"
+        action="tw_work_order_api.tw_api_master_partner_bundling_action"
+        groups="tw_work_order_api.group_tw_api_master_partner_bundling_read"
+        sequence="60"
+    />
+</odoo>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-name="tw_boom_dashboard.StackedProgressBarChart">
+        <div class="o_stacked_progress_bar_chart" t-att-style="containerStyle">
+            <!-- Title -->
+            <div t-if="state.name" class="stacked-title" t-att-style="titleStyle">
+                <t t-esc="state.name"/>
+            </div>
+            
+            <!-- ======================================= -->
+            <!-- GROUPED LAYOUT -->
+            <!-- ======================================= -->
+            <t t-if="state.isGrouped">
+                <!-- Legend (shared for all groups) -->
+                <div t-if="state.showLegend and state.groups.length and state.groups[0].segments.length" 
+                     class="stacked-legend" 
+                     t-att-style="legendStyle">
+                    <t t-foreach="state.groups[0].segments" t-as="seg" t-key="seg.id">
+                        <div class="legend-item" t-att-style="getLegendBadgeStyle(seg.color)">
+                            <span t-att-style="getLegendDotStyle(seg.color)"/>
+                            <span><t t-esc="seg.name"/></span>
+                        </div>
+                    </t>
+                </div>
+                
+                <!-- Groups Container -->
+                <div class="groups-container" t-att-style="groupContainerStyle">
+                    <t t-foreach="state.groups" t-as="group" t-key="group.name">
+                        <div class="group-item" style="margin-bottom: 10px;">
+                            <!-- Group Label -->
+                            <div class="group-label" t-att-style="getGroupLabelStyle()">
+                                <t t-esc="group.name"/> (<t t-esc="group.total"/>)
+                            </div>
+                            <!-- Progress Bar for this Group -->
+                            <div class="progress-container" t-att-style="progressContainerStyle">
+                                <t t-foreach="group.segments" t-as="seg" t-key="seg.id">
+                                    <div t-if="seg.percentage > 0"
+                                         class="progress-segment" 
+                                         t-att-style="getSegmentStyle(seg)"
+                                         t-att-title="seg.name + ': ' + seg.value + ' (' + seg.percentage + '%)'"
+                                         t-on-click="() => this.onSegmentClick(seg)">
+                                        <span t-if="state.showPercentage and seg.percentage >= 10" 
+                                              class="segment-text"
+                                              t-att-style="getSegmentTextStyle()">
+                                            <t t-esc="seg.percentage"/>%
+                                        </span>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+                
+                <!-- Empty State for Groups -->
+                <div t-if="!state.groups.length" 
+                     style="text-align: center; padding: 20px; color: #888;">
+                    No groups found
+                </div>
+            </t>
+            
+            <!-- ======================================= -->
+            <!-- SINGLE BAR LAYOUT (No Group By) -->
+            <!-- ======================================= -->
+            <t t-else="">
+                <!-- Legend -->
+                <div t-if="state.showLegend and state.segments.length" 
+                     class="stacked-legend" 
+                     t-att-style="legendStyle">
+                    <t t-foreach="state.segments" t-as="seg" t-key="seg.id">
+                        <div class="legend-item" t-att-style="getLegendBadgeStyle(seg.color)">
+                            <span t-att-style="getLegendDotStyle(seg.color)"/>
+                            <span><t t-esc="seg.name"/> (<t t-esc="seg.value"/>)</span>
+                        </div>
+                    </t>
+                </div>
+                
+                <!-- Progress Bar Container -->
+                <div class="progress-container" t-att-style="progressContainerStyle">
+                    <t t-foreach="state.segments" t-as="seg" t-key="seg.id">
+                        <div t-if="seg.percentage > 0"
+                             class="progress-segment" 
+                             t-att-style="getSegmentStyle(seg)"
+                             t-att-title="seg.name + ': ' + seg.value + ' (' + seg.percentage + '%)'"
+                             t-on-click="() => this.onSegmentClick(seg)">
+                            <span t-if="state.showPercentage and seg.percentage >= 8" 
+                                  class="segment-text"
+                                  t-att-style="getSegmentTextStyle()">
+                                <t t-esc="seg.percentage"/>%
+                            </span>
+                        </div>
+                    </t>
+                </div>
+                
+                <!-- Empty State -->
+                <div t-if="!state.segments.length" 
+                     style="text-align: center; padding: 20px; color: #888;">
+                    No segments configured
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>
+

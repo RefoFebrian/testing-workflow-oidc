@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>      
+        
+        <!-- Sale Order Cancel - Unit (Showroom) -->
+        <menuitem action="sale_order_cancel_unit_action" id="sale_order_cancel_unit_menu" 
+            parent="tw_cancellation.submenu_showroom_tw_cancellation" 
+            groups="tw_sale_order_cancel.group_tw_sale_order_cancel_read" 
+            sequence="2"/>
+        
+        <!-- Sale Order Cancel - Sparepart (Workshop) -->
+        <menuitem action="sale_order_cancel_sparepart_action" id="sale_order_cancel_sparepart_menu" 
+            parent="tw_cancellation.submenu_workshop_tw_cancellation" 
+            groups="tw_sale_order_cancel.group_tw_sale_order_cancel_read" 
+            sequence="2"/>
+            
+    </data>
+</odoo>

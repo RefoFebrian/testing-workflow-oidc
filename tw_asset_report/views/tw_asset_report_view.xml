@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_asset_report_view" model="ir.ui.view">
+            <field name="name">tw.asset.report.wizard</field>
+            <field name="model">tw.asset.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Asset Report" create="false" delete="false" edit="false">
+                    <group>
+                        <field name="option"/>     		
+                        <field name="status"/>
+                    </group>
+                      
+                    <notebook colspan="5">
+                          <page string="Branches">
+                            <field name="company_ids" colspan="4" nolabel="1"/>
+                          </page>
+                          <page string="Category">
+                              <field name="category_ids" colspan="4" nolabel="1"/>
+                          </page>
+                    </notebook>
+                    <footer>
+                        <button name="action_export_report" string="Generate" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+	  	<record id="tw_asset_report_action" model="ir.actions.act_window">
+            <field name="name">Laporan Asset</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.asset.report</field>
+            <field name="view_id" ref="tw_asset_report_view"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_warehouse_form_inherit_interbranch" model="ir.ui.view">
+        <field name="name">stock.warehouse.form.inherit.interbranch</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Interbranch Operations" name="interbranch_operations">
+                    <group>
+                        <group string="Unit">
+                            <field name="interbranch_in_unit_type_id" string="Interbranch In (Unit)" options="{'no_create_edit': True}"/>
+                            <field name="interbranch_out_unit_type_id" string="Interbranch Out (Unit)" options="{'no_create_edit': True}"/>
+                        </group>
+                        <group string="Sparepart">
+                            <field name="interbranch_in_sparepart_type_id" string="Interbranch In (Sparepart)" options="{'no_create_edit': True}"/>
+                            <field name="interbranch_out_sparepart_type_id" string="Interbranch Out (Sparepart)" options="{'no_create_edit': True}"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

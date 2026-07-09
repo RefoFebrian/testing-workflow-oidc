@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_stock_location_btl_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.location.btl.form</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='additional_info']" position="after">
+                    <group name="location_btl" string="BTL Information">
+                        <field name="btl_loc_type_id"/>
+                        <label for="effective_start_date" string="Effective Date"/>
+                        <div>
+                            <field name="effective_start_date"
+                                    widget="daterange"
+                                    options="{'end_date_field': 'effective_end_date'}"
+                                    />
+                            <field name="effective_end_date" invisible="1" />
+                        </div>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

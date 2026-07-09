@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="tw_list_cetak_kwt_print">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        
+                        <t t-set="logo" t-value="doc.company_id.logo" />
+                        <t t-if="doc.company_id.parent_id">
+                            <t t-set="logo" t-value="doc.company_id.sudo().parent_id.logo" />
+                        </t>
+
+                        <div>
+                            <div style="position: absolute; opacity: 0.15; width: 100%; left: 500px; top: 150px;">
+                                <img width="40%" stlye="text-align: center" t-if="logo" t-att-src="image_data_uri(logo)"/>
+                            </div>
+                        </div>
+                        <div class="oe_structure"/>
+                        <div class="row">
+                        </div>
+                        <table width="100%" style="font-size: 18px; font-family: Times New Roman, Times, serif; padding: 2px;">
+                            <tr>
+                                <td colspan="2" width="50%">
+                                    <p><h3>PT. TUNAS DWIPA MATRA</h3></p>
+                                    <b>Main Dealer and Authorized Dealer Of Honda Motorcycle</b>
+                                </td>
+                                <td rowspan="2" style="vertical-align:middle">
+                                    <p><h2><u>KUITANSI</u></h2></p>
+                                    <h3><span t-field="doc.name"/></h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="15%">
+                                    <img width="100%" t-if="logo" t-att-src="image_data_uri(logo)"/>
+                                </td>
+                                <td>
+                                    HEAD OFFICE <br/>
+                                    JL. Raden Intan No. 65 Bandar Lampung <br/>
+                                    Tlp (0721) 252470 Fax (0721) 261446 <br/>
+                                    Email: tdm.ho.operation@intra.tunasgroup.com <br/>
+                                    website: www.tunasgroup.com
+                                </td>
+                            </tr>
+                        </table>
+                        <p></p><br/>
+                        <table width="100%" style="font-size: 20px; font-family: Times New Roman, Times, serif; padding: 5px;">
+                            <tr>
+                                <td width="5%">Telah terima dari</td>
+                                <td>: &#160;<span t-field="doc.payer_name"/></td>
+                            </tr>
+                            <tr>
+                                <td>Banyak Uang</td>
+                                <td class="text-end">: &#160;<span t-esc="'{0:,.0f}'.format(doc.total)"/></td>
+                            </tr>
+                            <tr>
+                                <td>Terbilang</td>
+                                <td class="text-end">: &#160;<span t-esc="terbilang(doc.total)"/></td>
+                            </tr>
+                            <tr>
+                                <td>Untuk Pembayaran</td>
+                                <td>: &#160;<span t-field="doc.editorial"/></td>
+                            </tr>
+                            <tr>
+                                <td>Nomor Rekening</td>
+                                <td>: &#160;<span t-field="doc.journal_id.name"/></td>
+                            </tr>
+                            <tr height="50px">
+                                <td width="20%">Nama Rekening</td>
+                                <td>: &#160;<span t-field="doc.account_name"/></td>
+                            </tr>
+                            <tr height="100px">
+                                <td>Jakarta, <span t-field="doc.date" t-options='{"widget": "date", "format": "dd-MM-yyyy"}'/></td>
+                            </tr>
+                            <tr height="50px">
+                                <td><span t-field="doc.branch_head_name"/></td>
+                            </tr>
+                        </table>
+                        <div class="col-xs-6">
+                            <p style="border: 2px solid; border-radius: 12px; padding: 5px; text-align: justify">
+                                <b>Catatan :</b><br/>
+                                1. Pembayaran dengan Cheque / Giro dianggap lunas setelah diluangkan oleh bank <br/>
+                                2. Kuitansi ini adalah Kuitansi Resmi dan satu-satunya bukti pembayaran yang sah <br/>
+                                3. Selalu minta Kuitansi Resmi ini jika anda melakukan pembayaran ke PT. Tunas Dwipa Matra <br/>
+                            </p>
+                        </div>
+                        <div class="oe_structure"/>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

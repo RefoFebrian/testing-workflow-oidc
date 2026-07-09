@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="inherit_print_wo_invoice_voucher" inherit_id="tw_work_order.print_wo_invoice">
+        <xpath expr="//table[@id='total_summary']/tr[last()]" position="after">
+            <tr>
+                <td></td>
+                <td width="50.00%" style="text-align: Right">Tunas Voucher :</td>
+                <td style="text-align: Right"><span t-esc="total_voucher()"/></td>
+            </tr>
+        </xpath>
+    </template>
+
+</odoo>

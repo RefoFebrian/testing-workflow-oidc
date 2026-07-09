@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_petty_cash_out_view_search" model="ir.ui.view">
+            <field name="name">tw.petty.cash.out.search</field>
+            <field name="model">tw.petty.cash.out</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+		            <field name="company_id"/>
+					<field name="division"/>
+		            <field name="branch_destination_id"/>
+		            <field name="state"/>
+					<field name="employee_id" />
+					<field name="petty_cash_out_line_ids" string="Account" filter_domain="[('petty_cash_out_line_ids.account_id', 'ilike', self)]"/>
+					<filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+					<filter name="posted" string="Posted" domain="[('state','=','posted')]"/>
+					<filter name="reimbursed" string="Reimbursed" domain="[('state','=','reimbursed')]"/>
+					<filter name="cancelled" string="Cancelled" domain="[('state','=','cancel')]"/>
+					<filter name="group_by_state" string="Group by State" context="{'group_by':'state'}"/>
+					<filter name="group_by_branch" string="Branch" context="{'group_by':'company_id'}"/>
+					<filter name="group_by_branch_dest" string="Group by Branch Destination" context="{'group_by':'branch_destination_id'}"/>
+					<filter name="group_by_division" string="Group by Division" context="{'group_by':'division'}"/>
+					<filter name="group_by_journal" string="Group by Journal" context="{'group_by':'journal_petty_id'}"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="tw_petty_cash_out_view_list" model="ir.ui.view">
+            <field name="name">tw.petty.cash.out.list</field>
+            <field name="model">tw.petty.cash.out</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+		            <field name="company_id"/>
+					<field name="division"/>
+		            <field name="branch_destination_id"/>
+					<field name="date"/>
+					<field name="amount"/>
+					<field name="amount_real"/>
+		            <field name="state" widget="badge"
+						decoration-info="state == 'draft'"
+                        decoration-success="state == 'posted'"
+                        decoration-danger="state == 'cancel'" 
+					/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_petty_cash_out_view_form" model="ir.ui.view">
+            <field name="name">tw.petty.cash.out.form</field>
+            <field name="model">tw.petty.cash.out</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+						<button name="action_recalculate_amount_real" invisible="state != 'posted'" string="Recalculate" type="object" groups="tw_petty_cash.group_petty_cash_out_button_recalculate"/>
+						<button name="action_post_petty_cash_out" data-hotkey="c" invisible="state not in ['draft']" string="Post" type="object" class="oe_highlight" groups="tw_petty_cash.group_petty_cash_out_button_confirm"/>
+						<button name="%(action_report_tw_petty_cash_out_report)d" string="Print" type="action" class="btn-primary" invisible="state not in ['posted','reimbursed']" groups="tw_petty_cash.group_petty_cash_out_button_print"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,posted"/>
+	           		</header>
+                    <sheet>
+                        <div class="oe_title">
+                            <span class="o_form_label">Petty Cash Out</span>
+			        		<h1>
+				 				<field name="name" class="oe_inline" invisible="not name"/>
+                                <span invisible="name">Draft</span>
+			 				</h1>
+			        	</div>
+
+						<field name="available_account_ids" invisible="1"/>
+                        
+						<group>
+							<group>
+								<field name="company_id" options="{'no_create': True,'no_open': True}" readonly="state != 'draft' or name != 'New'" />
+                                <field name="branch_destination_id" options="{'no_create': True,'no_open': True}" required="1" readonly="state != 'draft'"/>
+							    <label for="amount"/>
+                                <div name="amount_div" class="o_row">
+                                    <field name="amount" readonly="state != 'draft'"/>
+                                    <field name="currency_id" options="{'no_create': True, 'no_open': True}" required="1" readonly="1" groups="base.group_multi_currency"/>
+                                </div>
+							    <field name="journal_petty_id" string="Journal" required="1" readonly="state != 'draft'" options="{'no_create': True,'no_open': True}" domain="[('type', '=', 'petty_cash'), ('company_id', 'parent_of', company_id)]"/>
+						    <field name="saldo_petty_cash" readonly="1"/>
+							</group>
+						    <group>
+	                    		<field name="division" required="1" readonly="state != 'draft'" />
+                                <field name="date" readonly="1"/>
+				            	<field name="amount_real"/>
+								<field name="employee_id" required="1" readonly="state != 'draft'" options="{'no_create': True,'no_open': True}" domain="['|',('company_id', '=', company_id),('company_id', '=', branch_destination_id)]"/>
+	                    		<field name="receiver_id" options="{'no_create': True,'no_open': True}"/>
+							</group>
+						</group>
+                        <notebook>
+		                    <page string="Payment Information">
+		                        <field name="petty_cash_out_line_ids" readonly="state != 'draft'">
+		                            <list editable="bottom">
+										<field name="type_id" options="{'no_create': True,'no_open': True}" required="1"/>
+										<field name="type_detail_id" options="{'no_create': True,'no_open': True}" required="1" domain="[('petty_cash_type_id', '=', type_id)]"/>
+                                		<field name="note"/>
+										<field name="name" required	="1" readonly="1" force_save="1"/>
+                                        <field name="account_id" options="{'no_create': True,'no_open': True}" required="1" domain="[('id','in',parent.available_account_ids)]" readonly="1" force_save="1"/>
+		                                <field name="amount" required="1" sum="Total Amount"/>  
+		                                <field name="amount_real" readonly="1" sum="Total Amount Real"/>
+						             </list>
+		                        </field>
+		                    </page>
+	                        <page string="Journal Items">
+	                            <group>
+	                                <group>
+                                        <field name="period_id"/>
+                                    </group>
+	                            </group>
+	                            <field name="move_line_ids" readonly="1"/>
+	                        </page>
+                            <page name="audit_trail" string="Audit Trail">
+								<group>
+									<group>
+										<field name="create_uid" readonly="1"/>
+										<field name="create_date" readonly="1"/>
+										<field name="confirm_uid" readonly="1"/>
+										<field name="confirm_date" readonly="1"/>
+									</group>
+									<group>
+										<field name="write_uid" readonly="1"/>
+										<field name="write_date" readonly="1"/>
+										<field name="cancel_uid" readonly="1"/>
+										<field name="cancel_date" readonly="1"/>
+									</group>
+								</group>
+							</page>
+		                </notebook>
+                    </sheet>
+					<chatter>
+						<field name="message_ids"/>
+						<field name="activity_ids"/>
+					</chatter>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_petty_cash_out_action" model="ir.actions.act_window">
+            <field name="name">Petty Cash Out</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.petty.cash.out</field>
+            <field name="view_mode">list,form</field>
+			<field name="context" eval="{'search_default_draft': '1'}" />
+        </record>
+
+    </data>
+</odoo>

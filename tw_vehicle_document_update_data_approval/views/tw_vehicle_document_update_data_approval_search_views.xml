@@ -1,0 +1,14 @@
+<odoo>
+  <data>
+      <record id="tw_vehicle_document_update_data_search_view_inherit" model="ir.ui.view">
+          <field name="name">tw.vehicle.document.update.data.search.view.inherit</field>
+          <field name="model">tw.vehicle.document.update.data</field>
+          <field name="inherit_id" ref="tw_vehicle_document_update_data.tw_vehicle_document_update_data_search_view"/>
+          <field name="arch" type="xml">
+            <xpath expr="//filter[@name='Outstanding']" position="attributes">
+              <attribute name="domain">[('state','in',('draft','waiting_for_approval'))]</attribute>
+            </xpath>
+          </field>
+      </record>
+  </data>
+</odoo>

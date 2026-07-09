@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <function model="tw.endpoint.configuration" name="_compile_inbound_output_templates"/>
+    </data>
+</odoo>

@@ -1,0 +1,63 @@
+<odoo>
+	<data>
+
+		<record id="purchase.menu_purchase_root" model="ir.ui.menu">
+			<field name="parent_id" ref="tw_menu.menu_tw_odoo_default" />
+		</record>
+
+
+		<!-- Menu -->
+		<!-- Showroom -->
+		<menuitem id="tw_purchase_order_showroom_menuitem"
+				  name="Purchase Order"
+				  parent="tw_menu.submenu_tw_showroom_purchase"
+				  action="tw_purchase_order.tw_purchase_order_showroom_action_server"
+				  groups="tw_purchase_order.group_tw_purchase_order_showroom_read"
+				  sequence="10" />
+
+		<menuitem id="tw_purchase_order_showroom_umum_menuitem"
+				  name="Purchase Order (Umum)"
+				  parent="tw_menu.submenu_tw_showroom_purchase"
+				  action="tw_purchase_order.tw_purchase_order_showroom_umum_action_server"
+				  groups="tw_purchase_order.group_tw_purchase_order_showroom_umum_read"
+				  sequence="11" />
+		
+		<menuitem id="tw_purchase_order_showroom_line_menuitem"
+				  name="On Purchase Order Lines"
+				  parent="tw_menu.submenu_tw_showroom_purchase"
+				  action="tw_purchase_order.purchase_line_form_action"
+				  groups="tw_purchase_order.group_tw_purchase_order_line_showroom_read"
+				  sequence="12" />
+
+		<!-- Workshop -->
+		<menuitem id="tw_purchase_order_workshop_menuitem"
+				  name="Purchase Order"
+				  parent="tw_menu.submenu_tw_workshop_purchase"
+				  action="tw_purchase_order.tw_purchase_order_workshop_action_server"
+				  groups="tw_purchase_order.group_tw_purchase_order_workshop_read"
+				  sequence="10" />
+		
+
+		<menuitem id="tw_purchase_order_showroom_type_menuitem"
+				  name="Purchase Order Types"
+				  action="tw_purchase_order.tw_purchase_order_showroom_purchase_order_type_action_server"
+				  parent="tw_menu.submenu_tw_showroom_configuration_misc"
+				  groups="tw_purchase_order.group_tw_purchase_order_type_showroom_read"
+				  sequence="100"/>
+		
+		<menuitem id="tw_purchase_order_workshop_type_menuitem"
+				  name="Purchase Order Types"
+				  action="tw_purchase_order.tw_purchase_order_workshop_purchase_order_type_action_server"
+				  parent="tw_menu.submenu_tw_workshop_configuration"
+				  groups="tw_purchase_order.group_tw_purchase_order_type_workshop_read"
+				  sequence="100"/>
+		
+		<!-- Miscellaneous -->
+		<menuitem id="tw_purchase_order_general_type_menuitem"
+				  name="Purchase Order Types"
+				  action="tw_purchase_order.tw_purchase_order_general_purchase_order_type_action_server"
+				  parent="tw_menu.submenu_tw_miscellaneous"
+				  groups="tw_purchase_order.group_tw_purchase_order_type_master_read"
+				  sequence="120"/>
+	</data>
+</odoo>

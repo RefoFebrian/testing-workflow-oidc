@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <record id="tw_approval_part_sales_form_view" model="ir.ui.view">
+            <field name="name">tw.approval.part.sales.form</field>
+            <field name="model">tw.part.sales</field>
+            <field name="inherit_id" ref="tw_part_sales.tw_part_sales_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//form/header/field[@name='state']" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,sale,done" />
+                </xpath>
+                <button name="action_open" position="after">
+                    <button name="action_request_approval" invisible="state != 'draft'" string="RFA" type="object" class="oe_highlight" groups="tw_part_sales_approval.group_tw_part_sales_rfa"/>
+                    <button name="action_approval" invisible="state != 'waiting_for_approval'" string="Approve" type="object" class="oe_highlight"/>
+                    <button name="action_reject_or_cancel" string="Reject" type="object" invisible="state != 'waiting_for_approval'" context="{'window_title': 'Reject'}"/>
+                    <button name="action_reject_or_cancel" string="Cancel Approval" type="object" invisible="state not in ['approved','waiting_for_approval']" groups="tw_part_sales_approval.group_tw_part_sales_cancel_approval" context="{'window_title': 'Cancel'}"/>
+                </button>
+                <button name="action_open" position="replace">
+                    <button name="action_open" data-hotkey="o" string="Open" type="object" invisible="state != 'approved'"/>
+                </button>
+                <xpath expr="//page[@name='other_information']" position="after">
+                    <page string="Approval">
+                        <field name="approval_ids">
+                            <list string="Approval" editable="bottom" create="false" edit="false" delete="false">
+                                <field name="group_id" />
+                                <field name="company_id" />
+                                <field name="division" />
+                                <field name="limit" />
+                                <field name="value" optional="show"/>
+                                <field name="state" />
+                                <field name="reason" />
+                                <field name="approver_id" />
+                                <field name="tanggal" />
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+
+                <xpath expr="//page[@name='audit_trail']/group/group/field[@name='write_date']" position="after">
+                    <field name="wfa_uid" readonly="1" options="{'no_open':True}"/>
+                    <field name="wfa_date" readonly="1" options="{'no_open':True}"/>
+                    <field name="approved_uid" readonly="1" options="{'no_open':True}"/>
+                    <field name="approved_date" readonly="1" options="{'no_open':True}"/>
+                    <field name="rejected_uid" readonly="1" options="{'no_open':True}"/>
+                    <field name="rejected_date" readonly="1" options="{'no_open':True}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_part_sales_approval_search_view" model="ir.ui.view">
+            <field name="name">tw.part.sales.approval.search</field>
+            <field name="inherit_id" ref="tw_part_sales.tw_part_sales_search_view" />
+            <field name="model">tw.part.sales</field>
+            <field name="arch" type="xml">
+                <filter name="state_draft" position="after">
+                    <filter string="Waiting for Approval" name="state_wfa" domain="[('state','=','waiting_for_approval')]" />
+                    <filter string="Approved" name="state_approved" domain="[('state','=','approved')]" />
+                </filter>
+            </field>
+        </record>
+
+        <record id="tw_part_sales.tw_part_sales_action_workshop" model="ir.actions.act_window">
+            <field name="context">{
+                'search_default_state_wfa': 1,
+                'search_default_state_approved': 1
+            }</field>
+        </record>
+    </data>
+</odoo>

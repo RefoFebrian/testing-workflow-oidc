@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Button Groups for Employee Incentive -->
+        
+        <!-- Confirm Button -->
+        <record id="group_tw_employee_incentive_button_confirm" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Button Employee Incentive - Confirm</field>
+        </record>
+
+        <record id="access_tw_employee_incentive_button_confirm" model="ir.model.access">
+            <field name="model_id" ref="model_tw_employee_incentive"/>
+            <field name="name">TW Employee Incentive - Button Confirm</field>
+            <field name="group_id" ref="group_tw_employee_incentive_button_confirm"/>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Done Button -->
+        <record id="group_tw_employee_incentive_button_done" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Button Employee Incentive - Done</field>
+        </record>
+
+        <record id="access_tw_employee_incentive_button_done" model="ir.model.access">
+            <field name="model_id" ref="model_tw_employee_incentive"/>
+            <field name="name">TW Employee Incentive - Button Done</field>
+            <field name="group_id" ref="group_tw_employee_incentive_button_done"/>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Draft Button -->
+        <record id="group_tw_employee_incentive_button_draft" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Button Employee Incentive - Draft</field>
+        </record>
+
+        <record id="access_tw_employee_incentive_button_draft" model="ir.model.access">
+            <field name="model_id" ref="model_tw_employee_incentive"/>
+            <field name="name">TW Employee Incentive - Button Draft</field>
+            <field name="group_id" ref="group_tw_employee_incentive_button_draft"/>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Confirm History Button -->
+        <record id="group_tw_employee_incentive_history_button_confirm" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Button Employee Incentive History - Confirm</field>
+        </record>
+
+		<record id="tw_employee_incentive_history_access_button_confirm_read" model="ir.model.access">
+			<field name="model_id" ref="model_tw_employee_incentive_history"/>
+			<field name="name">button_confirm_tw_employee_incentive_history read"</field>
+			<field name="group_id" ref="tw_employee_incentive_history_group_button_confirm" />
+			<field name="perm_write"> 1 </field>
+		</record>
+
+		<!-- Done Employee incentive history -->
+        </record>
+
+        <!-- Done History Button -->
+        <record id="group_tw_employee_incentive_history_button_done" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Button Employee Incentive History - Done</field>
+        </record>
+
+        <record id="access_tw_employee_incentive_history_button_done" model="ir.model.access">
+            <field name="model_id" ref="model_tw_employee_incentive_history"/>
+            <field name="name">TW Employee Incentive History - Button Done</field>
+            <field name="group_id" ref="group_tw_employee_incentive_history_button_done"/>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Draft History Button -->
+        <record id="group_tw_employee_incentive_history_button_draft" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Button Employee Incentive History - Draft</field>
+        </record>
+
+        <record id="access_tw_employee_incentive_history_button_draft" model="ir.model.access">
+            <field name="model_id" ref="model_tw_employee_incentive_history"/>
+            <field name="name">TW Employee Incentive History - Button Draft</field>
+            <field name="group_id" ref="group_tw_employee_incentive_history_button_draft"/>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Calculate Team Leader Incentive Button -->
+        <record id="group_tw_calculate_team_leader_incentive" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Button Team Leader - Calculate Incentive</field>
+        </record>
+
+        <record id="access_tw_calculate_team_leader_incentive" model="ir.model.access">
+            <field name="model_id" ref="model_tw_team_leader"/>
+            <field name="name">TW Team Leader - Calculate Incentive</field>
+            <field name="group_id" ref="group_tw_calculate_team_leader_incentive"/>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Recalculate incentive -->
+
+        <record id="group_tw_recalculate_incentive_button_confirm" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Button Confirm Recalculate Incentive</field>
+        </record>
+
+        <record id="group_tw_recalculate_incentive_button_confirm_admin" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Button Confirm Recalculate Incentive For Administrator</field>
+        </record>
+
+        <record id="group_tw_recalculate_incentive_button_check_completion" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Button Check Completion Recalculate Incentive</field>
+        </record>
+
+        <record id="group_tw_calculate_evaluation_performance" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Button Calculate Evaluation Performance</field>
+        </record>
+
+    </data>
+
+    <data>
+        <!-- Add button groups to System Admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_employee_incentive_button_confirm')),
+                (4, ref('group_tw_employee_incentive_button_done')),
+                (4, ref('group_tw_employee_incentive_button_draft')),
+                (4, ref('group_tw_employee_incentive_history_button_confirm')),
+                (4, ref('group_tw_employee_incentive_history_button_done')),
+                (4, ref('group_tw_employee_incentive_history_button_draft')),
+                (4, ref('group_tw_calculate_team_leader_incentive')),
+                (4, ref('group_tw_recalculate_incentive_button_confirm')),
+                (4, ref('group_tw_recalculate_incentive_button_check_completion')),
+                (4, ref('group_tw_calculate_evaluation_performance')),
+                (4, ref('group_tw_master_incentive_button_active')),
+                (4, ref('group_tw_master_incentive_button_expire')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

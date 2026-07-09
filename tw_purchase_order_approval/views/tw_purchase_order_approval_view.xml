@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="tw_purchase_order_approval_form_view" model="ir.ui.view">
+			<field name="name">tw.purchase.order.approval.form</field>
+			<field name="model">purchase.order</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="purchase.purchase_order_form"/>
+			<field name="arch" type="xml">
+                <!-- <field name="state" position="attributes">
+                    <attribute name="statusbar_visible">draft,waiting_for_approval,approved,sent,purchase</attribute>
+                </field> -->
+
+				<field name="state" position="replace">
+					<field name="state" 
+						widget="statusbar" 
+						statusbar_visible="draft,sent,purchase" 
+						invisible="is_need_approval"/>
+				</field>
+
+				<field name="state" position="after">
+					<field name="state" 
+						widget="statusbar" 
+						statusbar_visible="draft,waiting_for_approval,approved,sent,purchase" 
+						invisible="not is_need_approval"/>
+				</field>
+              	<button name="action_rfq_send" position="before">
+                    <button name="action_request_approval" invisible="state != 'draft' or context.get('is_asset') or not is_need_approval" string="RFA" type="object" class="oe_highlight" groups="tw_purchase_order_approval.group_tw_purchase_order_approval_rfa"/>
+					<button name="action_approval" invisible="state != 'waiting_for_approval' or context.get('is_asset') or not is_button_approve_visible" string="Approve" type="object" class="oe_highlight" />
+					<button name="action_reject_or_cancel" invisible="state != 'waiting_for_approval' or context.get('is_asset') or not is_button_approve_visible" string="Reject" type="object" context="{'window_title': 'Reject'}" groups="tw_purchase_order_approval.group_tw_purchase_order_approval_reject"/>
+					<button name="action_reject_or_cancel" invisible="state not in ('waiting_for_approval', 'approved') or context.get('is_asset') or not is_button_confirm_visible" string="Cancel Approval" type="object" context="{'window_title': 'Cancel'}" groups="tw_purchase_order_approval.group_tw_purchase_order_approval_cancel"/>
+                </button>
+                <button id="draft_confirm" position="attributes">
+                    <attribute name="invisible">not is_button_confirm_visible</attribute>
+                </button>	
+                
+				<xpath expr="//page[@name='products']" position="after">
+					<page string="Approval" name="approval">
+						<field name="approval_ids" readonly="True"/>
+					</page>
+				</xpath>
+			</field>
+		</record>
+		
+		<record id="tw_purchase_order_approval_custom_form_view" model="ir.ui.view">
+			<field name="name">tw.purchase.order.approval.custom.form</field>
+			<field name="model">purchase.order</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="tw_purchase_order.tw_inherit_purchase_order_form_view"/>
+			<field name="arch" type="xml">
+                <field name="write_date" position="after">
+                    <field name="confirm_uid" readonly="1"/>
+                    <field name="confirm_date" readonly="1"/>
+                </field>
+              
+			</field>
+		</record>
+
+		<record id="tw_purchase_order_approval_search_view" model="ir.ui.view">
+            <field name="name">tw.purchase.order.approval.search.view</field>
+            <field name="model">purchase.order</field>
+			<field name="inherit_id" ref="tw_purchase_order.tw_inherit_purchase_order_search_view" />
+            <field name="arch" type="xml">
+                <filter name="draft" position="after" >
+					<filter name="waiting_for_approval" string="Waiting for Approval" domain="[('state', '=', 'waiting_for_approval')]" />
+					<filter name="approved" string="Approved" domain="[('state', '=', 'approved')]" />
+					<filter name="confirmed" string="Confirmed" domain="[('state', '=', 'confirmed')]" />
+				</filter>
+            </field>
+        </record>
+	</data>
+</odoo>

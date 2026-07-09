@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="master_ring_0" model="tw.ring">
+            <field name="name">0</field>
+            <field name="active">true</field>
+        </record>
+        <record id="master_ring_1" model="tw.ring">
+            <field name="name">1</field>
+            <field name="active">true</field>
+        </record>
+        <record id="master_ring_2" model="tw.ring">
+            <field name="name">2</field>
+            <field name="active">true</field>
+        </record>
+        <record id="master_ring_3" model="tw.ring">
+            <field name="name">3</field>
+            <field name="active">true</field>
+        </record>
+        <record id="master_ring_4" model="tw.ring">
+            <field name="name">4</field>
+            <field name="active">true</field>
+        </record>
+        <record id="master_ring_5" model="tw.ring">
+            <field name="name">5</field>
+            <field name="active">true</field>
+        </record>
+        <record id="master_ring_6" model="tw.ring">
+            <field name="name">6</field>
+            <field name="active">true</field>
+        </record>
+        <record id="master_ring_7" model="tw.ring">
+            <field name="name">7</field>
+            <field name="active">true</field>
+        </record>
+        <record id="master_ring_8" model="tw.ring">
+            <field name="name">8</field>
+            <field name="active">true</field>
+        </record>
+        <record id="master_ring_9" model="tw.ring">
+            <field name="name">9</field>
+            <field name="active">true</field>
+        </record>
+        <record id="master_ring_10" model="tw.ring">
+            <field name="name">10</field>
+            <field name="active">true</field>
+        </record>
+        <record id="master_ring_11" model="tw.ring">
+            <field name="name">11</field>
+            <field name="active">true</field>
+        </record>
+        <record id="master_ring_other" model="tw.ring">
+            <field name="name">Other</field>
+            <field name="active">true</field>
+        </record>
+    </data>
+</odoo>

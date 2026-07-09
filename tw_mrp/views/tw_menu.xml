@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="mrp.menu_mrp_root" model="ir.ui.menu">
+            <field name="parent_id" ref="tw_menu.menu_tw_odoo_default" />
+        </record>
+
+        <!-- Showroom -->
+        <menuitem id="submenu_showroom_tw_manufacture" name="Manufaktur" parent="tw_menu.menu_tw_showroom" sequence="40"/> 	    
+        <menuitem id="submenu_showroom_tw_manufacture_bom" name="BoM" parent="tw_mrp.submenu_showroom_tw_manufacture" sequence="40"/> 	
+        <menuitem id="submenu_showroom_tw_manufacture_configuration" name="Configuration" parent="submenu_showroom_tw_manufacture" sequence="90"/>    
+        
+        <!-- Master -->
+        <menuitem id="submenu_master_tw_manufacture" name="Manufaktur" parent="tw_menu.menu_tw_master" sequence="40"/> 	    
+        <menuitem id="submenu_master_tw_manufacture_bom" name="BoM" parent="tw_mrp.submenu_master_tw_manufacture" sequence="40"/> 	    
+        <menuitem id="submenu_master_tw_manufacture_configuration" name="Configuration" parent="submenu_master_tw_manufacture" sequence="90"/>    
+        
+        <!-- Warehouse -->
+        <menuitem id="submenu_warehouse_tw_manufacture" name="Manufaktur" parent="tw_menu.menu_tw_warehouse" sequence="40"/> 	    
+        <menuitem id="submenu_warehouse_tw_manufacture_bom" name="BoM" parent="tw_mrp.submenu_warehouse_tw_manufacture" sequence="40"/> 	    
+        <menuitem id="submenu_warehouse_tw_manufacture_configuration" name="Configuration" parent="submenu_warehouse_tw_manufacture" sequence="90"/>    
+    
+    </data>
+</odoo>

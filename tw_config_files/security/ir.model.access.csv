@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_config_files_all,tw_config_files all,model_tw_config_files,base.group_user,1,0,0,0
+access_tw_stored_files_wizard_all,tw_stored_files_wizard all,model_tw_stored_files_wizard,base.group_user,1,0,0,0
+access_tw_stored_files_line_wizard_all,tw_stored_files_line_wizard all,model_tw_stored_files_line_wizard,base.group_user,1,0,0,0

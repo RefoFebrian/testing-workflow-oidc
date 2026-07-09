@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_activity_atl_btl_rfa_inherit_list_view" model="ir.ui.view">
+            <field name="name">tw.activity.plan.rfa.inherit.list</field>
+            <field name="model">tw.activity.atl.btl</field>
+            <field name="inherit_id" ref="tw_activity_atl_btl.tw_activity_atl_btl_list_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="before">
+                    <header>
+                        <button name="action_multi_approve" type="object" string="Approve"/>
+                    </header>
+                </xpath>
+            </field>    
+        </record>
+
+        <record id="tw_activity_atl_btl_rfa_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.activity.atl.btl.rfa.inherit.form</field>
+            <field name="model">tw.activity.atl.btl</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="tw_activity_atl_btl.tw_activity_atl_btl_form_view"/>
+            <field name="arch" type="xml">
+                <button name="action_add_activity" position="before">
+                    <button name="action_rfa" string="RFA" type="object" class="oe_highlight" invisible="state != 'draft'" groups="tw_activity_atl_btl_approval.group_tw_activity_atl_btl_approval_rfa"/>
+                    <button name="action_approval" string="Approve" type="object" class="oe_highlight" invisible="state != 'waiting_for_approval' and not context.get('approval_btl')" groups="tw_activity_atl_btl_approval.group_tw_activity_atl_btl_approval_rfa_approve"/>
+                    <button name="action_reject" string="Reject" type="object" invisible="state != 'waiting_for_approval' and not context.get('approval_btl')"/>
+                </button>
+
+                <xpath expr="//page[@name='activity_atl_btl_detail']" position="after">
+                    <page string="Approval">
+                        <field name="approval_ids" readonly="True"/>
+                    </page>
+                </xpath>
+
+                <field name="create_date" position="after">
+                    <field name="approved_uid" invisible="not approved_uid" readonly="1" />
+                    <field name="approved_date" invisible="not approved_date" readonly="1" />
+                </field>
+            </field>
+        </record>
+
+        <record id="tw_activity_atl_btl_approval_action" model="ir.actions.server">
+            <field name="name">Approve Activity Plan</field>
+            <field name="model_id" ref="tw_activity_atl_btl.model_tw_activity_atl_btl"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.activity.atl.btl'].action_activity_atl_btl_approval()
+            </field>
+        </record>
+
+    </data>
+</odoo>

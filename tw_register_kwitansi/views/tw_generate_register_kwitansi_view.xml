@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="tw_generate_kwitansi_view_list" model="ir.ui.view">
+			<field name="name">tw.generate.kwitansi.list</field>
+			<field name="model">tw.register.kwitansi</field>
+			<field name="priority">2</field>
+			<field name="arch" type="xml">
+				<list string="Register Kwitansi">
+					<field name="name" />
+					<field name="company_id" />
+					<field name="date" />
+					<field name="prefix" />
+					<field name="nomor_awal" />
+					<field name="nomor_akhir" />
+				</list>
+			</field>
+		</record>
+
+		<record id="tw_register_kwitansi_view_search" model="ir.ui.view">
+			<field name="name">tw.register.kwitansi.search</field>
+			<field name="model">tw.register.kwitansi</field>
+			<field name="arch" type="xml">
+				<search string="Search Register Kwitansi">
+					<field name='name' />
+					<field name='company_id' />
+					<field name='prefix' />
+					<field name='date' />
+					<group expand="0" string="Group By">
+						<filter string="Branch" name="group_by_branch" icon="terp-go-month" domain="[]"
+							context="{'group_by':'company_id'}" />
+						<filter string="Date" name="group_by_date" icon="terp-go-month" domain="[]"
+							context="{'group_by':'date'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record id="tw_generate_kwitansi_view_form" model="ir.ui.view">
+			<field name="name">tw.generate.kwitansi.form</field>
+			<field name="model">tw.register.kwitansi</field>
+			<field name="arch" type="xml">
+				<form string="Register Kwitansi">
+					<header>
+						<button name="action_post" invisible="state != 'draft'" string="Post" class="oe_highlight" type="object" groups="base.group_user" />
+						<field name="state" widget="statusbar" statusbar_visible="draft,posted" />
+					</header>
+					<sheet>
+						<div class="oe_title">
+							<h1>
+								<field name="name" readonly="1" />
+							</h1>
+						</div>
+						<group>
+							<group>
+								<field name="company_id" options="{'no_create': True,'no_open':True}"
+									readonly="state != 'draft'" />
+								<field name="date" readonly='1' />
+								<field name="is_ekwitansi" widget="boolean_toggle" readonly="state != 'draft'" />
+							</group>
+							<group>
+								<field name="nomor_awal"
+									readonly="state != 'draft'" />
+								<field name="nomor_akhir"
+									readonly="state != 'draft'" />
+								<field name="prefix" required="1"
+									readonly="state != 'draft'" />
+								<field name="padding" readonly="state != 'draft'" />
+							</group>
+						</group>
+						<notebook>
+							<page string="Kwitansi">
+								<field name="register_kwitansi_ids" widget="one2many_list">
+									<list editable="top">
+										<field name="name" />
+										<field name="company_id" />
+										<field name="state" />
+									</list>
+								</field>
+							</page>
+							<page string="Audit Trail">
+								<group>
+									<group>
+										<field name="create_uid" readonly="1"></field>
+										<field name="create_date" readonly="1"></field>
+										<field name="confirm_uid" readonly="1"></field>
+										<field name="confirm_date" readonly="1"></field>
+									</group>
+									<group>
+										<field name="write_uid" readonly="1"></field>
+										<field name="write_date" readonly="1"></field>
+									</group>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_tw_generate_kwitansi">
+			<field name="name">Generate Register Kwitansi</field>
+			<field name="res_model">tw.register.kwitansi</field>
+			<field name="view_mode">list,form</field>
+		</record>
+
+	</data>
+</odoo>

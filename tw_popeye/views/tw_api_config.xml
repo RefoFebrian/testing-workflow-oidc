@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_api_configuration_popeye_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.api.configuration.popeye.inherit.form</field>
+        <field name="model">tw.api.configuration</field>
+        <field name="inherit_id" ref="tw_api.tw_api_configuration_form_view"/>
+        <field name="arch" type="xml">
+            <div class="oe_title" position="after">
+                <div class="oe_button_box" name="button_box">
+                    <button name="action_open_config_parameter_url_popeye" string="URL API Popeye" type="object" class="oe_stat_button" icon="fa-gear" invisible="api_type_value != 'popeye'"/>
+                </div>
+            </div>
+
+            <button name="action_get_token" position="after">
+                <button name="action_get_token_popeye" type="object" string="Get Token Popeye" invisible="api_type_value != 'popeye'"/>
+            </button>
+            
+        </field>
+    </record>
+
+</odoo>

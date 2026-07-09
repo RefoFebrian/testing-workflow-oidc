@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+
+		<!-- SUBMENU -->
+		<menuitem id="tw_dealer_spk_menu_root"
+                  name="Dealer SPK"
+                  parent="tw_menu.submenu_tw_dealers_sale_showroom"
+                  groups="tw_spk.group_tw_dealer_spk_read"
+                  action="tw_spk.tw_dealer_spk_action_server"
+                  active="True"
+                  sequence="2" />
+	</data>
+</odoo>

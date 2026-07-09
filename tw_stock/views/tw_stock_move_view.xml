@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_stock_move_operation_inherit_view_form" model="ir.ui.view">
+            <field name="name">tw.stock.move.inherit.form</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_stock_move_operations" />
+            <field name="arch" type="xml">
+                <!-- Invisible Widget -->
+                <widget name="generate_serials" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </widget>
+                <widget name="import_lots" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </widget>
+                <field name="product_id" position="attributes">
+                    <attribute name="options">{'no_create': True,'no_open': True}</attribute>
+                </field>
+                <field name="picking_id" position="after">
+                    <field name="origin" invisible="1"/>
+                </field>
+                <xpath expr="//form/group/group" position="after">
+                    <group>
+                        <field name="picking_code" invisible="1"/>
+                        <field name="available_location_ids" invisible="1"/>
+                        <field name="location_id" required="0" readonly="state in ('done','cancel')" invisible="picking_code == 'incoming'" domain="[('id','in', available_location_ids)]" options="{'no_create': True, 'no_open': True}" />
+                    </group>
+                    <!--? Make invisible="0" for tracking -->
+                    <group name="additional_fields" invisible="1">
+                        <field name="has_chassis_tracking"/>
+                        <field name="use_create_lots"/>
+                        <field name="use_existing_lots"/>
+                        <field name="show_quant"/>
+                        <field name="show_lots_text"/>
+                        <field name="show_lots_m2o"/>
+                    </group>
+                </xpath>
+                <field name="has_tracking" position="after">
+                    <field name="use_create_lots" invisible="1"/>
+                    <field name="use_existing_lots" invisible="1"/>
+                    <field name="division" invisible="1"/>
+                </field>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

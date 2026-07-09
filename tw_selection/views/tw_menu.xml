@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="submenu_tw_selection"
+        name="Master Selection"
+        parent="tw_menu.menu_tw_master"
+        sequence="49" />
+
+    <menuitem id="menuitem_tw_selection" name="Selection (All)"
+        parent="tw_selection.submenu_tw_selection" sequence="1" action="tw_selection_action"
+        groups="tw_selection.group_tw_selection_read" />
+
+    <menuitem
+        id="menuitem_tw_selection_hobby"
+        name="Hobby"
+        parent="tw_selection.submenu_tw_selection"
+        action="tw_selection_hobby_action"
+        sequence="13"
+        groups="tw_selection.group_tw_selection_update"
+    />
+    
+    <menuitem
+        id="menuitem_tw_selection_motor_utilization"
+        name="Motor Utilization"
+        parent="tw_selection.submenu_tw_selection"
+        action="tw_selection_motor_utilization_action"
+        sequence="14"
+        groups="tw_selection.group_tw_selection_update"
+    />
+
+    <menuitem
+        id="menuitem_tw_selection_expense"
+        name="Expense"
+        parent="tw_selection.submenu_tw_selection"
+        action="tw_selection_expense_action"
+        sequence="15"
+        groups="tw_selection.group_tw_selection_update"
+    />
+
+    <menuitem
+        id="menuitem_tw_selection_income"
+        name="Income"
+        parent="tw_selection.submenu_tw_selection"
+        action="tw_selection_income_action"
+        sequence="16"
+        groups="tw_selection.group_tw_selection_update"
+    />
+
+    <menuitem
+        id="menuitem_tw_selection_motor_brand"
+        name="Motor Brand"
+        parent="tw_selection.submenu_tw_selection"
+        action="tw_selection_motor_brand_action"
+        sequence="17"
+        groups="tw_selection.group_tw_selection_update"
+    />
+
+    <menuitem
+        id="menuitem_tw_selection_motor_type"
+        name="Motor Type"
+        parent="tw_selection.submenu_tw_selection"
+        action="tw_selection_motor_type_action"
+        sequence="18"
+        groups="tw_selection.group_tw_selection_update"
+    />
+
+</odoo>

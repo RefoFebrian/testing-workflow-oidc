@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_tw_net_off_read,tw.net.off.read,tw_net_off.model_tw_net_off,group_tw_net_off_read,1,0,0,0
+access_tw_net_off_update,tw.net.off.update,tw_net_off.model_tw_net_off,group_tw_net_off_update,0,1,1,0
+access_tw_net_off_delete,tw.net.off.delete,tw_net_off.model_tw_net_off,group_tw_net_off_delete,0,0,0,1
+access_tw_net_off_line_read,tw.net.off.line.read,tw_net_off.model_tw_net_off_line,group_tw_net_off_read,1,0,0,0
+access_tw_net_off_line_update,tw.net.off.line.update,tw_net_off.model_tw_net_off_line,group_tw_net_off_update,0,1,1,0
+access_tw_net_off_line_delete,tw.net.off.line.delete,tw_net_off.model_tw_net_off_line,group_tw_net_off_delete,0,0,0,1

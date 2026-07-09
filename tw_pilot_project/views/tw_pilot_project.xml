@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_pilot_project_list_view" model="ir.ui.view">
+            <field name="name">tw.pilot.project.tree.view</field>
+            <field name="model">tw.pilot.project</field>
+            <field name="arch" type="xml">
+                <list string="Pilot Project">
+                    <field name="name"/>
+                    <field name="active"/>
+		        </list>
+		     </field>
+		</record>
+
+        <record id="tw_pilot_project_form_view" model="ir.ui.view">
+		    <field name="name">tw.pilot.project.form.view</field>
+		    <field name="model">tw.pilot.project</field>
+		    <field name="arch" type="xml">
+                <form string="Pilot Project">
+                    <header>
+                        <button string="Activate" type="object" name="action_activate" invisible="active == True" class="oe_highlight"/>
+                        <button string="Deactivate" type="object" name="action_deactivate" invisible="active == False" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h2>
+                                <field name="name" class="oe_inline" placeholder="Name"/>
+                            </h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="company_ids" widget="many2many_tags" options="{'no_create': True,'no_open':True}" required="1"/>
+                                <field name="is_using_rule"/>
+                                <field name="model_id" options="{'no_create': True,'no_open':True}" required="is_using_rule" invisible="not is_using_rule"/>
+                                <field name="output_type_id" options="{'no_create': True,'no_open':True}" required="1"/>
+                                <field name="active" readonly="1"/>
+                                <field name="description"/>
+                                <field name="company_id_result" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+		    </field>
+		</record>
+        <record id="tw_pilot_project_filter" model="ir.ui.view">
+            <field name="name">tw.pilot.project.filter</field>
+            <field name="model">tw.pilot.project</field>
+            <field name="arch" type="xml">
+                <search string="Search Pilot Project">
+                    <filter name="active" string="Active" domain="[('active', '=', True)]"  />
+                    <filter name="inactive" string="Inactive" domain="[('active', '=', False)]"  />
+                </search>
+            </field>
+        </record> 
+
+        <record id="tw_pilot_project_action" model="ir.actions.act_window">
+            <field name="name">Pilot Project</field>
+            <field name="res_model">tw.pilot.project</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Pilot Project
+                </p><p>
+                Click the Create button to add a new Pilot Project
+                </p>
+            </field>
+        </record>
+        
+        <menuitem id="menuitem_tw_master_configuration" name="Configuration" parent="tw_menu.submenu_tw_configuration" sequence="05"/>
+        <menuitem id="tw_pilot_project_menuitem" name="Pilot Project" parent="menuitem_tw_master_configuration" action="tw_pilot_project_action" sequence="7" groups="tw_pilot_project.tw_pilot_project_group_read"/>
+
+    </data>
+</odoo>

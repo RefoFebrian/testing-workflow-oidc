@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_payment_request_report_view" model="ir.ui.view">
+			<field name="name">tw.payment.request.report.view</field>
+			<field name="model">tw.payment.request.report</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Laporan Payment Request">
+					<group>
+                        <label for="start_date" string="Tanggal Upload"/>
+                        <div>
+                            <field name="start_date" class="oe_inline" required="end_date != False"/>&#160;-&#160;
+                            <field name="end_date" class="oe_inline" required="start_date != False"/>
+                        </div>
+						<field name="user_id" options="{'no_open': True,'no_create': True}"/>
+						<field name="transaction_type"/>
+						<field name="payment_request_type_id" options="{'no_open': True,'no_create': True}"/>
+                        <field name="company_ids" widget="many2many_tags" options="{'no_open': True,'no_create': True}"/>
+                    </group>
+                    <notebook>
+                        <page string="Employee">
+                            <field name="employee_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="identification_id"/>
+                                    <field name="registry_number"/>
+                                    <field name="tax_number"/>
+                                </list>
+                                <form>
+                                    <field name="name" readonly="1"/>
+                                    <field name="identification_id" readonly="1"/>
+                                    <field name="registry_number" readonly="1"/>
+                                    <field name="tax_number" readonly="1"/>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button name="action_download" type="object" string="Download" icon="fa-download" class="oe_highlight"/>
+                        <button special="cancel" string="Cancel" class="oe_link"/>
+                    </footer>
+                </form>
+			</field>
+		</record>
+
+		<record id="action_tw_payment_request_report" model="ir.actions.act_window">
+			<field name="name">Laporan Payment Request</field> 
+			<field name="res_model">tw.payment.request.report</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="tw_payment_request_report_view"/>
+			<field name="target">new</field>
+		</record>
+    </data>
+</odoo>

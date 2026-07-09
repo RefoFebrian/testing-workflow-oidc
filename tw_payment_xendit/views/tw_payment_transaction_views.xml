@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit payment transaction form to add payment URL button -->
+    <record id="view_payment_transaction_form_inherit" model="ir.ui.view">
+        <field name="name">payment.transaction.form.inherit.qris</field>
+        <field name="model">payment.transaction</field>
+        <field name="inherit_id" ref="payment.payment_transaction_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_check_payment_status" 
+                        type="object" 
+                        class="btn btn-secondary float-end me-2"
+                        invisible="state in ['done', 'cancel', 'error'] or provider_code != 'xendit' or (not provider_reference and not payment_url)">
+                    <i class="fa fa-refresh me-1" title="Refresh"/> Check Status
+                </button>
+                <button name="action_open_payment_url" 
+                        type="object" 
+                        class="btn btn-primary float-end"
+                        invisible="not payment_url">
+                    <i class="fa fa-external-link me-1" title="External Link"/> Open Payment Page
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='reference']" position="after">
+                <field name="payment_url" readonly="1"/>
+                <field name="note" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <!-- MENU -->
+        <menuitem id="tw_stock_inbound_menuitem" name="Stock Inbound" parent="tw_menu.submenu_tw_warehouse_expedition" action="tw_stock_inbound.tw_stock_inbound_action" sequence="10" groups="tw_stock_inbound.group_tw_stock_inbound_read"/>
+        <menuitem id="tw_expedition_configuration_menuitem" name="Configuration" parent="tw_menu.submenu_tw_warehouse_expedition" sequence="100"/>
+        <menuitem id="tw_expedition_master_menuitem" name="Master Expedition" parent="tw_stock_inbound.tw_expedition_configuration_menuitem" action="tw_stock_inbound.action_tw_partner_master_expedition" sequence="10" groups="tw_stock_inbound.group_tw_expedition_read"/>
+        <menuitem id="tw_expedition_master_partner_menuitem" name="Expedition" parent="tw_menu.submenu_tw_partner" action="tw_stock_inbound.action_tw_partner_master_expedition" sequence="10" groups="tw_stock_inbound.group_tw_expedition_read"/>
+        <menuitem id="tw_driver_master_menuitem" name="Master Driver" parent="tw_stock_inbound.tw_expedition_configuration_menuitem" action="tw_stock_inbound.action_tw_partner_driver" sequence="20" groups="tw_stock_inbound.group_tw_partner_driver_read"/>
+    </data>
+</odoo>

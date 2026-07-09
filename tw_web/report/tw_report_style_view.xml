@@ -1,0 +1,94 @@
+<odoo>
+    <data>
+        <template id="teto_report_styles_base">
+            <style>
+                /* Typography */
+                body { font-family: Arial, sans-serif; font-size: 1rem; }
+                .font-xs {
+                    font-size: 0.6rem !important;
+                }
+                .font-sm {
+                    font-size: 0.8rem !important;
+                }
+                .font-md {
+                    font-size: 1rem !important;
+                }
+                .font-lg {
+                    font-size: 1.2rem !important;
+                }
+                .font-xl {
+                    font-size: 1.4rem !important;
+                }
+                
+                /* Tables */
+                table {
+                    page-break-inside: avoid;
+                    border-collapse: collapse;
+                }
+
+                .teto-table-header,
+                .teto-table-content,
+                .teto-table-footer,
+                .teto-table-signature {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+                .teto-table-header th{
+                    background-color: rgb(180, 180, 180);
+                    vertical-align: middle;
+                    padding: 0.2rem;
+                    font-weight: bolder;
+                }
+                .teto-table-header td{
+                    vertical-align: middle;
+                    padding: 0.2rem;
+                }
+                .teto-table-content th {
+                    background-color: rgb(180, 180, 180);
+                    text-align: center;
+                    vertical-align: middle;
+                    border: 1px solid black;
+                    font-weight: bolder;
+                }
+                .teto-table-content td {
+                    vertical-align: middle;
+                    border: 1px solid black;
+                }
+                
+                .teto-row-border {
+                    width: 100%;
+                    border-right: none;
+                    border-left: none;
+                }
+                
+                .teto-row-border tr,
+                .teto-row-border th,
+                .teto-row-border td {
+                    border-right: none;
+                    border-left: none;
+                    border-top: 1px solid black;
+                    border-bottom: 1px solid black;
+                }
+
+                th, td {
+                    padding-left: 0.3rem;
+                    padding-right: 0.3rem;
+                }
+                
+                .signature-row,
+                .signature-row td,
+                .signature-row th {
+                    height: 6rem;
+                }
+                
+                /* Utilities */
+                .text-end  { text-align: right; }
+                .text-center { text-align: center; }
+                .italic        { font-style: italic; }
+                .bold        { font-weight: bold; }
+                .bolder        { font-weight: bolder; }
+                .border { border: 1px solid black; }
+            </style>
+        </template>
+    </data>
+</odoo>

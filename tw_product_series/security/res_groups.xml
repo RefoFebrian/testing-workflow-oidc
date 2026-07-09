@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Product Series Group Read -->
+        <record id="group_tw_product_series_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Product Series Showroom Read</field>
+        </record>
+        <record id="access_tw_product_series_read" model="ir.model.access">
+            <field name="model_id" ref="model_product_series"/>
+            <field name="name">product.series read</field>
+            <field name="group_id" ref="group_tw_product_series_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_product_series_master_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Product Series Master Read</field>
+        </record>
+        <record id="access_tw_product_series_master_read" model="ir.model.access">
+            <field name="model_id" ref="model_product_series"/>
+            <field name="name">product.series master read</field>
+            <field name="group_id" ref="group_tw_product_series_master_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Product Series Group Update -->
+        <record id="group_tw_product_series_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Product Series Showroom Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_product_series_read'))]"/>
+        </record>
+        <record id="access_tw_product_series_update" model="ir.model.access">
+            <field name="model_id" ref="model_product_series"/>
+            <field name="name">product.series update</field>
+            <field name="group_id" ref="group_tw_product_series_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_product_series_master_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Product Series Master Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_product_series_master_read'))]"/>
+        </record>
+        <record id="access_tw_product_series_master_update" model="ir.model.access">
+            <field name="model_id" ref="model_product_series"/>
+            <field name="name">product.series master update</field>
+            <field name="group_id" ref="group_tw_product_series_master_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Product Series Group Delete -->
+        <record id="group_tw_product_series_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Product Series Showroom Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_product_series_read'))]"/>
+        </record>
+        <record id="access_tw_product_series_delete" model="ir.model.access">
+            <field name="model_id" ref="model_product_series"/>
+            <field name="name">product.series delete</field>
+            <field name="group_id" ref="group_tw_product_series_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="group_tw_product_series_master_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Product Series Master delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_product_series_master_read'))]"/>
+        </record>
+        <record id="access_tw_product_series_master_delete" model="ir.model.access">
+            <field name="model_id" ref="model_product_series"/>
+            <field name="name">product.series master delete</field>
+            <field name="group_id" ref="group_tw_product_series_master_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+    </data>
+
+    <data>
+        <!-- Add to System Admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_product_series_read')),
+                (4, ref('group_tw_product_series_update')),
+                (4, ref('group_tw_product_series_delete')),
+                (4, ref('group_tw_product_series_master_read')),
+                (4, ref('group_tw_product_series_master_update')),
+                (4, ref('group_tw_product_series_master_delete')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

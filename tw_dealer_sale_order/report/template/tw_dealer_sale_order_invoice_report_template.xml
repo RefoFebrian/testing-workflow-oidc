@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="invoice_dso_template">
+            <t t-call="web.html_container">
+                <t t-call="tw_web.teto_report_layout">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            <style type="text/css">
+                                .page {
+                                    font-weight: 600;
+                                }
+                                table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                }
+                                th {
+                                    font-weight: bold;
+                                    vertical-align: middle;
+                                }
+                                th, td {
+                                    padding: 0.15rem;
+                                    border: 1px solid black;
+                                }
+                                .no-border {
+                                    border: none !important;
+                                }
+                                .border-top {
+                                    border-top: 1px solid black !important;
+                                    border-left: none !important;
+                                    border-right: none !important;
+                                    border-bottom: none !important;
+                                }
+                                .border-left-top {
+                                    border-top: 1px solid black !important;
+                                    border-left: 1px solid black !important;
+                                    border-right: none !important;
+                                    border-bottom: none !important;
+                                }
+                                .border-right-top {
+                                    border-top: 1px solid black !important;
+                                    border-left: none !important;
+                                    border-right: 1px solid black !important;
+                                    border-bottom: none !important;
+                                }
+                                .border-left {
+                                    border-top: none !important;
+                                    border-left: 1px solid black !important;
+                                    border-right: none !important;
+                                    border-bottom: none !important;
+                                }
+                                .border-right {
+                                    border-top: none !important;
+                                    border-left: none !important;
+                                    border-right: 1px solid black !important;
+                                    border-bottom: none !important;
+                                }
+                                .border-bottom {
+                                    border-top: none !important;
+                                    border-left: none !important;
+                                    border-right: none !important;
+                                    border-bottom: 1px solid black !important;
+                                }
+                                .border-left-bottom {
+                                    border-top: none !important;
+                                    border-left: 1px solid black !important;
+                                    border-right: none !important;
+                                    border-bottom: 1px solid black !important;
+                                }
+                                .border-right-bottom {
+                                    border-top: none !important;
+                                    border-left: none !important;
+                                    border-right: 1px solid black !important;
+                                    border-bottom: 1px solid black !important;
+                                }
+                                .title {
+                                    font-size: 18px;
+                                    font-weight: bolder;
+                                }
+                                .no-horizontal-border {
+                                    border-top: none !important;
+                                    border-bottom: none !important;
+                                }
+                                .no-horizontal-border td {
+                                    border-top: none !important;
+                                    border-bottom: none !important;
+                                }
+                            </style>
+                            <div class="oe_structure"/>
+                        <div class="row">
+                                <div class="col-6">
+                                    <table width="100%" class="table-borderless">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="3"><span class="title" t-esc="doc.company_id.sudo().parent_id.name"/> - <span class="title" t-esc="doc.company_id.name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3"><span t-esc="print_address(doc.company_id.partner_id)"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="29%">NPWP</td>
+                                                <td width="1%">:</td>
+                                                <td width="70%"><span t-esc="doc.company_id.vat"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pengukuhan</td>
+                                                <td>:</td>
+                                                <td><span t-field="doc.company_id.establishment_date" t-options='{"format": "dd-MM-yyyy"}'/></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-6">
+                                    <table width="100%" class="table-borderless">
+                                        <tbody>
+                                            <tr>
+                                                <td class="title" colspan="3">INVOICE</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="29%">No Sales Order</td>
+                                                <td width="1%">:</td>
+                                                <td width="70%"><span t-esc="doc.name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tanggal</td>
+                                                <td>:</td>
+                                                <td><span t-esc="time_date(doc.date_order)"/></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        <br/>
+                            <div class="row mt-1" style="border: 1px solid black;">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <table class="table-borderless" width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="29%">Instansi</td>
+                                                        <td width="1%">:</td>
+                                                        <td width="70%"><span name="instansi_id"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="29%">Pembeli</td>
+                                                        <td width="1%">:</td>
+                                                        <td width="70%"><span t-esc="doc.partner_id.name"/> (<span t-esc="doc.partner_id.code"/>)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="29%">QQ</td>
+                                                        <td width="1%">:</td>
+                                                        <td width="70%"><span t-esc="doc.partner_id.name"/> (<span t-esc="doc.partner_id.code"/>)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="29%">NPWP Pembeli</td>
+                                                        <td width="1%">:</td>
+                                                        <td width="70%"><span t-esc="doc.partner_id.no_npwp"/></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-6">
+                                            <table class="table-borderless" width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="29%">TOP</td>
+                                                        <td width="1%">:</td>
+                                                        <td width="70%"><span t-esc="get_payment_term(doc)"/> Days</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="29%">JTP</td>
+                                                        <td width="1%">:</td>
+                                                        <td width="70%"><span t-esc="due_date_invoice()"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="29%">Salesman</td>
+                                                        <td width="1%">:</td>
+                                                        <td width="70%"><span t-esc="doc.sales_id.name"/></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <table class="detail">
+                                            <thead>
+                                                <tr>
+                                                    <th name="no_thead_col">No</th>
+                                                    <th name="kode_thead_col">Kode</th>
+                                                    <th name="nama_barang_thead_col">Nama Barang</th>
+                                                    <th name="warna_thead_col">Warna</th>
+                                                    <th name="jml_thead_col">Jml</th>
+                                                    <th name="hrg_satuan_thead_col">Hrg Satuan</th>
+                                                    <th name="sub_total_thead_col">Sub Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="doc_line(doc.order_line.filtered(lambda l: l.product_id))" t-as="line">
+                                                    <tr>
+                                                        <td name="no_tbody_col" align="center"><span t-esc="line[0]"/></td>
+                                                        <td name="kode_tbody_col"><span t-esc="line[1].product_id.default_code"/></td>
+                                                        <td name="nama_barang_tbody_col"><span t-esc="line[1].product_id.name"/></td>
+                                                        <td name="warna_tbody_col">
+                                                            <span t-esc="line[1].product_id.product_template_attribute_value_ids.code"/> - <span t-esc="line[1].product_id.product_template_attribute_value_ids.name"/>
+                                                        </td>
+                                                        <td name="jml_tbody_col" align="right"><span t-esc="int(line[1].product_uom_qty)"/></td>
+                                                        <td name="hrg_satuan_tbody_col" align="right" class="text-end"><span t-esc="line[1].price_unit" t-options="{'widget': 'float', 'precision': 0}"/></td>
+                                                        <td name="sub_total_tbody_col" align="right" class="text-end"><span t-esc="line[1].price_unit * line[1].product_uom_qty" t-options="{'widget': 'float', 'precision': 0}"/></td>
+                                                    </tr>
+                                                </t>
+                                                <tr>
+                                                    <td colspan="8" style="border: 0;"/>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr name="description_tfoot_row" class="no-horizontal-border">
+                                                    <td colspan="3" rowspan="8" class="top-left">
+                                                        Harga Jual Sudah Termasuk <br/>
+                                                        Perlengkapan dan Barang Extra <br/>
+                                                        sesuai dengan BASTK
+                                                    </td>
+                                                    <td>Jumlah</td>
+                                                    <td align="right" rowspan="8"><span t-esc="int(total_quantity(doc))"/></td>
+                                                    <td rowspan="8"/>
+                                                    <td align="right"><span t-esc="total_subtotal(doc)" t-options="{'widget': 'float', 'precision': 0}"/></td>
+                                                </tr>
+                                                <tr name="potongan_1_tfoot_row" class="no-horizontal-border">
+                                                    <td>Potongan 1</td>
+                                                    <td align="right" class="text-end">
+                                                        <span t-out="(doc.amount_discount_regular or 0.0) - (doc.amount_discount_total or 0.0) + (doc.amount_discount_direct or 0.0)" t-options="{'widget': 'float', 'precision': 0}"/>
+                                                    </td>
+                                                </tr>
+                                                <tr name="potongan_2_tfoot_row" class="no-horizontal-border">
+                                                    <td>Potongan 2</td>
+                                                    <td align="right" class="text-end">
+                                                        <span t-out="(doc.amount_discount_total or 0.0) - (doc.amount_discount_regular or 0.0)" t-options="{'widget': 'float', 'precision': 0}"/>
+                                                    </td>
+                                                </tr>
+                                                <tr name="total_tfoot_row" class="no-horizontal-border">
+                                                    <td>Total</td>
+                                                    <td align="right">
+                                                        <span t-esc="total(doc)" t-options="{'widget': 'float', 'precision': 0}"/>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr name="untaxed_tfoot_row" class="no-horizontal-border">
+                                                    <td>Untaxed Amount</td>
+                                                    <td align="right" class="text-end">
+                                                        <span t-esc="doc.amount_untaxed" t-options="{'widget': 'float', 'precision': 0}"/>
+                                                    </td>
+                                                </tr>
+                                                <tr name="dpp_tfoot_row" class="no-horizontal-border">
+                                                    <td>DPP</td>
+                                                    <td align="right">
+                                                        <span t-esc="dpp()" t-options="{'widget': 'float', 'precision': 0}"/>
+                                                    </td>
+                                                </tr>
+                                                <tr name="ppn_tfoot_row" class="no-horizontal-border">
+                                                    <td>PPN</td>
+                                                    <td align="right" class="text-end">
+                                                        <span t-esc="doc.amount_tax" t-options="{'widget': 'float', 'precision': 0}"/>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row mt-3">
+                                <div class="col-6">Dicetak Oleh</div>
+                                <div class="col-6">Pembeli</div>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-6">..................................</div>
+                                <div class="col-6">..................................</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <span t-esc="user.name"/>
+                                    <span t-esc="time_date(doc.date_order)"/>
+                                </div>
+                                <div class="col-6"><span t-esc="doc.partner_id.name"/></div>
+                            </div>
+                            
+                            <div class="row my-1">
+                                <div class="col-12 text-end">
+                                    Cetakan ke <span t-esc="print_counter()"/>
+                                </div>
+                            </div>
+
+                            <div name="foot-note">
+                                <div class="row" name="voucher_id">
+                                    <div class="col-12">
+                                        Lembar ke-1 Pembeli / Lembar ke-2 Arsip Cabang / Lembar ke-3 Arsip HO
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        Pembayaran dapat di transfer ke rekening kami atas nama <span t-esc="doc.company_id.sudo().parent_id.name"/> - <span t-esc="doc.company_id.name"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        Pembayaran dianggap sudah diterima apabila telah masuk ke rekening <span t-esc="doc.company_id.sudo().parent_id.name"/> - <span t-esc="doc.company_id.name"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+                

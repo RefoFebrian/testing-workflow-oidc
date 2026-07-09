@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+      <record id="tw_cash_count_branch_setting_inherit_form_view" model="ir.ui.view">
+          <field name="name">tw.cash.count.branch.setting.inherit.view.form</field>
+          <field name="model">tw.branch.setting</field>
+          <field name="inherit_id" ref="tw_branch_setting.tw_branch_setting_form_view"/>
+          <field name="arch" type="xml">
+              <xpath expr="//page[@name='general_information']" position="after">
+                  <page string="Plafond" name="branch_plafond">
+                    <group>
+                          <field name="plafon_petty_cash_sr" required="1" options='{"no_create": True}'/>
+                          <field name="plafon_petty_cash_ws" required="1" options='{"no_create": True}'/>
+                          <field name="plafon_petty_cash_atl_btl" required="1" options='{"no_create": True}'/>
+                    </group>
+                  </page>
+              </xpath>
+          </field>
+      </record>
+    </data>
+  </odoo>
+  

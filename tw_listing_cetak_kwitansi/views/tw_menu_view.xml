@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+        
+        <!-- Listing Cetak Kwitansi Menu -->
+        <menuitem id="tw_listing_cetak_kwitansi_menuitem"
+            name="Listing Cetak Kwitansi"
+            parent="tw_menu.submenu_tw_backoffice_bank_cash"
+            action="tw_listing_cetak_kwitansi_action"
+            sequence="150"
+            groups="group_tw_listing_cetak_kwitansi_read"
+        />
+        <menuitem id="tw_listing_cetak_kwitansi_report_menuitem"
+            name="Laporan Listing Cetak Kwitansi"
+            parent="tw_menu.submenu_tw_backoffice_bank_cash"
+            action="tw_listing_cetak_kwitansi_report_action"
+            sequence="160"
+            groups="group_tw_listing_cetak_kwitansi_report_read"
+        />
+
+    </data>
+</odoo>

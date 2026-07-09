@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_attachment,tw_attachment_user,model_tw_attachment,base.group_user,1,0,0,0
+access_tw_attachment_mixin,tw_attachment_mixin,model_tw_attachment_mixin,base.group_user,1,0,0,0
+

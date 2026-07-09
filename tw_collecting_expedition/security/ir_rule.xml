@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- IR Rule: Users can only see records from their allowed companies -->
+        <record id="tw_collecting_expedition_company_rule" model="ir.rule">
+            <field name="name">Collecting Expedition: Multi-Company</field>
+            <field name="model_id" ref="model_tw_collecting_expedition"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+            <field name="groups" eval="[(4, ref('group_tw_collecting_expedition_read'))]"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+        <menuitem id="tw_budget_proposal_menuitem" action="action_tw_budget_proposal" parent="tw_menu.submenu_tw_backoffice_configuration" sequence="65"/>
+
+    </data>
+
+</odoo>

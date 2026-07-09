@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+     <!-- All Partner Menu-->
+     <record id="tw_inherit_all_partner_list_view" model="ir.ui.view">
+        <field name="name">Partners</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <list string="Partners">
+                <field name="code"/>
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_tw_all_partner_inherit_filter" model="ir.ui.view">
+        <field name="name">tw.all.partners.res.partner.select</field>
+        <field name="model">res.partner</field>
+        <field name="priority">50</field>
+        <field name="arch" type="xml">
+            <search string="Partners">
+                <field name="name" filter_domain="['|', '|', ('name', 'ilike', self), ('parent_id', 'ilike', self), ('ref' , '=', self)]"/>
+                <field name="code"/>
+                <field name="identification_number" string="KTP"/>
+                <field name="mobile" string="Mobile"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_tw_all_partner_inherit_partner">
+        <field name="name">Partners</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,list,form,activity</field>
+        <field name="search_view_id" ref="view_tw_all_partner_inherit_filter"/>
+        <field name="domain">[('company_type','=','company')]</field>
+        <field name="context" eval="
+        {
+            'default_company_type': 'company',
+        }
+        " />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Add a new Partners
+            </p><p>
+              TEDS 2.0 helps you easily track all activities related to a Supplier's Data
+            </p>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="action_tw_all_partner_inherit_partner_view_list_view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="tw_inherit_all_partner_list_view"/>
+        <field name="act_window_id" ref="action_tw_all_partner_inherit_partner"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="action_tw_all_partner_inherit_partner_form_view">
+        <field name="sequence" eval="3"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="tw_partner_contact_form_view"/>
+        <field name="act_window_id" ref="action_tw_all_partner_inherit_partner"/>
+    </record>
+     <record model="ir.actions.act_window.view" id="action_tw_all_partner_inherit_partner_view_kanban">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="base.res_partner_kanban_view"/>
+        <field name="act_window_id" ref="action_tw_all_partner_inherit_partner"/>
+    </record>
+    
+</odoo>

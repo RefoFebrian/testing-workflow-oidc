@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="tw_stock_distribution_list_view" model="ir.ui.view">
+			<field name="name">tw.stock.distribution.list</field>
+			<field name="model">tw.stock.distribution</field>
+			<field name="arch" type="xml">
+				<list string="Stock Distribution" create="false" delete="false">
+					<field name="name"/>
+					<field name="origin"/>
+					<field name="company_id"/>
+					<field name="requester_id"/>
+					<field name="date"/>
+					<field name="division"/>
+					<field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'done'" decoration-danger="state == 'cancel'"/>
+				</list>
+			</field>
+		</record>
+
+		<record id="tw_stock_distribution_form_view" model="ir.ui.view">
+			<field name="name">tw.stock.distribution.form</field>
+			<field name="model">tw.stock.distribution</field>
+			<field name="arch" type="xml">
+				<form string="Stock Distribution" create="false" delete="false" edit="true">
+					<header>
+						<button name="action_confirm_qty" string="Confirm" type="object" class="oe_highlight" invisible="state != 'draft'" groups="tw_stock_distribution.group_tw_stock_distribution_confirm"/>
+						<button name="action_create_order" string="Create Order" type="object" class="oe_highlight" invisible="sale_order_id or state != 'open'" groups="tw_stock_distribution.group_tw_stock_distribution_create_order"/>
+						<button name="action_update_date_wizard" string="Update Date Period" type="object" invisible="division == 'Unit' or state != 'open'"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,waiting_for_approval,open,done" statusbar_colors='{"draft":"blue","cancel":"red"}'/>
+					</header>
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="action_view_sale_order" type="object" class="oe_stat_button" icon="fa-shopping-bag" invisible="not sale_order_id">
+								<div>
+									<div>Sale Order</div>
+									<field name="sale_order_id" string="SO" widget="statinfo" nolabel="1"/>
+								</div>
+							</button>
+						</div>
+						<div class="oe_title">
+							<div name="origin_section" class="text-muted small" invisible="not origin" style="margin-left: 2px;">
+								<h1 style="margin-bottom: 4px;">
+									<field name="name" class="oe_inline" readonly="1"/>
+								</h1>
+								<label for="origin" string="Origin " style="margin-right: 10px;" invisible="not origin"/>
+								<field name="origin" class="oe_inline" nolabel="1" readonly="1" invisible="not origin"/>
+							</div>
+						</div>
+						<br/>
+						<group name="group_1">
+							<group name="group_1_sub_1">
+								<field name="company_id" options="{'no_show':True,'no_create':True,'no_open':True}" readonly="1"/>
+								<field name="requester_id" options="{'no_show':True,'no_create':True,'no_open':True}" readonly="1"/>
+								<field name="purchase_order_type_id" readonly="1" domain="[('division','=','Sparepart')]"/>
+								<field name="employee_id" options="{'no_show':True,'no_create':True,'no_open':True}" readonly="state != 'draft'"/>
+							</group>
+							<group name="group_1_sub_2">
+								<field name="division" readonly="1"/>
+								<field name="date" readonly="1"/>
+								<field name="start_date" readonly="1"/>
+								<field name="end_date" readonly="1"/>
+								<field name="origin" invisible="1"/>
+								<field name="is_effective_date" readonly="1" string="On Effective Date"/>
+								<field name="pricelist_id" invisible="1"/>
+							</group>
+						</group>
+						<group name="group_2">
+							<group name="group_2_sub_1">
+								<field name="description" readonly="state != 'draft'"/>
+							</group>
+							<group name="group_2_sub_2">
+							</group>
+						</group>
+						<notebook>
+							<page name="stock_distribution_ids" string="Detail Distribution">
+								<field colspan="4" name="stock_distribution_ids" nolabel="1" widget="one2many_list" readonly="state != 'draft'">
+									<list string="Detail Distribution" editable="top" create="false" delete="false" class="o_list_special_columns">
+										<field name="product_domain" column_invisible="1"/>
+										<field name="product_id" options="{'no_open':True, 'no_create':True}" readonly="1" domain="product_domain" width="30%"/>
+										<field name="description" readonly="1" width="20%"/>
+										<field name="requested_qty" readonly="1" width="10%" class="text-right"/>
+										<field name="approved_qty" readonly="parent.state != 'draft'" width="10%" class="text-right"/>
+										<field name="supply_qty" readonly="1" width="10%" class="text-right"/>
+										<field name="price" readonly="1" width="10%" class="text-right"/>
+										<field name="sub_total" readonly="1" width="10%" class="text-right"/>
+									</list>
+								</field>
+								<div class="oe_subtotal_footer" style="text-align: right;">
+									<div class="oe_subtotal_footer_separator" style="display: inline-block; text-align: right;">
+										<div class="oe_subtotal_footer_seperator" style="display: inline-block; margin-right: 10px;">
+											<label for="amount_total">Total</label>
+										</div>
+										<field name="amount_total" nolabel="1" widget='monetary' style="text-align: right;"/>
+									</div>
+								</div>
+								<div class="oe_clear"/>
+							</page>
+							<page string="Audit Trail">
+								<group>
+									<group>
+										<field name="create_uid" readonly="1"></field>
+										<field name="create_date" readonly="1"></field>
+										<field name="confirm_uid" readonly="1"></field>
+										<field name="confirm_date" readonly="1"></field>
+									</group>
+									<group>
+										<field name="write_uid" readonly="1"></field>
+										<field name="write_date" readonly="1"></field>
+										<field name="cancel_uid" readonly="1"></field>
+										<field name="cancel_date" readonly="1"></field>
+									</group>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+					<chatter/>
+				</form>
+			</field>
+		</record>
+
+		<record id="tw_stock_distribution_search" model="ir.ui.view">
+			<field name="name">tw.stock.distribution.search</field>
+			<field name="model">tw.stock.distribution</field>
+			<field name="arch" type="xml">
+				<search string="Search Stock Distribution">
+					<field name="name"/>
+					<field name="company_id"/>
+					<field name="requester_id"/>
+					<field name="date"/>
+					<field name="division"/>
+					<field name="origin"/>
+					<field name="purchase_order_type_id"/>
+					<field name="description"/>
+					<filter string="Requested" name="state_draft" domain="[('state','=','draft')]" />
+					<filter string="Waiting for Approval" name="state_wfa" domain="[('state','=','waiting_for_approval')]" />
+					<filter string="Approved" name="state_approved" domain="[('state','=','approved')]" />
+					<filter string="Open" name="state_open" domain="[('state','=','open')]" />
+					<filter string="Done" name="state_done" domain="[('state','=','done')]" />
+					<group name="tw_stock_distribution_groupby" string="Group By">
+						<filter name="company_sender" string="Branch" context="{'group_by':'company_id'}"/>
+						<filter name="name" string="Stock Distribution" context="{'group_by':'name'}"/>
+						<filter name="origin" string="Origin" context="{'group_by':'origin'}"/>
+						<filter name="division" string="Division" context="{'group_by':'division'}"/>
+						<filter name="company_requester" string="Company Requester" context="{'group_by':'requester_id'}"/>
+						<filter name="date" string="Date" context="{'group_by':'date'}"/>
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record id="tw_stock_distribution_sparepart_action" model="ir.actions.act_window">
+			<field name="name">Stock Distribution</field>
+			<field name="res_model">tw.stock.distribution</field>
+			<field name="view_mode">list,form</field>
+			<field name="context">{
+				"search_default_state_draft":1,
+		    	"search_default_state_waiting_for_approval":1,
+		    	"search_default_state_approved":1,
+		    	"search_default_state_open":1
+			}</field>
+			<field name="domain">[('division','=','Sparepart')]</field>
+		</record>
+
+		<record id="tw_stock_distribution_unit_action" model="ir.actions.act_window">
+			<field name="name">Stock Distribution</field>
+			<field name="res_model">tw.stock.distribution</field>
+			<field name="view_mode">list,form</field>
+			<field name="context">{
+				"search_default_state_draft":1,
+		    	"search_default_state_waiting_for_approval":1,
+		    	"search_default_state_approved":1,
+		    	"search_default_state_open":1
+			}</field>
+			<field name="domain">[('division','=','Unit')]</field>
+		</record>
+
+	</data>
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_payment_activity_wizard_form" model="ir.ui.view">
+            <field name="name">tw.payment.activity.wizard.form</field>
+            <field name="model">tw.payment.activity.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Pilih Skema Pembayaran">
+                    <group>
+                        <field name="payment_choice"/>
+                    </group>
+                    <footer>
+                        <button string="Confirm" type="object" name="action_confirm_payment_choice" class="btn-primary"/>
+                        <button string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

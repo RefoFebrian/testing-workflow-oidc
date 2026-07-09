@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+        <record id="view_tw_budget_proposal_list" model="ir.ui.view">
+            <field name="name">view.tw.budget.proposal.list</field>
+            <field name="model">tw.budget.proposal</field>
+            <field name="type">list</field>
+            <field name="arch" type="xml">
+                <list string="Budget Proposal" create="false" edit="false" delete="false">
+                    <field name="company_id"/>
+                    <field name="reference"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_tw_budget_proposal_form" model="ir.ui.view">
+            <field name="name">view.tw.budget.proposal.form</field>
+            <field name="model">tw.budget.proposal</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Budget Proposal" create="false" edit="false" delete="false">
+                    <sheet>
+                        <div class="oe_title">
+		       				<h1>
+					 			<field name="name" class="oe_inline" readonly="1"/>	
+		    			    </h1>
+	                    </div>
+                        <group>
+                            <group>
+					 			<field name="reference" class="oe_inline" readonly="1"/>	
+                                <field name="company_id" readonly="1"/>
+                                <field name="division" readonly="1"/>
+                                <field name="is_tender" readonly="1"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <notebook colspan="5">
+                            <page string="Detail">
+		                        <field colspan="4" name="budget_proposal_ids" nolabel="1" readonly="1">
+		                            <list string="Detail">
+						                <field name="proposal_category_code"/>
+						                <field name="proposal_category_name"/>
+						                <field name="initial_budget_amount"/>
+						                <field name="reserved_budget_amount"/>
+						                <field name="realization_budget_amount"/>
+						                <field name="available_budget_amount"/>
+		                            </list>
+		                            <form string="Budget Proposal Detail">
+										<group>
+                                            <field name="proposal_category_code"/>
+                                            <field name="proposal_category_name"/>
+                                            <field name="initial_budget_amount"/>
+                                            <field name="reserved_budget_amount"/>
+                                            <field name="realization_budget_amount"/>
+                                            <field name="available_budget_amount"/>
+										</group>
+                                        <notebook>
+                                            <page string="Payment Budget">
+                                                <field name="budget_payment_ids" readonly="1">
+                                                    <list editable="top">
+                                                        <field name="payment_request_id" options="{'no_create': True}" readonly="1"/>
+                                                        <field name="state" readonly="1"/>
+                                                    </list>
+                                                </field>                                            
+                                            </page>
+                                        </notebook>
+		                            </form>
+		                        </field>
+							</page>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"></field>
+                                        <field name="create_date" readonly="1"></field>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1"></field>
+                                        <field name="write_date" readonly="1"></field>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_budget_proposal_search" model="ir.ui.view">
+            <field name="name">tw.budget.proposal.search</field>
+            <field name="model">tw.budget.proposal</field>
+            <field name="arch" type="xml">
+                <search string="Search Budget Proposal">
+                    <field name="company_id"/>
+                    <field name="reference"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Branch" name="group_company" context="{'group_by': 'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="action_tw_budget_proposal" model="ir.actions.act_window">
+            <field name="name">Budget Proposal</field>
+            <field name="res_model">tw.budget.proposal</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        
+    </data>
+</openerp>

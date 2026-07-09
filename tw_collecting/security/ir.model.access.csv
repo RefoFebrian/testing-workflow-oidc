@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_collecting_read,Collecting Read,model_tw_collecting,group_tw_collecting_read,1,0,0,0
+access_tw_collecting_update,Collecting Update,model_tw_collecting,group_tw_collecting_update,1,1,1,0
+access_tw_collecting_delete,Collecting Delete,model_tw_collecting,group_tw_collecting_delete,1,1,1,1

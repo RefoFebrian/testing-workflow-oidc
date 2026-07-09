@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+
+        <!-- Paperformat -->
+        <record id="paperformat_dg_validasi" model="report.paperformat">
+            <field name="name">Stock Opname Direct Gift</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="css_margins" eval="True"/>
+            <field name="header_spacing">3</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <!-- Print Validasi -->
+        <record id="action_tw_so_dg_print_validasi" model="ir.actions.report">
+            <field name="name">Print Validasi</field>
+            <field name="model">tw.stock.opname.direct.gift</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_stock_opname_direct_gift.dg_print_validasi</field>
+            <field name="report_file">tw_stock_opname_direct_gift.dg_print_validasi</field>
+            <field name="print_report_name">'Print Validasi - %s' % (object.name)</field>
+            <field name="paperformat_id" ref="paperformat_dg_validasi"/>
+        </record>
+
+        <!-- Print Bakso -->
+        <record id="action_tw_so_dg_print_bakso" model="ir.actions.report">
+            <field name="name">Print Bakso DG</field>
+            <field name="model">tw.stock.opname.direct.gift</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_stock_opname_direct_gift.so_dg_bakso</field>
+            <field name="report_file">tw_stock_opname_direct_gift.so_dg_bakso</field>
+            <field name="paperformat_id" ref="paperformat_dg_validasi"/>
+        </record>
+
+    </data>
+</odoo>

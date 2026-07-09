@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="ir_config_parameter_koprol_vendor_url" model="ir.config_parameter">
+            <field name="key">koprol.vendor.url</field>
+            <field name="value">/api/v1/integration/vendor/getAll</field>
+        </record>
+        
+        <record id="ir_config_parameter_koprol_goods_product_url" model="ir.config_parameter">
+            <field name="key">koprol.goods.product.url</field>
+            <field name="value">/api/v1/integration/goods/getAll</field>
+        </record>
+        
+        <record id="ir_config_parameter_get_budget_proposal_url" model="ir.config_parameter">
+            <field name="key">koprol.get.budget.proposal.url</field>
+            <field name="value">/api/v1/integration/budgetProposal/getAll</field>
+        </record>
+        
+        <record id="ir_config_parameter_update_status_po_url" model="ir.config_parameter">
+            <field name="key">koprol.update.status.po.url</field>
+            <field name="value">/api/v1/integration/purchaseOrder/updateStatus</field>
+        </record>
+        
+        <record id="ir_config_parameter_update_budget_proposal_url" model="ir.config_parameter">
+            <field name="key">koprol.update.budget.proposal.url</field>
+            <field name="value">/api/v1/integration/budgetProposal/requestBudget</field>
+        </record>
+        
+     </data>
+</odoo>

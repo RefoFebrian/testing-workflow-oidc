@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>   	
+ 		<record id="tw_approval_config_filter_view" model="ir.ui.view">
+            <field name="name">tw.approval.config.filter.view</field>
+            <field name="model">tw.approval.config</field>
+            <field name="arch" type="xml">
+                <search string="Search Approval">
+                    <field name="model_id" string="Form"/>
+                    <field name="type"/> 
+                    <field name="code"/> 
+                    <field name="name"/> 
+					<filter string="Code" name="group_by_code" context="{'group_by':'code'}"/>
+					<filter string="Type" name="group_by_type" context="{'group_by':'type'}"/>
+                </search>
+            </field>
+        </record>
+
+		<record id="tw_master_approval_config_list_view" model="ir.ui.view">
+		    <field name="name">tw.config.approval.tree</field>
+		    <field name="model">tw.approval.config</field>
+		    <field name="arch" type="xml">
+		        <list string="Approval Config" delete="false">
+		        	<field name="name"/>
+		        	<field name="model_id"/>
+		        	<field name="code"/>
+		        	<field name="type"/>
+		        </list>
+		     </field>
+		</record>		
+		
+		<record id="tw_master_approval_config_form_view" model="ir.ui.view">
+		     <field name="name">tw.config.approval.view</field>
+		     <field name="model">tw.approval.config</field>
+		     <field name="priority" eval="30"/>
+		     <field name="arch" type="xml">
+		     	<form string="Form Approval Matrix Config" delete="false">
+		     	<sheet>
+		         	<group>
+		         		<group>
+			            	<field name="type" required='1'/>
+			             	<field name="code" required="type == 'biaya'"/>	       		
+		         		</group>
+		         		<group>
+			             	<field name="model_id" required='1' options="{'no_create': True,'no_open': True}"/>				             			             			         						            					            	
+			             	<field name="name" required='1'/>	
+			            					            				             				             			         		
+		         		</group>
+		            </group>
+		          	<notebook>
+						<page string="Audit Trail">
+							<group>
+								<group>
+									<field name="create_uid" readonly="1"></field>
+									<field name="create_date" readonly="1"></field>
+								</group>
+								<group>							
+									<field name="write_uid" readonly="1"></field>
+									<field name="write_date" readonly="1"></field>
+								</group>
+							</group>
+						</page>	                        
+                    </notebook>
+		        </sheet>		        
+		        </form>
+		   	 </field>																														
+		</record> 	
+
+		<record model="ir.actions.act_window" id="tw_approval_config_action">
+		    <field name="name">Approval Form</field>
+		    <field name="res_model">tw.approval.config</field>
+		    <field name="view_mode">list,form</field>
+		    <field name="search_view_id" ref="tw_approval_config_filter_view"/>		    
+		</record>	   	
+    	          
+ 	</data>
+ </odoo>
+       		
+       		
+	

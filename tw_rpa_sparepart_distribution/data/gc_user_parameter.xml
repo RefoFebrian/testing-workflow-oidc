@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_rpa_sparepart_distribution.restriction_gc_user" model="ir.config_parameter">
+            <field name="key">tw_rpa_sparepart_distribution.gc_user_ids</field>
+            <field name="value">('FOR-GC','SHAD03008')</field>
+        </record>
+    </data>
+</odoo>

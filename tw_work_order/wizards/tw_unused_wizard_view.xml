@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_work_order_unused_wizard_form_view" model="ir.ui.view">
+      <field name="name">tw.work.order.unused.wizard.form.view</field>
+      <field name="model">tw.work.order</field>
+      <field name="priority">99</field>
+      <field name="arch" type="xml">
+        <form string="Reason">
+          <group>
+            <field name="reason_unused" />
+          </group>
+          <footer>
+            <button name="action_button_confirm_reason_unused" string="Confirm" type="object"
+              class="oe_highlight" /> or <button string="Discard" class="oe_link" special="cancel" />
+          </footer>
+        </form>
+      </field>
+    </record>
+
+</odoo>

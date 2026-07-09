@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record model="ir.ui.view" id="tw_stock_lot_serial_number_wizard_form_view">
+    <field name="name">tw.stock.lot.serial.number.wizard.form.view</field>
+    <field name="model">stock.lot</field>
+    <field name="priority">100</field>
+    <field name="arch" type="xml">
+      <form string="Form Add WO">
+        <group>
+          <group>
+            <field name="name" string="Engine No" readonly="id and state != 'workshop'" />
+            <field name="chassis_number" required="1" readonly="id and state != 'workshop'" />
+            <field name="plate_number" required="1" readonly="id and state != 'workshop'" />
+            <field name="production_year" required="1" readonly="id and state != 'workshop'" />
+          </group>
+          <group>
+            <field name="product_id" domain="[('division','=','Unit')]" readonly="id and state != 'workshop'" options="{'no_open':True, 'no_create':True}"/>
+            <field name="partner_id" required="True" options="{'no_quick_create': True}" context="{'form_view_ref':'tw_partner.tw_customer_wizard_form_view'}" readonly="id and state != 'workshop'" />
+            <field name="state" invisible="True" />
+          </group>
+        </group>
+      </form>
+    </field>
+  </record>
+
+</odoo>

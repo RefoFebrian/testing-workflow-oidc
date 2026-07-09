@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_request_payment_term_read,Payment Term Read,model_tw_request_payment_term,group_tw_request_payment_term_read,1,0,0,0
+access_tw_request_payment_term_update,Payment Term Update,model_tw_request_payment_term,group_tw_request_payment_term_update,1,1,1,0
+access_tw_request_payment_term_delete,Payment Term Delete,model_tw_request_payment_term,group_tw_request_payment_term_delete,1,1,1,1

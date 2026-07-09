@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="tw_inherit_account_asset_asset_form_view" model="ir.ui.view">
+		<field name="name">tw.inherit.account.asset.asset.form.view</field>
+		<field name="model">account.asset.asset</field>
+		<field name="inherit_id" ref="om_account_asset.view_account_asset_asset_form" />
+		<field name="arch" type="xml">
+
+			<button name="set_to_draft" position="after">
+				<button name="action_generate_depreciation_entries" string="Generate Depre Entries" type="object" class="btn-primary" invisible="state != 'open'" groups="tw_asset_management.group_tw_asset_generate_depreciation_entries"/>
+			</button>
+				
+			<xpath expr="//form" position="attributes">
+				<attribute name="create">0</attribute>
+				<attribute name="duplicate">0</attribute>
+				<attribute name="delete">0</attribute>
+			</xpath>
+
+			<field name="name" position="attributes">
+				<attribute name="readonly">1</attribute>
+				<attribute name="required">state != 'draft'</attribute>
+			</field>
+
+			<xpath expr="//div[hasclass('oe_title')]" position="replace">
+				<div class="oe_title">
+					<label for="display_name" class="oe_edit_only"/>
+					<h1>
+						<field name="display_name" readonly="1"/>
+					</h1>
+				</div>
+			</xpath>
+
+			<xpath expr="//div[hasclass('oe_title')]/h1" position="after">
+				<div class="d-flex">
+					<div class="oe_title me-5">
+						<label for="company_id" class="oe_edit_only"/>
+						<h2><field name="company_id" options="{'no_open': True, 'no_create': True}" required="1" readonly="state != 'draft'" /></h2>
+					</div>
+					<div class="oe_title">
+						<label for="product_id" class="oe_edit_only"/>
+						<h2>
+							<field name="product_id" options="{'no_create': True}" required="1" readonly="state != 'draft'" 
+								context="{
+									'default_sale_ok': False,
+									'default_purchase_ok': True,
+									'default_is_asset': True,
+									'action_name' : 'Non-trade'}"/>
+						</h2>
+					</div>
+				</div>
+			</xpath>
+
+			<field name="date" position="after">
+				<field name="name" string="No. Register" readonly="1"/>
+				<field name="purchase_date" readonly="1"/>
+			</field>
+
+			<field name="value" position="before">
+				<field name="real_purchase_value" readonly="state != 'draft'" widget="monetary"/>
+			</field>
+
+			<field name="method_number" position="attributes">
+				<attribute name="readonly">1</attribute>
+			</field>
+
+			<field name="account_analytic_id" position="attributes">
+				<attribute name="readonly">1</attribute>
+			</field>
+			
+			<field name="analytic_distribution" position="attributes">
+				<attribute name="readonly">1</attribute>
+			</field>
+			
+			<field name="invoice_id" position="attributes">
+				<attribute name="readonly">1</attribute>
+			</field>
+
+			<page name="depreciation_board" position="before">
+				<page name="good_receive_assets" string="Good Receive">
+					<field name="good_receive_line_ids" editable="top" nolabel="1" readonly="1">
+						<list create="false" delete="false">
+							<field name="picking_id" string="Good Receive" readonly="1"/>
+							<field name="purchase_order_id" string="Purchase Order" readonly="1"/>
+							<field name="product_id" readonly="1"/>
+							<field name="qty" readonly="1"/>
+							<field name="price_total" string="Value" readonly="1"/>
+							<field name="do_date" string="Receive Date" readonly="1"/>
+							<field name="state" readonly="1"/>
+						</list>
+						<form>
+							<group>
+								<group>
+									<field name="picking_id" string="Good Receive" readonly="1"/>
+									<field name="purchase_order_id" string="Purchase Order" readonly="1"/>
+									<field name="product_id" readonly="1"/>
+								</group>
+								<group>
+									<field name="qty" readonly="1"/>
+									<field name="price_total" string="Value" readonly="1"/>
+									<field name="do_date" string="Receive Date" readonly="1"/>
+									<field name="state" readonly="1"/>
+								</group>
+							</group>
+						</form>
+					</field>
+				</page>
+			</page>
+			<page name="depreciation_board" position="after">
+				<page name="other_info" string="Other Info">
+					<group>
+						<field name="division" readonly="1"/>
+						<field name="employee_id" readonly="1"/>
+						<field name="employee_user_id" readonly="1"/>
+						<field name="location_id" readonly="1"/>
+					</group>
+				</page>
+				<page name="history_employee_user" string="History Pengguna">
+					<field name="history_employee_user_ids" editable="top" nolabel="1" readonly="1">
+						<list create="false" delete="false" default_order="id desc">
+							<field name="employee_id" readonly="1"/>
+							<field name="transaction_name" readonly="1"/>
+							<field name="date" readonly="1"/>
+						</list>
+					</field>
+				</page>
+			</page>
+
+			<field name="depreciation_line_ids" position="attributes">
+				<attribute name="readonly">1</attribute>
+			</field>
+
+		</field>
+	</record>
+
+	<record id="tw_inherit_account_asset_asset_kanban_view" model="ir.ui.view">
+		<field name="name">tw.inherit.account.asset.asset.kanban.view</field>
+		<field name="model">account.asset.asset</field>
+		<field name="inherit_id" ref="om_account_asset.view_account_asset_asset_kanban" />
+		<field name="arch" type="xml">
+
+			<field name="name" position="before">
+				<field name="company_id" required="1" />
+			</field>
+
+			<xpath expr="//div[hasclass('row', 'mb4')]" position="after">
+				<div class="row mb4">
+					<div class="col-12">
+						<strong>
+							<span>
+								<t t-esc="record.company_id.name" />
+							</span>
+						</strong>
+					</div>
+				</div>
+			</xpath>
+
+		</field>
+	</record>
+
+	<record id="tw_inherit_account_asset_asset_purchase_list_view" model="ir.ui.view">
+		<field name="name">tw.inherit.account.asset.asset.purchase.list.view</field>
+		<field name="model">account.asset.asset</field>
+		<field name="inherit_id" ref="om_account_asset.view_account_asset_asset_purchase_tree" />
+		<field name="arch" type="xml">
+
+			<list position="attributes">
+				<attribute name="default_order">id desc</attribute>
+			</list>
+
+			<field name="name" position="after">
+				<field name="company_id" />
+				<field name="product_id"/>
+			</field>
+
+		</field>
+	</record>
+
+	<record id="tw_inherit_account_asset_asset_search_view" model="ir.ui.view">
+		<field name="name">tw.inherit.account.asset.asset.search.view</field>
+		<field name="model">account.asset.asset</field>
+		<field name="inherit_id" ref="om_account_asset.view_account_asset_search" />
+		<field name="arch" type="xml">
+
+			<field name="name" position="after">
+				<field name="company_id" string="Branch" filter_domain="[('parent_id', '!=', False)]" />
+			</field>
+
+		</field>
+	</record>
+
+	<!-- Action for Fixed Assets -->
+    <record id="action_account_asset_fixed" model="ir.actions.server">
+        <field name="name">Assets</field>
+        <field name="path">fixed-asset</field>
+        <field name="model_id" ref="model_account_asset_asset"/>
+        <field name="binding_view_types">form,list</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = env['account.asset.asset'].action_fixed_asset_view()
+        </field>
+    </record>
+
+
+</odoo>

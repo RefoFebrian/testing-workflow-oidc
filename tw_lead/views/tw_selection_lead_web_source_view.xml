@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_selection_lead_web_source_action" model="ir.actions.act_window">
+        <field name="name">Lead Web Source</field>
+        <field name="res_model">tw.selection</field>
+        <field name="view_mode">list</field>
+        <field name="context">{'default_type': 'LeadWebSource'}</field>
+        <field name="domain">[('type', '=', 'LeadWebSource')]</field>
+        <field name="view_id" ref="tw_selection.tw_selection_regular_list_view" />
+    </record>
+
+</odoo>

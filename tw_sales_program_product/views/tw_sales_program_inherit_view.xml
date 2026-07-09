@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record id="tw_sales_program_product_form_view" model="ir.ui.view">
+            <field name="name">tw.sales.program.product.form</field>
+            <field name="model">tw.sales.program</field>
+            <field name="inherit_id" ref="tw_sales_program.tw_sales_program_form_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="product_id" invisible="sales_program_type_name != 'Program Subsidi Barang'" required="sales_program_type_name == 'Program Subsidi Barang'" readonly="state not in ('draft', 'on_revision')" options="{'no_create': True, 'no_open': True}"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="tw_sales_program_product_search_view" model="ir.ui.view">
+            <field name="name">tw.sales.program.product.search</field>
+            <field name="model">tw.sales.program</field>
+            <field name="inherit_id" ref="tw_sales_program.tw_sales_program_search_view"/>
+            <field name="arch" type="xml">
+                <field name="division" position="after">
+                    <field name="product_id"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

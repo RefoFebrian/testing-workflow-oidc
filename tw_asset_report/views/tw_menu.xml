@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- General Affairs -->
+        <menuitem id="tw_asset_report_menuitem" name="Laporan Asset" parent="tw_menu.submenu_tw_general_affair_report" action="tw_asset_report_action" sequence="10" groups="tw_asset_report.group_tw_asset_report"/>
+        <menuitem id="tw_asset_purchase_report_menuitem" name="Laporan Pembelian Asset" parent="tw_menu.submenu_tw_general_affair_report" action="tw_asset_purchase_report_action" sequence="20" groups="tw_asset_report.group_tw_asset_report"/>
+        
+    </data>
+</odoo>

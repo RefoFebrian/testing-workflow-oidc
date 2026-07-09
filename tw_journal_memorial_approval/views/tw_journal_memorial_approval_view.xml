@@ -1,0 +1,67 @@
+<odoo>
+    <data>
+
+      <record model="ir.ui.view" id="tw_journal_memorial_inherit_approval_form_view">
+          <field name="name">tw.journal.memorial.inherit.approval.form</field>
+          <field name="model">tw.journal.memorial</field>
+          <field name="inherit_id" ref="tw_journal_memorial.tw_account_journal_memorial_form_view"/>
+          <field name="arch" type="xml">
+                <field name="state" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,confirm"/>
+                </field>
+
+                <!-- Hidden helper fields for button visibility -->
+                <field name="move_id" position="after">
+                    <field name="is_cancel_request" invisible="1"/>
+                    <field name="cancel_source_id" invisible="1"/>
+                    <field name="code" invisible="1"/>
+                </field>
+
+                <!-- Smart button: navigate to cancel JM -->
+                <div class="oe_title" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_cancel_jm" type="object"
+                            class="oe_stat_button" icon="fa-ban"
+                            invisible="not cancel_refered_id">
+                            <field name="cancel_refered_id" widget="statinfo" string="Cancel JM"/>
+                        </button>
+                    </div>
+                </div>
+
+                <button name="action_confirm" position="attributes">
+                    <attribute name="invisible">state != 'approved'</attribute>
+                </button>
+                
+                <button name="action_confirm" position="after">
+                    <!-- RFA Buttons -->
+                    <button name="action_request_approval" data-hotkey="r" groups="tw_journal_memorial_approval.group_tw_journal_memorial_rfa" invisible="state != 'draft'" string="RFA" type="object" class="oe_highlight"/>
+
+                    <!-- Approve (shared for both RFA and Cancel) -->
+                    <button name="action_approval" data-hotkey="a" invisible="state != 'waiting_for_approval'" string="Approve" type="object" class="oe_highlight"/>
+
+                    <!-- Reject RFA → back to draft -->
+                    <button name="%(tw_approval.tw_approval_reject_wizard_action)d" invisible="state != 'waiting_for_approval' or is_cancel_request" string="Reject" type="action" context="{'model_name':'tw.journal.memorial','update_value':{'state':'draft','is_cancel_request':False}}"/>
+
+                    <!-- Reject Cancel → back to confirm -->
+                    <button name="%(tw_approval.tw_approval_reject_wizard_action)d" invisible="state != 'waiting_for_approval' or not is_cancel_request" string="Reject Cancel" type="action" context="{'model_name':'tw.journal.memorial','update_value':{'state':'confirm','is_cancel_request':False}}" groups="tw_journal_memorial_approval.group_tw_journal_memorial_reject_approval"/>
+
+                    <!-- Cancel Approval RFA → back to draft -->
+                    <button name="%(tw_approval.tw_approval_cancel_wizard_action)d" invisible="state not in ('waiting_for_approval','approved') or is_cancel_request" string="Cancel Approval" groups="tw_journal_memorial_approval.group_tw_journal_memorial_cancel_approval" type="action" context="{'model_name':'tw.journal.memorial','update_value':{'state':'draft','is_cancel_request':False}}"/>
+
+                    <!-- Cancel Approval Cancel → back to confirm -->
+                    <button name="%(tw_approval.tw_approval_cancel_wizard_action)d" invisible="state != 'waiting_for_approval' or not is_cancel_request" string="Cancel Approval" groups="tw_journal_memorial_approval.group_tw_journal_memorial_cancel_approval" type="action" context="{'model_name':'tw.journal.memorial','update_value':{'state':'confirm','is_cancel_request':False}}"/>
+
+                    <!-- Cancel JM Button (only on confirmed records, hidden on cancellation JMs) -->
+                    <button name="action_cancel" string="Cancel" type="object" invisible="state != 'confirm' or cancel_source_id or code == 'cancel'" groups="tw_journal_memorial_approval.group_tw_journal_memorial_cancel_approval" confirm="Are you sure you want to cancel this Journal Memorial?"/>
+                </button>
+
+                <page name="audit_trail" position="before">
+                    <page string="Approval">
+                        <field name="approval_ids" />
+                    </page>
+                </page>
+          </field>
+      </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Account Setting View -->
+    <record id="view_account_setting_form_inherit_blind_bonus" model="ir.ui.view">
+        <field name="name">tw.account.setting.form.inherit.blind.bonus</field>
+        <field name="model">tw.account.setting</field>
+        <field name="inherit_id" ref="tw_sale.tw_sale_order_account_setting_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='sales_config_group']" position="inside">
+                <field name="journal_sale_blind_bonus_id" options="{'no_create':True}" string="Journal Blind Bonus Unit Sales" help="Sales Invoice Creation Journal for Blind Bonus Unit"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_setting_form_inherit_blind_bonus_purchase" model="ir.ui.view">
+        <field name="name">tw.account.setting.form.inherit.blind.bonus.purchase</field>
+        <field name="model">tw.account.setting</field>
+        <field name="inherit_id" ref="tw_account_purchase.tw_purchase_account_setting_inherit_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='purchase_blind_bonus']" position="inside">
+                <field name="account_purchase_blind_bonus_dr_id" options="{'no_create':True}" />
+                <field name="account_purchase_blind_bonus_cr_id" options="{'no_create':True}" />
+                <field name="account_purchase_blind_bonus_performance_dr_id" options="{'no_create':True}" />
+                <field name="account_purchase_blind_bonus_performance_cr_id" options="{'no_create':True}" />
+                <field name="journal_purchase_blind_bonus_id" options="{'no_create':True}" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

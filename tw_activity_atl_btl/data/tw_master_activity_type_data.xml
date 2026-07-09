@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_act_type_pameran" model="tw.master.activity.type">
+            <field name="name">Pameran</field>
+            <field name="code">PM</field>
+        </record>
+        <record id="tw_act_type_canvasing" model="tw.master.activity.type">
+            <field name="name">Canvasing</field>
+            <field name="code">CV</field>
+        </record>
+        <record id="tw_act_type_canvasing_individu" model="tw.master.activity.type">
+            <field name="name">Canvasing Individu</field>
+            <field name="code">CVI</field>
+        </record>
+        <record id="tw_act_type_road_show" model="tw.master.activity.type">
+            <field name="name">Roadshow</field>
+            <field name="code">RS</field>
+        </record>
+        <record id="tw_act_type_group_customer" model="tw.master.activity.type">
+            <field name="name">Group Customer</field>
+            <field name="code">GC</field>
+        </record>
+        <record id="tw_act_type_group_customer_retail" model="tw.master.activity.type">
+            <field name="name">Group Customer Retail</field>
+            <field name="code">GCR</field>
+        </record>
+        <record id="tw_act_type_group_customer_ho" model="tw.master.activity.type">
+            <field name="name">Group Customer HO</field>
+            <field name="code">GCH</field>
+        </record>
+        <record id="tw_act_type_walk_in" model="tw.master.activity.type">
+            <field name="name">Walk In</field>
+            <field name="code">WI</field>
+        </record>
+        <record id="tw_act_type_channel" model="tw.master.activity.type">
+            <field name="name">Channel</field>
+            <field name="code">CH</field>
+        </record>
+        <record id="tw_act_online" model="tw.master.activity.type">
+            <field name="name">Online</field>
+            <field name="code">OL</field>
+        </record>
+        <record id="tw_act_showroom_event" model="tw.master.activity.type">
+            <field name="name">Showroom Event</field>
+            <field name="code">SE</field>
+        </record>
+        <record id="tw_act_riding_test" model="tw.master.activity.type">
+            <field name="name">Riding Test</field>
+            <field name="code">RT</field>
+        </record>
+        <record id="tw_act_customer_ro_h1" model="tw.master.activity.type">
+            <field name="name">Customer RO H1</field>
+            <field name="code">ROH1</field>
+        </record>
+        <record id="tw_act_customer_ro_h23" model="tw.master.activity.type">
+            <field name="name">Customer RO H23</field>
+            <field name="code">ROH23</field>
+        </record>
+        <record id="tw_act_external_parties" model="tw.master.activity.type">
+            <field name="name">External Parties (Leasing, Insurance)</field>
+            <field name="code">EXTERNAL</field>
+        </record>
+        <record id="tw_act_mobile_apps_md_dealer" model="tw.master.activity.type">
+            <field name="name">Mobile Apps MD/Dealer</field>
+            <field name="code">MOBILEAPPS</field>
+        </record>
+        <record id="tw_act_referral" model="tw.master.activity.type">
+            <field name="name">Referral</field>
+            <field name="code">REFERRAL</field>
+        </record>
+        <record id="tw_act_contact_centre" model="tw.master.activity.type">
+            <field name="name">Contact Centre</field>
+            <field name="code">CONTACTCENTRE</field>
+        </record>
+        <record id="tw_act_others" model="tw.master.activity.type">
+            <field name="name">Others</field>
+            <field name="code">OTHERS</field>
+        </record>
+        <record id="tw_act_pos" model="tw.master.activity.type">
+            <field name="name">POS</field>
+            <field name="code">POS</field>
+        </record>
+        <record id="tw_act_digital_marketing" model="tw.master.activity.type">
+            <field name="name">Digital Marketing</field>
+            <field name="code">DIGMAR</field>
+        </record>
+        <record id="tw_act_pos_cilandak" model="tw.master.activity.type">
+            <field name="name">POS Cilandak</field>
+            <field name="code">province_id_1700</field>
+        </record>
+    </data>
+</odoo>

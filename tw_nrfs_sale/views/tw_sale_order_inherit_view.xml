@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+	<data>
+        <record id="tw_sale_order_nrfs_form_view" model="ir.ui.view">
+            <field name="name">tw.sale.order.nrfs.form</field>
+            <field name="model">tw.sale.order</field>
+            <field name="inherit_id" ref="tw_sale.tw_sale_order_form_view"/>
+            <field name="arch" type="xml">
+        		<field name="location_id" position="before">
+                    <field name="nrfs_id" invisible="nrfs_id == False" readonly="1" options="{'no_open':True,'no_create':True}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

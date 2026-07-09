@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <data>
+    <record model="ir.ui.view" id="tw_check_reconcile_form">
+      <field name="name">tw_check_reconcile.form</field>
+      <field name="model">tw.check.reconcile</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="company_id" required="1" options="{'no_create': True, 'no_open': True}"/>
+              <field name="matching_number"/>
+              <field name="move_id" options="{'no_create': True, 'no_open': True}" domain="[('company_id', '=', company_id)]"/>
+            </group>
+            <notebook>
+              <page>
+                <field name="check_reconcile_line_ids" readonly="1">
+                  <list>
+                    <field name="move_line_id"/>
+                    <field name="journal"/>
+                    <field name="account_id"/>
+                    <field name="ref"/>
+                    <field name="date"/>
+                    <field name="partner"/>
+                    <field name="debit"/>
+                    <field name="credit"/>
+                    <field name="matching_number"/>
+                  </list>
+                </field>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <record id="tw_check_reconcile_action" model="ir.actions.act_window">
+      <field name="name">Check Reconcile</field>
+      <field name="res_model">tw.check.reconcile</field>
+      <field name="view_mode">form</field>
+    </record>
+
+    <record id="tw_check_reconcile_action_view_form" model="ir.actions.act_window.view">
+      <field name="sequence" eval="1"/>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="tw_check_reconcile_form"/>
+      <field name="act_window_id" ref="tw_check_reconcile_action"/>
+    </record>
+
+  </data>
+
+</odoo>

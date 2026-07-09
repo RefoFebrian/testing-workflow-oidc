@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <!-- Child -->
+        <menuitem id="tw_work_order_claim_menuitem" name="Work Order Claim"
+            parent="tw_work_order.submenu_tw_work_order_configuration" sequence="30"
+            action="tw_work_order_claim.tw_work_order_claim_action"
+            groups="tw_work_order_claim.tw_work_order_claim_group_read"/>
+        
+		<menuitem id="tw_workshop_claim_type_menuitem" name="Workshop Claim Type"
+            parent="tw_work_order.submenu_tw_work_order_configuration" sequence="40"
+            action="tw_work_order_claim.action_tw_workshop_claim_type"
+            groups="tw_work_order_claim.tw_workshop_claim_type_group_read"/>
+
+        <menuitem
+            id="menuitem_tw_selection_work_order_claim_type"
+            name="Work Order Claim Type"
+            parent="tw_selection.submenu_tw_selection"
+            action="tw_selection_work_order_claim_type_action"
+            sequence="7"
+            groups="tw_work_order_claim.group_tw_selection_work_order_claim_type"
+        />
+    </data>
+
+
+</odoo>

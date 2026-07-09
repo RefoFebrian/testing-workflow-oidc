@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    	<record model="ir.ui.view" id="tw_kpb_engine_type_tree_view">
+		    <field name="name">tw.kpb.engine.type.tree.view</field>
+		    <field name="model">tw.kpb.engine.type</field>
+		    <field name="arch" type="xml">
+		        <list string="KPB Engine Type">
+		            <field name="engine_no"/> 
+		            <field name="name"/>
+		        </list>
+		   	</field>
+		</record>
+    	<record id="tw_kpb_engine_type_form_view" model="ir.ui.view">
+            <field name="name">tw.kpb.engine.type.form.view</field>
+            <field name="model">tw.kpb.engine.type</field>
+            <field name="arch" type="xml">
+                <form string="KPB Engine Type">                              
+				<sheet>
+                    <div class="oe_title">                      
+	       				<h1>
+				            KPB Engine Type
+    			        </h1>
+                    </div>
+                    <group col="2" colspan="2">
+                    	<group>
+                    		<field name="engine_no"/>
+                    	</group>
+                    	<group>
+                    		<field name="name"/>
+                    	</group>
+		            </group>
+                    <notebook colspan="5">
+                        <page string="Nilai jasa dan Oli ">
+                            <field colspan="4" name="kategori_line" nolabel="1" widget="one2many_list">
+                                <list string="" editable="top">
+									<field name="kpb_ke"/>
+					                <field name="jasa"/>
+					                <field name="oli"/>
+                                </list>
+                            </field>
+                        </page>
+	 					<page string="Audit Trail">
+							<group>
+								<group>
+									<field name="create_uid" readonly="1"></field>
+									<field name="create_date" readonly="1"></field>
+								</group>
+								<group>							
+									<field name="write_uid" readonly="1"></field>
+									<field name="write_date" readonly="1"></field>
+								</group>
+							</group>
+						</page>                       
+                    </notebook>
+                </sheet> 
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_kpb_engine_type_search_view" model="ir.ui.view">
+            <field name="name">tw.kpb.engine.type.search</field>
+            <field name="model">tw.kpb.engine.type</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="engine_no"/>
+                    <field name="name"/>
+					<filter string="engine number"     name="group_by_engine_no"     domain="[]" context="{'group_by': 'engine_no'}"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="tw_kpb_engine_type_action">
+		    <field name="name">Kategori Nilai Mesin</field>
+		    <field name="res_model">tw.kpb.engine.type</field>
+		    <field name="view_mode">list,form</field>
+		</record>
+        
+	</data>
+</odoo>

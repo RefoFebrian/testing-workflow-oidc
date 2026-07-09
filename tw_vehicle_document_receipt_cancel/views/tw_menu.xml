@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Menu -->
+    <menuitem id="menu_vehicle_document_receipt_cancel_root"
+              name="Proses Penerimaan"
+              parent="tw_vehicle_document_cancel.tw_vehicle_document_cancel_menu_sub"
+              sequence="30"/>
+    
+    <!-- Submenus -->
+    <menuitem id="menu_vehicle_registration_receipt_cancel"
+              name="Cancel Penerimaan STNK"
+              parent="menu_vehicle_document_receipt_cancel_root"
+              action="action_vehicle_document_receipt_cancel"
+              groups="tw_vehicle_document_receipt_cancel.group_vehicle_document_receipt_cancel_read"
+              sequence="10"/>
+              
+    <menuitem id="menu_vehicle_ownership_receipt_cancel"
+              name="Cancel Penerimaan BPKB"
+              parent="menu_vehicle_document_receipt_cancel_root"
+              action="action_vehicle_ownership_receipt_cancel"
+              groups="tw_vehicle_document_receipt_cancel.group_vehicle_ownership_receipt_cancel_read"
+              sequence="20"/>
+    
+</odoo>

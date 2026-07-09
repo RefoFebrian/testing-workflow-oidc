@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_proposal_rule" model="ir.rule">
+            <field name="name">tw.proposal rule</field>
+            <field name="model_id" ref="model_tw_proposal"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+            <field name="groups" eval="[(4, ref('tw_proposal.group_tw_proposal_read'))]"/>
+        </record>
+    </data>
+</odoo>

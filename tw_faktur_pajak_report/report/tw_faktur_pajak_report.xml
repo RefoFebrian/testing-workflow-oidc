@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Paperformat Faktur Pajak -->
+		<record id="paperformat_faktur_pajak" model="report.paperformat">
+			<field name="name">Faktur Pajak Paper Format</field>
+			<field name="default" eval="False"/>
+			<field name="format">A4</field>
+			<field name="page_height">0</field>
+			<field name="page_width">0</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">10</field>
+			<field name="margin_bottom">10</field>
+			<field name="margin_left">10</field>
+			<field name="margin_right">10</field>
+			<field name="header_line" eval="False"/>
+			<field name="header_spacing">0</field>
+			<field name="dpi">90</field>
+		</record>
+
+		<!-- Report Action Definition -->
+		<record id="action_report_faktur_pajak" model="ir.actions.report">
+			<field name="name">Faktur Pajak</field>
+			<field name="model">tw.faktur.pajak.out</field>
+			<field name="report_type">qweb-pdf</field>
+			<field name="report_name">tw_faktur_pajak_report.report_faktur_pajak</field>
+			<field name="report_file">tw_faktur_pajak_report.report_faktur_pajak</field>
+			<field name="print_report_name">'Faktur Pajak - %s' % (object.name or 'Draft')</field>
+			<field name="paperformat_id" ref="paperformat_faktur_pajak"/>
+		</record>
+	</data>
+</odoo>

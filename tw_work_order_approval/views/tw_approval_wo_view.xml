@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_approval_wo_form_view" model="ir.ui.view">
+            <field name="name">tw.approval.wo.form</field>
+            <field name="model">tw.work.order</field>
+            <field name="inherit_id" ref="tw_work_order.tw_work_order_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//form/header/field[@name='state']" position="replace">
+                    <field name="state" invisible="is_other_module_installed" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,sale,done" />
+                    <field name="state" invisible="not is_other_module_installed" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,finished,sale,done" />
+                </xpath>
+                <button name="action_open" position="before">
+                    <button name="action_request_approval" string="RFA" type="object" class="oe_highlight" invisible="state != 'draft'" groups="tw_work_order_approval.group_button_action_request"/>
+                    <button name="action_approval" string="Approve" type="object" class="oe_highlight" invisible="state != 'waiting_for_approval'" />
+                    <button name="action_reject_or_cancel" string="Reject" type="object" invisible="state != 'waiting_for_approval'" context="{'window_title': 'Reject'}"/>
+                    <button name="action_reject_or_cancel" string="Cancel Approval" type="object" invisible="state not in ['approved','waiting_for_approval']" context="{'window_title': 'Cancel'}" groups="tw_work_order_approval.group_button_action_cancel"/>
+                </button>
+                <field name="date" position="after">
+                    <field name="approval_state" invisible="1"/>
+                </field>
+                <xpath expr="//page[@name='other_information']" position="after">
+                    <page string="Approval">
+                        <field name="approval_ids" readonly="1">
+                            <list string="Approval">
+                                <field name="group_id" />
+                                <field name="company_id" />
+                                <field name="division" />
+                                <field name="limit" />
+                                <field name="value" optional="show"/>
+                                <field name="state" />
+                                <field name="reason" />
+                                <field name="approver_id" />
+                                <field name="tanggal" />
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="tw_work_order_approval_search_view" model="ir.ui.view">
+            <field name="name">tw.work.order.approval.search</field>
+            <field name="inherit_id" ref="tw_work_order.tw_work_order_search_view" />
+            <field name="model">tw.work.order</field>
+            <field name="arch" type="xml">
+                <field name='lot_id' position="after">
+                    <field name="approval_ids" string="PIC Approval" filter_domain="[('approval_ids.approver_id', 'ilike', self)]"/>
+                </field>
+                <filter name="state_draft" position="after">
+                    <filter string="Waiting for Approval" name="state_wfa" domain="[('state','=','waiting_for_approval')]" />
+                    <filter string="Approved" name="state_approved" domain="[('state','=','approved')]" />
+                </filter>
+            </field>
+        </record>
+
+        <record id="tw_work_order.tw_work_order_form_action" model="ir.actions.act_window">
+            <field name="context">
+                {'search_default_state_wfa': 1, 'search_default_state_approved': 1}
+            </field>
+        </record>
+    </data>
+</odoo>
+       		
+       		
+	

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- List View -->
+        <record id="tw_bank_reconcile_cancel_list_view" model="ir.ui.view">
+            <field name="name">tw.bank.reconcile.cancel.list</field>
+            <field name="model">tw.bank.reconcile.cancel</field>
+            <field name="type">list</field>
+            <field name="arch" type="xml">
+                <list string="Bank Reconcile Cancel" default_order="id desc">
+                    <field name="name"/>
+					<field name="company_id"/>
+					<field name="bank_reconcile_id"/>
+					<field name="date"/>
+					<field name="state" widget="badge" decoration-warning="state in ('draft','waiting_for_approval')" decoration-success="state in ('confirmed')"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="tw_bank_reconcile_cancel_form_view" model="ir.ui.view">
+            <field name="name">tw.bank.reconcile.cancel.form</field>
+            <field name="model">tw.bank.reconcile.cancel</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Bank Reconcile Cancel">
+                    <header>
+                        <button name="action_request_approval" string="RFA" type="object" class="oe_highlight" invisible="state != 'draft'" groups="tw_bank_reconcile_cancel.group_tw_bank_reconcile_cancel_button_rfa"/>
+                        <button name="action_approval" string="Approve" type="object" class="oe_highlight" invisible="state != 'waiting_for_approval'"/>
+                        <button name="action_reject_or_cancel" string="Reject" type="object" invisible="state != 'waiting_for_approval'" context="{'window_title': 'Reject'}"/>
+                        <button name="action_reject_or_cancel" string="Cancel Approval" type="object" invisible="state not in ('waiting_for_approval', 'approved')" groups="tw_bank_reconcile_cancel.group_tw_bank_reconcile_cancel_button_cancel_approve" context="{'window_title': 'Cancel'}"/>
+                        <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" invisible="state != 'approved'" groups="tw_bank_reconcile_cancel.group_tw_bank_reconcile_cancel_button_cancel_confirm"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,confirmed"/>
+					</header>
+                    <sheet>
+                        <div class="oe_title">
+							<h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+						</div>
+						<group>
+							<group>
+								<field name="company_id" options="{'no_create': True, 'no_open': True}" required="1" readonly="create_date != False"/>
+								<field name="bank_reconcile_id" options="{'no_create': True, 'no_open': True}" required="1" readonly="state != 'draft'" domain="[('company_id','=',company_id), ('state','in',('posted', 'auto_reconciled'))]"/>
+							</group>
+							<group>
+								<field name="date" readonly="1"/>
+								<field name="reason" required="1" readonly="state != 'draft'"/>
+							</group>
+						</group>
+						<notebook>
+                            <page string="Approval">
+                                <field name="approval_ids" readonly="True"/>
+                            </page>
+							<page string="Audit Trail">
+								<group>
+									<group>
+										<field name="create_uid" readonly="1"/>
+										<field name="create_date" readonly="1"/>
+										<field name="approve_uid" readonly="1" invisible="approve_uid == False"/>
+										<field name="approve_date" readonly="1" invisible="approve_date == False"/>
+									</group>
+									<group>
+										<field name="write_uid" readonly="1"/>
+										<field name="write_date" readonly="1"/>
+										<field name="confirm_uid" readonly="1" invisible="confirm_uid == False"/>
+										<field name="confirm_date" readonly="1" invisible="confirm_date == False"/>
+									</group>
+								</group>
+							</page>
+						</notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="tw_bank_reconcile_cancel_search_view" model="ir.ui.view">
+            <field name="name">tw.bank.reconcile.cancel.search</field>
+            <field name="model">tw.bank.reconcile.cancel</field>
+            <field name="arch" type="xml">
+                <search string="Bank Reconcile Cancel">
+                    <field name="name" string="Name" select="True"/>
+                    <field name="bank_reconcile_id" string="Bank Reconcile" select="True"/>
+                    <field name="company_id" string="Branch" select="True"/>
+                    <field name="date" string="Date" select="True"/>
+                    <filter name="state_draft" string="Draft" domain="[('state','=','draft')]"/>
+                    <filter name="state_rfa" string="Waiting for approval" domain="[('state','=','waiting_for_approval')]"/>
+                    <filter name="state_approved" string="Approved" domain="[('state','=','approved')]"/>
+                    <filter name="state_confirmed" string="Confirmed" domain="[('state','=','confirmed')]"/>
+                    <group string="Group By.." expand="1">
+                        <filter string="Branch" domain="[]" name="group_by_company_id" context="{'group_by': 'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action View -->
+        <record id="tw_bank_reconcile_cancel_action" model="ir.actions.server">
+            <field name="name">Bank Reconcile Cancel</field>
+            <field name="model_id" ref="tw_bank_reconcile_cancel.model_tw_bank_reconcile_cancel"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.bank.reconcile.cancel'].action_bank_reconcile_cancel_tree()
+            </field>
+        </record>
+        
+    </data>
+</odoo>

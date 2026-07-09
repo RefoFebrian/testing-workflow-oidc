@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<!-- Mutation Request -->
+		<record model="ir.ui.view" id="tw_mutation_request_list_view">
+			<field name="name">tw.mutation.request.list</field>
+			<field name="model">tw.mutation.request</field>
+			<field name="arch" type="xml">
+				<list string="Mutation Request" default_order="id desc">
+					<field name="name" readonly="1"/>
+					<field name="company_id" readonly="1" options="{'no_show':True,'no_create':True,'no_open':True}"/>
+					<field name="branch_sender_id" readonly="1" options="{'no_show':True,'no_create':True,'no_open':True}"/>
+					<field name="division" readonly="1"/>
+					<field name="date" readonly="1"/>
+					<field name="state" readonly="1" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'done'" decoration-danger="state == 'cancel'" />
+				</list>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="tw_mutation_request_form_view">
+			<field name="name">tw.mutation.request.form</field>
+			<field name="model">tw.mutation.request</field>
+			<field name="arch" type="xml">
+				<form string="Mutation Request">
+					<header>
+						<button name="action_confirm_order" string="Confirm" class="oe_highlight" type="object" invisible="state != 'draft'" groups="tw_mutation_request.group_tw_mutation_request_confirm"/>
+						<button name="action_cancel" string="Cancel" type="object" invisible="state != 'confirm'" confirm="Apa anda yakin ingin membatalkan transaksi ini ?" groups="tw_mutation_request.group_tw_mutation_request_cancel"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,confirm,open,done" statusbar_colors='{"draft":"red","done":"blue"}'/>
+					</header>
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="action_view_stock_distribution" type="object" class="oe_stat_button" icon="fa-cubes" invisible="not stock_distribution_id">
+								<field name="stock_distribution_id" widget="statinfo" string="Distribution"/>
+							</button>
+							<button name="action_view_incoming_picking" type="object" class="oe_stat_button" icon="fa-truck" groups="tw_mutation_request.group_tw_mutation_request_view_picking_showroom,tw_mutation_request.group_tw_mutation_request_view_picking_workshop">
+								<field name="incoming_picking_count" widget="statinfo" string="Incoming"/>
+							</button>
+						</div>
+						<div class="oe_title">
+							<h1>
+								<field name="name" class="oe_inline" readonly="1"/>
+							</h1>
+						</div>
+						<group>
+							<group>
+								<field name="branch_type_ids" invisible="1"/>
+								<field name="company_id" options="{'no_show':True,'no_create':True,'no_open':True}" required="1" readonly="state != 'draft'" domain="[('branch_type_id','in',branch_type_ids)]"/>
+								<field name="branch_sender_id" options="{'no_show':True,'no_create':True,'no_open':True}" required="1" readonly="state != 'draft'" domain="[('category_id.name','=','Branch')]"/>
+								<field name="user_id" options="{'no_show':True,'no_create':True,'no_open':True}" readonly="state != 'draft'"/>
+								<field name="purchase_order_type_id" options="{'no_open':True,'no_create':True}" domain="[('division','=',division)]" required="1" readonly="state != 'draft'"/>
+								<field name="description" readonly="state != 'draft'"/>
+							</group>
+							<group>
+								<field name="division" readonly="1" force_save="1"/>
+								<field name="date" readonly="1"/>
+								<field name="start_date" readonly="1" force_save="1"/>
+								<field name="end_date" readonly="1" force_save="1"/>
+								<field name="is_picking" invisible="1"/>
+							</group>
+						</group>
+						<notebook>
+							<page name="request_line" string="Request Line">
+								<field colspan="4" name="request_line_ids" readonly="state != 'draft'">
+									<list string="Request Line" editable="bottom">
+										<field name="product_category_ids" column_invisible="1"/>
+										<field name="product_id" options="{'no_open':True, 'no_create':True}" required="1" domain="[('categ_id', 'in', product_category_ids)]"/>
+										<field name="description" required="1"/>
+										<field name="requested_qty" required="1" sum="Total Requested"/>
+										<field name="approved_qty" readonly="1" sum="Total Approved"/>
+										<field name="supply_qty" readonly="1" sum="Total Supply"/>
+										<field name="price" force_save="1" column_invisible="1"/>
+										<field name="sub_total" readonly="1" sum="Total" width="150px"/>
+									</list>
+								</field>
+							</page>
+							<page string="Audit Trail" name="audit_trail">
+								<group>
+									<group>
+										<field name="create_uid" options="{'no_open':True,'no_create':True}" readonly="1"/>
+										<field name="create_date" readonly="1"/>
+										<field name="confirm_uid" options="{'no_open':True,'no_create':True}" readonly="1" invisible="confirm_uid == False"/>
+										<field name="confirm_date" readonly="1" invisible="confirm_date == False"/>
+									</group>
+									<group>
+										<field name="write_uid" options="{'no_open':True,'no_create':True}" readonly="1"/>
+										<field name="write_date" readonly="1"/>
+										<field name="cancel_uid" options="{'no_open':True,'no_create':True}" readonly="1" invisible="cancel_uid == False"/>
+										<field name="cancel_date" readonly="1" invisible="cancel_date == False"/>
+									</group>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_mutation_request_search" model="ir.ui.view">
+			<field name="name">tw.mutation.request.search</field>
+			<field name="model">tw.mutation.request</field>
+			<field name="arch" type="xml">
+				<search string="Search Mutation Request">
+					<field name="name"/>
+					<field name="company_id"/>
+					<field name="branch_sender_id"/>
+					<field name="division"/>
+					<field name="purchase_order_type_id"/>
+					<filter string="Draft" name="state_draft" domain="[('state','=','draft')]" />
+					<filter string="Waiting for Approval" name="state_wfa" domain="[('state','=','waiting_for_approval')]" />
+					<filter string="Approved" name="state_approved" domain="[('state','=','approved')]" />
+					<filter string="Requested" name="state_confirm" domain="[('state','=','confirm')]" />
+					<filter string="Open" name="state_open" domain="[('state','=','open')]" />
+					<filter string="Done" name="state_done" domain="[('state','=','done')]" />
+					<filter string="Outstanding" name="outstanding" domain="[('state','!=','done')]" />
+					<group name="groupby">
+						<filter name="branch_groupby" string="Branch" context="{'group_by': 'company_id'}" />
+						<filter name="division_groupby" string="Division" context="{'group_by': 'division'}" />
+						<filter name="branch_sender_groupby" string="Branch Sender" context="{'group_by': 'branch_sender_id'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="tw_mutation_request_action">
+			<field name="name">Mutation Request</field>
+			<field name="res_model">tw.mutation.request</field>
+			<field name="view_mode">list,form</field>
+			<field name="context">{
+				"search_default_outstanding":1,
+				}</field>
+			<field name="domain">[]</field>
+		</record>
+
+		<record id="tw_mutation_request_action_list" model="ir.actions.act_window.view">
+			<field eval="1" name="sequence"/>
+			<field name="view_mode">list</field>
+			<field name="view_id" ref="tw_mutation_request_list_view"/>
+			<field name="act_window_id" ref="tw_mutation_request_action"/>
+		</record>
+
+		<record id="tw_mutation_request_action_form" model="ir.actions.act_window.view">
+			<field eval="2" name="sequence"/>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="tw_mutation_request_form_view"/>
+			<field name="act_window_id" ref="tw_mutation_request_action"/>
+		</record>
+
+	</data>
+</odoo>

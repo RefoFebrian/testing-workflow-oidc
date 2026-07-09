@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="ir_cron_sch_notification_stock_opname_history_photo" model="ir.cron">
+            <field name="name">Notification Stock Opname History Photo</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="model_id" ref="tw_stock_opname_api.model_tw_stock_opname_detail"/>
+            <field name="code">model.android_firebase_notif_history_photo()</field>
+            <field name="interval_number">10</field>
+            <field name="interval_type">minutes</field>
+            <field name="active">false</field>
+        </record>
+
+    </data>
+</odoo>

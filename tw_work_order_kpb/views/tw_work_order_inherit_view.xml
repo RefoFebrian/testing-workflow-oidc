@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="tw_work_order_voucher_view_form" model="ir.ui.view">
+        <field name="name">tw.work.order.voucher</field>
+        <field name="model">tw.work.order</field>
+        <field name="inherit_id" ref="tw_work_order_claim.tw_work_order_inherit_claim_view_form" />
+        <field name="arch" type="xml">
+            <field name="claim_type_id" position="after">
+                <field name="kpb_ke" invisible="claim_type != 'KPB'" required="claim_type == 'KPB'"
+                    readonly="state != 'draft'" class="oe_inline" />
+                <field name="is_event_kpb" invisible="1" class="oe_inline" />
+            </field>
+            <field name="claim_number" position="attributes">
+                <attribute name="required">state == 'finished' and claim_type_id.value == 'Claim Program' and claim_type != 'KPB'</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="tw_serial_number_inherit_wizard_form_view" model="ir.ui.view">
+        <field name="name">tw.serial.number.inherit.wizard</field>
+        <field name="model">tw.work.order</field>
+        <field name="inherit_id" ref="tw_work_order.tw_stock_lot_serial_number_wizard_form_view" />
+        <field name="arch" type="xml">
+            <field name="plate_number" position="after">
+                <field name="book_number" />
+            </field>
+            <field name="state" position="before">
+                <field name="book_code" />
+            </field>
+        </field>
+    </record>
+</odoo>

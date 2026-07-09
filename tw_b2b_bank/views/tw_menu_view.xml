@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Bank Menu -->
+        <menuitem id="tw_b2b_bank_menu" name="Bank" parent="tw_menu.submenu_tw_api" sequence="10"/>
+        <menuitem id="res_partner_bank_b2b_bank_menuitem"
+            name="Bank Accounts"
+            parent="tw_b2b_bank_menu"
+            action="res_partner_bank_b2b_bank_action"
+            sequence="01"
+            groups="tw_partner.group_tw_partner_bank_account_form_read"
+        />
+        <menuitem id="tw_api_url_menuitem"
+            name="API URL"
+            parent="tw_b2b_bank_menu"
+            action="tw_api_url_action"
+            sequence="02"
+            groups="group_tw_api_url_read"
+        />
+        <menuitem id="tw_api_schedule_menuitem"
+            name="API Schedule"
+            parent="tw_b2b_bank_menu"
+            action="tw_api_schedule_action"
+            sequence="03"
+            groups="group_tw_api_schedule_read"
+        />
+
+    </data>
+</odoo>

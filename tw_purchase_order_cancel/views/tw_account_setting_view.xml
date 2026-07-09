@@ -1,0 +1,16 @@
+<odoo>
+  <data>
+
+    <record id="tw_purchase_cancel_branch_setting_form_view" model="ir.ui.view">
+        <field name="name">tw.purchase.cancel.branch.setting.inherit.form</field>
+        <field name="model">tw.account.setting</field>
+        <field name="inherit_id" ref="tw_cancellation.tw_cancel_account_setting_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='purchase_journal_cancel']" position="inside">
+                <field name="journal_purchase_order_cancel_id" options="{'no_create': True}"/>
+            </xpath>
+        </field>
+    </record>
+
+  </data>
+</odoo>

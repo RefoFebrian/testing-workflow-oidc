@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_upload_supplier_payment_wizard" model="ir.ui.view">
+            <field name="name">Upload Supplier Payment</field>
+            <field name="model">tw.upload.supplier.payment</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Upload Supplier Payment">
+                    <group>
+                        <group>
+                            <field name="file" string="File to Upload" height="64" filename="file_name" invisible="message"/>
+                            <field name="file_name" invisible="1" />
+                            <field name="message" invisible="not message" readonly="1" />
+                        </group>
+                        <group>
+                            <button name="action_download_format_file" string="Download Template" type="object" class="oe_highlight"/>
+                        </group>
+                    </group>
+                    <newline />
+                    <footer invisible="message">
+                        <button name="action_upload" string="Import" type="object" class="oe_highlight" />
+                        <button string="Cancel" special="cancel" class="oe_link" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_tw_upload_supplier_payment" model="ir.actions.act_window">
+            <field name="name">Upload Supplier Payment</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.upload.supplier.payment</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_upload_supplier_payment_wizard" />
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

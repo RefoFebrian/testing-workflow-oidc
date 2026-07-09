@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        
+        <!-- List View PO Asset -->
+        <record id="tw_good_receive_asset_list_view" model="ir.ui.view">
+            <field name="name">good.receive.asset.view.list</field>
+            <field name="model">tw.good.receive</field>
+            <field name="priority" eval="2" />
+            <field name="arch" type="xml">
+            <list string="Good Receive Assets" default_order="id desc" decoration-muted="state=='cancel'" sample="1">
+                    <field name="priority" widget="priority" nolabel="1" optional="hide" />
+                    <field name="company_id" optional="show"/>
+                    <field name="name" string="Reference" decoration-info="state in ('draft','sent')" optional="show" />
+                    <field name="partner_id" string="Partner / Vendor"/>
+                    <field name="date" string="Date"/>
+                    <field name="amount_total"/>
+                    <field name="state" widget="badge" decoration-success="state == 'done'" decoration-danger="state == 'cancel'" decoration-info="state not in ('done','cancel')"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View PO Asset -->
+        <record id="tw_inherit_good_receive_asset_1_form_view" model="ir.ui.view">
+            <field name="name">stock.picking.asset.form</field>
+            <field name="model">tw.good.receive</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_open" string="Confirm" type="object" data-hotkey="o" invisible="state != 'draft'"/>
+                        <button name="action_cancel" string="Cancel" type="object" invisible="state not in ['draft', 'open']" confirm="Apakah anda yakin ingin cancel GR ini? Journal JGR akan di-reverse."/>
+                        <button name="action_set_to_draft" string="Set to Draft" type="object" invisible="state != 'cancel'"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,open,done,cancel"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" name="action_view_purchase_orders" type="object" icon="fa-credit-card"
+                                invisible="purchase_order_count == 0">
+                                <field name="purchase_order_count" widget="statinfo" string="Purchase Order"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1 class="d-flex">
+                                <field name="priority" widget="priority" class="me-3"/>
+                                <div invisible="id">New <field name="picking_type_code"/></div>
+                                <field name="name" invisible="not id"/>
+                            </h1>
+                            <!-- <button class="oe_stat_button" name="action_open_entries" invisible="not is_asset" type="object" icon="fa-pencil">
+                                <field string="Items" name="entry_count" widget="statinfo"/>
+                            </button> -->
+                        </div>
+                        <group>
+                            <group>
+                                <field name="company_id" required="1" options="{'no_create': True,'no_open': True}" readonly="state != 'draft'"/>
+                                <field name="partner_id" options="{'no_create': True, 'no_open': True}" string="Partner / Supplier" required="1" readonly="state != 'draft'"/>
+                                <field name="note" string="Note" required="1" readonly="state != 'draft'"/>
+                                <field name="transaction_type" readonly="state !='draft'"/>
+                                <field name="type" readonly="state !='draft'"/>
+                                <field name="picking_type_id" options="{'no_create': True,'no_open': True}" readonly="state != 'draft'" invisible="1"/>
+                                <field name="location_id" invisible="1" readonly="state != 'draft'" options="{'no_create': True,'no_open': True}"/>
+                                <field name="location_dest_id" invisible="1" readonly="state != 'draft'" options="{'no_create': True,'no_open': True}"/>
+                            </group>
+                            <group>
+                                <field name="division" placeholder="e.g. Division" options="{'no_create': True,'no_open': True}" readonly="1" force_save="1"/>
+                                <field name="date" readonly="1"/>
+                                <field name="date_document" readonly="state != 'draft'"/>
+                                <field name="vendor_picking_number" readonly="state != 'draft'" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Operations Assets" name="operations_asset" invisible="not is_asset">
+                                <field name="move_asset_ids" mode="list,kanban"
+                                    widget="stock_move_one2many"
+                                    readonly="state != 'draft'"
+                                    context="{'default_company_id': company_id, 'default_date': scheduled_date, 'default_date_deadline': date_deadline, 'picking_type_code': picking_type_code, 'default_picking_id': id}"
+                                    add-label="Add a Product">
+                                    <list decoration-muted="state == 'cancel' or state == 'done'" string="Details" editable="bottom">
+                                        <field name="sequence" column_invisible="1"/>
+                                        <field name="picking_id" column_invisible="True"/>
+                                        <field name="name" column_invisible="True"/>
+                                        <field name="state" readonly="1" column_invisible="1"/>
+                                        <field name="domain_purchase_order_id" column_invisible="1"/>
+                                        <field name="domain_asset_register_id" column_invisible="1"/>
+                                        <field name="is_final_cip" column_invisible="1"/>
+                                        <field name="is_have_regas" column_invisible="1"/>
+                                        <field name="is_asset" readonly="1" force_save="1" column_invisible="1"/>
+                                        <field name="product_id" column_invisible="1" context="{'default_is_storable': True}" required="1" readonly="1" force_save="1"/>
+                                        <field name="purchase_order_id" required="parent.is_asset" options="{'no_create': True, 'no_open': True}" column_invisible="not parent.is_asset" domain="[('company_id', '=', parent.company_id),('partner_id','=',parent.partner_id),('state','in',['open','partial_received'])]"/>
+                                        <field name="purchase_order_line_id" string="Product" required="parent.is_asset" options="{'no_create': True, 'no_open': True}" column_invisible="not parent.is_asset" domain="domain_purchase_order_id"/>
+                                        <field name="description" required="type_assets == 'asset_prepayments'"/>
+                                        <field name="is_cip" readonly="1" force_save="1"/>
+                                        <field name="asset_category_id" required="is_asset" force_save="1" optional="hide"/>
+                                        <field name="type_assets" readonly="1" force_save="1" optional="hide"/>
+                                        <field name="asset_register_id" required="is_have_regas" readonly="not is_have_regas" domain="domain_asset_register_id" optional="hide"/>
+                                        <field name="no_do" readonly="not is_final_cip" required="is_final_cip"/>
+                                        <field name="do_date" readonly="not is_final_cip" required="is_final_cip"/>
+                                        <field name="supplier_invoice_number" optional="hide"/>
+                                        <field name="document_date" optional="hide"/>
+                                        <field name="description" optional="hide"/>
+                                        <field name="site" optional="hide"/>
+                                        <field name="retensi" optional="hide"/>
+                                        <field name="qty_available" readonly="1" force_save="1" optional="show" column_invisible="not parent.is_asset"/>
+                                        <field name="qty_remaining" readonly="1" force_save="1" optional="hide" column_invisible="not parent.is_asset"/>
+                                        <field name="qty_registered" readonly="1" force_save="1" optional="hide" column_invisible="not parent.is_asset"/>
+                                        <field name="qty_unregistered" readonly="1" force_save="1" optional="hide" column_invisible="not parent.is_asset"/>
+                                        <field name="qty" string="Quantity" required="1"/>
+                                        <field name="price" readonly="1" force_save="1" optional="show" column_invisible="not parent.is_asset"/>
+                                        <field name="tax_ids" widget="many2many_tags" readonly="state != 'draft'" force_save="1" optional="show" column_invisible="not parent.is_asset"/>
+                                        <field name="price_tax" readonly="1" force_save="1" optional="show"/>
+                                        <field name="price_subtotal" readonly="1" force_save="1" optional="hide"/>
+                                        <field name="price_total" readonly="1" force_save="1" optional="show"/>
+                                    </list>
+                                </field>
+                                <group>
+                                    <group>
+                                        <field colspan="2" name="notes" nolabel="1" placeholder="Define your terms and conditions ..."/>
+                                    </group>
+                                    <group class="oe_subtotal_footer">
+                                        <field name="tax_totals" widget="account-tax-totals-field" nolabel="1" readonly="1"/>
+                                    </group>
+                                </group>
+                                <div class="clearfix"/>
+                            </page>
+                            <page string="Lampiran">
+                                <field name="attachment_ids" nolabel="1" readonly="state != 'draft'"/>
+                            </page>
+                            <page string="Journal Items" name="account_move" invisible="not is_asset">
+                                <field name="account_move_ids" readonly="1" force_save="1"/>
+                            </page>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1" options="{'no_create': True,'no_open': True}"></field>
+                                        <field name="create_date" readonly="1"></field>
+                                        <field name="confirm_uid" readonly="1" options="{'no_create': True,'no_open': True}"></field>
+                                        <field name="confirm_date" readonly="1"></field>
+                                    </group>
+                                    <group>							
+                                        <field name="write_uid" readonly="1" options="{'no_create': True,'no_open': True}"></field>
+                                        <field name="write_date" readonly="1"></field>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_good_receive_asset_search_view" model="ir.ui.view">
+            <field name="name">stock.picking.asset.search</field>
+            <field name="model">tw.good.receive</field>
+            <field name="arch" type="xml">
+                <search string="Search Good Receive Asset">
+                    <field name="name" string="Reference"/>
+                    <field name="origin" string="Source Document"/>
+                    <field name="company_id"/>
+                    <field name="note"/>
+                    <field name="transaction_type"/>
+                    <field name="type"/>
+                    <field name="date"/>
+                    <field name="vendor_picking_number"/>
+                    <field name="partner_id" string="Vendor"/>
+                    <field name="move_asset_ids" string="Purchase Order" filter_domain="[('move_asset_ids.purchase_order_id','ilike', self)]"/>
+                    <field name="move_asset_ids" string="Product" filter_domain="[('move_asset_ids.purchase_order_line_id','ilike', self)]"/>
+                    <field name="move_asset_ids" string="Description" filter_domain="[('move_asset_ids.description','ilike', self)]"/>
+                    <field name="move_asset_ids" string="Asset Category" filter_domain="[('move_asset_ids.asset_category_id','ilike',self)]"/>
+                    <field name="move_asset_ids" string="Asset" filter_domain="[('move_asset_ids.asset_register_id','ilike',self)]"/>
+                    <separator/>
+                    <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                    <filter name="open" string="Open" domain="[('state', '=', 'open')]"/>
+                    <filter name="done" string="Done" domain="[('state', '=', 'done')]"/>
+                    <filter name="outstanding" string="Outstanding" domain="[('state', '!=', 'done')]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Branch" name="group_by_company" context="{'group_by': 'company_id'}"/>
+                        <filter string="Partner" name="group_by_partner" context="{'group_by': 'partner_id'}"/>
+                        <filter string="Status" name="group_by_state" context="{'group_by': 'state'}"/>
+                        <filter string="Date" name="group_by_date" context="{'group_by': 'date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="tw_good_receive_asset_action" model="ir.actions.act_window">
+            <field name="name">Good Receive Asset</field>
+            <field name="res_model">tw.good.receive</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('is_asset','=',True)]</field>
+            <field name="context">
+                {
+                    'search_default_fieldname': 1,
+                    'default_division': 'Umum',
+                    'default_is_asset': True,
+                    'is_asset': True,
+                    'search_default_outstanding': 1
+                }
+            </field>
+            <field name="search_view_id" ref="tw_good_receive_asset_search_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No good receive assets found. Let's create one!
+                </p>
+            </field>
+        </record>
+        
+        <record id="tw_good_receive_asset_tree_action_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_asset_management.tw_good_receive_asset_list_view"/>
+            <field name="act_window_id" ref="tw_good_receive_asset_action"/>
+        </record>
+
+        <record id="tw_good_receive_asset_form_action_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_asset_management.tw_inherit_good_receive_asset_1_form_view"/>
+            <field name="act_window_id" ref="tw_good_receive_asset_action"/>
+        </record>
+
+        <!-- ===================== -->
+        <!-- GR LINE FORM VIEW     -->
+        <!-- ===================== -->
+        <record id="tw_good_receive_asset_line_form_view" model="ir.ui.view">
+            <field name="name">tw.good.receive.asset.line.form</field>
+            <field name="model">tw.good.receive.asset.line</field>
+            <field name="arch" type="xml">
+                <form string="GR Asset Line">
+                    <sheet>
+                        <group>
+                            <group string="Product Information">
+                                <field name="product_id" readonly="1"/>
+                                <field name="description"/>
+                                <field name="purchase_order_id" readonly="1"/>
+                                <field name="purchase_order_line_id" readonly="1" string="PO Line"/>
+                            </group>
+                            <group string="Asset Configuration">
+                                <field name="asset_category_id"/>
+                                <field name="type_assets" readonly="1"/>
+                                <field name="is_asset" readonly="1"/>
+                                <field name="is_cip" readonly="1"/>
+                                <field name="is_final_cip"/>
+                                <field name="asset_register_id"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Quantity">
+                                <field name="qty"/>
+                                <field name="qty_available" readonly="1"/>
+                                <field name="qty_remaining" readonly="1"/>
+                                <field name="qty_acquired" readonly="1"/>
+                                <field name="qty_acquisition_available" readonly="1"/>
+                                <field name="is_acquired" readonly="1"/>
+                            </group>
+                            <group string="Pricing">
+                                <field name="price"/>
+                                <field name="discount"/>
+                                <field name="tax_ids" widget="many2many_tags"/>
+                                <field name="price_subtotal" readonly="1"/>
+                                <field name="price_tax" readonly="1"/>
+                                <field name="price_total" readonly="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Document Info">
+                                <field name="no_do"/>
+                                <field name="do_date"/>
+                                <field name="document_date"/>
+                                <field name="supplier_invoice_number"/>
+                                <field name="no_faktur_pajak"/>
+                                <field name="tgl_faktur_pajak"/>
+                            </group>
+                            <group string="Other">
+                                <field name="site"/>
+                                <field name="retensi"/>
+                                <field name="division"/>
+                                <field name="state" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    
+    </data>
+    
+    
+
+</odoo>

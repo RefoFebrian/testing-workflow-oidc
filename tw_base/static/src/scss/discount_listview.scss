@@ -1,0 +1,42 @@
+/* discount_listview.scss 
+Digunakan spesifik untuk field discount di invoice supaya tidak terlihat seperti table
+*/
+
+/* Apply styles only when wrapped in the custom class */
+.discount_footer .o_list_view table.o_list_table,
+.discount_footer .o_list_view table.o_list_table thead,
+.discount_footer .o_list_view table.o_list_table tbody,
+.discount_footer .o_list_view table.o_list_table tr,
+.discount_footer .o_list_view table.o_list_table th,
+.discount_footer .o_list_view table.o_list_table td {
+    border: none !important;
+    background-color: transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Hide the table header */
+.discount_footer .o_list_view table.o_list_table thead {
+    display: none;
+}
+
+/* Collapse spacing to remove any extra gaps */
+.discount_footer .o_list_view table.o_list_table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Adjust padding for a less "table-like" feel */
+.discount_footer .o_list_view table.o_list_table td {
+    padding: 2px 4px;
+}
+
+/* Hide the extra control column */
+.discount_footer .o_list_view table.o_list_table th:nth-child(1),
+.discount_footer .o_list_view table.o_list_table td:nth-child(1) {
+    width: 50% !important;
+}
+.discount_footer .o_list_view table.o_list_table th:nth-child(2),
+.discount_footer .o_list_view table.o_list_table td:nth-child(2) {
+    width: 50% !important;
+}

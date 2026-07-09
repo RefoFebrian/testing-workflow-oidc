@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data> 
+    	
+		<record id="tw_bank_transfer_list_view" model="ir.ui.view">
+		    <field name="name">tw.bank.transfer.list.view</field>
+		    <field name="model">tw.bank.transfer</field>
+		    <field name="arch" type="xml">
+		        <list string="List Bank Transfer" default_order="id desc">
+		        	<field name="name"/>
+		            <field name="company_id"/>
+					<field name="date"/>	            		            			            	
+		            <field name="state"/>
+		            	            
+		        </list>
+		     </field>
+		</record>
+		    	
+		<record id="tw_bank_transfer_form_view" model="ir.ui.view">
+		    <field name="name">tw.bank.transfer.form.view</field>
+		    <field name="model">tw.bank.transfer</field>
+		    <field name="arch" type="xml">		       	        	
+				<form>
+					<header>
+						<button name="action_print_payment_request" type="object" invisible="state != 'posted'" string="Print" class="oe_highlight" groups="tw_bank_transfer.group_tw_bank_transfer_button_payment_request"/>
+						<button name="action_confirm" type="object" invisible="state != 'draft'" string="Post" class="oe_highlight" groups="tw_bank_transfer.group_tw_bank_transfer_button_post"/>
+						<button name="action_cancel" type="object" invisible="state != 'draft'" string="Cancel" confirm="Apa anda yakin ingin membatalkan transaksi ini ?"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,posted" statusbar_colors="{&quot;draft&quot;:&quot;red&quot;,&quot;posted&quot;:&quot;blue&quot;}"/>	
+	           		</header>
+					<sheet>  
+	        			<div class="oe_title">
+							<h1 invisible="name"><span>Draft</span></h1>
+							<h1 invisible="not name"><field name="name" readonly="1"/></h1>
+						</div>
+						<group>   
+							<group>
+								<field name="company_id" options="{'no_create': True,'no_open': True}" readonly="state != 'draft' or name"/>
+								<field name="journal_id" string="Bank" options="{'no_create': True,'no_open': True}" required="1" readonly="state != 'draft'"/>
+								<field name="payment_method_id" required="state == 'draft'" readonly="state != 'draft'" domain="[('payment_type','=','outbound')]" options="{'no_create': True, 'no_open': True}"/>
+								<field name="partner_id" required="require_partner_bank_account" options="{'no_create': True,'no_open': True}" readonly="state != 'draft'"/>
+								<field name="partner_bank_id" string="Bank Account"
+										context="{'default_partner_id': partner_id, 'display_account_trust': True}"
+										invisible="not show_partner_bank_account"
+										required="require_partner_bank_account" 
+										readonly="state != 'draft'"
+										options="{'no_create': True}"/>
+								<field name="bank_id" string="Bank"
+										options="{'no_create': True, 'no_open': True}"
+										invisible="not show_account_number"
+										required="require_account_number" 
+										readonly="state != 'draft'"
+										/>
+								<field name="account_number" string="Account Number"
+										invisible="not show_account_number"
+										required="require_account_number" 
+										readonly="state != 'draft'"
+										/>
+								<field name="account_holder" string="Account Holder"
+										invisible="not show_account_number"
+										readonly="state != 'draft'"
+										/>
+								<field name="transfer_note" readonly="1" invisible="1"/>
+								<field name="amount" required="1" readonly="state != 'draft'"/>								    	
+				                <field name="journal_type" invisible="1"/>	
+				                <field name="account_id" invisible="1"/>	
+							</group>
+							<group>
+								<field name="division" required="1" readonly="state != 'draft'"/>																
+								<field name="date" readonly="1"/>
+								<field name="email" readonly="state != 'draft'"/>
+								<field name="description" required="1" readonly="state != 'draft'"/>
+							</group> 										
+						</group>
+	                    <notebook colspan="5">
+	                        <page string="Detail Transfer">
+								<div style="color:red;" invisible="journal_id and company_id">
+									*Silahkan isi data header terlebih dahulu untuk menambahkan detil transfer.
+								</div>
+		                        <field colspan="4" name="line_ids" nolabel="1" widget="one2many_list" readonly="state != 'draft' or not journal_id or not company_id">
+		                            <list string="" editable="bottom">
+		                            	<field name="reimbursement_id" options="{'no_create': True,'no_open': True}"/>
+						                <field name="branch_destination_id" required="1" options="{'no_create': True,'no_open': True}"/>
+						                <field name="payment_to_id" required="1" options="{'no_create': True,'no_open': True}"/>
+						                <field name="description" required="1"/>
+						                <field name="amount" required="1" sum="Total Amount" readonly="reimbursement_id"/>		
+															                       																		                
+						             </list>
+		                        </field>
+	                            
+								<group class="oe_subtotal_footer oe_right">
+									<field name="bank_fee" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+										<div class="oe_subtotal_footer_seperator oe_inline">
+											<label for="amount_total"/>
+										</div>
+									<field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+								</group>
+                             
+								<div class="oe_clear"/>
+                            	<field name="note" class="oe_inline" placeholder="Note..." readonly="1"/>
+	                        </page>
+	                        <page string="Journal Items" invisible="state in ('draft', 'waiting_for_approval', 'app_approve')">
+	                            <group col="4">
+	                                <field name="period_id"/>
+	                            </group>
+	                            <field name="move_ids" readonly="1"/>	                               
+	                        </page>   
+							<page name="audit_trail" string="Audit Trail">
+								<group>
+									<group>
+										<field name="create_uid" options="{'no_open': True,'no_create': True}" readonly="1"/>
+										<field name="create_date" readonly="1"/>
+										<field name="confirm_uid" options="{'no_open': True,'no_create': True}" readonly="1"/>
+										<field name="confirm_date" readonly="1"/>
+									</group>
+									<group>							
+										<field name="write_uid" options="{'no_open': True,'no_create': True}" readonly="1"/>
+										<field name="write_date" readonly="1"/>
+										<field name="cancel_uid" options="{'no_open': True,'no_create': True}" readonly="1"/>
+										<field name="cancel_date" readonly="1"/>
+									</group>
+								</group>
+							</page>		                     
+	                    </notebook>							   		                																
+					</sheet>
+				</form>	
+		    </field>
+		</record>
+		
+		<record id="tw_bank_transfer_search_view" model="ir.ui.view">
+            <field name="name">tw.bank.transfer.search</field>
+            <field name="model">tw.bank.transfer</field>
+            <field name="arch" type="xml">
+                <search string="Bank Transfer">
+                	<field name="name"/>
+        			<field name="company_id"/>
+        			<field name="payment_method_id"/>
+					<field name="partner_id"/>
+        			<field name="line_ids" string="Reimbursed No" filter_domain="[('line_ids.reimbursement_id','ilike', self)]"/>
+					<field name="line_ids" string="Branch Destination" filter_domain="[('line_ids.branch_destination_id','ilike', self)]"/>
+					<field name="line_ids" string="Bank" filter_domain="[('line_ids.payment_to_id','ilike', self)]"/>
+					<filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+					<filter name="posted" string="Posted" domain="[('state','=','posted')]"/>
+					<filter name="cancelled" string="Cancelled" domain="[('state','=','cancel')]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Branch" name="company_id_group_by" domain="[]" context="{'group_by':'company_id'}"/>
+						<filter string="Tanggal" name="date" domain="[]" context="{'group_by':'date'}"/>
+						<filter string="Divisi" name="division_group_by" domain="[]" context="{'group_by':'division'}"/>
+						<filter string="State" name="state" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+ 	
+		<record model="ir.actions.act_window" id="banktransfer_action">
+		    <field name="name">Bank Transfer</field>
+		    <field name="res_model">tw.bank.transfer</field> 
+		    <field name="view_mode">list,form</field> 
+			<field name="context" eval="{'search_default_draft': '1'}" />
+		</record>		
+	</data>
+</odoo>

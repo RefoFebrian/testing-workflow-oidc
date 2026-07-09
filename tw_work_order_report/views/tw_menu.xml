@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="tw_work_order_report_menu"
+        parent="tw_menu.submenu_tw_workshop_report"
+        sequence="12"
+        action="action_report_workshop_wizard"
+        groups="tw_work_order_report.group_tw_work_order_report" />
+        
+    <menuitem id="tw_work_order_wip_report_menu"
+        action="tw_work_order_wip_report_action"
+        parent="tw_menu.submenu_tw_workshop_report"
+        groups="tw_work_order_report.group_tw_work_order_wip_report"
+        sequence="5" />
+
+
+</odoo>

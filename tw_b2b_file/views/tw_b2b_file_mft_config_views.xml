@@ -1,0 +1,12 @@
+<odoo>
+	<data>
+
+		<record id="action_window_tw_b2b_mft_config_files" model="ir.actions.act_window">
+			<field name="name">MFT Saved File Path Config</field>
+			<field name="res_model">tw.config.files</field>
+			<field name="view_mode">list,form</field>
+			<field name="domain">[('name', 'ilike', 'MFT')]</field>
+		</record>
+
+	</data>
+</odoo>

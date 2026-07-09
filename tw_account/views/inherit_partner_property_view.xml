@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>  
+        <record model="ir.ui.view" id="view_tw_partner_property_form">
+            <field name="name">tw.res.partner.property.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='banks']" position="attributes">
+                   <attribute name="invisible">True</attribute>
+                </xpath>
+                <page name='accounting' position="after">
+                    <page name="bank_accounts" string="Bank Accounts">
+                        <group string="Bank Accounts" name="banks" groups="account.group_account_invoice,account.group_account_readonly">
+                            <field name="bank_ids" nolabel="1" colspan="2" context="{'default_partner_id': id}" widget="auto_save_res_partner">
+                                <list>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="bank_id"/>
+                                    <field name="code" optional="show"/>
+                                    <field name="acc_holder_name" optional="show"/>
+                                    <field name="acc_number"/>
+                                    <field name="allow_out_payment"/>
+                                    <field name="acc_holder_name" column_invisible="True"/>
+                                </list>
+                            </field>
+                        </group>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+</odoo>

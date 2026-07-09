@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_b2b_file_archin" model="tw.config.files">
+            <field name="name">MFT-ARCHIN</field>
+            <field name="type_id" ref="tw_config_files.selection_mft_type_configfiles" />
+            <field name="local_path">/opt/local/file/path/MFT-ARCHIN</field>
+        </record>
+        
+        <record id="tw_b2b_file_in" model="tw.config.files">
+            <field name="name">MFT-IN</field>
+            <field name="type_id" ref="tw_config_files.selection_mft_type_configfiles" />
+            <field name="local_path">/opt/local/file/path/MFT-IN</field>
+        </record>
+        
+        <record id="tw_b2b_file_process" model="tw.config.files">
+            <field name="name">MFT-PROCESS</field>
+            <field name="type_id" ref="tw_config_files.selection_mft_type_configfiles" />
+            <field name="local_path">/opt/local/file/path/MFT-PROCESS</field>
+        </record>
+        
+        <record id="tw_b2b_file_error" model="tw.config.files">
+            <field name="name">MFT-ERROR</field>
+            <field name="type_id" ref="tw_config_files.selection_mft_type_configfiles" />
+            <field name="local_path">/opt/local/file/path/MFT-ERROR</field>
+        </record>
+       
+        <record id="tw_b2b_file_out" model="tw.config.files">
+            <field name="name">MFT-OUT</field>
+            <field name="type_id" ref="tw_config_files.selection_mft_type_configfiles" />
+            <field name="local_path">/opt/local/file/path/MFT-OUT</field>
+        </record>
+
+        <record id="tw_b2b_file_ahm_interface" model="tw.config.files">
+            <field name="name">AHM-INTERFACE</field>
+            <field name="type_id" ref="tw_config_files.selection_mft_type_configfiles" />
+            <field name="local_path">/opt/local/file/path/AHM-INTERFACE</field>
+        </record>
+
+    </data>
+</odoo>

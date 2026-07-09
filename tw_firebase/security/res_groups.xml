@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_module_category_firebase" model="ir.module.category">
+            <field name="name">TW Firebase</field>
+        </record>
+    </data>
+</odoo>

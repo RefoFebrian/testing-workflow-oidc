@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="subsidi_leasing">
+            <t t-call="web.html_container">
+                <style type="text/css">
+                    .page {
+                        margin-top: -10px !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                    }
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                    }
+                    th, td {
+                        padding: 5px;
+                        border: 1px solid black;
+                    }
+                    .no-border {
+                        border: none !important;
+                    }
+                    .border-top {
+                        border-top: 1px solid black !important;
+                        border-left: none !important;
+                        border-right: none !important;
+                        border-bottom: none !important;
+                    }
+                    .border-left-top {
+                        border-top: 1px solid black !important;
+                        border-left: 1px solid black !important;
+                        border-right: none !important;
+                        border-bottom: none !important;
+                    }
+                    .border-right-top {
+                        border-top: 1px solid black !important;
+                        border-left: none !important;
+                        border-right: 1px solid black !important;
+                        border-bottom: none !important;
+                    }
+                    .border-left {
+                        border-top: none !important;
+                        border-left: 1px solid black !important;
+                        border-right: none !important;
+                        border-bottom: none !important;
+                    }
+                    .border-right {
+                        border-top: none !important;
+                        border-left: none !important;
+                        border-right: 1px solid black !important;
+                        border-bottom: none !important;
+                    }
+                    .border-bottom {
+                        border-top: none !important;
+                        border-left: none !important;
+                        border-right: none !important;
+                        border-bottom: 1px solid black !important;
+                    }
+                    .border-left-bottom {
+                        border-top: none !important;
+                        border-left: 1px solid black !important;
+                        border-right: none !important;
+                        border-bottom: 1px solid black !important;
+                    }
+                    .border-right-bottom {
+                        border-top: none !important;
+                        border-left: none !important;
+                        border-right: 1px solid black !important;
+                        border-bottom: 1px solid black !important;
+                    }
+                </style>
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <table class="header">
+                            <thead>
+                                <tr>
+                                    <td class="no-border">
+                                        <b>
+                                            <span style="font-size: 20px;" t-esc="doc.company_id.sudo().parent_id.name"/>
+                                        </b>
+                                    </td>
+                                    <td class="no-border">
+                                        <b>
+                                            <span style="font-size: 20px;" t-esc="doc.company_id.name"/>
+                                        </b>
+                                    </td>
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr>
+                                    <td class="no-border">
+                                        <span style="font-size: 18px;">Head Office</span>
+                                    </td>
+                                    <td class="no-border">
+                                        <span style="font-size: 18px;" t-esc="doc.company_id.street"/>
+                                    </td>
+                                    <td class="no-border"/>
+                                </tr>
+                            </thead>
+                            <br/><br/>
+                            <table style="margin-top: 10px; margin-bottom: 10px;">
+                                <tr>
+                                    <td class="no-border" style="text-align: center;">
+                                        <b><span style="font-size: 18px;">SUBSIDI LEASING</span></b>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table>
+                                <tr>
+                                    <td class="no-border" width="15%">No. Sale Order</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%">
+                                        <span t-esc="doc.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">Sudah diterima dari</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%">
+                                        <span t-esc="doc.finco_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">Banyak Uang</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="text-end no-border" width="83%">
+                                        <span t-esc="'{:,.2f}'.format(get_subsidi_leasing()).replace(',', 'X').replace('.', ',').replace('X', '.')"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">Terbilang</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%">##                                        <span t-esc="terbilang(get_subsidi_leasing())"/>
+ ##</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">Untuk Pembayaran</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%">
+                                        <span t-esc="doc.for_reason_payment"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table>
+                                <tr>
+                                    <td class="signature-placholder top-left no-border">
+                                        <span t-esc="doc.company_id.state_id.name"/>
+,                                        <span t-esc="time_date(doc.date_order)"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr>
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr>
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr>
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr>
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr>
+                                    <td class="no-border top-border">
+                                        <span t-esc="user.name"/>
+,                                        <span t-esc="time_date(doc.date_order)"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

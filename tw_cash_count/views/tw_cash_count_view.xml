@@ -1,0 +1,233 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+	<data>
+		<record id="view_tw_cash_count_berita_acara_wizard" model="ir.ui.view">
+			<field name="name">tw.cash.count.berita.acara.wizard</field>
+			<field name="model">tw.cash.count.berita.acara.wizard</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<field name="cash_count_id" options="{'no_open':True,'no_create':True}" readonly="1"/>
+							<field name="options" readonly="1"/>
+							<field name="note"/>
+						</group>
+						<footer>
+							<button name="action_submit" string="Print" type="object" class="oe_highlight"/>
+							<button string="Close" class="oe_link" special="cancel"/>
+						</footer>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_tw_cash_count_cancel_wizard" model="ir.ui.view">
+			<field name="name">tw.cash.count.cancel.wizard</field>
+			<field name="model">tw.cash.count</field>
+			<field name="priority">10</field>
+			<field name="arch" type="xml">
+				<form>
+					<group>
+						<field name="reason_cancel" required="1"/>
+					</group>
+					<footer>
+						<button name="action_cancel_submit" string="Submit" type="object" class="oe_highlight"/>
+						<button string="Close" class="oe_link" special="cancel"/>
+					</footer>
+				</form>
+			</field>
+
+		</record>
+
+		<record id="view_tw_cash_count_list" model="ir.ui.view">
+			<field name="name">tw.cash.count.list</field>
+			<field name="model">tw.cash.count</field>
+			<field name="priority">1</field>
+			<field name="arch" type="xml">
+				<list>
+					<field name="name"/>
+					<field name="company_id"/>
+					<field name="type_cash_count"/>
+					<field name="date"/>
+					<field name="generate_date"/>
+					<field name="state"/>
+				</list>
+			</field>
+		</record>
+
+		<record id="view_tw_cash_count_form" model="ir.ui.view">
+			<field name="name">tw.cash.count.form</field>
+			<field name="model">tw.cash.count</field>
+			<field name="priority">1</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<button name="action_generate_data" invisible="not create_date or generate_date" string="Generate Data" class="oe_highlight" type="object" groups="tw_cash_count.group_tw_cash_count_generate_stock_button"/>
+						<button name="action_post" invisible="state != 'draft' or not generate_date" string="Post" class="oe_highlight" type="object" confirm="HARAP PASTIKAN KEMBALI DATA CASH COUNT ANTARA FISIK DAN SISTEM SUDAH SESUAI, CEK ISI BRANKAS DAN PASTIKAN SEMUA FISIK UANG DILUAR PENERIMAAN SISTEM SUDAH TERCATAT DI BERITA ACARA" groups="tw_cash_count.group_tw_cash_count_posted_button"/>
+						<button name="action_update_plafon" string="Update Plafon" type="object" invisible="state != 'draft' or not generate_date" groups="tw_cash_count.group_tw_cash_count_update_plafon_button"/>
+						<button name="action_cancel" invisible="state not in ['posted']" string="Cancel" type="object" groups="tw_cash_count.group_tw_cash_count_cancel_button"/>
+						<button name="action_bakso" invisible="state not in ['posted']" string="Berita Acara" type="object"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,posted"/>
+					</header>
+					<sheet>
+
+						<div class="oe_title">
+							<h1>
+								<field name="name" readonly="1"/>
+							</h1>
+						</div>
+						<group>
+							<group>
+								<field name="company_id" options="{'no_open':True,'no_create':True}" required="1" readonly="state != 'draft'"/>
+								<span invisible="cashier_id and admin_pos_id and adh_id and soh_id" style="color: red;">* Silahkan pilih Branch, Jika kasir, Admin POS, ADH dan SOH tidak ada maka perlu konfigurasi terlebih dahulu di data Branch</span>
+								<field name="cashier_id" options="{'no_open':True,'no_create':True}" required="1" readonly="state != 'draft'" force_save="1"/>
+								<field name="admin_pos_id" options="{'no_open':True,'no_create':True}" required="1" readonly="state != 'draft'" force_save="1"/>
+								<field name="adh_id" options="{'no_open':True,'no_create':True}" required="1" readonly="state != 'draft'" force_save="1"/>
+								<field name="soh_id" options="{'no_open':True,'no_create':True}" required="1" readonly="state != 'draft'" force_save="1"/>
+							</group>
+							<group>
+								<field name="date" readonly="1"/>
+								<field name="type_cash_count" required="1" readonly="state != 'draft'"/>
+								<field name="generate_date" readonly="1" invisible="not generate_date"/>
+								<field name="create_date" invisible="1"/>
+								<field name="reason_cancel" readonly="1" invisible="state != 'cancelled'"/>
+							</group>
+						</group>
+						<notebook>
+							<page string="Cash">
+								<field name="cash_detail_ids" nolabel="1" readonly="state != 'draft'">
+									<list create="false" delete="false" editable="bottom">
+										<field name="name" readonly="1"/>
+										<field name="journal" readonly="1"/>
+										<field name="status" readonly="1"/>
+										<field name="amount" readonly="1" sum="Total"/>
+										<field name="physical_amount" required="1" sum="Total"/>
+										<field name="selisih" readonly="1" sum="Total"/>
+										<field name="validation_id" string="Setoran Bank" options="{'no_open':True,'no_create':True}" widget="selection"/>
+										<field name="note" required="validation_id"/>
+										<field name="type" invisible="1"/>
+									</list>
+								</field>
+							</page>
+							<page string="Petty Cash" invisible="type_cash_count != 'Showroom'">
+								<group col="6" colspan="3">
+									<group col="1" width="50%" colspan="2">
+										<field name="plafon_petty_cash_sr" width="30%" readonly="1"/>
+										<field name="plafon_petty_cash_ws" width="30%" readonly="1"/>
+										<field name="plafon_petty_cash_atl_btl" width="30%" readonly="1"/>
+									</group>
+									<group col="1" width="50%" colspan="2">
+										<field name="physical_petty_cash_sr" width="30%" required="1" readonly="state != 'draft'"/>
+										<field name="physical_petty_cash_ws" width="30%" required="1" readonly="state != 'draft'"/>
+										<field name="physical_petty_cash_atl_btl" width="30%" required="1" readonly="state != 'draft'"/>
+									</group>
+									<group col="1" width="50%" colspan="2">
+										<field name="balance_pc_sr" width="30%" required="1" readonly="state != 'draft'"/>
+										<field name="balance_pc_ws" width="30%" required="1" readonly="state != 'draft'"/>
+										<field name="balance_pc_atl_btl" width="30%" required="1" readonly="state != 'draft'"/>
+									</group>
+								</group>
+								<field name="petty_cash_detail_ids" nolabel="1" readonly="state != 'draft'">
+									<list create="false" delete="false" editable="bottom">
+										<field name="name" readonly="1"/>
+										<field name="journal" readonly="1" string="Journal"/>
+										<field name="date" readonly="1"/>
+										<field name="description" readonly="1"/>
+										<field name="amount" readonly="1" string="Amount Real" sum="Total"/>
+										<field name="status" readonly="1"/>
+										<field name="validation_id" string="Validasi" options="{'no_open':True,'no_create':True}" widget="selection"/>
+										<field name="note" required="validation_id"/>
+										<field name="type" invisible="1"/>
+									</list>
+								</field>
+							</page>
+							<page string="Reimburse Petty Cash" invisible="type_cash_count != 'Showroom'">
+								<field name="reimburse_petty_cash_detail_ids" nolabel="1" readonly="state != 'draft' or name">
+									<list create="false" delete="false" editable="bottom">
+										<field name="name" readonly="1"/>
+										<field name="journal" readonly="1" string="Journal"/>
+										<field name="date" readonly="1" string="Date Request"/>
+										<field name="amount" readonly="1" string="Total Amount" sum="Total"/>
+										<field name="status" readonly="1"/>
+										<field name="type" invisible="1"/>
+									</list>
+								</field>
+							</page>
+							<page string="Penerimaan Lain">
+								<field name="other_receivable_ids" nolabel="1" readonly="state != 'draft'">
+									<list editable="bottom">
+										<field name="name" required="1"/>
+										<field name="amount" required="1" sum="Total"/>
+										<field name="note" required="1"/>
+									</list>
+								</field>
+							</page>
+							<page name="audit_trail" string="Audit Trail">
+								<group>
+									<group>
+										<field name="create_uid" readonly="1"/>
+										<field name="create_date" readonly="1"/>
+										<field name="post_uid" readonly="1" invisible="not post_uid"/>
+										<field name="post_date" readonly="1" invisible="not post_date"/>
+									</group>
+									<group>
+										<field name="write_uid" readonly="1"/>
+										<field name="write_date" readonly="1"/>
+										<field name="cancel_uid" invisible="not cancel_uid"/>
+										<field name="cancel_date" invisible="not cancel_date"/>
+									</group>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_tw_cash_count_search" model="ir.ui.view">
+			<field name="name">tw.cash.count.search</field>
+			<field name="model">tw.cash.count</field>
+			<field name="arch" type="xml">
+				<search string="Rules">
+					<field name="name"/>
+					<field name="company_id"/>
+					<field name="type_cash_count"/>
+					<filter name="state_draft" domain="[('state','=','draft')]" string="Draft"/>
+					<filter name="state_posted" domain="[('state','=','posted')]" string="Posted"/>
+					<group expand="0" string="Group By...">
+						<filter name="group_by_branch" string="Branch" domain="[]" context="{'group_by':'company_id'}"/>
+						<filter name="group_by_type_cash_count" string="type_cash_count" domain="[]" context="{'group_by':'type_cash_count'}"/>
+						<filter name="group_by_state" string="State" domain="[]" context="{'group_by':'state'}"/>
+					</group>
+				</search>
+			</field>
+		</record>
+
+
+		<record id="action_tw_cash_count" model="ir.actions.act_window">
+			<field name="name">Cash Count</field>
+			<field name="res_model">tw.cash.count</field>
+			<field name="view_mode">list,form</field>
+			<field name="context">{'search_default_state_draft':1}</field>
+		</record>
+
+		<!-- Print Bakso -->
+
+		<record id="paperformat_bakso_cash_count" model="report.paperformat">
+			<field name="name">Berita Acara Serah Terima Cash Count</field>
+			<field name="default" eval="True"/>
+			<field name="header_spacing">0</field>
+		</record>
+
+
+		<record id="action_print_bakso_cash_count" model="ir.actions.report">
+			<field name="name">Print Bakso Cash Count</field>
+			<field name="model">tw.cash.count</field>
+			<field name="report_type">qweb-pdf</field>
+			<field name="report_name">tw_cash_count.tw_cash_count_print_berita_acara</field>
+			<field name="print_report_name">'Print_Berita_Acara_Serah_Terima_Cash_Count_%s.pdf' % (object.origin)</field>
+			<field name="paperformat_id" ref="paperformat_bakso_cash_count"/>
+		</record>
+
+	</data>
+</odoo>

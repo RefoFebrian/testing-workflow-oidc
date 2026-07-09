@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+        <!-- Disbursement Post -->
+		<record id="group_tw_dgi_work_order_wizard_crud" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW DGI Work Order Wizard</field>
+        </record>
+
+        <record id="tw_dgi_work_order_wizard_access_crud" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dgi_work_order_wizard" />
+            <field name="name">tw_dgi_work_order_wizard crud</field>
+            <field name="group_id" ref="group_tw_dgi_work_order_wizard_crud" />
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="tw_base.group_system_admin" model="res.groups">
+			<field name="implied_ids" eval="[
+				(4,ref('group_tw_dgi_work_order_wizard_crud')),
+            ]">
+			</field>
+		</record>
+	
+	</data>
+</odoo>

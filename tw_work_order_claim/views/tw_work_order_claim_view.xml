@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <!-- LIST View -->
+    <record id="view_work_order_claim_list" model="ir.ui.view">
+      <field name="name">tw.work.order.claim.list</field>
+      <field name="model">tw.work.order.claim</field>
+      <field name="arch" type="xml">
+        <list string="Work Order Claim" delete="0">
+          <field name="display_name" string="Claim"/>
+          <field name="claim_type_id" string="Type"/>
+          <field name="kpb_period" string="KPB Ke-" optional="hide"/>
+          <field name="scope_type" string="Scope"/>
+          <field name="company_id" string="Branch"
+                 column_invisible="True"
+                 optional="hide"/>
+          <field name="area_id" string="Area"
+                 column_invisible="True"
+                 optional="hide"/>
+          <field name="date_start"/>
+          <field name="date_end"/>
+          <field name="journal_id" string="Journal"/>
+          <field name="active" string="Active" widget="boolean_toggle"/>
+        </list>
+      </field>
+    </record>
+
+    <!-- FORM View -->
+    <record id="tw_work_order_claim_view_form" model="ir.ui.view">
+      <field name="name">tw.work.order.claim.view.form</field>
+      <field name="model">tw.work.order.claim</field>
+      <field name="arch" type="xml">
+        <form string="Work Order Claim" delete="0">
+          <sheet>
+
+            <!-- Title Area -->
+            <div class="oe_title">
+              <h1>
+                <field name="display_name" nolabel="1" readonly="1" class="mb0"/>
+              </h1>
+            </div>
+
+            <!-- Main Config Group -->
+            <group>
+              <group string="Claim Configuration">
+
+                <!-- Scope toggle: Branch or Area (mutually exclusive) -->
+                <field name="scope_type" widget="radio" options="{'horizontal': True}"
+                       string="Scope By"
+                       help="Branch: claim dikonfigurasi per-cabang.\nArea: claim berlaku untuk semua cabang dalam satu area."/>
+
+                <!-- Branch — visible only when scope_type = 'branch' -->
+                <field name="company_id"
+                       invisible="scope_type != 'branch'"
+                       required="scope_type == 'branch'"
+                       options="{'no_open': True, 'no_create': True}"
+                       help="Pilih branch spesifik, atau Holding Company (H2Z) untuk semua branch"/>
+
+                <!-- Area — visible only when scope_type = 'area' -->
+                <field name="area_id"
+                       invisible="scope_type != 'area'"
+                       required="scope_type == 'area'"
+                       options="{'no_open': True, 'no_create': True}"
+                       placeholder="(Pilih area)"/>
+
+                <label for="claim_type_id" string="Claim Type"/>
+                <div class="o_row">
+                  <field name="claim_type_id" options="{'no_open': True, 'no_create': True}" required="1"/>
+                  <field name="claim_type" invisible="1"/>
+                  <span invisible="claim_type != 'KPB'" class="fw-bold ms-3 me-1">Ke-</span>
+                  <field name="kpb_period" invisible="claim_type != 'KPB'" required="claim_type == 'KPB'" nolabel="1" class="oe_inline"/>
+                </div>
+                <field name="journal_id" options="{'no_open': True, 'no_create': True}" required="1"/>
+                <field name="payment_term_id" options="{'no_open': True, 'no_create': True}" required="1"/>
+              </group>
+              <group string="Scope &amp; Period">
+                <label for="date_start" string="Effective Period"/>
+                <div class="o_row">
+                  <field name="date_start" class="oe_inline" placeholder="From"/>
+                  <span class="oe_inline mx-1">—</span>
+                  <field name="date_end" class="oe_inline" placeholder="To"/>
+                </div>
+                <field name="active" widget="boolean_toggle"/>
+              </group>
+            </group>
+
+            <!-- Unit Apply To Group -->
+            <group string="Produk Unit">
+              <group>
+                <field name="unit_apply_on" widget="radio" options="{'horizontal': True}"/>
+                <field name="unit_product_tmpl_id" options="{'no_open': True, 'no_create': True}" invisible="unit_apply_on != 'product'" required="unit_apply_on == 'product'"/>
+                <field name="unit_product_id" options="{'no_open': True, 'no_create': True}" invisible="unit_apply_on != 'product'" placeholder="(All variants)"/>
+                <field name="unit_categ_id" options="{'no_open': True, 'no_create': True}" invisible="unit_apply_on != 'category'" required="unit_apply_on == 'category'"/>
+              </group>
+            </group>
+
+            <notebook>
+              <!-- Claim Spareparts Tab -->
+              <page name="claim_line" string="Claim Items">
+                <field name="claim_line_ids" required="1">
+                  <list editable="bottom" string="Claim Sparepart Items">
+                    <field name="product_id" string="Product" options="{'no_open': True, 'no_create': True}" required="1"/>
+                    <field name="claim_to" required="1"/>
+                    <field name="partner_id" required="claim_to != 'customer'" force_save="1"/>
+                    <field name="claim_description" required="1"/>
+                  </list>
+                </field>
+              </page>
+
+              <!-- Audit Trail Tab -->
+              <page name="audit_trail" string="Audit Trail">
+                <group>
+                  <group>
+                    <field name="create_uid" string="Created by" readonly="1"/>
+                    <field name="create_date" string="Created on" readonly="1"/>
+                  </group>
+                  <group>
+                    <field name="write_uid" string="Updated by" readonly="1"/>
+                    <field name="write_date" string="Updated on" readonly="1"/>
+                  </group>
+                </group>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="tw_work_order_claim_search_view" model="ir.ui.view">
+      <field name="name">tw.work.order.claim.search</field>
+      <field name="model">tw.work.order.claim</field>
+      <field name="arch" type="xml">
+        <search string="Search Work Order Claim">
+          <field name="display_name" string="Claim Name"/>
+          <field name="claim_type_id" string="Claim Type"/>
+          <field name="company_id" string="Branch"/>
+          <field name="area_id" string="Area"/>
+          <field name="journal_id" string="Journal"/>
+          <field name="claim_line_ids" string="Product" filter_domain="[('claim_line_ids.product_id', 'ilike', self)]"/>
+          <separator/>
+          <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+          <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+          <filter string="Has Period" name="has_period" domain="[('date_start', '!=', False)]"/>
+          <separator/>
+          <filter string="Scope: Branch" name="filter_scope_branch" domain="[('scope_type', '=', 'branch')]"/>
+          <filter string="Scope: Area" name="filter_scope_area" domain="[('scope_type', '=', 'area')]"/>
+          <separator/>
+          <group expand="0" string="Group By">
+            <filter string="Scope" name="group_by_scope" domain="[]" context="{'group_by': 'scope_type'}"/>
+            <filter string="Branch" name="group_by_branch" domain="[]" context="{'group_by': 'company_id'}"/>
+            <filter string="Claim Type" name="group_by_claim_type" domain="[]" context="{'group_by': 'claim_type_id'}"/>
+            <filter string="Area" name="group_by_area" domain="[]" context="{'group_by': 'area_id'}"/>
+          </group>
+        </search>
+      </field>
+    </record>
+
+    <!-- Action -->
+    <record id="tw_work_order_claim_action" model="ir.actions.act_window">
+      <field name="name">Work Order Claim</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">tw.work.order.claim</field>
+      <field name="view_mode">list,form</field>
+      <field name="search_view_id" ref="tw_work_order_claim_search_view"/>
+      <field name="context">{'search_default_active': 1, 'search_default_group_by_claim_type': 1}</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">Klik untuk menambahkan konfigurasi Work Order Claim baru</p>
+        <p>Konfigurasi ini menentukan produk dan penerima klaim berdasarkan tipe klaim di Workshop.</p>
+      </field>
+    </record>
+
+    <!-- Link views to action -->
+    <record id="tw_work_order_claim_action_list" model="ir.actions.act_window.view">
+      <field name="sequence" eval="1"/>
+      <field name="view_mode">list</field>
+      <field name="view_id" ref="view_work_order_claim_list"/>
+      <field name="act_window_id" ref="tw_work_order_claim_action"/>
+    </record>
+
+    <record id="tw_work_order_claim_action_form" model="ir.actions.act_window.view">
+      <field name="sequence" eval="2"/>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="tw_work_order_claim_view_form"/>
+      <field name="act_window_id" ref="tw_work_order_claim_action"/>
+    </record>
+
+  </data>
+</odoo>

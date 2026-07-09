@@ -1,0 +1,34 @@
+<odoo>
+	<data>
+
+		<menuitem name="B2B File"
+			id="tw_menuitem_b2b_file_sep"
+			parent="tw_menu.menu_tw_mft_monitoring"
+			sequence="1" />
+		<menuitem name="Files"
+			id="tw_menuitem_b2b_file"
+			parent="tw_b2b_file.tw_menuitem_b2b_file_sep"
+			action="tw_b2b_file.action_window_tw_b2b_file"
+			groups="tw_b2b_file.group_tw_b2b_file_read"
+			sequence="1" />
+		<menuitem name="Content"
+			id="tw_menuitem_b2b_file_content"
+			parent="tw_b2b_file.tw_menuitem_b2b_file_sep"
+			action="tw_b2b_file.action_window_tw_b2b_file_content"
+			groups="tw_b2b_file.group_tw_b2b_file_read"
+			sequence="2" />
+		<menuitem name="MFT Saved File Path"
+			id="tw_menuitem_b2b_file_mft_config_files"
+			parent="tw_menu.menu_tw_mft_monitoring_configuration"
+			action="tw_b2b_file.action_window_tw_b2b_mft_config_files"
+			groups="tw_b2b_file.group_tw_b2b_file_config_read"
+			sequence="1" />
+		<menuitem name="MFT IN Configuration"
+			id="tw_menuitem_b2b_file_configuration"
+			parent="tw_menu.menu_tw_mft_monitoring_configuration"
+			action="tw_b2b_file.action_window_tw_b2b_file_config"
+			groups="tw_b2b_file.group_tw_b2b_file_config_read"
+			sequence="30" />
+
+	</data>
+</odoo>

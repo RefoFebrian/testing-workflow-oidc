@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_activity_settlement_wizard_form_view" model="ir.ui.view">
+            <field name="name">tw.activity.settlement.wizard.form</field>
+            <field name="model">tw.activity.settlement.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="activity_line_id" readonly="1" options="{'no_open':True,'no_create':True}"/>
+                        </group>
+                        <field name="line_ids">
+                            <list editable="bottom" create="0">
+                                <field name="advance_payment_id" string="Advance Payment" readonly="1" width="170%" options="{'no_open':True,'no_create':True}"/>
+                                <field name="avp_amount" readonly="1" string="Plan Amount"/>
+                                <field name="actual_amount" required="1" width="120%"/>
+                                <field name="stl_type" column_invisible="1"/>
+                                <field name="company_id" column_invisible="1"/>
+                                <field name="return_journal_id" required="stl_type == 'kembali'" invisible="stl_type != 'kembali'" width="300px" options="{'no_open':True,'no_create':True}"/>
+                                <field name="attachment_ids" widget="many2many_binary"/>
+                            </list>
+                        </field>
+                    </sheet>
+                    <footer>
+                        <button name="action_create_settlement"
+                                string="Create Settlement"
+                                type="object"
+                                class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

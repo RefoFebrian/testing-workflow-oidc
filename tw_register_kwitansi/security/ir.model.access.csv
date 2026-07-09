@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_register_kwitansi_all,tw_register_kwitansi all,model_tw_register_kwitansi,base.group_user,1,0,0,0
+access_tw_register_kwitansi_line_all,tw_register_kwitansi_line all,model_tw_register_kwitansi_line,base.group_user,1,0,0,0
+access_tw_report_register_kwitansi_all,tw_report_register_kwitansi all,model_tw_report_register_kwitansi,base.group_user,1,0,0,0

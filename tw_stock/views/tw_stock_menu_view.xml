@@ -1,0 +1,104 @@
+<odoo>
+  <data>
+
+    <record id="stock.menu_stock_root" model="ir.ui.menu">
+        <field name="parent_id" ref="tw_menu.menu_tw_odoo_default" />
+    </record>
+
+
+    <!-- SUB MENU -->
+    <menuitem id="submenu_tw_stock_incoming_showroom" name="Incoming" parent="tw_menu.submenu_tw_showroom_purchase" sequence="20"/>
+    <menuitem id="submenu_tw_stock_picking_incoming_showroom" name="Picking" parent="submenu_tw_stock_incoming_showroom" sequence="10"/>
+    <menuitem id="submenu_tw_stock_batch_incoming_showroom" name="Batch" parent="submenu_tw_stock_incoming_showroom" sequence="20"/>
+    <menuitem id="submenu_tw_stock_outgoing_showroom" name="Outgoing" parent="tw_menu.submenu_tw_showroom_h1" sequence="20"/>
+    <menuitem id="submenu_tw_stock_picking_outgoing_showroom" name="Picking" parent="submenu_tw_stock_outgoing_showroom" sequence="10"/>
+    <menuitem id="submenu_tw_stock_batch_outgoing_showroom" name="Batch" parent="submenu_tw_stock_outgoing_showroom" sequence="20"/>
+    <menuitem id="submenu_tw_stock_incoming_workshop" name="Incoming" parent="tw_menu.submenu_tw_workshop_purchase" sequence="20"/>
+    <menuitem id="submenu_tw_stock_picking_incoming_workshop" name="Picking" parent="submenu_tw_stock_incoming_workshop" sequence="10"/>
+    <menuitem id="submenu_tw_stock_batch_incoming_workshop" name="Batch" parent="submenu_tw_stock_incoming_workshop" sequence="20"/>
+    <menuitem id="submenu_tw_stock_outgoing_workshop" name="Outgoing" parent="tw_menu.submenu_tw_workshop_h3" sequence="50"/>
+    <menuitem id="submenu_tw_stock_picking_outgoing_workshop" name="Picking" parent="submenu_tw_stock_outgoing_workshop" sequence="10"/>
+    <menuitem id="submenu_tw_stock_batch_outgoing_workshop" name="Batch" parent="submenu_tw_stock_outgoing_workshop" sequence="20"/>
+
+    <!-- SHOWROOM -->
+    <!-- Incoming -->
+    <!-- Picking -->
+    <menuitem id="tw_stock_picking_receipt_unit_menuitem" name="On Incoming Shipment" parent="submenu_tw_stock_picking_incoming_showroom" action="action_tw_stock_picking_receipt_unit" sequence="10" groups="tw_stock.group_tw_stock_picking_showroom_on_incoming_shipment_read"/>
+    <menuitem id="tw_stock_picking_qc_unit_menuitem" name="Quality Control Transfer" parent="submenu_tw_stock_picking_incoming_showroom" action="action_tw_stock_picking_qc_unit" sequence="20" groups="tw_stock.group_tw_stock_picking_showroom_quality_control_transfer_read"/>
+    <menuitem id="tw_stock_picking_storage_unit_menuitem" name="Storage Transfer" parent="submenu_tw_stock_picking_incoming_showroom" action="action_tw_stock_picking_storage_unit" sequence="30" groups="tw_stock.group_tw_stock_picking_showroom_storage_transfer_read"/>
+    <!-- Batch -->
+    <menuitem id="tw_stock_picking_batch_md_receipt_unit_menuitem" name="Batch Receipt MD" parent="submenu_tw_stock_batch_incoming_showroom" action="action_tw_stock_picking_batch_md_receipt_unit" sequence="10" groups="tw_stock.group_tw_stock_picking_batch_md_receipt_showroom_read"/>
+    <menuitem id="tw_stock_picking_batch_md_qc_unit_menuitem" name="Batch QC MD" parent="submenu_tw_stock_batch_incoming_showroom" action="action_tw_stock_picking_batch_md_qc_unit" sequence="20" groups="tw_stock.group_tw_stock_picking_batch_md_qc_showroom_read"/>
+    <menuitem id="tw_stock_picking_batch_md_store_unit_menuitem" name="Batch Store MD" parent="submenu_tw_stock_batch_incoming_showroom" action="action_tw_stock_picking_batch_md_store_unit" sequence="30" groups="tw_stock.group_tw_stock_picking_batch_md_store_showroom_read"/>
+    <menuitem id="tw_stock_picking_batch_retail_receipt_unit_menuitem" name="Batch Receipt Retail" parent="submenu_tw_stock_batch_incoming_showroom" action="action_tw_stock_picking_batch_retail_receipt_unit" sequence="40" groups="tw_stock.group_tw_stock_picking_batch_retail_receipt_showroom_read"/>
+    <menuitem id="tw_stock_picking_batch_retail_qc_unit_menuitem" name="Batch QC Retail" parent="submenu_tw_stock_batch_incoming_showroom" action="action_tw_stock_picking_batch_retail_qc_unit" sequence="50" groups="tw_stock.group_tw_stock_picking_batch_retail_qc_showroom_read"/>
+    <menuitem id="tw_stock_picking_batch_retail_store_unit_menuitem" name="Batch Store Retail" parent="submenu_tw_stock_batch_incoming_showroom" action="action_tw_stock_picking_batch_retail_store_unit" sequence="60" groups="tw_stock.group_tw_stock_picking_batch_retail_store_showroom_read"/>
+    <!-- Outgoing -->
+    <!-- Picking -->
+    <menuitem id="tw_stock_picking_out_unit_menuitem" name="Picking Transfer" parent="submenu_tw_stock_picking_outgoing_showroom" action="action_tw_stock_picking_out_unit" sequence="10" groups="tw_stock.group_tw_stock_picking_showroom_picking_transfer_read"/>
+    <menuitem id="tw_stock_picking_pack_unit_menuitem" name="Packing Transfer" parent="submenu_tw_stock_picking_outgoing_showroom" action="action_tw_stock_picking_pack_unit" sequence="20" groups="tw_stock.group_tw_stock_picking_showroom_packing_transfer_read"/>
+    <menuitem id="tw_stock_picking_delivery_order_unit_menuitem" name="On Outgoing Shipment" parent="submenu_tw_stock_picking_outgoing_showroom" action="action_tw_stock_picking_delivery_order_unit" sequence="30" groups="tw_stock.group_tw_stock_picking_showroom_on_outgoing_shipment_read"/>
+    <!-- Batch -->
+    <menuitem id="tw_stock_picking_batch_retail_pick_unit_menuitem" name="Batch Pick" parent="submenu_tw_stock_batch_outgoing_showroom" action="action_tw_stock_picking_batch_retail_pick_unit" sequence="10" groups="tw_stock.group_tw_stock_picking_batch_retail_pick_showroom_read"/>
+    <menuitem id="tw_stock_picking_batch_retail_pack_unit_menuitem" name="Batch Pack" parent="submenu_tw_stock_batch_outgoing_showroom" action="action_tw_stock_picking_batch_retail_pack_unit" sequence="20" groups="tw_stock.group_tw_stock_picking_batch_retail_pack_showroom_read"/>
+    <menuitem id="tw_stock_picking_batch_retail_out_unit_menuitem" name="Batch Out" parent="submenu_tw_stock_batch_outgoing_showroom" action="action_tw_stock_picking_batch_retail_out_unit" sequence="30" groups="tw_stock.group_tw_stock_picking_batch_retail_out_showroom_read"/>
+
+    <!-- WORKSHOP -->
+    <!-- Incoming -->
+    <!-- Picking -->
+    <menuitem id="tw_stock_picking_receipt_sparepart_menuitem" name="On Incoming Shipment" parent="submenu_tw_stock_picking_incoming_workshop" action="action_tw_stock_picking_receipt_sparepart" sequence="10" groups="tw_stock.group_tw_stock_picking_workshop_on_incoming_shipment_read"/>
+    <menuitem id="tw_stock_picking_qc_sparepart_menuitem" name="Quality Control Transfer" parent="submenu_tw_stock_picking_incoming_workshop" action="action_tw_stock_picking_qc_sparepart" sequence="20" groups="tw_stock.group_tw_stock_picking_workshop_quality_control_transfer_read"/>
+    <menuitem id="tw_stock_picking_storage_sparepart_menuitem" name="Storage Transfer" parent="submenu_tw_stock_picking_incoming_workshop" action="action_tw_stock_picking_storage_sparepart" sequence="30" groups="tw_stock.group_tw_stock_picking_workshop_storage_transfer_read"/>
+    <!-- Batch -->
+    <menuitem id="tw_stock_picking_batch_md_receipt_sparepart_menuitem" name="Batch Receipt MD" parent="submenu_tw_stock_batch_incoming_workshop" action="action_tw_stock_picking_batch_md_receipt_sparepart" sequence="10" groups="tw_stock.group_tw_stock_picking_batch_md_receipt_workshop_read"/>
+    <menuitem id="tw_stock_picking_batch_md_qc_sparepart_menuitem" name="Batch QC MD" parent="submenu_tw_stock_batch_incoming_workshop" action="action_tw_stock_picking_batch_md_qc_sparepart" sequence="20" groups="tw_stock.group_tw_stock_picking_batch_md_qc_workshop_read"/>
+    <menuitem id="tw_stock_picking_batch_md_store_sparepart_menuitem" name="Batch Store MD" parent="submenu_tw_stock_batch_incoming_workshop" action="action_tw_stock_picking_batch_md_store_sparepart" sequence="30" groups="tw_stock.group_tw_stock_picking_batch_md_store_workshop_read"/>
+    <menuitem id="tw_stock_picking_batch_retail_receipt_sparepart_menuitem" name="Batch Receipt Retail" parent="submenu_tw_stock_batch_incoming_workshop" action="action_tw_stock_picking_batch_retail_receipt_sparepart" sequence="40" groups="tw_stock.group_tw_stock_picking_batch_retail_receipt_workshop_read"/>
+    <menuitem id="tw_stock_picking_batch_retail_qc_sparepart_menuitem" name="Batch QC Retail" parent="submenu_tw_stock_batch_incoming_workshop" action="action_tw_stock_picking_batch_retail_qc_sparepart" sequence="50" groups="tw_stock.group_tw_stock_picking_batch_retail_qc_workshop_read"/>
+    <menuitem id="tw_stock_picking_batch_retail_store_sparepart_menuitem" name="Batch Store Retail" parent="submenu_tw_stock_batch_incoming_workshop" action="action_tw_stock_picking_batch_retail_store_sparepart" sequence="60" groups="tw_stock.group_tw_stock_picking_batch_retail_store_workshop_read"/>
+    <!-- Outgoing -->
+    <!-- Picking -->
+    <menuitem id="tw_stock_picking_out_sparepart_menuitem" name="Picking Transfer" parent="submenu_tw_stock_picking_outgoing_workshop" action="action_tw_stock_picking_out_sparepart" sequence="10" groups="tw_stock.group_tw_stock_picking_workshop_picking_transfer_read"/>
+    <menuitem id="tw_stock_picking_pack_sparepart_menuitem" name="Packing Transfer" parent="submenu_tw_stock_picking_outgoing_workshop" action="action_tw_stock_picking_pack_sparepart" sequence="20" groups="tw_stock.group_tw_stock_picking_workshop_packing_transfer_read"/>
+    <menuitem id="tw_stock_picking_delivery_order_sparepart_menuitem" name="On Outgoing Shipment" parent="submenu_tw_stock_picking_outgoing_workshop" action="action_tw_stock_picking_delivery_order_sparepart" sequence="30" groups="tw_stock.group_tw_stock_picking_workshop_on_outgoing_shipment_read"/>
+    <!-- Batch -->
+    <menuitem id="tw_stock_picking_batch_retail_pick_sparepart_menuitem" name="Batch Pick" parent="submenu_tw_stock_batch_outgoing_workshop" action="action_tw_stock_picking_batch_retail_pick_sparepart" sequence="10" groups="tw_stock.group_tw_stock_picking_batch_retail_pick_workshop_read"/>
+    <menuitem id="tw_stock_picking_batch_retail_pack_sparepart_menuitem" name="Batch Pack" parent="submenu_tw_stock_batch_outgoing_workshop" action="action_tw_stock_picking_batch_retail_pack_sparepart" sequence="20" groups="tw_stock.group_tw_stock_picking_batch_retail_pack_workshop_read"/>
+    <menuitem id="tw_stock_picking_batch_retail_out_sparepart_menuitem" name="Batch Out" parent="submenu_tw_stock_batch_outgoing_workshop" action="action_tw_stock_picking_batch_retail_out_sparepart" sequence="30" groups="tw_stock.group_tw_stock_picking_batch_retail_out_workshop_read"/>
+
+    <!-- Warehouse -->
+      <!-- Operations -->
+      <menuitem id="tw_stock_picking_incoming_warehouse_menuitem" name="On Incoming Shipment" parent="tw_menu.submenu_tw_warehouse_operation" action="action_tw_stock_picking_incoming" sequence="10" groups="tw_stock.group_tw_warehouse_operation_incoming_shipment_read"/>
+      <menuitem id="tw_stock_picking_outgoing_warehouse_menuitem" name="On Outgoing Shipment" parent="tw_menu.submenu_tw_warehouse_operation" action="action_tw_stock_picking_outgoing" sequence="20" groups="tw_stock.group_tw_warehouse_operation_outgoing_shipment_read"/>
+      <menuitem id="tw_stock_picking_batch_warehouse_menuitem" name="Batch Transfer" parent="tw_menu.submenu_tw_warehouse_operation" action="action_tw_stock_picking_batch_inherit" sequence="30" groups="tw_stock.group_tw_warehouse_operation_batch_transfer_read"/>
+
+      <!-- Products -->
+      <menuitem id="tw_product_template_warehouse_menuitem" name="Products" action="stock.product_template_action_product" parent="tw_menu.submenu_tw_warehouse_product" sequence="10" groups="tw_stock.group_tw_warehouse_products_product_read"/>
+      <menuitem id="tw_product_product_warehouse_menuitem" name="Product Variants" action="stock.stock_product_normal_action" parent="tw_menu.submenu_tw_warehouse_product" sequence="20" groups="tw_stock.group_tw_warehouse_products_product_variant_read"/>
+      <menuitem id="tw_product_package_warehouse_menuitem" name="Packages" action="stock.action_package_view" parent="tw_menu.submenu_tw_warehouse_product" sequence="40" groups="tw_stock.group_tw_warehouse_products_packages_read"/>
+
+      <!-- Treaceability -->
+      <menuitem id="tw_stock_lot_warehouse_menuitem" name="Serial Number" parent="tw_menu.submenu_tw_warehouse_traceability" action="action_tw_stock_lot" sequence="10" groups="tw_stock.group_tw_warehouse_traceability_serial_number_read"/>
+      <menuitem id="tw_product_stock_warehouse_menuitem" name="Stock" action="stock.action_product_stock_view" parent="tw_menu.submenu_tw_warehouse_traceability" sequence="20" groups="tw_stock.group_tw_warehouse_traceability_stock_read"/>
+      <menuitem id="tw_stock_move_line_warehouse_menuitem" name="Moves History" parent="tw_menu.submenu_tw_warehouse_traceability" action="stock.stock_move_line_action" sequence="30" groups="tw_stock.group_tw_warehouse_traceability_moves_history_read"/>
+      <menuitem id="tw_stock_valuation_layer_warehouse_menuitem" name="Stock Valuation" parent="tw_menu.submenu_tw_warehouse_traceability" action="stock_account.stock_valuation_layer_action" sequence="40" groups="tw_stock.group_tw_warehouse_traceability_stock_valuation_read"/>
+      <menuitem id="tw_stock_quant_warehouse_menuitem" name="Quants" parent="tw_menu.submenu_tw_warehouse_traceability" action="tw_stock.action_tw_stock_quant_inherit" sequence="50" groups="tw_stock.group_tw_warehouse_traceability_stock_quant_read"/>
+    
+      <!-- Configuration -->
+      <menuitem id="tw_stock_warehouse_menuitem" name="Warehouse" parent="tw_menu.submenu_tw_warehouse_configuration" action="stock.action_warehouse_form" sequence="10" groups="tw_stock.group_tw_warehouse_configuration_warehouse_read"/>
+      <menuitem id="tw_stock_operation_type_warehouse_menuitem" name="Operation Types" parent="tw_menu.submenu_tw_warehouse_configuration" action="stock.action_picking_type_list" sequence="20" groups="tw_stock.group_tw_warehouse_configuration_operation_types_read"/>
+      <menuitem id="tw_stock_location_warehouse_menuitem" name="Locations" parent="tw_menu.submenu_tw_warehouse_configuration" action="stock.action_location_form" sequence="30" groups="tw_stock.group_tw_warehouse_configuration_location_read"/>
+      <menuitem id="tw_stock_route_warehouse_menuitem" name="Routes" parent="tw_menu.submenu_tw_warehouse_configuration" action="stock.action_routes_form" sequence="40" groups="tw_stock.group_tw_warehouse_configuration_routes_read"/>
+      <menuitem id="tw_stock_rule_warehouse_menuitem" name="Rules" parent="tw_menu.submenu_tw_warehouse_configuration" action="stock.action_rules_form" sequence="50" groups="tw_stock.group_tw_warehouse_configuration_rules_read"/>
+
+      <menuitem
+        id="menuitem_tw_stock_stock_location"
+        name="Stock Location"
+        parent="tw_selection.submenu_tw_selection"
+        action="tw_selection_stock_location_action"
+        sequence="1"
+        groups="tw_stock.group_tw_selection_stock_location"
+      />
+
+  </data>
+</odoo>

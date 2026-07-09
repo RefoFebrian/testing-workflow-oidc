@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_stock_picking_expedition_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.picking.expedition.inherit.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_picking_inherit_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//form/header" position="after">
+                    <header>
+                        <field name="delivery_state" widget="statusbar" 
+                            invisible="picking_type_code != 'outgoing' or partner_category_name == 'Customer'" 
+                            statusbar_visible="draft,intransit,delivered"
+                        />
+                    </header>
+                </xpath>
+                <xpath expr="//page[@name='audit_trail']" position="before">
+                    <page name="delivery_info" string="Delivery Info">
+                        <group string="Tracking Delivery">
+                            <group>
+                                <field name="delivery_driver_id" readonly="1" options="{'no_create': True,'no_open': True}"/>
+                                <field name="assign_driver_date" readonly="1"/>
+                                <field name="assign_driver_uid" readonly="1" options="{'no_create': True,'no_open': True}"/>
+                            </group>
+                            <group>
+                                <field name="intransit_date" readonly="1"/>
+                                <field name="intransit_uid" readonly="1" options="{'no_create': True,'no_open': True}"/>
+                                <field name="delivery_date" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="Delivery Document">
+                            <field name="filename_upload_image" invisible="1"/>
+                            <field name="file_image_show" widget="image" img_width="200" img_height="200" invisible="filename_upload_image == False"/>
+                            <field name="file_image" invisible="filename_upload_image != False" filename="filename_upload_image"/><br/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

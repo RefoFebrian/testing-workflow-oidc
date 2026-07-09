@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+      <record id="tw_journal_memorial_approval_branch_setting_inherit_form_view" model="ir.ui.view">
+          <field name="name">tw.journal.memorial.approval.branch.setting.inherit.view.form</field>
+          <field name="model">tw.branch.setting</field>
+          <field name="inherit_id" ref="tw_branch_setting.tw_branch_setting_form_view"/>
+          <field name="arch" type="xml">
+              <xpath expr="//page[@name='general_information']/group/group[1]" position="inside">
+                  <field name="is_need_approval_jm_cancel"/>
+              </xpath>
+          </field>
+      </record>
+    </data>
+</odoo>

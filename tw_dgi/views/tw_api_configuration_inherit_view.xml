@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit API Configuration Form - DGI Extensions -->
+        <record id="tw_api_configuration_dgi_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.api.configuration.dgi.inherit.form</field>
+            <field name="model">tw.api.configuration</field>
+            <field name="inherit_id" ref="tw_api.tw_api_configuration_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='endpoints']//field[@name='endpoint_config_ids']/list" position="attributes">
+                    <attribute name="default_order">dgi_division_id, code</attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='endpoints']//field[@name='method']" position="after">
+                    <field name="mode"/>
+                    <field name="target_model_id" options="{'no_create': True}"/>
+                    <field name="dgi_division_id" options="{'no_create': True, 'no_open': True}" column_invisible="parent.api_type_value != 'DGI'" optional="show"/>
+                </xpath>
+
+                <xpath expr="//page[@name='endpoints']//field[@name='active']" position="after">
+                    <!-- Unified Configuration Wizard Button -->
+                    <button name="action_open_config_wizard" type="object" string="Configure" class="oe_highlight" icon="fa-cogs" title="Open configuration wizard for mappings and output template"/>
+                </xpath>
+
+                <!-- DGI Settings Tab: inject after the last existing page -->
+                <xpath expr="//notebook/page[last()]" position="after">
+                    <page name="dgi_settings" string="DGI Settings" invisible="api_type_value != 'DGI'">
+                        <group>
+                            <group string="Request Body Configuration">
+                                <field name="dealer_id_source"
+                                       help="Tentukan sumber nilai 'dealerId' pada body request DGI API.&#10;&#10;Gunakan 'Parent ATPM Code' untuk branch ASP yang perlu menggunakan kode DGI Main Dealer-nya."/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

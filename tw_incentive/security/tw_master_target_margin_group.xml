@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Master Target Margin Group Read -->
+        <record id="group_tw_master_target_margin_read" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Master Target Margin Read</field>
+        </record>
+
+        <record id="access_tw_master_target_margin_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_target_margin"/>
+            <field name="name">TW Master Target Margin read</field>
+            <field name="group_id" ref="group_tw_master_target_margin_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_master_target_margin_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_target_margin_line"/>
+            <field name="name">TW Master Target Margin Line read</field>
+            <field name="group_id" ref="group_tw_master_target_margin_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Master Target Margin Group Update -->
+        <record id="group_tw_master_target_margin_update" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Master Target Margin Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_master_target_margin_read'))]"/>
+        </record>
+
+        <record id="access_tw_master_target_margin_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_target_margin"/>
+            <field name="name">TW Master Target Margin update</field>
+            <field name="group_id" ref="group_tw_master_target_margin_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_master_target_margin_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_target_margin_line"/>
+            <field name="name">TW Master Target Margin Line update</field>
+            <field name="group_id" ref="group_tw_master_target_margin_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Master Target Margin Group Delete -->
+        <record id="group_tw_master_target_margin_delete" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Master Target Margin Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_master_target_margin_read'))]"/>
+        </record>
+
+        <record id="access_tw_master_target_margin_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_target_margin"/>
+            <field name="name">TW Master Target Margin delete</field>
+            <field name="group_id" ref="group_tw_master_target_margin_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_master_target_margin_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_target_margin_line"/>
+            <field name="name">TW Master Target Margin Line delete</field>
+            <field name="group_id" ref="group_tw_master_target_margin_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+        
+        <!-- Master Target Margin Group Report -->
+        <record id="group_tw_master_target_margin_report" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Master Target Margin Report</field>
+        </record>
+
+        <record id="access_tw_master_target_margin_report" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_target_margin"/>
+            <field name="name">TW Master Target Margin report</field>
+            <field name="group_id" ref="group_tw_master_target_margin_report"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+        </record>
+
+        <record id="access_tw_master_target_margin_line_report" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_target_margin_line"/>
+            <field name="name">TW Master Target Margin Line report</field>
+            <field name="group_id" ref="group_tw_master_target_margin_report"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+        </record>
+    </data>
+
+    <data>
+        <!-- Add Master Target Margin groups to System Admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_master_target_margin_read')),
+                (4, ref('group_tw_master_target_margin_update')),
+                (4, ref('group_tw_master_target_margin_delete')),
+                (4, ref('group_tw_master_target_margin_report'))
+            ]"/>
+        </record>
+    </data>
+</odoo>

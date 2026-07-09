@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- List View -->
+        <record id="tw_api_schedule_list_view" model="ir.ui.view">
+            <field name="name">tw.api.schedule.list</field>
+            <field name="model">tw.api.schedule</field>
+            <field name="type">list</field>
+            <field name="arch" type="xml">
+                <list string="API Schedule">
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="tw_api_schedule_form_view" model="ir.ui.view">
+            <field name="name">tw.api.schedule.form</field>
+            <field name="model">tw.api.schedule</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="API Schedule">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <notebook>
+                            <page string="Detail Schedule API">
+                                <field name="line_ids">
+                                    <list editable="top">
+                                        <field name="hour" required="1"/>
+                                        <field name="minute" required="1"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"/>
+                                        <field name="create_date" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1"/>
+                                        <field name="write_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="tw_api_schedule_search_view" model="ir.ui.view">
+            <field name="name">tw.api.schedule.search</field>
+            <field name="model">tw.api.schedule</field>
+            <field name="arch" type="xml">
+                <search string="API Schedule">
+                    <field name="name" select="True"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action View -->
+        <record id="tw_api_schedule_action" model="ir.actions.server">
+            <field name="name">API Schedule</field>
+            <field name="model_id" ref="tw_b2b_bank.model_tw_api_schedule"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.api.schedule'].action_api_schedule_tree()
+            </field>
+        </record>
+        
+    </data>
+</odoo>

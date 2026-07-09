@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <menuitem id="tw_sparepart_substitusi_menu" action="tw_sparepart_substitusi_action" parent="tw_menu.submenu_tw_workshop_configuration" sequence="5" groups="tw_sparepart_substitusi.group_tw_sparepart_substitusi_read"/>
+	</data>
+</odoo>

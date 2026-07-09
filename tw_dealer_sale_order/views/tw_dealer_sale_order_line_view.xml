@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tw_dealer_sale_order_line_view_list" model="ir.ui.view">
+        <field name="name">tw.dealer.sale.order.line.view.list</field>
+        <field name="model">tw.dealer.sale.order.line</field>
+        <field name="priority">0</field>
+        <field name="arch" type="xml">
+            <list string="Sales Order Lines"
+                  decoration-warning="state in ['draft', 'sent'] and is_product_archived"
+                  limit="200">
+                <control>
+                    <create name="add_product_control" string="Add a product"/>
+                    <!-- <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                    <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/> -->
+                </control>
+
+                <field name="sequence" widget="handle" />
+                <!-- We do not display the type because we don't want the user to be bothered with that information if he has no section or note. -->
+                <field name="display_type" column_invisible="True"/>
+                <field name="product_uom_category_id" column_invisible="True"/>
+                <field name="product_type" column_invisible="True"/>
+                <field name="product_updatable" column_invisible="True"/>
+                <field name="is_downpayment" column_invisible="True"/>
+                <field name="item_type" optional="hide"/>
+                <field name="product_id"
+                        string="Product Variant"
+                        readonly="not product_updatable"
+                        required="not display_type and not is_downpayment"
+                        force_save="1"
+                        options="{ 'no_open': True, }"
+                        optional="hide"
+                        domain="[('sale_ok', '=', True), ('categ_id', 'in', parent.product_category_ids)]"
+                        context="{
+                            'partner_id': parent.partner_id,
+                            'quantity': product_uom_qty,
+                            'pricelist': parent.pricelist_id,
+                            'uom':product_uom,
+                            'company_id': parent.company_id,
+                            'default_lst_price': price_unit,
+                            'default_uom_id': product_uom,
+                        }" />
+                <field name="product_template_id"
+                        string="Product"
+                        placeholder="Type to find a product..."
+                        readonly="id and not product_updatable"
+                        required="not display_type and not is_downpayment"
+                        options="{ 'no_open': True, }"
+                        optional="hide"
+                        domain="[('sale_ok', '=', True)]"
+                        context="{
+                            'partner_id': parent.partner_id,
+                            'quantity': product_uom_qty,
+                            'pricelist': parent.pricelist_id,
+                            'uom':product_uom,
+                            'company_id': parent.company_id,
+                            'default_list_price': price_unit,
+                            'default_uom_id': product_uom,
+                        }" />
+                <field name="product_template_attribute_value_ids" column_invisible="1" />
+                <field name="product_custom_attribute_value_ids" column_invisible="1" >
+                    <list>
+                        <field name="custom_product_template_attribute_value_id" />
+                        <field name="custom_value" />
+                    </list>
+                </field>
+                <field name="product_no_variant_attribute_value_ids" column_invisible="1" />
+                <field name="is_configurable_product" column_invisible="1" />
+                <field name="linked_line_id" column_invisible="1"/>
+                <field name="virtual_id" column_invisible="1"/>
+                <field name="linked_virtual_id" column_invisible="1"/>
+                <field name="selected_combo_items" column_invisible="1"/>
+                <field name="combo_item_id" column_invisible="1"/>
+                <field name="name" widget="section_and_note_text" optional="show"/>
+                <field name="lot_id" optional="show"/>
+                <field name="account_id" optional="hide"/>
+                <field name="analytic_distribution"
+                       widget="analytic_distribution"
+                       optional="hide"
+                       groups="analytic.group_analytic_accounting"
+                       options="{
+                            'product_field': 'product_id',
+                            'business_domain': 'sale_order',
+                            'amount_field': 'price_subtotal'
+                        }" />
+                <field name="route_id" groups="stock.group_adv_location" options="{'no_create': True}" optional="hide" />
+                <field name="product_uom_qty"
+                    invisible="display_type"
+                    readonly="is_downpayment"
+                    decoration-info="(not display_type and invoice_status == 'to invoice')"
+                    decoration-bf="(not display_type and invoice_status == 'to invoice')"
+                    context="{
+                        'partner_id': parent.partner_id,
+                        'quantity': product_uom_qty,
+                        'pricelist': parent.pricelist_id,
+                        'uom': product_uom,
+                        'company_id': parent.company_id
+                    }" />
+                <field name="qty_delivered"
+                    invisible="display_type"
+                    string="Delivered"
+                    readonly="qty_delivered_method != 'manual' or is_downpayment"
+                    decoration-info="(not display_type and invoice_status == 'to invoice')"
+                    decoration-bf="(not display_type and invoice_status == 'to invoice')"
+                    column_invisible="parent.state != 'sale'"
+                    optional="show"/>
+                <field name="qty_delivered_method" column_invisible="True"/>
+                <field name="qty_invoiced"
+                    string="Invoiced"
+                    optional="show"
+                    decoration-info="(not display_type and invoice_status == 'to invoice')"
+                    decoration-bf="(not display_type and invoice_status == 'to invoice')"
+                    column_invisible="parent.state != 'sale'" />
+                <field name="qty_to_invoice" column_invisible="True"/>
+                <field name="product_uom_readonly" column_invisible="True"/>
+                <field name="product_uom" column_invisible="True" groups="!uom.group_uom"/>
+                <field name="product_uom"
+                    invisible="display_type"
+                    string="UoM"
+                    readonly="product_uom_readonly"
+                    required="not display_type and not is_downpayment"
+                    force_save="1"
+                    options='{"no_open": True}'
+                    optional="show"
+                    width="60px"
+                    groups="uom.group_uom"
+                    context="{'company_id': parent.company_id}" />
+                <field name="customer_lead"
+                    invisible="display_type"
+                    readonly="parent.state not in ['draft', 'sent', 'sale'] or is_downpayment"
+                    optional="hide"
+                    width="80px" />
+                <field name="product_packaging_qty" invisible="not product_id or not product_packaging_id" groups="product.group_stock_packaging" optional="hide"/>
+                <field name="product_packaging_id" invisible="not product_id" context="{'default_product_id': product_id, 'list_view_ref':'product.product_packaging_tree_view', 'form_view_ref':'product.product_packaging_form_view'}" groups="product.group_stock_packaging" optional="hide"/>
+                <field name="price_unit" string="Harga Unit" readonly="qty_invoiced &gt; 0"/>
+                <field name="technical_price_unit" column_invisible="1"/>
+                <field name="tax_id"
+                    invisible="display_type"
+                    readonly="qty_invoiced &gt; 0 or is_downpayment"
+                    options="{'no_create': True}"
+                    optional="show"
+                    widget="many2many_tags"
+                    domain="[('type_tax_use', '=', 'sale'), ('company_id', 'parent_of', parent.company_id), ('country_id', '=', parent.tax_country_id)]"
+                    context="{'active_test': True}" />
+                <field name="discount"
+                    invisible="display_type"
+                    string="Disc.%"
+                    optional="hide"
+                    groups="tw_dealer_sale_order.group_tw_dealer_sale_order_discount_per_so_line"
+                    width="50px" />
+                <field name="discount_regular"
+                    invisible="display_type"
+                    string="Disc Regular"
+                    optional="hide"
+                    width="100px" />
+                <field name="discount_total"
+                    invisible="item_type != 'main'"
+                    string="Disc Total"
+                    optional="show"
+                    width="100px" />
+                <field name="is_downpayment" column_invisible="True"/>
+                <field name="price_subtotal"
+                    invisible="is_downpayment or display_type"
+                    string="Subtotal"
+                    width="150px"/>
+                <field name="price_total"
+                    optional="hide"
+                    invisible="display_type or is_downpayment"
+                    string="Total"/>
+                <!-- Others fields -->
+                <field name="tax_calculation_rounding_method" column_invisible="True"/>
+                <field name="state" column_invisible="True"/>
+                <field name="invoice_status" column_invisible="True"/>
+                <field name="currency_id" column_invisible="True"/>
+                <field name="price_tax" column_invisible="True"/>
+                <field name="company_id" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="tw_dealer_sale_order_line_view_form" model="ir.ui.view">
+        <field name="name">tw.dealer.sale.order.line.view.form</field>
+        <field name="model">tw.dealer.sale.order.line</field>
+        <field name="priority">0</field>
+        <field name="arch" type="xml">
+            <form>
+                <!-- Hidden Misc Field -->
+                <field name="order_id" invisible="1" />
+                <field name="sequence" invisible="1" />
+                <field name="company_id" invisible="1" />
+                <field name="currency_id" invisible="1" />
+                <field name="order_partner_id" invisible="1" />
+                <field name="salesman_id" invisible="1" />
+                <field name="state" invisible="1" />
+                <field name="tax_country_id" invisible="1" />
+                <field name="display_type" invisible="1" />
+                <field name="is_configurable_product" readonly="1" invisible="1" />
+                <field name="is_downpayment" readonly="1" invisible="1" />
+                <field name="is_expense" readonly="1" invisible="1" />
+                <field name="linked_line_ids" invisible="1" />
+                <field name="virtual_id" invisible="1" />
+                <field name="linked_line_id" invisible="1" />
+                <field name="linked_virtual_id" invisible="1" />
+                <field name="combo_item_id" invisible="1" />
+                <field name="customer_lead" invisible="1" />
+                <field name="service_tracking" invisible="1" />
+                <field name="analytic_line_ids" invisible="1" />
+                <field name="item_type" invisible="1" />
+                <group invisible="item_type != 'main'">
+                    <group name="product_details" string="Product">
+                        <!-- Product Details -->
+                        <field name="name" readonly="1" />
+                        <field name="product_id"
+                               required="item_type == 'main'" readonly="1"
+                               domain="[('sale_ok', '=', True), ('categ_id', 'in', parent.product_category_ids)]" 
+                               options="{'no_open': True, 'no_create': True}"/>
+                        <label for="product_uom_qty"/>
+                        <div class="o_row">
+                            <field name="product_uom_qty" readonly="1" />
+                            <field name="product_uom" readonly="1" groups="uom.group_uom"/>
+                        </div>
+                        <field name="product_template_id" invisible="1" />
+                        <field name="product_uom_category_id" invisible="1" />
+                        <field name="product_template_attribute_value_ids" invisible="1" />
+                        <field name="product_custom_attribute_value_ids" invisible="1" />
+                        <field name="product_no_variant_attribute_value_ids" invisible="1" />
+                        <field name="is_product_archived" invisible="1" />
+                        <field name="product_type" invisible="1" />
+                        <field name="product_updatable" invisible="1" />
+                        <field name="selected_combo_items" invisible="1" />
+                        <field name="available_lot_ids" invisible="1" widget="many2many_tags" />
+                        
+                        <field name="location_id"
+                               required="item_type == 'main'"
+                               readonly="parent.state != 'draft'"
+                               options="{'no_create': True, 'no_open': True}"
+                               domain="[('usage', 'in', ['internal']), '|', ('company_id', '=', parent.company_id), ('company_id', '=', False)]"/>
+                        <field name="lot_id"
+                               required="item_type == 'main'"
+                               readonly="parent.state != 'draft'"
+                               options="{'no_create': True}"
+                               domain="[('id', 'in', available_lot_ids)]" />
+                        <field name="chassis_number" readonly="1"/>
+                        <field name="production_year" readonly="1"/>
+                        
+                    </group>
+
+                    <group name="payment_detail" string="Payment">
+                        <field name="downpayment" />
+                    </group>
+                    
+                    <group name="price_detail" string="Price Info">
+                        <field name="pricelist_item_id" readonly="1" invisible="1" />
+                        <field name="tax_calculation_rounding_method" invisible="1" />
+                        <field name="price_unit" readonly="1" />
+                        <field name="price_unit_purchase" readonly="1" groups="tw_dealer_sale_order.group_tw_dealer_sale_order_admin"/>
+                        <field name="technical_price_unit" invisible="1" />
+                        <field name="discount" invisible="1"/>
+                        <field name="discount_input" readonly="1"/>
+                        <field name="discount_regular"/>
+                        <field name="discount_direct"/>
+                        <field name="discount_total"/>
+                        <field name="tax_id" readonly="1" widget="many2many_tags"/>
+                        <field name="price_subtotal" readonly="1" />
+                        <field name="price_unit_tax" widget="monetary" readonly="1" />
+                        <field name="price_tax" widget="monetary" readonly="1" />
+                        <field name="price_total" readonly="1" widget="monetary" />
+                        <field name="price_reduce_taxexcl" readonly="1" invisible="1" />
+                        <field name="price_reduce_taxinc" readonly="1" invisible="1" />
+                        <field name="company_price_include" invisible="1" />
+                        <field name="amount_dealer_expense" readonly="1" />
+                        <field name="gross_profit_unit" readonly="1" />
+                    </group>
+
+                    <!-- To Invoice Field -->
+                    <group name="to_invoice" string="To Invoice" invisible="1" groups="tw_dealer_sale_order.group_tw_dealer_sale_order_line_to_invoiced">
+                        <field name="qty_invoiced" readonly="1" />
+                        <field name="qty_invoiced_posted" readonly="1" />
+                        <field name="qty_to_invoice" readonly="1" />
+                        <field name="invoice_lines" readonly="1" widget="many2many_tags" />
+                        <field name="invoice_status" readonly="1" />
+                        <field name="untaxed_amount_invoiced" readonly="1" />
+                        <field name="amount_invoiced" readonly="1" />
+                        <field name="untaxed_amount_to_invoice" readonly="1" />
+                        <field name="amount_to_invoice" readonly="1" />
+                    </group>
+                </group>
+                <group invisible="item_type != 'additional'">
+                    <group>
+                        <field name="name" required="item_type == 'additional'" readonly="1" force_save="1"/>
+                        <field name="product_id" readonly="1" force_save="1" domain="[('sale_ok', '=', True)]" widget="sol_product_many2one" options="{'no_open': True, 'no_create': True}"/>
+                        <field name="product_uom_qty" required="item_type == 'additional'" readonly="1" force_save="1"/>
+                        <field name="price_unit" readonly="1" force_save="1"/>
+                        <field name="discount"/>
+                        <field name="tax_id"  readonly="1" force_save="1"  widget="many2many_tags" options="{'no_create': True}" domain="[('type_tax_use', '=', 'sale'), ('company_id', 'parent_of', parent.company_id), ('country_id', '=', parent.tax_country_id)]" context="{'active_test': True}"/>
+                    </group>
+                    <group>
+                        <field name="price_subtotal" readonly="1"/>
+                        <field name="price_total" readonly="1"/>
+                    </group>
+                </group>
+                <notebook invisible="item_type != 'main'">
+                    <page name="page_lines" invisible="1"/>
+                </notebook>
+            </form>
+        </field>
+    </record>
+</odoo>

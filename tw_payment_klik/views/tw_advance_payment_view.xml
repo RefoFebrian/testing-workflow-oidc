@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+
+      <record model="ir.ui.view" id="tw_advance_payment_inherit_payment_klik_form_view">
+          <field name="name">tw.advance.payment.inherit.payment.klik.form</field>
+          <field name="model">tw.advance.payment</field>
+          <field name="inherit_id" ref="tw_advance_payment.tw_advance_payment_form_view"/>
+          <field name="arch" type="xml">
+                <button name="action_validate" position="after">
+                    <button name="action_klik_payment" string="Payment Klik" data-hotkey="k" groups="tw_payment_klik.group_tw_payment_klik_button_payment_klik" invisible="state not in ('approved','confirm','done') or is_payment_klik" type="object" class="oe_highlight"/>
+                </button>
+
+                <xpath expr="//form//sheet//group[2]//field[last()]" position="after">
+                    <field name="is_payment_klik" invisible="not is_payment_klik" readonly="1"/>
+                </xpath>
+
+                <field name="confirm_date" position="after">
+                    <field name="payment_klik_uid" readonly="1"/>
+                    <field name="payment_klik_date" readonly="1"/>
+                </field>
+          </field>
+      </record>
+
+    </data>
+</odoo>

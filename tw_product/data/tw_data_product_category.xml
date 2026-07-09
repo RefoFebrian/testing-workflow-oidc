@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+
+		<!-- Categ -->
+		<record id="product_category_unit" model="product.category">
+			<field name="name">Unit</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="tracking">serial_chassis</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_account_categ_other_inventory"/>
+		</record>
+		<record id="product_category_sparepart" model="product.category">
+			<field name="name">Sparepart</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">average</field>
+			<field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_account_categ_other_inventory"/>	
+		</record>
+		<record id="product_category_service" model="product.category">
+			<field name="name">Service</field>
+            <field name="property_valuation">real_time</field>
+			<field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_account_categ_other_inventory"/>	
+		</record>
+		<record id="product_category_umum" model="product.category">
+			<field name="name">Umum</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">average</field>
+			<field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_account_categ_other_inventory"/>	
+		</record>
+		<record id="product_category_direct_gift" model="product.category">
+			<field name="name">Direct Gift</field>
+			<field name="parent_id" ref="product_category_umum"/>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">average</field>
+			<field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_account_categ_other_inventory"/>	
+		</record>
+		<record id="product_category_extras" model="product.category">
+			<field name="name">Extras</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">average</field>
+			<field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_account_categ_other_inventory"/>	
+		</record>
+	</data>
+</odoo>

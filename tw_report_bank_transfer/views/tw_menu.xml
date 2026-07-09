@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_tw_report_bank_transfer" name="Laporan Bank Transfer" parent="tw_menu.submenu_tw_backoffice_report" action="action_tw_report_bank_transfer" groups="tw_report_bank_transfer.group_report_bank_transfer" sequence="20"/>
+    </data>
+</odoo>

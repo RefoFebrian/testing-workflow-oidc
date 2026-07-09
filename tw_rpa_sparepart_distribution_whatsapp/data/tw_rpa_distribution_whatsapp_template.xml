@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_rpa_distribution_whatsapp_template" model="tw.whatsapp.content.template">
+            <field name="name">Notifikasi Tidak Berjalannya RPA ke PIC Part</field>
+            <field name="subject">TunasHonda_WA</field>
+            <field name="type">other</field>
+            <field name="content">Salam 1 Hati,\nPada Tanggal {{1}}, RPA Distribution Sparepart {{2}} tidak berjalan dengan semestinya.\nSilahkan Periksa atau Lakukan Koordinasi dengan tim IT.\n\nTerima kasih\n\n_pesan ini adalah pesan otomatis_</field>
+        </record>
+    </data>
+</odoo>

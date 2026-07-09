@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <record id="tw_part_sales_api_view_form" model="ir.ui.view">
+      <field name="name">tw.part.sales.api.view.form</field>
+      <field name="model">tw.part.sales</field>
+      <field name="inherit_id" ref="tw_part_sales.tw_part_sales_form_view" />
+      <field name="arch" type="xml">
+        <xpath expr="//div[hasclass('oe_title')]" position="after">
+          <div class="oe_inline oe_right oe_button_box" name="button_box">
+            <button name="action_error_detail" type="object" class="oe_stat_button"
+              icon="fa-list-ul" string="Log Error" invisible="not is_error_ps" />
+          </div>
+        </xpath>
+        <button name="action_print_part_sales_thermal" position="after">
+          <button name="action_send_part_sales_single"
+            invisible="state not in ('sale','done') or status_api == 'done' or ps_number"
+            string="Send to DMS" type="object"
+            groups="tw_part_sales_api.group_button_api_part_sales_single" />
+        </button>
+        <field name="amount_invoiced" position="after">
+          <field name="ps_number" readonly="1" />
+          <field name="is_error_ps" invisible="1" />
+          <field name="status_api" invisible="1" />
+        </field>
+      </field>
+    </record>
+
+    <record id='tw_part_sales_view_search' model='ir.ui.view'>
+      <field name='name'>tw.part.sales.view.search</field>
+      <field name='model'>tw.part.sales</field>
+      <field name="inherit_id" ref="tw_part_sales.tw_part_sales_search_view" />
+      <field name="arch" type="xml">
+        <field name="partner_id" position="after">
+          <field name="ps_number" string="No Service Advisor DMS" />
+        </field>
+      </field>
+    </record>
+  </data>
+</odoo>

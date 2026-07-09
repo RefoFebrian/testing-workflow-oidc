@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_account_settings_dso_inherit_view" model="ir.ui.view">
+            <field name="name">tw.account.settings.dso.inherit.view</field>
+            <field name="model">tw.account.setting</field>
+            <field name="inherit_id" ref="tw_account_setting.tw_account_setting_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='dealer_sales_order_container']" position="inside">
+                    <group name="dso">
+                        <h3 class="o_stat_info" colspan="2" style="margin-top:0px;">
+                            <span class="text-success">Dealer Sale Order</span>
+                        </h3>
+                        <field name="journal_dso_settlement_id" domain="[('type', '=', 'sale')]" options="{'no_quick_create': True}"/>
+                        <field name="journal_dso_downpayment_id" options="{'no_quick_create': True}"/>
+                        <field name="journal_dso_downpayment_allocation_id" options="{'no_quick_create': True}"/>
+                    </group>
+                    <group name="account_discounts">
+                        <h3 class="o_stat_info" colspan="2" style="margin-top:0px;">
+                            <span class="text-success">Discounts</span>
+                        </h3>
+                        <field name="account_dso_discount_regular_id" domain="[('account_type', '=', 'expense')]" options="{'no_quick_create': True}"/>
+                    </group>
+                    <group name="dso_journal_cancel">
+                        <h3 class="o_stat_info" colspan="2" style="margin-top:20px;">
+                            <span class="text-success">Journal Cancel</span>
+                        </h3>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

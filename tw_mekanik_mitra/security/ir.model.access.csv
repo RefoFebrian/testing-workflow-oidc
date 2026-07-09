@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_matrix_mekanik_mitra,tw_matrix_mekanik_mitra,model_tw_matrix_mekanik_mitra,base.group_user,1,0,0,0
+access_tw_matrix_mekanik_mitra_detail,tw_matrix_mekanik_mitra_detail,model_tw_matrix_mekanik_mitra_detail,base.group_user,1,0,0,0
+access_tw_report_mekanik_mitra_wizard,tw_report_mekanik_mitra_wizard,model_tw_report_mekanik_mitra_wizard,base.group_user,1,0,0,0
+
+

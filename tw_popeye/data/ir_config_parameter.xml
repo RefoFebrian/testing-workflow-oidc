@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="ir_config_parameter_popeye_send_url" model="ir.config_parameter">
+            <field name="key">popeye.send.url</field>
+            <field name="value">/api/v1/post_ap_payment</field>
+        </record>
+        
+        <record id="ir_config_parameter_popeye_payment_check_status_url" model="ir.config_parameter">
+            <field name="key">popeye.check.status.url</field>
+            <field name="value">/api/v1/ap_payment/check_status</field>
+        </record>
+     </data>
+</odoo>

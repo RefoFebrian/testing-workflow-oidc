@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="assets_extension_global_rpc_error_listener" inherit_id="web.layout" name="tw_global_warning.GlobalRpcErrorListener">
+    <xpath expr="//body" position="inside">
+      <div id="global_rpc_error_listener_container">
+      </div>
+    </xpath>
+  </template>
+</odoo>

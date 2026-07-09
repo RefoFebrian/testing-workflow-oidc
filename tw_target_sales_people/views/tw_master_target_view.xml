@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_master_target_view_list" model="ir.ui.view">
+            <field name="name">tw.master.target.list</field>
+            <field name="model">tw.master.target</field>
+            <field name="arch" type="xml">
+                <list string="Master Target" editable="top">
+                    <field name="name" required="1"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_tw_master_target" model="ir.actions.act_window">
+            <field name="name">Master Target</field>
+            <field name="res_model">tw.master.target</field>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_master_target_view_list"/>
+        </record>
+    </data>
+</odoo>

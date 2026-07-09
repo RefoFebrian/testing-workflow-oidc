@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_boom_leave_request_approval_form_inherit" model="ir.ui.view">
+            <field name="name">tw.boom.leave.request.approval.form.inherit</field>
+            <field name="model">tw.boom.leave.request</field>
+            <field name="inherit_id" ref="tw_boom_leave_request.tw_boom_leave_request_form_view"/>
+            <field name="arch" type="xml">
+				<field name="state" position="replace">
+					<button name="action_rfa" invisible="state != 'draft'" string="RFA" type="object" class="oe_highlight" groups="tw_boom_leave_request_approval.group_tw_boom_leave_request_rfa"/>
+					<button name="action_approve" invisible="state != 'waiting_for_approval'" string="Approve" type="object" class="oe_highlight"/>
+					<button name="action_reject_or_cancel" invisible="state != 'waiting_for_approval'" string="Reject" type="object" context="{'window_title': 'Reject'}"/>
+					<!-- TODO: Aktifkan lagi jika memerlukan Cancel Approval untuk Leave Request Approval -->
+                    <button name="action_reject_or_cancel" invisible="state not in ('waiting_for_approval', 'approved')" string="Cancel Approval" type="object" context="{'window_title': 'Cancel'}" groups="tw_boom_leave_request_approval.group_tw_boom_leave_request_cancel"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved"/>
+				</field>
+
+                <field name="pic_id" position="attributes">
+                    <attribute name="readonly">state != 'draft'</attribute>
+                </field>
+
+                <field name="start_date" position="attributes">
+                    <attribute name="readonly">state != 'draft'</attribute>
+                </field>
+
+                <field name="end_date" position="attributes">
+                    <attribute name="readonly">state != 'draft'</attribute>
+                </field>
+
+                <field name="reason" position="attributes">
+                    <attribute name="readonly">state != 'draft'</attribute>
+                </field>
+
+				<xpath expr="//page[@name='audit_trail']" position="before">
+					<page string="Approval">
+						<field name="approval_ids" readonly="True">
+						</field>
+					</page>
+				</xpath>
+
+                <field name="create_date" position="after">
+                    <field name="approved_uid" invisible="not approved_uid" readonly="1" />
+                    <field name="approved_date" invisible="not approved_date" readonly="1" />
+                </field>
+
+                <field name="write_date" position="after">
+                    <field name="rejected_uid" invisible="not rejected_uid" readonly="1" />
+                    <field name="rejected_date" invisible="not rejected_date" readonly="1" />
+                </field>
+			</field>
+		</record>
+    </data>
+</odoo>

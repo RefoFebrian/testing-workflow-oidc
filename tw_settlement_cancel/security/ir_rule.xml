@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Record Rule: Settlement Cancel by Branch -->
+        <record id="tw_settlement_cancel_company_rule" model="ir.rule">
+            <field name="name">Settlement Cancel: Multi-Company</field>
+            <field name="model_id" ref="model_tw_settlement_cancel"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','in',company_ids)]</field>
+        </record>
+        
+    </data>
+</odoo>

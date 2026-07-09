@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="submenu_tw_backoffice_business_trip" name="Perjalanan Dinas" parent="tw_menu.menu_tw_employee" sequence="65"/>
+            <menuitem id="tw_business_trip_menuitem" parent="submenu_tw_backoffice_business_trip" action="action_tw_business_trip" sequence="1" groups="group_tw_business_trip_read"/>
+            <menuitem id="submenu_tw_business_trip_configuration" name="Configuration" parent="submenu_tw_backoffice_business_trip" sequence="100"/>
+                <menuitem id="tw_business_trip_plafon_menuitem" parent="submenu_tw_business_trip_configuration" action="tw_business_trip_plafon_action" sequence="10" groups="group_tw_business_trip_plafon_read"/>
+
+        <menuitem id="tw_master_ttd_menu" name="Master TTD" parent="tw_menu.submenu_tw_backoffice_configuration" action="tw_master_ttd_action" sequence="105" groups="group_tw_master_ttd_read"/>
+        
+    </data>
+</odoo>

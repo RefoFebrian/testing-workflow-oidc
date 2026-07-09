@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Bundling Groups -->
+        <record id="group_tw_mrp_bom_bundling_read" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Bundling Master Read</field>
+            <field name="implied_ids" eval="[
+                (4, ref('tw_mrp.group_tw_mrp_bom_form_read')),
+                (4, ref('mrp.group_mrp_routings')),
+            ]"/>
+        </record>
+
+        <record id="access_tw_mrp_bom_bundling_read" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_bom" />
+            <field name="name">tw_mrp_bom_bundling read</field>
+            <field name="group_id" ref="group_tw_mrp_bom_bundling_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bom_line_bundling_read" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_bom_line" />
+            <field name="name">tw_mrp_bom_line_bundling read</field>
+            <field name="group_id" ref="group_tw_mrp_bom_bundling_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bom_mrp_workcenter_read" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_workcenter" />
+            <field name="name">tw_mrp_bom_mrp_workcenter read</field>
+            <field name="group_id" ref="group_tw_mrp_bom_bundling_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bom_mrp_routing_workcenter_read" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_routing_workcenter" />
+            <field name="name">tw_mrp_bom_mrp_routing_workcenter read</field>
+            <field name="group_id" ref="group_tw_mrp_bom_bundling_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_mrp_bom_bundling_update" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Bundling Master Update</field>
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_mrp_bom_bundling_read')),
+                (4, ref('mrp.group_mrp_user')),
+            ]"/>
+        </record>
+
+        <record id="access_tw_mrp_bom_bundling_update" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_bom" />
+            <field name="name">tw_mrp_bom_bundling update</field>
+            <field name="group_id" ref="group_tw_mrp_bom_bundling_update" />
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bom_line_bundling_update" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_bom_line" />
+            <field name="name">tw_mrp_bom_line_bundling update</field>
+            <field name="group_id" ref="group_tw_mrp_bom_bundling_update" />
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bom_mrp_workcenter_update" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_workcenter" />
+            <field name="name">tw_mrp_bom_mrp_workcenter update</field>
+            <field name="group_id" ref="group_tw_mrp_bom_bundling_update" />
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bom_mrp_routing_workcenter_update" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_routing_workcenter" />
+            <field name="name">tw_mrp_bom_mrp_routing_workcenter update</field>
+            <field name="group_id" ref="group_tw_mrp_bom_bundling_update" />
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="group_tw_mrp_bom_bundling_delete" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Bundling Master Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_mrp_bom_bundling_read'))]"/>
+        </record>
+
+        <record id="access_tw_mrp_bom_bundling_delete" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_bom" />
+            <field name="name">tw_mrp_bom_bundling delete</field>
+            <field name="group_id" ref="group_tw_mrp_bom_bundling_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bom_line_bundling_delete" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_bom_line" />
+            <field name="name">tw_mrp_bom_line_bundling delete</field>
+            <field name="group_id" ref="group_tw_mrp_bom_bundling_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bom_mrp_workcenter_delete" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_workcenter" />
+            <field name="name">tw_mrp_bom_mrp_workcenter delete</field>
+            <field name="group_id" ref="group_tw_mrp_bom_bundling_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Bundling Order Groups -->
+        <record id="group_tw_mrp_bundling_order_read" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Bundling Order Read</field>
+        </record>
+
+        <record id="access_tw_mrp_bundling_order_bom_read" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_bom" />
+            <field name="name">tw_mrp_bundling_order_bom read</field>
+            <field name="group_id" ref="group_tw_mrp_bundling_order_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bundling_order_production_read" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_production" />
+            <field name="name">tw_mrp_bundling_order_production read</field>
+            <field name="group_id" ref="group_tw_mrp_bundling_order_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bundling_order_stock_move_read" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_move" />
+            <field name="name">tw_mrp_bundling_order_stock_move read</field>
+            <field name="group_id" ref="group_tw_mrp_bundling_order_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bundling_order_mrp_workorder_read" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_workorder" />
+            <field name="name">tw_mrp_bundling_order_mrp_workorder read</field>
+            <field name="group_id" ref="group_tw_mrp_bundling_order_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bundling_order_mrp_workcenter_read" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_workcenter" />
+            <field name="name">tw_mrp_bundling_order_mrp_workcenter read</field>
+            <field name="group_id" ref="group_tw_mrp_bundling_order_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_mrp_bundling_order_update" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Bundling Order Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_mrp_bundling_order_read'))]"/>
+        </record>
+
+        <record id="access_tw_mrp_bundling_order_bom_update" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_bom" />
+            <field name="name">tw_mrp_bundling_order_bom update</field>
+            <field name="group_id" ref="group_tw_mrp_bundling_order_update" />
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bundling_order_production_update" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_production" />
+            <field name="name">tw_mrp_bundling_order_production update</field>
+            <field name="group_id" ref="group_tw_mrp_bundling_order_update" />
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bundling_order_stock_move_update" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_move" />
+            <field name="name">tw_mrp_bundling_order_stock_move update</field>
+            <field name="group_id" ref="group_tw_mrp_bundling_order_update" />
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bundling_order_mrp_workorder_update" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_workorder" />
+            <field name="name">tw_mrp_bundling_order_mrp_workorder update</field>
+            <field name="group_id" ref="group_tw_mrp_bundling_order_update" />
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bundling_order_mrp_workcenter_update" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_workcenter" />
+            <field name="name">tw_mrp_bundling_order_mrp_workcenter update</field>
+            <field name="group_id" ref="group_tw_mrp_bundling_order_update" />
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+        </record>
+
+        <record id="group_tw_mrp_bundling_order_delete" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Bundling Order Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_mrp_bundling_order_read'))]"/>
+        </record>
+
+        <record id="access_tw_mrp_bundling_order_bom_delete" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_bom" />
+            <field name="name">tw_mrp_bundling_order_bom delete</field>
+            <field name="group_id" ref="group_tw_mrp_bundling_order_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bundling_order_production_delete" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_production" />
+            <field name="name">tw_mrp_bundling_order_production delete</field>
+            <field name="group_id" ref="group_tw_mrp_bundling_order_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bundling_order_stock_move_delete" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_move" />
+            <field name="name">tw_mrp_bundling_order_stock_move delete</field>
+            <field name="group_id" ref="group_tw_mrp_bundling_order_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bundling_order_mrp_workorder_delete" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_workorder" />
+            <field name="name">tw_mrp_bundling_order_mrp_workorder delete</field>
+            <field name="group_id" ref="group_tw_mrp_bundling_order_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bundling_order_mrp_workcenter_delete" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_workcenter" />
+            <field name="name">tw_mrp_bundling_order_mrp_workcenter delete</field>
+            <field name="group_id" ref="group_tw_mrp_bundling_order_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Unbuild Groups -->
+        <record id="group_tw_mrp_unbuild_bundling_read" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Unbuild Read</field>
+        </record>
+
+        <record id="access_tw_mrp_unbuild_bundling_read" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_unbuild" />
+            <field name="name">tw_mrp_unbuild_bundling read</field>
+            <field name="group_id" ref="group_tw_mrp_unbuild_bundling_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_mrp_unbuild_bundling_update" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Unbuild Update</field>
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_mrp_unbuild_bundling_read')),
+                (4, ref('mrp.group_mrp_user')),
+            ]"/>
+        </record>
+
+        <record id="access_tw_mrp_unbuild_bundling_update" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_unbuild" />
+            <field name="name">tw_mrp_unbuild_bundling update</field>
+            <field name="group_id" ref="group_tw_mrp_unbuild_bundling_update" />
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+        </record>
+
+        <record id="group_tw_mrp_unbuild_bundling_delete" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Unbuild Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_mrp_unbuild_bundling_read'))]"/>
+        </record>
+
+        <record id="access_tw_mrp_unbuild_bundling_delete" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_unbuild" />
+            <field name="name">tw_mrp_unbuild_bundling delete</field>
+            <field name="group_id" ref="group_tw_mrp_unbuild_bundling_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Bundling Report Groups -->
+        <record id="group_tw_mrp_bundling_report_read" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Bundling Report Read</field>
+        </record>
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_mrp_bom_bundling_read')),
+                (4, ref('group_tw_mrp_bom_bundling_update')),
+                (4, ref('group_tw_mrp_bom_bundling_delete')),
+                (4, ref('group_tw_mrp_bundling_order_read')),
+                (4, ref('group_tw_mrp_bundling_order_update')),
+                (4, ref('group_tw_mrp_bundling_order_delete')),
+                (4, ref('group_tw_mrp_unbuild_bundling_read')),
+                (4, ref('group_tw_mrp_unbuild_bundling_update')),
+                (4, ref('group_tw_mrp_unbuild_bundling_delete')),
+                (4, ref('group_tw_mrp_bundling_report_read')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

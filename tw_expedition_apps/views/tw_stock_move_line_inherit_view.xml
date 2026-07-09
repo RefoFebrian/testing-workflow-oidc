@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_stock_move_line_expedition_apps_inherit_view_tree" model="ir.ui.view">
+            <field name="name">tw.stock.move.line.expedition.apps.inherit.list</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_move_line_operation_inherit_view_tree" />
+            <field name="arch" type="xml">
+                <field name="quantity" position="after">
+                    <field name="actual_quantity" readonly="1" string="Actual Quantity" optional="hide"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

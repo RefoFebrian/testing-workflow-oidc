@@ -1,0 +1,14 @@
+<odoo>
+  <data>
+    <record id="tw_branch_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.branch.setting.branch.inherit.view.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <button name="action_all_company_branches" position="after">
+                <button class="oe_stat_button" name="action_open_branch_setting" type="object" icon="fa-cogs" string="Branch Setting" invisible="parent_id ==  False"/>
+            </button>
+        </field>
+    </record>
+  </data>
+</odoo>

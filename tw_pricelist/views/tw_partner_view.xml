@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="tw_partner_inherit_form_view" model="ir.ui.view">
+        <field name="name">res.partner.inherit.form.view</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <group name="purchase" position="after">
+                <group string="Pricelist" name="pricelist">
+                    <field name="property_product_pricelist"/>
+                </group>
+            </group>
+            <xpath expr="//form/sheet/notebook/page/group/group/field[@name='property_product_pricelist']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Backoffice -->
+    <!-- Payment -->
+    <menuitem id="menu_tw_backoffice_payment" name="Invoicing" parent="tw_menu.menu_tw_backoffice" sequence="15"></menuitem>
+    
+    <!-- Customer -->
+    <menuitem id="tw_account_customer_invoicing_backoffice_menuitem" name="Customers" parent="tw_payment.menu_tw_backoffice_payment" sequence="2"/>
+    <menuitem id="tw_account_payment_receive_payment_backoffice_menuitem" name="Hutang Lain" parent="tw_payment.tw_account_customer_invoicing_backoffice_menuitem" sequence="10" action="tw_payment.tw_account_payment_receive_payment_action" groups="tw_payment.group_account_payment_receive_payment_read"/>
+    <menuitem id="tw_account_payment_customer_payment_backoffice_menuitem" name="Customer Payment" parent="tw_payment.tw_account_customer_invoicing_backoffice_menuitem" sequence="25" action="tw_customer_payment_action" groups="group_account_payment_customer_payment_read"/>
+    <menuitem id="tw_account_action_move_out_invoice_type_backoffice_menuitem" name="Customer Invoice" parent="tw_payment.tw_account_customer_invoicing_backoffice_menuitem"  sequence="35" action="account.action_move_out_invoice" groups="group_account_move_customer_invoice_read"/>
+    <menuitem id="tw_account_account_customer_backoffice_menuitem" name="Customers" parent="tw_payment.tw_account_customer_invoicing_backoffice_menuitem" sequence="150" action="account.res_partner_action_customer" groups="tw_partner.group_res_partner_customer_read"/>
+    
+    <!-- Supplier -->
+    <menuitem id="tw_account_supplier_invoicing_backoffice_menuitem" name="Supplier" parent="tw_payment.menu_tw_backoffice_payment" sequence="3"/>
+    <menuitem id="tw_account_payment_supplier_payment_backoffice_menuitem" name="Supplier Payment" parent="tw_payment.tw_account_supplier_invoicing_backoffice_menuitem" sequence="15" action="tw_supplier_payment_action" groups="group_account_payment_supplier_payment_read"/>
+    <menuitem id="tw_account_action_move_in_invoice_type_backoffice_menuitem" name="Supplier Invoice" parent="tw_payment.tw_account_supplier_invoicing_backoffice_menuitem" sequence="1" action="account.action_move_in_invoice" groups="group_account_move_supplier_invoice_read"/>
+    <menuitem id="tw_account_account_supplier_backoffice_menuitem" name="Vendors" parent="tw_payment.tw_account_supplier_invoicing_backoffice_menuitem" sequence="200" action="account.res_partner_action_supplier" groups="tw_partner.group_tw_res_partner_vendor_read"/>
+
+</odoo>

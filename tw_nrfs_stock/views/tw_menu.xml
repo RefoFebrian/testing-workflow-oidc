@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="tw_master_position_unit_showroom_menuitem" name="Master Posisi Unit" parent="tw_nrfs.tw_master_nrfs_showroom_menuitem" action="tw_nrfs_stock.action_tw_master_position_unit" sequence="10" groups="tw_nrfs.tw_nrfs_admin_group_read"/>
+        <menuitem id="tw_master_position_unit_workshop_menuitem" name="Master Posisi Unit" parent="tw_nrfs.tw_master_nrfs_workshop_menuitem" action="tw_nrfs_stock.action_tw_master_position_unit" sequence="10" groups="tw_nrfs.tw_nrfs_admin_group_read"/>
+    </data>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="login" inherit_id="web.login">
+        <xpath expr="//form[@role='form']" position="attributes">
+            <attribute name="t-att-data-recaptcha-enabled">recaptcha_enabled</attribute>
+            <attribute name="t-att-data-recaptcha-version">recaptcha_version</attribute>
+            <attribute name="t-att-data-site-key">recaptcha_site_key</attribute>
+            <attribute name="class" add="o_login_form_recaptcha" separator=" "/>
+        </xpath>
+        <xpath expr="//div[hasclass('oe_login_buttons')]" position="before">
+            <input type="hidden" name="recaptcha_token_response" class="o_recaptcha_token_response"/>
+            <div id="recaptcha_v2_container" class="mt-3 pt-1 d-flex justify-content-center mx-auto" style="transform: scale(0.88); transform-origin: center;"/>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_account_settings_dso_finco_inherit_view" model="ir.ui.view">
+            <field name="name">tw.account.settings.dso.finco.inherit.view</field>
+            <field name="model">tw.account.setting</field>
+            <field name="inherit_id" ref="tw_account_setting.tw_account_setting_form_view" />
+            <field name="arch" type="xml">
+                <group name="dso" position="inside">
+                    <field name="journal_dso_incentive_finco_id" options="{'no_quick_create': True}"/>
+                </group>
+            </field>
+        </record>
+    </data>
+</odoo>

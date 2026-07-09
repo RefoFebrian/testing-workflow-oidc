@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+    <record model='ir.ui.view' id='tw_employee_historical_report_view'>
+    	<field name='name'>TW Employee Historical Report</field>
+    	<field name='model'>tw.employee.historical.report</field>
+    	<field name='type'>form</field>
+    	<field name='arch' type='xml'>
+    		<form string='Report Employee'>
+                <group>
+                    <group>
+                        <field name='month' string='Month' required="1"/>
+                    </group>
+                    <group>
+                        <field name='year' string='Year' required="1"/>
+                    </group>
+                </group>
+                <notebook> 
+                    <page string="Branches">
+                        <field name="company_ids" colspan="4" nolabel="1"/>
+                    </page>
+                    <page string="Departments">
+                        <field name="department_ids" colspan="4" nolabel="1"/>
+                    </page>
+                </notebook>
+                <footer>
+                    <button name="excel_report" string="Export Report" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+    		</form>
+    	</field>
+    </record>
+    
+    <record model='ir.actions.act_window' id='action_employee_historical_report'>
+    	<field name='name'>Laporan Employee Historical</field>
+    	<field name='res_model'>tw.employee.historical.report</field>
+    	<field name='view_mode'>form</field>
+    	<field name='target'>new</field>
+    </record>
+        
+    </data>
+</odoo>

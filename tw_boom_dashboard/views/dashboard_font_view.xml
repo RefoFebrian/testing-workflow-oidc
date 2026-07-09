@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_boom_dashboard_font_view_list" model="ir.ui.view">
+            <field name="name">tw.boom.dashboard.font.list.view</field>
+            <field name="model">tw.dashboard.font</field>
+            <field name="arch" type="xml">
+                <list editable="bottom">
+                    <field name="name" required="1"/>
+                    <field name="font_family_css" required="1" placeholder="e.g. 'Roboto', sans-serif"/>
+                    <field name="google_fonts_url" optional="show"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_boom_dashboard_font_view_form" model="ir.ui.view">
+            <field name="name">tw.boom.dashboard.font.form.view</field>
+            <field name="model">tw.dashboard.font</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" required="1"/>
+                            <field name="font_family_css" required="1"/>
+                            <field name="google_fonts_url" placeholder="https://fonts.googleapis.com/css2?family=YourFont&amp;display=swap"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_dashboard_font" model="ir.actions.act_window">
+            <field name="name">Dashboard Fonts</field>
+            <field name="res_model">tw.dashboard.font</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+    </data>
+</odoo>

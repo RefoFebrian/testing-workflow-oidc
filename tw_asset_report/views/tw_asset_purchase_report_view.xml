@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_asset_purchase_report_view" model="ir.ui.view">
+            <field name="name">tw.asset.purchase.report.wizard</field>
+            <field name="model">tw.asset.purchase.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Laporan Pembelian Asset" create="false" delete="false">
+                    <group>
+                        <group>
+                            <field name="purchase_state"/>
+                        </group>
+                        <group>
+                            <label for="po_date_start" string="PO Date"/>
+                            <div>
+                                <field name="po_date_start" class="oe_inline" placeholder="Start Date"/> - <field name="po_date_end" class="oe_inline" placeholder="End Date"/>
+                            </div>
+
+                            <label for="gr_date_start" string="GR Date"/>
+                            <div>
+                                <field name="gr_date_start" class="oe_inline" placeholder="Start Date"/> - <field name="gr_date_end" class="oe_inline" placeholder="End Date"/>
+                            </div>
+
+                            <label for="acq_date_start" string="Acquisition Date"/>
+                            <div>
+                                <field name="acq_date_start" class="oe_inline" placeholder="Start Date"/> - <field name="acq_date_end" class="oe_inline" placeholder="End Date"/>
+                            </div>
+                        </group>
+                    </group>
+                    <notebook colspan="5">
+                          <page string="Branches">
+                            <field name="company_ids" colspan="4" nolabel="1"/>
+                          </page>
+                          <page string="Category">
+                              <field name="category_ids" colspan="4" nolabel="1"/>
+                          </page>
+                    </notebook>
+                    <footer>
+                        <button name="action_export_report" string="Generate" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+	  	<record id="tw_asset_purchase_report_action" model="ir.actions.act_window">
+            <field name="name">Laporan Pembelian Asset</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.asset.purchase.report</field>
+            <field name="view_id" ref="tw_asset_purchase_report_view"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

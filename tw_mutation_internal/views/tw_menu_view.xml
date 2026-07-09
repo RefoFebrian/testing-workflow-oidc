@@ -1,0 +1,10 @@
+<odoo>
+  <data>
+    <!-- Mutation Internal-->
+    <menuitem id="tw_mutation_internal_unit_menuitem" name="Internal Transfer" parent="tw_menu.submenu_tw_showroom_mutation" action="action_tw_mutation_internal_unit" sequence="40" groups="tw_mutation_internal.group_tw_mutation_internal_showroom_read"/>
+    <menuitem id="tw_mutation_internal_sparepart_menuitem" name="Internal Transfer" parent="tw_menu.submenu_tw_workshop_mutation" action="action_tw_mutation_internal_sparepart" sequence="40" groups="tw_mutation_internal.group_tw_mutation_internal_workshop_read"/>
+    <menuitem id="tw_mutation_internal_extras_showroom_menuitem" name="Internal Transfer Extras" parent="tw_menu.submenu_tw_showroom_mutation" action="action_tw_mutation_internal_extras" sequence="41" groups="tw_mutation_internal.group_tw_mutation_internal_extras_read"/>
+    <menuitem id="tw_mutation_internal_extras_workshop_menuitem" name="Internal Transfer Extras" parent="tw_menu.submenu_tw_workshop_mutation" action="action_tw_mutation_internal_extras" sequence="41" groups="tw_mutation_internal.group_tw_mutation_internal_extras_read"/>
+
+  </data>
+</odoo>

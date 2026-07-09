@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="nrfs_penanganan_unit_tanpa_part" model="tw.selection">
+            <field name="value">HS2001</field>
+	    	<field name="name">Diperbaiki langsung oleh mekanik (tanpa melakukan pergantian part)</field>
+            <field name="type">PenangananUnitVendor</field>
+        </record>
+        <record id="nrfs_penanganan_unit_part_ready" model="tw.selection">
+            <field name="value">HS2002</field>
+	    	<field name="name">Diperbaiki dengan sparepart ready</field>
+            <field name="type">PenangananUnitVendor</field>
+        </record>
+        <record id="nrfs_penanganan_unit_part_pesan_biasa" model="tw.selection">
+            <field name="value">HS2003</field>
+	    	<field name="name">Diperbaiki dengan sparepart pesan (Jalur Biasa)</field>
+            <field name="type">PenangananUnitVendor</field>
+        </record>
+        <record id="nrfs_penanganan_unit_part_pesan_urgent" model="tw.selection">
+            <field name="value">HS2004</field>
+	    	<field name="name">Diperbaiki dengan sparepart pesan (PO Urgent)</field>
+            <field name="type">PenangananUnitMd</field>
+        </record>
+        <record id="nrfs_penanganan_unit_rubbing" model="tw.selection">
+            <field name="value">HS2005</field>
+	    	<field name="name">Rubbing</field>
+            <field name="type">PenangananUnitVendor</field>
+        </record>
+        <record id="nrfs_penanganan_unit_repainting_vendor" model="tw.selection">
+            <field name="value">HS2006</field>
+	    	<field name="name">Repainting ke vendor</field>
+            <field name="type">PenangananUnitVendor</field>
+        </record>
+        <record id="nrfs_penanganan_unit_repainting_gudang" model="tw.selection">
+            <field name="value">HS2007</field>
+	    	<field name="name">Repainting ke gudang</field>
+            <field name="type">PenangananUnitVendor</field>
+        </record>
+        <record id="nrfs_penanganan_unit_others" model="tw.selection">
+            <field name="value">HS2008</field>
+	    	<field name="name">Lain-lain</field>
+            <field name="type">PenangananUnitVendor</field>
+        </record>
+    </data>
+</odoo>

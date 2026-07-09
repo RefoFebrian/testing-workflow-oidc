@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="nrfs_penyebab_ahm_bpl" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2001</field>
+	    	<field name="name">AHM - BPL</field>
+        </record>
+        <record id="nrfs_penyebab_ahm_handling_tools" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2002</field>
+	    	<field name="name">AHM - Kondisi Handling Tools</field>
+        </record>
+        <record id="nrfs_penyebab_ahm_penyusunan_rapat" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2003</field>
+	    	<field name="name">AHM - Penyusunan Rapat</field>
+        </record>
+        <record id="nrfs_penyebab_ahm_pengikatan" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2004</field>
+	    	<field name="name">AHM - Pengikatan</field>
+        </record>
+        <record id="nrfs_penyebab_ahm_others" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2005</field>
+	    	<field name="name">AHM - Lain-lain</field>
+        </record>
+        <record id="nrfs_penyebab_port_asal_bpl" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2006</field>
+	    	<field name="name">Pelabuhan Asal - BPL</field>
+        </record>
+        <record id="nrfs_penyebab_port_asal_handling_tools" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2007</field>
+	    	<field name="name">Pelabuhan Asal - Kondisi Handling Tools</field>
+        </record>
+        <record id="nrfs_penyebab_port_asal_penyusunan_rapat" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2008</field>
+	    	<field name="name">Pelabuhan Asal - Penyusunan Rapat</field>
+        </record>
+        <record id="nrfs_penyebab_port_asal_pengikatan" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2009</field>
+	    	<field name="name">Pelabuhan Asal - Pengikatan</field>
+        </record>
+        <record id="nrfs_penyebab_port_asal_others" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2010</field>
+	    	<field name="name">Pelabuhan Asal - Lain-lain</field>
+        </record>
+        <record id="nrfs_penyebab_port_tujuan_bpl" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2011</field>
+	    	<field name="name">Pelabuhan Tujuan - BPL</field>
+        </record>
+        <record id="nrfs_penyebab_port_tujuan_handling_tools" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2012</field>
+	    	<field name="name">Pelabuhan Tujuan - Kondisi Handling Tools</field>
+        </record>
+        <record id="nrfs_penyebab_port_tujuan_penyusunan_rapat" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2013</field>
+	    	<field name="name">Pelabuhan Tujuan - Penyusunan Rapat</field>
+        </record>
+        <record id="nrfs_penyebab_port_tujuan_pengikatan" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2014</field>
+	    	<field name="name">Pelabuhan Tujuan - Pengikatan</field>
+        </record>
+        <record id="nrfs_penyebab_port_tujuan_others" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2015</field>
+	    	<field name="name">Pelabuhan Tujuan - Lain-lain</field>
+        </record>
+        <record id="nrfs_penyebab_pool_bpl" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2016</field>
+	    	<field name="name">Pool Expedisi - BPL</field>
+        </record>
+        <record id="nrfs_penyebab_pool_penyusunan_rapat" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2017</field>
+	    	<field name="name">Pool Expedisi - Penyusunan Rapat</field>
+        </record>
+        <record id="nrfs_penyebab_pool_handling_tools" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2018</field>
+	    	<field name="name">Pool Expedisi - Kondisi Handling Tools</field>
+        </record>
+        <record id="nrfs_penyebab_jalan_darat_handling_tools" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2019</field>
+	    	<field name="name">Jalan Darat - Kondisi Handling Tools</field>
+        </record>
+        <record id="nrfs_penyebab_jalan_darat_penyusunan_rapat" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2020</field>
+	    	<field name="name">Jalan Darat - Penyusunan Rapat</field>
+        </record>
+        <record id="nrfs_penyebab_jalan_darat_pengikatan" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2021</field>
+	    	<field name="name">Jalan Darat - Pengikatan</field>
+        </record>
+        <record id="nrfs_penyebab_jalan_darat_others" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2022</field>
+	    	<field name="name">Jalan Darat - Lain-lain</field>
+        </record>
+        <record id="nrfs_penyebab_md_bpl" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2023</field>
+	    	<field name="name">MD - BPL</field>
+        </record>
+        <record id="nrfs_penyebab_md_handling_tools" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2024</field>
+	    	<field name="name">MD - Kondisi Handling Tools</field>
+        </record>
+        <record id="nrfs_penyebab_md_penyusunan_rapat" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2025</field>
+	    	<field name="name">MD - Penyusunan Rapat</field>
+        </record>
+        <record id="nrfs_penyebab_md_pengikatan" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2026</field>
+	    	<field name="name">MD - Pengikatan</field>
+        </record>
+        <record id="nrfs_penyebab_md_others" model="tw.selection">
+            <field name="type">PenyebabNrfs</field>
+            <field name="value">CA2027</field>
+	    	<field name="name">MD - Lain-lain</field>
+        </record>
+    </data>
+</odoo>

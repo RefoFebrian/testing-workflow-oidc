@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- List View -->
+    <record id="view_tw_purchase_return_list" model="ir.ui.view">
+        <field name="name">tw.purchase.return.list</field>
+        <field name="model">tw.purchase.return</field>
+        <field name="arch" type="xml">
+            <list string="Purchase Returns" decoration-muted="state == 'cancel'" decoration-success="state == 'done'" decoration-info="state == 'confirmed'">
+                <field name="name"/>
+                <field name="company_id" string="Branch"/>
+                <field name="partner_id" string="Supplier"/>
+                <field name="invoice_id" string="Purchase Invoice"/>
+                <field name="date_return" string="Return Date"/>
+                <field name="state" string="State"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_tw_purchase_return_form" model="ir.ui.view">
+        <field name="name">tw.purchase.return.form</field>
+        <field name="model">tw.purchase.return</field>
+        <field name="arch" type="xml">
+            <form string="Purchase Return">
+                <header>
+                    <button id="create_invoice" name="action_create_invoice" string="Create Invoice" type="object" class="btn-primary" data-hotkey="q" invisible="invoice_status == 'invoiced' or state != 'sale'" groups="tw_purchase_return.group_tw_purchase_return_create_invoice"/>
+                    <button name="action_confirm" data-hotkey="q" string="Confirm" class="btn-primary" type="object" context="{'validate_analytic': True}" invisible="state != 'draft'" groups="tw_purchase_return.group_tw_purchase_return_confirm"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,sale,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" name="action_view_delivery" class="oe_stat_button" icon="fa-truck" invisible="delivery_count == 0" groups="stock.group_stock_user">
+                            <field name="delivery_count" widget="statinfo" string="Delivery"/>
+                        </button>
+                        <button name="action_view_invoice" type="object" class="oe_stat_button" icon="fa-pencil-square-o" invisible="invoice_count == 0">
+                            <field name="invoice_count" widget="statinfo" string="Invoices"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1" force_save="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="company_id" options="{'no_create': True}" readonly="state != 'draft'"/>
+                            <field name="partner_id" string="Supplier" options="{'no_open': True, 'no_create': True}" readonly="state != 'draft'"/>
+                            <field name="invoice_id" string="Purchase Invoice" options="{'no_open': True, 'no_create': True}" readonly="state != 'draft'" required="1"/>
+                            <field name="invoice_date" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="division" readonly="1"/>
+                            <field name="date_return" string="Return Date" readonly="1"/>
+                            <field name="payment_term_id" options="{'no_create': True}" readonly="state != 'draft'"/>
+                            <field name="available_product_ids" invisible="1"/>
+                            <field name="purchase_order_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Return Lines">
+                            <field name="order_line" context="{'default_order_id': id}" readonly="state != 'draft'">
+                                <list editable="bottom" readonly="state != 'draft'">
+                                    <field name="product_id" string="Product" readonly="not product_updatable" required="not display_type and not is_downpayment" force_save="1" context="{
+                                            'partner_id': parent.partner_id,
+                                            'quantity': product_uom_qty,
+                                            'pricelist': parent.pricelist_id,
+                                            'company_id': parent.company_id,
+                                            'default_lst_price': price_unit,
+                                        }" options="{'no_create': True, 'no_open': True}" optional="show" domain="[('id', 'in', parent.available_product_ids)]" widget="sol_product_many2one" class="text-wrap" style="white-space: normal !important; word-wrap: break-word !important;"/>
+                                    <field name="lot_id" string="Engine Number" readonly="state != 'draft'" options="{'no_create': True, 'no_open': True}" context="{'product_id': product_id}" domain="[('product_id', '=', product_id),('purchase_order_id', '=', parent.purchase_order_id),('supplier_invoice_number', '!=', False)]" required="1"/>
+                                    <field name="product_uom_qty" string="Qty" class="oe_edit_only" readonly="state != 'draft'" force_save="1"/>
+                                    <field name="price_unit" string="Unit Price" readonly="1" force_save="1"/>
+                                    <field name="tax_id" widget="many2many_tags" options="{'no_create': True}" groups="account.group_account_invoice" readonly="state != 'draft'"/>
+                                    <field name="price_subtotal" string="Subtotal" widget="monetary" readonly="1" options="{'currency_field': 'parent.company_id.currency_id'}" force_save="1"/>
+                                    <field name="price_tax" string="Taxes" readonly="1" optional="hide" force_save="1"/>
+                                    <field name="price_total" string="Tax Incl." readonly="1" optional="hide" force_save="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page name="other_information" string="Other Information">
+                            <group>
+                                <field name="notes" placeholder="Add an internal note..."/>
+                            </group>
+                        </page>
+                        <page name="audit_trail" string="Audit Trail">
+                            <group>
+                                <group>
+                                    <field name="create_uid" readonly="1"/>
+                                    <field name="write_uid" readonly="1"/>
+                                    <field name="confirm_uid" readonly="1"/>
+                                    <field name="done_uid" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="create_date" readonly="1"/>
+                                    <field name="write_date" readonly="1"/>
+                                    <field name="confirm_date" readonly="1"/>
+                                    <field name="done_date" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                    <group class="oe_subtotal_footer d-flex flex-column gap-0 gap-sm-3" colspan="2" name="return_total">
+                        <field name="tax_totals" widget="account-tax-totals-field" nolabel="1" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_tw_purchase_return_search" model="ir.ui.view">
+        <field name="name">tw.purchase.return.search</field>
+        <field name="model">tw.purchase.return</field>
+        <field name="arch" type="xml">
+            <search string="Purchase Returns">
+                <field name="name" filter_domain="[('name', 'ilike', self)]"/>
+                <field name="state"/>
+                <field name="partner_id"/>
+                <field name="invoice_id"/>
+                <filter string="Today's Returns" name="today" domain="[('date_return', '&gt;=', context_today() + ' 00:00:00'), ('date_return', '&lt;=', context_today() + ' 23:59:59')]"/>
+                <field name="date_return"/>
+                <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Confirmed" name="confirmed" domain="[('state', '=', 'confirmed')]"/>
+                <filter string="Done" name="done" domain="[('state', '=', 'done')]"/>
+                <filter string="Cancelled" name="cancel" domain="[('state', '=', 'cancel')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Status" name="group_by_state" context="{'group_by':'state'}"/>
+                    <filter string="Vendor" name="group_by_partner" context="{'group_by':'partner_id'}"/>
+                    <filter string="Invoice Purchase" name="group_by_invoice" context="{'group_by':'invoice_id'}"/>
+                    <filter string="Date" name="group_by_date" context="{'group_by':'date_return:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action for Purchase Return -->
+    <record id="action_tw_purchase_return" model="ir.actions.act_window">
+        <field name="name">Purchase Returns</field>
+        <field name="res_model">tw.purchase.return</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'default_division': 'Unit'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first purchase return
+            </p>
+        </field>
+    </record>
+</odoo>

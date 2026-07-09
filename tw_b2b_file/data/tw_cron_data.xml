@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_ir_cron_b2b_file_read_folder_in" model="ir.cron">
+            <field name="name">B2B File: Read File in Folder In</field>
+            <field name="model_id" ref="model_tw_b2b_file" />
+            <field name="state">code</field>
+            <field name="code">model.schedulle_read_folder_in()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+
+        <record id="tw_ir_cron_b2b_file_read_folder_process" model="ir.cron">
+            <field name="name">B2B File: Process Data</field>
+            <field name="model_id" ref="model_tw_b2b_file" />
+            <field name="state">code</field>
+            <field name="code">model.schedulle_process_outstanding_file()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+
+        <record id="tw_ir_cron_b2b_file_set_error_to_draft" model="ir.cron">
+            <field name="name">B2B File: Change Error State to Draft</field>
+            <field name="model_id" ref="model_tw_b2b_file" />
+            <field name="state">code</field>
+            <field name="code">model.schedulle_set_error_to_draft()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+
+        <record id="tw_ir_cron_b2b_file_process_pending_pmp" model="ir.cron">
+            <field name="name">B2B File: Process Pending PMP</field>
+            <field name="model_id" ref="model_tw_b2b_file_content" />
+            <field name="state">code</field>
+            <field name="code">model.schedulle_pmp_price_update(True, 3)</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+
+        <record id="tw_ir_cron_b2b_file_process_utc" model="ir.cron">
+            <field name="name">B2B File: Process UTC</field>
+            <field name="model_id" ref="model_tw_b2b_file" />
+            <field name="state">code</field>
+            <field name="code">model.schedulle_process_utc()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>        
+
+        <record id="tw_ir_cron_b2b_file_process_error_utc" model="ir.cron">
+            <field name="name">B2B File: Process UTC Error</field>
+            <field name="model_id" ref="model_tw_b2b_file" />
+            <field name="state">code</field>
+            <field name="code">model.schedulle_process_utc(1,'error')</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+        
+    </data>
+</odoo>

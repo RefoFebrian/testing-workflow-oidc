@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_dealer_order_spk_view_form" model="ir.ui.view">
+            <field name="name">tw.dealer.order.spk.view.form</field>
+            <field name="model">tw.dealer.sale.order</field>
+            <field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_order_view_form" />
+            <field name="arch" type="xml">
+                
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_view_lead" type="object" class="oe_stat_button" icon="fa-file-text" invisible="not lead_id" groups="tw_lead_dealer_sale_order.tw_group_button_so_view_lead">
+                        <div>
+                            <field name="lead_id" widget="statinfo" string="Lead" />
+                        </div>
+                    </button>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

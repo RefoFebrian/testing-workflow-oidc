@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="print_wo">
+            <style type="text/css">
+                h1 {font-size: 10px; font-weight: bold; font-family: Arial;}
+                table.tw_wo_table {text-align: left; width: 100%; border: 1px solid black; border-collapse: collapse; font-family: Arial; font-size: 13px;}
+                table.tw_wo_table thead, table.tw_wo_table tbody, table.tw_wo_table tr {border: 1px solid black;}
+                table.tw_wo_table td, table.tw_wo_table th {border: 1px solid black; padding: 3px 5px; font-family: Arial; font-size: 13px;}
+                span.tw_wo_field {font-size: 13px; font-family: Arial;}
+            </style>
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div class="oe_structure"/>
+
+                        <!-- Header -->
+                        <table width="100%">
+                            <tr>
+                                <td width="70.00%">
+                                    <t t-if="o.company_id.code not in ('DLL','MMW')">
+                                        <h1 style="margin: 0; font-size: 18px; font-weight: bold; font-family: Arial;">
+                                            <span t-field="o.company_id.parent_id.name"/>
+                                            <span t-field="o.company_id.name"/>
+                                        </h1>
+                                    </t>
+                                    <span t-field="o.company_id.street"/>
+                                </td>
+                                <td width="30.00%">
+                                    <h1 style="margin: 0; font-size: 18px; font-weight: bold; font-family: Arial;">WORK ORDER</h1>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Detail Info -->
+                        <table width="100%" style="font-size: 11px; font-family: Arial;">
+                            <tr>
+                                <td width="15.00%"/>
+                                <td width="1.00%"/>
+                                <td>
+                                    <span class="tw_wo_field"/>
+                                </td>
+                                <td width="15.00%">No</td>
+                                <td width="1.00%">:</td>
+                                <td>
+                                    <span class="tw_wo_field" t-field="o.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="15.00%">Tanggal</td>
+                                <td width="1.00%">:</td>
+                                <td>
+                                    <span class="tw_wo_field" t-field="o.confirm_date" t-options='{"widget": "date", "format": "dd-MM-yyyy"}'/>
+                                </td>
+                                <td width="15.00%"/>
+                                <td width="1.00%"/>
+                                <td>
+                                    <span class="tw_wo_field"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="15.00%">Mekanik</td>
+                                <td width="1.00%">:</td>
+                                <td>
+                                    <span class="tw_wo_field" t-field="o.mechanic_id.name"/>
+                                </td>
+                                <td width="15.00%">No Invoice</td>
+                                <td width="1.00%">:</td>
+                                <td>
+                                    <span class="tw_wo_field" t-esc="invoice_name()"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="15.00%">No. Polisi</td>
+                                <td width="1.00%">:</td>
+                                <td class="text-end">
+                                    <span class="tw_wo_field" t-esc="o.plate_number"/>
+                                </td>
+                                <td width="15.00%">Jenis Motor</td>
+                                <td width="1.00%">:</td>
+                                <td>
+                                    <span class="tw_wo_field" t-field="o.product_id.product_tmpl_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="15.00%">Nama Pemilik</td>
+                                <td width="1.00%">:</td>
+                                <td>
+                                    <span class="tw_wo_field" t-field="o.customer_stnk_id.display_name"/>
+                                </td>
+                                <td width="15.00%">No. Mesin</td>
+                                <td width="1.00%">:</td>
+                                <td>
+                                    <span class="tw_wo_field" t-field="o.lot_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="15.00%">BBM</td>
+                                <td width="1.00%">:</td>
+                                <td>
+                                    <span class="tw_wo_field" t-esc="o.fuel"/>
+                                </td>
+                                <td width="15.00%">No. Rangka</td>
+                                <td width="1.00%">:</td>
+                                <td class="text-end">
+                                    <span class="tw_wo_field" t-esc="o.chassis_number"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="15.00%">Alamat</td>
+                                <td width="1.00%">:</td>
+                                <td>
+                                    <span class="tw_wo_field" t-field="o.partner_id.street"/>
+                                </td>
+                                <td width="15.00%">Km</td>
+                                <td width="1.00%">:</td>
+                                <td>
+                                    <span class="tw_wo_field" t-field="o.km"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="15.00%">Keluhan</td>
+                                <td width="1.00%">:</td>
+                                <td>
+                                    <span class="tw_wo_field" t-field="o.note"/>
+                                </td>
+                                <td width="15.00%"/>
+                                <td width="1.00%"/>
+                                <td>
+                                    <span class="tw_wo_field"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+
+                        <!-- Jenis Pekerjaan (Service) -->
+                        <div style="font-weight: bold; font-family: Arial; font-size: 13px; margin-bottom: 4px;">
+                            <span style="margin-left: 20px;"></span> Jenis Pekerjaan :
+                        </div>
+                        <table style="text-align: left; width: 100%; border: 1px solid black; border-collapse: collapse; font-family: Arial; font-size: 13px;">
+                            <thead>
+                                <tr style="font-size: 13px; font-family: Arial; border: 1px solid black;">
+                                    <td width="5.00%" style="border: 1px solid black; padding: 3px 5px;">
+                                        <span style="margin-left: 20px;"></span> No</td>
+                                    <td width="20.00%" style="border: 1px solid black; padding: 3px 5px;">
+                                        <span style="margin-left: 20px;"></span> Nama Jasa</td>
+                                    <td width="20.00%" style="border: 1px solid black; padding: 3px 5px;">
+                                        <span style="margin-left: 20px;"></span> Deskripsi</td>
+                                    <td width="10.00%" style="border: 1px solid black; padding: 3px 5px;">
+                                        <span style="margin-left: 20px;"></span> Jumlah</td>
+                                    <td id="td02" width="15.00%" style="border: 1px solid black; padding: 3px 5px;">
+                                        <span style="margin-left: 20px;"></span> Estimasi Waktu </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="service_lines" t-value="get_service_lines(o.order_line)"/>
+                                <tr t-foreach="service_lines" t-as="sl" style="border: 1px solid black;">
+                                    <td style="text-align: center; border: 1px solid black; padding: 3px 5px;">
+                                        <span t-esc="sl[0]"/>
+                                    </td>
+                                    <td style="border: 1px solid black; padding: 3px 5px;">
+                                        <span style="margin-left: 20px;"></span>
+                                        <span t-field="sl[1].product_id.name"/>
+                                    </td>
+                                    <td style="border: 1px solid black; padding: 3px 5px;">
+                                        <span style="margin-left: 20px;"></span>
+                                        <span t-field="sl[1].product_id.default_code"/>
+                                    </td>
+                                    <td style="border: 1px solid black; padding: 3px 5px;">
+                                        <span style="margin-left: 20px;"></span>
+                                        <span t-field="sl[1].product_uom_qty"/>
+                                    </td>
+                                    <td style="border: 1px solid black; padding: 3px 5px;">
+                                        <span style="margin-left: 20px;"></span>
+                                        <span t-esc="estimasi_waktu(o)"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+
+                        <!-- Sparepart -->
+                        <div style="font-weight: bold; font-family: Arial; font-size: 13px; margin-bottom: 4px;">
+                            <span style="margin-left: 20px;"></span> Sparepart :
+                        </div>
+                        <table style="text-align: left; width: 100%; border: 1px solid black; border-collapse: collapse; font-family: Arial; font-size: 13px;">
+                            <thead>
+                                <tr style="font-size: 13px; font-family: Arial; border: 1px solid black;">
+                                    <td width="5.00%" style="border: 1px solid black; padding: 3px 5px;">
+                                        <span style="margin-left: 20px;"></span> No</td>
+                                    <td width="20.00%" style="border: 1px solid black; padding: 3px 5px;">
+                                        <span style="margin-left: 20px;"></span> Nama Part</td>
+                                    <td width="20.00%" style="border: 1px solid black; padding: 3px 5px;">
+                                        <span style="margin-left: 20px;"></span> Deskripsi</td>
+                                    <td width="10.00%" style="border: 1px solid black; padding: 3px 5px;">
+                                        <span style="margin-left: 20px;"></span> Jumlah</td>
+                                    <td width="15.00%" style="border: 1px solid black; padding: 3px 5px;">
+                                        <span style="margin-left: 20px;"></span> Lokasi</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="sparepart_lines" t-value="get_sparepart_lines(o.order_line)"/>
+                                <tr t-foreach="sparepart_lines" t-as="sp" style="border: 1px solid black;">
+                                    <td style="text-align: center; border: 1px solid black; padding: 3px 5px;">
+                                        <span t-esc="sp[0]"/>
+                                    </td>
+                                    <td style="border: 1px solid black; padding: 3px 5px;">
+                                        <span style="margin-left: 20px;"></span>
+                                        <span t-field="sp[1].product_id.name"/>
+                                    </td>
+                                    <td style="border: 1px solid black; padding: 3px 5px;">
+                                        <span style="margin-left: 20px;"></span>
+                                        <span t-field="sp[1].product_id.default_code"/>
+                                    </td>
+                                    <td style="border: 1px solid black; padding: 3px 5px;">
+                                        <span style="margin-left: 20px;"></span>
+                                        <span t-field="sp[1].product_uom_qty"/>
+                                    </td>
+                                    <td style="border: 1px solid black; padding: 3px 5px;">
+                                        <span style="margin-left: 20px;"></span>
+                                        <span t-field="sp[1].location_id.name"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Footer / Signature -->
+                        <div class="oe_structure">
+                            <table style="width: 100%;">
+                                <tr style="font-size: 13px; font-family: Arial;">
+                                    <td width="5.00%">
+                                        <br/>
+                                    </td>
+                                    <td width="15.00%">Dicetak Oleh</td>
+                                    <td width="4.00%"/>
+                                    <td width="15.00%">Dikeluarkan Oleh</td>
+                                    <td width="4.00%"/>
+                                    <td width="15.00%">Diterima Oleh</td>
+                                </tr>
+                                <tr>
+                                    <td width="5.00%">
+                                        <br/>
+                                        <br/>
+                                    </td>
+                                    <td>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr style="font-size: 13px; font-family: Arial;">
+                                    <td width="5.00%"/>
+                                    <td width="15.00%">.......................</td>
+                                    <td width="4.00%"/>
+                                    <td width="15.00%">.......................</td>
+                                    <td width="4.00%"/>
+                                    <td width="15.00%">.......................</td>
+                                </tr>
+                                <tr style="font-size: 13px; font-family: Arial;">
+                                    <td width="5.00%"/>
+                                    <td width="15.00%">
+                                        <span t-esc="print_user()"/>, <span t-esc="time_date()"/>
+                                    </td>
+                                    <td width="4.00%"/>
+                                    <td width="15.00%"/>
+                                    <td width="4.00%"/>
+                                    <td width="15.00%">
+                                        <span t-field="o.partner_id.name"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

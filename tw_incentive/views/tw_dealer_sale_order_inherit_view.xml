@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+		<record id="tw_dealer_sale_order_incentive_margin_inherit_view_form" model="ir.ui.view">
+			<field name="name">tw.dealer.sale.order.incentive.margin.inherit.view.form</field>
+			<field name="model">tw.dealer.sale.order</field>
+			<field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_order_view_form" />
+			<field name="arch" type="xml">
+				<button name="action_recompute_totals" position="before">
+					<field name="incentive_state" invisible="state not in ('sale', 'done')" readonly="1" />
+					<field name="error_message" invisible="incentive_state != 'error'" readonly="1" />
+					<field name="incentive_retry_count" invisible="incentive_retry_count == 0" readonly="1" />
+				</button>
+			</field>
+		</record>
+
+		<record id="tw_dealer_sale_order_line_incentive_margin_inherit_view_form" model="ir.ui.view">
+			<field name="name">tw.dealer.sale.order.line.incentive.margin.inherit.view.form</field>
+			<field name="model">tw.dealer.sale.order.line</field>
+			<field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_sale_order_line_view_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//group[@name='to_invoice']" position="before">
+					<group name="incentive_margin" string="Incentive Margin" groups="tw_incentive.group_tw_employee_incentive_read">
+						<field name="achieve_salesman_target" readonly="1" />
+						<field name="achieve_coordinator_target" readonly="1" />
+						<field name="incentive_state" readonly="1" />
+						<field name="target_margin_sales_id" readonly="1" />
+						<field name="target_margin_coordinator_id" readonly="1" />
+					</group>
+				</xpath>
+			</field>
+		</record>
+
+
+	</data>
+</odoo>

@@ -1,0 +1,49 @@
+<odoo>
+
+    <record id="tw_work_order_form_view_inherit_custom" model="ir.ui.view">
+        <field name="name">tw.work.order.form.view.inherit.custom</field>
+        <field name="model">tw.work.order</field>
+        <field name="inherit_id" ref="tw_work_order.tw_work_order_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='mechanic_advice']" position="after">
+                <separator string="Service Package" colspan="2"/>
+                <field name="area_id" invisible="1"/>
+                <field name="service_package_priority_ids" widget="many2many_checkboxes"
+                       readonly="state != 'draft'" force_save="1"
+                       domain="[('active', '=', True), ('is_priority', '=', True), ('company_id', 'parent_of', company_id), '|', ('area_id', '=', False), ('area_id', '=', area_id)]"/>
+                <field name="service_package_ids"
+                       widget="many2many_tags"
+                       readonly="state != 'draft'" force_save="1"
+                       options="{'no_create': True, 'no_open': True}"
+                       domain="[('active', '=', True), ('is_priority', '=', False), ('company_id', 'parent_of', company_id), '|', ('area_id', '=', False), ('area_id', '=', area_id)]"/>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']//field[@name='product_id']" position="after">
+                <field name="service_package_id" optional="show" readonly="1" force_save="1"
+                       options="{'no_open': True}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']//field[@name='division']" position="attributes">
+                <attribute name="readonly">service_package_id</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']//field[@name='product_id']" position="attributes">
+                <attribute name="readonly">service_package_id</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']//field[@name='name' and @widget='sol_text']" position="attributes">
+                <attribute name="readonly">service_package_id</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']//field[@name='product_uom_qty']" position="attributes">
+                <attribute name="readonly">service_package_id</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']//field[@name='discount']" position="attributes">
+                <attribute name="readonly">service_package_id</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

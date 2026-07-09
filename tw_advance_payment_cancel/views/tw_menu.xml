@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <menuitem id="submenu_tw_advance_payment_cancel" 
+                  name="Advance Payment Cancel" 
+                  parent="tw_cancellation.submenu_backoffice_tw_cancellation" 
+                  groups="tw_advance_payment_cancel.group_tw_advance_payment_cancel_read" 
+                  action="tw_advance_payment_cancel.advance_payment_cancel_action" 
+                  sequence="6"/>
+    </data>
+</odoo>

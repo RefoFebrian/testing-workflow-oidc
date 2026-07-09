@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_checklist_tools_approval_form" model="ir.ui.view">
+            <field name="name">tw.checklist.tool.approval.form</field>
+            <field name="model">tw.checklist.tools</field>
+            <field name="inherit_id" ref="tw_checklist_tool.view_tw_checklist_tools_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='action_generate_line']" position="after">
+                    <button name="action_rfa" string="RFA" invisible="state != 'open'" type="object" class="oe_highlight" groups="tw_checklist_tool_approval.group_button_rfa_checklist_tool"/>
+                    <button name="action_approved" string="Approve" type="object" invisible="state != 'RFA'" class="oe_highlight" groups="tw_checklist_tool_approval.group_button_approved_checklist_tool"/>
+                    <button name="action_reject_or_cancel" string="Reject" type="object" invisible="state != 'RFA'" groups="tw_checklist_tool_approval.group_button_reject_checklist_tool" context="{'window_title': 'Reject'}"/>
+                </xpath>
+
+                <xpath expr="//button[@name='action_done']" position="attributes">
+                    <attribute name="invisible">state != 'approve'</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='state']" position="attributes">
+                    <attribute name="statusbar_visible">draft,open,RFA,approve,done</attribute>
+                </xpath>
+
+                <xpath expr="//notebook/page[last()]" position="before">
+                     <page string="Approval">
+                        <field name="approval_ids">
+                            <list string="Approval" editable="bottom" create="false" edit="false" delete="false">
+                                <field name="group_id"/>
+                                <field name="company_id"/>
+                                <field name="division"/>
+                                <field name="state"/>
+                                <field name="reason"/>
+                                <field name="approver_id"/>
+                                <field name="tanggal"/>
+                            </list>
+                            <form>
+                                <sheet>
+                                    <group colspan="4" col="4">
+                                        <field name="company_id" readonly="1" options="{'no_create':True, 'no_open':True}"/>
+                                        <field name="tanggal" readonly="1"/>
+                                        <field name="group_id" readonly="1" options="{'no_create':True, 'no_open':True}"/>
+                                        <field name="division" readonly="1"/>
+                                        <field name="approver_id" readonly="1" options="{'no_create':True, 'no_open':True}"/>
+                                        <field name="state" readonly="1"/>
+                                        <field name="reason" readonly="1"/>
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </page>
+                </xpath>
+                
+                <xpath expr="//sheet" position="after">
+                    <chatter/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_tw_checklist_tools_approval_filter" model="ir.ui.view">
+            <field name="name">tw.checklist.tool.approval.filter</field>
+            <field name="model">tw.checklist.tools</field>
+            <field name="inherit_id" ref="tw_checklist_tool.tw_checklist_tools_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='state_open']" position="after">
+                    <filter name="state_rfa" domain="[('state','=','RFA')]" string="Request for Approval"/>
+                    <filter name="state_approve" domain="[('state','=','approve')]" string="Approved"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_checklist_tool.tw_checklist_tools_action" model="ir.actions.act_window">
+            <field name="context">{'search_default_company_ids': 1, 'search_default_state_draft': 1, 'search_default_state_open': 1, 'search_default_state_rfa': 1, 'search_default_state_approve': 1}</field>
+        </record>
+    </data>
+</odoo>

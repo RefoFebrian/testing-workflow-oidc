@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_rpa_sparepart_distribution_branch_setting_form_view" model="ir.ui.view">
+            <field name="name">tw.rpa.sparepart.distribution.branch.setting.form</field>
+            <field name="model">tw.branch.setting</field>
+            <field name="inherit_id" ref="tw_branch_setting.tw_branch_setting_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='general_information']" position="after">
+                    <page string="RPA Distribution" name="rpa_distribution_page">
+                        <group string="RPA Distribution Sparepart" name="rpa_distribution_sparepart_group">
+                            <field name="rpa_additional_location_id" options="{'no_create': True,'no_open':True}"/>
+                            <field name="rpa_topup_location_id" options="{'no_create': True,'no_open':True}"/>
+                            <field name="rpa_hotline_location_id" options="{'no_create': True,'no_open':True}"/>
+                            <field name="rpa_backup_hotline_location_id" options="{'no_create': True,'no_open':True}"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

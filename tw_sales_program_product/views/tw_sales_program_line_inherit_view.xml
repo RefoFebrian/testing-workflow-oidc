@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record id="tw_sales_program_line_product_list_view" model="ir.ui.view">
+            <field name="name">tw.sales.program.line.product.list</field>
+            <field name="model">tw.sales.program.line</field>
+            <field name="inherit_id" ref="tw_sales_program.tw_sales_program_line_list_view"/>
+            <field name="arch" type="xml">
+                <field name="qty" position="before">
+                    <field name="product_tmpl_id" required="1" options="{'no_create': True, 'no_open': True}"/>
+                </field>
+            </field>
+        </record>
+        
+        <record id="tw_sales_program_line_product_form_view" model="ir.ui.view">
+            <field name="name">tw.sales.program.line.product.form</field>
+            <field name="model">tw.sales.program.line</field>
+            <field name="inherit_id" ref="tw_sales_program.tw_sales_program_line_form_view"/>
+            <field name="arch" type="xml">
+                <field name="qty" position="before">
+                    <field name="product_tmpl_id" required="1" options="{'no_create': True, 'no_open': True}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

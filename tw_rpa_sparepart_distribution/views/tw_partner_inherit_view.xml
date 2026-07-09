@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="tw_rpa_sparepart_distribution_partner_form_view" model="ir.ui.view">
+        <field name="name">tw.rpa.sparepart.distribution.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="tw_partner.tw_partner_contact_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='partner_addresses']" position="after">
+                <page string="RPA Distribution" name="rpa_distribution_page" groups="base.group_user">
+                    <group string="RPA Distribution" name="rpa_distribution_group">
+                        <field name="dealer_group_id" 
+                               options="{'no_create': True, 'no_open': True}" 
+                               invisible="context.get('form_type') != 'Dealer'" 
+                               required="context.get('form_type') == 'Dealer'" 
+                        />
+                        <field name="jadwal_hari_pengiriman" 
+                               required="context.get('form_type') == 'Dealer'" 
+                               invisible="context.get('form_type') != 'Dealer'"
+                        />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

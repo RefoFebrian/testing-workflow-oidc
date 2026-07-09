@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <record id="tw_work_order_error_view_form" model="ir.ui.view">
+      <field name="name">tw.work.order.error.view.form</field>
+      <field name="model">tw.work.order</field>
+      <field name="inherit_id" ref="tw_work_order.tw_work_order_form_view" />
+      <field name="arch" type="xml">
+        <xpath expr="//div[hasclass('oe_title')]" position="after">
+          <field name="is_error_wo" invisible="1" />
+          <field name="status_api" invisible="1" />
+        </xpath>
+        <xpath expr="//div[@name='button_box']" position="inside">
+          <button name="action_error_detail" type="object" class="oe_stat_button"
+            icon="fa-list-ul" string="Log Error" invisible="not is_error_wo" />
+        </xpath>
+        <button name="action_tidak_digunakan" position="after">
+          <button name="action_send_work_order_single"
+            invisible="state not in ('sale','done') or status_api == 'done'"
+            string="Send to DMS" type="object"
+            groups="tw_work_order_api.group_button_api_work_order_single" />
+        </button>
+        <xpath expr="//div[hasclass('oe_title')]" position="inside">
+          <h4 invisible="not sa_number">
+            SA Number: <field name="sa_number" readonly="1" class="oe_inline" />
+          </h4>
+        </xpath>
+      </field>
+    </record>
+
+    <record id='tw_work_order_view_search' model='ir.ui.view'>
+      <field name='name'>tw.work.order.view.search</field>
+      <field name='model'>tw.work.order</field>
+      <field name="inherit_id" ref="tw_work_order.tw_work_order_search_view" />
+      <field name="arch" type="xml">
+        <field name="lot_id" position="after">
+          <field name="sa_number" string="No Service Advisor DMS" />
+        </field>
+      </field>
+    </record>
+  </data>
+</odoo>

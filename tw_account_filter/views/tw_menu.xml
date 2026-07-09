@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu Item -->
+    <menuitem id="tw_account_filter_menuitem" name="Account Filters" parent="tw_menu.submenu_tw_backoffice_configuration" action="tw_account_filter_action" sequence="10" groups="tw_account_filter.group_tw_account_filter_read"/>
+</odoo>

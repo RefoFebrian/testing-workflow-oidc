@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_master_expense_source_ho" model="tw.master.expense.source">
+            <field name="name">HO</field>
+        </record>
+        <record id="tw_master_expense_source_leasing" model="tw.master.expense.source">
+            <field name="name">Leasing</field>
+        </record>
+        <record id="tw_master_expense_source_company" model="tw.master.expense.source">
+            <field name="name">Cabang</field>
+        </record>
+        <record id="tw_master_expense_source_support_fund" model="tw.master.expense.source">
+            <field name="name">Dana Bantuan</field>
+        </record>
+    </data>
+</odoo>

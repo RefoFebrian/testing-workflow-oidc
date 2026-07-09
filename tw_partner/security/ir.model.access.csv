@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_partner_contact,tw_partner_contact,model_tw_partner_contact,base.group_user,1,0,0,0
+access_tw_partner_address,tw_partner_address,model_tw_partner_address,base.group_user,1,0,0,0
+access_stl_partner,access.stl.partner,model_res_partner,,0,0,0,0
+access_tw_family_card_all,tw_family_card_all,tw_partner.model_tw_family_card,base.group_user,1,1,1,1
+access_tw_res_partner_history,tw_res_partner_history,tw_partner.model_tw_partner_history,base.group_user,1,1,1,1

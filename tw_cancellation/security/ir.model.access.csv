@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_cancellation,tw_cancellation.tw_cancellation,model_tw_cancellation,base.group_user,1,0,0,0
+access_tw_cancellation_handler,tw_cancellation.tw_cancellation_handler,model_tw_cancellation_handler,base.group_user,1,0,0,0

@@ -1,0 +1,9 @@
+<odoo>
+  <data>
+    <!-- Monitoring Expedition Apps -->
+    <menuitem id="submenu_tw_expedition_apps" name="Expedition Apps" parent="tw_menu.submenu_tw_warehouse_expedition" sequence="50"/>
+    <menuitem id="tw_monitoring_expedition_apps_menuitem" name="Monitoring Expedition" parent="submenu_tw_expedition_apps" action="action_tw_monitoring_expedition_apps" sequence="10" groups="tw_expedition_apps.group_tw_monitoring_expedition_apps_read"/>
+    <menuitem id="tw_assign_delivery_driver_menuitem" name="Assign Delivery Driver" parent="submenu_tw_expedition_apps" action="action_tw_assign_delivery_driver_wizard" sequence="20" groups="tw_expedition_apps.group_tw_assign_delivery_driver_read"/>
+
+  </data>
+</odoo>

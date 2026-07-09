@@ -1,0 +1,8 @@
+<odoo>
+    <data>
+        <!-- Configuration -->
+        <menuitem id="tw_vehicle_configuration_menu_sub" name="Configuration" parent="tw_vehicle_document.tw_document_handling_menu_root" sequence="300"/>
+        <menuitem id="tw_vehicle_stnk_location_menu" name="STNK Location" parent="tw_vehicle_configuration_menu_sub" action="tw_vehicle_registration_location_action" sequence="10" groups="group_vehicle_document_location_read"/>
+        <menuitem id="tw_vehicle_bpkb_location_menu" name="BPKB Location" parent="tw_vehicle_configuration_menu_sub" action="tw_vehicle_ownership_location_action" sequence="20" groups="group_vehicle_document_location_read"/>      
+    </data>
+</odoo>

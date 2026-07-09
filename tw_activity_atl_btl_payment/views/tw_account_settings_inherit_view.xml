@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_account_settings_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.account.settings.inherit.form.view</field>
+            <field name="model">tw.account.setting</field>
+            <field name="inherit_id" ref="tw_account_setting.tw_account_setting_form_view"/>
+            <field name="arch" type="xml">
+                <field name="journal_avp_id" position="after">
+                    <field name="account_activity_id"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

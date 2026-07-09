@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_bank_reconcile_rule" model="ir.rule">
+            <field name="name">tw.bank.reconcile rule</field>
+            <field name="model_id" ref="model_tw_bank_reconcile"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+            <field name="groups" eval="[(4, ref('tw_bank_reconcile.group_tw_bank_reconcile_read'))]"/>
+        </record>
+
+    </data>
+</odoo>

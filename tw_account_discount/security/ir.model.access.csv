@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_move_discount,account_move_discount,model_account_move_discount,base.group_user,1,0,0,0
+access_tw_account_discount,tw_account_discount,model_tw_account_discount,base.group_user,1,0,0,0
+access_tw_account_move_discount,tw_account_move_discount,model_account_move_discount,tw_account.group_tw_account_invoicing_read,1,1,1,0

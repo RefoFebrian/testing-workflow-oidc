@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <menuitem name="DGI" id="tw_dgi_mapping_workshop_jasa_menu" parent="tw_menu.menu_tw_workshop" sequence="10" />
+        <menuitem name="DGI" id="tw_dgi_mapping_master_jasa_menu" parent="tw_menu.menu_tw_master" sequence="46" />
+        <menuitem id="tw_dgi_mapping_workshop_jasa_submenu" parent="tw_dgi_mapping_workshop_jasa_menu" action="tw_dgi_mapping_master_jasa_action" sequence="10" groups="group_tw_dgi_mapping_master_jasa_read"/>
+        <menuitem id="tw_dgi_mapping_master_jasa_submenu" parent="tw_dgi_mapping_master_jasa_menu" action="tw_dgi_mapping_master_jasa_action" sequence="10" groups="group_tw_dgi_mapping_master_jasa_read"/>
+    </data>
+</odoo>

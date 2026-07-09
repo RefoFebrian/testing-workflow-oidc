@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_selection_mft_windows_in_data" model="tw.selection">
+	    	<field name="name">MFT-IN</field>
+            <field name="value">MFT-IN</field> 
+	    	<field name="type">ServConfigOptions</field> 
+        </record>
+    
+        <record id="tw_selection_mft_windows_out_data" model="tw.selection">
+	    	<field name="name">MFT-OUT</field>
+            <field name="value">MFT-OUT</field> 
+	    	<field name="type">ServConfigOptions</field> 
+        </record>
+     </data>
+</odoo>

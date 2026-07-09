@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tw_lead_dgi_edit_primary_form" model="ir.ui.view">
+        <field name="name">tw.lead.dgi.edit.primary.form</field>
+        <field name="model">tw.lead</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="tw_lead.tw_lead_crm_lead_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Replace Header with simple save/cancel for popup -->
+            <xpath expr="//header" position="replace">
+                <header>
+                    <button string="Simpan Data" type="object" name="action_save_dgi_popup" class="btn-primary" />
+                    <button string="Batal" class="btn-secondary" special="cancel"/>
+                </header>
+            </xpath>
+
+            <!-- Add a warning block -->
+            <xpath expr="//sheet" position="before">
+                <div class="alert alert-warning text-center" role="alert" style="margin-bottom:0px;">
+                    <strong>Data DGI Belum Lengkap!</strong> Silakan lengkapi data wajib (Nama, KTP, dll) di bawah ini sebelum melanjutkan Confirm DSO.
+                </div>
+            </xpath>
+
+            <!-- Unlock readonly fields for this specific view -->
+            <xpath expr="//field[@name='customer_name']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='identification_number']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='identification_family_number']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='birthplace']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='birthdate']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='gender_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='religion_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='mobile']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='is_same_with_mobile']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='whatsapp']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='phone']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='email']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='blood_type_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='hobby_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='education_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='occupation_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='marital_status_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='housing_tenure_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='mobile_plan_status_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='expense_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='income_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='street']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='street2']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='rt']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='rw']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='state_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='city_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='district_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='sub_district_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='zip']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='is_same_ktp']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='street_domicile']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='street2_domicile']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='rt_domicile']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='rw_domicile']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='state_domicile_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='city_domicile_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='district_domicile_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='sub_district_domicile_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='zip_domicile']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='unit_operator_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='unit_usage_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='current_motorcycle']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='motor_brand_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='motor_type_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='payment_type_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='finco_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='down_payment']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='down_payment_date']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='tenor']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='installment']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='motor_ownership_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Main Lead Form to add button if DGI mandatory -->
+    <record id="view_tw_lead_form_dgi_spk_inherit" model="ir.ui.view">
+        <field name="name">tw.lead.form.dgi.spk.inherit</field>
+        <field name="model">tw.lead</field>
+        <field name="inherit_id" ref="tw_lead.tw_lead_crm_lead_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="is_dgi_dso_required" invisible="1"/>
+                <button name="action_open_dgi_required_form" type="object" class="oe_stat_button" icon="fa-pencil-square-o" invisible="not is_dgi or not is_dgi_dso_required">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_text text-warning">Lengkapi Data</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

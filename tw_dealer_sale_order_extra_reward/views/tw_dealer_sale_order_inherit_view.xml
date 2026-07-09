@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_dealer_sale_order_extra_reward_form_view" model="ir.ui.view">
+            <field name="name">tw.dealer.sale.order.extra.reward.form</field>
+            <field name="model">tw.dealer.sale.order</field>
+            <field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_order_view_form"/>
+            <field name="priority">40</field>
+            <field name="arch" type="xml">
+                <field name="amount_receivable" position="before">
+                    <field name="amount_extra_reward" readonly="1"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="tw_dealer_sale_order_line_extra_reward_form_view" model="ir.ui.view">
+            <field name="name">tw.dealer.sale.order.line.extra.reward.form</field>
+            <field name="model">tw.dealer.sale.order.line</field>
+            <field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_sale_order_line_view_form"/>
+            <field name="priority">40</field>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='page_lines']" position="after">
+					<page string="Extra Reward" name="dso_line_extra_reward">
+                        <group col="2" context="{'readonly_by_pass': 1}">
+                            <field name="extra_reward_partner_id" force_save="1" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                            <field name="extra_reward_tax_id" readonly="1"/>
+                            <field name="extra_reward_value"/>
+                            <field name="amount_extra_reward" readonly="1" force_save="1"/>
+                        </group>
+					</page>
+				</xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

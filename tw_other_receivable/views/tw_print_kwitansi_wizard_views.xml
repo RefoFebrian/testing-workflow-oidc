@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_wizard_print_kwitansi_form" model="ir.ui.view">
+            <field name="name">tw.wizard.print.kwitansi.form</field>
+            <field name="model">tw.wizard.print.kwitansi</field>
+            <field name="arch" type="xml">
+                <form string="Pilih Nomor Kwitansi">
+                    <group>
+                        <field name="company_id" invisible="1"/>
+                        <field name="kwitansi_line_id" domain="[('state','=','open'), ('company_id','=', company_id)]" options="{'no_create': True,'no_open': True}"/>
+                        <field name="receipt_print_count" invisible="1"/>
+                        <field name="model_name" invisible="1"/>
+                        <field name="transaction_id" invisible="1"/>
+                        <field name="reason" invisible="not is_invisible" required="is_invisible"/>
+                    </group>
+                    <footer>
+                        <button string="Print" type="object" name="action_print" class="btn-primary"/>
+                        <button string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_print_kwitansi" model="ir.actions.act_window">
+            <field name="name">Pilih Kwitansi</field>
+            <field name="res_model">tw.wizard.print.kwitansi</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

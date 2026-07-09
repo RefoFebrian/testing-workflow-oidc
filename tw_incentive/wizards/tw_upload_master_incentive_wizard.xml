@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="tw_upload_master_incentive_wizard" model="ir.ui.view">
+			<field name="name">tw.upload.master.incentive.wizard</field>
+			<field name="model">tw.upload.master.incentive</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Upload master incentive">
+                	<sheet>
+						<group colspan="4" col="4" invisible="state_x == 'get'">
+                            <group colspan="2">
+								<field name="sales_category"/>
+								<field name="branch_class" invisible="sales_category != 'sales_payroll'"/>
+								<field name="file" filename="filename" string="Upload File"/>
+                            </group>
+                            <group colspan="2">
+                                <label for="action_download_format_file" string="Contoh File"/>
+                                <div>                   
+                                    <button name="action_download_format_file" type="object" class="oe_highlight" icon="fa-download" string="Download Contoh"/>
+                                </div>
+                            </group>
+                        </group>
+		                <field invisible="1" name="state_x"/>
+		                <newline/>    
+		                <group col="4" fill="0" invisible="state_x != 'get'">
+		                    <separator colspan="4" string="Generate Master Incentive Success ..." invisible="state_x == 'choose'"/>
+		                </group>
+		                <footer>
+		                    <button name="action_import" invisible="state_x == 'get'" required="1" string="Import" type="object" class="oe_highlight"/>
+		                    <button string="Cancel" invisible="state_x == 'get'" class="oe_link" special="cancel" />
+		                </footer>
+	                </sheet>
+                    <field name="state_x" invisible="1"/>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_upload_master_incentive_wizard" model="ir.actions.act_window">
+			<field name="name">Upload Master Incentive</field> 
+			<field name="path">tw-upload-master-incentive</field>
+			<field name="res_model">tw.upload.master.incentive</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="tw_upload_master_incentive_wizard"/>
+			<field name="target">new</field>
+			<field name="context">{'default_state_x': 'choose'}</field>
+		</record>
+
+	  	
+	</data>
+</odoo>

@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Surat Jalan Group -->
+        <record id="group_tw_travel_document_laporan" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Surat Jalan</field>
+        </record>
+        <record id="access_tw_travel_document_laporan" model="ir.model.access">
+            <field name="model_id" ref="model_tw_travel_document_report"/>
+            <field name="name">tw_travel_document_laporan</field>
+            <field name="group_id" ref="group_tw_travel_document_laporan"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Surat Jalan Showroom Group -->
+        <record id="group_tw_travel_document_showroom_laporan" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Surat Jalan Showroom</field>
+        </record>
+        <record id="access_tw_travel_document_showroom_laporan" model="ir.model.access">
+            <field name="model_id" ref="model_tw_travel_document_report"/>
+            <field name="name">tw_travel_document_showroom_laporan</field>
+            <field name="group_id" ref="group_tw_travel_document_showroom_laporan"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Surat Jalan Workshop Group -->
+        <record id="group_tw_travel_document_workshop_laporan" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Surat Jalan Workshop</field>
+        </record>
+        <record id="access_tw_travel_document_workshop_laporan" model="ir.model.access">
+            <field name="model_id" ref="model_tw_travel_document_report"/>
+            <field name="name">tw_travel_document_workshop_report</field>
+            <field name="group_id" ref="group_tw_travel_document_workshop_laporan"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Stock Picking Report Group -->
+        <record id="group_tw_stock_picking_laporan" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Stock Picking</field>
+        </record>
+        <record id="access_tw_stock_picking_laporan" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_report"/>
+            <field name="name">tw_stock_picking_laporan</field>
+            <field name="group_id" ref="group_tw_stock_picking_laporan"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Stock Picking Showroom Report Group -->
+        <record id="group_tw_stock_picking_showroom_laporan" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Stock Picking Showroom</field>
+        </record>
+        <record id="access_tw_stock_picking_showroom_laporan" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_report"/>
+            <field name="name">tw_stock_picking_showroom_laporan</field>
+            <field name="group_id" ref="group_tw_stock_picking_showroom_laporan"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Stock Picking Workshop Report Group -->
+        <record id="group_tw_stock_picking_workshop_laporan" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Stock Picking Workshop</field>
+        </record>
+        <record id="access_tw_stock_picking_workshop_laporan" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_report"/>
+            <field name="name">tw_stock_picking_workshop_laporan</field>
+            <field name="group_id" ref="group_tw_stock_picking_workshop_laporan"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Stock Movement Report Group -->
+        <record id="group_tw_stock_movement_laporan" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Stock Movement</field>
+        </record>
+        <record id="access_tw_stock_movement_laporan" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_movement_report"/>
+            <field name="name">tw_stock_movement_laporan</field>
+            <field name="group_id" ref="group_tw_stock_movement_laporan"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Stock Movement Showroom Report Group -->
+        <record id="group_tw_stock_movement_showroom_laporan" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Stock Movement Showroom</field>
+        </record>
+        <record id="access_tw_stock_movement_showroom_laporan" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_movement_report"/>
+            <field name="name">tw_stock_movement_showroom_laporan</field>
+            <field name="group_id" ref="group_tw_stock_movement_showroom_laporan"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Stock Movement Workshop Report Group -->
+        <record id="group_tw_stock_movement_workshop_laporan" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Stock Movement Workshop</field>
+        </record>
+        <record id="access_tw_stock_movement_workshop_laporan" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_movement_report"/>
+            <field name="name">tw_stock_movement_workshop_laporan</field>
+            <field name="group_id" ref="group_tw_stock_movement_workshop_laporan"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Stock Inbound Report Group -->
+        <record id="group_tw_stock_inbound_laporan" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Stock Inbound</field>
+        </record>
+        <record id="access_tw_stock_inbound_laporan" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_inbound_report"/>
+            <field name="name">tw_stock_inbound_laporan</field>
+            <field name="group_id" ref="group_tw_stock_inbound_laporan"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Stock Inbound Showroom Report Group -->
+        <record id="group_tw_stock_inbound_showroom_laporan" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Stock Inbound Showroom</field>
+        </record>
+        <record id="access_tw_stock_inbound_showroom_laporan" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_inbound_report"/>
+            <field name="name">tw_stock_inbound_showroom_laporan</field>
+            <field name="group_id" ref="group_tw_stock_inbound_showroom_laporan"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Stock Inbound Workshop Report Group -->
+        <record id="group_tw_stock_inbound_workshop_laporan" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Stock Inbound Workshop</field>
+        </record>
+        <record id="access_tw_stock_inbound_workshop_laporan" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_inbound_report"/>
+            <field name="name">tw_stock_inbound_workshop_laporan</field>
+            <field name="group_id" ref="group_tw_stock_inbound_workshop_laporan"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Stock Report Group -->
+        <record id="group_tw_stock_laporan" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Stock</field>
+        </record>
+        <record id="access_tw_stock_laporan" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_report"/>
+            <field name="name">tw_stock_laporan</field>
+            <field name="group_id" ref="group_tw_stock_laporan"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+        
+        <!-- Stock Report Showroom Group -->
+        <record id="group_tw_stock_laporan_showroom" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Stock Showroom</field>
+        </record>
+        <record id="access_tw_stock_laporan_showroom" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_report"/>
+            <field name="name">tw_stock_laporan_showroom</field>
+            <field name="group_id" ref="group_tw_stock_laporan_showroom"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Stock Report Workshop Group -->
+        <record id="group_tw_stock_laporan_workshop" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Stock Workshop</field>
+        </record>
+        <record id="access_tw_stock_laporan_workshop" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_report"/>
+            <field name="name">tw_stock_laporan_workshop</field>
+            <field name="group_id" ref="group_tw_stock_laporan_workshop"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Stock Report Umum Group -->
+        <record id="group_tw_stock_laporan_umum" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Stock Umum</field>
+        </record>
+        <record id="access_tw_stock_laporan_umum" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_report"/>
+            <field name="name">tw_stock_laporan_umum</field>
+            <field name="group_id" ref="group_tw_stock_laporan_umum"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Stock Report Extras Group -->
+        <record id="group_tw_stock_laporan_extras" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Stock Extras</field>
+        </record>
+        <record id="access_tw_stock_laporan_extras" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_report"/>
+            <field name="name">tw_stock_laporan_extras</field>
+            <field name="group_id" ref="group_tw_stock_laporan_extras"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Stock Available Report Group -->
+        <record id="group_tw_stock_available_laporan" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Stock Available</field>
+        </record>
+        <record id="access_tw_stock_available_laporan" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_available_report"/>
+            <field name="name">tw_stock_available_laporan</field>
+            <field name="group_id" ref="group_tw_stock_available_laporan"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Stock Available Report Showroom Group -->
+        <record id="group_tw_stock_available_laporan_showroom" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Stock Available Showroom</field>
+        </record>
+        <record id="access_tw_stock_available_laporan_showroom" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_available_report"/>
+            <field name="name">tw_stock_available_laporan_showroom</field>
+            <field name="group_id" ref="group_tw_stock_available_laporan_showroom"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Stock Available Report Workshop Group -->
+        <record id="group_tw_stock_available_laporan_workshop" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Stock Available Workshop</field>
+        </record>
+        <record id="access_tw_stock_available_laporan_workshop" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_available_report"/>
+            <field name="name">tw_stock_available_laporan_workshop</field>
+            <field name="group_id" ref="group_tw_stock_available_laporan_workshop"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Stock Available Report Umum Group -->
+        <record id="group_tw_stock_available_laporan_umum" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Stock Available Umum</field>
+        </record>
+        <record id="access_tw_stock_available_laporan_umum" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_available_report"/>
+            <field name="name">tw_stock_available_laporan_umum</field>
+            <field name="group_id" ref="group_tw_stock_available_laporan_umum"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- NRFS Report Group -->
+        <record id="group_tw_nrfs_laporan" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan NRFS</field>
+        </record>
+        <record id="access_tw_nrfs_laporan" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_report"/>
+            <field name="name">tw_nrfs_laporan</field>
+            <field name="group_id" ref="group_tw_nrfs_laporan"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- NRFS Report Showroom Group -->
+        <record id="group_tw_nrfs_laporan_showroom" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan NRFS Showroom</field>
+        </record>
+        <record id="access_tw_nrfs_laporan_showroom" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_report"/>
+            <field name="name">tw_nrfs_laporan_showroom</field>
+            <field name="group_id" ref="group_tw_nrfs_laporan_showroom"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- NRFS Report Workshop Group -->
+        <record id="group_tw_nrfs_laporan_workshop" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan NRFS Workshop</field>
+        </record>
+        <record id="access_tw_nrfs_laporan_workshop" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_report"/>
+            <field name="name">tw_nrfs_laporan_workshop</field>
+            <field name="group_id" ref="group_tw_nrfs_laporan_workshop"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- PO Supply Sparepart Report Group -->
+        <record id="group_tw_po_supply_sparepart_laporan" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan PO Supply Sparepart</field>
+        </record>
+        <record id="access_tw_po_supply_sparepart_laporan" model="ir.model.access">
+            <field name="model_id" ref="model_tw_po_supply_sparepart_report"/>
+            <field name="name">tw_po_supply_sparepart_laporan</field>
+            <field name="group_id" ref="group_tw_po_supply_sparepart_laporan"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_tw_travel_document_laporan')),
+                (4,ref('group_tw_travel_document_showroom_laporan')),
+                (4,ref('group_tw_travel_document_workshop_laporan')),
+                (4,ref('group_tw_stock_picking_laporan')),
+                (4,ref('group_tw_stock_picking_showroom_laporan')),
+                (4,ref('group_tw_stock_picking_workshop_laporan')),
+                (4,ref('group_tw_stock_movement_laporan')),
+                (4,ref('group_tw_stock_movement_showroom_laporan')),
+                (4,ref('group_tw_stock_movement_workshop_laporan')),
+                (4,ref('group_tw_stock_inbound_laporan')),
+                (4,ref('group_tw_stock_inbound_showroom_laporan')),
+                (4,ref('group_tw_stock_inbound_workshop_laporan')),
+                (4,ref('group_tw_stock_laporan')),
+                (4,ref('group_tw_stock_laporan_showroom')),
+                (4,ref('group_tw_stock_laporan_workshop')),
+                (4,ref('group_tw_stock_laporan_umum')),
+                (4,ref('group_tw_nrfs_laporan')),
+                (4,ref('group_tw_nrfs_laporan_showroom')),
+                (4,ref('group_tw_nrfs_laporan_workshop')),
+                (4,ref('group_tw_po_supply_sparepart_laporan')),
+                (4,ref('group_tw_stock_available_laporan')),
+                (4,ref('group_tw_stock_available_laporan_showroom')),
+                (4,ref('group_tw_stock_available_laporan_workshop')),
+                (4,ref('group_tw_stock_available_laporan_umum')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

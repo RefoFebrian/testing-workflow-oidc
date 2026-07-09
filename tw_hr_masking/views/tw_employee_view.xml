@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_hr_employee_list_masking_view" model="ir.ui.view">
+            <field name="name">tw.hr.employee.tree.masking</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="tw_hr.tw_hr_employee_list_view"/>
+            <field eval="1" name="priority"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='work_email']" position="attributes">
+                    <attribute name="widget">mask_sensitive</attribute>
+                    <attribute name="options">{'mask_type': 'email'}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='work_phone']" position="attributes">
+                    <attribute name="widget">mask_sensitive</attribute>
+                    <attribute name="options">{'mask_type': 'phone'}</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="tw_hr_employee_kanban_view" model="ir.ui.view">
+            <field name="name">tw.hr.view.employee.kanban</field>
+            <field name="model">hr.employee</field>
+            <field eval="1" name="priority"/>
+            <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='work_email']" position="attributes">
+                    <attribute name="widget">mask_sensitive</attribute>
+                    <attribute name="options">{'mask_type': 'email'}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_hr_employee_form_view" model="ir.ui.view">
+            <field name="name">tw.hr.view.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field eval="1" name="priority"/>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='work_email']" position="attributes">
+                    <attribute name="widget">mask_sensitive</attribute>
+                    <attribute name="options">{'mask_type': 'email'}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='work_phone']" position="attributes">
+                    <attribute name="widget">mask_sensitive</attribute>
+                    <attribute name="options">{'mask_type': 'phone'}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='mobile_phone']" position="attributes">
+                    <attribute name="widget">mask_sensitive</attribute>
+                    <attribute name="options">{'mask_type': 'phone'}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='identification_id']" position="attributes">
+                    <attribute name="widget">mask_sensitive</attribute>
+                    <attribute name="options">{'mask_type': 'id'}</attribute>
+                </xpath>
+
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

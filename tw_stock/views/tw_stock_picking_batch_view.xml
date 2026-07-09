@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_stock_picking_batch_original_form_view" model="ir.ui.view">
+            <field name="name">stock.picking.batch.original.form</field>
+            <field name="model">stock.picking.batch</field>
+            <field name="inherit_id" eval="False"/>
+            <field name="arch" type="xml">
+                <form string="Stock Batch Transfer" create="0" duplicate="0">
+                    <field name="company_id" invisible="1"/>
+                    <field name="show_check_availability" invisible="1"/>
+                    <field name="show_allocation" invisible="1"/>
+                    <field name="picking_type_code" invisible="1"/>
+                    <field name="is_wave" invisible="1"/>
+                    <field name="show_lots_text" invisible="1"/>
+                    <header>
+                        <button name="action_confirm" invisible="state != 'draft'" string="Confirm" type="object" class="oe_highlight"/>
+                        <button name="action_done" string="Validate" type="object" class="oe_highlight" invisible="not picking_ids or state != 'in_progress' or show_check_availability"/>
+                        <button name="action_assign" string="Check Availability" type="object" class="oe_highlight" invisible="state != 'in_progress' or not show_check_availability"/>
+                        <button name="action_done" string="Validate" type="object" invisible="not picking_ids or state != 'in_progress' or not show_check_availability"/>
+                        <button name="action_assign" string="Check Availability" type="object" invisible="state != 'draft' or not show_check_availability"/>
+                        <button name="action_print" invisible="state not in ('in_progress', 'done')" string="Print" type="object"/>
+                        <button string="Print Labels" type="object" name="action_open_label_layout"/>
+                        <button name="action_cancel" string="Cancel" type="object" invisible="state != 'in_progress'"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_pickings" string="View Pickings" type="object" class="oe_stat_button" icon="fa-list" invisible="not picking_ids"/>
+                            <button name="action_view_next_batch" string="View Next Batch" type="object" class="oe_stat_button" icon="fa-truck" invisible="not batch_next_id"/>
+                            <button name="action_view_backorder_batch" string="View Backorder Batch" type="object" class="oe_stat_button" icon="fa-share" invisible="not batch_backorder_id"/>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" class="oe_inline"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group id="batch_delivery_data">
+                                <field name="company_id" groups="base.group_multi_company" string="Branch" readonly="state != 'draft'" force_save="1" options="{'no_create': True,'no_open': True}"/>
+                                <field name="picking_type_id" required="1" readonly="state != 'draft'" options="{'no_create': True,'no_open': True}" domain="[('company_id', '=', company_id)]" />
+                                <field name="source_picking_ids" widget="many2many_tags" domain="[
+                                        ('state','in',['assigned','confirmed','waiting']), ('batch_id','=',False), ('division','=',division), ('picking_type_id','=',picking_type_id), ('company_id','=',company_id)
+                                    ]" readonly="state != 'draft'" required="1" options="{'no_create': True,'no_open': True}" />
+                                <field name="use_create_lots" invisible="1"/>
+                                <field name="description" readonly="state != 'draft'"/>
+                            </group>
+                            <group name="detail">
+                                <field name="division" placeholder="e.g. Division" required="1" readonly="context.get('is_readonly', state != 'draft')" force_save="1"/>
+                                <field name="date" readonly="1" force_save="1"/>
+                            </group>
+                            <field name="properties" nolabel="1" columns="2" hideAddButton="1"/>
+                        </group>
+                        <notebook>
+                            <page string="Detailed Operations" name="page_detailed_operations" invisible="state == 'draft'">
+                                <field name="move_line_ids" context="{'list_view_ref': 'stock_picking_batch.view_move_line_tree'}" readonly="state not in ['draft', 'in_progress']"/>
+                            </page>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1" options="{'no_create': True,'no_open': True}"></field>
+                                        <field name="create_date" readonly="1"></field>
+                                        <field name="validate_uid" readonly="1" options="{'no_create': True,'no_open': True}"></field>
+                                        <field name="validate_date" readonly="1"></field>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1" options="{'no_create': True,'no_open': True}"></field>
+                                        <field name="write_date" readonly="1"></field>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_stock_picking_batch_inherit_list_view" model="ir.ui.view">
+            <field name="name">tw.stock.picking.batch.inherit.list</field>
+            <field name="model">stock.picking.batch</field>
+            <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="//list" position="attributes">
+                    <attribute name="duplicate">0</attribute>
+                </xpath>
+                <field name="name" position="after">
+                    <field name="division" optional="show" readonly="1"/>
+                    <field name="date" optional="show" readonly="1"/>
+                    <field name="location_id" optional="show" readonly="1" options="{'no_create': True,'no_open': True}"/>
+                </field>
+                <field name="scheduled_date" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </field>
+                <field name="user_id" position="attributes">
+                    <attribute name="column_invisible">1</attribute>
+                </field>
+                <field name="picking_type_id" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="options">{'no_create': True,'no_open': True}</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_move_line_tree_picking_batch" model="ir.ui.view">
+            <field name="name">stock.move.line.tree.stock_picking_batch</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock_picking_batch.view_move_line_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//list" position="attributes">
+                    <attribute name="create">0</attribute>
+                    <attribute name="delete">0</attribute>
+                    <attribute name="duplicate">0</attribute>
+                </xpath>
+
+                <field name="product_id" position="attributes">
+                    <attribute name="options">{'no_create': True,'no_open': True}</attribute>
+                </field>
+
+                <field name="product_id" position="after">
+                    <field name="is_rfs"/>
+                    <field name="domain_lot_ids" column_invisible="1"/>
+                </field>
+
+                <field name="picking_id" position="attributes">
+                    <attribute name="column_invisible">1</attribute>
+                </field>
+
+                <field name="package_id" position="attributes">
+                    <attribute name="column_invisible">1</attribute>
+                </field>
+
+                <field name="product_uom_id" position="attributes">
+                    <attribute name="column_invisible">1</attribute>
+                </field>
+
+                <xpath expr="//field[@name='company_id'][2]" position="attributes">
+                    <attribute name="column_invisible">1</attribute>
+                </xpath>
+
+                <field name="result_package_id" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="force_save">1</attribute>
+                    <attribute name="domain">[('picking_id', '=', picking_id), ('product_id', '=', product_id)]</attribute>
+                    <attribute name="options">{'no_create': True,'no_open': True}</attribute>
+                </field>
+
+                <field name="lot_id" position="attributes">
+                    <attribute name="required">tracking in ['lot', 'serial']</attribute>
+                    <attribute name="domain">[('id', 'in', domain_lot_ids)]</attribute>
+                    <attribute name="options">{'no_create': True,'no_open': True}</attribute>
+                </field>
+
+                <field name="location_id" position="attributes">
+                    <attribute name="string">Source Location</attribute>
+                    <attribute name="domain">[('usage','=','internal'),('company_id','=',company_id)]</attribute>
+                    <attribute name="options">{'no_create': True,'no_open': True}</attribute>
+                    <attribute name="readonly">context.get('sequence_code') not in ['PICK', 'OUT']</attribute>
+                    <attribute name="force_save">1</attribute>
+                </field>
+
+                <field name="location_dest_id" position="attributes">
+                    <attribute name="string">Destination Location</attribute>
+                    <attribute name="domain">[('usage','=','internal'),('company_id','=',company_id)]</attribute>
+                    <attribute name="options">{'no_create': True,'no_open': True}</attribute>
+                    <attribute name="readonly">context.get('sequence_code') != 'IN'</attribute>
+                    <attribute name="force_save">1</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="tw_stock_picking_batch_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.picking.batch.inherit.form</field>
+            <field name="model">stock.picking.batch</field>
+            <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="duplicate">0</attribute>
+                </xpath>
+                <button name="action_view_reception_report" position="after">
+                    <button name="action_view_pickings" string="View Pickings" type="object" class="oe_stat_button" icon="fa-list" invisible="not picking_ids"/>
+                    <button name="action_view_next_batch" string="View Next Batch" type="object" class="oe_stat_button" icon="fa-truck" invisible="not batch_next_id"/>
+                    <button name="action_view_backorder_batch" string="View Backorder Batch" type="object" class="oe_stat_button" icon="fa-share" invisible="not batch_backorder_id"/>
+                </button>
+                <button name="action_confirm" position="before">
+                    <button name="action_generate_line" invisible="state != 'draft' or division != 'Sparepart'" string="Generate Line" type="object" class="oe_highlight" groups="tw_stock.group_tw_stock_picking_batch_button_generate_line_read"/>
+                    <button name="action_set_draft" invisible="state != 'cancel'" string="Set to Draft" type="object" class="oe_highlight" groups="tw_stock.group_tw_stock_picking_batch_button_set_draft_read"/>
+                </button>
+                <button name="action_confirm" position="attributes">
+                    <attribute name="groups">tw_stock.group_tw_stock_picking_batch_button_confirm_read</attribute>
+                </button>
+                <xpath expr="//button[@name='action_done'][1]" position="attributes">
+                    <attribute name="groups">tw_stock.group_tw_stock_picking_batch_button_validate_read</attribute>
+                    <attribute name="class">oe_highlight</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_done'][2]" position="attributes">
+                    <attribute name="groups">tw_stock.group_tw_stock_picking_batch_button_validate_read</attribute>
+                    <attribute name="class">oe_highlight</attribute>
+                </xpath>
+                <button name="action_assign" position="replace">
+                </button>
+                <button name="action_print" position="replace">
+                    <button name="action_print_travel_document" string="Print Surat Jalan" type="object" invisible="state != 'done' and picking_type_id.code != 'outgoing'" data-hotkey="o" groups="tw_stock.group_tw_stock_travel_document"/>
+                    <button name="action_batch_goods_receipt_report" string="Print Bukti Penerimaan" type="object" invisible="state != 'done' and picking_type_code != 'incoming'" data-hotkey="g" groups="tw_stock.group_tw_stock_goods_receipt"/>
+                </button>
+                <button name="action_open_label_layout" position="replace">
+                </button>
+                <button name="action_cancel" position="attributes">
+                    <attribute name="groups">tw_stock.group_tw_stock_picking_batch_button_cancel_read</attribute>
+                </button>
+                <field name="user_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                    <attribute name="options">{'no_create': True,'no_open': True}</attribute>
+                </field>
+                <field name="picking_type_id" position="replace">
+                </field>
+                <xpath expr="//group[@id='batch_delivery_data']/field[@name='company_id']" position="replace">
+                </xpath>
+                <field name="user_id" position="before">
+                    <field name="type" invisible="1"/>
+                    <field name="is_without_source" invisible="1"/>
+                    <field name="use_create_lots" invisible="1"/>
+                    <field name="company_id" string="Branch" force_save="1" readonly="state != 'draft'" domain="[('branch_type_id.value','=','MD')]" groups="base.group_multi_company" options="{'no_create': True,'no_open': True}"/>
+                    <field name="picking_type_id" required="1" readonly="state != 'draft'" options="{'no_create': True,'no_open': True}" domain="[('company_id', '=', company_id)]" />
+                    <field name="source_picking_ids" widget="many2many_tags" domain="[
+                            ('state','in',['assigned','confirmed','waiting']), ('batch_id','=',False), ('division','=',division), ('picking_type_id','=',picking_type_id), ('company_id','=',company_id)
+                        ]" readonly="state != 'draft'" options="{'no_create': True,'no_open': True}" />
+                </field>
+                <field name="scheduled_date" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="description" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <xpath expr="//sheet/group/group" position="after">
+                    <group name="detail">
+                        <field name="division" placeholder="e.g. Division" options="{'no_create': True,'no_open': True}" required="1" readonly="context.get('is_readonly', state != 'draft')" force_save="1"/>
+                        <field name="date" readonly="1" force_save="1"/>
+                        <field name="location_id" placeholder="e.g. Destination Location" readonly="state != 'draft'" invisible="division == 'Unit'" options="{'no_create': True,'no_open': True}" force_save="1"/>
+                    </group>
+                </xpath>
+
+                <field name="picking_ids" position="attributes">
+                    <attribute name="readonly">state != 'draft'</attribute>
+                    <attribute name="options">{'no_create': True,'no_open': True}</attribute>
+                </field>
+
+                <field name="move_ids" position="attributes">
+                    <attribute name="options">{'no_create': True,'no_open': True}</attribute>
+                </field>
+
+                <xpath expr="//page[@name='page_transfers']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='page_operations']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_put_in_pack']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='page_transfers']" position="after">
+                    <page string="Audit Trail">
+                        <group>
+                            <group>
+                                <field name="create_uid" readonly="1" options="{'no_create': True,'no_open': True}"></field>
+                                <field name="create_date" readonly="1"></field>
+                                <field name="validate_uid" readonly="1" options="{'no_create': True,'no_open': True}"></field>
+                                <field name="validate_date" readonly="1"></field>
+                            </group>
+                            <group>
+                                <field name="write_uid" readonly="1" options="{'no_create': True,'no_open': True}"></field>
+                                <field name="write_date" readonly="1"></field>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+                <xpath expr="//page[@name='page_detailed_operations']" position="before">
+                    <page string="Batch Lines" name="batch_line" invisible="picking_type_code != 'incoming'">
+                        <label for="batch_line_ids" string="Unit" invisible="division == 'Sparepart'"/>
+                        <field name="batch_line_ids" readonly="state != 'draft'">
+                            <list string="Batch Lines" editable="bottom">
+                                <field name="division" column_invisible="1"/>
+                                <field name="lot_ids" column_invisible="1"/>
+                                <field name="package_number" required="parent.division == 'Sparepart'" column_invisible="parent.division != 'Sparepart'"/>
+                                <field name="sequence_number" required="parent.division == 'Sparepart'" column_invisible="parent.division != 'Sparepart'"/>
+                                <field name="lot_id" required="parent.division == 'Unit'" column_invisible="parent.division != 'Unit'" options="{'no_open': True, 'no_create': True}" domain="[('id','in',lot_ids)]"/>
+                                <field name="product_id" readonly="1" column_invisible="parent.division != 'Unit'" options="{'no_open': True, 'no_create': True}" force_save="1"/>
+                                <field name="move_id" optional="hide"/>
+                                <field name="location_dest_id" required="parent.division == 'Unit'" column_invisible="parent.division != 'Unit'" options="{'no_open': True, 'no_create': True}" domain="[('usage','=','internal'),('company_id','=',parent.company_id)]"/>
+                                <field name="residual_capacity" readonly="1" column_invisible="parent.division != 'Unit'"/>
+                                <field name="location_capacity" readonly="1" column_invisible="parent.division != 'Unit'" force_save="1"/>
+                                <field name="is_rfs" column_invisible="parent.division != 'Unit'"/>
+                                <field name="quantity" readonly="1" column_invisible="parent.division != 'Unit'" sum="Total Quantity" force_save="1"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_stock_picking_batch_inherit_filter" model="ir.ui.view">
+            <field name="name">tw.stock.picking.batch.inherit.filter</field>
+            <field name="model">stock.picking.batch</field>
+            <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_filter"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="source_picking_ids" string="Picking"/>
+                    <field name="source_picking_ids" />
+                    <field name="company_id" />
+                    <field name="picking_type_id" string="Operation Type" context="{'group_by': 'picking_type_id'}" />
+                    <field name="division" context="{'group_by': 'division'}" />
+
+                    <field name="batch_line_ids" string="Serial Number" filter_domain="[('batch_line_ids.lot_id','ilike',self)]"/>
+                    <field name="batch_line_ids" string="Product" filter_domain="[('batch_line_ids.product_id','ilike',self)]"/>
+                    <field name="batch_line_ids" string="Qr Code" filter_domain="[('batch_line_ids.qr_code','ilike',self)]"/>
+                    <field name="batch_line_ids" string="Destination Location" filter_domain="[('batch_line_ids.location_dest_id','ilike',self)]"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="action_tw_stock_picking_batch_inherit" model="ir.actions.act_window">
+            <field name="name">Picking Batch</field>
+            <field name="res_model">stock.picking.batch</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{
+                'default_state':'draft',
+                'default_has_batch_line': True,
+                'search_default_draft':'1',
+                'search_default_in_progress':'1'
+            }"/>
+            <field name="search_view_id" ref="stock_picking_batch.stock_picking_batch_filter"/>
+        </record>
+
+        <record id="action_tw_stock_picking_batch_inherit_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="stock_picking_batch.stock_picking_batch_tree"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_batch_inherit"/>
+        </record>
+
+        <record id="action_tw_stock_picking_batch_inherit_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="stock_picking_batch.stock_picking_batch_form"/>
+            <field name="act_window_id" ref="action_tw_stock_picking_batch_inherit"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+		<record id="tw_db_config_list_view" model="ir.ui.view">
+            <field name="name">tw.db.config.tree</field>
+            <field name="model">tw.db.config</field>
+            <field name="arch" type="xml">
+                <list string="DB Config">
+                    <field name="name"/>
+                    <field name="host"/>
+                    <field name="port"/>
+                    <field name="user"/>
+                    <field name="create_date"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_db_config_form_view" model="ir.ui.view">
+            <field name="name">tw.db.config.form</field>
+            <field name="model">tw.db.config</field>
+            <field name="arch" type="xml">
+                <form string="db config">
+                    <header>
+                        <button name="test_connection" type="object" string="Test Connection"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                                <field name="db_name" required="1"/>
+                                <field name="host" required="1"/>
+                                <field name="port" required="1"/>
+                                <field name="user" required="1"/>
+                                <field name="password" password="True" required="1"/>
+                                <field name="create_date" readonly="1"/>
+                                <field name="write_date" readonly="1"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_db_config_filter" model="ir.ui.view">
+            <field name="name">tw.db.config.filter</field>
+            <field name="model">tw.db.config</field>
+            <field name="arch" type="xml">
+                <search string="Search DB Config">
+                    <field name="name"></field>
+                    <field name="host" />
+                    <field name="port" />
+                    <field name="user" />
+                    <field name="create_date" />
+                    <filter name="create_date" string="create date" context="{'group_by': 'create_date'}" />
+                </search>
+            </field>
+        </record> 
+
+        <record id="tw_db_config_action" model="ir.actions.act_window">
+            <field name="name">DB Config</field>
+            <field name="res_model">tw.db.config</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{ }</field>
+        </record>
+        
+        <record id="tw_db_config_action_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_db_config_list_view"/>
+            <field name="act_window_id" ref="tw_db_config_action"/>
+        </record>
+
+        <record id="tw_db_config_action_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_db_config_form_view"/>
+            <field name="act_window_id" ref="tw_db_config_action"/>
+        </record>
+
+        <menuitem id="menuitem_tw_dasboard_config" name="Dashboard" parent="tw_menu.submenu_tw_configuration" sequence="15" groups="tw_db_config.tw_db_config_group_read"/>
+        <menuitem id="menuitem_tw_db_config" action="tw_db_config_action" parent="menuitem_tw_dasboard_config" sequence="1" groups="tw_db_config.tw_db_config_group_read"/>
+    </data>
+</odoo>

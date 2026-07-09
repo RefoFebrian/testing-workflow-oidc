@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="pelunasan_leasing_dso_template">
+            <t t-call="web.html_container">
+                <style type="text/css">
+                    .page {
+                        margin-top: -10px !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                    }
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                    }
+                    th, td {
+                        padding: 5px;
+                        border: 1px solid black;
+                    }
+                    .no-border {
+                        border: none !important;
+                    }
+                    .border-top {
+                        border-top: 1px solid black !important;
+                        border-left: none !important;
+                        border-right: none !important;
+                        border-bottom: none !important;
+                    }
+                    .border-left-top {
+                        border-top: 1px solid black !important;
+                        border-left: 1px solid black !important;
+                        border-right: none !important;
+                        border-bottom: none !important;
+                    }
+                    .border-right-top {
+                        border-top: 1px solid black !important;
+                        border-left: none !important;
+                        border-right: 1px solid black !important;
+                        border-bottom: none !important;
+                    }
+                    .border-left {
+                        border-top: none !important;
+                        border-left: 1px solid black !important;
+                        border-right: none !important;
+                        border-bottom: none !important;
+                    }
+                    .border-right {
+                        border-top: none !important;
+                        border-left: none !important;
+                        border-right: 1px solid black !important;
+                        border-bottom: none !important;
+                    }
+                    .border-bottom {
+                        border-top: none !important;
+                        border-left: none !important;
+                        border-right: none !important;
+                        border-bottom: 1px solid black !important;
+                    }
+                    .border-left-bottom {
+                        border-top: none !important;
+                        border-left: 1px solid black !important;
+                        border-right: none !important;
+                        border-bottom: 1px solid black !important;
+                    }
+                    .border-right-bottom {
+                        border-top: none !important;
+                        border-left: none !important;
+                        border-right: 1px solid black !important;
+                        border-bottom: 1px solid black !important;
+                    }
+                </style>
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <table class="header">
+                            <thead>
+                                <tr>
+                                    <td class="no-border">
+                                        <b>
+                                            <span style="font-size: 20px;" t-esc="doc.company_id.sudo().parent_id.name"/>
+                                        </b>
+                                    </td>
+                                    <td class="no-border">
+                                        <b>
+                                            <span style="font-size: 20px;" t-esc="doc.company_id.name"/>
+                                        </b>
+                                    </td>
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" style="vertical-align: top;">
+                                        <span style="font-size: 18px;" t-esc="print_address(doc.company_id.sudo().parent_id.partner_id)"/>
+                                    </td>
+                                    <td class="no-border" style="vertical-align: top;">
+                                        <span style="font-size: 18px;" t-esc="print_address(doc.company_id.partner_id)"/>
+                                    </td>
+                                    <td class="no-border"/>
+                                </tr>
+                            </thead>
+                            <br/>
+                            <br/>
+                            <table>
+                                <tr>
+                                    <td class="no-border" style="text-align: center;">
+                                        <b>
+                                            <span style="font-size: 18px;">TANDA TERIMA PELUNASAN PENJUALAN KREDIT</span>
+                                        </b>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table>
+                                <tr>
+                                    <td class="no-border" width="15%">Sudah diterima dari</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%">
+                                        <span t-esc="doc.partner_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">Sejumlah</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%">Rp <span t-esc="doc.amount_receivable" t-options="{'widget': 'float', 'precision': 0}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">Terbilang</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%">##                                        <span t-esc="terbilang(doc.amount_receivable)"/>
+ ##</td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td class="no-border" width="100%">
+                                        <b>Dengan Perincian Pembayaran Sebagai Berikut :</b>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr name="price_otr_row">
+                                    <td class="no-border" width="5%"/>
+                                    <td class="no-border" width="2%">1.</td>
+                                    <td class="no-border" width="15%">Harga Motor OTR</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="text-end no-border" align="right" width="10%">
+                                        <span t-esc="doc.amount_total" t-options="{'widget': 'float', 'precision': 0}"/>
+                                    </td>
+                                    <td class="no-border" width="33%"/>
+                                </tr>
+                                <tr name="downpayment_row">
+                                    <td class="no-border"/>
+                                    <td class="no-border">2.</td>
+                                    <td class="no-border">Uang Muka</td>
+                                    <td class="no-border">:</td>
+                                    <td class="text-end no-border" align="right">
+                                        <span t-esc="doc.amount_downpayment" t-options="{'widget': 'float', 'precision': 0}"/>
+                                    </td>
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr name="voucher_row">
+                                    <td class="no-border"/>
+                                    <td class="no-border">3.</td>
+                                    <td class="no-border">Voucher</td>
+                                    <td class="no-border">:</td>
+                                    <td class="no-border" align="right" />
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr name="other_row">
+                                    <td class="no-border"/>
+                                    <td class="no-border">4.</td>
+                                    <td class="no-border">Lainnya</td>
+                                    <td class="no-border">:</td>
+                                    <td class="no-border" align="right"/>
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr name="bill_row">
+                                    <td class="no-border"/>
+                                    <td style="padding-top: 2rem" class="no-border" colspan="2">Jumlah Tagihan</td>
+                                    <td style="padding-top: 2rem" class="no-border">:</td>
+                                    <td style="padding-top: 2rem" class="text-end no-border" align="right">
+                                        <span t-esc="doc.amount_receivable" t-options="{'widget': 'float', 'precision': 0}"/>
+                                    </td>
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr name="installment_row">
+                                    <td class="no-border"/>
+                                    <td class="no-border" colspan="2">Angsuran Finco</td>
+                                    <td class="no-border">:</td>
+                                    <td class="no-border" align="right">
+                                        <span t-esc="sum(doc.order_line.filtered(lambda l: l.product_id).mapped('installment'))" t-options="{'widget': 'float', 'precision': 0}"/>
+                                    </td>
+                                    <td class="no-border"/>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table>
+                                <tr>
+                                    <td class="no-border" width="100%">
+                                        <b>Untuk Data Kendaraan Sepada Motor Sebagai Berikut :</b>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td class="no-border" width="15%">No. Sale Order</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="33%">
+                                        <span t-esc="doc.name"/>
+                                    </td>
+                                    <td class="no-border" width="15%">Tanggal</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="33%">
+                                        <span t-field="doc.date_order" t-options='{"widget": "date", "format": "dd-MM-yyyy"}'/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">Nama Pelanggan</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="33%">
+                                        <span t-esc="doc.partner_id.name"/>
+                                    </td>
+                                    <td class="no-border" width="15%"/>
+                                    <td class="no-border" width="2%"/>
+                                    <td class="no-border" width="33%"/>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table class="detail">
+                                <thead>
+                                    <tr>
+                                        <th>Type Motor</th>
+                                        <th>Warna</th>
+                                        <th>No. Mesin</th>
+                                        <th>No. Rangka</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="doc.order_line.filtered(lambda l: l.product_id)" t-as="line">
+                                        <tr>
+                                            <td>
+                                                <span t-esc="line.product_id.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="line.product_id.product_template_attribute_value_ids.code"/>
+ -                                                <span t-esc="line.product_id.product_template_attribute_value_ids.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="line.lot_id.name"/>
+                                            </td>
+                                            <td class="text-end">
+                                                <span t-esc="line.lot_id.chassis_number"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <br/>
+                            <table>
+                                <tr>
+                                    <td class="no-border" width="100%">
+                                        <b>Mohon Pembayaran Anda Mencantumkan Nomor Referensi Kami di Atas dan Ditransfer ke Rekening Kami dibawah ini :</b>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td class="no-border" width="5%"/>
+                                    <td class="no-border" width="17%">Nama Bank</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%">
+                                        <b>
+                                            <span t-esc="doc.journal_id.name"/>
+                                        </b>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td class="no-border" width="5%"/>
+                                    <td class="no-border" width="30%">Terima kasih atas Kepercayaan dan Kerjasamanya.</td>
+                                    <td class="no-border" width="2%"></td>
+                                    <td class="no-border" width="30%"></td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="5%"/>
+                                    <td class="no-border" width="30%">
+                                        <span t-esc="doc.company_id.sudo().parent_id.name"/>
+                                    </td>
+                                    <td class="no-border" width="2%"></td>
+                                    <td class="no-border" width="30%"></td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table>
+                                <tr>
+                                    <td class="signature-placholder top-left no-border">
+                                        <span t-esc="doc.company_id.state_id.name"/>
+,                                        <span t-esc="time_date(doc.date_order)"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr>
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr>
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr>
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr>
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr>
+                                    <td class="no-border top-border">
+                                        <span t-esc="user.name"/>
+,                                        <span t-esc="time_date(doc.date_order)"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

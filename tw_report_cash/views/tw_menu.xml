@@ -1,0 +1,5 @@
+<odoo>
+    <data>
+        <menuitem id="menu_report_cash" name="Laporan Cash" parent="tw_menu.submenu_tw_backoffice_report" sequence="5" groups="tw_report_cash.group_report_cash" action="action_report_cash_wizard"/>
+    </data>
+</odoo>

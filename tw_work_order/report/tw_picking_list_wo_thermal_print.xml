@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="print_wo_picking_list">
+            <style type="text/css">
+                td {font-size: 13}
+                .td {font-size: 13}
+            </style>
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page" style="padding: 0px !important;margin: 0px !important;">
+                        <table width="100%" style="padding: 0px !important;margin: 0px !important;">
+                            <tr>
+                                <td>
+                                    <table width="100%">
+                                        <tr>
+                                            <td width="70.00%">
+                                                <t t-set="base_url" t-value="request.httprequest.host_url.rstrip('/')"/>
+                                                <img t-att-src="base_url + '/tw_work_order/static/src/img/ahass.jpg'"
+                                                    style="width:80px; height:25px; align:right;position:absolute" />
+                                            </td>
+                                            <td width="50.00%" rowspan="8" align="right">
+                                                <img t-att-src="'data:image/png;base64,' + o.qr_code_base64" style="width: 2cm; height: 2cm;" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 14px;">
+                                                <span style="color:white">_</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 14px;">
+                                                <span style="color:white">_</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 14px;">
+                                                <span style="color:white">_</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 14px;">
+                                                <span style="color:white">_</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 14px;">
+                                                <span style="color:white">_</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 14px;">
+                                                <span t-field="o.company_id.name" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 14px;">
+                                                <span t-field="o.company_id.street" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 14px;">No. Telp <span
+                                                    t-field="o.company_id.phone" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 16px;text-align: Center"
+                                                colspan="2">
+                                                <b>PICKING LIST</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 14px;" height="12">NO WO : &#160;<span
+                                                    t-field="o.name" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 14px;" height="12">Tanggal : &#160;<span
+                                                    t-field="o.date"  t-options='{"widget": "date", "format": "dd-MM-yyyy"}'/></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 14px;" colspan="2">
+                                                <span style="color:white">_</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <table width="100%" style="font-size: 14px;">
+                            <tr>
+                                <td style="font-size: 14px;" colspan="3" height="16">
+                                    <b>DATA KONSUMEN</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 13px;" width="37.00%" height="12">No Polisi</td>
+                                <td style="font-size: 13px;" width="2.00%">:</td>
+                                <td style="font-size: 13px;" width="60.00%">
+                                    <span t-field="o.plate_number" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 13px;" width="27.00%" height="12">Nama Pemilik</td>
+                                <td style="font-size: 13px;" width="2.00%">:</td>
+                                <td style="font-size: 13px;" width="70.00%">
+                                    <span t-field="o.customer_stnk_id.name" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 13px;" width="27.00%" height="12">Alamat
+                                    Pemilik</td>
+                                <td style="font-size: 13px;" width="2.00%">:</td>
+                                <td style="font-size: 13px;" width="70.00%">
+                                    <span t-field="o.customer_stnk_id.street" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 13px;" width="37.00%" height="12">NO STNK</td>
+                                <td style="font-size: 13px;" width="2.00%">:</td>
+                                <td style="font-size: 13px;" width="60.00%">
+                                    <span t-field="o.customer_stnk_id.code" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 13px;" colspan="3">
+                                    <span style="color:white">_</span>
+                                </td>
+                            </tr>
+                        </table>
+                        <table width="100%" style="font-size: 16px;">
+                            <tr>
+                                <td style="font-size: 14px;" colspan="3" height="16">
+                                    <b>DATA KENDARAAN</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 13px;" width="37.00%" height="12">No Polisi</td>
+                                <td style="font-size: 13px;" width="2.00%">:</td>
+                                <td style="font-size: 13px;" width="60.00%">
+                                    <span t-field="o.plate_number" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 13px;" width="27.00%" height="12">No Engine</td>
+                                <td style="font-size: 13px;" width="2.00%">:</td>
+                                <td style="font-size: 13px;" width="70.00%">
+                                    <span t-field="o.lot_id.name" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 13px;" width="27.00%" height="12">No Rangka</td>
+                                <td style="font-size: 13px;" width="2.00%">:</td>
+                                <td style="font-size: 13px;" width="70.00%">
+                                    <span t-field="o.lot_id.chassis_number" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 13px;" width="27.00%" height="12">Tipe Motor</td>
+                                <td style="font-size: 13px;" width="2.00%">:</td>
+                                <td style="font-size: 13px;" width="70.00%"><span
+                                        t-field="o.product_id.description" /> (<span
+                                        t-field="o.product_id.name" />)</td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 13px;" width="27.00%" height="12">Kilometer</td>
+                                <td style="font-size: 13px;" width="2.00%">:</td>
+                                <td style="font-size: 13px;" width="70.00%">
+                                    <span t-field="o.km" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 13px;" width="27.00%" height="12">FUEL</td>
+                                <td style="font-size: 13px;" width="2.00%">:</td>
+                                <td style="font-size: 13px;" width="70.00%"><span t-field="o.fuel" />
+                                    %</td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <span style="color:white">_</span>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table width="100%" style="font-size: 13px;">
+                            <tr>
+                                <td style="font-size: 14px;">
+                                    <b>KELUHAN &amp; CATATAN : </b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table width="100%"
+                                        style="align:center; border: 1px solid black;">
+                                        <tr>
+                                            <td height="60" style="font-size: 13px;">
+                                                <span style="color:white">_</span>
+                                                <span
+                                                    t-field="o.note" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="color:white">_</span>
+                                </td>
+                            </tr>
+                        </table>
+                        <table width="100%" style="font-size: 13px;table-layout:fixed;">
+                            <tr>
+                                <td style="font-size: 14px;">
+                                    <b>
+                                        <u>RINCIAN PEKERJAAN &amp; SUKU CADANG</u>
+                                    </b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table width="100%" style="font-size: 13px;table-layout:fixed;">
+                                        <t t-if="o.order_line">
+                                            <tr>
+                                                <td style="font-size: 13px;" width="30.00%">
+                                                    <b>Pekerjaan</b>
+                                                </td>
+                                                <td width="30.00%"
+                                                    style="font-size: 13px;text-align:left;"></td>
+                                                <td width="10.00%"
+                                                    style="font-size: 13px;text-align:center;">
+                                                    <b>Qty</b>
+                                                </td>
+                                                <td width="10.00%"
+                                                    style="font-size: 13px;text-align:left;"></td>
+                                            </tr>
+                                            <tr t-foreach="o.order_line" t-as="k"
+                                                style="font-size: 14px;">
+                                                <t t-if="k.division == 'Service'">
+                                                    <tr>
+                                                        <td width="30.00%"
+                                                            style="font-size: 13px;white-space:nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                            <span
+                                                                t-field="k.product_id.display_name" />
+                                                        </td>
+                                                        <td width="30.00%"
+                                                            style="font-size: 13px;text-align:left;"></td>
+                                                        <td width="10.00%"
+                                                            style="font-size: 13px;text-align:center;">
+                                                            <span t-field="k.product_qty" />
+                                                        </td>
+                                                        <td width="10.00%"
+                                                            style="font-size: 13px;text-align:left;"></td>
+                                                    </tr>
+                                                </t>
+                                            </tr>
+                                        </t>
+                                        <tr>
+                                            <td width="100%" colspan="3">
+                                                _____________________________________</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table width="100%" style="font-size: 13px;table-layout:fixed;">
+                                        <t t-if="o.order_line">
+                                            <tr>
+                                                <td width="30.00%"
+                                                    style="font-size: 13px;text-align:left;">
+                                                    <b>Kode Sparepart</b>
+                                                </td>
+                                                <td width="30.00%"
+                                                    style="font-size: 13px;text-align:left;">
+                                                    <b>Nama Part</b>
+                                                </td>
+                                                <td width="10.00%"
+                                                    style="font-size: 13px;text-align:center;">
+                                                    <b>Qty</b>
+                                                </td>
+                                                <td width="10.00%"
+                                                    style="font-size: 13px;text-align:left;">
+                                                    <b>Lokasi</b>
+                                                </td>
+                                            </tr>
+                                            <tr t-foreach="o.order_line" t-as="k"
+                                                style="font-size: 14px;">
+                                                <t t-if="k.division == 'Sparepart'">
+                                                    <tr>
+                                                        <td width="30.00%"
+                                                            style="font-size: 13px;text-align:left;white-space:nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                            <span t-field="k.product_id.name" />
+                                                        </td>
+                                                        <td width="30.00%"
+                                                            style="font-size: 13px;text-align:left;">
+                                                            <span
+                                                                t-field="k.product_id.product_tmpl_id.description" />
+                                                        </td>
+                                                        <td width="10.00%"
+                                                            style="font-size: 13px;text-align:center;">
+                                                            <span t-field="k.product_qty" />
+                                                        </td>
+                                                        <td width="10.00%"
+                                                            style="font-size: 13px;text-align:left;">
+                                                            <span
+                                                                t-field="k.location_id.display_name" />
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                            </tr>
+                                        </t>
+                                        <tr>
+                                            <td width="100%" colspan="3">
+                                                _____________________________________</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100.00%" colspan="3">
+                                                <span style="color:white">_</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                    <table width="100%"
+                                        style="font-size: 14px;table-layout:fixed;padding-top:10px;">
+                                        <tr>
+                                            <td width="50.00%"
+                                                style="font-size: 13px;text-align:left;">Dicetak
+                                                Oleh :</td>
+                                            <td width="15.00%"
+                                                style="font-size: 13px;text-align:center;" />
+                                            <td width="35.00%"
+                                                style="font-size: 13px;text-align:right;">Dikeluarkan
+                                                Oleh :</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100.00%" colspan="3">
+                                                <span style="color:white">_</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100.00%" colspan="3">
+                                                <span style="color:white">_</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100.00%" colspan="3">
+                                                <span style="color:white">_</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100.00%" colspan="3">
+                                                <span style="color:white">_</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50.00%" height="15"
+                                                style="font-size: 13px;text-align:left;">
+                                                <b>(<span style="color:white">_____________________</span>
+                                                    )</b>
+                                            </td>
+                                            <td width="0.00%"
+                                                style="font-size: 13px;text-align:center;" />
+                                            <td width="50.00%"
+                                                style="font-size: 13px;text-align:right;">
+                                                <b>(<span style="color:white">_____________________</span>
+                                                    )</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50.00%"
+                                                style="font-size: 13px;text-align:left;">Diterima
+                                                Oleh :</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100.00%" colspan="3">
+                                                <span style="color:white">_</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100.00%" colspan="3">
+                                                <span style="color:white">_</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100.00%" colspan="3">
+                                                <span style="color:white">_</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100.00%" colspan="3">
+                                                <span style="color:white">_</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50.00%"
+                                                style="font-size: 13px;text-align:left;">
+                                                <b>
+                                                    <u>(<span t-field="o.mechanic_id.name" />)</u>
+                                                </b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50.00%"
+                                                style="font-size: 13px;text-align:left;">
+                                                Mekanik</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100.00%" colspan="3">
+                                                <span style="color:white">_</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="oe_structure">
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

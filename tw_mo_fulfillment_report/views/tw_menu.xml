@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Showroom -->
+    <menuitem name="Laporan MO Fulfillment Unit" id="menuitem_tw_mo_fulfillment_report_unit"
+        parent="tw_menu.submenu_tw_showroom_report" sequence="4"
+        action="action_tw_mo_fulfillment_report_showroom_wizard" 
+        groups="tw_mo_fulfillment_report.group_tw_mo_fulfillment_laporan_showroom"/>
+
+    <!-- Workshop -->
+    <menuitem name="Laporan MO Fulfillment Part" id="menuitem_tw_mo_fulfillment_report_part"
+        parent="tw_menu.submenu_tw_workshop_report" sequence="4"
+        action="action_tw_mo_fulfillment_report_workshop_wizard" 
+        groups="tw_mo_fulfillment_report.group_tw_mo_fulfillment_laporan_workshop"/>
+
+
+</odoo>

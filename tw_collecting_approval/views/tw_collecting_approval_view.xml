@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+
+      <record model="ir.ui.view" id="tw_collecting_inherit_approval_form_view">
+          <field name="name">tw.collecting.inherit.approval.form</field>
+          <field name="model">tw.collecting</field>
+          <field name="inherit_id" ref="tw_collecting.tw_collecting_form_view"/>
+          <field name="arch" type="xml">
+                <field name="state" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,confirm"/>
+                </field>
+
+                <button name="action_confirm" position="attributes">
+                    <attribute name="invisible">state != 'approved'</attribute>
+                </button>
+                
+                <button name="action_confirm" position="after">
+                    <button name="action_request_approval" data-hotkey="r" groups="tw_collecting_approval.group_tw_collecting_rfa" invisible="amount == 0 or state != 'draft'" string="RFA" type="object" class="oe_highlight"/>
+                    <button name="action_approval" data-hotkey="a" invisible="state != 'waiting_for_approval'" string="Approve" type="object" class="oe_highlight"/>
+                    <button name="%(tw_approval.tw_approval_reject_wizard_action)d" invisible="state != 'waiting_for_approval'" string="Reject" type="action" context="{'model_name':'tw.collecting','update_value':{'state':'draft'}}"/>
+                    <button name="%(tw_approval.tw_approval_cancel_wizard_action)d" invisible="state not in ('waiting_for_approval','approved')" string="Cancel Approval" groups="tw_collecting_approval.group_tw_collecting_cancel_approval" type="action" context="{'model_name':'tw.collecting','update_value':{'state':'draft'}}"/>																		
+                </button>
+
+                <page name="audit_trail" position="before">
+                    <page string="Approval">
+                        <field name="approval_ids" />
+                    </page>
+                </page>
+          </field>
+      </record>
+
+    </data>
+</odoo>

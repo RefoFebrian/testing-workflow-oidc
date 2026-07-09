@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Inherited Form View -->
+			<record id="tw_inherit_p2p_upo_purchase_order_view_form" model="ir.ui.view">
+				<field name="name">tw.purchase.order.p2p.upo.form</field>
+				<field name="model">tw.p2p.purchase.order</field>
+				<field name="inherit_id" ref="tw_p2p.tw_p2p_purchase_form_view" />
+				<field name="arch" type="xml">
+                    <xpath expr="//page[@name='audit_trail']" position="before">
+						<page name="history_upo" string="History File UPO">
+							<field name="export_upo_ids" readonly="1">
+                                <list string="History File UPO">
+                                    <field name="filename"/>
+                                    <field name="date"/>
+                                    <field name="state"/>
+                                </list>
+                                <form>
+                                    <group>
+                                        <field name="filename" readonly="1"/>
+                                        <field name="date" readonly="1"/>
+                                        <field name="state" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="content" readonly="1"/>
+                                    </group>
+                                </form>
+                            </field>
+						</page>
+                        <page name="mft_error_log" string="MFT Error Log">
+                            <field name="b2b_error_log_ids" readonly="1">
+                                <list string="MFT Error Logs">
+                                    <field name="name"/>
+                                    <field name="state" widget="badge" decoration-success="state == 'done'" decoration-danger="state == 'open'"/>
+                                    <field name="datetime"/>
+                                </list>
+                            </field>
+                        </page>
+					</xpath>
+                </field>
+            </record>
+
+</odoo>

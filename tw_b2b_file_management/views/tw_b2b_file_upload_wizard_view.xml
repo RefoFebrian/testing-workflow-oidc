@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="tw_b2b_file_upload_wizard_view_form" model="ir.ui.view">
+			<field name="name">tw.b2b.file.upload.wizard</field>
+            <field name="model">tw.b2b.file.upload</field>
+            <field name="arch" type="xml">
+                <form>
+                	<sheet>
+						<group col="4" colspan="4">
+							<group colspan="2">
+								<field name="config_options_id" string="Upload Ke" required="1" options="{'no_create': True,'no_open':True}"/>
+								<field name="type" required="1"/>
+								<field name="is_teds_upload" invisible="1"/>
+								<field name="extension" string="Format File" invisible="type == 'zip'" required="type == 'file' and not is_teds_upload"/>
+							</group>
+							<group colspan="2" col="1">
+								<field name="attachment_ids" nolabel="1" widget="many2many_binary_dropzone" required="1"/>
+		                	</group>
+		                </group>
+                        <field invisible="1" name="state_x"/>
+		                <newline/>
+		                <group col="4" fill="0">
+		                </group>
+		                <footer>
+		                    <button name="action_import" string="Import" type="object" class="oe_highlight"/>
+		                    <button string="Cancel" class="oe_link" special="cancel" />
+		                </footer>
+	                </sheet>
+	            </form>
+            </field>
+        </record>
+
+	    <record id="tw_b2b_file_upload_wizard_action" model="ir.actions.act_window">
+	        <field name="name">Upload MFT File</field>
+	        <field name="res_model">tw.b2b.file.upload</field>
+	        <field name="view_mode">form</field>
+	        <field name="view_id" ref="tw_b2b_file_management.tw_b2b_file_upload_wizard_view_form"/>
+	        <field name="target">new</field>
+	    </record>
+	</data>
+</odoo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_whatsapp_content_template_self_register" model="tw.whatsapp.content.template">
+            <field name="name">Informasi Self Register</field>
+            <field name="subject">SelfRegister_WA</field>
+            <field name="content">Salam 1 Hati,\n\nInformasi Self Register Anda sebagai berikut :\nNama Konsumen : {{1}}\nNomor Self Register : {{2}}\n\nTerima kasih\n\n_pesan ini adalah pesan otomatis_</field>
+        </record>
+
+    </data>
+</odoo>

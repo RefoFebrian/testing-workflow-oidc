@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+		<!-- Product Attribute -->
+		<record id="product_attribute_color" model="product.attribute">
+			<field name="name">Color</field>
+		</record>
+		<record id="base.main_company" model="res.company">
+			<field name="attribute_id" ref="tw_product.product_attribute_color"/>
+		</record>
+		
+		<!-- Product Attribut Value -->
+		<record id='product_attribute_value_00' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>DUMMY</field>
+			<field name='code'>00</field>
+		</record>
+		<record id='product_attribute_value_91' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>CREAM NO STRIPE</field>
+			<field name='code'>91</field>
+		</record>
+		<record id='product_attribute_value_92' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BS EMULATOR</field>
+			<field name='code'>92</field>
+		</record>
+		<record id='product_attribute_value_93' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>ORANGE NO STRP</field>
+			<field name='code'>93</field>
+		</record>
+		<record id='product_attribute_value_95' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>PUTIH NO STRIPE</field>
+			<field name='code'>95</field>
+		</record>
+		<record id='product_attribute_value_96' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BLUE NO STRIPE</field>
+			<field name='code'>96</field>
+		</record>
+		<record id='product_attribute_value_98' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>RED NO STRIPE</field>
+			<field name='code'>98</field>
+		</record>
+		<record id='product_attribute_value_99' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BLACK NO STRIPE</field>
+			<field name='code'>99</field>
+		</record>
+		<record id='product_attribute_value_ac' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>ABU-ABU COKLAT</field>
+			<field name='code'>AC</field>
+		</record>
+		<record id='product_attribute_value_ag' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>ARMY GREEN</field>
+			<field name='code'>AG</field>
+		</record>
+		<record id='product_attribute_value_ah' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>ABU2 HITAM</field>
+			<field name='code'>AH</field>
+		</record>
+		<record id='product_attribute_value_am' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>ABUABU-HITAM RD</field>
+			<field name='code'>AM</field>
+		</record>
+		<record id='product_attribute_value_ar' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>ABU-ABU MERAH</field>
+			<field name='code'>AR</field>
+		</record>
+		<record id='product_attribute_value_as' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>ABU ABU SILVER</field>
+			<field name='code'>AS</field>
+		</record>
+		<record id='product_attribute_value_bb' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BLACK BLUE</field>
+			<field name='code'>BB</field>
+		</record>
+		<record id='product_attribute_value_bc' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BIRU-KREM</field>
+			<field name='code'>BC</field>
+		</record>
+		<record id='product_attribute_value_be' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BLACK GREY</field>
+			<field name='code'>BE</field>
+		</record>
+		<record id='product_attribute_value_bg' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BLACK GREEN</field>
+			<field name='code'>BG</field>
+		</record>
+		<record id='product_attribute_value_bh' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BIRU HITAM</field>
+			<field name='code'>BH</field>
+		</record>
+		<record id='product_attribute_value_bk' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BLACK</field>
+			<field name='code'>BK</field>
+		</record>
+		<record id='product_attribute_value_bl' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BLUE</field>
+			<field name='code'>BL</field>
+		</record>
+		<record id='product_attribute_value_bm' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BIRU MERAH</field>
+			<field name='code'>BM</field>
+		</record>
+		<record id='product_attribute_value_bo' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BLACK ORANGE</field>
+			<field name='code'>BO</field>
+		</record>
+		<record id='product_attribute_value_bp' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BIRU PUTIH</field>
+			<field name='code'>BP</field>
+		</record>
+		<record id='product_attribute_value_bq' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BLUE</field>
+			<field name='code'>BQ</field>
+		</record>
+		<record id='product_attribute_value_br' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BLACK RED</field>
+			<field name='code'>BR</field>
+		</record>
+		<record id='product_attribute_value_bs' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BLACK SILVER</field>
+			<field name='code'>BS</field>
+		</record>
+		<record id='product_attribute_value_bt' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BLUE TELKOM</field>
+			<field name='code'>BT</field>
+		</record>
+		<record id='product_attribute_value_bv' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BLACK VIOLET</field>
+			<field name='code'>BV</field>
+		</record>
+		<record id='product_attribute_value_bw' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BROWN</field>
+			<field name='code'>BW</field>
+		</record>
+		<record id='product_attribute_value_bx' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BLUE SILVER</field>
+			<field name='code'>BX</field>
+		</record>
+		<record id='product_attribute_value_by' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BLACK YELLOW</field>
+			<field name='code'>BY</field>
+		</record>
+		<record id='product_attribute_value_bz' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BIRU - SILVER</field>
+			<field name='code'>BZ</field>
+		</record>
+		<record id='product_attribute_value_ch' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>COKLAT HITAM</field>
+			<field name='code'>CH</field>
+		</record>
+		<record id='product_attribute_value_cp' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>CHROME PLATING</field>
+			<field name='code'>CP</field>
+		</record>
+		<record id='product_attribute_value_cr' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>CREAM</field>
+			<field name='code'>CR</field>
+		</record>
+		<record id='product_attribute_value_cs' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>COKLAT - SILVER</field>
+			<field name='code'>CS</field>
+		</record>
+		<record id='product_attribute_value_dk' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>DARK KNIGHT</field>
+			<field name='code'>DK</field>
+		</record>
+		<record id='product_attribute_value_gd' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>GOLD</field>
+			<field name='code'>GD</field>
+		</record>
+		<record id='product_attribute_value_gh' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HIJAU HITAM</field>
+			<field name='code'>GH</field>
+		</record>
+		<record id='product_attribute_value_gr' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>GREY</field>
+			<field name='code'>GR</field>
+		</record>
+		<record id='product_attribute_value_gs' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>GREY SILVER</field>
+			<field name='code'>GS</field>
+		</record>
+		<record id='product_attribute_value_ha' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM-ABU ABU</field>
+			<field name='code'>HA</field>
+		</record>
+		<record id='product_attribute_value_hb' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM BIRU</field>
+			<field name='code'>HB</field>
+		</record>
+		<record id='product_attribute_value_hc' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM-PUTIHBIRU</field>
+			<field name='code'>HC</field>
+		</record>
+		<record id='product_attribute_value_hd' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM-PUTIHPINK</field>
+			<field name='code'>HD</field>
+		</record>
+		<record id='product_attribute_value_he' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM-PINK</field>
+			<field name='code'>HE</field>
+		</record>
+		<record id='product_attribute_value_hf' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM - COKLAT</field>
+			<field name='code'>HF</field>
+		</record>
+		<record id='product_attribute_value_hg' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM PUTIH RD</field>
+			<field name='code'>HG</field>
+		</record>
+		<record id='product_attribute_value_hh' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM-HIJAU</field>
+			<field name='code'>HH</field>
+		</record>
+		<record id='product_attribute_value_hj' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM MERAH SV</field>
+			<field name='code'>HJ</field>
+		</record>
+		<record id='product_attribute_value_hk' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM - KUNING</field>
+			<field name='code'>HK</field>
+		</record>
+		<record id='product_attribute_value_hl' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM KUNING SV</field>
+			<field name='code'>HL</field>
+		</record>
+		<record id='product_attribute_value_hm' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM MERAH</field>
+			<field name='code'>HM</field>
+		</record>
+		<record id='product_attribute_value_hn' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM MERAH PUTIH</field>
+			<field name='code'>HN</field>
+		</record>
+		<record id='product_attribute_value_ho' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM ORANGE</field>
+			<field name='code'>HO</field>
+		</record>
+		<record id='product_attribute_value_hp' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM PUTIH</field>
+			<field name='code'>HP</field>
+		</record>
+		<record id='product_attribute_value_hr' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM - BIRU OR</field>
+			<field name='code'>HR</field>
+		</record>
+		<record id='product_attribute_value_hs' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM SILVER</field>
+			<field name='code'>HS</field>
+		</record>
+		<record id='product_attribute_value_ht' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HIJAU PUTIH</field>
+			<field name='code'>HT</field>
+		</record>
+		<record id='product_attribute_value_hu' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM - BIRU PU</field>
+			<field name='code'>HU</field>
+		</record>
+		<record id='product_attribute_value_hw' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM-BEIGE</field>
+			<field name='code'>HW</field>
+		</record>
+		<record id='product_attribute_value_hy' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM-SILVER YL</field>
+			<field name='code'>HY</field>
+		</record>
+		<record id='product_attribute_value_hz' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM-SILVER BL</field>
+			<field name='code'>HZ</field>
+		</record>
+		<record id='product_attribute_value_ka' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>KREM SILVER</field>
+			<field name='code'>KA</field>
+		</record>
+		<record id='product_attribute_value_kc' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>KREM-COKLAT</field>
+			<field name='code'>KC</field>
+		</record>
+		<record id='product_attribute_value_kh' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>KUNING HITAM</field>
+			<field name='code'>KH</field>
+		</record>
+		<record id='product_attribute_value_ks' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>KUNING SILVER</field>
+			<field name='code'>KS</field>
+		</record>
+		<record id='product_attribute_value_ls' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BIRU SILVER</field>
+			<field name='code'>LS</field>
+		</record>
+		<record id='product_attribute_value_ma' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>MERAH ABU-ABU</field>
+			<field name='code'>MA</field>
+		</record>
+		<record id='product_attribute_value_mc' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>MAGENTA HITAM</field>
+			<field name='code'>MC</field>
+		</record>
+		<record id='product_attribute_value_mf' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>MERAH PUTIH HITAM</field>
+			<field name='code'>MF</field>
+		</record>
+		<record id='product_attribute_value_mh' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>MERAH HITAM</field>
+			<field name='code'>MH</field>
+		</record>
+		<record id='product_attribute_value_mk' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>MERAH-KREM</field>
+			<field name='code'>MK</field>
+		</record>
+		<record id='product_attribute_value_mp' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>MERAH PUTIH</field>
+			<field name='code'>MP</field>
+		</record>
+		<record id='product_attribute_value_ms' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>MERAH SILVER</field>
+			<field name='code'>MS</field>
+		</record>
+		<record id='product_attribute_value_nk' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>PINK</field>
+			<field name='code'>NK</field>
+		</record>
+		<record id='product_attribute_value_ob' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>ORANGE BIRU</field>
+			<field name='code'>OB</field>
+		</record>
+		<record id='product_attribute_value_oh' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>ORANGE HITAM</field>
+			<field name='code'>OH</field>
+		</record>
+		<record id='product_attribute_value_op' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>ORANGE PUTIH</field>
+			<field name='code'>OP</field>
+		</record>
+		<record id='product_attribute_value_or' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>ORANGE</field>
+			<field name='code'>OR</field>
+		</record>
+		<record id='product_attribute_value_os' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>ORANGE SILVER</field>
+			<field name='code'>OS</field>
+		</record>
+		<record id='product_attribute_value_pa' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>PUTIH ABU-ABU</field>
+			<field name='code'>PA</field>
+		</record>
+		<record id='product_attribute_value_pb' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>PUTIH BIRU</field>
+			<field name='code'>PB</field>
+		</record>
+		<record id='product_attribute_value_pc' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>PUTIH BIRU MERAH</field>
+			<field name='code'>PC</field>
+		</record>
+		<record id='product_attribute_value_pd' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>PUTIH MERAH BIR</field>
+			<field name='code'>PD</field>
+		</record>
+		<record id='product_attribute_value_pe' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>PUTIH-BEIGE</field>
+			<field name='code'>PE</field>
+		</record>
+		<record id='product_attribute_value_pf' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>PUTIH PINK</field>
+			<field name='code'>PF</field>
+		</record>
+		<record id='product_attribute_value_ph' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>PUTIH HITAM</field>
+			<field name='code'>PH</field>
+		</record>
+		<record id='product_attribute_value_pj' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>PUTIH HIJAU</field>
+			<field name='code'>PJ</field>
+		</record>
+		<record id='product_attribute_value_pk' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>PINK</field>
+			<field name='code'>PK</field>
+		</record>
+		<record id='product_attribute_value_pm' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>PUTIH MERAH</field>
+			<field name='code'>PM</field>
+		</record>
+		<record id='product_attribute_value_po' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>PUTIH ORANGE ME</field>
+			<field name='code'>PO</field>
+		</record>
+		<record id='product_attribute_value_pp' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>PINK PUTIH</field>
+			<field name='code'>PP</field>
+		</record>
+		<record id='product_attribute_value_pr' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>PINK SILVER</field>
+			<field name='code'>PR</field>
+		</record>
+		<record id='product_attribute_value_ps' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>PUTIH SILVER</field>
+			<field name='code'>PS</field>
+		</record>
+		<record id='product_attribute_value_pt' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>PUTIH MAGENTA</field>
+			<field name='code'>PT</field>
+		</record>
+		<record id='product_attribute_value_pv' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>PUTIH VIOLET</field>
+			<field name='code'>PV</field>
+		</record>
+		<record id='product_attribute_value_ra' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>RED WHITE</field>
+			<field name='code'>RA</field>
+		</record>
+		<record id='product_attribute_value_rd' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>RED</field>
+			<field name='code'>RD</field>
+		</record>
+		<record id='product_attribute_value_rs' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>RED SILVER</field>
+			<field name='code'>RS</field>
+		</record>
+		<record id='product_attribute_value_sa' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>SILVER ABU-ABU</field>
+			<field name='code'>SA</field>
+		</record>
+		<record id='product_attribute_value_sb' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>SILVER BIRU</field>
+			<field name='code'>SB</field>
+		</record>
+		<record id='product_attribute_value_sh' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>SILVER HITAM</field>
+			<field name='code'>SH</field>
+		</record>
+		<record id='product_attribute_value_sk' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>SILVER KUNING</field>
+			<field name='code'>SK</field>
+		</record>
+		<record id='product_attribute_value_sm' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>SILVER MERAH</field>
+			<field name='code'>SM</field>
+		</record>
+		<record id='product_attribute_value_st' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>STONE GREY</field>
+			<field name='code'>ST</field>
+		</record>
+		<record id='product_attribute_value_su' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>SILVER UNGU</field>
+			<field name='code'>SU</field>
+		</record>
+		<record id='product_attribute_value_sv' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>SILVER</field>
+			<field name='code'>SV</field>
+		</record>
+		<record id='product_attribute_value_sx' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>SILVER AXIS GR.</field>
+			<field name='code'>SX</field>
+		</record>
+		<record id='product_attribute_value_ua' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BIRU ABU-ABU</field>
+			<field name='code'>UA</field>
+		</record>
+		<record id='product_attribute_value_uo' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>BIRU ORANGE</field>
+			<field name='code'>UO</field>
+		</record>
+		<record id='product_attribute_value_vh' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>VIOLET HITAM</field>
+			<field name='code'>VH</field>
+		</record>
+		<record id='product_attribute_value_vo' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>VIOLET</field>
+			<field name='code'>VO</field>
+		</record>
+		<record id='product_attribute_value_vp' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>VIOLET-PUTIH</field>
+			<field name='code'>VP</field>
+		</record>
+		<record id='product_attribute_value_vs' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>VIOLET - SILVER</field>
+			<field name='code'>VS</field>
+		</record>
+		<record id='product_attribute_value_wg' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>WHITE GREEN</field>
+			<field name='code'>WG</field>
+		</record>
+		<record id='product_attribute_value_wh' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>WHITE</field>
+			<field name='code'>WH</field>
+		</record>
+		<record id='product_attribute_value_wl' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>WHITE BLUE</field>
+			<field name='code'>WL</field>
+		</record>
+		<record id='product_attribute_value_wp' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>WHITE PINK</field>
+			<field name='code'>WP</field>
+		</record>
+		<record id='product_attribute_value_wr' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>WHITE RED</field>
+			<field name='code'>WR</field>
+		</record>
+		<record id='product_attribute_value_ws' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>WHITE SILVER</field>
+			<field name='code'>WS</field>
+		</record>
+		<record id='product_attribute_value_xb' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM - BIRU</field>
+			<field name='code'>XB</field>
+		</record>
+		<record id='product_attribute_value_xe' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM - PINK</field>
+			<field name='code'>XE</field>
+		</record>
+		<record id='product_attribute_value_xh' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM - HIJAU</field>
+			<field name='code'>XH</field>
+		</record>
+		<record id='product_attribute_value_xm' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM - MERAH</field>
+			<field name='code'>XM</field>
+		</record>
+		<record id='product_attribute_value_xo' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM - ORANGE</field>
+			<field name='code'>XO</field>
+		</record>
+		<record id='product_attribute_value_xs' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>HITAM - SILVER</field>
+			<field name='code'>XS</field>
+		</record>
+		<record id='product_attribute_value_yl' model ='product.attribute.value'>
+			<field name='attribute_id' ref='tw_product.product_attribute_color'/>
+			<field name='name'>YELLOW</field>
+			<field name='code'>YL</field>
+		</record>
+	</data>
+</odoo>

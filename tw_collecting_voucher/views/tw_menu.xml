@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Backoffice -->
+    <menuitem id="menu_collecting_voucher" name="Collecting Voucher" parent="tw_menu.submenu_tw_backoffice_non_trade" action="tw_collecting_voucher_action" sequence="140" groups="tw_collecting_voucher.tw_collecting_voucher_group_read"/>
+
+</odoo>

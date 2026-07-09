@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_tw_birojasa_billing_upload_wizard_form" model="ir.ui.view">
+    <field name="name">tw.birojasa.billing.upload.wizard.form</field>
+    <field name="model">tw.vehicle.document.upload.wizard</field>
+    <field name="inherit_id" ref='tw_vehicle_registration_process_upload.tw_vehicle_registration_process_upload_wizard_view_form'/>
+      <field name="arch" type="xml">
+          <xpath expr="//div[hasclass('alert', 'alert-info')]" position="after">
+                  <div class="alert alert-info" role="alert" invisible="upload_type != 'billing'">
+                  <h4>
+                    <i class="fa fa-info-circle" title="Info"/>
+                    Format File Excel
+                  </h4>
+                  <ul>
+                    <li>Kolom 1: Branch (Code) (Mandatory)</li>
+                    <li>Kolom 2: Biro Jasa (Code) (Mandatory)</li>
+                    <li>Kolom 3: Type (reg or adv) (Mandatory)</li>
+                    <li>Kolom 4: description</li>
+                    <li>Kolom 5: document date (Mandatory) (Format: mm/dd/yyyy)</li>
+                    <li>Kolom 6: document number</li>
+                    <li>Kolom 7: document copy</li>
+                    <li>Kolom 8: Taxes (id or name) (jika lebih dari satu, pisahkan dengan koma) (jika menggunakan satu name tax, awali dengan petik satu ('12%))</li>
+                    <li>Kolom 9: engine no (Mandatory)</li>
+                    <li>Kolom 10: tgl jtp notice (Mandatory) (Format: mm/dd/yyyy)</li>
+                    <li>Kolom 11: total tagihan (Mandatory)</li>
+                  </ul>
+                  <table class="table table-bordered" style="width: 60%; margin: 10px 0 20px 20px;">
+                      <tr style="background-color: #f8f9fa;">
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">Kode Branch</td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">Kode Biro Jasa</td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">Type</td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">Description</td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">document date</td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">document number</td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">document copy</td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">Taxes</td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">Engine Number</td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">No notice</td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">Tgl Jtp Notice</td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">Total Tagihan</td>
+                      </tr>
+                      <tr>												
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">DDS</td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">AGL</td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">reg</td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;"></td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">10/15/2025</td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;"></td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">true or false</td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">1 or 12%,11% or '10%</td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">KF11E2141492</td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">k31244</td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">10/15/2025</td>
+                          <td style="padding: 8px; border: 1px solid #dee2e6;">10000000</td>
+                      </tr>
+                  </table>
+                  <p><strong>Catatan:</strong> Baris pertama dianggap header.</p>
+                </div>
+            </xpath>
+      </field>
+  </record>
+</odoo>

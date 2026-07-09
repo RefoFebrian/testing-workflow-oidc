@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+    
+        <record id="view_tw_p2p_purchase_tree" model="ir.ui.view">
+            <field name="name">tw.p2p.purchase.order.line.tree</field>
+            <field name="model">tw.p2p.purchase.order</field>
+            <field eval="1" name="priority"/>
+            <field name="arch" type="xml">
+                <list string="P2P Purchase Order">
+                    <field name="name"/>
+                    <field name="supplier_id"/>
+                    <field name="dealer_id"/>
+                    <field name="date"/>
+                    <field name="purchase_order_type_id"/>
+                    <field name="periode_id"/>
+                    <field name="state" widget="badge" decoration-success="state == 'confirmed'" decoration-danger="state == 'revisi'"/>
+                </list>
+            </field>
+        </record>    	
+ 
+		<record model="ir.ui.view" id="tw_p2p_purchase_form_view">
+		    <field name="name">tw.p2p.purchase.order.form</field>
+		    <field name="model">tw.p2p.purchase.order</field>
+		    <field name="arch" type="xml">
+		        <form string="P2P Purchase Order">	 
+						<header>
+								<button name="action_verification" groups="tw_p2p.group_tw_p2p_purchase_order_verification" type="object" invisible="state not in ('draft','revisi')" string="Verification" class="oe_highlight"/>
+								<button name="action_revisi" groups="tw_p2p.group_tw_p2p_purchase_order_export_upo" type="object" string="Revisi" class="oe_highlight" invisible="state != 'waiting_for_verification'"/>		
+								<button name="action_generate_line" groups="tw_p2p.group_tw_p2p_purchase_order_generate" invisible="purchase_line_ids == False or state not in ('draft') or type_name == 'Additional'" type="object" string="Generate" class="oe_highlight"/>
+								<button name="confirm_order" groups="tw_p2p.group_tw_p2p_purchase_order_confirm" type="object" invisible="state not in ('waiting_for_verification')" string="Confirm" class="oe_highlight"/>
+								<button name="cancel_order" groups="tw_p2p.group_tw_p2p_purchase_order_cancel" type="object" invisible="state != 'draft'" string="Cancel"/>						
+								<button name="action_export_import_wizard" groups="tw_p2p.group_tw_p2p_purchase_order_export_import" invisible="state not in ('draft','revisi')" type="object" string="Export / Import"/>
+								<button name="action_reject_by_ahm" type="object" groups="tw_p2p.group_tw_p2p_purchase_order_reject" string="Reject PO" invisible="1"/>						  				
+								<button name="action_print_document" type="object" groups="tw_p2p.group_tw_p2p_purchase_order_report" string="Print" invisible="state != 'confirmed'" class="oe_highlight"/>						  				
+								<field name="state" widget="statusbar" statusbar_visible="draft,waiting_for_verification,revisi,confirmed" statusbar_colors="{&quot;draft&quot;:&quot;red&quot;,&quot;confirmed&quot;:&quot;blue&quot;}"/>	
+	           			</header>		        	       	
+		        	<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="action_view_po" type="object" class="oe_stat_button" icon="fa-shopping-cart" invisible="not purchase_order_id">
+								<div>
+									<div>Purchase Order</div>
+									<field name="purchase_order_id" widget="statinfo" nolabel="1"/>
+								</div>
+							</button>
+						</div>
+			         	<div class="oe_title">
+			         		<div class="row">
+								<div class="col-6">
+									<h2>
+										<field name="name" class="oe_inline" readonly="1"/>
+									</h2>
+								</div>
+							</div>
+			         	</div>       
+						<group>     
+	                    	<group>
+							    <field name="dealer_id" options="{'no_create': True,'no_open': True}" readonly="state != 'draft'"/>
+							    <field name="company_id" options="{'no_create': True,'no_open': True}" invisible="1"/>
+							    <field name="purchase_order_id" options="{'no_create': True,'no_open': True}" invisible="1"/>
+								<field name="supplier_id" options="{'no_create': True,'no_open': True}" required="1" readonly="state != 'draft'"/>												                    			                    		
+							   	<field name="periode_id" options="{'no_create': True,'no_open': True}" required="1" readonly="state != 'draft'"/> 													
+								<field name="description" readonly="state != 'draft'"/>
+								<field name="revisi_ke" invisible="revisi_ke == 0" readonly="1"/>
+								<field name="product_p2p_ids" invisible="1"/>
+								 <field name="credit_limit_unit" readonly="True" invisible="division != 'Unit'" />
+
+								 <field name="credit_limit_sparepart" readonly="True" invisible="division != 'Sparepart'"/>
+							</group>
+				            <group> 
+	                    		<field name="division" required="1" readonly="1"/>
+				            	<field name="date" readonly="1"/> 
+				            	
+				            	<field name="purchase_order_type_id" domain="[('division','=',division),'|',('name','=','Fix'),('name','=','Additional')]" options="{'no_create': True,'no_open': True}" required="1" readonly="state != 'draft' or name != False"/>
+								<field name="category_fix_order_id" options="{'no_create': True,'no_open': True}" invisible="division != 'Sparepart'" required="division == 'Sparepart' and type_name == 'Fix'" readonly="state != 'draft' or name != False"/>
+								<field name="user_id" readonly="1"/>
+								<field name="type_name" invisible="1"/>
+								<field name="is_type_po" invisible="1"/>
+				            </group>   
+						</group>	
+						
+						<notebook colspan="5">
+							<page name="order_line" string="Order Line">
+		                        <field colspan="4" name="purchase_line_ids" nolabel="1" widget="one2many_list" readonly="state not in ('draft','revisi')" invisible="type_name == 'Additional'">
+		                            <list delete="false" create="false" string="" editable="bottom">
+						                <field name="product_id" domain="[('division','=',parent.division),('id','in',parent.product_p2p_ids)]" width="35%" readonly="1" options="{'no_create': True,'no_open': True}"/>
+										<field name="tent1_prev_qty"/>
+						                <field name="fix_qty" string="Fix Qty"/>
+										<field name="tent2_prev_qty" column_invisible="1"/>
+										<field name="type" column_invisible="1"/>					                
+						                <field name="tent1_qty" required="type == 'Fix'" string="Tent 1 Qty"/>
+						                <field name="tent2_qty" required="type == 'Fix'" string="Tent 2 Qty"/>
+						                <field name="qty_available" readonly="1" string="Qty Available"/>
+						             </list>
+		                        </field>
+		                        <field colspan="4" name="additional_line_ids" nolabel="1" widget="one2many_list" readonly="state not in ('draft','revisi')" invisible="type_name != 'Additional'">
+		                            <list string="" editable="bottom">
+		                            	<field name="type" column_invisible="1"/>
+						                <field name="product_id" domain="[('division','=',parent.division),('id','in',parent.product_p2p_ids)]" width="40%" options="{'no_create': True,'no_open': True}" required="type == 'Additional'"/>						                
+						                <field name="fix_qty" width="45%" string="Fix Qty" sum="Total Qty" required="type == 'Additional'"/>
+
+						                <field name="qty_available" width="150px" readonly="1" string="Qty Available" force_save="1"/>
+						             </list>
+		                        </field>		                        		                        								
+							</page>
+							<page name="audit_trail" string="Audit Trail">
+								<group>
+									<group>
+										<field name="create_uid" options="{'no_open': True}" readonly="1"/>
+										<field name="create_date" readonly="1"/>
+										<field name="confirm_uid" options="{'no_open': True}" readonly="1"/>
+										<field name="confirm_date" readonly="1"/>										
+										<field name="waiting_for_verification_uid" invisible="not waiting_for_verification_uid" options="{'no_open': True}" readonly="1"/>
+										<field name="waiting_for_verification_date" invisible="not waiting_for_verification_date" readonly="1"/>
+										<field name="verification_uid" invisible="not verification_uid" options="{'no_open': True}" readonly="1"/>
+										<field name="verification_date" invisible="not verification_date" readonly="1"/>
+									</group>
+									<group>							
+										<field name="write_uid" options="{'no_open': True}" readonly="1"/>
+										<field name="write_date" readonly="1"/>
+										<field name="revisi_uid" invisible="not revisi_uid" options="{'no_open': True}" readonly="1"/>
+										<field name="revisi_date" invisible="not revisi_date" readonly="1"/>
+										<field name="rfa_uid" invisible="not rfa_uid" options="{'no_open': True}" readonly="1"/>
+										<field name="rfa_date" invisible="not rfa_date" readonly="1"/>
+										<field name="cancel_uid" invisible="not cancel_uid" options="{'no_open': True}" readonly="1"/>
+										<field name="cancel_date" invisible="not cancel_date" readonly="1"/>
+									</group>
+								</group>
+							</page>			                    
+		                </notebook>				
+		           </sheet>
+		        </form>
+		    </field>
+		</record>
+
+		<record id="view_tw_p2p_purchase_filter" model="ir.ui.view">
+            <field name="name">tw.p2p.purchase.filter</field>
+            <field name="model">tw.p2p.purchase.order</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                   <field name="name"/>
+                   <field name="supplier_id"/>
+				   <field name="dealer_id"/>
+				   <field name="date"/>
+				   <field name="purchase_order_type_id"/>
+				   <field name="periode_id"/>
+				   <field name="purchase_line_ids" string="Product" filter_domain="[('purchase_line_ids.product_id', 'ilike', self)]"/>
+				   <field name="state"/>
+				   <filter name="outstanding" string="Outstanding" domain="[('state','!=','confirmed')]" />
+				   <filter name="draft" string="Draft" domain="[('state','=','draft')]" />
+				   <filter name="waiting_for_verification" string="Waiting For Verification"  domain="[('state','=','waiting_for_verification')]"/>
+				   <filter name="revisi" string="Revisi" domain="[('state','=','revisi')]" />  
+				   <filter name="confirmed" string="Confirmed" domain="[('state','=','confirmed')]"/>
+					<group expand="0" string="Group By">
+						<filter name="name" string="Name" context="{'group_by': 'name'}" />
+						<filter name="supplier_id" string="Supplier" context="{'group_by': 'supplier_id'}" />
+						<filter name="dealer_id" string="Dealer" context="{'group_by': 'dealer_id'}" />
+						<filter name="date" string="Date" context="{'group_by': 'date'}" />
+						<filter name="purchase_order_type_id" string="Type" context="{'group_by': 'purchase_order_type_id'}" />
+						<filter name="periode_id" string="Periode" context="{'group_by': 'periode_id'}" />
+						<filter name="state" string="State" context="{'group_by': 'state'}" />
+					</group>
+
+                </search>
+            </field>
+        </record>		
+
+		<record model="ir.actions.act_window" id="tw_p2p_purchase_action">
+		    <field name="name">P2P Purchase Order</field>
+            <field name="path">p2p</field>
+		    <field name="res_model">tw.p2p.purchase.order</field>
+		    <field name="view_mode">list,form</field>
+			<field name="domain" eval="[('division', '=', 'Unit')]"/>
+			<field name="context" eval="
+            {
+                'form_type': 'P2P Purchase Order',
+				'readonly_by_pass': 1,
+                'default_division': 'Unit',
+				'search_default_outstanding': 1,
+            }
+            " />
+		</record>
+
+		<record model="ir.actions.act_window" id="tw_p2p_purchase_sparepart_action">
+		    <field name="name">P2P Purchase Order Sparepart</field>
+		    <field name="res_model">tw.p2p.purchase.order</field>
+		    <field name="view_mode">list,form</field>
+             <field name="domain" eval="[('division', '=', 'Sparepart')]"/>
+             <field name="context" eval="
+            {
+                'form_type': 'P2P Purchase Order Sparepart',
+				'readonly_by_pass': 1,
+                'default_division': 'Sparepart',
+				'search_default_draft': 1,
+				'search_default_waiting_for_verification': 1,
+				'search_default_revisi': 1,
+            }
+            " />
+		</record>
+					
+    </data>
+</odoo>

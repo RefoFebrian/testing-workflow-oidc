@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_nrfs_mutation_internal_form_view" model="ir.ui.view" >
+            <field name="name">tw.nrfs.mutation.internal.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="tw_mutation_internal.tw_mutation_internal_form_view"/>
+            <field name="arch" type="xml">
+        		<xpath expr="//field[@name='picking_line_ids']/list/field[@name='product_id']" position="after">
+                    <field name="is_rfs"/>
+                    <field name="available_location_dest_ids" column_invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='picking_line_ids']/list/field[@name='location_dest_id']" position="attributes">
+                    <attribute name="domain">[('id', 'child_of', parent.location_dest_id),('id', 'in', available_location_dest_ids)]</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

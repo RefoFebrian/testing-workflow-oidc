@@ -1,0 +1,5 @@
+<odoo>
+  <data>
+    <menuitem action="tw_work_order_collecting_cancel_action" id="tw_work_order_collecting_cancel_menu" parent="tw_cancellation.submenu_workshop_tw_cancellation" groups="tw_work_order_collecting_cancel.group_tw_work_order_collecting_cancel_read" sequence="2"/>
+  </data>
+</odoo>

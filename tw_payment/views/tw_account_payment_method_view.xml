@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="tw_account_payment_method_form_inherit_view" model="ir.ui.view">
+            <field name="name">tw.account.payment.method.form.inherit</field>
+            <field name="model">account.payment.method</field>
+            <field name="inherit_id" ref="om_account_accountant.view_account_payment_method_form"/>
+            <field name="arch" type="xml">
+                <field name="code" position="after">
+                    <field name="is_require_bank_account"/>
+                    <field name="is_require_account_number"/>
+                </field>
+            </field>
+        </record>
+
+</odoo>
+

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_production_lot_form" model="ir.ui.view">
+            <field name="name">stock.lot.form</field>
+            <field name="model">stock.lot</field>
+            <field name="inherit_id"
+                ref="tw_birojasa_billing_process.view_vehicle_birojasa_billing_lot_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='birojasa_billing']" position="after">
+                    <group string="Proses Penyerahan">
+                        <group>
+                            <h3 class="o_stat_info" colspan="2" style="margin-top:0px;">
+                                <span class="text-success">Penyerahan STNK</span>
+                            </h3>
+                            <field name="registration_handover_id" string="Penyerahan STNK"
+                                readonly="1" />
+                            <field name="registration_handover_date"
+                                string="Tanggal Penyerahan STNK" readonly="1" />
+                            <field name="registration_receiver"
+                                string="Penerima STNK" readonly="1" />
+                            <br />
+                            <h3 class="o_stat_info" colspan="2" style="margin-top:0px;">
+                                <span class="text-success">Penyerahan BPKB</span>
+                            </h3>
+                            <field name="ownership_handover_id" string="Penyerahan BPKB"
+                                readonly="1" />
+                            <field name="ownership_handover_date" string="Tanggal Penyerahan BPKB"
+                                readonly="1" />
+                            <field name="ownership_receiver"
+                                string="Penerima BPKB" readonly="1" />
+                            <br />
+                        </group>
+                        <group>
+                            <h3 class="o_stat_info" colspan="2" style="margin-top:0px;">
+                                <span class="text-success">Penyerahan Notice</span>
+                            </h3>
+                            <field name="notice_handover_id" string="Penyerahan Notice" readonly="1" />
+                            <field name="notice_handover_date" string="Tanggal Penyerahan Notice"
+                                readonly="1" />
+                            <field name="notice_receiver"
+                                string="Penerima Notice" readonly="1" />
+                            <br />
+                            <h3 class="o_stat_info" colspan="2" style="margin-top:0px;">
+                                <span class="text-success">Penyerahan Plat</span>
+                            </h3>
+                            <field name="plate_handover_id" string="Penyerahan Plat" readonly="1" />
+                            <field name="plate_handover_date" string="Tanggal Penyerahan Plat"
+                                readonly="1" />
+                            <field name="plate_receiver"
+                                string="Penerima Plat" readonly="1" />
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

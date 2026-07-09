@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+    <!--ATPM-->   
+        <record id="partner_atpm_ahm" model="res.partner">
+	    	<field name="code">AHM</field> 
+	    	<field name="code">AHM</field> 
+            <field name="name">Astra Honda Motor</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_principle')])]"/>   
+        </record>
+
+    <!--FINCOY-->   
+        <record id="partner_fincoy_nusa_surya_ciptadana" model="res.partner">
+	    	<field name="code">FC000006</field> 
+	    	<field name="code">NSC</field> 
+            <field name="name">PT. Nusa Surya Ciptadana</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>   
+        </record>
+    
+        <record id="partner_fincoy_mega_central_finance" model="res.partner">
+	    	<field name="code">FC000003</field> 
+	    	<field name="code">MCF</field> 
+            <field name="name">PT. Mega Central Finance</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>   
+        </record>
+    
+        <record id="partner_fincoy_wahana_ottomitra_multiatha" model="res.partner">
+	    	<field name="code">FC00000002</field> 
+	    	<field name="code">WOM</field> 
+            <field name="name">PT. Wahana Ottomitra Multiartha Tbk</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>   
+        </record>
+    
+        <record id="partner_fincoy_federal_international_finance" model="res.partner">
+	    	<field name="code">FC00000003</field> 
+	    	<field name="code">FIF</field> 
+            <field name="name">PT. Federal International Finance</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>   
+        </record>
+    
+        <record id="partner_fincoy_adira_dinamika_miltifinance" model="res.partner">
+	    	<field name="code">FC00000005</field> 
+	    	<field name="code">ADM</field> 
+            <field name="name">PT. Adira Dinamika Multifinance Tbk</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>   
+        </record>
+    
+        <record id="partner_fincoy_summit_oto_finance" model="res.partner">
+	    	<field name="code">FC00000006</field> 
+	    	<field name="code">SOF</field> 
+            <field name="name">PT. Summit Oto Finance</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>   
+        </record>
+        
+
+        <record id="partner_fincoy_wahana_ottomitra_multiartha_syariah" model="res.partner">
+	    	<field name="code">FC000023</field>
+	    	<field name="code">WOM_Syariah</field>
+	    	<field name="name">PT. Wahana Ottomitra Multiartha Syariah</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_federal_international_finance_syariah" model="res.partner">
+	    	<field name="code">FC000022</field>
+	    	<field name="code">FIF_Syariah</field>
+	    	<field name="name">PT. Federal International Finance Syariah</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_cimb_niaga_auto_finance" model="res.partner">
+	    	<field name="code">FC000021</field>
+	    	<field name="code">CIMB</field>
+	    	<field name="name">CIMB Niaga Auto Finance</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_al_ijarah_indonesia_finance" model="res.partner">
+	    	<field name="code">FC000020</field>
+	    	<field name="code">Al_Ijarah</field>
+	    	<field name="name">PT. Al Ijarah Indonesia Finance</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_sasana_artha_finance" model="res.partner">
+	    	<field name="code">FC00000008</field>
+	    	<field name="code">SAF</field>
+	    	<field name="name">PT. Sasana Artha Finance</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_beta_inti_multi_finance" model="res.partner">
+	    	<field name="code">FC000019</field>
+	    	<field name="code">BIMF</field>
+	    	<field name="name">PT. Beta Inti Multi Finance</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_mega_finance" model="res.partner">
+	    	<field name="code">FC00000007</field>
+	    	<field name="code">MF</field>
+	    	<field name="name">PT. Mega Finance</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_bpr_semoga_jaya_artha" model="res.partner">
+	    	<field name="code">FC000018</field>
+	    	<field name="code">BPR_SJA</field>
+	    	<field name="name">PT. BPR Semoga Jaya Artha</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_central_santosa_finance" model="res.partner">
+	    	<field name="code">FC000017</field>
+	    	<field name="code">CSF</field>
+	    	<field name="name">PT. Central Santosa Finance</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_mandiri_tunas_finance" model="res.partner">
+	    	<field name="code">FC000016</field>
+	    	<field name="code">MTF</field>
+	    	<field name="name">PT. Mandiri Tunas Finance</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_sinar_mitra_sepadan_finance_(sms_finance)" model="res.partner">
+	    	<field name="code">FC000015</field>
+	    	<field name="code">SMSF</field>
+	    	<field name="name">PT. Sinar Mitra Sepadan Finance (SMS Finance)</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_multindo_auto_finance" model="res.partner">
+	    	<field name="code">FC000014</field>
+	    	<field name="code">MAF</field>
+	    	<field name="name">PT. Multindo Auto Finance</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_capela_multidana_cabang_medan" model="res.partner">
+	    	<field name="code">FC000013</field>
+	    	<field name="code">CM_Medan</field>
+	    	<field name="name">PT. Capela Multidana Cabang Medan</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_bpr_universal_sentosa" model="res.partner">
+	    	<field name="code">FC000012</field>
+	    	<field name="code">BPR_US</field>
+	    	<field name="name">PT. BPR Universal Sentosa</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_bpr_karyajatnika_sadaya" model="res.partner">
+	    	<field name="code">FC000011</field>
+	    	<field name="code">BPR_KS</field>
+	    	<field name="name">PT. BPR Karyajatnika Sadaya</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_bni_multi_finance" model="res.partner">
+	    	<field name="code">FC000010</field>
+	    	<field name="code">BNI_MF</field>
+	    	<field name="name">BNI Multi Finance</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_bhakti_finance" model="res.partner">
+	    	<field name="code">FC000009</field>
+	    	<field name="code">BF</field>
+	    	<field name="name">PT. Bhakti Finance</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_sunindo_parama_finance" model="res.partner">
+	    	<field name="code">FC000008</field>
+	    	<field name="code">SPF</field>
+	    	<field name="name">Sunindo Parama Finance</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_sejahtera_pertama_multifinance" model="res.partner">
+	    	<field name="code">FC000007</field>
+	    	<field name="code">SPM</field>
+	    	<field name="name">PT. Sejahtera Pertama Multifinance</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_indomobil_finance_indonesia" model="res.partner">
+	    	<field name="code">FC000005</field>
+	    	<field name="code">IFI</field>
+	    	<field name="name">PT. Indomobil Finance Indonesia</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_internusa_tribuana_citra_multi_finance" model="res.partner">
+	    	<field name="code">FC000004</field>
+	    	<field name="code">ITCMF</field>
+	    	<field name="name">PT. Internusa Tribuana Citra Multi Finance</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_financia_multi_finance" model="res.partner">
+	    	<field name="code">FC000002</field>
+	    	<field name="code">FMF</field>
+	    	<field name="name">PT. Financia Multi Finance</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_mandala_multi_finance_tbk" model="res.partner">
+	    	<field name="code">FC000001</field>
+	    	<field name="code">MMF</field>
+	    	<field name="name">PT. Mandala Multi Finance Tbk</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_hd_finance" model="res.partner">
+	    	<field name="code">FC00000001</field>
+	    	<field name="code">HDF</field>
+	    	<field name="name">PT. HD Finance</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+        <record id="partner_fincoy_tunas_financindo_sarana" model="res.partner">
+	    	<field name="code">FC00000004</field>
+	    	<field name="code">TFS</field>
+	    	<field name="name">PT. Tunas Financindo Sarana</field> 
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_finco')])]"/>  
+            <field name="active">False</field>  
+        </record>
+    
+    <!--BIRO JASA-->     
+        <record id="partner_biro_jasa_princess" model="res.partner">
+            <field name="code">PRC</field>
+            <field name="name">Princess</field>
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_birojasa')])]"/>  
+        </record>
+        <record id="partner_biro_jasa_agung_lestari" model="res.partner">
+            <field name="code">AGL</field>
+            <field name="name">Agung Lestari</field>
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_birojasa')])]"/>  
+        </record>
+        <record id="partner_biro_jasa_akhun" model="res.partner">
+            <field name="code">AKN</field>
+            <field name="name">Akhun</field>
+            <field name="category_id" eval="[(6, 0, [ref('contact_tags_birojasa')])]"/>  
+        </record>
+    </data>
+</odoo>

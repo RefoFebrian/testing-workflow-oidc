@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="tw_mrp_approval_form_view" model="ir.ui.view">
+      <field name="name">tw.mrp.approval.form</field>
+      <field name="model">mrp.production</field>
+      <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+      <field name="arch" type="xml">
+        <field name="state" position="replace">
+          <field name="state" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,progress,to_close,done"/>
+        </field>  
+        <button name="action_confirm" position="replace">
+          <button name="action_request_approval" invisible="state != 'draft'" string="RFA" type="object" class="oe_highlight" groups="tw_mrp_approval.group_button_mrp_request_approval"/>
+          <button name="action_approval" invisible="state != 'waiting_for_approval'" string="Approve" type="object" class="oe_highlight"/>
+          <button name="action_reject_or_cancel" invisible="state != 'waiting_for_approval'" string="Reject" type="object" context="{'window_title': 'Reject'}"/>
+          <button name="action_confirm" invisible="state != 'approved'" data-hotkey="q" string="Confirm" type="object" class="oe_highlight" context="{'validate_analytic': True}" groups="tw_mrp_approval.group_button_mrp_confirm_approval"/>
+          <button name="action_reject_or_cancel" invisible="state not in ['approved', 'waiting_for_approval']" string="Cancel Approval" type="object" context="{'window_title': 'Cancel'}" groups="tw_mrp_approval.group_button_mrp_cancel_approval"/>
+        </button>
+
+        <xpath expr="//button[@name='action_cancel']" position="attributes">
+          <attribute name="invisible">state in ['approved', 'waiting_for_approval']</attribute>
+        </xpath>
+
+        <xpath expr="//page[@name='audit_trail']" position="before">
+          <page string="Approval">
+            <field name="approval_ids" readonly="True" />
+          </page>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>

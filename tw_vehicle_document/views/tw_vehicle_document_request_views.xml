@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_vehicle_document_request_view_search" model="ir.ui.view">
+            <field name="name">tw.vehicle.document.request.search</field>
+            <field name="model">tw.vehicle.document.request</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+		            <field name="company_id"/>
+					<field name="division"/>
+		            <field name="partner_id"/>
+		            <field name="atpm_code"/>
+		            <field name="is_exception_faktur"/>
+		            <field name="state"/>
+					<field name="vehicle_document_request_line_ids" string="Engine Number" filter_domain="[('vehicle_document_request_line_ids.lot_id', 'ilike', self)]"/>
+					<field name="vehicle_document_request_line_ids" string="Product" filter_domain="[('vehicle_document_request_line_ids.product_id', 'ilike', self)]"/>
+					<field name="vehicle_document_request_line_ids" string="Customer" filter_domain="[('vehicle_document_request_line_ids.partner_id', 'ilike', self)]"/>
+					<field name="vehicle_document_request_line_ids" string="Customer STNK" filter_domain="[('vehicle_document_request_line_ids.customer_stnk_id', 'ilike', self)]"/>
+					<field name="vehicle_document_request_line_ids" string="Chassis Number" filter_domain="[('vehicle_document_request_line_ids.chassis_number', 'ilike', self)]"/>
+					<filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+					<filter name="done" string="Done" domain="[('state','=','done')]"/>
+					<filter name="cancelled" string="Cancelled" domain="[('state','=','cancel')]"/>
+					<filter name="group_by_state" string="Group by State" context="{'group_by':'state'}"/>
+					<filter name="group_by_branch" string="Branch" context="{'group_by':'company_id'}"/>
+					<filter name="group_by_division" string="Group by Division" context="{'group_by':'division'}"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="tw_vehicle_document_request_view_list" model="ir.ui.view">
+            <field name="name">tw.vehicle.document.request.list</field>
+            <field name="model">tw.vehicle.document.request</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+		            <field name="company_id"/>
+					<field name="division"/>
+		            <field name="partner_id"/>
+		            <field name="date"/>
+		            <field name="atpm_code"/>
+		            <field name="is_exception_faktur"/>
+		            <field name="state"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_vehicle_document_request_view_form" model="ir.ui.view">
+            <field name="name">tw.vehicle.document.request.form</field>
+            <field name="model">tw.vehicle.document.request</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+						<button name="action_confirm" data-hotkey="c" invisible="state != 'draft'" string="Post" type="object" class="oe_highlight" groups="tw_vehicle_document.group_vehicle_document_request_button_post"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+	           		</header>
+                    <sheet>
+                        <div class="oe_title">
+                            <span class="o_form_label">Permohonan Faktur</span>
+			        		<h1>
+				 				<field name="name" class="oe_inline" invisible="not name"/>
+                                <span invisible="name">Draft</span>
+			 				</h1>
+			        	</div>
+                        <group>
+							<group>
+								<field name="company_id" options="{'no_create': True,'no_open': True}" readonly="state != 'draft'" required="1"/>
+                                <field name="partner_id" options="{'no_create': True,'no_open': True}" readonly="1" domain="[('category_id.name', '=', 'Principle')]" force_save="1"/>
+                                <field name="atpm_code" readonly="1" force_save="1"/>
+							</group>
+						    <group>
+	                    		<field name="division" readonly="1" />
+                                <field name="date" readonly="1"/>
+				            	<field name="is_exception_faktur" readonly="state != 'draft'"/>
+	                    	</group>
+						</group>
+                        <notebook>
+		                    <page name="engine_line" string="Engine Line">
+		                        <field name="vehicle_document_request_line_ids" readonly="state != 'draft'">
+		                            <list editable="bottom" create="false" edit="false">
+                                		<field name="lot_id" required="1" options="{'no_create': True,'no_open': True}"/>
+                                        <field name="chassis_number"/>
+                                        <field name="product_id"/>
+                                        <field name="partner_id"/>
+                                        <field name="customer_stnk_id"/>
+                                        <field name="state" readonly="1" decoration-danger="state == 'cancel'"
+                                                    decoration-warning="state == 'draft'"
+                                                    decoration-success="state == 'done'"
+                    					/>
+						             </list>
+		                        </field>
+		                    </page>
+                            <page string="Audit Trail">
+								<group>
+									<group>
+										<field name="create_uid" readonly="1"/>
+										<field name="create_date" readonly="1"/>
+										<field name="confirm_uid" readonly="1"/>
+										<field name="confirm_date" readonly="1"/>
+									</group>
+									<group>
+										<field name="write_uid" readonly="1"/>
+										<field name="write_date" readonly="1"/>
+										<field name="cancel_uid" readonly="1"/>
+										<field name="cancel_date" readonly="1"/>
+									</group>
+								</group>
+							</page>
+		                </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_vehicle_document_request_action" model="ir.actions.act_window">
+            <field name="name">Permohonan Faktur</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.vehicle.document.request</field>
+            <field name="view_mode">list,form</field>
+			<field name="context">{"search_default_draft": 1}</field>
+        </record>
+
+    </data>
+</odoo>

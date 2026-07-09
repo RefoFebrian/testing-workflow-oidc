@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_api_configuration_b2b_bank_bri_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.api.configuration.b2b.bank.bri.inherit.form</field>
+        <field name="model">tw.api.configuration</field>
+        <field name="inherit_id" ref="tw_api.tw_api_configuration_form_view"/>
+        <field name="arch" type="xml">
+            <button name="action_get_token" position="after">
+                <button name="action_get_token_bri_manual" invisible="api_type_value != 'bri'" type="object" string="Get Token BRI" class="oe_highlight"/>
+                <button name="schedule_statements_bri" invisible="api_type_value != 'bri'" type="object" string="Statements BRI" class="oe_highlight"/>
+            </button>
+        </field>
+    </record>
+
+</odoo>

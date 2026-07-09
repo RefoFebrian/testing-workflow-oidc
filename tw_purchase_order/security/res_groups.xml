@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_module_category_purchase_order" model="ir.module.category">
+            <field name="name">TW Purchase Order</field>
+        </record>
+
+        <!-- SHOWROOM PO READ -->
+            <record id="group_tw_purchase_order_showroom_read" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order - Showroom Read</field>
+            </record>
+            
+            <record id="access_tw_purchase_order_showroom_read" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order" />
+                <field name="name">tw_purchase_order_showroom read</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_read" />
+                <field name="perm_read">1</field>
+            </record>
+
+            <record id="access_tw_purchase_order_line_showroom_read" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order_line" />
+                <field name="name">tw_purchase_order_line_showroom read</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_read" />
+                <field name="perm_read">1</field>
+            </record>
+
+            <record id="group_tw_purchase_order_line_showroom_read" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order Line - Showroom Read</field>
+            </record>
+            
+            <record id="access_tw_purchase_order_line_showroom_read" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order_line" />
+                <field name="name">tw_purchase_order_line_showroom read</field>
+                <field name="group_id" ref="group_tw_purchase_order_line_showroom_read" />
+                <field name="perm_read">1</field>
+            </record>
+            
+            <record id="access_tw_purchase_order_showroom_stock_move_read" model="ir.model.access">
+                <field name="model_id" ref="stock.model_stock_move" />
+                <field name="name">tw_purchase_order_showroom_stock_move read</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_read" />
+                <field name="perm_read">1</field>
+            </record>
+            
+            <record id="access_tw_purchase_order_showroom_stock_picking_read" model="ir.model.access">
+                <field name="model_id" ref="stock.model_stock_picking" />
+                <field name="name">tw_purchase_order_showroom_stock_picking read</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_read" />
+                <field name="perm_read">1</field>
+            </record>
+
+        <!-- SHOWROOM UPDATE -->
+            <record id="group_tw_purchase_order_showroom_update" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order - Showroom Update</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_purchase_order_showroom_read'))]" />
+            </record>
+            
+            <record id="access_tw_purchase_order_showroom_update" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order" />
+                <field name="name">tw_purchase_order_showroom update</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_update" />
+                <field name="perm_create">1</field>
+                <field name="perm_write">1</field>
+            </record>
+
+            <record id="access_tw_purchase_order_line_showroom_update" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order_line" />
+                <field name="name">tw_purchase_order_line_showroom update</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_update" />
+                <field name="perm_create">1</field>
+                <field name="perm_write">1</field>
+            </record>
+
+            <record id="group_tw_purchase_order_line_showroom_update" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order Line - Showroom Update</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_purchase_order_line_showroom_read'))]" />
+            </record>
+            
+            <record id="access_tw_purchase_order_line_showroom_update" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order_line" />
+                <field name="name">tw_purchase_order_line_showroom update</field>
+                <field name="group_id" ref="group_tw_purchase_order_line_showroom_update" />
+                <field name="perm_create">1</field>
+                <field name="perm_write">1</field>
+            </record>
+
+            <record id="access_tw_purchase_order_showroom_stock_move_update" model="ir.model.access">
+                <field name="model_id" ref="stock.model_stock_move" />
+                <field name="name">tw_purchase_order_showroom_stock_move update</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_update" />
+                <field name="perm_create">1</field>
+                <field name="perm_write">1</field>
+            </record>
+
+        <!-- SHOWROOM DELETE -->
+            <record id="group_tw_purchase_order_showroom_delete" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order - Showroom Delete</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_purchase_order_showroom_read'))]" />
+            </record>
+            
+            <record id="access_tw_purchase_order_showroom_delete" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order" />
+                <field name="name">tw_purchase_order_showroom delete</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_delete" />
+                <field name="perm_unlink">1</field>
+            </record>
+            <record id="access_tw_purchase_order_line_showroom_delete" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order_line" />
+                <field name="name">tw_purchase_order_line_showroom delete</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_delete" />
+                <field name="perm_unlink">1</field>
+            </record>
+
+            <record id="group_tw_purchase_order_line_showroom_delete" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order Line - Showroom Delete</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_purchase_order_line_showroom_read'))]" />
+            </record>
+            
+            <record id="access_tw_purchase_order_line_showroom_delete" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order_line" />
+                <field name="name">tw_purchase_order_line_showroom delete</field>
+                <field name="group_id" ref="group_tw_purchase_order_line_showroom_delete" />
+                <field name="perm_unlink">1</field>
+            </record>
+
+            <record id="access_tw_purchase_order_showroom_stock_move_delete" model="ir.model.access">
+                <field name="model_id" ref="stock.model_stock_move" />
+                <field name="name">tw_purchase_order_showroom_stock_move delete</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_delete" />
+                <field name="perm_unlink">1</field>
+            </record>
+
+        <!-- SHOWROOM UMUM PO READ -->
+            <record id="group_tw_purchase_order_showroom_umum_read" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order - Showroom Umum Read</field>
+            </record>
+            
+            <record id="access_tw_purchase_order_showroom_umum_read" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order" />
+                <field name="name">tw_purchase_order_showroom_umum read</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_umum_read" />
+                <field name="perm_read">1</field>
+            </record>
+
+            <record id="access_tw_purchase_order_line_showroom_umum_read" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order_line" />
+                <field name="name">tw_purchase_order_line_showroom_umum read</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_umum_read" />
+                <field name="perm_read">1</field>
+            </record>
+
+            <record id="group_tw_purchase_order_line_showroom_umum_read" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order Line - Showroom Umum Read</field>
+            </record>
+            
+            <record id="access_tw_purchase_order_line_showroom_umum_read" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order_line" />
+                <field name="name">tw_purchase_order_line_showroom_umum read</field>
+                <field name="group_id" ref="group_tw_purchase_order_line_showroom_umum_read" />
+                <field name="perm_read">1</field>
+            </record>
+            
+            <record id="access_tw_purchase_order_showroom_umum_stock_move_read" model="ir.model.access">
+                <field name="model_id" ref="stock.model_stock_move" />
+                <field name="name">tw_purchase_order_showroom_umum_stock_move read</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_umum_read" />
+                <field name="perm_read">1</field>
+            </record>
+            
+            <record id="access_tw_purchase_order_showroom_umum_stock_picking_read" model="ir.model.access">
+                <field name="model_id" ref="stock.model_stock_picking" />
+                <field name="name">tw_purchase_order_showroom_umum_stock_picking read</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_umum_read" />
+                <field name="perm_read">1</field>
+            </record>
+
+        <!-- SHOWROOM UMUM UPDATE -->
+            <record id="group_tw_purchase_order_showroom_umum_update" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order - Showroom Umum Update</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_purchase_order_showroom_umum_read'))]" />
+            </record>
+            
+            <record id="access_tw_purchase_order_showroom_umum_update" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order" />
+                <field name="name">tw_purchase_order_showroom_umum update</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_umum_update" />
+                <field name="perm_create">1</field>
+                <field name="perm_write">1</field>
+            </record>
+
+            <record id="access_tw_purchase_order_line_showroom_umum_update" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order_line" />
+                <field name="name">tw_purchase_order_line_showroom_umum update</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_umum_update" />
+                <field name="perm_create">1</field>
+                <field name="perm_write">1</field>
+            </record>
+
+            <record id="group_tw_purchase_order_line_showroom_umum_update" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order Line - Showroom Umum Update</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_purchase_order_line_showroom_umum_read'))]" />
+            </record>
+            
+            <record id="access_tw_purchase_order_line_showroom_umum_update" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order_line" />
+                <field name="name">tw_purchase_order_line_showroom_umum update</field>
+                <field name="group_id" ref="group_tw_purchase_order_line_showroom_umum_update" />
+                <field name="perm_create">1</field>
+                <field name="perm_write">1</field>
+            </record>
+
+            <record id="access_tw_purchase_order_showroom_umum_stock_move_update" model="ir.model.access">
+                <field name="model_id" ref="stock.model_stock_move" />
+                <field name="name">tw_purchase_order_showroom_umum_stock_move update</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_umum_update" />
+                <field name="perm_create">1</field>
+                <field name="perm_write">1</field>
+            </record>
+
+            <record id="access_tw_purchase_order_showroom_umum_stock_picking_update" model="ir.model.access">
+                <field name="model_id" ref="stock.model_stock_picking" />
+                <field name="name">tw_purchase_order_showroom_umum_stock_picking update</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_umum_update" />
+                <field name="perm_create">1</field>
+                <field name="perm_write">1</field>
+            </record>
+
+        <!-- SHOWROOM UMUM DELETE -->
+            <record id="group_tw_purchase_order_showroom_umum_delete" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order - Showroom Umum Delete</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_purchase_order_showroom_umum_read'))]" />
+            </record>
+            
+            <record id="access_tw_purchase_order_showroom_umum_delete" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order" />
+                <field name="name">tw_purchase_order_showroom_umum delete</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_umum_delete" />
+                <field name="perm_unlink">1</field>
+            </record>
+            <record id="access_tw_purchase_order_line_showroom_umum_delete" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order_line" />
+                <field name="name">tw_purchase_order_line_showroom_umum delete</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_umum_delete" />
+                <field name="perm_unlink">1</field>
+            </record>
+
+            <record id="group_tw_purchase_order_line_showroom_umum_delete" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order Line - Showroom Umum Delete</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_purchase_order_line_showroom_umum_read'))]" />
+            </record>
+            
+            <record id="access_tw_purchase_order_line_showroom_umum_delete" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order_line" />
+                <field name="name">tw_purchase_order_line_showroom_umum delete</field>
+                <field name="group_id" ref="group_tw_purchase_order_line_showroom_umum_delete" />
+                <field name="perm_unlink">1</field>
+            </record>
+
+            <record id="access_tw_purchase_order_showroom_umum_stock_move_delete" model="ir.model.access">
+                <field name="model_id" ref="stock.model_stock_move" />
+                <field name="name">tw_purchase_order_showroom_umum_stock_move delete</field>
+                <field name="group_id" ref="group_tw_purchase_order_showroom_umum_delete" />
+                <field name="perm_unlink">1</field>
+            </record>
+
+        <!-- WORKSHOP PO READ -->
+            <record id="group_tw_purchase_order_workshop_read" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order - Workshop Read</field>
+            </record>
+            
+            <record id="access_tw_purchase_order_workshop_read" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order" />
+                <field name="name">tw_purchase_order_workshop read</field>
+                <field name="group_id" ref="group_tw_purchase_order_workshop_read" />
+                <field name="perm_read">1</field>
+            </record>
+
+            <record id="access_tw_purchase_order_line_workshop_read" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order_line" />
+                <field name="name">tw_purchase_order_line_workshop read</field>
+                <field name="group_id" ref="group_tw_purchase_order_workshop_read" />
+                <field name="perm_read">1</field>
+            </record>
+
+            <record id="access_tw_purchase_order_workshop_stock_move_read" model="ir.model.access">
+                <field name="model_id" ref="stock.model_stock_move" />
+                <field name="name">tw_purchase_order_workshop_stock_move read</field>
+                <field name="group_id" ref="group_tw_purchase_order_workshop_read" />
+                <field name="perm_read">1</field>
+            </record>
+
+        <!-- WORKSHOP UPDATE -->
+            <record id="group_tw_purchase_order_workshop_update" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order - Workshop Update</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_purchase_order_workshop_read'))]" />
+            </record>
+
+            <record id="access_tw_purchase_order_workshop_update" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order" />
+                <field name="name">tw_purchase_order_workshop update</field>
+                <field name="group_id" ref="group_tw_purchase_order_workshop_update" />
+                <field name="perm_create">1</field>
+                <field name="perm_write">1</field>
+            </record>
+            
+            <record id="access_tw_purchase_order_line_workshop_update" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order_line" />
+                <field name="name">tw_purchase_order_line_workshop update</field>
+                <field name="group_id" ref="group_tw_purchase_order_workshop_update" />
+                <field name="perm_create">1</field>
+                <field name="perm_write">1</field>
+            </record>
+
+            <record id="access_tw_purchase_order_workshop_stock_move_update" model="ir.model.access">
+                <field name="model_id" ref="stock.model_stock_move" />
+                <field name="name">tw_purchase_order_workshop_stock_move update</field>
+                <field name="group_id" ref="group_tw_purchase_order_workshop_update" />
+                <field name="perm_create">1</field>
+                <field name="perm_write">1</field>
+            </record>
+
+        <!-- WORKSHOP DELETE -->
+            <record id="group_tw_purchase_order_workshop_delete" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order - Workshop Delete</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_purchase_order_workshop_read'))]" />
+            </record>
+
+            <record id="access_tw_purchase_order_workshop_delete" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order" />
+                <field name="name">tw_purchase_order_workshop delete</field>
+                <field name="group_id" ref="group_tw_purchase_order_workshop_delete" />
+                <field name="perm_unlink">1</field>
+            </record>
+            
+            <record id="access_tw_purchase_order_line_workshop_delete" model="ir.model.access">
+                <field name="model_id" ref="purchase.model_purchase_order_line" />
+                <field name="name">tw_purchase_order_line_workshop delete</field>
+                <field name="group_id" ref="group_tw_purchase_order_workshop_delete" />
+                <field name="perm_unlink">1</field>
+            </record>
+
+            <record id="access_tw_purchase_order_workshop_stock_move_delete" model="ir.model.access">
+                <field name="model_id" ref="stock.model_stock_move" />
+                <field name="name">tw_purchase_order_workshop_stock_move delete</field>
+                <field name="group_id" ref="group_tw_purchase_order_workshop_delete" />
+                <field name="perm_unlink">1</field>
+            </record>
+
+    
+        <!-- SHOWROOM READ -->
+            <record id="group_tw_purchase_order_type_showroom_read" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order Type - Showroom Read</field>
+            </record>
+
+            <record id="access_tw_purchase_order_type_showroom_read" model="ir.model.access">
+                <field name="model_id" ref="model_tw_purchase_order_type" />
+                <field name="name">tw_purchase_order_showroom_type read</field>
+                <field name="group_id" ref="group_tw_purchase_order_type_showroom_read" />
+                <field name="perm_read">1</field>
+            </record>
+
+        <!-- SHOWROOM UPDATE -->
+            <record id="group_tw_purchase_order_type_showroom_update" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order Type - Showroom Update</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_purchase_order_type_showroom_read'))]" />
+            </record>
+
+            <record id="access_tw_purchase_order_type_showroom_update" model="ir.model.access">
+                <field name="model_id" ref="model_tw_purchase_order_type" />
+                <field name="name">tw_purchase_order_showroom_type update</field>
+                <field name="group_id" ref="group_tw_purchase_order_type_showroom_update" />
+                <field name="perm_create">1</field>
+                <field name="perm_write">1</field>
+            </record>
+
+        <!-- SHOWROOM DELETE -->
+            <record id="group_tw_purchase_order_type_showroom_delete" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order Type - Showroom Delete</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_purchase_order_type_showroom_read'))]" />
+            </record>
+
+            <record id="access_tw_purchase_order_type_showroom_delete" model="ir.model.access">
+                <field name="model_id" ref="model_tw_purchase_order_type" />
+                <field name="name">tw_purchase_order_showroom_type delete</field>
+                <field name="group_id" ref="group_tw_purchase_order_type_showroom_delete" />
+                <field name="perm_unlink">1</field>
+            </record>
+
+        <!-- WORKSHOP READ -->
+            <record id="group_tw_purchase_order_type_workshop_read" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order Type - Workshop Read</field>
+            </record>
+
+            <record id="access_tw_purchase_order_type_workshop_read" model="ir.model.access">
+                <field name="model_id" ref="model_tw_purchase_order_type" />
+                <field name="name">tw_purchase_order_workshop_type read</field>
+                <field name="group_id" ref="group_tw_purchase_order_type_workshop_read" />
+                <field name="perm_read">1</field>
+            </record>
+
+        <!-- WORKSHOP UPDATE -->
+            <record id="group_tw_purchase_order_type_workshop_update" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order Type - Workshop Update</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_purchase_order_type_workshop_read'))]" />
+            </record>
+
+            <record id="access_tw_purchase_order_type_workshop_update" model="ir.model.access">
+                <field name="model_id" ref="model_tw_purchase_order_type" />
+                <field name="name">tw_purchase_order_workshop_type update</field>
+                <field name="group_id" ref="group_tw_purchase_order_type_workshop_update" />
+                <field name="perm_create">1</field>
+                <field name="perm_write">1</field>
+            </record>
+
+        <!-- WORKSHOP DELETE -->
+            <record id="group_tw_purchase_order_type_workshop_delete" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order Type - Workshop Delete</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_purchase_order_type_workshop_read'))]" />
+            </record>
+
+            <record id="access_tw_purchase_order_type_workshop_delete" model="ir.model.access">
+                <field name="model_id" ref="model_tw_purchase_order_type" />
+                <field name="name">tw_purchase_order_workshop_type delete</field>
+                <field name="group_id" ref="group_tw_purchase_order_type_workshop_delete" />
+                <field name="perm_unlink">1</field>
+            </record>
+
+        <!-- MASTER READ -->
+            <record id="group_tw_purchase_order_type_master_read" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order Type - Master Read</field>
+            </record>
+
+            <record id="access_tw_purchase_order_type_master_read" model="ir.model.access">
+                <field name="model_id" ref="model_tw_purchase_order_type" />
+                <field name="name">tw_purchase_order_master_type read</field>
+                <field name="group_id" ref="group_tw_purchase_order_type_master_read" />
+                <field name="perm_read">1</field>
+            </record>
+
+        <!-- MASTER UPDATE -->
+            <record id="group_tw_purchase_order_type_master_update" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order Type - Master Update</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_purchase_order_type_master_read'))]" />
+            </record>
+
+            <record id="access_tw_purchase_order_type_master_update" model="ir.model.access">
+                <field name="model_id" ref="model_tw_purchase_order_type" />
+                <field name="name">tw_purchase_order_master_type update</field>
+                <field name="group_id" ref="group_tw_purchase_order_type_master_update" />
+                <field name="perm_create">1</field>
+                <field name="perm_write">1</field>
+            </record>
+
+        <!-- MASTER DELETE -->
+            <record id="group_tw_purchase_order_type_master_delete" model="res.groups">
+                <field name="category_id" ref="tw_module_category_purchase_order" />
+                <field name="name">TW Purchase Order Type - Master Delete</field>
+                <field name="implied_ids" eval="[(4, ref('group_tw_purchase_order_type_master_read'))]" />
+            </record>
+
+            <record id="access_tw_purchase_order_type_master_delete" model="ir.model.access">
+                <field name="model_id" ref="model_tw_purchase_order_type" />
+                <field name="name">tw_purchase_order_master_type delete</field>
+                <field name="group_id" ref="group_tw_purchase_order_type_master_delete" />
+                <field name="perm_unlink">1</field>
+            </record>
+
+        
+        <record id="group_tw_purchase_order_discount_line" model="res.groups">
+            <field name="category_id" ref="tw_module_category_purchase_order" />
+            <field name="name">TW Purchase Order Discount Line Read</field>
+        </record>
+        
+        <record id="access_tw_purchase_order_discount_line_read" model="ir.model.access">
+            <field name="model_id" ref="purchase.model_purchase_order_line" />
+            <field name="name">tw_purchase_order_showroom_line read</field>
+            <field name="group_id" ref="group_tw_purchase_order_discount_line" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Form Access -->
+        <record id="group_tw_purchase_order_form_read" model="res.groups">
+           <field name="category_id" ref="tw_module_category_purchase_order"/>
+           <field name="name">TW Purchase Order Form Read</field> 
+        </record> 
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_purchase_order_showroom_read')),
+                (4, ref('group_tw_purchase_order_showroom_update')),
+                (4, ref('group_tw_purchase_order_showroom_delete')),
+                (4, ref('group_tw_purchase_order_showroom_umum_read')),
+                (4, ref('group_tw_purchase_order_showroom_umum_update')),
+                (4, ref('group_tw_purchase_order_showroom_umum_delete')),
+                (4, ref('group_tw_purchase_order_line_showroom_read')),
+                (4, ref('group_tw_purchase_order_line_showroom_update')),
+                (4, ref('group_tw_purchase_order_line_showroom_delete')),
+                (4, ref('group_tw_purchase_order_line_showroom_umum_read')),
+                (4, ref('group_tw_purchase_order_line_showroom_umum_update')),
+                (4, ref('group_tw_purchase_order_line_showroom_umum_delete')),
+                (4, ref('group_tw_purchase_order_workshop_read')),
+                (4, ref('group_tw_purchase_order_workshop_update')),
+                (4, ref('group_tw_purchase_order_workshop_delete')),
+                (4, ref('group_tw_purchase_order_type_showroom_read')),
+                (4, ref('group_tw_purchase_order_type_showroom_update')),
+                (4, ref('group_tw_purchase_order_type_showroom_delete')),
+                (4, ref('group_tw_purchase_order_type_workshop_read')),
+                (4, ref('group_tw_purchase_order_type_workshop_update')),
+                (4, ref('group_tw_purchase_order_type_workshop_delete')),
+                (4, ref('group_tw_purchase_order_type_master_read')),
+                (4, ref('group_tw_purchase_order_type_master_update')),
+                (4, ref('group_tw_purchase_order_type_master_delete')),
+                (4, ref('group_tw_purchase_order_discount_line')),
+                (4, ref('group_tw_purchase_order_form_read')),
+            ]" />
+        </record>
+    </data>
+
+</odoo>

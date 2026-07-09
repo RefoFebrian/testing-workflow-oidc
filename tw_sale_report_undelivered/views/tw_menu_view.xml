@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="tw_sale_report_undelivered_menuitem" name="Laporan SO Undelivered" parent="tw_menu.submenu_tw_showroom_report" action="tw_sale_report_undelivered.tw_sale_report_undelivered_action" sequence="7" groups="tw_sale_report_undelivered.group_tw_sale_report_undelivered_all"/>
+    </data>
+</odoo>

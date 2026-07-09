@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_customer_payment_b2b_emeterai_inherit_list_view" model="ir.ui.view">
+        <field name="name">tw.customer.payment.b2b.emeterai.inherit.list</field>
+        <field name="model">tw.account.payment</field>
+        <field name="inherit_id" ref="tw_payment.tw_customer_payment_list_view"/>
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <field name="emeterai_id"/>
+            </field>
+        </field>
+    </record>
+    
+    <record id="tw_customer_payment_b2b_emeterai_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.customer.payment.b2b.emeterai.inherit.form</field>
+        <field name="model">tw.account.payment</field>
+        <field name="inherit_id" ref="tw_payment.tw_account_payment_form_view"/>
+        <field name="arch" type="xml">
+            <button name="action_print_kwitansi" position="after">
+                <button name="action_process_stamp" string="Stamp e-Meterai" type="object" invisible="state != 'paid' or type == 'supplier_payment' or emeterai_id != False" groups="tw_b2b_emeterai_payment.group_tw_account_payment_customer_payment_button_stamp"/>
+            </button>
+            
+            <button name="button_open_journal_entry" position="after">
+                <button name="action_open_emeterai" string="e-Meterai" type="object" class="oe_stat_button" icon="fa-certificate" invisible="emeterai_id == False"/>
+            </button>
+        </field>
+    </record>
+    
+    <record id="tw_customer_payment_b2b_emeterai_inherit_search_view" model="ir.ui.view">
+        <field name="name">tw.customer.payment.b2b.emeterai.inherit.search</field>
+        <field name="model">tw.account.payment</field>
+        <field name="inherit_id" ref="tw_payment.tw_account_payment_search_view"/>
+        <field name="arch" type="xml">
+            <filter name="cancel" position="after">
+                <filter name="is_using_stamp" string="Stamp e-Meterai" domain="[('emeterai_id','!=',False)]"/>
+            </filter>
+        </field>
+    </record>
+
+</odoo>

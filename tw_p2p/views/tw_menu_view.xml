@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+        <!-- # Transaction -->
+        <menuitem id="tw_p2p_purchase_unit_submenu" name="P2P Unit" groups="group_p2p_purchase_order_unit_read" parent="tw_menu.submenu_tw_showroom_purchase" action="tw_p2p_purchase_action" sequence="1"/>    	
+        <menuitem id="tw_p2p_purchase_sparepart_submenu" name="P2P Sparepart" groups="group_p2p_purchase_order_sparepart_read" parent="tw_menu.submenu_tw_workshop_purchase" action="tw_p2p_purchase_sparepart_action" sequence="1"/>    	
+        
+        <!-- Configuration-->
+        <!-- Showroom-->
+        <menuitem id="tw_p2p_configuration_unit_menu" parent="tw_menu.submenu_tw_showroom_configuration" name="P2P" sequence="50"></menuitem>
+
+        <menuitem id="tw_p2p_unit_product_submenu" name="P2P Product" parent="tw_p2p_configuration_unit_menu"  action="tw_p2p_unit_product_action" sequence="20" groups="tw_p2p.group_tw_p2p_product_read"/>    	
+        <menuitem id="tw_p2p_unit_submenu" name="P2P Config" parent="tw_p2p_configuration_unit_menu"  action="tw_p2p_config_action" sequence="10" groups="tw_p2p.group_tw_p2p_config_read"/> 
+        <menuitem id="tw_p2p_unit_periode_submenu" name="P2P Periode" parent="tw_p2p_configuration_unit_menu"  action="tw_p2p_periode_action" sequence="30" groups="tw_p2p.group_tw_p2p_periode_read"/>    	   	
+        <menuitem id="tw_p2p_unit_category_fix_order_submenu" name="Category Fix Order" parent="tw_p2p_configuration_unit_menu" action="tw_p2p_category_fix_order_action" sequence="40" groups="tw_p2p.group_tw_p2p_category_fix_order_read"/>    	   	
+        
+        <!-- Workshop-->
+        <menuitem id="tw_p2p_configuration_sparepart_menu" parent="tw_menu.submenu_tw_workshop_configuration" name="P2P" sequence="50"></menuitem>
+        
+        <menuitem id="tw_p2p_sparepart_product_submenu" name="P2P Product" parent="tw_p2p_configuration_sparepart_menu"  action="tw_p2p_sparepart_product_action" sequence="20" groups="tw_p2p.group_tw_p2p_product_workshop_read"/>    	
+        <menuitem id="tw_p2p_sparepart_submenu" name="P2P Config" parent="tw_p2p_configuration_sparepart_menu"  action="tw_p2p_config_action" sequence="10" groups="tw_p2p.group_tw_p2p_config_workshop_read"/> 
+        <menuitem id="tw_p2p_sparepart_periode_submenu" name="P2P Periode" parent="tw_p2p_configuration_sparepart_menu"  action="tw_p2p_periode_action" sequence="30" groups="tw_p2p.group_tw_p2p_periode_workshop_read"/>    	   	
+        <menuitem id="tw_p2p_sparepart_category_fix_order_submenu" name="Category Fix Order" parent="tw_p2p_configuration_sparepart_menu" action="tw_p2p_category_fix_order_action" sequence="40" groups="tw_p2p.group_tw_p2p_category_fix_order_workshop_read"/>    	   	
+        
+    </data>
+</odoo>

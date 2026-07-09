@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <template id="print_out_registration">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="p">
+                    <div class="page">
+                        <style>
+                            .page {
+                            font-family: 'Arial', sans-serif;
+                            padding: 25px;
+                            color: #000;
+                            line-height: 1.4;
+                            }
+                            .header-table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin-bottom: 15px;
+                            }
+                            .header-table td {
+                            vertical-align: top;
+                            padding: 0;
+                            }
+                            .header-left {
+                            font-size: 15px;
+                            line-height: 1.6;
+                            text-align: left;
+                            padding-right: 15px;
+                            }
+                            .header-left strong {
+                            font-size: 17px;
+                            display: block;
+                            margin-bottom: 3px;
+                            }
+                            .header-right {
+                            text-align: left;
+                            padding-left: 115px;
+                            }
+                            .header-right h3 {
+                            margin-top: 5px;
+                            font-size: 17px;
+                            font-weight: bold;
+                            }
+                            .header-right .subtitle {
+                            font-size: 13px;
+                            margin: 2px 0 6px 0;
+                            font-weight: normal;
+                            }
+                            .header-right .nobukti {
+                            font-size: 13px;
+                            margin: 0;
+                            }
+                            .info-table {
+                            width: 100%;
+                            margin: 20px 0 15px 0;
+                            font-size: 14px;
+                            }
+                            .info-table td {
+                            padding: 3px 0;
+                            vertical-align: top;
+                            }
+                            .info-table .label {
+                            width: 110px;
+                            }
+                            .info-table .separator {
+                            width: 15px;
+                            }
+                            .data-table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin: 15px 0 30px 0;
+                            font-size: 13px;
+                            }
+                            .data-table th,
+                            .data-table td {
+                            border: 1px solid #000;
+                            padding: 6px 8px;
+                            text-align: left;
+                            }
+                            .data-table th {
+                            background-color: #f0f0f0;
+                            font-weight: bold;
+                            text-align: center;
+                            }
+                            .data-table td:first-child {
+                            text-align: center;
+                            width: 35px;
+                            }
+                            .signature-section {
+                            margin-top: 40px;
+                            }
+                            .signature-table {
+                            width: 100%;
+                            font-size: 14px;
+                            border-collapse: collapse;
+                            }
+                            .signature-table td {
+                            vertical-align: top;
+                            }
+                            .signature-left {
+                            padding-right: 190px;
+                            }
+                            .signature-right {
+                            padding-left: 190px;
+                            }
+                            .signature-line {
+                            margin-top: 80px;
+                            border-bottom: 1px solid #000;
+                            padding-bottom: 2px;
+                            width: 100%;
+                            }
+                            .signature-info {
+                            font-size: 13px;
+                            margin-top: 6px;
+                            }
+                        </style>
+
+                        <table class="header-table">
+                            <tr>
+                                <td style="width:55%;">
+                                    <div class="header-left">
+                                        <strong>
+                                            <t t-if="p.company_id.parent_id"><t t-esc="p.company_id.parent_id.name"/> - </t><t t-esc="p.company_id.name"/>
+                                        </strong>
+                                        <t t-esc="p.company_id.street"/>
+                                        <br/>
+                                        <t t-esc="p.company_id.state_id.name"/>
+                                    </div>
+                                </td>
+                                <td style="width:45%;">
+                                    <div class="header-right">
+                                        <h3>PPSB</h3>
+                                        <p class="subtitle">PENGAJUAN PENGURUSAN STNK/BPKB</p>
+                                        <p class="nobukti">No Bukti : &#160;<t t-esc="p.name"/>
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table class="info-table">
+                            <tr>
+                                <td class="label">Tanggal</td>
+                                <td class="separator">:</td>
+                                <td>
+                                    <t t-esc="p.date.strftime('%d-%m-%Y') if p.date else ''"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label">Kepada Yth.</td>
+                                <td class="separator">:</td>
+                                <td>
+                                    <t t-esc="p.biro_jasa_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <t t-esc="', '.join(filter(None, [
+                                        p.biro_jasa_id.street or '',
+                                        ('RT %s/RW %s' % (p.biro_jasa_id.rt, p.biro_jasa_id.rw))
+                                            if p.biro_jasa_id.rt and p.biro_jasa_id.rw
+                                            else ('RT %s' % p.biro_jasa_id.rt if p.biro_jasa_id.rt else ('RW %s' % p.biro_jasa_id.rw if p.biro_jasa_id.rw else '')),
+                                        p.biro_jasa_id.district_id.name or '',
+                                        p.biro_jasa_id.city_id.name or ''
+                                    ]))"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%;">No.</th>
+                                    <th>Kode Barang</th>
+                                    <th>Nama Barang</th>
+                                    <th>No Mesin</th>
+                                    <th>No Rangka</th>
+                                    <th>Atas Nama</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="p.registration_process_line_ids" t-as="x">
+                                    <tr>
+                                        <td>
+                                            <span t-esc="x_index + 1"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="x.lot_id.product_id.default_code"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="x.lot_id.product_id.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="x.name"/>
+                                        </td>
+                                        <td class="text-end">
+                                            <t t-esc="x.chassis_number"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="x.customer_stnk_id.name"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <div class="signature-section">
+                            <table class="signature-table">
+                                <tr>
+                                    <td class="signature-left" style="width:50%;">Dicetak Oleh :</td>
+                                    <td class="signature-right" style="width:50%;">Penerima :</td>
+                                </tr>
+                                <tr>
+                                    <td class="signature-left">
+                                        <div class="signature-line"></div>
+                                        <div class="signature-info">
+                                            <t t-esc="user.name"/>
+                                            <t t-esc="local_time()"/>
+                                        </div>
+                                    </td>
+                                    <td class="signature-right">
+                                        <div class="signature-line"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

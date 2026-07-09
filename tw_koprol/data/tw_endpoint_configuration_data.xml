@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- 
+            Koprol API Endpoint Configurations
+            These endpoints are linked to tw.api.configuration with api_type = 'koprol_2'
+        -->
+        
+        <!-- Vendor Endpoint -->
+        <record id="tw_endpoint_koprol_vendor" model="tw.endpoint.configuration">
+            <field name="code">koprol.vendor</field>
+            <field name="version">1</field>
+            <field name="url_path">integration/vendor/getAll</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_koprol.tw_api_configuration_koprol"/>
+        </record>
+
+        <!-- Goods/Product Endpoint -->
+        <record id="tw_endpoint_koprol_goods_product" model="tw.endpoint.configuration">
+            <field name="code">koprol.goods.product</field>
+            <field name="version">1</field>
+            <field name="url_path">integration/goods/getAll</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_koprol.tw_api_configuration_koprol"/>
+        </record>
+
+        <!-- Get Budget Proposal Endpoint -->
+        <record id="tw_endpoint_koprol_get_budget_proposal" model="tw.endpoint.configuration">
+            <field name="code">koprol.get.budget.proposal</field>
+            <field name="version">1</field>
+            <field name="url_path">integration/budgetProposal/getAll</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_koprol.tw_api_configuration_koprol"/>
+        </record>
+
+        <!-- Update Status PO Endpoint -->
+        <record id="tw_endpoint_koprol_update_status_po" model="tw.endpoint.configuration">
+            <field name="code">koprol.update.status.po</field>
+            <field name="version">1</field>
+            <field name="url_path">integration/purchaseOrder/updateStatus</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_koprol.tw_api_configuration_koprol"/>
+        </record>
+
+        <!-- Update Budget Proposal Endpoint -->
+        <record id="tw_endpoint_koprol_update_budget_proposal" model="tw.endpoint.configuration">
+            <field name="code">koprol.update.budget.proposal</field>
+            <field name="version">1</field>
+            <field name="url_path">integration/budgetProposal/requestBudget</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_koprol.tw_api_configuration_koprol"/>
+        </record>
+
+    </data>
+</odoo>

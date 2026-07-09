@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_payment_b2b_bank_payment_transaction_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.payment.b2b.bank.payment.transaction.inherit.form</field>
+        <field name="model">payment.transaction</field>
+        <field name="inherit_id" ref="payment.payment_transaction_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='transaction_partner']" position="after">
+                <group name="transaction_api_payment_1" invisible="not transaction_keys">
+                    <field name="customer_id" invisible="1" options="{'no_open': True, 'no_create': True}"/>
+                    <field name="qr_file" widget="image" invisible="not qr_file" options='{"size": [200, 253]}'/>
+                    <field name="qr_filename" invisible="not qr_filename"/>
+                    <field name="detail_info" invisible="not detail_info"/>
+                </group>
+                <group name="transaction_api_payment_2" invisible="not transaction_keys">
+                    <field name="va_no" invisible="not va_no"/>
+                    <field name="reason" invisible="not reason"/>
+                    <field name="reference_number" invisible="not reference_number"/>
+                    <field name="transaction_date" invisible="not transaction_date"/>
+                    <field name="transaction_status" invisible="not transaction_status"/>
+                    <field name="transaction_id" invisible="not transaction_id"/>
+                    <field name="transaction_keys" invisible="not transaction_keys" help="Transaction keys generate by TDM"/>
+                    <field name="additional_info" invisible="not additional_info" help="Additional Information"/>
+                </group>
+                <group name="transaction_api_payment_3" invisible="not transaction_keys">
+                    <field name="currency_code" invisible="not currency_code"/>
+                    <field name="approval_code" invisible="not approval_code"/>
+                    <field name="batch_number" invisible="not batch_number"/>
+                    <field name="convenience_fee" invisible="not convenience_fee"/>
+                    <field name="issuer_reference_number" invisible="not issuer_reference_number"/>
+                </group>
+                <group name="transaction_api_payment_4" invisible="not transaction_keys">
+                    <field name="customer_pan" invisible="not customer_pan"/>
+                    <field name="issuer_name" invisible="not issuer_name"/>
+                    <field name="acquirer_name" invisible="not acquirer_name"/>
+                    <field name="payer_name" invisible="not payer_name"/>
+                    <field name="payer_phone_number" invisible="not payer_phone_number"/>
+                    <field name="merchant_id" invisible="not merchant_id" options="{'no_open': True, 'no_create': True}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

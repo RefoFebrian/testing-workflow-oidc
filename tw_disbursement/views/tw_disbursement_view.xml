@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="tw_disbursement_list_view">
+		    <field name="name">tw.disbursement.list</field>
+		    <field name="model">tw.disbursement</field>
+		    <field name="arch" type="xml">
+		        <list string="Disbursement">
+		            <field name="name"/>
+		            <field name="company_id"/>
+					<field name="date"/>	
+					<field name="journal_id"/>
+					<field name="amount"/>
+					<field name="diff_amount"/>
+		            <field name="state"/>
+		        </list>
+		     </field>
+		</record>
+        
+		<record model="ir.ui.view" id="tw_disbursement_form_view">
+		    <field name="name">tw.disbursement.form</field>
+		    <field name="model">tw.disbursement</field>
+		    <field name="arch" type="xml">
+		    	<form string="Disbursement EDC">
+		    		<header>
+                        <button name="action_post_disbursement" invisible="state != 'draft'" string="Post" type="object" class="oe_highlight" groups='tw_disbursement.group_tw_disbursement_post'/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,posted" statusbar_colors='{"draft":"red","posted":"blue"}'/>
+		    		</header>
+		    		<sheet>
+						<div class="oe_title">
+		       				<h1>
+					 			<field name="name" class="oe_inline" readonly="1"/>
+		    			    </h1>
+	                    </div>
+			    		<group>
+							<group>
+								<field name="company_id" required="1" readonly="state != 'draft'" options="{'no_show':True,'no_create':True,'no_open':True}"/>
+								<field name="journal_id" required="1" readonly="state != 'draft'" options="{'no_show':True,'no_create':True,'no_open':True}"/>
+								<field name="edc_journal_id" required="1" readonly="state != 'draft'" options="{'no_show':True,'no_create':True,'no_open':True}"/>
+								<field name="amount" required="1" readonly="state != 'draft'"/>
+							</group>
+							<group>
+								<field name="division" required="1" readonly="state != 'draft'"/>
+								<field name="date" readonly="1"/>
+								<field name="memo" readonly="state != 'draft'"/>
+							</group>
+						</group>
+						<notebook>
+							<page name="disbursement_line" string="Disbursement Line">
+		                        <field colspan="4" name="disbursement_line_ids" readonly="state != 'draft'">
+		                            <list string="Disbursement Line" editable="bottom">
+										<field name="move_line_id" required='1' string='Journal Entry' 
+                                            domain="[('debit', '>', 0),('move_id.journal_id', '=', parent.edc_journal_id),('full_reconcile_id', '=', False)]" 
+                                            options="{'no_show':True,'no_create':True,'no_open':True}"
+                                        />
+						                <field name="ref" required="1"/>
+						                <field name="partner_id" required="1" options="{'no_show':True,'no_create':True,'no_open':True}"/>
+						                <field name="account_id" required="1" options="{'no_show':True,'no_create':True,'no_open':True}"/>
+						                <field name="debit" required="1"/>
+		                            </list>
+		                        </field>
+		                        <group class="oe_subtotal_footer oe_right">
+			                     	<field name="diff_amount" widget='monetary' readonly="1"/>
+								</group>
+								<div class="oe_clear"/>
+                                <field name="description" class="oe_inline" placeholder="Note..." readonly="state != 'draft'"/> 
+							</page>
+                            <page name="move" string="Journal Items">
+                                <group col="4">
+	                                <field name="period_id" required="1" readonly="state != 'draft'" options="{'no_show':True,'no_create':True,'no_open':True}"/>
+	                            </group>
+                                <field name="move_line_ids" readonly="1">
+                                    <list string="Journal Items" editable="bottom">
+                                        <field name="move_id" options="{'no_show':True,'no_create':True,'no_open':True}"/>
+                                        <field name="ref"/>
+                                        <field name="date"/>
+                                        <field name="statement_id" options="{'no_show':True,'no_create':True,'no_open':True}"/>
+                                        <field name="partner_id" options="{'no_show':True,'no_create':True,'no_open':True}"/>
+                                        <field name="account_id" options="{'no_show':True,'no_create':True,'no_open':True}"/>
+                                        <field name="name"/>
+                                        <field name="debit"/>
+                                        <field name="credit"/>
+                                        <field name="full_reconcile_id" options="{'no_show':True,'no_create':True,'no_open':True}"/>
+                                        <field name="state"/>
+                                    </list>
+                                </field>
+                            </page>
+							<page string="Audit Trail" name="audit_trail">
+								<group>
+									<group>
+										<field name="create_uid" options="{'no_open':True,'no_create':True}" readonly="1"/>
+										<field name="create_date" readonly="1"/>
+										<field name="confirm_uid" options="{'no_open':True,'no_create':True}" readonly="1" invisible="confirm_uid == False"/>
+										<field name="confirm_date" readonly="1" invisible="confirm_date == False"/>
+									</group>
+									<group>
+										<field name="write_uid" options="{'no_open':True,'no_create':True}" readonly="1"/>
+										<field name="write_date" readonly="1"/>
+									</group>
+								</group>
+							</page>
+						</notebook>
+		    		</sheet>
+		    	</form>
+			</field>
+		</record>
+
+		<record id="view_disbursement_search" model="ir.ui.view">
+            <field name="name">tw.disbursement.search</field>
+            <field name="model">tw.disbursement</field>
+            <field name="arch" type="xml">
+                <search string="Search Disbursement EDC">
+                	<field name="name" string="Reference"/>
+                    <field name="company_id"/>
+					<field name="journal_id"/> 
+					<field name="edc_journal_id"/> 
+					<field name="memo"/>
+					<field name="disbursement_line_ids" string="Journal Entry" filter_domain="[('disbursement_line_ids.move_line_id', 'ilike', self)]"/>
+					<field name="disbursement_line_ids" string="Reference" filter_domain="[('disbursement_line_ids.ref', 'ilike', self)]"/>
+					<field name="disbursement_line_ids" string="Partner" filter_domain="[('disbursement_line_ids.partner_id', 'ilike', self)]"/>
+					<field name="disbursement_line_ids" string="Account" filter_domain="[('disbursement_line_ids.account_id', 'ilike', self)]"/>
+					<filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+					<filter name="posted" string="Posted" domain="[('state','=','posted')]"/>
+					<group name="group_by">
+						<filter name="branch_groupby" string="Branch" context="{'group_by':'company_id'}"/>
+                        <filter name="date_groupby" string="Date" context="{'group_by':'date'}"/> 
+						<filter name="division_groupby" string="Division" context="{'group_by':'division'}"/>
+					</group>
+                </search>
+            </field>
+        </record>
+		
+		<record model="ir.actions.act_window" id="tw_disbursement_action">
+            <field name="name">Disbursement EDC</field>
+            <field name="res_model">tw.disbursement</field>
+            <field name="view_mode">list,form</field>
+			<field name="context">{'search_default_draft': 1}</field>
+            <field name="domain">[]</field>
+        </record>
+        
+        <record id="tw_disbursement_action_list" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_disbursement_list_view"/>
+            <field name="act_window_id" ref="tw_disbursement_action"/>
+        </record>
+        
+        <record id="tw_disbursement_action_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_disbursement_form_view"/>
+            <field name="act_window_id" ref="tw_disbursement_action"/>
+        </record>
+		
+	</data>
+</odoo>

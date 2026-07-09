@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="module_category_incentive" model="ir.module.category">
+            <field name="name">Incentive</field>
+            <field name="sequence">60</field>
+        </record>
+        
+        <!-- TW Employee Incentive Group Read -->
+        <record id="group_tw_employee_incentive_read" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Employee Incentive Read</field>
+        </record>
+
+        <record id="access_tw_employee_incentive_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_employee_incentive"/>
+            <field name="name">TW Employee Incentive read</field>
+            <field name="group_id" ref="group_tw_employee_incentive_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_employee_incentive_history_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_employee_incentive_history"/>
+            <field name="name">TW Employee Incentive History read</field>
+            <field name="group_id" ref="group_tw_employee_incentive_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- TW Employee Incentive Group Update -->
+        <record id="group_tw_employee_incentive_update" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Employee Incentive Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_employee_incentive_read'))]"/>
+        </record>
+
+        <record id="access_tw_employee_incentive_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_employee_incentive"/>
+            <field name="name">TW Employee Incentive update</field>
+            <field name="group_id" ref="group_tw_employee_incentive_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_employee_incentive_history_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_employee_incentive_history"/>
+            <field name="name">TW Employee Incentive History update</field>
+            <field name="group_id" ref="group_tw_employee_incentive_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- TW Employee Incentive Group Delete -->
+        <record id="group_tw_employee_incentive_delete" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Employee Incentive Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_employee_incentive_read'))]"/>
+        </record>
+
+        <record id="access_tw_employee_incentive_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_employee_incentive"/>
+            <field name="name">TW Employee Incentive delete</field>
+            <field name="group_id" ref="group_tw_employee_incentive_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Report Groups -->
+        <record id="group_tw_laporan_incentive_read" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Incentive laporan</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_employee_incentive_read'))]"/>
+        </record>
+
+        <record id="access_tw_laporan_incentive_all" model="ir.model.access">
+            <field name="model_id" ref="model_tw_report_incentive"/>
+            <field name="name">TW Laporan Incentive all</field>
+            <field name="group_id" ref="group_tw_laporan_incentive_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="group_tw_laporan_sisa_margin_dso_read" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW laporan Sisa Margin DSO</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_employee_incentive_read'))]"/>
+        </record>
+
+        <record id="access_tw_laporan_sisa_margin_dso_all" model="ir.model.access">
+            <field name="model_id" ref="model_tw_report_sisa_margin_dso"/>
+            <field name="name">TW Laporan Sisa Margin DSO all</field>
+            <field name="group_id" ref="group_tw_laporan_sisa_margin_dso_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="group_tw_laporan_team_leader_read" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Team Leader laporan</field>
+        </record>
+        
+        <record id="access_tw_laporan_team_leader_all" model="ir.model.access">
+            <field name="model_id" ref="model_tw_report_team_leader"/>
+            <field name="name">TW Laporan Team Leader all</field>
+            <field name="group_id" ref="group_tw_laporan_team_leader_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+        
+        <record id="group_tw_upload_minimum_wage" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Upload Minimum Wage</field>
+        </record>
+        
+        <record id="access_tw_upload_minimum_wage_all" model="ir.model.access">
+            <field name="model_id" ref="model_tw_upload_minimum_wage"/>
+            <field name="name">TW Upload Minimum Wage all</field>
+            <field name="group_id" ref="group_tw_upload_minimum_wage"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- TW Employee Incentive DSO Group Read -->
+        <record id="group_tw_employee_incentive_dso_read" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Employee Incentive Dealer Sale Order Read</field>
+        </record>
+    </data>
+
+    <data>
+        <!-- Add groups to System Admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_employee_incentive_read')),
+                (4, ref('group_tw_employee_incentive_update')),
+                (4, ref('group_tw_employee_incentive_delete')),
+                (4, ref('group_tw_laporan_incentive_read')),
+                (4, ref('group_tw_laporan_team_leader_read')),
+                (4, ref('group_tw_laporan_sisa_margin_dso_read')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

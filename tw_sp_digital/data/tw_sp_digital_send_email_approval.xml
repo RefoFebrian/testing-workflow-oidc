@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <record model="mail.template" id="template_mail_for_notification_approval_sp_digital">
+			<field name="name">Template Mail Notifikasi Approval Surat Peringatan (SP) Digital</field>
+			<field name="email_from">noreply.tunashonda@intra.tunasgroup.com</field>
+			<field name="subject">Notifikasi Approval Surat Peringatan</field>
+			<field name="email_to">${ctx.get('email')}</field>
+			<field name="email_cc"/>
+			<field name="model_id" ref="model_tw_sp_digital"/>
+			<field name="body_html"><![CDATA[
+                <div style="margin:0;padding:20px;font-family:Arial,sans-serif;font-size:14px;color:#000000;background-color:#ffffff;">
+                    <p>Halo <t t-out="ctx.get('approval_name', '')"/>,</p>
+                    <p>Mengingatkan sesuai dengan prosedur approval atas deviasi Surat Peringatan (SP):</p>
+
+                    <table style="width:100%;max-width:600px;border-collapse:collapse;margin:12px 0;font-size:13px;">
+                        <tbody>
+                            <tr>
+                                <td style="padding:6px;border:1px solid #ddd;width:35%;font-weight:bold;">Nama</td>
+                                <td style="padding:6px;border:1px solid #ddd;" t-out="ctx.get('penerima_sp', '')"/>
+                            </tr>
+                            <tr>
+                                <td style="padding:6px;border:1px solid #ddd;width:35%;font-weight:bold;">NIP</td>
+                                <td style="padding:6px;border:1px solid #ddd;" t-out="ctx.get('nip', '')"/>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>Mohon segera dilakukan approval agar sistem dapat memproses informasi selanjutnya.</p>
+
+                    <div style="text-align:center;margin:18px 0;">
+                        <a href="https://tunas.honda-ku.com/" target="_blank" style="display:inline-block;text-decoration:none;color:#4264f0;background-color:#ecca49;border-radius:4px;padding:10px 20px;">Tunas Honda Website</a>
+                    </div>
+
+                    <p>Terima kasih.</p>
+                </div>
+            ]]></field>
+        </record>
+    </data>
+</odoo>

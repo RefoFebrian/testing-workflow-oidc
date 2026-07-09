@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_api_configuration_aws_form_view" model="ir.ui.view">
+            <field name="name">tw.api.configuration.aws.form</field>
+            <field name="model">tw.api.configuration</field>
+            <field name="inherit_id" ref="tw_api.tw_api_configuration_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='password']" position="after">
+                    <field name="region" invisible="api_type_value != 'aws'" required="api_type_value == 'aws'"/>
+                    <field name="bucket" invisible="api_type_value != 'aws'" required="api_type_value == 'aws'"/>
+                    <field name="source_prefix" invisible="api_type_value != 'aws'" required="api_type_value == 'aws'"/>
+                    <field name="destination_prefix" invisible="api_type_value != 'aws'" required="api_type_value == 'aws'"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

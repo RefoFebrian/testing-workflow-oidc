@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+		<menuitem id="account.menu_finance" name="Accounting" sequence="29" web_icon="tw_menu,static/src/img/menu_icon/accounting.png" groups="tw_account.group_tw_accounting_menu_read"/>
+	</data>
+</odoo>

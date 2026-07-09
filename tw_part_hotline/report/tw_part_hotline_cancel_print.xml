@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="tw_part_hotline_cancel_print">
+            <style type="text/css">
+                h1   {font-size: 18px; font-weight:bold; font-family: Arial;}
+                table#t01 {text-align: left;width: 100%; border-left: 1px solid black; border-right: 1px solid black;  border-bottom: 0px solid black; border-top: 1px solid black; font-family: Arial; font-size: 14px;}
+    
+                table#t02 {text-align: left;width: 20%; border-left: 0px solid black; border-right: 0px solid black; font-family: Arial;}
+                span#s01 {font-size: 14px; font-family: Arial;}
+                
+                tr#tr01 {font-size: 14px; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black; font-family: Arial;}
+
+                td#td01 {border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; font-family: Arial;} 
+                td#td02 {border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; font-family: Arial; font-size: 14px;} 
+
+                th#th01 {border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; font-size: 14px; font-family: Arial; text-align: Center;} 
+            </style>
+
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <table width="100%">
+                            <tr>
+                                <td style="text-align: center;" width="100.00%"><h1>PART HOTLINE CANCEL</h1></td>
+                            </tr>
+                        </table>
+                        
+                        <table width="100%" style="border-collapse: collapse; border: 1px solid black; font-size: 14px; font-family: Arial;" cellpadding="5">
+                            <tr>
+                                <td style="padding-top: 5px" width="15.00%">&#160; Branch</td>
+                                <td style="padding-top: 5px" width="1.00%">:</td>
+                                <td style="padding-top: 5px"><span id="s01" t-field="doc.company_id.name"></span></td>
+                                <td style="padding-top: 5px" width="18.00%"></td>
+                            </tr>
+                            <tr>
+                                <td width="15.00%">&#160; Division</td>
+                                <td width="1.00%">:</td>
+                                <td><span id="s01" t-field="doc.division"></span></td>
+                                <td width="18.00%"></td>
+                            </tr>
+                            <tr>
+                                <td width="15.00%">&#160; Date</td>
+                                <td width="1.00%">:</td>
+                                <td><span id="s01" t-field="doc.date" t-options='{"widget": "date", "format": "dd-MM-yyyy"}'></span></td>
+                                <td width="18.00%"></td>
+                            </tr>
+                            <tr>
+                                <td width="15.00%">&#160; No. Hotline</td>
+                                <td width="1.00%">:</td>
+                                <td><span id="s01" t-field="doc.hotline_id.name"></span></td>
+                                <td width="18.00%"></td>
+                            </tr>
+                            <tr style="padding-bottom: 5px">
+                                <td style="padding-bottom: 5px" width="15.00%">&#160; Reason</td>
+                                <td style="padding-bottom: 5px" width="1.00%">:</td>
+                                <td style="padding-bottom: 5px"><span id="s01" t-field="doc.reason"></span></td>
+                                <td style="padding-bottom: 5px" width="18.00%"></td>
+                            </tr>
+                        </table>
+
+                        <table width="100%">
+                            <tr>
+                                <td style="text-align: center;" width="100.00%"><h1></h1></td>
+                            </tr>
+                        </table>
+
+                        <table id="t01"  style="font-size: 14px; font-family: Arial;">
+                            <tr id="tr01" style="font-size: 14px; font-family: Arial;">
+                                <td id="td02" width="30.00%">&#160; Diajukan Oleh </td>
+                                <td id="td02" width="60.00%" style="text-align: center;">&#160; Mengetahui </td>
+                            </tr>
+                        </table>
+
+                        <table id="t01"  style="font-size: 14px; font-family: Arial;">
+                            <tr id="tr01" style="font-size: 14px; font-family: Arial;">
+                                <td id="td02" width="30.00%" style="padding-bottom: 25px; padding-top: 25px">&#160; </td>
+                                <td id="td02" width="30.00%" style="padding-bottom: 25px; padding-top: 25px">&#160; </td>
+                                <td id="td02" width="30.00%" style="padding-bottom: 25px; padding-top: 25px">&#160; </td>
+                            </tr>
+
+                            <tr id="tr01" style="font-size: 14px; font-family: Arial;">
+                                <td id="td02" width="30.00%">&#160; </td>
+                                <td id="td02" width="30.00%">&#160; </td>
+                                <td id="td02" width="30.00%">&#160; </td>
+                            </tr>
+
+                            <tr id="tr01" style="font-size: 14px; font-family: Arial;">
+                                <td id="td02" width="30.00%">&#160; Frontdesk/Partman</td>
+                                <td id="td02" width="30.00%">&#160; Kamek/SA</td>
+                                <td id="td02" width="30.00%">&#160; ACH</td>
+                            </tr>
+                        </table>
+                        
+                        <table style="font-size: 14px; font-family: Arial;width: 100%;">
+                            <tr style="font-size: 14px; font-family: Arial;">
+                                <td width="30.00%">&#160; </td>
+                            </tr>
+                            <tr style="font-size: 14px; font-family: Arial;">
+                                <td width="30.00%">&#160; <span t-esc="Date.strftime(\'%d-%m-%Y\') if hasattr(Date, \'strftime\') else Date"/>, <span t-esc="user.name"/></td>
+                                <td width="30.00%">&#160; </td>
+                                <td width="30.00%">&#160; </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

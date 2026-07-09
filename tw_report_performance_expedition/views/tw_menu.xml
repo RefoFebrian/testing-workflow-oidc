@@ -1,0 +1,6 @@
+<odoo>
+    <data>
+        <menuitem id="menu_report_performance_expedition_showroom" name="Laporan Performance Ekspedisi" parent="tw_menu.submenu_tw_showroom_report" sequence="20" groups="tw_report_performance_expedition.group_report_performance_expedition" action="action_report_performance_expedition_wizard"/>
+        <menuitem id="menu_report_performance_expedition_workshop" name="Laporan Performance Ekspedisi" parent="tw_menu.submenu_tw_workshop_report" sequence="20" groups="tw_report_performance_expedition.group_report_performance_expedition" action="action_report_performance_expedition_wizard"/>
+    </data>
+</odoo>

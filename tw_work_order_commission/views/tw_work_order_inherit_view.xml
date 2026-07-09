@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="tw_work_order_commission_form_view" model="ir.ui.view">
+      <field name="name">tw.work.order.commission</field>
+      <field name="model">tw.work.order</field>
+      <field name="inherit_id" ref="tw_work_order.tw_work_order_form_view" />
+      <field name="arch" type="xml">
+        <page name="order_lines" position="after">
+          <page name="commission" string="Commission">
+            <group>
+              <field name="mediator_id" readonly="state != 'draft'"/>
+              <field name="amount_commission" readonly="state != 'draft' or not mediator_id" required="mediator_id"/>
+            </group>
+          </page>
+        </page>
+      </field>
+    </record>
+  </data>
+</odoo>

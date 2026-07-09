@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_users_form_simple_modif" model="ir.ui.view">
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+
+            <xpath expr="//notebook/page" position="inside">
+                
+            </xpath>
+
+            <page name="account_security" position="inside">
+
+                <div>
+                    <div class="o_horizontal_separator d-flex align-items-center mt-2 mb-4 text-uppercase fw-bolder small">
+                        API Credentials
+                        <button name="action_generate_user_api_credentials"
+                                type="object"
+                                invisible="client_id != False and client_secret != False"
+                                class="fa fa-toggle-off o_auth_2fa_btn text-primary enabled"
+                                aria-label="Disable API Credentials"></button>
+                        <button name="action_generate_user_api_credentials"
+                                type="object"
+                                invisible="client_id == False and client_secret == False"
+                                class="fa fa-toggle-on o_auth_2fa_btn text-primary enabled"
+                                aria-label="Enable API Credentials"></button>
+                    </div>
+                    <group>
+                        <field name="client_id" readonly="1" invisible="client_id == False" />
+                        <field name="client_secret" readonly="1" invisible="client_secret == False" />
+                    </group>
+                    <div class="o_horizontal_separator d-flex align-items-center mt-2 mb-4 text-uppercase fw-bolder small">
+                        Generate Key Pair
+                        <button name="action_generate_key_pair" string="Generate Key Pair" class="btn btn-secondary ms-2 mb-2" type="object"/>
+                    </div>
+                    <group>
+                        <field name="credential_public_filename" string="Public File Name" invisible="1"/>
+                        <field name="credential_public_file" string="Public File" filename="credential_public_filename"/>
+                    </group>
+                    <group>
+                        <field name="credential_private_filename" string="Private File Name" invisible="1"/>
+                        <field name="credential_private_file" string="Private File" filename="credential_private_filename"/>
+                    </group>
+                    <field name="api_key_ids">
+                        <list create="false">
+                            <field name="token" />
+                            <field name="scope" />
+                            <field name="create_date" />
+                            <field name="expiration_date" />
+                            <field name="grant_type_id" />
+                        </list>
+                    </field>
+                </div>
+
+            </page>
+
+        </field>
+    </record>
+</odoo>

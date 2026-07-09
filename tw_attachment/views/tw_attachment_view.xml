@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <data>
+        <record id="view_tw_attachment_list" model="ir.ui.view">
+            <field name="name">tw.attachment.list</field>
+            <field name="model">tw.attachment</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <list editable="top" string="Attachment" open_form_view="True">
+                    <field name="type"/>
+                    <field name="description" required="1" string="Keterangan"/>
+                    <field name="datas" readonly="type == 'url'" filename="name" string="Upload File"/>
+                    <field name="name" string="Nama File / URL" readonly="type != 'url'" required="type == 'url'" force_save="1"/>
+                    <field name="create_date" optional="hide"/>
+                    <field name="create_uid" optional="hide"/>
+                    <field name="write_date" optional="hide"/>
+                    <field name="write_uid" optional="hide"/>
+                    <field name="mimetype" optional="hide"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_tw_attachment_form" model="ir.ui.view">
+            <field name="name">tw.attachment.form</field>
+            <field name="model">tw.attachment</field>
+            <field name="arch" type="xml">
+                <form string="Attachment" create="0" delete="0" edit="0">
+                    <sheet>
+                        <group>
+                            <field name="name" invisible="type == 'url'" readonly="1"/>
+                            <field name="name" widget="pdf_url_viewer" readonly="1" invisible="type != 'url'"/>
+                            <field name="description" readonly="1"/>
+                            <field name="type" readonly="1"/>
+                            <field name="mimetype" invisible="type == 'url'" readonly="1"/>
+                            <field name="datas" widget="pdf_viewer" invisible="type == 'url' or mimetype != 'application/pdf'" readonly="1"/>
+                            <field name="datas" widget="image"  invisible="type == 'url' or mimetype not in ('image/jpeg','image/png')" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+
+</odoo>

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="serah_bpkb_dso_template">
+            <t t-call="web.html_container">
+                <style type="text/css">
+                    .page {
+                        margin-top: -10px !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                    }
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                    }
+                    th, td {
+                        padding: 5px;
+                        border: 1px solid black;
+                    }
+                    .no-border {
+                        border: none !important;
+                    }
+                    .border-top {
+                        border-top: 1px solid black !important;
+                        border-left: none !important;
+                        border-right: none !important;
+                        border-bottom: none !important;
+                    }
+                    .border-left-top {
+                        border-top: 1px solid black !important;
+                        border-left: 1px solid black !important;
+                        border-right: none !important;
+                        border-bottom: none !important;
+                    }
+                    .border-right-top {
+                        border-top: 1px solid black !important;
+                        border-left: none !important;
+                        border-right: 1px solid black !important;
+                        border-bottom: none !important;
+                    }
+                    .border-left {
+                        border-top: none !important;
+                        border-left: 1px solid black !important;
+                        border-right: none !important;
+                        border-bottom: none !important;
+                    }
+                    .border-right {
+                        border-top: none !important;
+                        border-left: none !important;
+                        border-right: 1px solid black !important;
+                        border-bottom: none !important;
+                    }
+                    .border-bottom {
+                        border-top: none !important;
+                        border-left: none !important;
+                        border-right: none !important;
+                        border-bottom: 1px solid black !important;
+                    }
+                    .border-left-bottom {
+                        border-top: none !important;
+                        border-left: 1px solid black !important;
+                        border-right: none !important;
+                        border-bottom: 1px solid black !important;
+                    }
+                    .border-right-bottom {
+                        border-top: none !important;
+                        border-left: none !important;
+                        border-right: 1px solid black !important;
+                        border-bottom: 1px solid black !important;
+                    }
+                </style>
+                <t t-foreach="docs" t-as="doc">
+                    <t t-foreach="doc.order_line.filtered(lambda l: l.product_id)" t-as="line">
+                        <div class="page">
+                            <table class="header">
+                                <table>
+                                    <tr>
+                                        <td class="no-border" style="text-align: center;">
+                                            <b>
+                                                <span style="font-size: 18px;">SURAT PERNYATAAN</span>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="no-border">Yang bertanda tangan dibawah ini :</td>
+                                    </tr>
+                                </table>
+                                <br/>
+                                <table>
+                                    <tr>
+                                        <td class="no-border" width="15%">Nama</td>
+                                        <td class="no-border" width="2%">:</td>
+                                        <td class="no-border" width="83%">
+                                            <span t-esc="doc.company_id.branch_setting_id.branch_head_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="no-border" width="15%">Jabatan</td>
+                                        <td class="no-border" width="2%">:</td>
+                                        <td class="no-border" width="83%">
+                                            <span t-esc="doc.company_id.branch_setting_id.branch_head_id.job_title"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="no-border" width="15%">Alamat</td>
+                                        <td class="no-border" width="2%">:</td>
+                                        <td class="no-border" width="83%">
+                                            <span t-esc="doc.company_id.branch_setting_id.branch_head_id.sudo().private_street"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table>
+                                    <tr>
+                                        <td class="no-border" width="100%">
+                                            <b>Dengan ini bertindak untuk dan atas nama <span t-esc="doc.company_id.sudo().parent_id.name"/>
+                                            <span t-esc="doc.company_id.name"/>
+ dengan ini menyatakan bahwa BPKB dan Faktur dengan data :</b>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td class="no-border" width="15%">Nama</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%">
+                                        <span t-esc="doc.partner_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">Alamat</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%">
+                                        <span t-esc="doc.partner_id.street"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%"></td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%">
+                                        <span t-esc="doc.partner_id.sub_district_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%"></td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%">
+                                        <span t-esc="doc.partner_id.district_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%"></td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%">
+                                        <span t-esc="doc.partner_id.city_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">Jenis Motor</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%">
+                                        <span t-esc="line.product_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">Tahun</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%">
+                                        <span t-esc="line.lot_id.production_year"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">Warna</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%">
+                                        <span t-esc="', '.join(line.product_id.product_template_attribute_value_ids.mapped('name'))"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">No. Rangka</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="text-end no-border" width="83%">
+                                        <span t-esc="line.lot_id.chassis_number"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border" width="15%">No. Mesin</td>
+                                    <td class="no-border" width="2%">:</td>
+                                    <td class="no-border" width="83%">
+                                        <span t-esc="line.lot_id.name"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <!-- 
+                                NOTE: to tw_dealer_sale_order_finco, as all related finco attributes have been moved to the respective module.
+                                <table>
+                                    <tr>
+                                        <td class="no-border" width="100%">Sedang dalam proses pengurusan dan akan kami serahkan kepada <span t-esc="doc.finco_id.name"/> dalam waktu 3 bulan dari tanggal surat pernyataan ini dibuat dan akan kami serahkan tanpa syarat apapun.</td>
+                                    </tr>
+                                </table>
+                                -->
+                            <table>
+                                <tr>
+                                    <td class="no-border" width="100%">Demikian surat pernyataan ini kami buat, atas perhatian dan kerjasamanya kami ucapkan terima kasih.</td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table>
+                                <tr>
+                                    <td class="signature-placholder top-left no-border">
+                                        <span t-esc="doc.company_id.state_id.name"/>
+,                                        <span t-esc="time_date(doc.date_order)"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border">Hormat Kami,</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr>
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr>
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr>
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr>
+                                    <td class="no-border"/>
+                                </tr>
+                                <tr>
+                                    <td class="no-border top-border">
+                                        <span t-esc="doc.company_id.branch_setting_id.branch_head_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-border top-border">
+                                        <span t-esc="doc.company_id.branch_setting_id.branch_head_id.job_title"/>
+                                    </td>
+                                    <td class="no-border top-border" style="text-align: right;">
+                                        <span t-esc="user.name"/>
+,                                        <span t-esc="time_date(doc.date_order)"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</data>
+</odoo>

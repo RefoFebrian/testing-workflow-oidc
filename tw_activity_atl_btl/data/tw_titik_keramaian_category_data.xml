@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_select_activity_point_rs" model="tw.selection">
+            <field name="name">Rumah Sakit</field>
+            <field name="value">Rumah Sakit</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_puskes" model="tw.selection">
+            <field name="name">Puskesmas</field>
+            <field name="value">Puskesmas</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_prac_doc" model="tw.selection">
+            <field name="name">Praktek Dokter</field>
+            <field name="value">Praktek Dokter</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_main_market" model="tw.selection">
+            <field name="name">Pasar Induk</field>
+            <field name="value">Pasar Induk</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_suprise_market" model="tw.selection">
+            <field name="name">Pasar Kaget</field>
+            <field name="value">Pasar Kaget</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_overflow_market" model="tw.selection">
+            <field name="name">Pasar Tumpah</field>
+            <field name="value">Pasar Tumpah</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_minimarket" model="tw.selection">
+            <field name="name">Minimarket</field>
+            <field name="value">Minimarket</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_supermarket" model="tw.selection">
+            <field name="name">Supermarket</field>
+            <field name="value">Supermarket</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_cafe" model="tw.selection">
+            <field name="name">Cafe</field>
+            <field name="value">Cafe</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_resto" model="tw.selection">
+            <field name="name">Restaurant</field>
+            <field name="value">Restaurant</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_office" model="tw.selection">
+            <field name="name">Perkantoran</field>
+            <field name="value">Perkantoran</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_attractions" model="tw.selection">
+            <field name="name">Tempat Wisata</field>
+            <field name="value">Tempat Wisata</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_entertainment" model="tw.selection">
+            <field name="name">Tempat Hiburan</field>
+            <field name="value">Tempat Hiburan</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_spbu" model="tw.selection">
+            <field name="name">SPBU</field>
+            <field name="value">SPBU</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_school" model="tw.selection">
+            <field name="name">Sekolah atau Universitas</field>
+            <field name="value">Sekolah atau Universitas</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_city_park" model="tw.selection">
+            <field name="name">Taman Kota</field>
+            <field name="value">Taman Kota</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_garden" model="tw.selection">
+            <field name="name">Perkebunan</field>
+            <field name="value">Perkebunan</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_village" model="tw.selection">
+            <field name="name">Perkampungan</field>
+            <field name="value">Perkampungan</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_station" model="tw.selection">
+            <field name="name">Terminal</field>
+            <field name="value">Terminal</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_airport" model="tw.selection">
+            <field name="name">Bandara</field>
+            <field name="value">Bandara</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_showroom_tdm" model="tw.selection">
+            <field name="name">Showroom TDM</field>
+            <field name="value">Showroom TDM</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+        <record id="tw_select_activity_point_sanctuary" model="tw.selection">
+            <field name="name">Rumah Ibadah</field>
+            <field name="value">Rumah Ibadah</field> 
+            <field name="type">TitikKeramaianCategory</field>
+        </record>
+    </data>
+</odoo>

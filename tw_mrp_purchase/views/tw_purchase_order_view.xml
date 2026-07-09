@@ -1,0 +1,18 @@
+<odoo>
+	<data>
+
+        <!-- Action View -->
+			<record id="tw_purchase_order_umum_action_server" model="ir.actions.server">
+				<field name="name">Purchase Order</field>
+				<field name="path">purchase-order-umum</field>
+				<field name="model_id" ref="purchase.model_purchase_order"/>
+				<field name="binding_model_id" ref="purchase.model_purchase_order" />
+				<field name="binding_view_types">form,list</field>
+				<field name="state">code</field>
+				<field name="code">
+					action = env['purchase.order'].action_purchase_order_list('General')
+				</field>
+			</record>
+
+	</data>
+</odoo>

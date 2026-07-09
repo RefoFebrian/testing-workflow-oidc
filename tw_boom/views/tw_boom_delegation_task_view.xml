@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_boom_delegation_task_form" model="ir.ui.view">
+            <field name="name">tw.boom.delegation.task.form</field>
+            <field name="model">tw.boom.delegation.task</field>
+            <field name="arch" type="xml">
+                <form string="Delegation Task" create="0">
+                    <sheet>
+                        <div class="header">
+                            <h1>
+                                Delegasi Task
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="company_id" string="Branch" required="1" options="{'no_open':True,'no_create':True}"/>
+                                <field name="job_id" required="1" options="{'no_open':True,'no_create':True}"/>
+                                <field name="category_id" required="1" options="{'no_open':True,'no_create':True}"/>
+                            </group>
+                            <group>
+                                <field name="start_date" required="1" options="{'no_open':True,'no_create':True}"/>
+                                <field name="end_date" required="1" options="{'no_open':True,'no_create':True}"/>
+                            </group>
+                            <group>
+                                <span style="display: flex; align-items: center; gap: 8px;">
+                                    <button name="action_search_task" string="Search Task" type="object" class="oe_highlight" groups="tw_boom.group_tw_boom_delegation_task_read"/>
+                                    <button name="action_check_all_tasks" string="Check/Uncheck All Task" type="object" class="oe_highlight" groups="tw_boom.group_tw_boom_delegation_task_update"/>
+                                </span>
+                            </group>
+                        </group>
+                        <field name="delegation_line_ids" widget="one2many_list" options="{'no_open':True,'no_create':True}">
+                            <list string="Delegasi Task" editable="top" create="0" delete="0">
+                                <field name="is_check"/>
+                                <field name="category_id" readonly="1" options="{'no_open':True,'no_create':True}"/>
+                                <field name="no_transaction" readonly="1"/>
+                                <field name="transaction_value" readonly="1" options="{'no_open':True,'no_create':True}"/>
+                                <field name="job_delegation_id" readonly="1" options="{'no_open':True,'no_create':True}"/>
+                            </list>
+                        </field>
+                        <group>
+                            <button name="action_assign_task_to_delegation" string="Assign Task" type="object" class="oe_highlight" groups="tw_boom.group_tw_boom_delegation_task_update"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_tw_boom_delegation_task" model="ir.actions.act_window">
+            <field name="name">Delegation Task</field>
+            <field name="res_model">tw.boom.delegation.task</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Silahkan Cari Task Terlebih Dahulu :)
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

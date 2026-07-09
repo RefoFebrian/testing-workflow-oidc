@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="tw_submission_off_the_road_view_list">
+      <field name="name">tw.submission.off.the.road.list</field>
+      <field name="model">tw.submission.off.the.road</field>
+      <field name="arch" type="xml">
+        <list string="List Penyerahan Faktur Off The Road">
+          <field name="name" />
+          <field name="company_id" />
+          <field name="division" />
+          <field name="partner_id" />
+          <field name="customer_name" />
+          <field name="date" />
+          <field name="state" />
+        </list>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="tw_submission_off_the_road_view_form">
+      <field name="name">tw.submission.off.the.road.form</field>
+      <field name="model">tw.submission.off.the.road</field>
+      <field name="arch" type="xml">
+        <form string="Form Penyerahan Faktur Off The Road">
+          <header>
+            <button name="action_post_submission"
+              groups='tw_document_off_the_road.group_tw_submission_off_the_road_post'
+              type="object"
+              invisible="state != 'draft'"
+              string="Post" class="oe_highlight" />
+            <field name="state" widget="statusbar" statusbar_visible="draft,posted"
+              statusbar_colors='{"draft":"red","posted":"blue"}' />
+          </header>
+          <sheet>
+            <div class="oe_title">
+              <h2> Penyerahan Faktur Off The Road<field name="name" class="oe_inline" />
+              </h2>
+            </div>
+            <group col="2" colspan="2">
+              <group>
+                <field name="company_id"
+                  options="{'no_create': True,'no_open': True}"
+                  readonly="state != 'draft' or name != False" 
+                  required="1"
+                />
+              </group>
+              <group>
+                <field name="division" required="1"
+                  readonly="submission_otr_line_ids != [] or state != 'draft'" />
+              </group>
+              <group>
+                <field name="partner_id" options="{'no_create': True,'no_open': True}"
+                  readonly="state != 'draft'" />
+
+                <field name="description" readonly="state != 'draft'" />
+
+              </group>
+              <group>
+                <field name="customer_name" required="1"
+                  options="{'no_create': True,'no_open': True}"
+                  readonly="state != 'draft'" />
+                <field name="date" required="1" readonly="1" />
+
+              </group>
+            </group>
+
+            <notebook colspan="5">
+              <page string="Engine line">
+                <field colspan="4" name="submission_otr_line_ids" nolabel="1" widget="one2many_list"
+                  readonly="state != 'draft'">
+                  <list string="" editable="bottom">
+                    <field name="lot_id" options="{'no_create': True,'no_open': True}" domain="[('id', 'in', available_lot_ids)]" />
+                    <field name="available_lot_ids" options="{'no_create': True,'no_open': True}" column_invisible="1"/>
+                    <field name="customer_stnk_id" />
+                    <field name="print_date" />
+                    <field name="doc_number" />
+                    <field name="vehicle_document_take_date" />
+                  </list>
+                </field>
+              </page>
+              <page string="Audit Trail">
+                <group>
+                  <group>
+                    <field name="create_uid" readonly="1"></field>
+                    <field name="create_date" readonly="1"></field>
+                    <field name="confirm_uid" readonly="1"></field>
+                    <field name="confirm_date" readonly="1"></field>
+                  </group>
+                  <group>
+                    <field name="write_uid" readonly="1"></field>
+                    <field name="write_date" readonly="1"></field>
+                  </group>
+                </group>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="tw_submission_off_the_road_view_filter" model="ir.ui.view">
+      <field name="name">tw.submission.off.the.road.filter</field>
+      <field name="model">tw.submission.off.the.road</field>
+      <field name="arch" type="xml">
+        <search string="Search Penyerahan Faktur Off The Road">
+          <field name="name" string="Reference" />
+          <field name="company_id" />
+          <field name="engine_number" />
+          <field name="customer_stnk_id" />
+          <filter name="draft" string="Draft" domain="[('state','=','draft')]" />
+          <filter name="post" string="Posted" domain="[('state','=','posted')]" />
+          <group string="Group By">
+            <filter name="group_branch" string="Branch" context="{'group_by':'company_id'}" />
+            <filter name="group_date" string="date" context="{'group_by':'date'}" />
+          </group>
+        </search>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_tw_submission_off_the_road">
+      <field name="name">Penyerahan Faktur Off The Road</field>
+      <field name="res_model">tw.submission.off.the.road</field>
+      <field name="view_mode">list,form</field>
+      <field name="search_view_id" ref="tw_submission_off_the_road_view_filter" />
+      <field name="context">{"search_default_draft":1}</field>
+    </record>
+
+  </data>
+</odoo>
+															

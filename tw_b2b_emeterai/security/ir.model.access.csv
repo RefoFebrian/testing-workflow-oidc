@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_b2b_emeterai,tw_b2b_emeterai.tw_b2b_emeterai,model_tw_b2b_emeterai,base.group_user,1,0,0,0
+access_tw_b2b_emeterai_master_coordinate,tw_b2b_emeterai.tw_b2b_emeterai_master_coordinate,model_tw_b2b_emeterai_master_coordinate,base.group_user,1,0,0,0
+access_tw_b2b_emeterai_master_quota,tw_b2b_emeterai.tw_b2b_emeterai_master_quota,model_tw_b2b_emeterai_master_quota,base.group_user,1,0,0,0
+access_tw_b2b_emeterai_report,tw_b2b_emeterai.tw_b2b_emeterai_report,model_tw_b2b_emeterai_report,base.group_user,1,0,0,0

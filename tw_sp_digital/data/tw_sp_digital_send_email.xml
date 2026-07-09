@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record model="mail.template" id="template_mail_for_kacab_open_sp_digital">
+			<field name="name">Template Mail Surat Peringatan (SP) Kacab Digital</field>
+			<field name="email_from">noreply.tunashonda@intra.tunasgroup.com</field>
+			<field name="subject">Surat Peringatan</field>
+			<field name="email_to">${ctx.get('email')}</field>
+			<field name="email_cc"/>
+			<field name="model_id" ref="model_tw_sp_digital"/>
+			<field name="body_html"><![CDATA[
+				<div style="margin:0;padding:20px;font-family:Arial,sans-serif;font-size:14px;color:#000000;background-color:#ffffff;">
+					<p>Kepada Yth. <t t-out="ctx.get('name', '')"/></p>
+	
+					<t t-if="ctx.get('status') == 'employee'">
+						<p>Anda telah mendapatkan surat peringatan
+						   <strong t-out="ctx.get('sp_level', '')"/>.</p>
+					</t>
+					<t t-else="">
+						<p>Sehubungan dengan karyawan anda yang bernama:</p>
+					</t>
+	
+					<t t-if="ctx.get('employees')">
+						<table style="width:100%;border-collapse:collapse;margin:15px 0;font-size:12px;">
+							<thead>
+								<tr style="background-color:#5db4dc;color:white;">
+									<th style="padding:8px;text-align:left;border:1px solid #ddd;">No</th>
+									<th style="padding:8px;text-align:left;border:1px solid #ddd;">Nama</th>
+									<th style="padding:8px;text-align:left;border:1px solid #ddd;">NIK</th>
+									<th style="padding:8px;text-align:left;border:1px solid #ddd;">Jabatan</th>
+									<th style="padding:8px;text-align:left;border:1px solid #ddd;">Cabang</th>
+									<th style="padding:8px;text-align:left;border:1px solid #ddd;">SP</th>
+								</tr>
+							</thead>
+							<tbody>
+								<t t-foreach="ctx.get('employees', [])" t-as="employee">
+									<tr>
+										<td style="padding:8px;border:1px solid #ddd;" t-out="employee_index + 1"/>
+										<td style="padding:8px;border:1px solid #ddd;" t-out="employee.get('nama_karyawan', '')"/>
+										<td style="padding:8px;border:1px solid #ddd;" t-out="employee.get('nik', '')"/>
+										<td style="padding:8px;border:1px solid #ddd;" t-out="employee.get('jabatan_karyawan', '')"/>
+										<td style="padding:8px;border:1px solid #ddd;" t-out="employee.get('cabang_karyawan', '')"/>
+										<td style="padding:8px;border:1px solid #ddd;" t-out="employee.get('sp_level', '')"/>
+									</tr>
+								</t>
+							</tbody>
+						</table>
+					</t>
+	
+					<p>Mohon segera konfirmasi terkait Surat Peringatan ini melalui Aplikasi doodool atau Situs Web 
+					<a href="https://tunas.honda-ku.com/">Tunas Honda</a>.</p>
+					
+					<p>Atas perhatian Anda, kami ucapkan terima kasih.</p>
+					
+					<p>Salam Satu Hati,<br/>
+					Tim HRD</p>
+				</div>
+			]]></field>
+		</record>
+
+    </data>
+</odoo>

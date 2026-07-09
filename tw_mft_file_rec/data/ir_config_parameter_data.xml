@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="ir_config_param_list_category_product_mft_file_rec" model="ir.config_parameter">
+            <field name="key">mft_file_rec.list_category_product</field>
+            <field name="value">['NONHGP-ASPIRA','NONHGP-BLAZE','NONHGP-FEDERAL','NONHGP-OTHERS']</field>
+        </record>
+
+    </data>
+</odoo>

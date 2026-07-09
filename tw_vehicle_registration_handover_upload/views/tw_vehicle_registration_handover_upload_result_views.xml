@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="view_tw_vehicle_registration_handover_upload_result_wizard" model="ir.ui.view">
+      <field name="name">tw.vehicle.registration.handover.upload.result.wizard.form</field>
+      <field name="model">tw.vehicle.registration.handover.upload.result.wizard</field>
+      <field name="arch" type="xml">
+        <form string="Upload Result" create="false" edit="false">
+          <sheet>
+            <group>
+              <field name="upload_filename" readonly="1"/>
+              <group >
+                <field name="summary_success" readonly="1"/>
+                <field name="summary_failed" readonly="1"/>
+                <field name="summary_skipped" readonly="1"/>
+                <field name="summary_text" readonly="1" nolabel="1" widget="text"/>
+            </group>
+
+            </group>
+            <notebook>
+              <page string="Result">
+                <field name="result_line_ids">
+                  <list editable="bottom">
+                    <field name="branch"/>
+                    <field name="receiver"/>
+                    <field name="status"/>
+                  </list>
+                </field>
+              </page>
+            </notebook>
+          </sheet>
+          <footer>
+            <button string="Close" class="btn-secondary" special="cancel"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+  </data>
+</odoo>

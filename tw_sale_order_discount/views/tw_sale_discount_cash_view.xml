@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="view_tw_sale_discount_cash_list" model="ir.ui.view" >
+            <field name="name">tw.sale.discount.cash.list</field>
+            <field name="model">tw.sale.discount.cash</field>
+            <field name="arch" type="xml">
+            	<list string="Master Discount Cash" editable="top">
+                    <field name="type_id" required="1" options="{'no_create':True,'no_open':True}"/>
+                    <field name="payment_term_id" required="1" options="{'no_create':True,'no_open':True}"/>
+                    <field name="discount_percent" required="1"/>
+            	</list>
+            </field>
+        </record>
+
+        <record id="tw_sale_discount_cash_search" model="ir.ui.view">
+            <field name="name">tw.sale.discount.cash.search</field>
+            <field name="model">tw.sale.discount.cash</field>
+            <field name="arch" type="xml">
+                <search string="Search Master Discount Cash">
+                    <field name="type_id"/>
+                    <field name="payment_term_id"/>
+                    <filter name="Type" string="Type" domain="[('type_id', '=', 'value')]" context="{'group_by': 'type_id'}" />
+                    <filter name="Payment Term" string="Payment Term" domain="[('payment_term_id', '=', 'value')]" context="{'group_by': 'payment_term_id'}" />
+                </search>
+            </field>
+        </record>
+
+        <record id="tw_sale_discount_cash_action" model="ir.actions.act_window">
+            <field name="name">Master Discount Cash</field>
+            <field name="res_model">tw.sale.discount.cash</field>
+            <field name="view_mode">list,form</field>
+        </record>
+	</data>
+</odoo>

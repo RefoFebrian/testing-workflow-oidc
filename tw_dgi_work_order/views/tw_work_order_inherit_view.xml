@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit List View - Add GET DGI Button -->
+    <record id="tw_work_order_dgi_view_list" model="ir.ui.view">
+        <field name="name">tw.work.order.dgi.view.list</field>
+        <field name="model">tw.work.order</field>
+        <field name="inherit_id" ref="tw_work_order.tw_work_order_list_view" />
+        <field name="arch" type="xml">
+            <!-- Add GET DGI button like CRM Generate Leads -->
+            <xpath expr="//list" position="inside">
+                <header>
+                    <button name="action_open_dgi_wizard"
+                        type="object"
+                        class="btn-secondary"
+                        string="GET DGI"
+                        data-hotkey="d"
+                        icon="fa-cloud-download"
+                        groups="tw_dgi_work_order.group_tw_dgi_work_order"
+                        display="always" />
+                </header>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Form View - Show DGI Info -->
+    <record id="tw_work_order_form_dgi_view_form" model="ir.ui.view">
+        <field name="name">tw.work.order.dgi.view.form</field>
+        <field name="model">tw.work.order</field>
+        <field name="inherit_id" ref="tw_work_order.tw_work_order_form_view" />
+        <field name="arch" type="xml">
+            <!-- Add button_box if not exists, then add DGI badge -->
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="is_dgi" invisible="1"/>
+                <field name="md_reference_pkb" invisible="1"/>
+                <button name="action_show_dgi_info" type="object" class="oe_stat_button"
+                    icon="fa-cloud-download"
+                    invisible="not is_dgi">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_text">From DGI</span>
+                        <span class="o_stat_value" invisible="not md_reference_pkb">
+                            <field name="md_reference_pkb" readonly="1"/>
+                        </span>
+                    </div>
+                </button>
+            </xpath>
+
+            <!-- Add DGI fields invisible (need to be in form) -->
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="is_dgi" invisible="1" />
+            </xpath>
+
+            <!-- Add ref_doc_number to line tree -->
+            <xpath expr="//field[@name='order_line']//list//field[@name='state']"
+                position="before">
+                <field name="ref_doc_number" string="Ref Doc Number" optional="hide" width="120" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="tw_work_order_log_note_dgi_form_view" model="ir.ui.view">
+        <field name="name">tw.work.order.log.note.dgi</field>
+        <field name="model">tw.work.order</field>
+        <field name="inherit_id" ref="tw_work_order.tw_work_order_form_view" />
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="state_dgi" readonly="1" />
+            </field>
+            <button name="action_open" position="before">
+                <button name="action_dgi_inv2_add" type="object" string="DGI Add INV2"
+                    invisible="state not in ('open','done')" />
+            </button>
+            <xpath expr="//div[hasclass('oe_title')]" position="after">
+                <field name="md_reference_pkb" readonly="1" />
+                <field name="md_reference_sa" readonly="1" />
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Tracking DGI Log" invisible="note_log == False">
+                    <field name="note_log" readonly="1" />
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Search Filter Work Order -->
+    <record id="tw_work_order_dealer_spk_dgi_search_view" model="ir.ui.view">
+        <field name="name">dealer.spk.dgi.search</field>
+        <field name="model">tw.work.order</field>
+        <field name="inherit_id" ref="tw_work_order.tw_work_order_search_view" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="md_reference_pkb" string="DGI PKB Ref"/>
+                <field name="md_reference_sa" string="DGI SA Ref"/>
+            </field>
+            <xpath expr="//search" position="inside">
+                <separator/>
+                <filter name="filter_is_dgi" string="From DGI" domain="[('is_dgi', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,90 @@
+<odoo>
+	<data>
+
+	<record id="tw_job_list_view" model="ir.ui.view">
+		<field name="name">tw.job.tree</field>
+		<field name="model">hr.job</field>
+		<field name="arch" type="xml">
+			<list>
+				<field name="name"/>
+				<field name="department_id"/>
+				<field name="sales_force_id"/>
+				<field name="branch_control"/>
+				<field name="group_id" options="{'no_open':True, 'no_create':True}"/>
+			</list>
+		</field>
+	</record>
+
+	<record id="tw_job_form_view" model="ir.ui.view">
+		<field name="name">tw.job.form</field>
+		<field name="model">hr.job</field>
+		<field name="inherit_id" ref="hr.view_hr_job_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="/form/sheet/div[last()]" position="after">
+				<group>
+					<field name="company_id"/>
+					<field name="department_id"/>
+					<div class="o_row">
+						<group>
+							<field name="group_id" />	
+						</group>
+						<button name="action_sync_res_groups"
+								string="Sync"
+								type="object"
+								class="btn-primary"
+								style="margin-left: 10px; margin-top: 3px;"
+								groups="tw_hr.group_button_action_sync_res_groups_read"/>
+					</div>
+					<field name="sales_force_id" options="{'no_create': True}"/>
+					<field name="job_category_id" options="{'no_create': True}"/>
+					<field name="is_sales_digital" options="{'no_create': True}"/>
+					<field name="branch_control" options="{'no_create': True}"/>
+				</group>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="tw_job_filter_view" model="ir.ui.view">
+		<field name="name">tw.job.filter.inherit.view</field>
+		<field name="model">hr.job</field>
+		<field name="inherit_id" ref="hr.view_job_filter"/>
+		<field name="arch" type="xml">
+			<field name="name" position="after">
+				<field name="company_id" />
+				<field name="sales_force_id" />
+				<field name="group_id" />
+				<filter name="branch_control" string="Branch Control" context="{'group_by': 'branch_control'}" />
+				<filter name="job_category_id" string="Job Category" context="{'group_by': 'job_category_id'}" />
+				<!-- <filter name="sales_category" string="Sales Category" context="{'group_by': 'sales_category'}" /> -->
+			</field>
+		</field>
+	</record>
+
+	<record id="tw_job_action" model="ir.actions.act_window">
+		<field name="name">Job</field>
+		<field name="path">job</field>
+		<field name="res_model">hr.job</field>
+		<field name="view_mode">list,form</field>
+		<field name="context">{
+			'readonly_by_pass': 1,
+			'default_kategori': 'md'
+		}</field>
+		<field name="domain">[]</field>
+	</record>
+
+	<record id="tw_job_action_tree" model="ir.actions.act_window.view">
+		<field eval="1" name="sequence"/>
+		<field name="view_mode">list</field>
+		<field name="view_id" ref="tw_job_list_view"/>
+		<field name="act_window_id" ref="tw_job_action"/>
+	</record>
+
+	<record id="tw_job_action_form" model="ir.actions.act_window.view">
+		<field eval="2" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="tw_job_form_view"/>
+		<field name="act_window_id" ref="tw_job_action"/>
+	</record>
+
+	</data>
+</odoo>

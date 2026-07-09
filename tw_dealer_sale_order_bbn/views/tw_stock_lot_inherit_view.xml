@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_production_lot_bbn_form" model="ir.ui.view">
+            <field name="name">stock.lot.bbn.form</field>
+            <field name="model">stock.lot</field>
+            <field name="inherit_id" ref="tw_dealer_sale_order.tw_stock_lot_dealer_sale_order_inherit_form_view"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="customer_stnk_id"/>
+                    <field name="biro_jasa_id"/>
+                </field>
+                <group name="dealer_sale_order_group2" position="inside">
+                    <field name="accure_bbn_move_id" readonly="1" options="{'no_create': True}"/>
+                    <field name="accrue_bbn_move_line_ids" widget="many2many_tags" readonly="1" options="{'no_create': True, 'no_open': True}"/>
+                </group>
+            </field>
+        </record>
+
+    </data>
+</odoo>

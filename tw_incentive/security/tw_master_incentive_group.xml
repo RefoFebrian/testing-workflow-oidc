@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Master incentive Group Read -->
+        <record id="group_tw_master_incentive_read" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Master incentive Read</field>
+        </record>
+
+        <record id="access_tw_master_incentive_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_incentive"/>
+            <field name="name">TW Master incentive read</field>
+            <field name="group_id" ref="group_tw_master_incentive_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_master_incentive_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_incentive_line"/>
+            <field name="name">TW Master incentive Line read</field>
+            <field name="group_id" ref="group_tw_master_incentive_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Master incentive Group Update -->
+        <record id="group_tw_master_incentive_update" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Master incentive Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_master_incentive_read'))]"/>
+        </record>
+
+        <record id="access_tw_master_incentive_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_incentive"/>
+            <field name="name">TW Master incentive update</field>
+            <field name="group_id" ref="group_tw_master_incentive_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_master_incentive_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_incentive_line"/>
+            <field name="name">TW Master incentive Line update</field>
+            <field name="group_id" ref="group_tw_master_incentive_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Master incentive Group Delete -->
+        <record id="group_tw_master_incentive_delete" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Master incentive Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_master_incentive_read'))]"/>
+        </record>
+
+        <record id="access_tw_master_incentive_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_incentive"/>
+            <field name="name">TW Master incentive delete</field>
+            <field name="group_id" ref="group_tw_master_incentive_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_master_incentive_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_incentive_line"/>
+            <field name="name">TW Master incentive Line delete</field>
+            <field name="group_id" ref="group_tw_master_incentive_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+        
+        <!-- Master incentive Group Report -->
+        <record id="group_tw_master_incentive_report" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Master incentive Report</field>
+        </record>
+
+        <record id="access_tw_master_incentive_report" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_incentive"/>
+            <field name="name">TW Master incentive report</field>
+            <field name="group_id" ref="group_tw_master_incentive_report"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+        </record>
+
+        <record id="access_tw_master_incentive_line_report" model="ir.model.access">
+            <field name="model_id" ref="model_tw_master_incentive_line"/>
+            <field name="name">TW Master incentive Line report</field>
+            <field name="group_id" ref="group_tw_master_incentive_report"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+        </record>
+    </data>
+
+    <!-- Master Incentive -->
+        <record id="group_tw_master_incentive_button_active" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Button Confirm Activate Master Incentive</field>
+        </record>
+
+        <record id="group_tw_master_incentive_button_expire" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Button Confirm Expire Master Incentive</field>
+        </record>
+
+    <data>
+        <!-- Add Master incentive groups to System Admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_master_incentive_read')), 
+                (4, ref('group_tw_master_incentive_update')), 
+                (4, ref('group_tw_master_incentive_delete')), 
+                (4, ref('group_tw_master_incentive_report')),
+                (4, ref('group_tw_master_incentive_button_active')),
+                (4, ref('group_tw_master_incentive_button_expire')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

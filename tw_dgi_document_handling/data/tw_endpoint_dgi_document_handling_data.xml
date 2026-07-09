@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--
+        =============================================================
+        DGI Document Handling Endpoint Configurations
+        
+        All processes use the same url_path "doch/read".
+        Differentiated by statusFakturSTNK logic in mapping records.
+        =============================================================
+        -->
+
+        <!-- Helper to generate records for all dealers -->
+        <!-- Process: PROSES STNK -->
+        <record id="tw_endpoint_dgi_doch_proses_stnk_hso" model="tw.endpoint.configuration">
+            <field name="code">doch_proses_stnk</field>
+            <field name="version">1</field>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_hso"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_vehicle_registration_process.model_tw_vehicle_registration_process"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "registration_process_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "faktur_stnk_number": "unit.nomorFakturSTNK",
+        "faktur_stnk_date": "unit.tglProses"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_proses_stnk_asp" model="tw.endpoint.configuration">
+            <field name="code">doch_proses_stnk</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_asp"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_registration_process.model_tw_vehicle_registration_process"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "registration_process_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "faktur_stnk_number": "unit.nomorFakturSTNK",
+        "faktur_stnk_date": "unit.tglProses"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_proses_stnk_dam" model="tw.endpoint.configuration">
+            <field name="code">doch_proses_stnk</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_dam"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_registration_process.model_tw_vehicle_registration_process"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "registration_process_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "faktur_stnk_number": "unit.nomorFakturSTNK",
+        "faktur_stnk_date": "unit.tglProses"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_proses_stnk_daw" model="tw.endpoint.configuration">
+            <field name="code">doch_proses_stnk</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_daw"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_registration_process.model_tw_vehicle_registration_process"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "registration_process_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "faktur_stnk_number": "unit.nomorFakturSTNK",
+        "faktur_stnk_date": "unit.tglProses"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_proses_stnk_npm" model="tw.endpoint.configuration">
+            <field name="code">doch_proses_stnk</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_npm"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_registration_process.model_tw_vehicle_registration_process"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "registration_process_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "faktur_stnk_number": "unit.nomorFakturSTNK",
+        "faktur_stnk_date": "unit.tglProses"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_proses_stnk_sinsen" model="tw.endpoint.configuration">
+            <field name="code">doch_proses_stnk</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_sinsen"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_registration_process.model_tw_vehicle_registration_process"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "registration_process_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "faktur_stnk_number": "unit.nomorFakturSTNK",
+        "faktur_stnk_date": "unit.tglProses"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_proses_stnk_wahana" model="tw.endpoint.configuration">
+            <field name="code">doch_proses_stnk</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_wahana"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_registration_process.model_tw_vehicle_registration_process"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "registration_process_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "faktur_stnk_number": "unit.nomorFakturSTNK",
+        "faktur_stnk_date": "unit.tglProses"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+
+        <!-- Process: RECEIPT STNK -->
+        <record id="tw_endpoint_dgi_doch_receipt_stnk_hso" model="tw.endpoint.configuration">
+            <field name="code">doch_receipt_stnk</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_hso"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_receipt.model_tw_vehicle_registration_receipt"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "vehicle_registration_receipt_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "status_faktur": "unit.statusFakturSTNK"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_receipt_stnk_asp" model="tw.endpoint.configuration">
+            <field name="code">doch_receipt_stnk</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_asp"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_receipt.model_tw_vehicle_registration_receipt"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "vehicle_registration_receipt_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "status_faktur": "unit.statusFakturSTNK"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_receipt_stnk_dam" model="tw.endpoint.configuration">
+            <field name="code">doch_receipt_stnk</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_dam"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_receipt.model_tw_vehicle_registration_receipt"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "vehicle_registration_receipt_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "status_faktur": "unit.statusFakturSTNK"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_receipt_stnk_daw" model="tw.endpoint.configuration">
+            <field name="code">doch_receipt_stnk</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_daw"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_receipt.model_tw_vehicle_registration_receipt"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "vehicle_registration_receipt_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "status_faktur": "unit.statusFakturSTNK"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_receipt_stnk_npm" model="tw.endpoint.configuration">
+            <field name="code">doch_receipt_stnk</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_npm"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_receipt.model_tw_vehicle_registration_receipt"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "vehicle_registration_receipt_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "status_faktur": "unit.statusFakturSTNK"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_receipt_stnk_sinsen" model="tw.endpoint.configuration">
+            <field name="code">doch_receipt_stnk</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_sinsen"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_receipt.model_tw_vehicle_registration_receipt"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "vehicle_registration_receipt_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "status_faktur": "unit.statusFakturSTNK"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_receipt_stnk_wahana" model="tw.endpoint.configuration">
+            <field name="code">doch_receipt_stnk</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_wahana"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_receipt.model_tw_vehicle_registration_receipt"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "vehicle_registration_receipt_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "status_faktur": "unit.statusFakturSTNK"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+
+        <!-- Process: RECEIPT BPKB -->
+        <record id="tw_endpoint_dgi_doch_receipt_bpkb_hso" model="tw.endpoint.configuration">
+            <field name="code">doch_receipt_bpkb</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_hso"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_receipt.model_tw_vehicle_ownership_receipt"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "vehicle_ownership_receipt_line_ids": {
+        "lot_id": "unit.nomorRangka"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_receipt_bpkb_asp" model="tw.endpoint.configuration">
+            <field name="code">doch_receipt_bpkb</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_asp"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_receipt.model_tw_vehicle_ownership_receipt"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "vehicle_ownership_receipt_line_ids": {
+        "lot_id": "unit.nomorRangka"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_receipt_bpkb_dam" model="tw.endpoint.configuration">
+            <field name="code">doch_receipt_bpkb</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_dam"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_receipt.model_tw_vehicle_ownership_receipt"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "vehicle_ownership_receipt_line_ids": {
+        "lot_id": "unit.nomorRangka"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_receipt_bpkb_daw" model="tw.endpoint.configuration">
+            <field name="code">doch_receipt_bpkb</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_daw"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_receipt.model_tw_vehicle_ownership_receipt"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "vehicle_ownership_receipt_line_ids": {
+        "lot_id": "unit.nomorRangka"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_receipt_bpkb_npm" model="tw.endpoint.configuration">
+            <field name="code">doch_receipt_bpkb</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_npm"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_receipt.model_tw_vehicle_ownership_receipt"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "vehicle_ownership_receipt_line_ids": {
+        "lot_id": "unit.nomorRangka"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_receipt_bpkb_sinsen" model="tw.endpoint.configuration">
+            <field name="code">doch_receipt_bpkb</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_sinsen"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_receipt.model_tw_vehicle_ownership_receipt"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "vehicle_ownership_receipt_line_ids": {
+        "lot_id": "unit.nomorRangka"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_receipt_bpkb_wahana" model="tw.endpoint.configuration">
+            <field name="code">doch_receipt_bpkb</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_wahana"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_receipt.model_tw_vehicle_ownership_receipt"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "vehicle_ownership_receipt_line_ids": {
+        "lot_id": "unit.nomorRangka"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+
+        <!-- Process: HANDOVER STNK -->
+        <record id="tw_endpoint_dgi_doch_handover_stnk_hso" model="tw.endpoint.configuration">
+            <field name="code">doch_handover_stnk</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_hso"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_handover.model_tw_vehicle_registration_handover"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "receiver": "namaPenerima",
+    "registration_handover_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "status_faktur": "unit.statusFakturSTNK"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_handover_stnk_asp" model="tw.endpoint.configuration">
+            <field name="code">doch_handover_stnk</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_asp"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_handover.model_tw_vehicle_registration_handover"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "receiver": "namaPenerima",
+    "registration_handover_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "status_faktur": "unit.statusFakturSTNK"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_handover_stnk_dam" model="tw.endpoint.configuration">
+            <field name="code">doch_handover_stnk</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_dam"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_handover.model_tw_vehicle_registration_handover"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "receiver": "namaPenerima",
+    "registration_handover_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "status_faktur": "unit.statusFakturSTNK"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_handover_stnk_daw" model="tw.endpoint.configuration">
+            <field name="code">doch_handover_stnk</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_daw"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_handover.model_tw_vehicle_registration_handover"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "receiver": "namaPenerima",
+    "registration_handover_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "status_faktur": "unit.statusFakturSTNK"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_handover_stnk_npm" model="tw.endpoint.configuration">
+            <field name="code">doch_handover_stnk</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_npm"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_handover.model_tw_vehicle_registration_handover"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "receiver": "namaPenerima",
+    "registration_handover_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "status_faktur": "unit.statusFakturSTNK"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_handover_stnk_sinsen" model="tw.endpoint.configuration">
+            <field name="code">doch_handover_stnk</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_sinsen"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_handover.model_tw_vehicle_registration_handover"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "receiver": "namaPenerima",
+    "registration_handover_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "status_faktur": "unit.statusFakturSTNK"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_handover_stnk_wahana" model="tw.endpoint.configuration">
+            <field name="code">doch_handover_stnk</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_wahana"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_handover.model_tw_vehicle_registration_handover"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "receiver": "namaPenerima",
+    "registration_handover_line_ids": {
+        "lot_id": "unit.nomorRangka",
+        "status_faktur": "unit.statusFakturSTNK"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+
+        <!-- Process: HANDOVER BPKB -->
+        <record id="tw_endpoint_dgi_doch_handover_bpkb_hso" model="tw.endpoint.configuration">
+            <field name="code">doch_handover_bpkb</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_hso"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_handover.model_tw_vehicle_ownership_handover"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "receiver": "namaPenerima",
+    "ownership_handover_line_ids": {
+        "lot_id": "unit.nomorRangka"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_handover_bpkb_asp" model="tw.endpoint.configuration">
+            <field name="code">doch_handover_bpkb</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_asp"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_handover.model_tw_vehicle_ownership_handover"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "receiver": "namaPenerima",
+    "ownership_handover_line_ids": {
+        "lot_id": "unit.nomorRangka"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_handover_bpkb_dam" model="tw.endpoint.configuration">
+            <field name="code">doch_handover_bpkb</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_dam"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_handover.model_tw_vehicle_ownership_handover"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "receiver": "namaPenerima",
+    "ownership_handover_line_ids": {
+        "lot_id": "unit.nomorRangka"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_handover_bpkb_daw" model="tw.endpoint.configuration">
+            <field name="code">doch_handover_bpkb</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_daw"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_handover.model_tw_vehicle_ownership_handover"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "receiver": "namaPenerima",
+    "ownership_handover_line_ids": {
+        "lot_id": "unit.nomorRangka"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_handover_bpkb_npm" model="tw.endpoint.configuration">
+            <field name="code">doch_handover_bpkb</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_npm"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_handover.model_tw_vehicle_ownership_handover"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "receiver": "namaPenerima",
+    "ownership_handover_line_ids": {
+        "lot_id": "unit.nomorRangka"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_handover_bpkb_sinsen" model="tw.endpoint.configuration">
+            <field name="code">doch_handover_bpkb</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_sinsen"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_handover.model_tw_vehicle_ownership_handover"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "receiver": "namaPenerima",
+    "ownership_handover_line_ids": {
+        "lot_id": "unit.nomorRangka"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+        <record id="tw_endpoint_dgi_doch_handover_bpkb_wahana" model="tw.endpoint.configuration">
+            <field name="code">doch_handover_bpkb</field>
+            <field name="version">1</field>
+            <field name="mode">read</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_wahana"/>
+            <field name="url_path">doch/read</field>
+            <field name="method">post</field>
+            <field name="target_model_id" ref="tw_vehicle_document_handover.model_tw_vehicle_ownership_handover"/>
+            <field name="output_template">{
+    "id_spk": "idSPK",
+    "receiver": "namaPenerima",
+    "ownership_handover_line_ids": {
+        "lot_id": "unit.nomorRangka"
+    }
+}</field>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+
+    </data>
+</odoo>

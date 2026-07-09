@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_tw_report_cash" model="ir.ui.view">
+            <field name="name">Report Cash</field>
+            <field name="model">tw.report.cash</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report Cash">
+                    <group>
+                        <group>
+                            <field name="option" required="1"/>
+                            <field name="state" string="Status" invisible="option not in ('Cash Reconcile', 'EDC')" required="option == 'Cash Reconcile'"/>
+                            <field name="journal_id" invisible="option != 'Petty Cash'" required="option == 'Petty Cash'" options="{'no_open': True, 'no_create': True}"/>
+                            <label for="start_date" string="Tanggal"/>
+                            <div class="o_row">
+                                <field name="start_date" widget="date" class="oe_inline" required="1"/>
+                                <i class="fa fa-long-arrow-right mx-2" aria-label="Arrow icon" title="Arrow"/>
+                                <field name="end_date" widget="date" class="oe_inline" required="1"/>
+                            </div>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Branches" invisible="option == 'Petty Cash'">
+                            <field name="company_ids"/>
+                        </page>
+                        <page string="Journals" invisible="option == 'Petty Cash'">
+                            <field name="journal_ids"/>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button name="action_generate_report" string="Export Excel" type="object" class="btn-primary"/>
+                        <button name="action_print_pdf_report" string="Print PDF" type="object" class="btn-secondary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_report_cash_wizard" model="ir.actions.act_window">
+            <field name="name">Laporan Cash</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.report.cash</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

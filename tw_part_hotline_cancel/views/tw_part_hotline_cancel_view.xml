@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="paperformat_document_hotline_cancel_report" model="report.paperformat">
+            <field name="name">Cancel Hotline Report Paper</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">25</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="action_print_document_hotline_cancel" model="ir.actions.report">
+            <field name="name">Cancel Hotline Thermal</field>
+            <field name="model">tw.part.hotline.cancel</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_part_hotline.tw_part_hotline_cancel_print</field>
+            <field name="report_file">tw_part_hotline.tw_part_hotline_cancel_print</field>
+            <field name="paperformat_id" ref="tw_part_hotline_cancel.paperformat_document_hotline_cancel_report" />
+        </record>
+
+        <record id="tw_part_hotline_cancel_view_list" model="ir.ui.view">
+            <field name="name">tw.part.hotline.cancel.view.list</field>
+            <field name="model">tw.part.hotline.cancel</field>
+            <field name="arch" type="xml">
+                <list string="Part Hotline">
+                    <field name="name" />
+                    <field name="company_id" />
+                    <field name="division" />
+                    <field name="part_hotline_id" />
+                    <field name="date" />
+                    <field name="state" />
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_part_hotline_cancel_view_form" model="ir.ui.view">
+            <field name="name">tw.part.hotline.cancel.view.form</field>
+            <field name="model">tw.part.hotline.cancel</field>
+            <field name="inherit_id" ref="tw_cancellation.tw_cancellation_form_view"/>
+            <field name="arch" type="xml">
+                <button name="action_confirm" position="after">
+                    <button name="action_print_document_hotline_cancel" type="object" string="Print Form" class="oe_highlight" invisible="context.get('default_model_type') != 'tw.part.hotline'"/>
+                </button>
+                <field name="transaction_name" position="after">
+                    <field name="part_hotline_id" readonly="state != 'draft'" options="{'no_create':True,'no_open':True}" domain="[('company_id','=',company_id),('division','=',division), '|', ('purchase_order_id', '=', False), ('purchase_order_id.state', 'in', ['draft', 'cancel'])]" required="context.get('default_model_type') != 'tw.part.hotline' and context.get('default_model_type')" invisible="context.get('default_model_type') != 'tw.part.hotline'"/>
+                </field>
+                <xpath expr="//button[@name='action_request_approval']" position="attributes">
+                    <attribute name="groups">tw_part_hotline_cancel.group_tw_part_hotline_cancel_rfa_approve</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_reject_or_cancel' and contains(@context, 'Cancel')]" position="attributes">
+                    <attribute name="groups">tw_part_hotline_cancel.group_tw_part_hotline_cancel_approval_cancel</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_confirm']" position="attributes">
+                    <attribute name="groups">tw_part_hotline_cancel.group_tw_part_hotline_cancel_approval_confirm</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_part_hotline_cancel_view_search" model="ir.ui.view">
+            <field name="name">tw.part.hotline.cancel.view.search</field>
+            <field name="model">tw.part.hotline.cancel</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="part_hotline_id" />
+                    <field name='name' />
+                    <field name="company_id" />
+                    <filter string="Draft" name="state_draft" domain="[('state','=','draft')]" />
+                    <filter string="Waiting for Approval" name="state_waiting_for_approval" domain="[('state','=','waiting_for_approval')]" />
+                    <filter string="Approved" name="state_approved" domain="[('state','=','approved')]" />
+                    <filter string="Confirmed" name="state_confirmed" domain="[('state','=','confirmed')]" />
+                    <group expand="1" string="Group By">
+                        <filter string="Company" name="group_by_company" domain="[('company_id','!=',False)]" context="{'group_by':'company_id'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_tw_part_hotline_cancel" model="ir.actions.act_window">
+            <field name="name">Part Hotline Cancel</field>
+            <field name="res_model">tw.part.hotline.cancel</field>
+            <field name="context" eval="
+                {
+                'search_default_state_draft':1,
+                'search_default_state_waiting_for_approval':1,
+                'search_default_state_approved':1,
+                'default_model_id': ref('tw_part_hotline.model_tw_part_hotline'),
+                'default_model_type': 'tw.part.hotline',
+                }
+            "/>
+            <field name="domain">['|',('part_hotline_id','!=',False),('model_id.model','=','tw.part.hotline')]</field>
+        </record>
+
+        <record id="tw_part_hotline_cancel_action_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_part_hotline_cancel_view_list"/>
+            <field name="act_window_id" ref="action_tw_part_hotline_cancel"/>
+        </record>
+
+        <record id="tw_part_hotline_cancel_action_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_part_hotline_cancel_view_form"/>
+            <field name="act_window_id" ref="action_tw_part_hotline_cancel"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <template id="reg_handover_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="p">
+                    <div class="page">
+                        <style>
+                            .page {
+                                font-family: 'Arial', 'Helvetica', sans-serif;
+                                font-size: 11px;
+                                width: 21cm;
+                                height: 29.7cm;
+                                padding: 2cm 1.5cm;
+                                box-sizing: border-box;
+                            }
+
+                            h3, h4, h5 {
+                                text-align: center;
+                                margin: 0 0 5px 0;
+                                padding: 0;
+                                line-height: 1.4;
+                            }
+
+                            h3 {
+                                font-size: 18px;
+                            }
+
+                            h4 {
+                                font-size: 16px;
+                                font-weight: normal;
+                            }
+
+                            h5 {
+                                font-size: 14px;
+                                font-weight: normal;
+                            }
+
+                            .table {
+                                width: 100%;
+                                border-collapse: collapse;
+                            }
+
+                            .table th, .table td {
+                                padding: 3px 5px;
+                                vertical-align: top;
+                            }
+
+                            .table-info td {
+                                padding: 2px 0;
+                            }
+
+                            .table-info td:first-child {
+                                width: 30px;
+                            }
+
+                            .table-info td:nth-child(2) {
+                                width: 150px;
+                            }
+
+                            .table-info td:nth-child(3) {
+                                width: 20px;
+                            }
+
+                            .table-line {
+                                border: 1px solid black;
+                            }
+
+                            .table-line td, .table-line th {
+                                border: 1px solid black;
+                                padding: 8px;
+                                text-align: center;
+                            }
+
+                            .text-center {
+                                text-align: center;
+                            }
+
+                            .text-end {
+                                text-align: right;
+                            }
+
+                            .spacer-10 {
+                                height: 10px;
+                            }
+
+                            .spacer-20 {
+                                height: 20px;
+                            }
+
+                            .spacer-30 {
+                                height: 30px;
+                            }
+
+                            p {
+                                margin: 8px 0;
+                                line-height: 1.5;
+                            }
+
+                            ol, ul {
+                                margin: 5px 0;
+                                padding-left: 20px;
+                            }
+
+                            ol li, ul li {
+                                margin: 5px 0;
+                                line-height: 1.5;
+                            }
+
+                            .signature-table {
+                                margin-top: 30px;
+                            }
+
+                            .signature-table td {
+                                text-align: center;
+                                width: 33.33%;
+                                padding: 0 10px;
+                            }
+
+                            .signature-space {
+                                height: 100px;
+                            }
+
+                            .signature-line {
+                                border-bottom: 1px solid black;
+                                width: 90%;
+                                margin: 5 auto;
+                                display: block;
+                            }
+
+                            .terms {
+                                margin-top: 20px;
+                                padding-top: 10px;
+                                border-top: 1px solid #ddd;
+                            }
+
+                            .header-box {
+                                border-bottom: 2px solid black;
+                                padding-bottom: 10px;
+                                margin-bottom: 20px;
+                            }
+
+                            .vehicle-info {
+                                padding: 10px 0;
+                                margin: 10px 0;
+                            }
+
+                            .checkbox-table {
+                                margin: 15px 0;
+                                width: 10cm;
+                                border-collapse: collapse;
+                            }
+
+                            .checkbox-table .checkbox-cell {
+                                width: 80px;
+                                height: 40px;
+                                border: 1px solid black;
+                            }
+
+                            .checkbox-table .label-cell {
+                                border: none;
+                                text-align: left;
+                                padding-left: 15px;
+                            }
+                        </style>
+
+                        <div class="header-box">
+                            <h3><b>TANDA TERIMA PENYERAHAN STNK</b></h3>
+                            <t t-if="p.company_id.parent_id">
+                                <h4><b><t t-esc="p.company_id.parent_id.name"/></b></h4>
+                            </t>
+                            <h5><b><t t-esc="p.company_id.name"/></b></h5>
+                        </div>
+
+                        <table class="table" style="margin-bottom: 15px;">
+                            <tr>
+                                <td style="width: 4cm; font-weight: bold;">No. Tanda Terima</td>
+                                <td style="width: 0.5cm;">:</td>
+                                <td><t t-esc="p.name"/></td>
+                            </tr>
+                        </table>
+
+                        <p style="margin-bottom: 15px; font-size: 15px;">
+                            Telah diterima dengan kondisi baik dan lengkap berupa <b>Asli</b>:
+                        </p>
+
+                        <p style="margin-bottom: 10px; font-size: 15px;">
+                            <b>1. Surat Tanda Nomor Kendaraan Bermotor (STNK) </b> dengan data sebagai berikut:
+                        </p>
+
+                        <t t-foreach="p.registration_handover_line_ids" t-as="x">
+                            <div class="vehicle-info">
+                                <table class="table table-info">
+                                    <tr>
+                                        <td>a.</td>
+                                        <td>Nama Pemilik</td>
+                                        <td>:</td>
+                                        <td><t t-esc="x.partner_id.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>b.</td>
+                                        <td>Alamat Pemilik</td>
+                                        <td>:</td>
+                                        <td>
+                                            <t t-esc="x.partner_id.street"/><br/>
+                                            <t t-esc="x.partner_id.state_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>c.</td>
+                                        <td>No. KTP Pemilik</td>
+                                        <td>:</td>
+                                        <td class="text-end"><t t-esc="x.partner_id.identification_number"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>d.</td>
+                                        <td>Merk/Type</td>
+                                        <td>:</td>
+                                        <td><t t-esc="x.lot_id.product_id.default_code"/> / <t t-esc="x.lot_id.product_id.factur_code"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>e.</td>
+                                        <td>Jenis/Model</td>
+                                        <td>:</td>
+                                        <td><t t-esc="x.lot_id.product_id.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>f.</td>
+                                        <td>Tahun Pembuatan</td>
+                                        <td>:</td>
+                                        <td><t t-esc="x.lot_id.production_year"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>g.</td>
+                                        <td>Warna</td>
+                                        <td>:</td>
+                                        <td><span t-esc="x.lot_id.product_id.product_template_attribute_value_ids.code"/> - <span t-esc="x.lot_id.product_id.product_template_attribute_value_ids.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>h.</td>
+                                        <td>No. Rangka</td>
+                                        <td>:</td>
+                                        <td class="text-end"><t t-esc="x.lot_id.chassis_number"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>i.</td>
+                                        <td>No. Mesin</td>
+                                        <td>:</td>
+                                        <td><t t-esc="x.lot_id.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>j.</td>
+                                        <td>No. Polisi</td>
+                                        <td>:</td>
+                                        <td class="text-end"><t t-esc="x.plate_number"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>k.</td>
+                                        <td>No. STNK</td>
+                                        <td>:</td>
+                                        <td class="text-end"><t t-esc="x.lot_id.vehicle_registration_number"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <p style="margin: 15px 0; font-size: 15px;">
+                                <b>2. Plat Atas Sepeda Motor HONDA</b> dengan No. Rangka <b><t t-esc="x.lot_id.chassis_number"/></b>
+                                dan No. Polisi <b><t t-esc="x.plate_number"/></b>
+                            </p>
+
+                            <table class="checkbox-table">
+                                <tr>
+                                    <td class="checkbox-cell"></td>
+                                    <td class="label-cell"><b>STNK</b></td>
+                                </tr>
+                                <tr>
+                                    <td class="checkbox-cell"></td>
+                                    <td class="label-cell"><b>PLAT</b></td>
+                                </tr>
+                            </table>
+
+                            <p style="margin: 20px 0;">
+                                <span style="font-size: 15px;"><t t-esc="p.company_id.state_id.name"/></span>,
+                                <span style="font-size: 15px;"><t t-esc="format_date(p.env, x.stnk_handover_date, date_format='dd-MM-yyyy')"/></span>
+                            </p>
+                        </t>
+
+                        <table class="table signature-table">
+                            <tr>
+                                <td><b>Yang Menyerahkan</b></td>
+                                <td><b>Mengetahui</b></td>
+                                <td><b>Penerima</b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="signature-space"></td>
+                            </tr>
+                            <tr>
+                                <td><span class="signature-line"></span></td>
+                                <td><span class="signature-line"></span></td>
+                                <td><span class="signature-line"></span></td>
+                            </tr>
+                            <tr>
+                                <td><t t-esc="user.name"/></td>
+                                <td></td>
+                                <td><t t-esc="p.receiver"/></td>
+                            </tr>
+                        </table>
+
+                        <div class="terms">
+                            <p><b>Syarat dan Ketentuan</b></p>
+                            <p>TDM dan Konsumen sepakat bila:</p>
+                            <ol>
+                                <li>Seluruh tanggung jawab terhadap STNK dan Plat secara otomatis beralih kepada Konsumen setelah konsumen menandatangani tanda terima ini.</li>
+                                <li>Konsumen yang namanya tercantum pada STNK WAJIB mengambil dan menerima secara langsung STNK, Notice atau Plat. Apabila diwakilkan, wajib menunjukkan KTP pemilik dan KTP pengambil.</li>
+                                <li>Bila ketentuan no. 2 dilanggar, maka seluruh tanggung jawab berada di pihak konsumen.</li>
+                            </ol>
+                        </div>
+
+                        <p class="text-end" style="margin-top: 20px; font-size: 9px; color: #666;">
+                            Dicetak oleh: &#160;<t t-esc="user.name"/> |
+                            <t t-esc="format_datetime(p.env, datetime.datetime.now(), tz=p.env.user.tz, dt_format='dd-MM-yyyy HH:mm')"/>
+                        </p>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Work Center Groups -->
+        <record id="group_tw_mrp_workcenter_read" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Work Centers Read</field>
+        </record>
+
+        <record id="group_tw_mrp_workcenter_update" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Work Centers Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_mrp_workcenter_read'))]"/>
+        </record>
+
+        <record id="group_tw_mrp_workcenter_delete" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Work Centers Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_mrp_workcenter_read'))]"/>
+        </record>
+
+        <!-- mrp workcenter master -->
+        <record id="group_tw_mrp_workcenter_master_read" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Work Centers Master Read</field>
+        </record>
+        <record id="access_tw_mrp_workcenter_master_read" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_workcenter" />
+            <field name="name">tw_mrp_workcenter_master_read</field>
+            <field name="group_id" ref="group_tw_mrp_workcenter_master_read" />
+            <field name="perm_read">1</field>
+        </record>
+        <record id="group_tw_mrp_workcenter_master_update" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Work Centers Master Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_mrp_workcenter_master_read'))]"/>
+        </record>
+        <record id="access_tw_mrp_workcenter_master_update" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_workcenter" />
+            <field name="name">tw_mrp_workcenter_master_update</field>
+            <field name="group_id" ref="group_tw_mrp_workcenter_master_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        <record id="group_tw_mrp_workcenter_master_delete" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Work Centers Master Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_mrp_workcenter_master_read'))]"/>
+        </record>
+        <record id="access_tw_mrp_workcenter_master_delete" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_workcenter" />
+            <field name="name">tw_mrp_workcenter_master_delete</field>
+            <field name="group_id" ref="group_tw_mrp_workcenter_master_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- mrp workcenter warehouse -->
+
+        <record id="group_tw_mrp_workcenter_warehouse_read" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Work Centers Warehouse Read</field>
+        </record>
+        <record id="access_tw_mrp_workcenter_warehouse_read" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_workcenter" />
+            <field name="name">tw_mrp_workcenter_warehouse_read</field>
+            <field name="group_id" ref="group_tw_mrp_workcenter_warehouse_read" />
+            <field name="perm_read">1</field>
+        </record>
+        <record id="group_tw_mrp_workcenter_warehouse_update" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Work Centers Warehouse Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_mrp_workcenter_warehouse_read'))]"/>
+        </record>
+        <record id="access_tw_mrp_workcenter_warehouse_update" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_workcenter" />
+            <field name="name">tw_mrp_workcenter_warehouse_update</field>
+            <field name="group_id" ref="group_tw_mrp_workcenter_warehouse_update" />
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+        </record>
+        <record id="group_tw_mrp_workcenter_warehouse_delete" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Work Centers Warehouse Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_mrp_workcenter_warehouse_read'))]"/>
+        </record>
+        <record id="access_tw_mrp_workcenter_warehouse_delete" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_workcenter" />
+            <field name="name">tw_mrp_workcenter_warehouse_delete</field>
+            <field name="group_id" ref="group_tw_mrp_workcenter_warehouse_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_mrp_workcenter_read')),
+                (4, ref('group_tw_mrp_workcenter_update')),
+                (4, ref('group_tw_mrp_workcenter_delete')),
+                (4, ref('group_tw_mrp_workcenter_master_read')),
+                (4, ref('group_tw_mrp_workcenter_master_update')),
+                (4, ref('group_tw_mrp_workcenter_master_delete')),
+                (4, ref('group_tw_mrp_workcenter_warehouse_read')),
+                (4, ref('group_tw_mrp_workcenter_warehouse_update')),
+                (4, ref('group_tw_mrp_workcenter_warehouse_delete')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

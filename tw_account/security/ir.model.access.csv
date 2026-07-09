@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_partial_reconcile_invoicing_read,account.partial.reconcile.invoicing.read,account.model_account_partial_reconcile,group_tw_account_invoicing_read,1,0,0,0
+access_validate_account_move_invoicing_read,account.validate.account.move.invoicing.read,account.model_validate_account_move,group_tw_account_invoicing_read,1,1,1,0

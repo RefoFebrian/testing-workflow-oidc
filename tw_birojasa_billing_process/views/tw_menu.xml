@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="tw_vehicle_birojasa_menu" name="Birojasa"
+            parent="tw_vehicle_registration_process.tw_vehicle_registration_process_menu_sub" sequence="40" />
+        <menuitem id="tw_vehicle_birojasa_menuitem" name="Tagihan Birojasa"
+            parent="tw_vehicle_birojasa_menu" action="tw_birojasa_billing_action"
+            sequence="1" groups="tw_birojasa_billing_process.group_birojasa_billing_read" />
+
+    </data>
+</odoo>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="tw_pricelist_form_view" model="ir.ui.view">
+        <field name="name">tw.product.pricelist.form</field>
+        <field name="model">product.pricelist</field>
+        <field name="priority">0</field>
+        <field name="arch" type="xml">
+            <form string="Products Price List">
+                <header>
+                    <button name="action_open_pricelist_report" type="object" string="Print"/>
+                    <button name="action_upload_pricelist_version" type="object" string="Upload" groups="tw_pricelist.tw_pricelist_group_button_upload_pricelist_version"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="e.g. Pricelist Unit Retailers"/></h1>
+                    </div>
+                    <group>
+                        <group name="pricelist_settings">
+                            <field name="is_pricelist_version_active" invisible="1"/>
+                            <field name="currency_id" groups="base.group_multi_currency" invisible="1"/>
+                            <field name="active"/>
+                            <field name="company_id" string="Branch" options="{'no_create': True}"/>
+                            <field name="type"/>
+                        </group>
+                        <group>
+                            <field name="country_group_ids" widget="many2many_tags" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="version_page" string="Version">
+                            <div style="color:red;" invisible="create_date != False">
+                                *Silahkan save terlebih dahulu untuk menambahkan pricelist version.
+                            </div>
+                            <field name="version_ids" readonly="create_date == False">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="area_id"/>
+                                    <field name="plate_id"/>
+                                    <field name="date_start"/>
+                                    <field name="date_end"/>
+                                    <field name="expiration_state" string="State" widget="badge" decoration-warning="expiration_state == 'expired'" decoration-success="expiration_state == 'confirmed'" decoration-muted="expiration_state not in ('expired', 'confirmed')"/>
+                                    <field name="state" widget="badge" optional="hide" decoration-success="state == 'confirmed'" decoration-muted="state not in ('confirmed')"/>
+                                    <button name="action_view_pricelist_items" type="object" string="View Items" optional="show"/>
+                                    <button name="action_copy" type="object" string="Copy Version" invisible="state != 'confirmed'" optional="hide" groups="tw_pricelist.tw_pricelist_group_button_copy" confirm="Are you sure you want to copy this pricelist version?"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page name="pricelist_rules" string="Price Rules">
+                            <field name="item_ids" nolabel="1" context="{'default_base':'list_price'}" readonly="1">
+                                <list string="Pricelist Rules">
+                                    <field name="product_tmpl_id" column_invisible="True"/>
+                                    <field name="name" string="Apply on"/>
+                                    <field name="price" string="Price"/>
+                                    <field name="min_quantity"/>
+                                    <field name="date_start"/>
+                                    <field name="date_end"/>
+                                    <field name="base" column_invisible="True"/>
+                                    <field name="price_discount" column_invisible="True"/>
+                                    <field name="applied_on" column_invisible="True"/>
+                                    <field name="compute_price" column_invisible="True"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Audit Trail">
+                            <group>
+                                <group>
+                                    <field name="create_uid" readonly="1"></field>
+                                    <field name="create_date" readonly="1"></field>
+                                </group>
+                                <group>							
+                                    <field name="write_uid" readonly="1"></field>
+                                    <field name="write_date" readonly="1"></field>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tw_pricelist_list_view" model="ir.ui.view">
+        <field name="name">tw.product.pricelist.list</field>
+        <field name="model">product.pricelist</field>
+        <field name="priority">0</field>
+        <field name="arch" type="xml">
+            <list string="Products Price List" default_order="id desc">
+                <field name="company_id" string="Branch"/>
+                <field name="name" string="Pricelist"/>
+                <field name="type"/>
+                <field name="currency_id"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="tw_pricelist_search_view" model="ir.ui.view">
+        <field name="name">tw.product.pricelist.search</field>
+        <field name="model">product.pricelist</field>
+        <field name="priority">0</field>
+        <field name="arch" type="xml">
+            <search string="Products Price Search">
+                <field name="name" string="Pricelist"/>
+                <field name="currency_id" groups="base.group_multi_currency"/>
+                <field name="company_id" string="Branch"/>
+                <field name="version_ids" string="Version Name" filter_domain="[('version_ids.name','ilike', self)]"/>
+                <field name="item_ids" string="Apply On" filter_domain="[('item_ids.name','ilike', self)]"/>
+                <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+                <filter string="Purchase Pricelist" name="type_purchase" domain="[('type','=','purchase')]" />
+                <filter string="Sale Pricelist" name="type_sale" domain="[('type','=','sales')]" />
+                <group expand="0" string="Group By">
+                    <filter string="Pricelist" name="name" domain="[]" context="{'group_by': 'name'}" />
+                    <filter string="Branch" name="company_id" domain="[]" context="{'group_by': 'company_id'}" />
+                    <filter string="Type" name="type" domain="[]" context="{'group_by': 'type'}" />
+                    <filter string="Active" name="active" domain="[]" context="{'group_by': 'active'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Form -->
+    <record id="tw_product_supplierinfo_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.product.supplierinfo.inherit.view.form</field>
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Readonly Purchase Order Vendor Price -->
+            <xpath expr="//form/sheet/group/group/div/field[@name='price']" position="attributes">
+                <attribute name="readonly"></attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="tw_product_pricelist_action2" model="ir.actions.act_window">
+        <field name="name">Pricelists</field>
+        <field name="res_model">product.pricelist</field>
+        <field name="path">tw_pricelists</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="search_view_id" ref="tw_pricelist_search_view" />
+        <field name="context">{
+            "default_base":'list_price',
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            Create a new pricelist
+            </p><p>
+            A price is a set of sales prices or rules to compute the price of sales order lines based on products, product categories, dates and ordered quantities.
+            This is the perfect tool to handle several pricings, seasonal discounts, etc.
+            </p><p>
+            You can assign pricelists to your customers or select one when creating a new sales quotation.
+            </p>
+        </field>
+    </record>
+     
+</odoo>

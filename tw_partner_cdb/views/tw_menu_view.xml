@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+
+        <!-- SUB MENU -->
+        <menuitem id="submenu_tw_partner_cdb" name="Customer Database" parent="tw_menu.submenu_tw_showroom_h1" sequence="21"/>
+
+        <!-- SHOWROOM -->
+        <menuitem id="tw_partner_cdb_menuitem" name="CDB" parent="submenu_tw_partner_cdb" action="action_tw_partner_cdb" sequence="10" groups="tw_partner_cdb.group_tw_partner_cdb_read"/>
+
+        <!-- MASTER -->
+        <menuitem name="CDB" groups="tw_partner_cdb.group_tw_partner_cdb_master_read" id="menu_master_partner_cdb" sequence="1000" parent="tw_menu.submenu_tw_partner" action="action_tw_partner_cdb"/>
+
+    </data>
+</odoo>

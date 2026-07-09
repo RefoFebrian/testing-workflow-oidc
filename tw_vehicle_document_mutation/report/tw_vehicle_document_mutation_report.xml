@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="action_print_out_registration_mutation" model="ir.actions.report">
+            <field name="name">Print Out Registration Mutation</field>
+            <field name="model">tw.document.mutation</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_vehicle_document_mutation.reg_mutation_report</field>
+            <field name="report_file">tw_vehicle_document_mutation.reg_mutation_report</field>
+            <field name="print_report_name">'Mutasi STNK - %s' % (object.name)</field>
+            <field name="paperformat_id" ref="tw_web.tw_report_paperformat_a4"/>
+        </record>
+
+        <record id="action_print_out_ownership_mutation" model="ir.actions.report">
+            <field name="name">Print Out Ownership Mutation</field>
+            <field name="model">tw.document.mutation</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_vehicle_document_mutation.own_mutation_report</field>
+            <field name="report_file">tw_vehicle_document_mutation.own_mutation_report</field>
+            <field name="print_report_name">'Mutasi BPKB - %s' % (object.name)</field>
+            <field name="paperformat_id" ref="tw_web.tw_report_paperformat_a4"/>
+        </record>
+
+        <record id="action_print_out_ownership_mutation_request" model="ir.actions.report">
+            <field name="name">Print Out Ownership Mutation Request</field>
+            <field name="model">tw.ownership.mutation.request</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_vehicle_document_mutation.own_mutation_request_report</field>
+            <field name="report_file">tw_vehicle_document_mutation.own_mutation_request_report</field>
+            <field name="print_report_name">'Mutasi BPKB - %s' % (object.name)</field>
+            <field name="paperformat_id" ref="tw_web.tw_report_paperformat_a4"/>
+        </record>
+
+    </data>
+</odoo>

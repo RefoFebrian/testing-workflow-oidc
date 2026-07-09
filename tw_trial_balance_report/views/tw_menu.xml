@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="menuitem_trial_balance_report" name="Laporan Trial Balance" parent="tw_menu.submenu_tw_backoffice_report" action="tw_trial_balance_report_action" sequence="10" groups="tw_trial_balance_report.group_trial_balance_report"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_tw_account_payment_document">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context(lang=lang)"/>
+            <t t-set="values" t-value="o._get_payment_receipt_report_values()"/>
+            <div class="page">
+                <h3><strong><span t-field="o.payment_receipt_title">Payment Receipt</span>: &#160;<span t-field="o.name">INV0001</span></strong></h3>
+
+                <div class="mb-4 mt-3">
+                    <div name="date" class="row">
+                        <div class="col-6" t-if="o.date">
+                            Payment Date: &#160;<span t-field="o.date" t-options='{"widget": "date", "format": "dd-MM-yyyy"}'>2023-01-01</span>
+                        </div>
+                        <div class="col-6">
+                            Memo: &#160;<span t-field="o.memo">-</span>
+                        </div>
+                    </div>
+                    <div class="oe_structure"></div>
+                    <div class="row">
+                        <div class="col-6" t-if="o.partner_type">
+                            <t t-if="o.partner_type == 'customer'">
+                                Customer: &#160;<span t-field="o.partner_id" data-oe-demo="Marc Demo"/>
+                            </t>
+                            <t t-else="o.partner_type == 'supplier'">
+                                Vendor: &#160;<span t-field="o.partner_id" data-oe-demo="Marc Demo"/>
+                            </t>
+                        </div>
+                        <div name="payment_method"
+                            t-if="values['display_payment_method'] and o.payment_method_id"
+                            class="col-6">
+                            Payment Method: &#160;<span t-field="o.journal_id.name">Credit card</span>
+                        </div>
+                    </div>
+                    <div class="oe_structure"></div>
+                    <div class="row">
+                        <div class="col-6" t-if="o.amount">
+                            Total: &#160;<span t-field="o.amount" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}">50 USD</span>
+                        </div>
+                        <div class="col-6">
+                            Bank Account: &#160;<span t-field="o.partner_bank_id.acc_number">-</span> (<span t-field="o.partner_bank_id.acc_holder_name"/>)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6" t-if="o.amount_text"  style="line-height:1;padding:0.25rem 0.5rem;">
+                            <small>## <span t-field="o.amount_text"></span><span>  ##</span></small>
+                        </div>
+                        <div class="col-6">
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="oe_structure"></div>
+                <table name="Details" class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th><span>Journal Number</span></th>
+                            <th><span>Invoice Number</span></th>
+                            <th><span>Invoice Date</span></th>
+                            <th><span>Invoice Due Date</span></th>
+                            <th t-if="otherCurrency" class="text-end"><span>Amount In Currency</span></th>
+                            <th class="text-end"><span>Amount</span></th>
+                        </tr>
+                    </thead>
+                    <t t-set="debit_lines" t-value="o.line_dr_ids"/>
+                    <t t-set="credit_lines" t-value="o.line_cr_ids"/>
+                    <t t-set="writeoff_lines" t-value="o.line_wo_ids"/>
+                    <tbody>
+                        <tr>
+                            <td colspan="5" style="
+                                background-color:#f0f0f0;
+                                line-height:1;
+                                padding:0.25rem 0.5rem;
+                            "><small>Debit</small></td>
+                        </tr>
+                        <t t-foreach="debit_lines" t-as="dl">
+                            <t t-set="name" t-value="dl.move_line_id.name or dl.move_line_id.move_id.name"/>
+                            <tr>
+                                <td><span t-esc="name"></span></td>
+                                <td><span t-field="dl.move_line_id.ref" data-oe-demo="Sample Ref"/></td>
+                                <td><span t-field="dl.move_line_id.move_id.date" t-options='{"widget": "date", "format": "dd-MM-yyyy"}'></span></td>
+                                <td><span t-field="dl.move_line_id.move_id.invoice_date_due" t-options='{"widget": "date", "format": "dd-MM-yyyy"}'></span></td>
+                                <td t-if="otherCurrency"/>
+                                <td class="text-end"><span t-field="dl.amount">100.00</span></td>
+                            </tr>
+                        </t>
+                        <tr>
+                            <td colspan="4" style="
+                                background-color:#f0f0f0;
+                                line-height:1;
+                                padding:0.25rem 0.5rem;
+                            "><small>Credit</small></td>
+                        </tr>
+                        <t t-foreach="credit_lines" t-as="cl">
+                            <t t-set="name" t-value="cl.move_line_id.name or cl.move_line_id.move_id.name"/>
+                            <tr>
+                                <td><span t-esc="name"></span></td>
+                                <td><span t-field="cl.move_line_id.ref" data-oe-demo="Sample Ref"/></td>
+                                <td><span t-field="cl.move_line_id.move_id.date" t-options='{"widget": "date", "format": "dd-MM-yyyy"}'></span></td>
+                                <td><span t-field="cl.move_line_id.move_id.invoice_date_due" t-options='{"widget": "date", "format": "dd-MM-yyyy"}'></span></td>
+                                <td t-if="otherCurrency"/>
+                                <td class="text-end"><span t-field="cl.amount">100.00</span></td>
+                            </tr>
+                        </t>
+                        <tr>
+                            <td colspan="4" style="
+                                background-color:#f0f0f0;
+                                line-height:1;
+                                padding:0.25rem 0.5rem;
+                            "><small>WriteOff</small></td>
+                        </tr>
+                        <t t-foreach="writeoff_lines" t-as="wo">
+                            <tr>
+                                <td><span t-field="wo.name"></span></td>
+                                <td><span t-field="wo.move_line_id.ref" data-oe-demo="Sample Ref"/></td>
+                                <td><span/>-</td>
+                                <td><span/>-</td>
+                                <td t-if="otherCurrency"/>
+                                <td class="text-end"><span t-field="wo.amount">100.00</span></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <div style="border: none !important;"> 
+                <table style="width:100%; border: none !important; border-collapse: collapse;">
+                    <tr  style="font-size: 12px; font-family: Arial; border: none !important;">
+                        <td width="25.00%" style="border: none !important; text-align: Center">Approved by</td>
+                        <td width="25.00%" style="border: none !important; text-align: Center">Finance,</td>
+                        <td width="25.00%" style="border: none !important; text-align: Center">Posting,</td>
+                        <td width="25.00%" style="border: none !important; text-align: Center">Penerima,</td>
+                    </tr> 
+                    <tr style="border: none !important;">
+                        <td width="5.00%" style="border: none !important;"><h1></h1></td>
+                        <td style="border: none !important;"><h1></h1></td>
+                    </tr>
+                    <tr style="border: none !important;">
+                        <td width="5.00%" style="border: none !important;"><h1></h1></td>
+                        <td style="border: none !important;"><h1></h1></td>
+                    </tr> 
+                    <tr style="border: none !important;">
+                        <td width="5.00%" style="border: none !important;"><h1></h1></td>
+                        <td style="border: none !important;"><h1></h1></td>
+                    </tr>   
+                    <tr style="font-size: 12px; font-family: Arial; border: none !important;">
+                        <td width="25.00%" style="border: none !important;"></td>
+                        <td width="25.00%" style="border: none !important;"></td>
+                        <td width="25.00%" style="border: none !important;"></td>
+                        <td width="25.00%" style="border: none !important;"></td>
+                    </tr>
+                    <tr style="border: none !important;">
+                        <td width="5.00%" style="border: none !important;"><h1></h1></td>
+                        <td style="border: none !important;"><h1></h1></td>
+                    </tr> 
+                    <tr style="font-size: 12px; font-family: Arial; border: none !important;">
+                        <td  style="border: none !important;" colspan="4">Lembar ke-1 Finance / Lembar ke-2 Accounting -- 
+                            <span t-esc="o.env.user.name"/>, 
+                            <span t-esc="time.strftime('%d/%m/%Y %H:%M:%S')"/>
+                        </td>
+                    </tr>                                            
+                </table> 
+            </div>
+            <div class="oe_structure"></div>
+        </t>
+    </template>
+
+    <template id="report_tw_account_payment">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.partner_id.lang or o.company_id.partner_id.lang"/>
+                <t t-call="tw_payment.report_tw_account_payment_document" t-lang="lang"/>
+            </t>
+        </t>
+    </template>
+    
+</odoo>

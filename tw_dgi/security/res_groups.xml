@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="access_tw_endpoint_configuration_read" model="ir.model.access">
+            <field name="model_id" ref="tw_dgi.model_tw_endpoint_configuration"/>
+            <field name="name">tw_endpoint_configuration read</field>
+            <field name="group_id" ref="tw_api.tw_api_configuration_group_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="tw_endpoint_configuration_access_update" model="ir.model.access">
+            <field name="model_id" ref="tw_dgi.model_tw_endpoint_configuration" />
+            <field name="name">tw_endpoint_configuration update</field>
+            <field name="group_id" ref="tw_api.tw_api_configuration_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_endpoint_configuration_access_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_dgi.model_tw_endpoint_configuration" />
+            <field name="name">tw_endpoint_configuration delete</field>
+            <field name="group_id" ref="tw_api.tw_api_configuration_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_mapping_response_read" model="ir.model.access">
+            <field name="model_id" ref="tw_dgi.model_tw_mapping_response"/>
+            <field name="name">tw_mapping_response read</field>
+            <field name="group_id" ref="tw_api.tw_api_configuration_group_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="tw_mapping_response_access_update" model="ir.model.access">
+            <field name="model_id" ref="tw_dgi.model_tw_mapping_response" />
+            <field name="name">tw_mapping_response update</field>
+            <field name="group_id" ref="tw_api.tw_api_configuration_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_mapping_response_access_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_dgi.model_tw_mapping_response" />
+            <field name="name">tw_mapping_response delete</field>
+            <field name="group_id" ref="tw_api.tw_api_configuration_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+    </data>
+</odoo>

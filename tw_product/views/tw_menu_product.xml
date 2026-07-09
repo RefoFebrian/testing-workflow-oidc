@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+    
+        <!-- Shorwoom -->
+        <menuitem id="tw_menuitem_product_submenu_showroom" parent="tw_menu.submenu_tw_showroom_configuration" name="Product" sequence="01" groups="tw_product.group_tw_product_template_unit_read"/>  
+        <menuitem id="tw_menuitem_product_template_unit_showroom" parent="tw_menuitem_product_submenu_showroom" action="tw_product_template_unit_action" sequence="01" groups="tw_product.group_tw_product_template_unit_read"/>  
+        <menuitem id="tw_menuitem_product_product_unit_variants_showroom" parent="tw_menuitem_product_submenu_showroom" action="tw_product_product_variants_unit_action" sequence="02" groups="tw_product.group_tw_product_product_unit_read"/>  
+	    <!-- Shorwoom - Extras -->
+        <menuitem id="tw_menuitem_product_template_extras_showroom" parent="tw_menuitem_product_submenu_showroom" action="tw_product_template_extras_action" sequence="03" groups="tw_product.group_tw_product_extras_read"/>   
+	    <menuitem id="tw_menuitem_product_product_extras_variants_showroom" parent="tw_menuitem_product_submenu_showroom" action="tw_product_product_variants_extras_action" sequence="04" groups="tw_product.group_tw_product_variants_extras_read"/>  
+        <!-- Shorwoom - Direct Gift -->
+        <menuitem id="tw_menuitem_product_template_direct_gift_showroom" parent="tw_menuitem_product_submenu_showroom" action="tw_product_template_direct_gift_action" sequence="05" groups="tw_product.group_tw_product_direct_gift_read"/>   
+	    <menuitem id="tw_menuitem_product_product_direct_gift_variants_showroom" parent="tw_menuitem_product_submenu_showroom" action="tw_product_product_variants_direct_gift_action" sequence="06" groups="tw_product.group_tw_product_variants_direct_gift_read"/>  
+	    
+        
+        <!-- Workshop -->
+        <menuitem id="tw_menuitem_product_submenu_workshop" parent="tw_menu.submenu_tw_workshop_configuration" name="Product" sequence="01" groups="tw_product.group_tw_product_template_sparepart_read"/>  
+        <menuitem id="tw_menuitem_product_template_sparepart_workshop" parent="tw_menuitem_product_submenu_workshop" action="tw_product_template_sparepart_action" sequence="01" groups="tw_product.group_tw_product_template_sparepart_read"/>  
+        <menuitem id="tw_menuitem_product_product_sparepart_variants_workshop" parent="tw_menuitem_product_submenu_workshop" action="tw_product_product_variants_sparepart_action" sequence="02" groups="tw_product.group_tw_product_product_sparepart_read"/>  
+        
+        <menuitem id="tw_menuitem_product_template_service_workshop" parent="tw_menuitem_product_submenu_workshop" action="tw_product_template_service_action" sequence="01" groups="tw_product.group_tw_product_template_service_read"/>  
+        <menuitem id="tw_menuitem_product_product_service_variants_workshop" parent="tw_menuitem_product_submenu_workshop" action="tw_product_product_variants_service_action" sequence="02" groups="tw_product.group_tw_product_product_service_read"/>  
+        
+        <!-- MASTER -->
+        <menuitem id="tw_submenu_product" name="Products" parent="tw_menu.menu_tw_master" sequence="20"/>
+
+	    <!-- MASTER - Unit -->
+        <menuitem id="tw_menuitem_product_template_unit" parent="tw_submenu_product" action="tw_product_template_unit_action" sequence="10" groups="tw_product.group_tw_product_template_unit_master_read"/>   
+	    <menuitem id="tw_menuitem_product_product_unit_variants" parent="tw_submenu_product" action="tw_product_product_variants_unit_action" sequence="20" groups="tw_product.group_tw_product_product_unit_master_read"/>  
+	    
+	    <!-- MASTER - Sparepart -->
+        <menuitem id="tw_menuitem_product_template_sparepart" parent="tw_submenu_product" action="tw_product_template_sparepart_action" sequence="11" groups="tw_product.group_tw_product_template_sparepart_read"/>   
+	    <menuitem id="tw_menuitem_product_product_sparepart_variants" parent="tw_submenu_product" action="tw_product_product_variants_sparepart_action" sequence="21" groups="tw_product.group_tw_product_product_sparepart_read"/>  
+	    
+	    <!-- MASTER - Service -->
+        <menuitem id="tw_menuitem_product_template_service" parent="tw_submenu_product" action="tw_product_template_service_action" sequence="12" groups="tw_product.group_tw_product_template_service_read"/>   
+	    <menuitem id="tw_menuitem_product_product_service_variants" parent="tw_submenu_product" action="tw_product_product_variants_service_action" sequence="22" groups="tw_product.group_tw_product_product_service_read"/>  
+
+	    <!-- MASTER - Extras -->
+        <menuitem id="tw_menuitem_product_template_extras" parent="tw_submenu_product" action="tw_product_template_extras_action" sequence="13" groups="tw_product.group_tw_product_extras_read"/>   
+	    <menuitem id="tw_menuitem_product_product_extras_variants" parent="tw_submenu_product" action="tw_product_product_variants_extras_action" sequence="23" groups="tw_product.group_tw_product_variants_extras_read"/>  
+	    
+        <!-- MASTER - Direct Gift -->
+        <menuitem id="tw_menuitem_product_template_direct_gift" parent="tw_submenu_product" action="tw_product_template_direct_gift_action" sequence="14" groups="tw_product.group_tw_product_direct_gift_read"/>   
+	    <menuitem id="tw_menuitem_product_product_direct_gift_variants" parent="tw_submenu_product" action="tw_product_product_variants_direct_gift_action" sequence="24" groups="tw_product.group_tw_product_variants_direct_gift_read"/>  
+        
+	    <!-- MASTER - All -->
+        <menuitem id="tw_menuitem_product_template_all" parent="tw_submenu_product" action="tw_product_template_all_action" sequence="15" groups="tw_product.group_tw_product_template_all_read"/>   
+	    <menuitem id="tw_menuitem_product_product_all_variants" parent="tw_submenu_product" action="tw_product_product_variants_all_action" sequence="25" groups="tw_product.group_tw_product_product_all_read"/>  
+        
+        <!-- MASTER - Configuration -->
+        <menuitem id="tw_menuitem_product_master_configuration" parent="tw_submenu_product" name="configuration" sequence="500" groups="tw_product.group_tw_product_template_unit_read"/>   
+        <menuitem id="tw_menuitem_product_product_category" parent="tw_menuitem_product_master_configuration" action="product.product_category_action_form" sequence="10" groups="tw_product.group_tw_product_product_category_read"/>  
+        <menuitem id="tw_menuitem_product_type" parent="tw_menuitem_product_master_configuration" action="action_tw_product_type_tree" sequence="15" groups="tw_product.group_tw_product_type_read"/>
+        <menuitem id="tw_menuitem_product_attribute" parent="tw_menuitem_product_master_configuration" action="product_attribute_action_tree" sequence="20" groups="tw_product.group_tw_attribute_read"/>
+        <menuitem id="tw_menuitem_product_attribute_value" parent="tw_menuitem_product_master_configuration" action="product_attribute_value_action_tree" sequence="25" groups="tw_product.group_tw_attribute_value_read"/>
+        <menuitem id="tw_menuitem_product_unit_parts" parent="tw_menuitem_product_master_configuration" action="tw_unit_parts_action" sequence="40" groups="tw_product.group_tw_unit_parts_read"/>
+
+        <!-- Warehouse  -->
+        <menuitem id="tw_product_categories_warehouse_menuitem" name="Product Categories" action="product.product_category_action_form" parent="tw_menu.submenu_tw_warehouse_product" sequence="30" groups="tw_product.group_tw_product_product_category_warehouse_read"/>
+
+    </data>
+</odoo>

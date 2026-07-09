@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="print_wo_kwitansi">
+            <t t-set="scale" t-value="0.8"/>
+            <t t-set="size_26" t-value="26 * scale"/>
+            <t t-set="size_24" t-value="24 * scale"/>
+            <t t-set="size_22" t-value="22 * scale"/>
+            <t t-set="size_20" t-value="20 * scale"/>
+            <t t-set="size_18" t-value="18 * scale"/>
+            <t t-set="size_16" t-value="16 * scale"/>
+            <t t-set="size_14" t-value="14 * scale"/>
+            <t t-set="size_13" t-value="13 * scale"/>
+            <t t-set="size_12" t-value="12 * scale"/>
+            <t t-set="size_11" t-value="11 * scale"/>
+            <t t-set="size_10" t-value="10 * scale"/>
+            <t t-set="size_9" t-value="9 * scale"/>
+            <t t-set="size_8" t-value="8 * scale"/>
+            <t t-set="size_7" t-value="7 * scale"/>
+            <t t-set="size_6" t-value="6 * scale"/>
+            <t t-set="size_5" t-value="5 * scale"/>
+            <t t-set="size_4" t-value="4 * scale"/>
+            <t t-set="size_3" t-value="3 * scale"/>
+            <t t-set="size_2" t-value="2 * scale"/>
+            <t t-set="size_1" t-value="1 * scale"/>
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page" style="padding: 0px !important; margin: 0px !important;">
+
+                        <table style="width:100%; border-collapse: collapse;">
+                            <tr>
+                                <td>
+                                    <table style="width:100%; table-layout: fixed; border-collapse: collapse;">
+                                        
+                                        <!-- WAJIB: colgroup -->
+                                        <colgroup>
+                                            <col style="width:15%;"/>
+                                            <col style="width:85%;"/>
+                                        </colgroup>
+                        
+                                        <tr>
+                                            <td t-attf-style="font-size: {{size_26}}px;" colspan="2">
+                                                <b><span t-field="o.company_id.name"/></b>
+                                            </td>
+                                        </tr>
+                        
+                                        <tr>
+                                            <td t-attf-style="font-size: {{size_12}}px;" colspan="2">
+                                                <b>Main Dealer And Authorized Dealers of Honda Motorcycle</b>
+                                            </td>
+                                        </tr>
+                        
+                                        <tr>
+                                            <!-- KIRI -->
+                                            <td style="vertical-align: top;">
+                                                <t t-set="base_url" t-value="request.httprequest.host_url.rstrip('/')"/>
+                                                <img t-att-src="base_url + '/tw_work_order/static/src/img/tdm.jpg'" 
+                                                     style="height:45px; max-width:100%;"/>
+                                            </td>
+                        
+                                            <!-- KANAN -->
+                                            <td t-attf-style="font-size: {{size_12}}px; vertical-align: top; word-break: break-word;">
+                                                <span t-field="o.company_id.parent_id.name"/><br/>
+                                                <span t-field="o.company_id.name"/><br/>
+                                                <span t-field="o.company_id.street"/><br/>
+                                                <span t-field="o.company_id.phone"/><br/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" t-attf-style="font-size: {{size_12}}px; vertical-align: top; word-break: break-word;">
+                                                Email: &#160;<span t-field="o.company_id.email"/><br/>
+                                                Website: &#160;<span t-field="o.company_id.website"/>
+                                            </td>
+                                        </tr>
+                        
+                                        <tr>
+                                            <td colspan="2"/>
+                                        </tr>
+                        
+                                        <tr>
+                                            <td t-attf-style="font-size: {{size_26}}px; text-align: center;" colspan="2">
+                                                <b>KUITANSI</b>
+                                            </td>
+                                        </tr>
+                        
+                                        <tr>
+                                            <td colspan="2" style="border-top: double;"/>
+                                        </tr>
+                        
+                                    </table>
+                                    <table style="width:100%; table-layout: fixed; border-collapse: collapse;">
+                                        <!-- WAJIB: colgroup -->
+                                        <colgroup>
+                                            <col style="width:60%;"/>
+                                            <col style="width:40%;"/>
+                                        </colgroup>
+                                        <tr>
+                                            <td width="50%" t-attf-style="font-size: {{size_12}}px; text-align: left;">
+                                                <span t-field="o.company_id.name"/>
+                                            </td>
+                                            <td width="50%" t-attf-style="font-size: {{size_12}}px; text-align: right;">
+                                                <span t-field="o.company_id.street"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Kwitansi Lines -->
+                        <t t-set="kw_lines" t-value="kwitansi_lines.get(o.id, [])"/>
+                        <t t-foreach="kw_lines" t-as="kw">
+                            <table width="100%" t-attf-style="font-size: {{size_14}}px;">
+                                <tr>
+                                    <td t-attf-style="font-size: {{size_13}}px;" colspan="3"/>
+                                </tr>
+                                <tr>
+                                    <td t-attf-style="font-size: {{size_14}}px;" width="40.00%" height="12">No Transaksi</td>
+                                    <td t-attf-style="font-size: {{size_14}}px;" width="2.00%">:</td>
+                                    <td t-attf-style="font-size: {{size_14}}px;" width="60.00%">
+                                        <span t-field="kw.payment_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td t-attf-style="font-size: {{size_14}}px;" width="40.00%" height="12">No Invoice</td>
+                                    <td t-attf-style="font-size: {{size_14}}px;" width="2.00%">:</td>
+                                    <td t-attf-style="font-size: {{size_14}}px;" width="60.00%">
+                                        <span t-esc="kw.move_line_id.move_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td t-attf-style="font-size: {{size_13}}px;" colspan="3"/>
+                                </tr>
+                                <tr>
+                                    <td t-attf-style="font-size: {{size_13}}px;" width="40.00%" height="12">Sudah terima dari</td>
+                                    <td t-attf-style="font-size: {{size_13}}px;" width="2.00%">:</td>
+                                    <td t-attf-style="font-size: {{size_13}}px;" width="60.00%">
+                                        <span t-field="kw.partner_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td t-attf-style="font-size: {{size_13}}px;" colspan="3"/>
+                                </tr>
+                                <tr>
+                                    <td t-attf-style="font-size: {{size_13}}px;" width="40.00%" height="12">Banyak uang</td>
+                                    <td t-attf-style="font-size: {{size_13}}px;" width="2.00%">:</td>
+                                    <td t-attf-style="font-size: {{size_13}}px;" width="60.00%">
+                                        Rp. <span t-field="kw.amount_original"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td t-attf-style="font-size: {{size_13}}px;" colspan="3"/>
+                                </tr>
+                                <tr>
+                                    <td t-attf-style="font-size: {{size_13}}px;" width="40.00%" height="12">Terbilang</td>
+                                    <td t-attf-style="font-size: {{size_13}}px;" width="2.00%">:</td>
+                                    <td t-attf-style="font-size: {{size_13}}px;" width="60.00%" class="text-end">
+                                        <span t-esc="terbilang(kw.amount_original)"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td t-attf-style="font-size: {{size_13}}px;" colspan="3"/>
+                                </tr>
+                                <tr>
+                                    <td t-attf-style="font-size: {{size_13}}px;" width="40.00%" height="12">Untuk Pembayaran</td>
+                                    <td t-attf-style="font-size: {{size_13}}px;" width="2.00%">:</td>
+                                    <td t-attf-style="font-size: {{size_13}}px;" width="60.00%">
+                                        <span t-esc="kw.move_line_id.ref"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td t-attf-style="font-size: {{size_13}}px;" colspan="3"/>
+                                </tr>
+                            </table>
+
+                            <!-- Signature Section -->
+                            <table width="100%" t-attf-style="font-size: {{size_13}}px;">
+                                <tr>
+                                    <td width="100.00%" colspan="3"/>
+                                </tr>
+                                <tr>
+                                    <td width="50.00%" t-attf-style="font-size: {{size_13}}px; text-align: left;">
+                                        <span t-field="o.company_id.state_id.name"/>
+,
+                                        <span t-field="kw.date_original" t-options='{"format": "dd-MM-yyyy"}'/>
+                                    </td>
+                                    <td width="15.00%" t-attf-style="font-size: {{size_13}}px; text-align: center;"/>
+                                    <td width="35.00%" t-attf-style="font-size: {{size_13}}px; text-align: right;"/>
+                                </tr>
+                                <tr>
+                                    <td width="100.00%" colspan="3"/>
+                                </tr>
+                                <tr>
+                                    <td width="100.00%" colspan="3"/>
+                                </tr>
+                                <tr>
+                                    <td width="100.00%" colspan="3"/>
+                                </tr>
+                                <tr>
+                                    <td width="100.00%" colspan="3"/>
+                                </tr>
+                                <tr>
+                                    <td width="100.00%" colspan="3" height="15" t-attf-style="font-size: {{size_13}}px; text-align: left;">
+                                        <b>
+                                            <u>
+                                                <span t-field="kw.payment_id.create_uid.name"/>
+                                            </u>,
+                                            <span t-field="kw.payment_id.create_date" t-options='{"format": "dd-MM-yyyy hh:mm:ss"}'/>
+                                        </b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="50.00%" height="15" t-attf-style="font-size: {{size_13}}px; text-align: left;">KASIR</td>
+                                </tr>
+                                <tr>
+                                    <td width="100.00%" colspan="3"/>
+                                </tr>
+                                <tr>
+                                    <td width="100.00%" colspan="3"/>
+                                </tr>
+                                <tr>
+                                    <td width="50.00%" height="15" t-attf-style="font-size: {{size_13}}px; text-align: left;">LAMPIRAN</td>
+                                </tr>
+                            </table>
+                        </t>
+
+                        <!-- Footer -->
+                        <table width="100%" t-attf-style="font-size: {{size_14}}px; table-layout: fixed; padding-top: 10px;">
+                            <tr>
+                                <td width="100.00%" t-attf-style="font-size: {{size_13}}px; text-align: left;">-Putih = Konsumen</td>
+                            </tr>
+                            <tr>
+                                <td width="100.00%" t-attf-style="font-size: {{size_13}}px; text-align: left;">-Hijau = Accounting</td>
+                            </tr>
+                            <tr>
+                                <td width="100.00%" t-attf-style="font-size: {{size_13}}px; text-align: left;">-Kuning = Finance</td>
+                            </tr>
+                            <tr>
+                                <td width="100.00%" t-attf-style="font-size: {{size_13}}px; text-align: left;">-Merah = Kasir</td>
+                            </tr>
+                            <tr>
+                                <td width="100.00%" t-attf-style="font-size: {{size_13}}px; text-align: left;">-Biru = Biru Finance Company</td>
+                            </tr>
+                            <tr>
+                                <td t-attf-style="font-size: {{size_13}}px;" colspan="3"/>
+                            </tr>
+                        </table>
+
+                        <!-- Catatan -->
+                        <table width="100%" style="border: 1px solid black;">
+                            <tr>
+                                <td t-attf-style="font-size: {{size_13}}px;">
+                                    <b>Catatan :</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td t-attf-style="font-size: {{size_13}}px;">1. Pembayaran dengan cheque/Giro dianggap lunas setelah diuangkan oleh bank</td>
+                            </tr>
+                            <tr>
+                                <td t-attf-style="font-size: {{size_13}}px;"/>
+                            </tr>
+                            <tr>
+                                <td t-attf-style="font-size: {{size_13}}px;">2. Kuitansi ini adalah kuitansi resmi dan satu-satunya pembayaran yang sah</td>
+                            </tr>
+                            <tr>
+                                <td t-attf-style="font-size: {{size_13}}px;"/>
+                            </tr>
+                            <tr>
+                                <td t-attf-style="font-size: {{size_13}}px;">3. Selalu minta kuitansi resmi ini jika anda melakukan pembayaran ke PT. TUNAS DWIPA MATRA</td>
+                            </tr>
+                        </table>
+
+                        <div class="oe_structure"/>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

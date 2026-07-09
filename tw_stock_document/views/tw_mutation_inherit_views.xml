@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit Request BPKB form view to use stock_document_id selection -->
+        <record id="tw_ownership_mutation_request_view_form_stock_doc" model="ir.ui.view">
+            <field name="name">tw.ownership.mutation.request.form.stock.doc</field>
+            <field name="model">tw.ownership.mutation.request</field>
+            <field name="inherit_id" ref="tw_vehicle_document_mutation.tw_ownership_mutation_request_view_form"/>
+            <field name="arch" type="xml">
+                <!-- Replace lot_ids with stock_document_ids hidden field -->
+                <field name="lot_ids" position="replace">
+                    <field name="stock_document_ids" invisible="1" />
+                </field>
+
+                <!-- Replace lot_id selection with stock_document_id in line list -->
+                <field name="ownership_mutation_request_line_ids" position="attributes">
+                    <attribute name="context">{'default_ownership_mutation_request_id': id}</attribute>
+                </field>
+
+                <xpath expr="//field[@name='ownership_mutation_request_line_ids']/list/field[@name='lot_id']" position="replace">
+                    <field name="stock_document_id" string="Stock STNK/BPKB" required="1" options="{'no_create': True,'no_open': True}" domain="[('id', 'in', parent.stock_document_ids)]" />
+                    <field name="lot_id" readonly="1" force_save="1" />
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherit Outgoing Document form view to use stock_document_id -->
+        <record id="tw_document_mutation_outgoing_view_form_stock_doc" model="ir.ui.view">
+            <field name="name">tw.document.mutation.outgoing.form.stock.doc</field>
+            <field name="model">tw.document.mutation</field>
+            <field name="inherit_id" ref="tw_vehicle_document_mutation.tw_document_mutation_outgoing_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='document_mutation_line_ids']/list/field[@name='lot_id']" position="replace">
+                    <field name="stock_document_id" string="Stock STNK/BPKB" required="1" options="{'no_create': True,'no_open': True}" domain="[('type', '=', parent.document_type), ('state', '=', 'stock'), ('lot_id', 'in', parent.domain_lot_ids)]" />
+                    <field name="lot_id" readonly="1" force_save="1" />
+                </xpath>
+                <!-- Hide duplicate location columns -->
+                <xpath expr="//field[@name='document_mutation_line_ids']/list/field[@name='stnk_current_location_id']" position="attributes">
+                    <attribute name="column_invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='document_mutation_line_ids']/list/field[@name='bpkb_current_location_id']" position="replace">
+                    <field name="current_location_id" readonly="1" string="Current Location" />
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherit Incoming Document form view to show stock_document_id -->
+        <record id="tw_document_mutation_incoming_view_form_stock_doc" model="ir.ui.view">
+            <field name="name">tw.document.mutation.incoming.form.stock.doc</field>
+            <field name="model">tw.document.mutation</field>
+            <field name="inherit_id" ref="tw_vehicle_document_mutation.tw_document_mutation_incoming_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='document_mutation_line_ids']/list/field[@name='lot_id']" position="replace">
+                    <field name="stock_document_id" string="Stock STNK/BPKB" options="{'no_create': True,'no_open': True}" domain="[('type', '=', parent.document_type), ('state', '=', 'intransit'), ('lot_id', 'in', parent.domain_lot_ids)]" readonly="parent.outgoing_mutation_id" />
+                    <field name="lot_id" readonly="1" force_save="1" />
+                </xpath>
+                <!-- Hide duplicate location columns -->
+                <xpath expr="//field[@name='document_mutation_line_ids']/list/field[@name='stnk_current_location_id']" position="attributes">
+                    <attribute name="column_invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='document_mutation_line_ids']/list/field[@name='bpkb_current_location_id']" position="replace">
+                    <field name="current_location_id" readonly="1" string="Current Location" />
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherit Internal Mutation form view to use stock_document_id -->
+        <record id="tw_document_mutation_internal_view_form_stock_doc" model="ir.ui.view">
+            <field name="name">tw.document.mutation.internal.form.stock.doc</field>
+            <field name="model">tw.document.mutation</field>
+            <field name="inherit_id" ref="tw_vehicle_document_mutation.view_document_mutation_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='document_mutation_line_ids']/list/field[@name='lot_id']" position="replace">
+                    <field name="stock_document_id" string="Stock STNK/BPKB" required="1" options="{'no_create': True,'no_open': True}" domain="[('type', '=', parent.document_type), ('state', '=', 'stock'), ('lot_id', 'in', parent.domain_lot_ids)]" />
+                    <field name="lot_id" readonly="1" force_save="1" string="Engine Number" />
+                </xpath>
+                <!-- Hide duplicate location columns -->
+                <xpath expr="//field[@name='document_mutation_line_ids']/list/field[@name='stnk_current_location_id']" position="attributes">
+                    <attribute name="column_invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='document_mutation_line_ids']/list/field[@name='bpkb_current_location_id']" position="replace">
+                    <field name="current_location_id" readonly="1" string="Current Location" />
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

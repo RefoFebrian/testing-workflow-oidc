@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_partner_ai_kpb_data" model="res.partner">
+            <field name="name">AI - Data KPB</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="autopost_bills">always</field>
+            <field name="email">ai_kpb@example.com</field>
+        </record>
+
+        <record id="user_ai_kpb_data" model="res.users">
+            <field name="partner_id" ref="tw_partner_ai_kpb_data"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="company_ids" eval="[Command.link(ref('base.main_company'))]"/>
+            <field name="login">ai_kpb</field>
+            <field name="password"></field>
+        </record>
+
+<!-- With Channel -->
+
+        <record id="channel_kpb_data" model="discuss.channel">
+            <field name="name">AI - Data KPB</field>
+            <field name="description">Chat mengenai data KPB.</field>
+        </record>
+
+        <!-- notify all employees of module installation -->
+        <record id="module_tw_install_notification" model="mail.message">
+            <field name="model">discuss.channel</field>
+            <field name="res_id" ref="channel_kpb_data"/>
+            <field name="message_type">email</field>
+            <field name="subtype_id" ref="mail.mt_comment"/>
+            <field name="subject">Welcome to Odoo!</field>
+            <field name="body"><![CDATA[<p>Welcome to the #AI channel.</p>
+            <p>Silahkan tanyakan apapun tentang transaksi WO KPB disini <b>ex: Berapa jumlah KPB di bulan maret 2025?</b>.</p>]]></field>
+        </record>
+
+        <record id="channel_member_kpb_data_channel_for_admin" model="discuss.channel.member">
+            <field name="partner_id" ref="base.partner_admin"/>
+            <field name="channel_id" ref="channel_kpb_data"/>
+            <field name="fetched_message_id" ref="module_tw_install_notification"/>
+            <field name="seen_message_id" ref="module_tw_install_notification"/>
+        </record>
+
+        <record id="channel_kpb_data" model="discuss.channel">
+            <field name="group_ids" eval="[Command.link(ref('tw_chat_bot.group_tw_channel_ai_kpb_read'))]"/>
+        </record>
+        
+    </data>
+</odoo>

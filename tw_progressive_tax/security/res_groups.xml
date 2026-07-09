@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+    
+    <!--TW Pajak Progressive  -->
+        
+        <!-- Read -->
+        <record id="group_progressive_tax_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Pajak Progressive Read</field> 
+        </record>
+
+        <record id="access_progressive_tax_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_progressive_tax"/>
+            <field name="name">progressive_tax read</field> 
+            <field name="group_id" ref="group_progressive_tax_read"/>  
+            <field name="perm_read">1</field> 
+        </record>
+
+        <record id="access_progressive_tax_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_progressive_tax_line"/>
+            <field name="name">progressive_tax_line read</field> 
+            <field name="group_id" ref="group_progressive_tax_read"/>  
+            <field name="perm_read">1</field> 
+        </record>
+       
+
+        
+        <record id="group_progressive_tax_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Pajak Progressive Delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_progressive_tax_read'))]"/>    
+        </record>
+
+        <record id="access_progressive_tax_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_progressive_tax"/>
+            <field name="name">progressive_tax delete</field> 
+            <field name="group_id" ref="group_progressive_tax_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>    
+
+        <record id="access_progressive_tax_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_progressive_tax_line"/>
+            <field name="name">progressive_tax_line delete</field> 
+            <field name="group_id" ref="group_progressive_tax_delete"/>
+            <field name="perm_unlink">1</field> 
+        </record>    
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+			<field name="implied_ids" eval="[
+                (4,ref('group_progressive_tax_read')),	
+				(4,ref('group_progressive_tax_delete')),				
+			]"/> 
+		</record>
+    </data>
+    
+
+</odoo>

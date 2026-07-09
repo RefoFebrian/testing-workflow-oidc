@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <record model="ir.ui.view" id="tw_work_order_collecting_inherit_form_view">
+			<field name="name">tw.work.order.collecting.form</field>
+			<field name="model">tw.work.order.collecting</field>
+            <field name="inherit_id" ref="tw_work_order_collecting.tw_work_order_collecting_form_view"/>
+			<field name="arch" type="xml">
+                <button name="action_get_detail" position="replace">
+                    <button string="Get Detail" invisible="amount != 0 or state != 'draft'" name="action_get_detail" type="object" class="oe_highlight" />
+                </button>
+            </field>
+        </record>    
+    </data>
+    
+
+</odoo>

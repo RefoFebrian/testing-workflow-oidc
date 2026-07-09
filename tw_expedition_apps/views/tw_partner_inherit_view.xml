@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="tw_expedition_apps_partner_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.expedition.apps.partner.inherit.form.view</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="tw_partner.tw_partner_contact_form_view"/>
+        <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <field name="delivery_capacity"/>
+            </field>
+        </field>
+    </record>
+</odoo>

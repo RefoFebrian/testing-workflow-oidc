@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="cron_auto_report_hutang" model="ir.cron">
+            <field name="name">Auto Generate Report Hutang</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Hutang')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 21:01:00')"/>
+        </record>
+
+        <record id="cron_auto_report_workshop" model="ir.cron">
+            <field name="name">Auto Generate Report Workshop</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Workshop')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 19:41:00')"/>
+        </record>
+        <record id="cron_auto_report_workshop_qty_measurement" model="ir.cron">
+            <field name="name">Auto Generate Report Workshop Qty Measurement</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Workshop Qty Measurement')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 20:01:00')"/>
+        </record>
+
+        <record id="cron_auto_report_penjualan_unit_main_dealer" model="ir.cron">
+            <field name="name">Auto Generate Report Penjualan Unit Main Dealer</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Penjualan Unit Main Dealer')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 18:01:00')"/>
+        </record>
+
+         <record id="cron_auto_report_penjualan_sparepart_main_dealer" model="ir.cron">
+            <field name="name">Auto Generate Report Penjualan Sparepart Main Dealer</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Penjualan Sparepart Main Dealer')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 18:21:00')"/>
+        </record>
+
+        <record id="cron_auto_report_laporan_piutang" model="ir.cron">
+            <field name="name">Auto Generate Report Laporan Piutang</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Piutang')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 21:21:00')"/>
+        </record>
+
+        <record id="cron_auto_report_laporan_stock_unit" model="ir.cron">
+            <field name="name">Auto Generate Report Laporan Stock Unit</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Stock Unit')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 17:31:00')"/>
+        </record>
+
+        <record id="cron_auto_report_laporan_stock_direct_gift" model="ir.cron">
+            <field name="name">Auto Generate Report Laporan Stock Direct Gift</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Stock Direct Gift')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 18:01:00')"/>
+        </record>
+
+        <record id="cron_auto_report_laporan_stock_sparepart" model="ir.cron">
+            <field name="name">Auto Generate Report Laporan Stock Sparepart</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Stock Sparepart')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 18:31:00')"/>
+        </record>
+
+        <record id="cron_auto_report_laporan_stock_sparepart_intransit" model="ir.cron">
+            <field name="name">Auto Generate Report Laporan Stock Sparepart Intransit</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Stock Sparepart Intransit')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 19:01:00')"/>
+        </record>
+
+        <record id="cron_auto_report_laporan_stock_movement_unit" model="ir.cron">
+            <field name="name">Auto Generate Report Laporan Stock Movement Unit</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Stock Movement Unit')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 17:01:00')"/>
+        </record>
+
+        <record id="cron_auto_report_laporan_stock_movement_sparepart" model="ir.cron">
+            <field name="name">Auto Generate Report Laporan Stock Movement Sparepart</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Stock Movement Sparepart')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 17:21:00')"/>
+        </record>
+
+        <record id="cron_auto_report_laporan_penjualan_unit" model="ir.cron">
+            <field name="name">Auto Generate Report Laporan Penjualan Unit</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Penjualan Unit')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 17:41:00')"/>
+        </record>
+
+        <record id="cron_auto_report_laporan_purchase_order_unit" model="ir.cron">
+            <field name="name">Auto Generate Report Laporan Purchase Order Unit</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Purchase Order Unit')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 18:41:00')"/>
+        </record>
+
+        <record id="cron_auto_report_laporan_purchase_order_sparepart" model="ir.cron">
+            <field name="name">Auto Generate Report Laporan Purchase Order Sparepart</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Purchase Order Sparepart')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 19:01:00')"/>
+        </record>
+
+        <record id="cron_auto_report_laporan_asset" model="ir.cron">
+            <field name="name">Auto Generate Report Laporan Asset</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Asset')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 19:31:00')"/>
+        </record>
+
+        <record id="cron_auto_report_laporan_asset_prepaid" model="ir.cron">
+            <field name="name">Auto Generate Report Laporan Asset Prepaid</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Asset Prepaid')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 20:01:00')"/>
+        </record>
+
+        <record id="cron_auto_report_laporan_pembelian_part_ahm" model="ir.cron">
+            <field name="name">Auto Generate Report Laporan Pembelian Part AHM</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Pembelian Part AHM')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 20:21:00')"/>
+        </record>
+
+        <record id="cron_auto_report_laporan_stock_picking" model="ir.cron">
+            <field name="name">Auto Generate Report Laporan Stock Picking</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Stock Picking')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 19:21:00')"/>
+        </record>
+
+        <record id="cron_auto_report_laporan_order_fulfillment" model="ir.cron">
+            <field name="name">Auto Generate Report Laporan Order Fulfillment</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Order Fulfillment')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 19:21:00')"/>
+        </record>
+
+        <record id="cron_auto_report_laporan_trial_balance" model="ir.cron">
+            <field name="name">Auto Generate Report Laporan Trial Balance</field>
+            <field name="model_id" ref="tw_auto_report.model_tw_report_automation"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.cron_report_automation('Laporan Trial Balance')
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 20:41:00')"/>
+        </record>
+
+    </data>
+
+</odoo>

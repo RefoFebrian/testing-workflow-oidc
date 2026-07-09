@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_stock_picking_nrfs_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.picking.nrfs.inherit.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_picking_inherit_form_view" />
+            <field name="arch" type="xml">
+                <field name="origin" position="after">
+                    <field name="vehicle_id" invisible="context.get('is_asset') or use_create_lots" readonly="1" force_save="1"/>
+                    <field name="driver_id" invisible="context.get('is_asset') or use_create_lots" readonly="1" force_save="1"/>
+                </field>
+                <xpath expr="//field[@name='location_dest_id'][2]" position="after">
+                    <field name="has_nrfs" invisible="1"/>
+                    <field name="nrfs_location_id" 
+                        required="has_nrfs == 'have_nrfs'"
+                        invisible="context.get('is_asset') or has_nrfs == 'no_nrfs'" 
+                        readonly="state == 'done'" 
+                        placeholder="e.g. MML/NRFS" 
+                        options="{'no_create': True,'no_open': True}" 
+                        domain="[('type_id.value','=','nrfs')]"
+                    />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

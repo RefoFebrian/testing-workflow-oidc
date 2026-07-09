@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Master Listing Cetak Kwitansi Trx Option -->
+        <record id="tw_selection_type_list_cetak_kwt_trx_option_claim_kpb" model="tw.selection">
+	    	<field name="name">CLAIM KPB</field>
+            <field name="value">claim_kpb</field>
+	    	<field name="type">ListCetakKwtCategory</field>
+        </record>
+        
+        <record id="tw_selection_type_list_cetak_kwt_trx_option_claim_ahass" model="tw.selection">
+	    	<field name="name">CLAIM AHASS</field>
+            <field name="value">claim_ahass</field>
+	    	<field name="type">ListCetakKwtCategory</field>
+        </record>
+        
+        <record id="tw_selection_type_list_cetak_kwt_trx_option_dealer_incentive" model="tw.selection">
+	    	<field name="name">INSENTIF DEALER</field>
+            <field name="value">insentif_dealer</field>
+	    	<field name="type">ListCetakKwtCategory</field>
+        </record>
+        
+        <record id="tw_selection_type_list_cetak_kwt_trx_option_marketing_incentive" model="tw.selection">
+	    	<field name="name">INSENTIF PEMASARAN</field>
+            <field name="value">insentif_pemasaran</field>
+	    	<field name="type">ListCetakKwtCategory</field>
+        </record>
+        
+        <record id="tw_selection_type_list_cetak_kwt_trx_option_intermediary_services" model="tw.selection">
+	    	<field name="name">JASA PERANTARA</field>
+            <field name="value">jasa_perantara</field>
+	    	<field name="type">ListCetakKwtCategory</field>
+        </record>
+        
+        <record id="tw_selection_type_list_cetak_kwt_trx_option_sales_incentive" model="tw.selection">
+	    	<field name="name">SALES INSENTIF</field>
+            <field name="value">sales_insentif</field>
+	    	<field name="type">ListCetakKwtCategory</field>
+        </record>
+        
+        <record id="tw_selection_type_list_cetak_kwt_trx_option_claim_scp" model="tw.selection">
+	    	<field name="name">CLAIM SCP</field>
+            <field name="value">claim_scp</field>
+	    	<field name="type">ListCetakKwtCategory</field>
+        </record>
+        
+        <record id="tw_selection_type_list_cetak_kwt_trx_option_freight_cost" model="tw.selection">
+	    	<field name="name">ONGKOS ANGKUT</field>
+            <field name="value">ongkos_angkut</field>
+	    	<field name="type">ListCetakKwtCategory</field>
+        </record>
+
+     </data>
+</odoo>

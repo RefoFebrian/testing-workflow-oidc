@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_res_config_settings_branch_form_view" model="ir.ui.view">
+            <field name="name">res.config.settings.branch.form</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//setting[@id='default_taxes']/div/div[2]" position="after">
+                    <div class="row">
+                        <label string="Additional Purchase Tax" for="additional_purchase_tax_id" class="col-lg-3 o_light_label"/>
+                        <field name="additional_purchase_tax_id" domain="[('type_tax_use', 'in', ('purchase', 'all'))]"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

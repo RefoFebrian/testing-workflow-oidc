@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- list view -->
+        <record id="tw_firebase_notification_view_list" model="ir.ui.view">
+            <field name="name">tw.firebase.notification.list</field>
+            <field name="model">tw.firebase.notification</field>
+            <field name="type">list</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="Firebase notification">
+                    <field name="name" />
+                    <field name="customer_name" />
+                    <field name="overdue" />
+                    <field name="followup_date" />
+                    <field name="company_id" />
+                    <field name="employee_receiver_id" />
+                    <field name="category_id" />
+                    <field name="send_date" />
+                    <field name="state" />
+                </list>
+            </field>
+        </record>
+        <!-- form view -->
+        <record id="tw_firebase_notification_view_form" model="ir.ui.view">
+            <field name="name">tw.firebase.notification.form</field>
+            <field name="model">tw.firebase.notification</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Firebase notification">
+                    <header>
+                        <button string="Confirm" type="object" name="action_confirm" invisible="state != 'draft'" groups="tw_firebase.tw_firebase_notification_group_button_confirm"/>
+                        <button string="Mark as Done" type="object" name="action_done" invisible="state != 'open'" groups="tw_firebase.tw_firebase_notification_group_button_done"/>
+                        <button string="Reset to Draft" type="object" name="action_draft" invisible="state not in ['open','done']" groups="tw_firebase.tw_firebase_notification_group_button_draft"/>
+                        <field name="state" widget="statusbar" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <!--button type="object" name="action_view_detail" class="oe_stat_button" icon="fa-pencil-square-o"-->
+                                <!--field name="detail_count" widget="statinfo" string="Detail(s)"/-->
+                                <!--field name="detail_ids" invisible="1"/-->
+                            <!--/button-->
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" string="Firebase notification Name"/>
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="message" required="1" readonly="state != 'draft'" />
+                            </group>
+                            <group>
+                                <field name="customer_name" />
+                                <field name="lead_activity_id" readonly='state != "draft"'/>
+                                <field name="company_id" readonly="state != 'draft'" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="employee_receiver_id" readonly="state != 'draft'" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="category_id" readonly="state != 'draft'" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="overdue" readonly="state != 'draft'"/>
+                                <field name="followup_date" readonly="state != 'draft'"/>
+                                <field name="send_date" readonly="state != 'draft'"/>
+                            </group>
+                        </group>
+                        <notebook>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- search -->
+        <record id="tw_firebase_notification_view_search" model="ir.ui.view">
+            <field name="name">tw.firebase.notification.search</field>
+            <field name="model">tw.firebase.notification</field>
+            <field name="arch" type="xml">
+                <search string="Firebase notification">
+
+                    <filter string="Name" name="filter_by_name" domain="[('name','=','')]" />
+                    <filter string="Customer Name" name="filter_by_customer_name" domain="[('customer_name','=','')]" />
+                    <filter string="State" name="filter_by_state" domain="[('state','=','')]" />
+                    <filter string="Overdue in" name="filter_by_overdue" domain="[('overdue','=','')]" />
+                    <filter string="Tgl followup" name="filter_by_followup_date" domain="[('followup_date','=','')]" />
+                    <filter string="Tgl kirim" name="filter_by_send_date" domain="[('send_date','=','')]" />
+                    <field name="name" select="True"/>
+                    <field name="customer_name" select="True"/>
+                    <field name="lead_activity_id" readonly='state != "draft"'/>
+                    <field name="state" select="True"/>
+                    <field name="overdue" select="True"/>
+                    <field name="followup_date" select="True"/>
+                    <field name="send_date" select="True"/>
+                    <field name="company_id" select="True"/>
+                    <field name="employee_receiver_id" select="True"/>
+                    <field name="category_id" select="True"/>
+                    <group string="Group By..">
+                        <filter string="Branch" domain="[]" name="group_by_company_id" context="{'group_by':'company_id'}"/>
+                        <filter string="Employee receiver" domain="[]" name="group_by_employee_receiver_id" context="{'group_by':'employee_receiver_id'}"/>
+                        <filter string="Category" domain="[]" name="group_by_category_id" context="{'group_by':'category_id'}"/>
+                        <filter string="Lead activity" domain="[]" name="group_by_lead_activity_id" context="{'group_by':'lead_activity_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <!-- kanban , to show image, please add image_small in the model -->
+        <record id="tw_firebase_notification_view_kanban" model="ir.ui.view" >
+            <field name="name">tw.firebase.notification.kanban</field>
+            <field name="model">tw.firebase.notification</field>
+            <field name="arch" type="xml">
+                <kanban version="7.0">
+                    <field name="id" />
+                    <field name="name" />
+                    <field name="state" />
+                    <field name="overdue" />
+                    <field name="followup_date" />
+                    <field name="send_date" />
+                    <field name="company_id" />
+                    <field name="employee_receiver_id" />
+                    <field name="category_id" />
+                    <templates>
+                        <t t-name="card">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <a type="open"><field name="name"/></a>
+                                    </h4>
+                                    <ul>
+                                        <li>
+                                            Field1: <field name="name"></field>
+                                        </li>
+                                        <li>
+                                            Field2: <field name="name"></field>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- calendar if a date field exists -->
+        <record id="tw_firebase_notification_view_cal" model="ir.ui.view">
+            <field name="name">tw.firebase.notification.cal</field>
+            <field name="model">tw.firebase.notification</field>
+            <field name="arch" type="xml">
+                <calendar string="Firebase notification" date_start="send_date">
+                    <field name="name" />
+                </calendar>
+            </field>
+        </record>
+        <!-- action window -->
+        <record id="tw_firebase_notification_action" model="ir.actions.act_window">
+            <field name="name">Firebase notification</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.firebase.notification</field>
+            <field name="view_mode">list,kanban,form,calendar,graph</field>
+            <field name="context">{"search_default_fieldname":1}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Firebase notification
+                </p><p>
+                Click the Create button to add a new Firebase notification
+                </p>
+            </field>
+        </record>
+
+        
+    </data>
+</odoo>

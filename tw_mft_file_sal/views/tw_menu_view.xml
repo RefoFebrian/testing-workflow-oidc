@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Generate MFT File SAL Menu -->
+        <menuitem id="tw_mft_file_sal_menuitem"
+            name="Generate File AHM SAL"
+            parent="tw_monitoring_mft.tw_generate_mft_submenu"
+            action="tw_export_mft_file_sal_action"
+            sequence="20"
+            groups="group_tw_export_mft_file_sal_read"
+        />
+
+    </data>
+</odoo>

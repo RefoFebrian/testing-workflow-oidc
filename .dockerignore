@@ -1,0 +1,15 @@
+.git
+.gitignore
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+.env
+.env.template
+env_template
+odoo.conf
+odoo.conf.template
+docker-compose.yml
+Dockerfile
+odoo_workflow.md

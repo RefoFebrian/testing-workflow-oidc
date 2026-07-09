@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_pilot_project_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Pilot Project Read</field> 
+        </record> 
+        
+        <record id="tw_pilot_project_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_pilot_project"/>
+            <field name="name">pilot_project read</field> 
+            <field name="group_id" ref="tw_pilot_project_group_read"/>  
+            <field name="perm_read">1</field> 
+        </record>
+
+        <record id="tw_pilot_project_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Pilot Project Update</field> 
+			<field name="implied_ids" eval="[(4, ref('tw_pilot_project_group_read'))]"/>
+        </record>
+
+        <record id="tw_pilot_project_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_pilot_project"/>
+            <field name="name">pilot_project update</field> 
+            <field name="group_id" ref="tw_pilot_project_group_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>
+        
+        <record id="tw_pilot_project_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Pilot Project Delete</field> 
+			<field name="implied_ids" eval="[(4, ref('tw_pilot_project_group_read'))]"/>
+        </record>
+
+        <record id="tw_pilot_project_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_pilot_project"/>
+            <field name="name">pilot_project delete</field> 
+            <field name="group_id" ref="tw_pilot_project_group_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+		    <field name="implied_ids" eval="[
+                (4,ref('tw_pilot_project_group_read')),
+				(4,ref('tw_pilot_project_group_update')),
+				(4,ref('tw_pilot_project_group_delete'))
+            ]"/> 
+		</record>
+    </data>
+</odoo>

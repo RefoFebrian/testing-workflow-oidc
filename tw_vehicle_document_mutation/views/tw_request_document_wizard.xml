@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_ownership_mutation_request_form" model="ir.ui.view">
+            <field name="name">tw.ownership.mutation.request.form</field>
+            <field name="model">tw.ownership.mutation.request</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="sender" required="1" />
+                            <field name="tracking_number" invisible="sender != 'SAP'"
+                                required="sender == 'SAP'" />
+                            <field name="courier_name" invisible="sender != 'Branch'"
+                                required="sender == 'Branch'" />
+                        </group>
+                        <footer>
+                            <button name="action_submit" string="Submit" type="object"
+                                class="oe_highlight" />
+                            <button string="Cancel" class="oe_link" special="cancel" />
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

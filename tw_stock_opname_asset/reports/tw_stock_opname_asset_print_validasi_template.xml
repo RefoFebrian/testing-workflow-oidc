@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="tw_stock_opname_asset_print_validasi">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="tw_web.teto_report_layout">
+                    <t t-call="tw_web.teto_report_styles_base" />
+                    <div class="page">
+                        <div class="oe_structure">
+
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <strong t-esc="o.name" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table-borderless" width="100%">
+                                        <tbody>
+                                            <tr>
+                                                <td class="bolder" width="20%">Branch</td>
+                                                <th width="3%">:</th>
+                                                <td width="27%"><t t-esc="o.company_id.name" /></td>
+                                                <td class="bolder" width="20%">PDI/Kamek/SA</td>
+                                                <th width="3%">:</th>
+                                                <td width="27%"><t t-esc="o.pdi_id.name" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bolder">Tanggal SO</td>
+                                                <th>:</th>
+                                                <td><span t-field="o.date" t-options="{'widget': 'date', 'format': 'dd-MM-yyyy'}" /></td>
+                                                <td class="bolder">SOH</td>
+                                                <th>:</th>
+                                                <td><t t-esc="o.soh_id.name" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bolder">Generate on</td>
+                                                <th>:</th>
+                                                <td><span t-field="o.generate_date" t-options="{'widget': 'datetime', 'format': 'dd-MM-yyyy HH:mm:ss'}" /></td>
+                                                <td class="bolder">ADH</td>
+                                                <th>:</th>
+                                                <td><t t-esc="o.adh_id.name" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row my-3">
+                                <div class="col">
+                                    <strong>Data Stock Asset</strong>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="teto-table-content">
+                                        <thead>
+                                            <th style="width: 5%;">No</th>
+                                            <th width="12%">Kode Asset</th>
+                                            <th width="14%">Nama Asset</th>
+                                            <th width="9%">Kategory</th>
+                                            <th width="9%">Validasi Fisik</th>
+                                            <th width="9%">Status Asset</th>
+                                            <th width="13%">PIC Asset</th>
+                                            <th width="9%">Kondisi Fisik Asset</th>
+                                            <th width="10%">No Engine</th>
+                                            <th width="14%">Keterangan</th>
+                                        </thead>
+                                        <tbody>
+                                            <t t-set="i" t-value="1"/>
+                                            <tr t-foreach="o.detail_ids" t-as="line">
+                                                <td class="text-center"><span t-esc="i"/><t t-set="i" t-value="i + 1"/></td>
+                                                <td><span t-esc="line.code"/></td>
+                                                <td><span t-esc="line.name"/></td>
+                                                <td><span t-esc="line.category"/></td>
+                                                <td><span t-esc="line.physical_validation"/></td>
+                                                <td><span t-esc="line.asset_status"/></td>
+                                                <td><span t-esc="line.pic_validation_id.name"/></td>
+                                                <td><span t-esc="line.physical_condition"/></td>
+                                                <td><span t-esc="line.engine_no"/></td>
+                                                <td><span t-esc="line.description"/></td>
+                                            </tr>
+                                        </tbody>  
+                                    </table>
+                                    <span t-esc="user.name"/>, <span t-esc="time.strftime('%d/%m/%Y %H:%M:%S')" />
+                                </div>
+                            </div>
+
+                            <div class="row my-3">
+                                <div class="col">
+                                    <strong>Fisik Tidak Tercatat Sistem</strong>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="teto-table-content">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 5%;">No</th>
+                                                <th>Nama Asset</th>
+                                                <th>Lokasi Fisik Asset</th>
+                                                <th>PIC Asset</th>
+                                                <th>Kondisi Fisik Asset</th>
+                                                <th>Nomor Mesin</th>
+                                                <th>Keterangan</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-set="j" t-value="1"/>
+                                            <tr t-foreach="o.other_asset_ids" t-as="other">
+                                                <td class="text-center"><span t-esc="j"/><t t-set="j" t-value="j + 1"/></td>
+                                                <td><span t-esc="other.name"/></td>
+                                                <td><span t-esc="other.physical_location"/></td>
+                                                <td><span t-esc="other.pic_asset_id.name"/></td>
+                                                <td><span t-esc="other.physical_condition"/></td>
+                                                <td><span t-esc="other.engine_no"/></td>
+                                                <td><span t-esc="other.description"/></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row mt-5">
+                                <div class="col-12">
+                                    <table class="teto-table-signature">
+                                        <tr>
+                                            <td colspan="2">PIC SO</td>
+                                            <td>Menyetujui</td>
+                                        </tr>
+                                        <tr class="signature-row">
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bolder"><span t-esc="o.adh_id.name"/></td>
+                                            <td class="bolder"><span t-esc="o.pdi_id.name"/></td>
+                                            <td class="bolder"><span t-esc="o.soh_id.name"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>ADH</td>
+                                            <td>PDI / Kamek / SA</td>
+                                            <td>SOH</td>  
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">
+                                                Dicetak oleh: &#160;<span t-esc="user.name"/>, <span t-esc="time.strftime('%d/%m/%Y %H:%M:%S')" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

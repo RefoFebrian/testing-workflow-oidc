@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>  
+    	
+		<record id="tw_p2p_purchase_order_approval_form_view" model="ir.ui.view">
+            <field name="name">tw.p2p.purchase.order.approval.form</field>
+            <field name="model">tw.p2p.purchase.order</field>
+            <field name="inherit_id" ref="tw_p2p.tw_p2p_purchase_form_view"/>
+            <field name="arch" type="xml">
+
+				<field name="state" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,waiting_for_verification,revisi,confirmed" statusbar_colors="{&quot;draft&quot;:&quot;red&quot;,&quot;confirmed&quot;:&quot;blue&quot;}"/>	
+				</field>
+
+				<!-- Replace base action_verification button (first button in header) -->
+				<button name="action_verification" position="replace"/>
+
+				<!-- Replace action_generate_line and add all approval flow buttons -->
+				<button name="action_generate_line" position="replace">
+                    <button name="action_generate_line" groups="tw_p2p.group_tw_p2p_purchase_order_generate" invisible="purchase_line_ids == False or state not in ('draft') or type_name == 'Additional'" type="object" string="Generate" class="oe_highlight"/>
+                    <button name="action_request_approval" invisible="state not in ('draft','revisi')" string="RFA" type="object" class="oe_highlight" groups="tw_p2p_approval.group_tw_p2p_purchase_order_rfa"/>
+					<button name="cancel_order" groups="tw_p2p.group_tw_p2p_purchase_order_cancel" type="object" invisible="state != 'draft'" string="Cancel"/>
+					<button name="action_export_import_wizard" groups="tw_p2p.group_tw_p2p_purchase_order_export_import" invisible="state not in ('draft','revisi')" type="object" string="Export / Import"/>
+					<button name="action_approval" invisible="state != 'waiting_for_approval'" string="Approve" type="object" class="oe_highlight" />
+					<button name="confirm_order" invisible="state != 'waiting_for_verification'" string="Confirm" type="object" class="oe_highlight" groups="tw_p2p_approval.group_tw_p2p_purchase_order_confirm_approval"/>
+					<button name="action_reject_or_cancel" invisible="state != 'waiting_for_approval'" string="Reject" type="object" context="{'window_title': 'Reject'}"/>
+					<button name="action_reject_or_cancel" invisible="state not in ('waiting_for_approval', 'approved')" string="Cancel Approval" type="object" context="{'window_title': 'Cancel'}" groups="tw_p2p_approval.group_tw_p2p_purchase_order_cancel_approval"/>
+                    <button name="action_revisi" groups="tw_p2p.group_tw_p2p_purchase_order_export_upo" type="object" string="Revisi" class="oe_highlight" invisible="state != 'waiting_for_verification'"/>		
+					<button name="action_reject_by_ahm" type="object" groups="tw_p2p.group_tw_p2p_purchase_order_reject" string="Reject PO" invisible="state != 'approved'"/>				  				
+				</button>
+
+				<!-- Hide base module's Cancel and Export/Import buttons -->
+				<button name="cancel_order" position="replace"/>
+				<button name="action_export_import_wizard" position="replace"/>
+				<button name="action_revisi" position="replace"/>
+				<button name="confirm_order" position="replace"/>
+
+				<xpath expr="//page[@name='order_line']" position="after">
+					<page string="Approval">
+						<field name="approval_ids" readonly="True">
+						</field>
+					</page>
+				</xpath>
+			</field>
+		</record>
+
+		<record id="view_tw_p2p_purchase_filter_inherit" model="ir.ui.view">
+			<field name="name">tw.p2p.purchase.filter.inherit</field>
+			<field name="model">tw.p2p.purchase.order</field>
+			<field name="inherit_id" ref="tw_p2p.view_tw_p2p_purchase_filter"/>
+			<field name="arch" type="xml">
+
+				<!-- Menambahkan filter baru setelah filter Confirmed -->
+				<xpath expr="//filter[@name='confirmed']" position="after">
+					<filter name="waiting_for_approval" string="Waiting For Approval" domain="[('state','=','waiting_for_approval')]"/>
+					<filter name="approved" string="Approved" domain="[('state','=','approved')]"/>
+				</xpath>
+
+			</field>
+		</record>
+		
+ 	</data>
+</odoo>

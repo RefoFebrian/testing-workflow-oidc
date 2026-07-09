@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_upload_journal_memorial_upload_read,upload.journal.memorial.upload.read,model_tw_journal_memorial_upload_wizard,tw_group_upload_journal_memorial_upload_read,1,1,1,0
+access_upload_net_off_upload_read,upload.net.off.upload.read,model_tw_net_off_upload_wizard,tw_group_upload_net_off_upload_read,1,1,1,0

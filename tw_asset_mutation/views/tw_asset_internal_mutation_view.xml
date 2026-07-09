@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+	<data>
+        <!-- Tree View -->
+        <record id="view_tw_internal_mutation_asset_tree" model="ir.ui.view">
+            <field name="name">tw.asset.distribution.internal.tree</field>
+            <field name="model">tw.asset.distribution</field>
+            <field name="arch" type="xml">
+            	<list>
+            		<field name="name"/>
+            		<field name="company_id"/>
+            		<field name="date"/>
+            		<field name="state" widget="badge"/>
+            	</list>
+            </field>
+        </record>
+		
+		<!-- Form View -->
+		<record id="view_tw_internal_mutation_asset_form" model="ir.ui.view">
+            <field name="name">tw.asset.distribution.internal.form</field>
+            <field name="model">tw.asset.distribution</field>
+            <field name="arch" type="xml">
+            	<form>
+ 					<header>
+                        <button name="action_confirm" invisible="state == 'done'" string="Confirm" class="oe_highlight" type="object"/>
+	                	<field name="state" widget="statusbar" statusbar_visible="requested,done"/>
+                	</header>
+            		<sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_picking" type="object" class="oe_stat_button" icon="fa-truck" invisible="picking_count == 0">
+                                <field name="picking_count" widget="statinfo" string="Pickings"/>
+                            </button>
+                        </div>
+            			<div class="oe_title">                      
+		                    <h1>
+		                        <field name="name" force_save="1" readonly="1"/>
+		                    </h1>
+	                    </div>
+            			<group>
+            				<group>
+            					<field name="company_id" options="{'no_open':True,'no_create':True}" required="1" readonly="state != 'requested'"/>
+                                <field name="pic_asset_id" options="{'no_open':True,'no_create':True}" required="1" readonly="state != 'requested'"/>
+            				</group>
+            				<group>
+            					<field name="division"/>
+            					<field name="date" readonly="1"/>
+            				</group>
+                            <field name="type" invisible="1"/>
+            			</group>
+                        <notebook>
+                            <page name="asset_detail" string="Asset Detail">
+                                <field name="detail_ids" nolabel="1" readonly="state != 'requested'">
+                                    <list editable="bottom">
+                                        <field name="asset_id" domain="[('company_id','=',parent.company_id)]" options="{'no_open':True,'no_create':True}" required="1"/>
+                                        <field name="employee_user_id" options="{'no_open':True,'no_create':True}" readonly="1" force_save="1"/>
+                                        <field name="new_employee_user_id" options="{'no_open':True,'no_create':True}"/>
+                                        <field name="product_id" force_save="1" readonly="1"/>
+                                        <field name="code" readonly="1" force_save="1"/>
+                                        <field name="category_id" options="{'no_open':True,'no_create':True}" readonly="1" force_save="1"/>
+                                        <field name="amount" readonly="1" force_save="1"/>
+                                        <field name="amount_depreciated" readonly="1" force_save="1"/>
+                                        <field name="book_value" readonly="1" force_save="1"/>
+                                        <field name="location_asset_id" options="{'no_open':True,'no_create':True}" required="1" readonly="1" force_save="1"/>
+                                        <field name="location_dest_id" string="Lokasi Tujuan" options="{'no_open':True,'no_create':True}" required="1"/>
+                                        <field name="note"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page name="audit_trail" string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"/>
+                                        <field name="create_date" readonly="1"/>
+                                        <field name="confirm_uid" readonly="1" invisible="not confirm_uid"/>
+                                        <field name="confirm_date" readonly="1" invisible="not confirm_date"/>
+                                    </group>
+                                    <group>                         
+                                        <field name="write_uid" readonly="1"/>
+                                        <field name="write_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>             
+                        </notebook>
+            		</sheet>
+            	</form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="view_tw_internal_mutation_asset_filter" model="ir.ui.view">
+            <field name="name">tw.asset.distribution.internal.filter</field>
+            <field name="model">tw.asset.distribution</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="pic_asset_id"/>
+                    <field name="date"/>
+                    <field name="detail_ids" string="Asset" filter_domain="[('detail_ids.asset_id','ilike', self)]"/>
+                    <field name="detail_ids" string="Product" filter_domain="[('detail_ids.product_id','ilike', self)]"/>
+                    <field name="detail_ids" string="Asset Code" filter_domain="[('detail_ids.code','ilike', self)]"/>
+                    <field name="detail_ids" string="Asset Category" filter_domain="[('detail_ids.category_id','ilike', self)]"/>
+                    <field name="detail_ids" string="Asset Location" filter_domain="[('detail_ids.location_asset_id','ilike', self)]"/>
+                    <field name="detail_ids" string="Keterangan" filter_domain="[('detail_ids.note','ilike', self)]"/>
+                    <filter string="Requested" name="state_requested" domain="[('state','=','requested')]"/>
+                    <filter string="Done" name="state_done" domain="[('state','=','done')]"/>
+
+                    <group expand="1" string="Group By">
+                        <filter string="Branch" name="gby_branch" context="{'group_by':'company_id'}"/>
+                        <filter string="State" name="gby_state" context="{'group_by':'state'}"/>
+                        <filter string="Division" name="gby_division" context="{'group_by':'division'}"/>
+                        <filter string="Date" name="gby_date" context="{'group_by':'date'}"/>
+                        <filter string="PIC Asset" name="gby_pic_asset" context="{'group_by':'pic_asset_id'}"/>
+                    </group>                       
+
+                </search>
+            </field>
+        </record> 
+        
+        <!-- Action -->
+        <record id="action_tw_asset_internal_mutation" model="ir.actions.act_window">
+            <field name="name">Mutasi Internal</field>
+            <field name="res_model">tw.asset.distribution</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('type', '=', 'internal')]</field>
+            <field name="context">{
+                'default_type': 'internal',
+                'search_default_state_requested': 1,
+            }</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('view_tw_internal_mutation_asset_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_tw_internal_mutation_asset_form')}),
+            ]"/>
+        </record>
+
+    </data>
+</odoo>

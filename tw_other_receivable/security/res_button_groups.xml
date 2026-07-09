@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Button Groups -->
+        <record id="group_button_other_receivable_confirm" model="res.groups">
+            <field name="category_id" ref="tw_other_receivable.tw_module_category_other_receivable"/>
+            <field name="name">TW Button Other Receivable Confirm</field>
+        </record>
+        
+        <record id="group_button_other_receivable_validate" model="res.groups">
+            <field name="category_id" ref="tw_other_receivable.tw_module_category_other_receivable"/>
+            <field name="name">TW Button Other Receivable Validate</field>
+        </record>
+        
+        <record id="group_button_other_receivable_update" model="res.groups">
+            <field name="category_id" ref="tw_other_receivable.tw_module_category_other_receivable"/>
+            <field name="name">TW Button Other Receivable Update</field>
+        </record>
+
+        <record id="group_button_other_receivable_print_kwitansi" model="res.groups">
+            <field name="category_id" ref="tw_other_receivable.tw_module_category_other_receivable"/>
+            <field name="name">TW Button Other Receivable Print Kwitansi</field>
+        </record>
+        
+        <!-- Add all button groups to System Admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_button_other_receivable_confirm')),
+                (4, ref('group_button_other_receivable_validate')),
+                (4, ref('group_button_other_receivable_update')),
+                (4, ref('group_button_other_receivable_print_kwitansi'))
+            ]" />
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_jm_net_off" name="JM &amp; Net Off" parent="tw_menu.submenu_tw_backoffice_non_trade" sequence="200"/>
+    <menuitem id="menu_journal_memorial" name="Journal Memorial" parent="menu_jm_net_off" action="tw_action_journal_memorial" sequence="100" groups="tw_journal_memorial.group_tw_journal_memorial_read"/>
+</odoo>

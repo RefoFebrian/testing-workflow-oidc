@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <!-- Child -->
+        <menuitem id="tw_kpb_expired_menuitem" name="KPB Expired"
+            parent="tw_work_order.submenu_tw_work_order_configuration" sequence="40"
+            action="tw_work_order_kpb.tw_kpb_expired_action"
+            groups="tw_work_order_kpb.tw_kpb_expired_group_read"/>
+            
+        <menuitem id="tw_kpb_engine_type_menuitem" name="KPB Engine Type"
+            parent="tw_work_order.submenu_tw_work_order_configuration" sequence="50"
+            action="tw_work_order_kpb.tw_kpb_engine_type_action"
+            groups="tw_work_order_kpb.tw_kpb_engine_type_group_read" />
+
+    </data>
+
+
+</odoo>

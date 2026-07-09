@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <record id="tw_report_mo_fulfillment_view_wizard" model="ir.ui.view">
+      <field name="name">TW MO Fulfillment Report</field>
+      <field name="model">tw.mo.fulfillment.report</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="MO Fulfillment Report">
+          <group>
+            <group>
+              <field name="branch_sender_id" options="{'no_open':True,'no_create':True}" />
+              <field name="branch_receiver_id" options="{'no_open':True,'no_create':True}" />
+              <field name="division_showroom" string="Division" required="context.get('is_showroom',False)"
+                invisible="not context.get('is_showroom',False)" />
+              <field name="division_workshop" string="Division" required="context.get('is_workshop',False)"
+                invisible="not context.get('is_workshop',False)" />
+            </group>
+            <group>
+              <field name="state" />
+              <field name="picking_type_code" />
+              <label for="start_date" string="Date" />
+              <div>
+                <field name="start_date" class="oe_inline" /> - <field name="end_date"
+                  class="oe_inline" />
+              </div>
+            </group>
+          </group>
+          <footer>
+            <button name="excel_report" string="Export Report" type="object" class="oe_highlight" />
+            <button string="Cancel" class="oe_link"
+              special="cancel" />
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <!-- Showroom -->
+    <record id="action_tw_mo_fulfillment_report_showroom_wizard" model="ir.actions.act_window">
+      <field name="name">Laporan MO Fulfillment Showroom</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">tw.mo.fulfillment.report</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="tw_report_mo_fulfillment_view_wizard" />
+      <field name="target">new</field>
+      <field name="context">
+        {'is_showroom':True}
+      </field>
+    </record>
+
+    <!-- Workshop -->
+    <record id="action_tw_mo_fulfillment_report_workshop_wizard" model="ir.actions.act_window">
+      <field name="name">Laporan MO Fulfillment Workshop</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">tw.mo.fulfillment.report</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="tw_report_mo_fulfillment_view_wizard" />
+      <field name="target">new</field>
+      <field name="context">
+        {'is_workshop':True}
+      </field>
+    </record>
+
+  </data>
+</odoo>

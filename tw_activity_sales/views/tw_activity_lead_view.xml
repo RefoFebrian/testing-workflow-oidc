@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_lead_crm_lead_activityform_view" model="ir.ui.view">
+            <field name="name">tw.activity.lead.form</field>
+            <field name="model">tw.lead</field>
+            <field name="inherit_id" ref="tw_lead.tw_lead_crm_lead_form_view"/>
+            <field name="arch" type="xml">
+                <group name="salesperson" position="inside">
+                    <field name="is_btl" invisible="1" />
+                    <field name="is_requires_act_type" invisible="1" />
+                    <field name="is_pos" invisible="1" />
+                    <field name="sales_channel_id" readonly="state != 'open'" required="1" options="{'no_open': True, 'no_create': True}" />
+                    <field name="sales_channel" invisible="1" />
+                    <field name="act_type_id" invisible="not is_requires_act_type" readonly="state != 'open'" required="is_requires_act_type" options="{'no_open': True, 'no_create': True}" />
+                    <field name="activity_plan_ids" invisible="1"/>
+                    <field name="activity_plan_id" required="is_btl" invisible="not is_btl" domain="[('id', 'in', activity_plan_ids)]" readonly="state != 'open'" options="{'no_open': True, 'no_create': True}" />
+                    <field name="sales_source_location_id" invisible="not is_pos or is_btl != False" required="is_pos and is_btl == False and state == 'open'" readonly="state != 'open'" domain="[('company_id', '=', company_id), ('usage', '=', 'internal')]" options="{'no_open': True, 'no_create': True}" />
+                    <field name="activity_point_id" invisible="1" options="{'no_open': True, 'no_create': True}" />
+                </group>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    
+        <!-- Faktur Pajak Core Tax -->
+
+        <!-- READ -->
+        <record id="group_tw_faktur_pajak_core_tax_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Faktur Pajak Core Tax Read</field>
+        </record>
+
+        <record id="access_tw_faktur_pajak_out_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_faktur_pajak_out_line"/>
+            <field name="name">tw_faktur_pajak_out_line read</field>
+            <field name="group_id" ref="group_tw_faktur_pajak_core_tax_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_upload_core_tax_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_upload_core_tax"/>
+            <field name="name">tw_upload_core_tax read</field>
+            <field name="group_id" ref="group_tw_faktur_pajak_core_tax_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_e_faktur_coretax_pajak_wizard_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_e_faktur_coretax_pajak_wizard"/>
+            <field name="name">tw_e_faktur_coretax_pajak_wizard read</field>
+            <field name="group_id" ref="group_tw_faktur_pajak_core_tax_read"/>
+            <field name="perm_read">1</field>
+        </record>
+            
+        <!-- UPDATE -->
+        <record id="group_tw_faktur_pajak_core_tax_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Faktur Pajak Core Tax Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_faktur_pajak_core_tax_read'))]"/>
+        </record>
+
+        <record id="access_tw_faktur_pajak_out_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_faktur_pajak_out_line"/>
+            <field name="name">tw_faktur_pajak_out_line update</field>
+            <field name="group_id" ref="group_tw_faktur_pajak_core_tax_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_upload_core_tax_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_upload_core_tax"/>
+            <field name="name">tw_upload_core_tax update</field>
+            <field name="group_id" ref="group_tw_faktur_pajak_core_tax_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_e_faktur_coretax_pajak_wizard_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_e_faktur_coretax_pajak_wizard"/>
+            <field name="name">tw_e_faktur_coretax_pajak_wizard update</field>
+            <field name="group_id" ref="group_tw_faktur_pajak_core_tax_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- DELETE -->
+        <record id="group_tw_faktur_pajak_core_tax_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Faktur Pajak Core Tax Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_faktur_pajak_core_tax_read'))]"/>
+        </record>
+
+        <record id="access_tw_faktur_pajak_out_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_faktur_pajak_out_line"/>
+            <field name="name">tw_faktur_pajak_out_line delete</field>
+            <field name="group_id" ref="group_tw_faktur_pajak_core_tax_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_upload_core_tax_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_upload_core_tax"/>
+            <field name="name">tw_upload_core_tax delete</field>
+            <field name="group_id" ref="group_tw_faktur_pajak_core_tax_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_e_faktur_coretax_pajak_wizard_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_e_faktur_coretax_pajak_wizard"/>
+            <field name="name">tw_e_faktur_coretax_pajak_wizard delete</field>
+            <field name="group_id" ref="group_tw_faktur_pajak_core_tax_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_faktur_pajak_core_tax_read')),
+                (4, ref('group_tw_faktur_pajak_core_tax_update')),
+                (4, ref('group_tw_faktur_pajak_core_tax_delete')),
+            ]"/>
+        </record>
+    </data>
+
+</odoo>

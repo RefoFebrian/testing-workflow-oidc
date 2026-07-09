@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-name="tw_boom_dashboard.LabelChart">
+        <div class="o_label_chart" t-att-style="style">
+            <span t-out="state.content"/>
+        </div>
+    </t>
+</templates>

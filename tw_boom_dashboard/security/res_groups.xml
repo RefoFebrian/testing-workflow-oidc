@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- TW BOOM -->
+        <record id="group_tw_boom_dashboard" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Dashboard Menu</field>
+        </record>
+
+        <record id="group_tw_boom_dashboard_user" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Dashboard User Menu</field>
+        </record>
+
+        <record id="group_tw_boom_dashboard_admin_area" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Dashboard Admin Area Menu</field>
+        </record>
+
+        <record id="group_tw_boom_dashboard_area_manager" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Dashboard Area Manager Menu</field>
+        </record>
+
+        <record id="group_tw_boom_dashboard_admin_manager" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Dashboard Admin Manager Menu</field>
+        </record>
+
+        <record id="group_tw_boom_dashboard_admin_spv" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Dashboard Admin SPV Menu</field>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('tw_boom_dashboard.group_tw_boom_dashboard')),
+                (4, ref('tw_boom_dashboard.group_tw_boom_dashboard_user')),
+                (4, ref('tw_boom_dashboard.group_tw_boom_dashboard_admin_area')),
+                (4, ref('tw_boom_dashboard.group_tw_boom_dashboard_area_manager')),
+                (4, ref('tw_boom_dashboard.group_tw_boom_dashboard_admin_manager')),
+                (4, ref('tw_boom_dashboard.group_tw_boom_dashboard_admin_spv')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_incentive_partner_line,tw_incentive_partner_line,model_tw_incentive_partner_line,base.group_user,1,0,0,0
+access_tw_incentive_partner_line_detail,tw_incentive_partner_line_detail,model_tw_incentive_partner_line_detail,base.group_user,1,0,0,0

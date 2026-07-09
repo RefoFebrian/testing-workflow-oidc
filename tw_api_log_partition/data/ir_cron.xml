@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="ir_cron_create_future_partitions" model="ir.cron">
+            <field name="name">API Log: Create Future Partitions</field>
+            <field name="model_id" ref="model_tw_api_log_partition"/>
+            <field name="state">code</field>
+            <field name="code">model.action_ensure_future_partitions()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="ir_cron_sync_partition_list" model="ir.cron">
+            <field name="name">API Log: Sync Partition List</field>
+            <field name="model_id" ref="model_tw_api_log_partition"/>
+            <field name="state">code</field>
+            <field name="code">model.action_sync_partitions()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active">True</field>
+        </record>
+
+    </data>
+</odoo>

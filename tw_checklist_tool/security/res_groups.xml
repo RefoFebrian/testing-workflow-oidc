@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Checklist Tool Read Group -->
+        <record id="group_checklist_tool_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Checklist Tool - Read</field>
+        </record>
+        
+        <!-- Checklist Tool Update Group -->
+        <record id="group_checklist_tool_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Checklist Tool - Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_checklist_tool_read'))]"/>
+        </record>
+        
+        <!-- Checklist Tool Delete Group -->
+        <record id="group_checklist_tool_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Checklist Tool - Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_checklist_tool_read'))]"/>
+        </record>
+
+        <!-- Checklist Tool Access Rights -->
+        <!-- Model: tw.checklist.tools -->
+        <record id="access_tw_checklist_tools_read" model="ir.model.access">
+            <field name="name">tw.checklist.tools read</field>
+            <field name="model_id" ref="model_tw_checklist_tools"/>
+            <field name="group_id" ref="group_checklist_tool_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">0</field>
+            <field name="perm_create">0</field>
+            <field name="perm_unlink">0</field>
+        </record>
+        <record id="access_tw_checklist_tools_update" model="ir.model.access">
+            <field name="name">tw.checklist.tools update</field>
+            <field name="model_id" ref="model_tw_checklist_tools"/>
+            <field name="group_id" ref="group_checklist_tool_update"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">0</field>
+        </record>
+        <record id="access_tw_checklist_tools_delete" model="ir.model.access">
+            <field name="name">tw.checklist.tools delete</field>
+            <field name="model_id" ref="model_tw_checklist_tools"/>
+            <field name="group_id" ref="group_checklist_tool_delete"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Model: tw.checklist.tools.line -->
+        <record id="access_tw_checklist_tools_line_read" model="ir.model.access">
+            <field name="name">tw.checklist.tools.line read</field>
+            <field name="model_id" ref="model_tw_checklist_tools_line"/>
+            <field name="group_id" ref="group_checklist_tool_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">0</field>
+            <field name="perm_create">0</field>
+            <field name="perm_unlink">0</field>
+        </record>
+        <record id="access_tw_checklist_tools_line_update" model="ir.model.access">
+            <field name="name">tw.checklist.tools.line update</field>
+            <field name="model_id" ref="model_tw_checklist_tools_line"/>
+            <field name="group_id" ref="group_checklist_tool_update"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">0</field>
+        </record>
+        <record id="access_tw_checklist_tools_line_delete" model="ir.model.access">
+            <field name="name">tw.checklist.tools.line delete</field>
+            <field name="model_id" ref="model_tw_checklist_tools_line"/>
+            <field name="group_id" ref="group_checklist_tool_delete"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Model: tw.checklist.tools.detail -->
+        <record id="access_tw_checklist_tools_detail_read" model="ir.model.access">
+            <field name="name">tw.checklist.tools.detail read</field>
+            <field name="model_id" ref="model_tw_checklist_tools_detail"/>
+            <field name="group_id" ref="group_checklist_tool_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">0</field>
+            <field name="perm_create">0</field>
+            <field name="perm_unlink">0</field>
+        </record>
+        <record id="access_tw_checklist_tools_detail_update" model="ir.model.access">
+            <field name="name">tw.checklist.tools.detail update</field>
+            <field name="model_id" ref="model_tw_checklist_tools_detail"/>
+            <field name="group_id" ref="group_checklist_tool_update"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">0</field>
+        </record>
+        <record id="access_tw_checklist_tools_detail_delete" model="ir.model.access">
+            <field name="name">tw.checklist.tools.detail delete</field>
+            <field name="model_id" ref="model_tw_checklist_tools_detail"/>
+            <field name="group_id" ref="group_checklist_tool_delete"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Master Checklist Tool Read Group -->
+        <record id="group_checklist_tool_master_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Checklist Tool Master - Read</field>
+        </record>
+
+        <!-- Master Checklist Tool Update Group -->
+        <record id="group_checklist_tool_master_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Checklist Tool Master - Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_checklist_tool_master_read'))]"/>
+        </record>
+
+        <!-- Master Checklist Tool Delete Group -->
+        <record id="group_checklist_tool_master_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Checklist Tool Master - Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_checklist_tool_master_read'))]"/>
+        </record>
+
+        <!-- Master Tools Access Rights -->
+        <!-- Model: tw.master.tools -->
+        <record id="access_tw_master_tools_read" model="ir.model.access">
+            <field name="name">tw.master.tools read</field>
+            <field name="model_id" ref="model_tw_master_tools"/>
+            <field name="group_id" ref="group_checklist_tool_master_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">0</field>
+            <field name="perm_create">0</field>
+            <field name="perm_unlink">0</field>
+        </record>
+        <record id="access_tw_master_tools_update" model="ir.model.access">
+            <field name="name">tw.master.tools update</field>
+            <field name="model_id" ref="model_tw_master_tools"/>
+            <field name="group_id" ref="group_checklist_tool_master_update"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">0</field>
+        </record>
+        <record id="access_tw_master_tools_delete" model="ir.model.access">
+            <field name="name">tw.master.tools delete</field>
+            <field name="model_id" ref="model_tw_master_tools"/>
+            <field name="group_id" ref="group_checklist_tool_master_delete"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Model: tw.master.tools.line -->
+        <record id="access_tw_master_tools_line_read" model="ir.model.access">
+            <field name="name">tw.master.tools.line read</field>
+            <field name="model_id" ref="model_tw_master_tools_line"/>
+            <field name="group_id" ref="group_checklist_tool_master_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">0</field>
+            <field name="perm_create">0</field>
+            <field name="perm_unlink">0</field>
+        </record>
+        <record id="access_tw_master_tools_line_update" model="ir.model.access">
+            <field name="name">tw.master.tools.line update</field>
+            <field name="model_id" ref="model_tw_master_tools_line"/>
+            <field name="group_id" ref="group_checklist_tool_master_update"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">0</field>
+        </record>
+        <record id="access_tw_master_tools_line_delete" model="ir.model.access">
+            <field name="name">tw.master.tools.line delete</field>
+            <field name="model_id" ref="model_tw_master_tools_line"/>
+            <field name="group_id" ref="group_checklist_tool_master_delete"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Category Master Tools Access Rights -->
+        <record id="access_tw_category_master_tools_read" model="ir.model.access">
+            <field name="name">tw.selection category master tools read</field>
+            <field name="model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="group_id" ref="group_checklist_tool_master_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">0</field>
+            <field name="perm_create">0</field>
+            <field name="perm_unlink">0</field>
+        </record>
+        <record id="access_tw_category_master_tools_update" model="ir.model.access">
+            <field name="name">tw.selection category master tools update</field>
+            <field name="model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="group_id" ref="group_checklist_tool_master_update"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">0</field>
+        </record>
+        <record id="access_tw_category_master_tools_delete" model="ir.model.access">
+            <field name="name">tw.selection category master tools delete</field>
+            <field name="model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="group_id" ref="group_checklist_tool_master_delete"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Master Tools Location Access Rights -->
+        <record id="access_tw_master_tools_location_read" model="ir.model.access">
+            <field name="name">tw.selection master tools location read</field>
+            <field name="model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="group_id" ref="group_checklist_tool_master_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">0</field>
+            <field name="perm_create">0</field>
+            <field name="perm_unlink">0</field>
+        </record>
+        <record id="access_tw_master_tools_location_update" model="ir.model.access">
+            <field name="name">tw.selection master tools location update</field>
+            <field name="model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="group_id" ref="group_checklist_tool_master_update"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">0</field>
+        </record>
+        <record id="access_tw_master_tools_location_delete" model="ir.model.access">
+            <field name="name">tw.selection master tools location delete</field>
+            <field name="model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="group_id" ref="group_checklist_tool_master_delete"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+         <!-- Admin Group -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_checklist_tool_read')),
+                (4, ref('group_checklist_tool_update')),
+                (4, ref('group_checklist_tool_delete')),
+                (4, ref('group_checklist_tool_master_read')),
+                (4, ref('group_checklist_tool_master_update')),
+                (4, ref('group_checklist_tool_master_delete')),
+            ]"/>
+        </record>
+
+    </data>
+</odoo>

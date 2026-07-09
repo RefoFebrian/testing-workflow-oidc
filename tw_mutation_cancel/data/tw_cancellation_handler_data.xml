@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="cancellation_handler_mutation_order" model="tw.cancellation.handler">
+            <field name="model">tw.mutation.order</field>
+            <field name="module">tw_mutation_cancel</field>
+        </record>
+    </data>
+</odoo>

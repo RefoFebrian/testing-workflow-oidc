@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Main Menu for Handover Cancellation -->
+        <menuitem 
+            id="tw_registration_document_handover_cancel_menu_sub" 
+            name="Proses Penyerahan" 
+            parent="tw_vehicle_document_cancel.tw_vehicle_document_cancel_menu_sub" 
+            sequence="40"/>
+            
+        <menuitem 
+            id="tw_registration_document_handover_cancel_menu" 
+            name="Cancel Penyerahan STNK" 
+            parent="tw_registration_document_handover_cancel_menu_sub" 
+            action="registration_document_handover_cancel_unit_action"
+            groups="group_registration_document_handover_cancel_read"
+            sequence="10"/>
+            
+        <menuitem 
+            id="tw_ownership_document_handover_cancel_menu" 
+            name="Cancel Penyerahan BPKB" 
+            parent="tw_registration_document_handover_cancel_menu_sub" 
+            action="ownership_document_handover_cancel_unit_action"
+            groups="group_ownership_document_handover_cancel_read"
+            sequence="20"/>
+    </data>
+</odoo>

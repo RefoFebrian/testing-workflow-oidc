@@ -1,0 +1,49 @@
+.o_tw_work_order_kanban .o_kanban_renderer.o_kanban_ungrouped {
+    .o_kanban_record {
+        width: 500px;
+    }
+}
+
+.tw_wo_form_string {
+    color: grey !important;
+}
+
+
+.o_field_widget.o_field_label_selection.override_label_selection_widget .badge {
+    border-radius: 0px !important;
+    padding: 4px 10px !important;
+}
+
+/* Badge label_selection */
+.o_field_widget.o_field_label_selection.override_label_selection_widget .badge.text-bg-secondary {
+    background-color: #BFC2C6 !important; /* abu */
+    color: white !important;
+}
+
+.o_field_widget.o_field_label_selection.override_label_selection_widget .badge.text-bg-success {
+    background-color: #28A745 !important; /* hijau */
+    color: white !important;
+}
+
+.o_field_widget.o_field_label_selection.override_label_selection_widget .badge.text-bg-warning {
+    background-color: #EE8C2A !important; /* oranye */
+    color: white !important;
+}
+
+.o_field_widget.o_field_label_selection.override_label_selection_widget .badge.text-bg-danger {
+    background-color: #dc3545 !important; /* merah */
+    color: white !important;
+}
+
+/* Tambah style custom */
+.o_field_widget.o_field_label_selection.override_label_selection_widget .badge.text-bg-info {
+    background-color: #2A5BEE !important; /* biru */
+    color: white !important;
+}
+
+.tw_custom_badge_text_bg_secondary{
+    border-radius: 0px !important;
+    padding: 4px 10px !important;
+    background-color: #BFC2C6 !important; /* abu */
+    color: white !important;
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Register tw.good.receive in cancellation handler -->
+        <record id="tw_cancellation_handler_good_receive" model="tw.cancellation.handler">
+            <field name="model">tw.good.receive</field>
+            <field name="module">tw_good_receive_cancel</field>
+        </record>
+
+    </data>
+</odoo>

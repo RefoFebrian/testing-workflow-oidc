@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="tw_branch_setting_form_view_inherit_custom" model="ir.ui.view">
+            <field name="name">tw.branch.setting.form.inherit.custom</field>
+            <field name="model">tw.branch.setting</field>
+            <field name="inherit_id" ref="tw_branch_setting.tw_branch_setting_form_view"/>
+
+            <field name="arch" type="xml">
+                <field name="cashier_id" position="after">
+                    <field name="is_po_need_approval" />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

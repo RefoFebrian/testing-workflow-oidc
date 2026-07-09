@@ -1,0 +1,97 @@
+<odoo>
+    <data>
+
+        <record id="tw_barcode_label_asset_form" model="ir.ui.view">
+            <field name="name">tw.barcode.label.asset.form</field>
+            <field name="model">tw.barcode.label.asset</field>
+            <field name="arch" type="xml">
+                <form string="Label Barcode Asset">
+                    <header name="header">
+                        <button name="action_listing_asset" type="object" string="Listing Asset"/>
+                        <button name="action_checklist_print_asset" type="object" string="Print All?"/>
+                        <button name="action_print_barcode_label" type="object" string="Print Barcode Label" class="oe_highlight"/>
+                    </header>
+                    <sheet string="Barcode Label">
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <group>
+                                    <field name="asset_code_id" required="0" options="{'no_open': True, 'no_create': True}" context="{'default_type': 'AssetCode'}"/>
+                                    <field name="company_ids" options="{'no_open':True,'no_create':True}" required="1" widget="many2many_tags"/>
+                                    <field name="label_state" required="1"/>
+                                </group>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="List Asset">
+                                <field name="label_asset_ids" nolabel="1" widget="one2many_list">
+                                    <list create="false" delete="false" editable="bottom">
+                                        <field name="is_print" />
+                                        <field name="asset_id" readonly="1" column_invisible="1"/>
+                                        <field name="asset_name" readonly="1" />
+                                        <field name="asset_number" readonly="1" />
+                                        <field name="asset_code" readonly="1" />
+                                        <field name="asset_category" readonly="1" />
+                                        <field name="purchase_date" readonly="1" />
+                                        <field name="qr_code_base64" optional="hide" readonly="1" />
+                                        <field name="division" readonly="1" />
+                                        <field name="partner" readonly="1" />
+                                        <field name="status" readonly="1" />
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" options="{'no_open':True,'no_create':True}" readonly="1"></field>
+                                        <field name="create_date" readonly="1"></field>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" options="{'no_open':True,'no_create':True}" readonly="1"></field>
+                                        <field name="write_date" readonly="1"></field>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_tw_barcode_labelling_asset" model="ir.actions.act_window">
+            <field name="name">Barcode Labelling Asset</field>
+            <field name="res_model">tw.barcode.label.asset</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <record id="paperformat_barcode" model="report.paperformat">
+            <field name="name">Barcode Label Asset</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">215</field>
+            <field name="page_width">165</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="action_print_barcode_label_asset" model="ir.actions.report">
+            <field name="name">Barcode Label Asset</field>
+            <field name="model">tw.barcode.label.asset</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_asset_barcode.print_barcode_label_asset</field>
+            <field name="print_report_name">'Print_Barcode_Label_Asset_%s.pdf' % (object.origin)</field>
+            <field name="paperformat_id" ref="tw_asset_barcode.paperformat_barcode"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    <!-- Proposal -->
+        <record id="group_tw_button_open_payment_request" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Open Payment Request</field>
+        </record>        
+    
+    <!-- Print Proposal -->
+        <record id="group_tw_button_print_proposal" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Print Proposal</field>
+        </record>
+        
+        <record id="group_tw">
+
+        </record>
+    </data>
+    <data>
+    <!-- Add all access to admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+			<field name="implied_ids" eval="[
+                (4,ref('group_tw_button_open_payment_request')),				
+                (4,ref('group_tw_button_print_proposal')),				
+			]"/> 
+		</record>
+    </data>
+</odoo>

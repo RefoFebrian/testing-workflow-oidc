@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_master_app_type_tree" model="ir.ui.view">
+            <field name="name">tw.master.app.type.list</field>
+            <field name="model">tw.selection</field>
+            <field name="arch" type="xml">
+                <list string="Master App Type" create="1" delete="1" editable="top">
+                    <field name="name" required="1" string="App Name"/>
+                    <field name="value" required="1"/>
+                    <field name="type"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_tw_master_app_type" model="ir.actions.act_window">
+            <field name="name">Master App Type</field>
+            <field name="res_model">tw.selection</field>
+            <field name="view_mode">list</field>
+            <field name="domain">[('type','=','APPType')]</field>
+            <field name="context">{'default_type': 'APPType'}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No master app type found. Let's create one!
+                </p>
+            </field>
+        </record>
+
+        <record id="tw_master_app_type_action_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="view_tw_master_app_type_tree"/>
+            <field name="act_window_id" ref="action_tw_master_app_type"/>
+        </record>
+    </data>
+</odoo>

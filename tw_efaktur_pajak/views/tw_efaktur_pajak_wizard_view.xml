@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_efaktur_pajak_wizard" model="ir.ui.view">
+            <field name="name">Generate eFaktur Pajak Wizard</field>
+            <field name="model">tw.efaktur.pajak.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Generate eFaktur Pajak">
+                    <sheet>
+                        <group>
+                            <group string="Filter Periode">
+                                <label for="start_date" string="Periode"/>
+                                <div class="o_row">
+                                    <field name="start_date" class="oe_inline"/>
+                                    <span class="mx-1">-</span>
+                                    <field name="end_date" class="oe_inline"/>
+                                </div>
+                                <field name="no_faktur" placeholder="Nomor Faktur..."/>
+                                <field name="ref_ids" widget="many2many_tags" placeholder="Pilih No Transaksi..."/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Filter Branch" name="page_company">
+                                <field name="company_ids" nolabel="1">
+                                    <list>
+                                        <field name="name"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Filter Partner" name="page_partner">
+                                <field name="partner_ids" nolabel="1">
+                                    <list>
+                                        <field name="name"/>
+                                        <field name="no_npwp" optional="show"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+
+                    <footer>
+                        <button name="action_print_report" string="Export Report" type="object" class="btn-primary"/>
+                        <button string="Close" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_tw_efaktur_pajak_wizard" model="ir.actions.act_window">
+            <field name="name">Generate eFaktur Pajak</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.efaktur.pajak.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_tw_efaktur_pajak_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_tw_efaktur_pajak" name="Generate eFaktur Pajak" parent="tw_faktur_pajak.tw_backoffice_tax_submenu" sequence="999" action="action_tw_efaktur_pajak_wizard" groups="tw_efaktur_pajak.group_tw_efaktur_pajak_read"/>
+    </data>
+</odoo>

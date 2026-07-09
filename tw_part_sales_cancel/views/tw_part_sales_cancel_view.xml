@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="tw_part_sales_cancel_view_list">
+            <field name="name">tw.part.sales.cancel.list</field>
+            <field name="model">tw.part.sales.cancel</field>
+            <field name="arch" type="xml">
+                <list string="Part Sales Cancel">
+                	<field name="name"/>
+                    <field name="company_id"/>
+                    <field name="division"/>
+                	<field name="part_sales_id"/>
+                    <field name="date"/>
+                    <field name="state"/>
+				</list>
+			</field>
+        </record>
+
+        <record id="tw_part_sales_cancel_view_search" model="ir.ui.view">
+            <field name="name">tw.part.sales.cancel.search</field>
+            <field name="model">tw.part.sales.cancel</field>
+            <field name="arch" type="xml">
+                <search string="Search Part Sales Cancel">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="part_sales_id"/>
+                    <field name="division"/>
+                    <field name="date"/>
+                    <filter string="Waiting For Approval" name="waiting_approval" domain="[('state','=','waiting_approval')]"/>
+                    <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                    <filter string="Confirmed" name="confirmed" domain="[('state','=','confirmed')]"/>
+                    <filter string="Approved" name="approved" domain="[('state','=','approved')]"/>
+					<group string="Group By" name="groupby">
+                        <filter name="state_groupby" string="Status" context="{'group_by': 'state'}"/>
+                        <filter name="name_groupby" string="Name" context="{'group_by': 'name'}"/>
+                        <filter name="date" string="Date" context="{'group_by': 'date'}"/>
+                        <filter name="division" string="Division" context="{'group_by': 'division'}"/>
+                        <filter name="company_id" string="Branch" context="{'group_by': 'company_id'}"/>
+                        <filter name="part_sales_id" string="Part Sales" context="{'group_by': 'part_sales_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record model="ir.ui.view" id="tw_part_sales_cancel_inherit_view_form">
+            <field name="name">tw.part.sales.cancel.form</field>
+            <field name="model">tw.part.sales.cancel</field>
+            <field name="inherit_id" ref="tw_cancellation.tw_cancellation_form_view"/>
+            <field name="arch" type="xml">
+                <button name="action_confirm" position="after">
+                    <button name="action_print_part_sales_cancel" type="object" string="Print Form" class="oe_highlight" invisible="context.get('default_model_type') != 'tw.part.sales'"/>
+                </button>
+                <xpath expr="//button[@name='action_request_approval']" position="attributes">
+                    <attribute name="groups">tw_part_sales_cancel.group_tw_part_sales_cancel_rfa_approve</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_reject_or_cancel' and contains(@context, 'Cancel')]" position="attributes">
+                    <attribute name="groups">tw_part_sales_cancel.group_tw_part_sales_cancel_approval_cancel</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_confirm']" position="attributes">
+                    <attribute name="groups">tw_part_sales_cancel.group_tw_part_sales_cancel_approval_confirm</attribute>
+                </xpath>
+                <field name="transaction_name" position="after">
+                    <field name="part_sales_id" readonly="state != 'draft'" options="{'no_create':True,'no_open':True}" domain="[('state','in',('approved','sale','done')),('company_id','=',company_id),('division','=',division)]" required="context.get('default_model_type') != 'tw.part.sales' and context.get('default_model_type')" invisible="context.get('default_model_type') != 'tw.part.sales'"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="tw_part_sales_cancel_action">
+            <field name="name">Part Sales Cancel</field>
+            <field name="res_model">tw.part.sales.cancel</field>
+            <field name="search_view_id" ref="tw_part_sales_cancel_view_search"/>
+            <field name="context" eval="
+            {
+            'default_model_id': ref('tw_part_sales.model_tw_part_sales'),
+            'default_model_type': 'tw.part.sales',
+            'search_default_draft': '1',
+            'search_default_waiting_approval': '1',
+            'search_default_confirmed': '1',
+            }
+            "/>
+            <field name="domain">['|',('part_sales_id','!=',False),('model_id.model','=','tw.part.sales')]</field>
+        </record>
+
+        <!-- Action -->
+        <record id="tw_part_sales_cancel_action_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_part_sales_cancel_view_list"/>
+            <field name="act_window_id" ref="tw_part_sales_cancel_action"/>
+        </record>
+        
+        <record id="tw_part_sales_cancel_action_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_part_sales_cancel_inherit_view_form"/>
+            <field name="act_window_id" ref="tw_part_sales_cancel_action"/>
+        </record>
+    </data>
+</odoo>

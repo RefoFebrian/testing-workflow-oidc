@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit the sale order form view -->
+        <record id="view_tw_sale_order_form_inherit_discount" model="ir.ui.view">
+            <field name="name">tw.sale.order.form.inherit.discount</field>
+            <field name="model">tw.sale.order</field>
+            <field name="inherit_id" ref="tw_sale.tw_sale_order_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='sale_total']" position="before">
+                    <group name="discount_total" colspan="2">
+                        <div class="d-flex justify-content-end mb-2">
+                            <button 
+                                name="action_update_discounts" 
+                                string="Items Discount" 
+                                type="object" 
+                                class="btn btn-link"
+                                invisible="state not in ['draft', 'sent']"
+                                icon="fa-refresh"/>
+                        </div>
+                        <group class="o_inner_group grid oe_subtotal_footer d-flex order-0 order-lg-1 flex-column gap-0 gap-sm-3 col-lg-2">
+                            <field name="discount_ids" nolabel="1" force_save="1" class="discount_footer">
+                                <list editable="bottom" delete="false" create="false" class="o_account_tax_totals_table">
+                                    <field name="discount_id" readonly="1" force_save="1" class="text-nowrap"/>
+                                    <field name="amount" readonly="parent.state not in ['draft', 'sent']" force_save="1" string="Amount" options="{'currency_field': 'currency_id'}" class="text-end"/>
+                                    <field name="company_id" column_invisible="1"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                    <field name="tax_ids" widget="many2many_tags" options="{'no_create': True}" column_invisible="1"/>
+                                    <field name="account_id" column_invisible="1"/>
+                                </list>
+                            </field>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

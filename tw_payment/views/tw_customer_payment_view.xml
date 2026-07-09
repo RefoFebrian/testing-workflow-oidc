@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+         <!-- Customers Payment-->
+
+         <record id="tw_customer_payment_list_view" model="ir.ui.view">
+            <field name="name">Customers Payment</field>
+            <field name="model">tw.account.payment</field>
+            <field name="arch" type="xml">
+                <list string="Customers" default_order="id desc">
+                    <field name="company_id" string="Branch" readonly="state in ['cancel', 'in_process']"/>
+                    <field name="beneficiary_company_id" string="Terima untuk" optional="show"/>
+                    <field name="name"/>
+                    <field name="division"/>
+                    <field name="partner_id" string="Customer"/>
+                    <field name="journal_id" optional="show"/>
+                    <field name="date"/>
+                    <field name="amount_total" widget="monetary" optional="show"/>
+                    <field name="state" widget="badge" decoration-info="state in ('draft','cancel','rejected')" decoration-warning="state not in ('draft','canceled','rejected','paid')" decoration-success="state == 'paid'"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_customer_payment_action" model="ir.actions.act_window">
+            <field name="name">Customers Payment</field>
+            <field name="res_model">tw.account.payment</field>
+            <field name="view_mode">kanban,list,form,activity</field>
+            <field name="search_view_id" ref="tw_account_payment_search_view"/>
+            <field name="domain">[('type','=','customer_payment'),('payment_type','=','inbound'),('partner_type','=','customer')]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                  Add a new Customers Payment
+                </p><p>
+                  TEDS 2.0 helps you easily track all activities related to a Customers's Data
+                </p>
+            </field>
+        </record>
+
+        <!-- Need to be separated, because it cant read its own ID on install -->
+        <record id="tw_payment.tw_customer_payment_action" model="ir.actions.act_window">
+            <field name="context" eval="
+                {
+                    'default_payment_type': 'inbound',
+                    'default_type': 'customer_payment',
+                    'default_partner_type': 'customer',
+                    'search_default_inbound_filter': 1,
+                    'search_default_draft': 1,
+                    'default_move_journal_types': ('bank', 'cash'),
+                    'display_account_trust': True,
+                    'action_id': ref('tw_payment.tw_customer_payment_action'),
+                }
+            " />
+        </record>
+
+        <record model="ir.actions.act_window.view" id="tw_customer_payment_tree_action_view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_customer_payment_list_view"/>
+            <field name="act_window_id" ref="tw_customer_payment_action"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="tw_account_payment_form_action_view">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_account_payment_form_view"/>
+            <field name="act_window_id" ref="tw_customer_payment_action"/>
+        </record>
+
+
+</odoo>

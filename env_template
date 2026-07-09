@@ -1,0 +1,5 @@
+# Database Configuration
+HOST=host.docker.internal
+USER=db_user
+PASSWORD=db_password
+PORT=5432

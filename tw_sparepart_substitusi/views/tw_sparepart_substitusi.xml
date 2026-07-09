@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_sparepart_substitusi_list_view" model="ir.ui.view">
+            <field name="name">tw.sparepart.substitusi.list</field>
+            <field name="model">tw.sparepart.substitusi</field>
+            <field name="arch" type="xml">
+                <list string="Sparepart Substitusi">
+                    <field name="part_old_id" />
+                    <field name="part_new_id" />
+                    <field name="create_date"/>
+                    <field name="write_date"/>
+                    <field name="state" />
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_sparepart_substitusi_form_view" model="ir.ui.view">
+            <field name="name">tw.sparepart.substitusi.form</field>
+            <field name="model">tw.sparepart.substitusi</field>
+            <field name="arch" type="xml">
+                <form string="Sparepart Substitusi">
+                    <header>
+                        <button name="action_confirm" type="object" invisible="state != 'draft'" string="Confirm" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed" />
+                    </header>
+                    <sheet>
+                        <group colspan="4" col="4">
+                            <field name="part_old_id" required="1" options="{'no_create': True,'no_open':True}" readonly="state != 'draft'"/>
+                            <field name="part_new_id" required="1" options="{'no_create': True,'no_open':True}" readonly="state != 'draft'"/>
+                        </group>
+                        <notebook>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"/>
+                                        <field name="create_date" readonly="1"/>
+                                        <field name="confirm_uid" readonly="1"/>
+                                        <field name="confirm_date" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1"/>
+                                        <field name="write_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_sparepart_substitusi_filter_view" model="ir.ui.view">
+            <field name="name">tw.sparepart.substitusi.filter</field>
+            <field name="model">tw.sparepart.substitusi</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="part_old_id"/>
+                    <field name="part_new_id"/>
+                    <group string="Group By">
+                        <filter string="Status" domain="[]" name="group_by_state" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="tw_sparepart_substitusi_action" model="ir.actions.act_window">
+			<field name="name">Master Sparepart Substitusi</field>
+			<field name="res_model">tw.sparepart.substitusi</field>
+			<field name="view_mode">list,form</field>
+		</record>
+
+    </data>
+</odoo>

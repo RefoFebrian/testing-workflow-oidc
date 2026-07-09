@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="tw_rpa_sparepart_distribution_so_form_view" model="ir.ui.view">
+            <field name="name">tw.rpa.sparepart.distribution.so.form</field>
+            <field name="model">tw.sale.order</field>
+            <field name="inherit_id" ref="tw_sale.tw_sale_order_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='confirm_date']" position="after">
+                    <field name="is_rpa" readonly="1" widget="boolean_button" force_save="1"/>
+                </xpath>
+                <xpath expr="//field[@name='cancel_date']" position="after">
+                    <field name="is_auto_confirm" readonly="1" widget="boolean_button" force_save="1"/>
+                    <field name="failed_rpa_reason" readonly="1" invisible="failed_rpa_reason == False" force_save="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_rpa_sparepart_distribution_so_search" model="ir.ui.view">
+            <field name="name">tw.rpa.sparepart.distribution.so.search</field>
+            <field name="model">tw.sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='activities_upcoming_all']" position="after">
+                    <filter string="RPA" domain="[('is_rpa','=',True)]" name="mo_is_rpa_filter"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

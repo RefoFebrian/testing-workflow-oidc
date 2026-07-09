@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_res_partner_koprol_form" model="ir.ui.view" >
+		    <field name="name">res.partner.koprol.form</field>
+		    <field name="model">res.partner</field>
+		    <field name="inherit_id" ref="tw_partner.tw_partner_contact_form_view"/>
+		    <field name="arch" type="xml">
+		    	<xpath expr="//field[@name='code']" position="after">
+                    <field name="koprol_code" readonly="1"/>
+                </xpath>
+		    	<xpath expr="//field[@name='company_type']" position="attributes">
+                    <attribute name="readonly">'koprol_code' == 'True'</attribute> 
+                </xpath>
+		    	<xpath expr="//field[@name='code']" position="attributes">
+                    <attribute name="readonly">'koprol_code' == 'True'</attribute> 
+                </xpath>
+		    	<xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="readonly">'koprol_code' == 'True'</attribute> 
+                </xpath>
+		    	<xpath expr="//field[@name='street_domicile']" position="attributes">
+                    <attribute name="readonly">'koprol_code' == 'True'</attribute> 
+                </xpath>
+		    	<xpath expr="//field[@name='identification_number']" position="attributes">
+                    <attribute name="readonly">'koprol_code' == 'True'</attribute> 
+                </xpath>
+		    	<xpath expr="//field[@name='no_npwp']" position="attributes">
+                    <attribute name="readonly">'koprol_code' == 'True'</attribute> 
+                </xpath>
+		    	<xpath expr="//field[@name='is_pkp']" position="attributes">
+                    <attribute name="readonly">'koprol_code' == 'True'</attribute> 
+                </xpath>
+		    	<xpath expr="//field[@name='tgl_pengukuhan']" position="attributes">
+                    <attribute name="readonly">'koprol_code' == 'True'</attribute> 
+                </xpath>
+		    	<xpath expr="//field[@name='alamat_npwp']" position="attributes">
+                    <attribute name="readonly">'koprol_code' == 'True'</attribute> 
+                </xpath>
+		    	<xpath expr="//field[@name='email']" position="attributes">
+                    <attribute name="readonly">'koprol_code' == 'True'</attribute> 
+                </xpath>
+		    	<xpath expr="//field[@name='phone']" position="attributes">
+                    <attribute name="readonly">'koprol_code' == 'True'</attribute> 
+                </xpath>
+		    	<xpath expr="//field[@name='mobile']" position="attributes">
+                    <attribute name="readonly">'koprol_code' == 'True'</attribute> 
+                </xpath>
+		    	<xpath expr="//field[@name='website']" position="attributes">
+                    <attribute name="readonly">'koprol_code' == 'True'</attribute> 
+                </xpath>
+		    </field>
+		</record>
+	</data>
+</odoo>

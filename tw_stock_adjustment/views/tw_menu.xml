@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Stock Adjustment Menu -->
+    <menuitem id="menu_tw_stock_adjustment_root" name="Stock Adjustment" parent="tw_menu.submenu_tw_warehouse_operation" sequence="25" groups="tw_stock_adjustment.tw_stock_adjustment_group_read" />
+
+    <menuitem id="menu_tw_stock_adjustment" name="Stock Adjustments" parent="menu_tw_stock_adjustment_root" action="action_tw_stock_adjustment" sequence="10" />
+
+    <menuitem id="menu_tw_stock_adjustment_report" name="Report Stock Adjustment" parent="menu_tw_stock_adjustment_root" action="tw_stock_adjustment_report_action" sequence="20" />
+</odoo>

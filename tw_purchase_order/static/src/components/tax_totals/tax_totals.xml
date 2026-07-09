@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-inherit="account.TaxTotalsField" t-inherit-mode="extension" owl="1">
+        <xpath expr="//tr[1]" position="after">
+            <tr t-if="totals.discount_cash">
+                <td class="o_td_label">
+                    <label class="o_form_label o_tax_total_label">Discount Cash</label>
+                </td>
+
+                <td class="o_list_monetary">
+                    <span t-att-name="totals.discount_cash"
+                            style="white-space: nowrap"
+                            t-out="formatMonetary(totals.discount_cash)"/>
+                </td>
+            </tr>
+            <tr t-if="totals.discount_program">
+                <td class="o_td_label">
+                    <label class="o_form_label o_tax_total_label">Discount Program</label>
+                </td>
+
+                <td class="o_list_monetary">
+                    <span t-att-name="totals.discount_program"
+                            style="white-space: nowrap"
+                            t-out="formatMonetary(totals.discount_program)"/>
+                </td>
+            </tr>
+            <tr t-if="totals.discount_other">
+                <td class="o_td_label">
+                    <label class="o_form_label o_tax_total_label">Discount Other</label>
+                </td>
+
+                <td class="o_list_monetary">
+                    <span t-att-name="totals.discount_other"
+                            style="white-space: nowrap"
+                            t-out="formatMonetary(totals.discount_other)"/>
+                </td>
+            </tr>
+        </xpath>
+    </t>
+</templates>

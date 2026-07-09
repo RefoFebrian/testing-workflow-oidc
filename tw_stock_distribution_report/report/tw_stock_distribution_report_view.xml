@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="report_stock_distribution_view_form" model="ir.ui.view">
+      <field name="name">Print Report Stock Distribution</field>
+      <field name="model">tw.stock.distribution.report</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="Laporan Stock Distribution">
+          <group>
+            <field name="options" required="1" />
+            <field name="trx_type" required="1" />
+            <field name="state" />
+            <field name="order_state" invisible="options != 'sd_order'" />
+            <field name="division" readonly="1" />
+            <label for="start_date" string="Tanggal" />
+            <div>
+              <field name="start_date" class="oe_inline" /> s/d <field name="end_date"
+                class="oe_inline" />
+            </div>
+          </group>
+          <notebook>
+            <page string="Branches">
+              <field name="company_ids">
+                <list editable="top">
+                  <field name="name" string="Branch" />
+                </list>
+              </field>
+            </page>
+            <page string="Dealers">
+              <field name="dealer_ids" colspan="4" nolabel="1" />
+            </page>
+          </notebook>
+          <footer>
+            <button name="excel_report" string="Export Report" type="object" class="oe_highlight" />
+            <button string="Cancel" class="oe_link" special="cancel" />
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_report_stock_distribution_showroom_wizard" model="ir.actions.act_window">
+      <field name="name">Laporan Stock Distribution Showroom</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">tw.stock.distribution.report</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="report_stock_distribution_view_form" />
+      <field name="target">new</field>
+      <field name="context">
+        {
+        'default_division':'Unit'
+        }
+      </field>
+    </record>
+
+    <record id="action_report_stock_distribution_workshop_wizard" model="ir.actions.act_window">
+      <field name="name">Laporan Stock Distribution Workshop</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">tw.stock.distribution.report</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="report_stock_distribution_view_form" />
+      <field name="target">new</field>
+      <field name="context">
+        {
+        'default_division':'Sparepart'
+        }
+      </field>
+    </record>
+
+  </data>
+</odoo>

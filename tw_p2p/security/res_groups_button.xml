@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+           
+<!-- P2P Purchase Order Generate -->
+        <record id="module_p2p_purchase_order_button" model="ir.module.category">
+            <field name="name">TW P2P Purchase Order Button</field>
+            <field name="sequence">60</field>
+        </record>
+		
+        <record id="group_tw_p2p_purchase_order_generate" model="res.groups">
+            <field name="category_id" ref="module_p2p_purchase_order_button"/>
+            <field name="name">TW Button P2P Purchase Order Generate</field>
+        </record>
+                   
+        <record id="access_tw_p2p_purchase_order_generate_write" model="ir.model.access">
+            <field name="model_id" ref="model_tw_p2p_purchase_order"/>
+            <field name="name">p2p_purchase_order_generate write</field> 
+            <field name="group_id" ref="group_tw_p2p_purchase_order_generate"/>  
+            <field name="perm_write">1</field> 
+        </record>
+           
+        <record id="access_tw_p2p_purchase_order_line_generate_create" model="ir.model.access">
+            <field name="model_id" ref="model_tw_p2p_purchase_order_line"/>
+            <field name="name">p2p_purchase_order_line_generate create</field> 
+            <field name="group_id" ref="group_tw_p2p_purchase_order_generate"/>  
+            <field name="perm_create">1</field> 
+        </record> 
+        
+<!-- P2P Purchase Order Validate -->
+		
+        <record id="group_tw_p2p_purchase_order_validate" model="res.groups">
+            <field name="category_id" ref="module_p2p_purchase_order_button"/>
+            <field name="name">TW Button P2P Purchase Order Validate</field>
+        </record>
+                
+        <record id="access_tw_p2p_purchase_order_validate_write" model="ir.model.access">
+            <field name="model_id" ref="model_tw_p2p_purchase_order"/>
+            <field name="name">p2p_purchase_order_validate write</field> 
+            <field name="group_id" ref="group_tw_p2p_purchase_order_validate"/>  
+            <field name="perm_write">1</field> 
+        </record>
+                   
+<!-- P2P Purchase Order Confirm -->
+		
+        <record id="group_tw_p2p_purchase_order_confirm" model="res.groups">
+            <field name="category_id" ref="module_p2p_purchase_order_button"/>
+            <field name="name">TW Button P2P Purchase Order Confirm</field>
+        </record>
+             
+        <record id="access_tw_p2p_purchase_order_confirm_write" model="ir.model.access">
+            <field name="model_id" ref="model_tw_p2p_purchase_order"/>
+            <field name="name">p2p_purchase_order_confirm_unit write</field> 
+            <field name="group_id" ref="group_tw_p2p_purchase_order_confirm"/>  
+            <field name="perm_write">1</field> 
+        </record>     
+        
+<!-- P2P Purchase Order Unit Verification -->
+		
+        <record id="group_tw_p2p_purchase_order_verification" model="res.groups">
+            <field name="category_id" ref="module_p2p_purchase_order_button"/>
+            <field name="name">TW Button P2P Purchase Order Verification</field>
+        </record>
+             
+        <record id="access_tw_p2p_purchase_order_verification_write" model="ir.model.access">
+            <field name="model_id" ref="model_tw_p2p_purchase_order"/>
+            <field name="name">p2p_purchase_order_verification write</field> 
+            <field name="group_id" ref="group_tw_p2p_purchase_order_verification"/>  
+            <field name="perm_write">1</field> 
+        </record>     
+        
+<!-- P2P Purchase Order Unit Revisi -->
+		
+        <record id="group_tw_p2p_purchase_order_revisi" model="res.groups">
+            <field name="category_id" ref="module_p2p_purchase_order_button"/>
+            <field name="name">TW Button P2P Purchase Order Revisi</field>
+        </record>
+             
+        <record id="access_tw_p2p_purchase_order_revisi_write" model="ir.model.access">
+            <field name="model_id" ref="model_tw_p2p_purchase_order"/>
+            <field name="name">p2p_purchase_order_revisi write</field> 
+            <field name="group_id" ref="group_tw_p2p_purchase_order_revisi"/>  
+            <field name="perm_write">1</field> 
+        </record>     
+        
+<!-- P2P Purchase Order Export Import -->
+		
+        <record id="group_tw_p2p_purchase_order_export_import" model="res.groups">
+            <field name="category_id" ref="module_p2p_purchase_order_button"/>
+            <field name="name">TW Button P2P Purchase Order Export Import</field>
+        </record>
+             
+        <record id="access_tw_p2p_purchase_order_export_import_write" model="ir.model.access">
+            <field name="model_id" ref="model_tw_p2p_purchase_order"/>
+            <field name="name">p2p_purchase_order_export_import write</field> 
+            <field name="group_id" ref="group_tw_p2p_purchase_order_export_import"/>  
+            <field name="perm_write">1</field> 
+        </record>     
+        
+<!-- P2P Purchase Order Cancel -->
+		
+        <record id="group_tw_p2p_purchase_order_cancel" model="res.groups">
+            <field name="category_id" ref="module_p2p_purchase_order_button"/>
+            <field name="name">TW Button P2P Purchase Order Cancel</field>
+        </record>
+             
+        <record id="access_tw_p2p_purchase_order_cancel_button_write" model="ir.model.access">
+            <field name="model_id" ref="model_tw_p2p_purchase_order"/>
+            <field name="name">p2p_purchase_order_cancel write</field> 
+            <field name="group_id" ref="group_tw_p2p_purchase_order_cancel"/>  
+            <field name="perm_write">1</field> 
+        </record> 
+        
+<!-- P2P Purchase Order Export UPO -->
+		
+        <record id="group_tw_p2p_purchase_order_export_upo" model="res.groups">
+            <field name="category_id" ref="module_p2p_purchase_order_button"/>
+            <field name="name">TW Button P2P Purchase Order Export UPO</field>
+        </record>
+             
+        <record id="access_tw_p2p_purchase_order_export_upo_write" model="ir.model.access">
+            <field name="model_id" ref="model_tw_p2p_purchase_order"/>
+            <field name="name">p2p_purchase_order_unit_export_upo write</field> 
+            <field name="group_id" ref="group_tw_p2p_purchase_order_export_upo"/>  
+            <field name="perm_write">1</field> 
+        </record>
+              
+<!-- P2P Purchase Order Reject PO -->
+		
+        <record id="group_tw_p2p_purchase_order_reject" model="res.groups">
+            <field name="category_id" ref="module_p2p_purchase_order_button"/>
+            <field name="name">TW Button P2P Purchase Order Reject PO</field>
+        </record>
+
+<!-- P2P Purchase Order Report -->
+		
+        <record id="group_tw_p2p_purchase_order_report" model="res.groups">
+            <field name="category_id" ref="module_p2p_purchase_order_button"/>
+            <field name="name">TW Button P2P Purchase Order Report</field>
+        </record>
+                
+        <record id="group_tw_p2p_admin" model="res.groups">
+			<field name="implied_ids" eval="[
+											(4,ref('group_tw_p2p_purchase_order_generate')),
+											(4,ref('group_tw_p2p_purchase_order_validate')),
+											(4,ref('group_tw_p2p_purchase_order_confirm')),
+											(4,ref('group_tw_p2p_purchase_order_verification')),
+											(4,ref('group_tw_p2p_purchase_order_cancel')),
+											(4,ref('group_tw_p2p_purchase_order_export_upo')),
+											(4,ref('group_tw_p2p_purchase_order_reject')),
+											(4,ref('group_tw_p2p_purchase_order_report')),
+											(4,ref('group_tw_p2p_purchase_order_export_import'))
+											]"/> 
+		</record>                         
+    </data>
+</odoo>

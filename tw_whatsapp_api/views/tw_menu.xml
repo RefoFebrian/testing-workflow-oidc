@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- SUB MENU -->
+		<menuitem id="tw_whatsapp_submenu" name="WhatsApp" parent="tw_menu.menu_tw_whatsapp_top" sequence="1"/>
+		<!-- MENU -->
+		<menuitem id="tw_whatsapp_message_inbox_menu" 
+            parent="tw_whatsapp_api.tw_whatsapp_submenu"
+            action="tw_whatsapp_api.tw_whatsapp_message_inbox_action" 
+            sequence="1"
+            groups="tw_whatsapp_api.group_tw_whatsapp_message_read"
+        />
+
+		<menuitem id="tw_whatsapp_message_outbox_menu" 
+			parent="tw_whatsapp_api.tw_whatsapp_submenu"
+			action="tw_whatsapp_api.tw_whatsapp_message_outbox_action" 
+			sequence="2" 
+			groups="tw_whatsapp_api.group_tw_whatsapp_message_read"
+		/>
+
+		<menuitem id="tw_whatsapp_content_template_menu"
+			name="Whatsapp Content Template" 
+			parent="tw_whatsapp_api.tw_whatsapp_submenu"
+			action="tw_whatsapp_api.tw_whatsapp_content_template_action" 
+			sequence="3"
+			groups="tw_whatsapp_api.group_tw_whatsapp_content_template_read"
+		/>
+
+		<menuitem
+			id="menuitem_tw_selection_template_whatsapp"
+			name="Template Whatsapp"
+			parent="tw_selection.submenu_tw_selection"
+			action="tw_selection_template_whatsapp_action"
+			sequence="19"
+			groups="tw_whatsapp_api.group_tw_whatsapp_content_template_read"
+		/>
+	</data>
+</odoo>

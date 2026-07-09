@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem 
+            id="menu_tw_faktur_pajak_gabungan"
+            name="Faktur Pajak Gabungan"
+            parent="tw_faktur_pajak.tw_backoffice_tax_submenu" 
+            sequence="20"
+            groups="tw_faktur_pajak_gabungan.group_fpg_read"/>
+        
+        <menuitem 
+            id="submenu_tw_faktur_pajak_gabungan"
+            name="Faktur Pajak Gabungan"
+            parent="menu_tw_faktur_pajak_gabungan"
+            action="tw_faktur_pajak_gabungan_action"
+            sequence="20"
+            groups="tw_faktur_pajak_gabungan.group_fpg_read"/>
+            
+        <menuitem 
+            id="menu_tw_master_model_pajak"
+            name="Master Model Pajak Gabungan"
+            parent="menu_tw_faktur_pajak_gabungan"
+            action="tw_master_model_pajak_action"
+            sequence="10"
+            groups="tw_faktur_pajak_gabungan.group_fpg_read"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- tree view -->
+        <record id="tw_res_area_list_view" model="ir.ui.view">
+            <field name="name">res.area.tree</field>
+            <field name="model">res.area</field>
+            <field name="type">list</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="Res area">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="description"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- form view -->
+        <record id="tw_res_area_form_view" model="ir.ui.view">
+            <field name="name">res.area.form</field>
+            <field name="model">res.area</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Res area">
+                    <header>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" string="Name"/>
+                            <h1><field name="name" required="1"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="code" required="1"/>
+                                <field name="description" required="1"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Branches">
+                                <field name="company_ids" nolabel="1" colspan="4">
+                                    <list string="Branches" editable="bottom">
+                                        <field name="name" required="1"/>
+                                        <field name="code" required="1"/>
+                                    </list>
+                                </field>
+		                    </page>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                        <field name="create_date" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                        <field name="write_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- search -->
+        <record id="tw_res_area_view_search" model="ir.ui.view">
+            <field name="name">res.area.search</field>
+            <field name="model">res.area</field>
+            <field name="arch" type="xml">
+                <search string="Res area">
+                    <field name="name" select="True"/>
+                    <field name="code" select="True"/>
+                    <field name="description" select="True"/>
+                    <group string="Group By..">
+                        <filter string="Name" name="group_by_name" context="{'group_by': 'name'}"/>
+                        <filter string="Code" name="group_by_code" context="{'group_by': 'code'}"/>
+                        <filter string="Description" name="group_by_description" context="{'group_by': 'description'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <!-- action window -->
+        <record id="tw_res_area_action" model="ir.actions.act_window">
+            <field name="name">Area</field>
+            <field name="path">area</field>
+            <field name="res_model">res.area</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{"search_default_fieldname":1}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Res area
+                </p><p>
+                Click the Create button to add a new Res area
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

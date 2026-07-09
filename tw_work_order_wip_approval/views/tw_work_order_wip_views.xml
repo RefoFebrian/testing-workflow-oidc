@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="tw_work_order_wip_approval_form_view" model="ir.ui.view">
+			<field name="name">tw.work.order.wip.approval.form</field>
+			<field name="model">tw.work.order.wip</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="tw_work_order_wip.tw_work_order_wip_view_form"/>
+			<field name="arch" type="xml">
+				<field name="state" position="attributes">
+					<attribute name="statusbar_visible">"draft,waiting_for_approval,approved,confirm,open,done"</attribute>
+				</field>
+				<xpath expr="//button[@name='action_get_wip']" position="after">
+					<button name="action_rfa" string="RFA" type="object" class="oe_highlight" invisible="state != 'draft'" groups="tw_work_order_wip_approval.group_tw_work_order_wip_approval_request_button" confirm="Harap pastikan kembali data  WIP sudah benar dan jika ada WIP yang tidak tercatat disistem sudah di input dan sesuai !" />
+					<button name="action_approval" string="Approve" type="object" class="oe_highlight" invisible="state != 'waiting_for_approval'"/>
+					<button name="action_reject" string="Reject" type="object" invisible="state != 'waiting_for_approval'" context="{'window_title': 'Reject'}"/>
+					<button name="action_cancel_approval" string="Cancel Approval" type="object" invisible="state not in ['approved','waiting_for_approval']" groups="tw_work_order_wip_approval.group_tw_work_order_wip_reject_cancel_button" context="{'window_title': 'Cancel'}"/>
+				</xpath>
+				<xpath expr="//page[@name='page_detail_wip']" position="after">
+					<page string="Approval">
+						<field name="approval_ids" readonly="True"/>
+					</page>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>

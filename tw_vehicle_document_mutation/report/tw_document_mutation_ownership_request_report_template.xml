@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <template id="own_mutation_request_report">
+            <t t-call="web.html_container">
+                <t t-call="tw_web.teto_report_layout">
+                    <t t-call="tw_web.teto_report_styles_base" />
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            
+                            <div class="oe_structure">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <table class="table-borderless">
+                                            <tbody>
+                                                <tr><th class="text-start bolder"><t t-esc="doc.company_id.sudo().parent_id.name" /></th></tr>
+                                                <tr><th class="text-start bolder"><t t-esc="doc.company_id.name" /></th></tr>
+                                                <tr><td><t t-esc="print_address(doc.company_id.partner_id)" /></td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-6">
+                                        <table class="table-borderless">
+                                            <tbody>
+                                                <tr><th class="text-start bolder" colspan="3">REQUEST BPKB</th></tr>
+                                                <tr><td>No</td><td>:</td><td><t t-esc="doc.name" /></td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <hr />
+
+                                <div class="row mt-3">
+                                    <div class="col-6">
+                                        <table class="table-borderless" width="100%">
+                                            <tr>
+                                                <th class="text-start bolder" width="40%">Cabang</th><td width="5%">:</td><td width="55%"><t t-esc="doc.company_id.name" /></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-start bolder">Lokasi Asal</th><td>:</td><td><t t-esc="doc.bpkb_source_location_id.name" /></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-start bolder">Lokasi Tujuan</th><td>:</td><td><t t-esc="doc.transit_location_id.name" /></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-start bolder">No Mutasi</th><td>:</td><td><t t-esc="doc.outgoing_mutation_id.name" /></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-6">
+                                        <table class="table-borderless" width="100%">
+                                            <tr>
+                                                <th class="text-start bolder" width="40%">Tanggal Request</th><td width="5%">:</td><td width="55%"><t t-esc="doc.date.strftime('%d-%m-%Y') if doc.date else ''" t-option="{'format': 'yyyy-mm-dd'}"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-start bolder">Pengiriman By</th><td>:</td><td><t t-esc="doc.sender" /></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-start bolder">Nama Kurir</th><td>:</td><td><t t-esc="doc.courier_name" /></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <table class="teto-table-content" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th width="5%">No</th>
+                                                    <th>No Mesin</th>
+                                                    <th>No Rangka</th>
+                                                    <th>Atas Nama</th>
+                                                    <th>No BPKB</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-set="num" t-value="1" />
+                                                <tr t-foreach="doc.ownership_mutation_request_line_ids" t-as="line">
+                                                    <td class="text-center"><t t-esc="num" /></td>
+                                                    <td><t t-esc="line.lot_id.name" /></td>
+                                                    <td class="text-end"><t t-esc="line.lot_id.chassis_number" /></td>
+                                                    <td><t t-esc="line.customer_bpkb_id.name" /></td>
+                                                    <td class="text-end"><t t-esc="line.bpkb_number" /></td>
+                                                    <t t-set="num" t-value="num + 1" />
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="5">
+                                                        <t t-esc="usr()" />, <t t-esc="tgl()" />
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="row my-3">
+                                    <div class="col-4">Penerima</div>
+                                </div>
+                                <div class="row mt-5">
+                                    <div class="col-4">(......................)</div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

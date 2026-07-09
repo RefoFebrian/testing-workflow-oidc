@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Vehicle Receive STNK -->
+
+        <record id="group_vehicle_registration_receipt_button_post" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">Penerimaan STNK Post</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_vehicle_registration_receipt_read'))]"/>
+        </record>
+
+        <record id="group_vehicle_registration_receipt_button_print" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">Penerimaan STNK Print</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_vehicle_registration_receipt_read'))]"/>
+        </record>
+
+        <!-- Vehicle Receive BPKB -->
+
+        <record id="group_vehicle_ownership_receipt_button_post" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">Penerimaan BPKB Post</field>
+            <field name="implied_ids" eval="[(4, ref('group_vehicle_ownership_receipt_read'))]"/>
+        </record>
+
+        <record id="group_vehicle_ownership_receipt_button_print" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">Penerimaan BPKB Print</field>
+            <field name="implied_ids" eval="[(4, ref('group_vehicle_ownership_receipt_read'))]"/>
+        </record>
+    </data>
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+            (4,ref('group_vehicle_registration_receipt_button_post')),
+            (4,ref('group_vehicle_registration_receipt_button_print')),
+            (4,ref('group_vehicle_ownership_receipt_button_post')),
+            (4,ref('group_vehicle_ownership_receipt_button_print')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

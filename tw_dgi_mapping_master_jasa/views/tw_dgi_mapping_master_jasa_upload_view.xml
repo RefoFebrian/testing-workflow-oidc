@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_upload_mapping_jasa_wizard_view_form" model="ir.ui.view">
+        <field name="name">tw.upload.mapping.jasa.wizard.view.form</field>
+        <field name="model">tw.upload.mapping.jasa.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Upload Mapping Jasa">
+                <sheet>
+                    <div class="alert alert-info" role="alert">
+                        <h4>
+                            <i class="fa fa-info-circle"/>
+                            Format File Excel
+                        </h4>
+                        <ul>
+                            <li>Kolom 1: Produk Jasa (name)(mandatory)</li>
+                            <li>Kolom 2: Produk MD (string)(mandatory)</li>
+                        </ul>
+                        <table class="table table-bordered" style="width: 60%; margin: 10px 0 20px 20px;">
+                            <tr style="background-color: #f8f9fa;">
+                                <td style="padding: 8px; border: 1px solid #dee2e6;">Produk Jasa</td>
+                                <td style="padding: 8px; border: 1px solid #dee2e6;">Produk MD</td>
+                            </tr>
+                            <tr>												
+                                <td style="padding: 8px; border: 1px solid #dee2e6;">KPB 2</td>
+                                <td style="padding: 8px; border: 1px solid #dee2e6;">35010082</td>
+                            </tr>
+                        </table>
+                        <p><strong>Catatan:</strong> Baris pertama dianggap header.</p>
+                        </div>
+                    <group>
+                        <group>
+                            <field name="file" filename="filename"/>
+                            <field name="filename" invisible='1'/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Import" name="action_import" type="object" class="oe_highlight"/>
+                        <button string="Close" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

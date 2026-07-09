@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="tw_work_order_faktur_pajak_form_view" model="ir.ui.view">
+        <field name="name">tw.work.order.faktur.pajak</field>
+        <field name="model">tw.work.order</field>
+        <field name="inherit_id" ref="tw_work_order.tw_work_order_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_tidak_digunakan']" position="after">
+                <button name="action_register_faktur_pajak" type="object"
+                    invisible="(faktur_pajak_out_id != False) or (combined_tax == True) or (state not in ('sale', 'done'))"
+                    string="Register Faktur Pajak" class="oe_highlight"
+                    groups="tw_work_order_faktur_pajak.group_button_register_faktur_pajak" />
+            </xpath>
+            <xpath expr="//page[@name='history_service']" position="after">
+                <page name="faktur_pajak" string='Faktur Pajak' invisible="amount_total == 0">
+                    <group>
+                        <field name='combined_tax' invisible="state != 'draft'"></field>
+                        <field name='faktur_pajak_out_id' readonly='1' invisible="not faktur_pajak_out_id"></field>
+                        <field name='number_faktur_pajak' 
+                               string="Nomor Faktur Pajak" 
+                               readonly="faktur_pajak_out_id != False"
+                               invisible="faktur_pajak_out_id != False"/>
+                        <field name='date_faktur_pajak' 
+                               string="Tanggal Faktur Pajak" 
+                               readonly="faktur_pajak_out_id != False"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_sp_digital,tw_sp_digital.tw_sp_digital,model_tw_sp_digital,base.group_user,1,0,0,0
+access_tw_sp_digital_line,tw_sp_digital.tw_sp_digital_line,model_tw_sp_digital_line,base.group_user,1,0,0,0
+access_tw_sp_digital_target,tw_sp_digital.tw_sp_digital_target,model_tw_sp_digital_target,base.group_user,1,0,0,0
+access_tw_sp_digital_target_line,tw_sp_digital.tw_sp_digital_target_line,model_tw_sp_digital_target_line,base.group_user,1,0,0,0
+access_tw_upload_sp_digital,tw_sp_digital.tw_upload_sp_digital,model_tw_upload_sp_digital,base.group_user,1,0,0,0
+access_tw_report_sp_digital,tw_sp_digital.tw_report_sp_digital,model_tw_report_sp_digital,base.group_user,1,0,0,0
+access_tw_employee_evaluation_performance,tw_sp_digital.tw_employee_evaluation_performance,model_tw_employee_evaluation_performance,base.group_user,1,0,0,0
+access_tw_employee_evaluation_performance_line,tw_sp_digital.tw_employee_evaluation_performance_line,model_tw_employee_evaluation_performance_line,base.group_user,1,0,0,0

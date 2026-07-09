@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_part_sales_account_setting_form_view" model="ir.ui.view">
+            <field name="name">tw.part.sales.account.setting.inherit.form</field>
+            <field name="model">tw.account.setting</field>
+            <field name="inherit_id" ref="tw_account_setting.tw_account_setting_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='part_sales_container']" position="inside">
+                    <group name="journal_part_sales_page">
+                        <h3 class="o_stat_info" colspan="2" style="margin-top:0px;">
+                            <span class="text-success">Journal Part Sales</span>
+                        </h3>
+                        <field name="journal_part_sales_umum_id" options="{'no_create': True}"/>
+                        <field name="journal_part_sales_sparepart_id" options="{'no_create': True}"/>
+                    </group>
+                    <group name="part_sales_cancel">
+                        <h3 class="o_stat_info" colspan="2" style="margin-top:0px;">
+                            <span class="text-success">Journal Cancel</span>
+                        </h3>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

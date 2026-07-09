@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="tw_dealer_order_expedition_inherit_view_form" model="ir.ui.view">
+			<field name="name">tw.dealer.order.expedition.inherit.view.form</field>
+			<field name="model">tw.dealer.sale.order</field>
+			<field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_order_view_form" />
+			<field name="arch" type="xml">
+
+				<field name="amount_receivable" position="before">
+					<field name="amount_accrue_expedition" readonly="1" force_sav="1"/>
+				</field>
+
+				<xpath expr="//field[@name='summary_discount_ids']/list//field[@name='price_unit_purchase']" position="after">
+					<field name="accrue_expedition" optional="hide" width="150px" widget="monetary" readonly="1"/>
+				</xpath>
+
+				<xpath expr="//field[@name='summary_discount_ids']/form//field[@name='price_unit_purchase']" position="after">
+					<field name="accrue_expedition" readonly="1"/>
+				</xpath>
+
+			</field>
+		</record>
+
+		<record id="tw_dealer_order_line_expedition_inherit_view_form" model="ir.ui.view">
+			<field name="name">tw.dealer.order.line.expedition.inherit.view.form</field>
+			<field name="model">tw.dealer.sale.order.line</field>
+			<field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_sale_order_line_view_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='price_unit']" position="after">
+					<field name="accrue_expedition" readonly="1" force_save="1"/>
+				</xpath>
+			</field>
+		</record>
+
+	</data>
+</odoo>

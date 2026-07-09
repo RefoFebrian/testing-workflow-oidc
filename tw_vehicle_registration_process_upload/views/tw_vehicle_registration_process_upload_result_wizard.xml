@@ -1,0 +1,37 @@
+<odoo>
+  <data>
+    <record id="tw_vehicle_registration_process_upload_result_wizard_view_form" model="ir.ui.view">
+      <field name="name">tw.vehicle.registration.process.upload.result.wizard.view.form</field>
+      <field name="model">tw.vehicle.registration.upload.result.wizard</field>
+      <field name="arch" type="xml">
+        <form string="Result Upload Proses STNK" create='false' edit='false'>
+          <sheet>
+            <group>
+              <field name="upload_filename" readonly="1"></field>
+            </group>
+            <group >
+              <field name="summary_success" readonly="1"/>
+              <field name="summary_failed" readonly="1"/>
+              <field name="summary_skipped" readonly="1"/>
+              <field name="summary_text" readonly="1" nolabel="1" widget="text"/>
+          </group>
+            <notebook>
+              <page string="result">
+                <field name="result_line_ids">
+                  <list>
+                    <field name="branch"></field>
+                    <field name="biro"></field>
+                    <field name="status"></field>
+                  </list>
+                </field>
+              </page>
+            </notebook>
+            <footer>
+              <button string="Close" special="cancel" class="btn-secondary"/>
+            </footer>
+          </sheet>
+        </form>
+      </field>
+    </record>
+  </data>
+</odoo>

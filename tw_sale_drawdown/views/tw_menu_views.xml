@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu Item in Master -->
+    <menuitem id="menu_partner_drawdown_master"
+        name="Partner Drawdown"
+        parent="tw_menu.submenu_tw_workshop_configuration"
+        sequence="20"
+        groups="tw_sale_drawdown.group_partner_drawdown_master"/>
+
+    <menuitem id="menu_partner_drawdown_upload_master"
+        name="Upload Drawdown"
+        parent="tw_sale_drawdown.menu_partner_drawdown_master"
+        action="action_partner_drawdown_upload_wizard"
+        sequence="10"
+        groups="tw_sale_drawdown.group_partner_drawdown_master"/>
+
+    <!-- Menu Item in Showroom -->
+    <menuitem id="menu_partner_drawdown_showroom"
+        name="Partner Drawdown"
+        parent="tw_menu.submenu_tw_showroom_configuration_misc"
+        sequence="20"
+        groups="tw_sale_drawdown.group_partner_drawdown_read"/>
+
+    <menuitem id="menu_partner_drawdown_upload_showroom"
+        name="Upload Drawdown"
+        parent="tw_sale_drawdown.menu_partner_drawdown_showroom"
+        action="action_partner_drawdown_upload_wizard"
+        sequence="10"
+        groups="tw_sale_drawdown.group_partner_drawdown_read"/>
+</odoo>

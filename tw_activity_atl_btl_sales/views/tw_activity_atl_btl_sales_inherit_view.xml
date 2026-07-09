@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_activity_atl_btl_sales_inherit_view" model="ir.ui.view">
+            <field name="name">tw.activity.atl.btl.line.sales.inherit.form</field>
+            <field name="model">tw.activity.atl.btl.line</field>
+            <field name="inherit_id" ref="tw_activity_atl_btl.tw_activity_atl_btl_line_all_form_view"/>
+            <field name="arch" type="xml">
+                    
+                <xpath expr="//field[@name='history_location_ids']" position="before">
+                    <field name="qty_customer_last" readonly="1"/>
+                </xpath>
+
+                <xpath expr="//group[@name='group_history_activity']" position="after">
+                    <group string="Actual Plan" invisible="state != 'done'">
+                        <notebook>
+                            <page name="act_spk" string="SPK">
+                                <field name="spk_ids" readonly="1">
+                                    <list editable="top">
+                                        <field name="name" string="No SPK"/>
+                                        <field name="date_order"/>
+                                        <field name="partner_id"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page name="act_dso" string="Sales Order">
+                                <field name="dso_ids" readonly="1">
+                                    <list editable="top">
+                                        <field name="name" string="No Sales Order"/>
+                                        <field name="date_order"/>
+                                        <field name="partner_id"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

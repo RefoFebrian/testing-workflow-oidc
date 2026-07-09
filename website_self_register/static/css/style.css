@@ -1,0 +1,28 @@
+.search-box-custom {
+    display: flex;
+    align-items: center;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.search-box-custom input {
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    flex: 1;
+}
+
+.search-box-custom button {
+    background-color: #e53935;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.search-box-custom input::placeholder {
+    color: #aaa;
+}

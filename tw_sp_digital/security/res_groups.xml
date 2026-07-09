@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+    <!-- SP Digital Group Read -->
+        <record id="group_tw_sp_digital_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW SP Digital Read</field>
+        </record>
+        <record id="access_tw_sp_digital_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sp_digital"/>
+            <field name="name">tw_sp_digital read</field>
+            <field name="group_id" ref="group_tw_sp_digital_read"/>
+            <field name="perm_read">1</field>
+        </record>
+        <record id="access_tw_sp_digital_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sp_digital_line"/>
+            <field name="name">tw_sp_digital_line read</field>
+            <field name="group_id" ref="group_tw_sp_digital_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- SP Digital Group Update -->
+        <record id="group_tw_sp_digital_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW SP Digital Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_sp_digital_read'))]"/>
+        </record>
+        <record id="access_tw_sp_digital_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sp_digital"/>
+            <field name="name">tw_sp_digital update</field>
+            <field name="group_id" ref="group_tw_sp_digital_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        <record id="access_tw_sp_digital_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sp_digital_line"/>
+            <field name="name">tw_sp_digital_line update</field>
+            <field name="group_id" ref="group_tw_sp_digital_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- SP Digital Group Delete -->
+        <record id="group_tw_sp_digital_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW SP Digital Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_sp_digital_read'))]"/>
+        </record>
+        <record id="access_tw_sp_digital_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sp_digital"/>
+            <field name="name">tw_sp_digital delete</field>
+            <field name="group_id" ref="group_tw_sp_digital_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+        <record id="access_tw_sp_digital_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sp_digital_line"/>
+            <field name="name">tw_sp_digital_line delete</field>
+            <field name="group_id" ref="group_tw_sp_digital_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    <!-- SP Digital Target Group Read -->
+        <record id="group_tw_sp_digital_target_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Target SP Digital Read</field>
+        </record>
+        <record id="access_tw_sp_digital_target_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sp_digital_target"/>
+            <field name="name">tw_sp_digital_target read</field>
+            <field name="group_id" ref="group_tw_sp_digital_target_read"/>
+            <field name="perm_read">1</field>
+        </record>
+        <record id="access_tw_sp_digital_target_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sp_digital_target_line"/>
+            <field name="name">tw_sp_digital_target_line read</field>
+            <field name="group_id" ref="group_tw_sp_digital_target_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- SP Digital Target Group Update -->
+        <record id="group_tw_sp_digital_target_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Target SP Digital Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_sp_digital_target_read'))]"/>
+        </record>
+        <record id="access_tw_sp_digital_target_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sp_digital_target"/>
+            <field name="name">tw_sp_digital_target update</field>
+            <field name="group_id" ref="group_tw_sp_digital_target_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        <record id="access_tw_sp_digital_target_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sp_digital_target_line"/>
+            <field name="name">tw_sp_digital_target_line update</field>
+            <field name="group_id" ref="group_tw_sp_digital_target_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- SP Digital Target Group Delete -->
+        <record id="group_tw_sp_digital_target_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Target SP Digital Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_sp_digital_target_read'))]"/>
+        </record>
+        <record id="access_tw_sp_digital_target_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sp_digital_target"/>
+            <field name="name">tw_sp_digital_target delete</field>
+            <field name="group_id" ref="group_tw_sp_digital_target_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+        <record id="access_tw_sp_digital_target_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sp_digital_target_line"/>
+            <field name="name">tw_sp_digital_target_line delete</field>
+            <field name="group_id" ref="group_tw_sp_digital_target_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    <!-- UPLOAD SP Digital -->
+        <record id="group_tw_upload_sp_digital_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Upload SP Digital</field>
+        </record>
+        <record id="access_tw_upload_sp_digital_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_upload_sp_digital"/>
+            <field name="name">tw_upload_sp_digital update</field>
+            <field name="group_id" ref="group_tw_upload_sp_digital_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+    
+    <!-- UPLOAD SP Digital Target -->
+        <record id="group_tw_upload_sp_digital_target_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Upload Target (SP Digital)</field>
+        </record>
+        <record id="access_tw_upload_sp_digital_target_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_upload_sp_digital"/>
+            <field name="name">tw_upload_sp_digital_target update</field>
+            <field name="group_id" ref="group_tw_upload_sp_digital_target_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+    <!-- REPORT SP Digital -->
+        <record id="group_tw_report_sp_digital_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan SP Digital</field>
+        </record>
+        <record id="access_tw_report_sp_digital_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_report_sp_digital"/>
+            <field name="name">tw_report_sp_digital update</field>
+            <field name="group_id" ref="group_tw_report_sp_digital_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_tw_sp_digital_read')),
+                (4,ref('group_tw_sp_digital_update')),
+                (4,ref('group_tw_sp_digital_delete')),
+                (4,ref('group_tw_sp_digital_target_read')),
+                (4,ref('group_tw_sp_digital_target_update')),
+                (4,ref('group_tw_sp_digital_target_delete')),
+                (4,ref('group_tw_upload_sp_digital_read')),
+                (4,ref('group_tw_upload_sp_digital_target_read')),
+                (4,ref('group_tw_report_sp_digital_read')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

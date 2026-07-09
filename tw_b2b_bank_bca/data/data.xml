@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Data Partner BCA -->
+        <record id="res_partner_b2b_bank_central_asia" model="res.partner">
+    		<field name="name">PT. Bank Central Asia Tbk.</field>
+    		<field name="code">BCA</field>
+    		<field name="phone">+621500888</field>
+    		<field name="mobile">+628111500998</field>
+    		<field name="is_company">True</field>
+    		<field name="is_bank">True</field>
+            <field name="street">Jl. MH Thamrin No. 1, Jakarta 10310, Indonesia</field>
+    		<field name="email">halobca@bca.co.id</field>
+    		<field name="website">https://www.bca.co.id/</field>
+            <field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_bank')])]"/>
+        </record>
+
+        <!-- Data User BCA -->
+        <record id="res_users_b2b_bank_central_asia" model="res.users">
+    		<field name="name">PT. Bank Central Asia Tbk.</field>
+    		<field name="partner_id" ref="tw_b2b_bank_bca.res_partner_b2b_bank_central_asia"/>
+            <field name="login">BCA</field>
+            <field name="email">halobca@bca.co.id</field>
+        </record>
+        
+    </data>
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_mft_file_ssu_stock_lot_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.lot.mft.file.ssu.form</field>
+            <field name="model">stock.lot</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_lot_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='additional']" position="inside">
+                    <group name='ssu_group' string='SSU Information'>
+                        <field name="filename_ssu_md_receive" readonly="1"/>
+                        <field name="actual_ssu_md_receive_date" readonly="1"/>
+                        <field name="filename_ssu_md_send" readonly="1"/>
+                        <field name="actual_ssu_md_send_date" readonly="1"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

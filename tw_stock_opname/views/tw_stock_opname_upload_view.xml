@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_tw_stock_opname_upload_wizard" model="ir.ui.view">
+            <field name="name">tw.stock.opname.upload.wizard</field>
+            <field name="model">tw.stock.opname.upload</field>
+            <field name="arch" type="xml">
+                <form>
+                	<sheet>
+						<group colspan="4" col="4" invisible="state_x == 'get'">
+                            <group colspan="2">
+								<field name="file" filename="filename" string="Upload File"/>
+                            </group>
+                        </group>
+		                <field invisible="1" name="state_x"/>
+		                <field name="opname_id" invisible="1"/>
+		                <newline/>    
+		                <group col="4" fill="0" invisible="state_x != 'get'">
+		                    <separator colspan="4" string="Upload Stock Opname Line Success ..." invisible="state_x == 'choose'"/>
+		                </group>
+		                <footer>
+		                    <button name="action_import" invisible="state_x == 'get'" required="1" string="Import" type="object" class="oe_highlight"/>
+		                    <button string="Cancel" invisible="state_x == 'get'" class="oe_link" special="cancel" />
+		                </footer>
+	                </sheet>
+	            </form>
+            </field>
+        </record>	     
+	</data>
+</odoo>

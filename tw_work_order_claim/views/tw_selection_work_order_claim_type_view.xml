@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_selection_work_order_claim_type_action" model="ir.actions.act_window">
+        <field name="name">Work Order Claim Type</field>
+        <field name="res_model">tw.selection</field>
+        <field name="view_mode">list</field>
+        <field name="context">{'default_type': 'WorkOrderClaimType'}</field>
+        <field name="domain">[('type', '=', 'WorkOrderClaimType')]</field>
+        <field name="view_id" ref="tw_selection.tw_selection_regular_list_view" />
+    </record>
+
+</odoo>

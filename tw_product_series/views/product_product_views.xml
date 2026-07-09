@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Product Variant Form View Inheritance -->
+        <record id="view_product_product_form_inherit_series" model="ir.ui.view">
+            <field name="name">product.product.form.inherit.series</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='categ_id']" position="after">
+                    <field name="series_id" required="division == 'Unit'" options="{'no_create': True, 'no_open': True}" groups="base.group_user"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

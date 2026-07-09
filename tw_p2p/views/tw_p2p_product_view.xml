@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    	
+        <record id="view_tw_p2p_product_tree" model="ir.ui.view">
+            <field name="name">tw.p2p.product.line.tree</field>
+            <field name="model">tw.p2p.product</field>
+            <field eval="1" name="priority"/>
+            <field name="arch" type="xml">
+                <list string="P2P Product" create="true" editable="top">
+                    <header>
+                        <button name="%(tw_p2p.action_tw_p2p_product_import_act_window)d" string="Import TEDS 2.0" type="action" class="btn-secondary"/>
+                    </header>
+					<field name="active"/>
+                	<field name="product_id" domain="[('division', '=', context.get('division'))]" required="1" options='{"no_create": True,"no_open":True}'/>               	
+                    <field name="name" readonly='1'/>
+                    <field name="start_date" required="1"/>
+                    <field name="end_date" required="1"/>
+                    <field name="categ_id" string="Category"/>
+                    <field name="sub_category_name"/>
+                    <field name="category_fix_order_id" invisible="context.get('division') != 'Sparepart'" required="context.get('division') == 'Sparepart'"/>
+                    <field name="division"/>
+                    <field name="company_ids" optional="show" widget="many2many_tags"/>
+                </list>
+            </field>
+        </record>    	
+ 
+		<record model="ir.ui.view" id="tw_p2p_product_form_view">
+		    <field name="name">tw.p2p.product.form</field>
+		    <field name="model">tw.p2p.product</field>
+		    <field name="arch" type="xml">
+		        <form string="P2P Product">	        	
+		        	<sheet>
+			        	<div class="oe_title">
+			        		<h2>
+								<field name="active"/>
+				                <label for="name" string="P2P Product"/>    			
+				 				<field name="name" class="oe_inline" readonly='1'/>
+			 				</h2>
+			        	</div>       
+						<group>   
+							<group colspan="2">
+								<field name="product_id" domain="[('division', '=', context.get('division'))]" required="1" options="{'no_create': True,'no_open': True}"  />
+							</group>            
+	                    	<group>
+	                    		<field name="categ_id"/>
+	                    		<field name="sub_category_name"/>
+	                    		<field name="category_fix_order_id" invisible="context.get('division') != 'Sparepart'" required="context.get('division') == 'Sparepart'"/>
+                            <field name="company_ids" widget="many2many_tags"/>
+                    			<field name="start_date" required="1" />
+                    			<field name="end_date" required="1" ></field>
+							</group>  
+						</group>	
+						
+						<notebook colspan="5">
+							<page string="Audit Trail">
+								<group>
+									<group>
+										<field name="create_uid" readonly="1"></field>
+										<field name="create_date" readonly="1"></field>
+									</group>
+									<group>							
+										<field name="write_uid" readonly="1"></field>
+										<field name="write_date" readonly="1"></field>
+									</group>
+								</group>
+							</page>			                    
+		                </notebook>				
+		           </sheet>
+		        </form>
+		    </field>
+		</record>
+
+ 		<record id="view_tw_p2p_product_filter" model="ir.ui.view">
+            <field name="name">p2p.config.list.select</field>
+            <field name="model">tw.p2p.product</field>
+            <field name="arch" type="xml">
+                <search string="Search P2P Product">
+                    <field name="name"/>
+                    <field name="product_id"/>
+					<field name="start_date"/>
+					<field name="end_date"/>
+					<filter string="Active" name="filter_active" domain="[('active','=', True)]"/> 	
+					<filter string="Inactive" name="filter_inactive" domain="[('active','=', False)]"/>
+					<group expand="0" string="Group By">
+						<filter name="name" string="Name" context="{'group_by': 'name'}" />
+						<filter name="product_id" string="Product" context="{'group_by': 'product_id'}" />
+						<filter name="start_date" string="Start Date" context="{'group_by': 'start_date'}" />
+						<filter name="end_date" string="End Date" context="{'group_by': 'end_date'}" />
+					</group>
+                </search>
+            </field>
+        </record>		
+		<record model="ir.actions.act_window" id="tw_p2p_unit_product_action">
+		    <field name="name">P2P Product</field>
+		    <field name="res_model">tw.p2p.product</field>
+		    <field name="view_mode">list,form</field>
+			<field name="domain">[('division','=','Unit'),('active', 'in', [True, False])]</field>
+			<field name="context">{
+				'search_default_filter_active': True,
+				'division': 'Unit'
+			}</field>
+		    <field name="search_view_id" ref="view_tw_p2p_product_filter"/>
+		</record>
+		
+		<record model="ir.actions.act_window" id="tw_p2p_sparepart_product_action">
+		    <field name="name">P2P Product</field>
+		    <field name="res_model">tw.p2p.product</field>
+		    <field name="view_mode">list,form</field>
+			<field name="domain">[('division','=','Sparepart'),('active', 'in', [True, False])]</field>
+			<field name="context">{
+				'search_default_filter_active': True,
+				'division': 'Sparepart'
+			}</field>
+		    <field name="search_view_id" ref="view_tw_p2p_product_filter"/>
+		</record>
+					
+    </data>
+</odoo>
+    

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_all_tw_nrfs_lkuat_report,access_all_tw_nrfs_lkuat_report,model_tw_nrfs_lkuat_report,base.group_user,1,0,0,0
+access_all_tw_nrfs_po_urgent_report,access_all_tw_nrfs_po_urgent_report,model_tw_nrfs_po_urgent_report,base.group_user,1,0,0,0
+access_all_tw_nrfs_sparepart_report,access_all_tw_nrfs_sparepart_report,model_tw_nrfs_sparepart_report,base.group_user,1,0,0,0

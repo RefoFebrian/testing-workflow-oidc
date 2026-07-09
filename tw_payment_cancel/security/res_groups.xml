@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Payment Cancel -->
+        <record id="group_tw_payment_cancel_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Payment Cancel Read</field>
+        </record>
+        
+        <record id="access_tw_payment_cancel_read" model="ir.model.access">
+            <field name="model_id" ref="tw_payment_cancel.model_tw_payment_cancel"/>
+            <field name="name">tw_payment_cancel read</field>
+            <field name="group_id" ref="group_tw_payment_cancel_read"/>
+            <field name="perm_read">1</field>
+        </record> 
+
+        <record id="group_tw_payment_cancel_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Payment Cancel Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_payment_cancel_read'))]"/>
+        </record>
+        
+        <record id="access_tw_payment_cancel_update" model="ir.model.access">
+            <field name="model_id" ref="tw_payment_cancel.model_tw_payment_cancel"/>
+            <field name="name">tw_payment_cancel update</field>
+            <field name="group_id" ref="group_tw_payment_cancel_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record> 
+
+        <record id="group_tw_payment_cancel_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Payment Cancel Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_payment_cancel_read'))]"/>
+        </record>
+        
+        <record id="access_tw_payment_cancel_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_payment_cancel.model_tw_payment_cancel"/>
+            <field name="name">tw_payment_cancel delete</field>
+            <field name="group_id" ref="group_tw_payment_cancel_delete"/>
+            <field name="perm_unlink">1</field>
+        </record> 
+        
+    </data>
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_payment_cancel_read')),
+                (4, ref('group_tw_payment_cancel_update')),
+                (4, ref('group_tw_payment_cancel_delete')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

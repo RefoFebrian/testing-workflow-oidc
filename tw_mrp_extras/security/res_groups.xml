@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- MRP Extras Groups -->
+        <record id="group_tw_mrp_bom_extras_read" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Extras Read</field>
+            <field name="implied_ids" eval="[(4, ref('tw_mrp.group_tw_mrp_bom_form_read'))]"/>
+        </record>
+
+        <record id="group_tw_mrp_bom_extras_update" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Extras Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_mrp_bom_extras_read'))]"/>
+        </record>
+
+        <record id="group_tw_mrp_bom_extras_delete" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Extras Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_mrp_bom_extras_read'))]"/>
+        </record>
+
+        <!-- mrp bom extras warehouse -->
+        <record id="group_tw_mrp_bom_extras_warehouse_read" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Extras Warehouse Read</field>
+        </record>
+
+        <record id="group_tw_mrp_bom_extras_warehouse_update" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Extras Warehouse Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_mrp_bom_extras_warehouse_read'))]"/>
+        </record>
+
+        <record id="group_tw_mrp_bom_extras_warehouse_delete" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Extras Warehouse Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_mrp_bom_extras_warehouse_read'))]"/>
+        </record>
+
+        <!-- mrp bom extras master -->
+
+        <record id="group_tw_mrp_bom_extras_master_read" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Extras Master Read</field>
+        </record>
+        <record id="group_tw_mrp_bom_extras_master_update" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Extras Master Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_mrp_bom_extras_master_read'))]"/>
+        </record>
+        <record id="group_tw_mrp_bom_extras_master_delete" model="res.groups">
+            <field name="category_id" ref="tw_mrp.tw_module_category_mrp"/>
+            <field name="name">TW Extras Master Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_mrp_bom_extras_master_read'))]"/>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="access_tw_mrp_bom_extras_warehouse_read" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_bom" />
+            <field name="name">tw_mrp_bom_extras_warehouse read</field>
+            <field name="group_id" ref="group_tw_mrp_bom_extras_warehouse_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bom_extras_warehouse_update" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_bom" />
+            <field name="name">tw_mrp_bom_extras_warehouse update</field>
+            <field name="group_id" ref="group_tw_mrp_bom_extras_warehouse_update" />
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bom_extras_warehouse_delete" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_bom" />
+            <field name="name">tw_mrp_bom_extras_warehouse delete</field>
+            <field name="group_id" ref="group_tw_mrp_bom_extras_warehouse_delete" />
+            <field name="perm_read">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_mrp_bom_extras_master_read" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_bom" />
+            <field name="name">tw_mrp_bom_extras_master read</field>
+            <field name="group_id" ref="group_tw_mrp_bom_extras_master_read" />
+            <field name="perm_read">1</field>
+        </record>
+        <record id="access_tw_mrp_bom_extras_master_update" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_bom" />
+            <field name="name">tw_mrp_bom_extras_master update</field>
+            <field name="group_id" ref="group_tw_mrp_bom_extras_master_update" />
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        <record id="access_tw_mrp_bom_extras_master_delete" model="ir.model.access">
+            <field name="model_id" ref="mrp.model_mrp_bom" />
+            <field name="name">tw_mrp_bom_extras_master delete</field>
+            <field name="group_id" ref="group_tw_mrp_bom_extras_master_delete" />
+            <field name="perm_read">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_mrp_bom_extras_read')),
+                (4, ref('group_tw_mrp_bom_extras_update')),
+                (4, ref('group_tw_mrp_bom_extras_delete')),
+                (4, ref('group_tw_mrp_bom_extras_warehouse_read')),
+                (4, ref('group_tw_mrp_bom_extras_warehouse_update')),
+                (4, ref('group_tw_mrp_bom_extras_warehouse_delete')),
+                (4, ref('group_tw_mrp_bom_extras_master_read')),
+                (4, ref('group_tw_mrp_bom_extras_master_update')),
+                (4, ref('group_tw_mrp_bom_extras_master_delete')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_asset_distribution,tw_asset_distribution.tw_asset_distribution,model_tw_asset_distribution,base.group_user,1,0,0,0
+access_tw_asset_distribution_line,tw_asset_distribution.tw_asset_distribution_line,model_tw_asset_distribution_line,base.group_user,1,0,0,0
+access_tw_asset_mutation,tw_asset_distribution.tw_asset_mutation,model_tw_asset_mutation,base.group_user,1,0,0,0
+access_tw_asset_mutation_line,tw_asset_distribution.tw_asset_mutation_line,model_tw_asset_mutation_line,base.group_user,1,0,0,0
+

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="so_bpkb_bakso">
+            <t t-call="web.html_container">
+                <t t-call="tw_web.teto_report_layout">
+                    <t t-call="tw_web.teto_report_styles_base" />
+                    <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <style>
+                            table td,
+                            table th,
+                            .info-table td,
+                            .info-table th,
+                            .detail-table td,
+                            .detail-table th,
+                            .signature-table td,
+                            .signature-table th {
+                            padding: 8px 10px !important;
+                            vertical-align: top;
+                            }
+                            .report-container {
+                            
+                            
+                            
+                            padding-left: 13mm;
+                            padding-right: 13mm;
+                            }
+                            .report-title {
+                            text-align: center;
+                            font-weight: bolder;
+                            margin-bottom: 20px;
+                            border-bottom: 1px solid black;
+                            }
+                            .info-table {
+                            width: 100%;
+                            margin-bottom: 12px;
+                            border-collapse: collapse;
+                            border: 1px solid #333;
+                            }
+                            .info-table th, .info-table td {
+                            padding: 6px 8px;
+                            vertical-align: top;
+                            border: 1px solid #333;
+                            }
+                            .detail-table {
+                            border-collapse: collapse;
+                            width: 100%;
+                            margin-top: 10px;
+                            }
+                            .detail-table th, .detail-table td {
+                            border: 1px solid #333;
+                            padding: 6px 8px;
+                            vertical-align: top;
+                            }
+                            .detail-table th {
+                            font-weight: bold;
+                            background-
+                            text-align: left;
+                            }
+                            .section-title {
+                            font-weight: bold;
+                            text-decoration: underline;
+                            margin-top: 20px;
+                            margin-bottom: 8px;
+                            }
+                            .signature-table {
+                            margin-top: 25px;
+                            text-align: center;
+                            }
+                            .signature-table .signature-space td {
+                            height: 70px;
+                            }
+                            p {
+                            margin: 5px 0;
+                            }
+                        </style>
+
+                        <div class="oe_structure"/>
+
+                        <div class="report-container">
+                            <div class="report-title">BERITA ACARA STOCK OPNAME BPKB</div>
+
+                            <table class="info-table">
+                                <tr>
+                                    <th style="width: 20%; text-align:left;">No Referensi</th>
+                                    <td style="width: 80%; text-align:left;">: &#160;<span t-esc="data.get('name', '')"/>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <table class="info-table">
+                                <tr>
+                                    <th style="width: 20%; text-align:left;">Branch</th>
+                                    <td style="width: 30%; text-align:left;">: &#160;<span t-esc="data.get('branch', '')"/>
+                                    </td>
+                                    <th style="width: 20%; text-align:left;">Jam Mulai</th>
+                                    <td style="width: 30%; text-align:left;">: &#160;<span t-esc="data.get('jam_mulai', '')"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left;">Division</th>
+                                    <td style="text-align:left;">: &#160;<span t-esc="data.get('division', '')"/>
+                                    </td>
+                                    <th style="text-align:left;">Jam Selesai</th>
+                                    <td style="text-align:left;">: &#160;<span t-esc="data.get('jam_selesai', '')"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left;">Tanggal SO</th>
+                                    <td colspan="3" style="text-align:left;">: &#160;<span t-esc="data.get('tgl_so', '')"/>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <div style=" font-weight:bold; margin-top:15px; margin-bottom:5px;">
+                                Hasil Stock Opname hari ini sebagai berikut:
+                            </div>
+
+                            <table class="detail-table">
+                                <t t-if="data.get('saldo_sistem', 0) != 0">
+                                    <tr>
+                                        <th style="width: 60%;">Saldo BPKB by Sistem</th>
+                                        <td style="width: 40%; text-align:right;">
+                                            <span t-esc="data['saldo_sistem']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="data.get('saldo_cabang', 0) != 0">
+                                    <tr>
+                                        <th>Saldo BPKB by Fisik di Cabang</th>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data['saldo_cabang']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="data.get('saldo_ho', 0) != 0">
+                                    <tr>
+                                        <th>Saldo BPKB by Fisik di HO Pasar Minggu</th>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data['saldo_ho']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="data.get('saldo_ga', 0) != 0">
+                                    <tr>
+                                        <th>Saldo BPKB by Fisik di GA</th>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data['saldo_ga']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="data.get('saldo_md', 0) != 0">
+                                    <tr>
+                                        <th>Saldo BPKB by Fisik di Main Dealer</th>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data['saldo_md']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="data.get('saldo_birojasa', 0) != 0">
+                                    <tr>
+                                        <th>Saldo BPKB by Fisik di Biro Jasa</th>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data['saldo_birojasa']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="data.get('saldo_konsumen', 0) != 0">
+                                    <tr>
+                                        <th>BPKB Sudah Penyerahan ke Konsumen</th>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data['saldo_konsumen']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="data.get('saldo_leasing', 0) != 0">
+                                    <tr>
+                                        <th>BPKB Sudah Penyerahan ke Leasing</th>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data['saldo_leasing']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="data.get('saldo_lainnya', 0) != 0">
+                                    <tr>
+                                        <th>Hilang / Fisik tidak diketahui</th>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data['saldo_lainnya']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="data.get('selisih_sistem_fisik', 0) != 0">
+                                    <tr>
+                                        <th>Selisih Sistem vs Fisik</th>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data['selisih_sistem_fisik']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="data.get('other_bpkb', 0) != 0">
+                                    <tr>
+                                        <th>Fisik tidak tercatat sistem</th>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data['other_bpkb']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="data.get('total_stock', 0) != 0">
+                                    <tr>
+                                        <th>Total BPKB di Cabang</th>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data['total_stock']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+
+                            <div class="section-title">PERNYATAAN</div>
+                            <p style="text-align: justify;">
+                                Proses stock opname ini telah berjalan dengan baik dan hasil ini telah dinyatakan
+                                sah untuk diakui dan telah didukung oleh dokumen yang seharusnya dilampirkan.
+                            </p>
+
+                            <div style="margin-top: 15px;">
+                                <b>Note:</b>
+                                <table class="detail-table" style="margin-top: 5px;">
+                                    <tr>
+                                        <td style="height: 50px;">
+                                            <span t-esc="data.get('note_bakso', '')"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <table class="detail-table signature-table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="3" style="text-align:center;">PERSON IN CHARGE YANG BERTUGAS</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:33.3%; text-align:center;">PIC SO</th>
+                                        <th colspan="2" style="width:66.6%; text-align:center;">MENGETAHUI</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="signature-space">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left;">
+                                            <span t-esc="data.get('adh_id', '')"/>
+                                        </td>
+                                        <td style="text-align:left;">
+                                            <span t-esc="data.get('staff_bbn_id', '')"/>
+                                        </td>
+                                        <td style="text-align:left;">
+                                            <span t-esc="data.get('soh_id', '')"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>ADH</th>
+                                        <th>Staff BBN</th>
+                                        <th>SOH</th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"
+                                            style="text-align:left;  border: none; background-color: white;">
+                                            <span t-esc="data.get('printed_user', '')"/>,
+                                            <span t-esc="data.get('date', '')"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="oe_structure"/>
+                    </div>
+                </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

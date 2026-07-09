@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <!-- Layout 2: Add data colors support -->
+    <t t-name="tw_boom_dashboard.KpiLayoutTwoCustom" t-inherit="synconics_bi_dashboard.KpiLayoutTwo" t-inherit-mode="extension">
+        <!-- Update count2 in side-by-side display to use kpi_data2_color -->
+        <xpath expr="//div[hasclass('d-block') and hasclass('pr-4')]/span[@class='d-block'][1]" position="attributes">
+            <attribute name="t-att-style">'color:' + (state.data.kpi_data2_color || state.data.font_color) + ';'</attribute>
+        </xpath>
+        <!-- Update count in side-by-side display to use kpi_data1_color -->
+        <xpath expr="//div[hasclass('d-block') and hasclass('pl-4')]/span[@class='d-block'][1]" position="attributes">
+            <attribute name="t-att-style">'color:' + (state.data.kpi_data1_color || state.data.font_color) + ';'</attribute>
+        </xpath>
+    </t>
+
+    <!-- Layout 3-5: Angka utama menggunakan Data 1 Color -->
+    <!-- Layout 3: Add data colors support -->
+    <t t-name="tw_boom_dashboard.KpiLayoutThreeCustom" t-inherit="synconics_bi_dashboard.KpiLayoutThree" t-inherit-mode="extension">
+        <!-- Update the main count display to use kpi_data1_color -->
+        <xpath expr="//div[hasclass('d-flex') and hasclass('align-items-center') and hasclass('justify-content-center')]" position="attributes">
+            <attribute name="t-att-style">'font-size:' + state.data.font_size + 'px; color:' + (state.data.kpi_data1_color || state.data.font_color) + '; font-weight:' + (state.data.font_weight_bold || state.data.font_weight) + ';' + 'font-style:' + (state.data.font_style || 'normal') + ';'</attribute>
+        </xpath>
+    </t>
+
+    <!-- Layout 4: Add data colors support -->
+    <t t-name="tw_boom_dashboard.KpiLayoutFourCustom" t-inherit="synconics_bi_dashboard.KpiLayoutFour" t-inherit-mode="extension">
+        <!-- Update the main span to use kpi_data1_color -->
+        <xpath expr="//div[hasclass('oe_content')]/span" position="attributes">
+            <attribute name="t-att-style">'font-size:' + state.data.font_size + 'px; color:' + (state.data.kpi_data1_color || state.data.font_color) + '; font-weight:' + (state.data.font_weight_bold || state.data.font_weight) + ';' + 'font-style:' + (state.data.font_style || 'normal') + ';'</attribute>
+        </xpath>
+    </t>
+
+    <!-- Layout 5: Add data colors support -->
+    <t t-name="tw_boom_dashboard.KpiLayoutFiveCustom" t-inherit="synconics_bi_dashboard.KpiLayoutFive" t-inherit-mode="extension">
+        <!-- Update the main span to use kpi_data1_color -->
+        <xpath expr="//div[hasclass('oe_content')]/span[1]" position="attributes">
+            <attribute name="t-att-style">'font-size:' + state.data.font_size + 'px; color:' + (state.data.kpi_data1_color || state.data.font_color) + '; font-weight:' + (state.data.font_weight_bold || state.data.font_weight) + ';' + 'font-style:' + (state.data.font_style || 'normal') + ';'</attribute>
+        </xpath>
+    </t>
+
+</templates>

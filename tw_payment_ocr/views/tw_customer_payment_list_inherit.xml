@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_customer_payment_list_view_ocr_inherit" model="ir.ui.view">
+        <field name="name">tw.account.payment.list.ocr.inherit</field>
+        <field name="model">tw.account.payment</field>
+        <field name="inherit_id" ref="tw_payment.tw_customer_payment_list_view"/>
+        <!-- Adding Upload button to header of list view -->
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <header>
+                    <button name="%(tw_payment_ocr.action_tw_payment_ocr_wizard)d" string="Upload Document" type="action" class="btn-primary" display="always" groups="tw_payment_ocr.group_payment_upload_ocr"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

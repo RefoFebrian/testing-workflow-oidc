@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_udstk_view_form" model="ir.ui.view">
+            <field name="name">tw.udstk.form</field>
+            <field name="model">stock.lot</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="company_id" readonly="1" string="Branch"/>
+                                <field name="name" readonly="1"/>
+                                <field name="chassis_number" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="division" readonly="1"/>
+                                <field name="partner_id" readonly="1"/>
+                                <div class="o_row">
+                                    <label for="customer_stnk_id" string="Customer STNK"/>
+                                    <div class="d-flex align-items-center">
+                                        <field name="customer_stnk_id" options="{'no_quick_create': True}" class="o_form_input o_form_field" readonly="0" required="1" nolabel="1" context="{'form_view_ref': 'tw_partner.tw_customer_partner_form_view', 'res_id': customer_stnk_id}"/>
+                                    </div>
+                                </div>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_confirm_udstnk" type="object" string="Ok" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

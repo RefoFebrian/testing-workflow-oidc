@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_master_target_prospect_cold" model="tw.master.target">
+            <field name="name">Cold Prospect</field>
+        </record>
+
+        <record id="tw_master_target_prospect_hot" model="tw.master.target">
+            <field name="name">Hot Prospect</field>
+        </record>
+
+        <record id="tw_master_target_prospect_deal" model="tw.master.target">
+            <field name="name">Deal Prospect</field>
+        </record>
+
+    </data>
+</odoo>

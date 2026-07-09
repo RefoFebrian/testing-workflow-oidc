@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_payment_request_type_opex_salary" model="tw.payment.request.type">
+            <field name="name">OPEX SALARY</field>
+        </record>
+
+        <record id="tw_payment_request_type_opex_repair" model="tw.payment.request.type">
+            <field name="name">OPEX REPAIR AND MAINTENANCE</field>
+        </record>
+
+        <record id="tw_payment_request_type_opex_perjalanan_dinas" model="tw.payment.request.type">
+            <field name="name">OPEX PERJALANAN DINAS</field>
+        </record>
+
+        <record id="tw_payment_request_type_opex_stationary" model="tw.payment.request.type">
+            <field name="name">OPEX STATIONARY AND BRINDING</field>
+        </record>
+
+        <record id="tw_payment_request_type_opex_rent" model="tw.payment.request.type">
+            <field name="name">OPEX RENT</field>
+        </record>
+
+        <record id="tw_payment_request_type_opex_telephone" model="tw.payment.request.type">
+            <field name="name">OPEX TELEPHONE AND INTERNET</field>
+        </record>
+
+        <record id="tw_payment_request_type_opex_electricity" model="tw.payment.request.type">
+            <field name="name">OPEX ELECTRICITY AND WATER</field>
+        </record>
+
+        <record id="tw_payment_request_type_opex_recruitment" model="tw.payment.request.type">
+            <field name="name">OPEX RECRUITMENT AND TRAINING</field>
+        </record>
+
+        <record id="tw_payment_request_type_opex_legal" model="tw.payment.request.type">
+            <field name="name">OPEX LEGAL</field>
+        </record>
+
+        <record id="tw_payment_request_type_opex_professional_fee" model="tw.payment.request.type">
+            <field name="name">OPEX PROFESIONAL FEE</field>
+        </record>
+
+        <record id="tw_payment_request_type_opex_advertising_tax" model="tw.payment.request.type">
+            <field name="name">OPEX ADVERTISING AND PROMOTION (TAX)</field>
+        </record>
+
+        <record id="tw_payment_request_type_opex_office" model="tw.payment.request.type">
+            <field name="name">OPEX OFFICE</field>
+        </record>
+
+        <record id="tw_payment_request_type_hpp_support_penjualan" model="tw.payment.request.type">
+            <field name="name">HPP SUPPORT PENJUALAN</field>
+        </record>
+
+        <record id="tw_payment_request_type_opex_advertising_non_tax" model="tw.payment.request.type">
+            <field name="name">OPEX ADVERTISING AND PROMOTION (NON-TAX)</field>
+        </record>
+
+        <record id="tw_payment_request_type_opex_sales" model="tw.payment.request.type">
+            <field name="name">OPEX SALES</field>
+        </record>
+
+        <record id="tw_payment_request_type_oioe" model="tw.payment.request.type">
+            <field name="name">OIOE</field>
+        </record>
+
+        <record id="tw_payment_request_type_opex_donasi_retribusi" model="tw.payment.request.type">
+            <field name="name">OPEX DONASI AND RETRIBUSI</field>
+        </record>
+
+        <record id="tw_payment_request_type_opex_natura" model="tw.payment.request.type">
+            <field name="name">OPEX NATURA</field>
+        </record>
+
+    </data>
+</odoo>

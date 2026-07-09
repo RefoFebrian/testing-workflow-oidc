@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="invoice_dso_template_voucher_inherit" inherit_id="tw_dealer_sale_order.invoice_dso_template">
+            <xpath expr="//div[@name='foot-note']/div[1]" position="before">
+                <div t-if="total_voucher() > 0" class="row">
+                    <div class="col-12">
+                        Anda memiliki Voucher Service dan Sparepart dengan Total Rp. <span t-esc="total_voucher()"/>. Berlaku selama 1 tahun sejak invoice diterbitkan dari tanggal <span t-esc="date_invoice()"/> s/d <span t-esc="due_date_invoice()"/>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

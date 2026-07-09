@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_purchase_order_form_inherit_print" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit.print</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <!-- Add Print button only visible when state is purchase or done -->
+                <button name="action_print_purchase_order" type="object" string="Print" class="oe_highlight" invisible="state not in ('purchase', 'done')" groups="tw_purchase_order_report.group_tw_purchase_order_print_showroom,tw_purchase_order_report.group_tw_purchase_order_print_workshop"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

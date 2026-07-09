@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="batch_bastk_document_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <!-- Custom CSS matching old style -->
+                        <style>
+                            .terp_header_besar { font-size: 16px; font-weight: bold; }
+                            .terp_header_kecil { font-size: 12px; }
+                            .terp_isi_table { font-size: 12px; }
+                            .table-line { border-collapse: collapse; width: 100%; }
+                            .table-line th, .table-line td { border: 1px solid black; padding: 6px; font-size: 12px; }
+                            .no-border { border: none; }
+                            .text-center { text-align: center; }
+                            .text-right { text-align: right; }
+                        </style>
+
+                        <div class="page">
+                            <t t-set="partner" t-value="o.picking_ids and o.picking_ids[0].partner_id or False"/>
+                            <t t-set="origins" t-value="', '.join([p.origin for p in o.picking_ids if p.origin])"/>
+
+                            <div class="row mb-4">
+                                <div class="col-6">
+                                    <div class="terp_header_besar">
+                                        <t t-esc="o.company_id.name"/>
+                                    </div>
+                                    <div class="terp_header_kecil mt-2">
+                                        <t t-esc="o.company_id.street"/> <br/>
+                                        <t t-esc="o.company_id.state_id.name"/>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="terp_header_besar text-center mb-3">BERITA ACARA SERAH TERIMA KENDARAAN</div>
+                                    <table class="table-sm no-border w-100 terp_header_kecil">
+                                        <tr>
+                                            <td style="width: 30%;">No</td>
+                                            <td style="width: 5%;">:</td>
+                                            <td style="width: 65%;"><t t-esc="o.name"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tanggal</td>
+                                            <td>:</td>
+                                            <td><span t-field="o.scheduled_date" t-options='{"widget": "date"}'/></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <table class="table-sm no-border w-100 terp_isi_table">
+                                        <tr>
+                                            <td style="width: 20%;">No Sales Order</td>
+                                            <td style="width: 2%;">:</td>
+                                            <td style="width: 78%;"><t t-esc="origins"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kepada Yth.</td>
+                                            <td>:</td>
+                                            <td><t t-esc="partner.name if partner else ''"/> <t t-if="partner and partner.ref">(<t t-esc="partner.ref"/>)</t></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="vertical-align: top;">Alamat</td>
+                                            <td style="vertical-align: top;">:</td>
+                                            <td>
+                                                <t t-esc="partner.street if partner else ''"/><br/>
+                                                <t t-esc="partner.city_id.name if partner and 'city_id' in partner and partner.city_id else (partner.city if partner else '')"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <table class="table-line mb-4">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" style="width: 5%;">No.</th>
+                                        <th style="width: 30%;">Nama Barang</th>
+                                        <th style="width: 15%;">Warna</th>
+                                        <th class="text-center" style="width: 5%;">Jml</th>
+                                        <th style="width: 15%;">No Rangka</th>
+                                        <th style="width: 15%;">No Mesin</th>
+                                        <th style="width: 15%;">Plat Smt</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="line_count" t-value="1"/>
+                                    <!-- Iterate through all move lines across pickings -->
+                                    <t t-foreach="o.picking_ids.mapped('move_line_ids')" t-as="ml">
+                                        <tr>
+                                            <td class="text-center"><t t-esc="line_count"/></td>
+                                            <td>
+                                                <t t-esc="ml.product_id.name"/>
+                                                <t t-if="ml.product_id.default_code">(<t t-esc="ml.product_id.default_code"/>)</t>
+                                            </td>
+                                            <td>
+                                                <t t-esc="', '.join(ml.product_id.product_template_attribute_value_ids.mapped('name'))"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <t t-esc="ml.quantity"/>
+                                            </td>
+                                            <td><t t-esc="ml.lot_id.chassis_number if ml.lot_id and 'chassis_number' in ml.lot_id else ''"/></td>
+                                            <td><t t-esc="ml.lot_id.name if ml.lot_id else ''"/></td>
+                                            <td></td>
+                                        </tr>
+                                        <t t-set="line_count" t-value="line_count + 1"/>
+                                    </t>
+                                </tbody>
+                            </table>
+
+                            <div class="row" style="margin-top: 50px;">
+                                <div class="col-5 text-center terp_isi_table">
+                                    <p>Diserahkan Oleh:</p>
+                                    <br/><br/><br/><br/>
+                                    <p>------------------------------</p>
+                                    <p>( <t t-esc="o.company_id.name"/> )</p>
+                                </div>
+                                <div class="col-7 text-center terp_isi_table">
+                                    <p>Telah diterima dengan kondisi baik dan lengkap oleh:</p>
+                                    <br/><br/><br/><br/>
+                                    <p>------------------------------</p>
+                                    <p>( <t t-esc="partner.name if partner else '..................................'"/> )</p>
+                                </div>
+                            </div>
+                            
+                            <div class="row mt-5">
+                                <div class="col-12 terp_isi_table">
+                                    <p>Lembar ke-1 Arsip Cabang / Lembar ke-2 Pelanggan / Lembar ke-3 Arsip HO</p>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

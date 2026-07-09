@@ -1,0 +1,589 @@
+<odoo>
+    <data>
+        <record id="self_register_home" model="website.page">
+            <field name="url"></field>
+            <field name="is_published">True</field>
+            <field name="website_indexed" eval="True" />
+            <field name="name">Self Register</field>
+            <field name="type">qweb</field>
+            <field name="key">website_self_register.self_register_home</field>
+            <field name="arch" type="xml">
+            <t t-name="website.self-register-new">
+                <t t-call="website.layout">
+                    <main>
+                        <!-- ============================================
+                             HERO — Search Plate Number
+                             ============================================ -->
+                        <style>
+                            /* ==============================
+                               Paket Service Horizontal Scroll
+                               ============================== */
+                            .paket-scroll-section {
+                                text-align: left;
+                                padding: 0;
+                            }
+                            .paket-scroll-section .section-label {
+                                font-size: 1.1rem;
+                                font-weight: 700;
+                                color: #2c3e50;
+                                margin-bottom: 12px;
+                            }
+                            .paket-cards-wrapper {
+                                display: flex;
+                                flex-wrap: nowrap;
+                                gap: 14px;
+                                overflow-x: auto;
+                                overflow-y: hidden;
+                                scroll-snap-type: x mandatory;
+                                -webkit-overflow-scrolling: touch;
+                                padding: 8px 4px 14px 4px;
+                            }
+                            /* Custom scrollbar */
+                            .paket-cards-wrapper::-webkit-scrollbar {
+                                height: 6px;
+                            }
+                            .paket-cards-wrapper::-webkit-scrollbar-track {
+                                background: #f1f1f1;
+                                border-radius: 3px;
+                            }
+                            .paket-cards-wrapper::-webkit-scrollbar-thumb {
+                                background: #ccc;
+                                border-radius: 3px;
+                            }
+                            .paket-cards-wrapper::-webkit-scrollbar-thumb:hover {
+                                background: #aaa;
+                            }
+                            /* Card */
+                            .paket-card {
+                                flex: 0 0 260px;
+                                min-width: 260px;
+                                max-width: 260px;
+                                background: #ffffff;
+                                border-radius: 12px;
+                                overflow: hidden;
+                                box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+                                border: 2px solid transparent;
+                                transition: all 0.25s ease;
+                                cursor: pointer;
+                                display: flex;
+                                flex-direction: column;
+                                position: relative;
+                                scroll-snap-align: start;
+                            }
+                            .paket-card:hover {
+                                transform: translateY(-3px);
+                                box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+                            }
+                            .paket-card.active {
+                                border-color: #e62020;
+                                box-shadow: 0 4px 18px rgba(230, 32, 32, 0.18);
+                            }
+                            /* Card Image */
+                            .paket-card-image {
+                                height: 60px;
+                                background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                position: relative;
+                                overflow: hidden;
+                            }
+                            .paket-card-image img.placeholder {
+                                max-width: 50px;
+                                opacity: 0.7;
+                                filter: grayscale(100%);
+                            }
+                            .paket-card-image img.real-image {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                                object-position: center;
+                            }
+                            .paket-card.active .paket-card-image {
+                                background: linear-gradient(135deg, #ffeef0 0%, #ffdde1 100%);
+                            }
+                            /* Card Content */
+                            .paket-card-content {
+                                padding: 12px;
+                                flex-grow: 1;
+                                display: flex;
+                                flex-direction: column;
+                            }
+                            .paket-title {
+                                font-size: 0.9rem;
+                                font-weight: 700;
+                                color: #2c3e50;
+                                margin-bottom: 4px;
+                                line-height: 1.3;
+                                display: -webkit-box;
+                                -webkit-line-clamp: 2;
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                            }
+                            .paket-desc {
+                                font-size: 0.8rem;
+                                color: #555;
+                                line-height: 1.5;
+                                margin-bottom: 0;
+                                display: -webkit-box;
+                                -webkit-line-clamp: 5;
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                                transition: all 0.3s ease;
+                            }
+                            .paket-desc.expanded {
+                                -webkit-line-clamp: unset;
+                                display: block;
+                            }
+                            /* Checkmark */
+                            .paket-check {
+                                position: absolute;
+                                top: 8px;
+                                right: 8px;
+                                width: 24px;
+                                height: 24px;
+                                background: #e62020;
+                                color: white;
+                                border-radius: 50%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-size: 12px;
+                                opacity: 0;
+                                transform: scale(0);
+                                transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                            }
+                            .paket-card.active .paket-check {
+                                opacity: 1;
+                                transform: scale(1);
+                            }
+                            /* Detail Paket Modal */
+                            .modal-detail-paket {
+                                display: none;
+                                position: fixed;
+                                z-index: 1060;
+                                left: 0;
+                                top: 0;
+                                width: 100%;
+                                height: 100%;
+                                overflow: hidden;
+                                background-color: rgba(0,0,0,0.5);
+                            }
+                            .modal-detail-paket-content {
+                                background: #fff;
+                                margin: 8% auto;
+                                padding: 0;
+                                border-radius: 15px;
+                                width: 90%;
+                                max-width: 500px;
+                                max-height: 75vh;
+                                box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+                                display: flex;
+                                flex-direction: column;
+                                overflow: hidden;
+                            }
+                            .modal-detail-paket-header {
+                                padding: 18px 22px;
+                                background: linear-gradient(135deg, #e62020 0%, #c41818 100%);
+                                color: white;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                border-radius: 15px 15px 0 0;
+                            }
+                            .modal-detail-paket-header h4 {
+                                margin: 0;
+                                font-size: 1.15rem;
+                                font-weight: 700;
+                            }
+                            .close-detail-modal {
+                                color: rgba(255,255,255,0.8);
+                                font-size: 26px;
+                                font-weight: bold;
+                                cursor: pointer;
+                                line-height: 1;
+                            }
+                            .close-detail-modal:hover {
+                                color: #fff;
+                            }
+                            .modal-detail-paket-image {
+                                height: 160px;
+                                background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                overflow: hidden;
+                            }
+                            .modal-detail-paket-image img {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+                            .modal-detail-paket-body {
+                                padding: 22px;
+                                overflow-y: auto;
+                                flex-grow: 1;
+                                font-size: 0.95rem;
+                                line-height: 1.7;
+                                color: #444;
+                            }
+                            .modal-detail-paket-footer {
+                                padding: 14px 22px;
+                                border-top: 1px solid #eee;
+                                text-align: center;
+                            }
+                            .modal-detail-paket-footer .btn-pilih-paket {
+                                background: #e62020;
+                                color: white;
+                                border: none;
+                                border-radius: 8px;
+                                padding: 10px 30px;
+                                font-weight: 600;
+                                cursor: pointer;
+                                transition: background 0.2s;
+                            }
+                            .modal-detail-paket-footer .btn-pilih-paket:hover {
+                                background: #c41818;
+                            }
+                            /* Mobile responsive */
+                            @media (max-width: 576px) {
+                                .paket-card {
+                                    flex: 0 0 170px;
+                                    min-width: 170px;
+                                    max-width: 170px;
+                                }
+                                .paket-card-image {
+                                    height: 50px;
+                                }
+                                .paket-card-content {
+                                    padding: 10px;
+                                }
+                                .paket-title {
+                                    font-size: 0.85rem;
+                                }
+                                .paket-desc {
+                                    font-size: 0.73rem;
+                                    -webkit-line-clamp: 2;
+                                }
+                                .modal-detail-paket-content {
+                                    margin: 15% auto;
+                                    width: 95%;
+                                }
+                                .modal-detail-paket-image {
+                                    height: 120px;
+                                }
+                            }
+                        </style>
+                        <section class="container-custom mt-5">
+                            <div class="text-center search-container">
+                                <h2>Cari Plat Kendaraan Mu</h2>
+                                <p>
+                                    Silahkan input nomor polisi untuk memastikan kendaraan anda
+                                    sudah terdaftar pada sistem Honda.
+                                    <br/>Contoh format: <strong>BE2408BAX</strong>
+                                </p>
+                            </div>
+                            <div class="d-flex justify-content-center" style="margin-top:-26px; position:relative; z-index:2;">
+                                <form onsubmit="return searchPlatNo(event)" method="POST" class="form-inline" style="width:100%; max-width:480px;">
+                                    <div class="search-box-custom">
+                                        <input name="plat_kendaraan" type="text"
+                                               placeholder="Ketikkan nomor plat mu"
+                                               autocomplete="off"
+                                               required="required" />
+                                        <button type="submit">Cari</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+
+                        <!-- ============================================
+                             MODAL — Success / Error
+                             ============================================ -->
+                        <div id="successModal" class="modal-custom" style="display: none;">
+                            <div class="modal-custom-content">
+                                <span class="close-button">&#215;</span>
+                                <h3 id="title_modal">Yeay, pendaftaran berhasil!</h3>
+                                <div class="alert">
+                                    <span id="content_modal">🚨 Simpan nomor registrasi ini, ya</span>
+                                </div>
+                                <div id="registration_number" class="registration-number">
+                                    <input type="text" id="registrationNumber" value="-" readonly=""/>
+                                    <button onclick="copyToClipboard()">📋 Salin nomor</button>
+                                </div>
+                                <img id="image_modal_footer"
+                                     src="/website_self_register/static/img/illustrasi_berhasil.png"
+                                     alt="Ilustrasi"
+                                     class="high-five-image"/>
+                            </div>
+                        </div>
+
+                        <!-- ============================================
+                             FORM SECTION — Registration Details
+                             ============================================ -->
+                        <section class="mt-4">
+                            <div class="container text-center">
+                                <div class="bg_illustrasi" name="bg_illustrasi">
+                                    <div id="card_self_register" class="s_card card w-100" data-snippet="s_card" data-name="Card" style="display: none;">
+                                    <h4 class="card-header o_default_snippet_text">Form Pendaftaran Service</h4>
+                                    <div class="card-body">
+                                        <p class="card-text o_default_snippet_text" style="color:#555; margin-bottom:20px;">
+                                            <t t-esc="warning_message"/>
+                                        </p>
+                                        <div class="container">
+                                            <form onsubmit="return postSelfRegister(event)" method="post" enctype="multipart/form-data" data-mark="*" data-pre-fill="true" data-success-page="/thank-you" data-success-mode="redirect">
+                                                <div class="s_website_form_rows row s_col_no_bgcolor">
+
+                                                    <!-- Customer Name -->
+                                                    <div data-name="Field" class="s_website_form_field mb-3 col-12 s_website_form_custom s_website_form_required" data-type="char">
+                                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="name_customer">
+                                                                <span class="s_website_form_label_content">Nama Customer</span>
+                                                            </label>
+                                                            <div class="col-sm">
+                                                                <input class="form-control s_website_form_input" placeholder="Silahkan masukan nama Anda" type="text" name="Name Customer" required="1" id="name_customer"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Phone -->
+                                                    <div data-name="Field" class="s_website_form_field mb-3 col-12 s_website_form_custom s_website_form_required" data-type="char">
+                                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="no_telp">
+                                                                <span class="s_website_form_label_content">No HP / Telp</span>
+                                                            </label>
+                                                            <div class="col-sm">
+                                                                <input class="form-control s_website_form_input" placeholder="Contoh: 08123456789" type="tel" pattern="[0-9]{10,13}" name="no_telp" required="1" id="no_telp"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Nomor Mesin -->
+                                                    <div data-name="Field" class="s_website_form_field mb-3 col-12 s_website_form_custom s_website_form_required" data-type="char">
+                                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="nomor_mesin">
+                                                                <span class="s_website_form_label_content">Nomor Mesin</span>
+                                                            </label>
+                                                            <div class="col-sm">
+                                                                <input class="form-control s_website_form_input" type="text" name="Nomor Mesin" required="1" id="nomor_mesin"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Nomor Rangka -->
+                                                    <div data-name="Field" class="s_website_form_field mb-3 col-12 s_website_form_custom" data-type="char">
+                                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="nomor_rangka">
+                                                                <span class="s_website_form_label_content">Nomor Rangka</span>
+                                                            </label>
+                                                            <div class="col-sm">
+                                                                <input class="form-control s_website_form_input" type="text" name="Nomor Rangka" id="nomor_rangka"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- No. Booking Service -->
+                                                    <div data-name="Field" class="s_website_form_field mb-3 col-12 s_website_form_custom" data-type="char">
+                                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="no_booking_service">
+                                                                <span class="s_website_form_label_content">No. Booking Service</span>
+                                                            </label>
+                                                            <div class="col-sm">
+                                                                <input class="form-control s_website_form_input" type="text" name="No. Booking Service" id="no_booking_service"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Product -->
+                                                    <div data-name="Field" class="s_website_form_field mb-3 col-12 s_website_form_custom" data-type="char">
+                                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="product">
+                                                                <span class="s_website_form_label_content">Tipe Motor</span>
+                                                            </label>
+                                                            <div class="col-sm">
+                                                                <input class="form-control s_website_form_input" type="text" name="Product" id="product"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- KM -->
+                                                    <div data-name="Field" class="s_website_form_field mb-3 col-12 s_website_form_custom" data-type="float">
+                                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="km">
+                                                                <span class="s_website_form_label_content">Kilometer (KM)</span>
+                                                            </label>
+                                                            <div class="col-sm">
+                                                                <input type="number" class="form-control s_website_form_input" step="any" name="km" placeholder="Contoh: 15000" id="km"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Keluhan -->
+                                                    <div data-name="Field" class="s_website_form_field mb-3 col-12 s_website_form_custom" data-type="float">
+                                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="choice_keluhan">
+                                                                <span class="s_website_form_label_content">Apakah ada Keluhan?</span>
+                                                            </label>
+                                                            <div class="col-sm">
+                                                                <select class="form-control s_website_form_input" name="choice_keluhan" id="choice_keluhan" required="">
+                                                                    <option value="">(Silahkan Pilih)</option>
+                                                                    <option t-attf-value="yes_keluhan">Ya, ada keluhan</option>
+                                                                    <option t-attf-value="no_keluhan">Tidak ada keluhan</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Service Type -->
+                                                    <div id="service_type_div" data-name="Field" class="s_website_form_field mb-3 col-12 s_website_form_custom" data-type="float">
+                                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="service_type">
+                                                                <span class="s_website_form_label_content">Tipe Service</span>
+                                                            </label>
+                                                            <div class="col-sm">
+                                                                <select class="form-control s_website_form_input" name="service_type" id="service_type" required="">
+                                                                    <option value="">(Silahkan Pilih)</option>
+                                                                    <option t-attf-value="KPB">KPB (Kupon Perawatan Berkala)</option>
+                                                                    <option t-attf-value="REG">Reguler</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Paket Service (Inline Horizontal Scroll Cards) -->
+                                                    <div id="paket_service_div" class="form-group s_website_form_field col-12 s_website_form_custom s_website_form_required paket-scroll-section" data-type="many2one" data-name="Field">
+                                                        <!-- Hidden input for form submission -->
+                                                        <input type="hidden" name="paket_service" id="paket_service" />
+                                                        <label class="col-form-label s_website_form_label col-12 mb-2 font-weight-bold section-label" for="paket_service" style="text-align: left;">
+                                                            <span class="s_website_form_label_content">Paket Service</span>
+                                                            <span class="s_website_form_mark text-danger"> *</span>
+                                                        </label>
+                                                        <!-- Horizontal scrollable card container -->
+                                                        <div id="paket_service_cards_container" class="paket-cards-wrapper"></div>
+                                                        <!-- Fallback/Default Options -->
+                                                        <div id="paket_service_fallback" style="display: none;">
+                                                            <t t-foreach="paket_service" t-as="paket_service_item">
+                                                                <div class="paket-fallback-item" t-att-data-id="paket_service_item.id" t-att-data-name="paket_service_item.name"></div>
+                                                            </t>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Paket Service Description (hidden dropdown) -->
+                                                    <div id="paket_service_description_div" class="form-group s_website_form_field col-12 s_website_form_custom s_website_form_required" data-type="many2one" data-name="Field">
+                                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="paket_service_description">
+                                                            <span class="s_website_form_label_content">Paket Service Description</span>
+                                                            <span class="s_website_form_mark"> *</span>
+                                                        </label>
+                                                        <div class="col-sm">
+                                                            <select class="form-control s_website_form_input" name="paket_service_description" id="paket_service_description">
+                                                            <option value="">(Silahkan Pilih)</option>
+                                                            <t t-foreach="paket_service_description" t-as="paket_service_description">
+                                                                <option t-attf-value="#{paket_service.id}">
+                                                                <t t-esc="paket_service.description" />
+                                                                </option>
+                                                            </t>
+                                                            </select>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Description -->
+                                                    <div id="description_div" data-name="Field" class="form-group s_website_form_field mb-3 col-12 s_website_form_custom" data-type="char">
+                                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                            <label class="col-form-label s_website_form_label col-12 mb-2 font-weight-bold" for="description_packet_service" style="font-size: 1.1rem; text-align: left;">
+                                                                <span class="s_website_form_label_content">Deskripsi</span>
+                                                            </label>
+                                                            <div class="col-12">
+                                                                <textarea class="form-control s_website_form_input" name="description_packet_service" placeholder="Tuliskan deskripsi layanan..." id="description_packet_service" rows="3"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Keluhan Text -->
+                                                    <div id="keluhan_div" data-name="Field" class="s_website_form_field mb-3 col-12 s_website_form_custom" data-type="char">
+                                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="keluhan">
+                                                                <span class="s_website_form_label_content">Detail Keluhan</span>
+                                                            </label>
+                                                            <div class="col-sm">
+                                                                <input class="form-control s_website_form_input" type="text" name="Keluhan" placeholder="Jelaskan keluhan Anda..." id="keluhan"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Privacy Policy Section -->
+                                                    <t t-if="privacy_policy_content">
+                                                        <input type="hidden" id="privacy_policy_id" t-att-value="privacy_policy_id"/>
+                                                        <div class="mb-3 col-12 privacy-policy-section">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="privacy_policy_checkbox"/>
+                                                                <label class="form-check-label" for="privacy_policy_checkbox">
+                                                                    Saya telah membaca dan menyetujui
+                                                                    <a href="#" id="privacy_policy_link" class="privacy-policy-link">Kebijakan Privasi</a>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </t>
+
+                                                    <!-- Submit -->
+                                                    <div class="mb-0 py-3 col-12 s_website_form_submit text-center" data-name="Submit Button">
+                                                        <button type="submit" aria-label="form" title="Kirim Pendaftaran" class="btn btn-primary">
+                                                            Kirim Pendaftaran
+                                                        </button>
+                                                        <span id="s_website_form_result"/>
+                                                    </div>
+
+                                                </div>
+                                            </form>
+
+                                            <!-- Privacy Policy Modal -->
+                                            <t t-if="privacy_policy_content">
+                                                <div id="privacyPolicyModal" class="modal-privacy" style="display: none;">
+                                                    <div class="modal-privacy-content">
+                                                        <div class="modal-privacy-header">
+                                                            <h3>Kebijakan Privasi</h3>
+                                                            <span class="close-privacy-modal">&#215;</span>
+                                                        </div>
+                                                        <div class="modal-privacy-body">
+                                                            <t t-raw="privacy_policy_content"/>
+                                                        </div>
+                                                        <div class="modal-privacy-footer">
+                                                            <button id="btn_accept_privacy" class="btn btn-primary">Saya Mengerti</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+
+                                            <!-- Detail Paket Service Modal -->
+                                            <div id="detailPaketModal" class="modal-detail-paket">
+                                                <div class="modal-detail-paket-content">
+                                                    <div class="modal-detail-paket-header">
+                                                        <h4 id="detail_paket_title">Detail Paket</h4>
+                                                        <span class="close-detail-modal">&#215;</span>
+                                                    </div>
+                                                    <div id="detail_paket_image_wrapper" class="modal-detail-paket-image" style="display:none;">
+                                                        <img id="detail_paket_image" src="" alt="Paket Image"/>
+                                                    </div>
+                                                    <div class="modal-detail-paket-body">
+                                                        <div id="detail_paket_desc"></div>
+                                                    </div>
+                                                    <div class="modal-detail-paket-footer">
+                                                        <button type="button" id="btn_pilih_detail_paket" class="btn-pilih-paket">Pilih Paket Ini</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+                </t>
+            </t>
+        </field>
+      </record>
+    </data>
+  </odoo>

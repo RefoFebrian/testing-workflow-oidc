@@ -1,0 +1,50 @@
+<odoo>
+    <data>
+        <record id="tw_account_payment_receive_payment_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.payment.inherit.form</field>
+            <field name="model">tw.account.payment</field>
+            <field name="inherit_id" ref="tw_payment.tw_account_payment_receive_payment_form_view"/>
+            <field name="arch" type="xml">
+                <field name="state" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,paid"/>
+                </field>
+
+                <button name="action_validate" position="attributes">
+                  <attribute name="invisible">state not in ('in_process','approved')</attribute>
+                </button>
+
+                <page name="receive_detail" position="after">
+                    <page string="Approval">
+                        <field name="approval_ids" />
+                    </page>
+                </page>
+                
+                <button name="action_validate" position="after">
+                  	<button name="action_request_approval" data-hotkey="r" groups="tw_payment_approval.group_tw_receive_payment_rfa" invisible="state != 'draft'" string="RFA" type="object" class="oe_highlight"/>
+                    <button name="action_approval" data-hotkey="a" invisible="state != 'waiting_for_approval'" string="Approve" type="object" class="oe_highlight"/>
+                    <button name="%(tw_approval.tw_approval_reject_wizard_action)d" invisible="state != 'waiting_for_approval'" string="Reject" type="action" context="{'model_name':'tw.account.payment','update_value':{'state':'draft'}}" groups="tw_payment_approval.group_tw_receive_payment_cancel_approval"/>
+                    <button name="%(tw_approval.tw_approval_cancel_wizard_action)d" invisible="state not in ('waiting_for_approval','approved')" string="Cancel Approval" groups="tw_payment_approval.group_tw_receive_payment_cancel_approval" type="action" context="{'model_name':'tw.account.payment','update_value':{'state':'draft'}}"/>																		
+                </button>
+
+            </field>
+        </record>
+
+
+        <record id="tw_payment.tw_account_payment_receive_payment_action" model="ir.actions.act_window">
+        <field name="context" eval="
+            {
+                'default_type': 'receive_payment',
+                'default_payment_type': 'inbound',
+                'default_partner_type': 'customer',
+                'search_default_inbound_filter': 1,
+                'search_default_draft': 1,
+                'search_default_waiting_approval': 1,
+                'search_default_approved': 1,
+                'default_move_journal_types': ('bank', 'cash'),
+                'display_account_trust': True,
+                'action_id': ref('tw_payment.tw_account_payment_receive_payment_action'),
+            }
+            " />
+    </record>
+    </data>
+</odoo>

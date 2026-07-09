@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Paperformat Thermal -->
+        <record id="paperformat_qc_thermal" model="report.paperformat">
+            <field name="name">QC Thermal Paper</field>
+            <field name="default" eval="False"/>
+            <field name="format">custom</field>
+            <field name="page_height">330</field>
+            <field name="page_width">120</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">15</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">3</field>
+            <field name="dpi">80</field>
+        </record>
+
+        <!-- Paperformat A4 for CARTOON PDF -->
+        <record id="paperformat_cartoon_a4" model="report.paperformat">
+            <field name="name">CARTOON A4 Paper</field>
+            <field name="default" eval="False"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">20</field>
+            <field name="margin_bottom">20</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <!-- Report Action Thermal -->
+        <record id="action_report_tw_quality_checking" model="ir.actions.report">
+            <field name="name">QC Thermal</field>
+            <field name="model">tw.quality.checking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_quality_checking.quality_checking_report</field>
+            <field name="report_file">tw_quality_checking.quality_checking_report</field>
+            <field name="print_report_name">'QC_Thermal_%s.pdf' % (object.name)</field>
+            <field name="paperformat_id" ref="paperformat_qc_thermal"/>
+            <field name="domain">[('state','=','done')]</field>
+        </record>
+
+        <!-- Report Action CARTOON PDF -->
+        <record id="action_report_tw_cartoon_pdf" model="ir.actions.report">
+            <field name="name">CARTOON Report</field>
+            <field name="model">tw.quality.checking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_quality_checking.cartoon_pdf_report</field>
+            <field name="report_file">tw_quality_checking.cartoon_pdf_report</field>
+            <field name="print_report_name">'CARTOON_%s.pdf' % (object.name)</field>
+            <field name="paperformat_id" ref="paperformat_cartoon_a4"/>
+            <field name="domain">[('state','=','done')]</field>
+        </record>
+
+    </data>
+</odoo>

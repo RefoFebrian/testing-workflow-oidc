@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- MENU -->
+		<menuitem id="tw_telegram_configuration_menuitem" 
+			action="tw_telegram.tw_telegram_configuration_action" 
+			name="Telegram Configuration" 
+			parent="tw_menu.submenu_tw_configuration" 
+			sequence="100" 
+			groups="tw_telegram.group_tw_telegram_configuration_read"
+		/>
+	</data>
+</odoo>

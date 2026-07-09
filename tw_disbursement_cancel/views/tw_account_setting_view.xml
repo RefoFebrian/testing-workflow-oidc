@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="tw_disbursement_cancel_account_setting_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.disbursement.cancel.account.setting.inherit.view.form</field>
+            <field name="model">tw.account.setting</field>
+            <field name="inherit_id" ref="tw_disbursement.tw_disbursement_account_setting_inherit_form_view"/>
+            <field name="arch" type="xml">
+                <field name="account_disbursement_pl_id" position="after">
+                    <field name="journal_disbursement_cancel_id" options="{'no_create': True}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+  </odoo>
+  

@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <record id="view_tw_account_move_tree" model="ir.ui.view">
+            <field name="name">view.tw.account.move.tree</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_tree"/>
+            <field name="arch" type="xml">
+                <field name="date" position="replace">
+                </field>
+                
+                <field name="state" position="before">
+                    <field name="date" readonly="state in ['cancel', 'posted']"/>
+                </field>
+                
+                <field name="ref" position="replace">
+                </field>
+                <field name="name" position="after">
+                    <field name="ref" optional="show"/>
+                    <field name="supplier_invoice_number" optional="show"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="tw_account_move_view_form" model="ir.ui.view">
+            <field name="name">tw.account.move.view.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+
+                <field name="name" position="after">
+                    <field name="is_limit_edit" invisible="1"/>
+                </field>
+
+                <xpath expr="//label[@for='invoice_date']" position="before">
+                    <field name="division" required="1" readonly="state != 'draft' or is_limit_edit" />
+                    <field name="product_category_ids" invisible="1" widget="many2many_tags"/>
+                </xpath>
+
+                <button name="action_post" position="before">
+                <!-- TODO: Apakah tombol ini digunakan? -->
+                    <!-- <button name="action_open" string="Validate" class="oe_highlight"
+                            type="object" groups="account.group_account_invoice" data-hotkey="c"
+                            context="{'validate_analytic': True, 'disable_abnormal_invoice_detection': False}"
+                            invisible="state != 'draft'" /> -->
+                    <button name="action_print_invoice_pdf" string="Print Invoice" class="oe_highlight"
+                            type="object" groups="account.group_account_invoice" data-hotkey="p"
+                            invisible="state != 'posted'" />
+                </button>
+
+                <xpath expr="//button[@name='action_post'][1]" position="attributes">
+                    <attribute name="groups">tw_account.group_tw_invoice_confirm_button</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_post'][2]" position="attributes">
+                    <attribute name="groups">tw_account.group_tw_invoice_confirm_button</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='button_cancel'][1]" position="attributes">
+                    <attribute name="groups">tw_account.group_tw_invoice_cancel_button</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_cancel'][2]" position="attributes">
+                    <attribute name="groups">tw_account.group_tw_invoice_cancel_button</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_print_pdf']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='button_draft']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_reverse']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <field name="invoice_date" position="attributes">
+                    <attribute name="required">state == 'draft'</attribute>
+                    <attribute name="readonly">state != 'draft'</attribute>
+                </field>
+                
+                <xpath expr="//field[@name='invoice_date'][2]" position="attributes">
+                    <attribute name="required">state == 'draft'</attribute>
+                    <attribute name="readonly">state != 'draft'</attribute>
+                </xpath>
+
+                <field name="name" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="force_save">1</attribute>
+                </field>
+                
+                <field name="partner_id" position="attributes">
+                    <attribute name="readonly">state != 'draft' or is_limit_edit</attribute>
+                    <attribute name="force_save">1</attribute>
+                </field>
+                
+                <xpath expr="//label[@for='partner_id']" position="before">
+                    <field name="company_id" required="1" readonly="state != 'draft' or is_limit_edit" />
+                </xpath>
+
+                <field name="ref" position="attributes">
+                    <attribute name="readonly">state != 'draft' or is_limit_edit</attribute>
+                    <attribute name="force_save">1</attribute>
+                </field>
+
+                <xpath expr="//div[@name='journal_div']//field[@name='journal_id'][1]" position="attributes">
+                    <attribute name="readonly">state != 'draft' or is_limit_edit</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='journal_id'][1]" position="attributes">
+                    <attribute name="readonly">state != 'draft' or is_limit_edit</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='ref'][not(@invisible) or contains(@invisible, 'in_invoice')]" position="attributes">
+                    <attribute name="readonly">state != 'draft' or is_limit_edit</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='ref'][contains(@invisible, 'out_invoice')]" position="attributes">
+                    <attribute name="readonly">state != 'draft' or is_limit_edit</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='company_id'][1]" position="attributes">
+                    <attribute name="string">Branch</attribute>
+                    <attribute name="readonly">state != 'draft' or is_limit_edit</attribute>
+                </xpath>
+
+                <field name="ref" position="after">
+                    <field name="supplier_invoice_number" readonly="state == 'posted'"/>
+                </field>
+
+                <!-- ****Entries Line**** -->
+                <field name="line_ids" position="attributes">
+                    <attribute name="readonly">state != 'draft' or is_limit_edit</attribute>
+                    <attribute name="force_save">1</attribute>
+                </field>
+
+                <xpath expr="//page[@id='aml_tab']/field[@name='line_ids']/list/field[@name='account_id']" position="before">
+                    <field name="company_id" string="Branch" required="1" invisible="display_type in ('line_section', 'line_note')" optional="show" options="{'no_create':True,'no_open':True}"/>
+                    <field name="division" invisible="display_type in ('line_section', 'line_note')" optional="show"/>
+                </xpath>
+                
+
+                <xpath expr="//page[@id='aml_tab']/field[@name='line_ids']/list/field[@name='name']" position="after">
+                    <field name="ref" readonly="state != 'draft'" optional="show"/>
+                    <field name="date_maturity" readonly="state != 'draft'" optional="hide"/>
+                </xpath>
+                
+                <xpath expr="//page[@id='aml_tab']/field[@name='line_ids']/list/field[@name='tax_tag_ids']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+
+                <xpath expr="//page[@id='aml_tab']/field[@name='line_ids']/list/field[@name='analytic_distribution']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+
+                <xpath expr="//page[@id='aml_tab']/field[@name='line_ids']/list/field[@name='credit']" position="after">
+                    <field name="matching_number" string="Reconcile ID" invisible="display_type in ('line_section', 'line_note')" optional="show"/>
+                    <field name="full_reconcile_id" string="Full Reconcile ID" invisible="display_type in ('line_section', 'line_note')" optional="hide"/>
+                </xpath>
+                
+                
+                <!-- ****Invoice Line**** -->
+                <field name="invoice_line_ids" position="attributes">
+                    <attribute name="readonly">state != 'draft'</attribute>
+                </field>
+
+                <xpath expr="//page[@id='invoice_tab']/field[@name='invoice_line_ids']" position="attributes">
+                    <attribute name="invisible">is_limit_edit</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='product_id']" position="attributes">
+                    <attribute name="domain">
+                        (
+                            context.get('default_move_type') in ('out_invoice', 'out_refund', 'out_receipt')
+                            and [('sale_ok', '=', True)]
+                            or [('purchase_ok', '=', True)]
+                        ) and [('categ_id', 'in', parent.product_category_ids)]
+                    </attribute>
+                    <attribute name="readonly">parent.is_limit_edit</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='quantity']" position="attributes">
+                    <attribute name="readonly">parent.state != 'draft' or parent.is_limit_edit</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='price_unit']" position="attributes">
+                    <attribute name="readonly">parent.state != 'draft' or parent.is_limit_edit</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='price_subtotal']" position="attributes">
+                    <attribute name="sum">Total</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='price_total']" position="attributes">
+                    <attribute name="sum">Total</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='discount']" position="attributes">
+                    <attribute name="readonly">parent.state != 'draft'</attribute>
+                    <attribute name="optional">show</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='product_uom_id']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="force_save">1</attribute>
+                    <attribute name="optional">hide</attribute>
+                    <attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='analytic_distribution']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+
+                <field name="invoice_line_ids" position="after">
+                   <field name="invoice_line_ids"
+                        invisible="not is_limit_edit"
+                        widget="product_label_section_and_note_field_o2m"
+                        mode="list"
+                        context="{
+                            'default_move_type': context.get('default_move_type'),
+                            'journal_id': journal_id,
+                            'default_partner_id': commercial_partner_id,
+                            'default_currency_id': currency_id or company_currency_id,
+                            'default_display_type': 'product',
+                            'quick_encoding_vals': quick_encoding_vals,
+                        }" readonly="state != 'draft'">
+                        <list editable="bottom" string="Journal Items" create="0" delete="0" default_order="sequence, id">
+                            <!-- Displayed fields -->
+                            <field name="sequence" widget="handle"/>
+                            <field name="product_id" optional="hide" readonly="1" force_save="1"/>
+                            <field name="name" readonly="1" force_save="1" widget="section_and_note_text" optional="show"/>
+                            <field name="account_id" readonly="1" force_save="1" context="{'partner_id': partner_id, 'move_type': parent.move_type}" groups="account.group_account_readonly" options="{'no_quick_create': True}" domain="[('deprecated', '=', False), ('company_ids', 'parent_of', company_id), ('account_type', 'not in', ('asset_receivable', 'liability_payable', 'off_balance'))]" required="display_type not in ('line_note', 'line_section')"/>
+                            <field name="analytic_distribution" optional="hide"/>
+                            <field name="quantity" optional="show" readonly="1" force_save="1"/>
+                            <field name="product_uom_category_id" column_invisible="True" readonly="1" force_save="1"/>
+                            <field name="product_uom_id" string="UoM" optional="hide" width="92px" readonly="1" force_save="1"/>
+                            <field name="price_unit" string="Price"/>
+                            <field name="discount" width="50px" string="Disc.%" optional="show"/>
+                            <field name="tax_ids" widget="many2many_tax_tags"
+                                    domain="[('type_tax_use', '=?', parent.invoice_filter_type_domain), ('company_id', 'parent_of', parent.company_id), ('country_id', '=', parent.tax_country_id)]"
+                                    context="{'append_type_to_tax_name': not parent.invoice_filter_type_domain, 'active_test': True}"
+                                    options="{'no_create': True}"
+                                    optional="show"/>
+                            <field name="price_subtotal"
+                                    sum="Total"
+                                    column_invisible="parent.move_type not in ['in_invoice', 'in_refund', 'in_receipt'] and parent.company_price_include == 'tax_included'"
+                                    string="Amount"/>
+                            <field name="price_total"
+                                    sum="Total"
+                                    column_invisible="parent.move_type in ['in_invoice', 'in_refund', 'in_receipt'] or parent.company_price_include == 'tax_excluded'"
+                                    string="Amount"/>
+                            <!-- Others fields -->
+                            <field name="partner_id" column_invisible="True"/>
+                            <field name="currency_id" column_invisible="True"/>
+                            <field name="company_id" column_invisible="True"/>
+                            <field name="company_currency_id" column_invisible="True"/>
+                            <field name="display_type" force_save="1" column_invisible="True"/>
+                        </list>
+                    </field>
+                </field>
+
+                <!-- ****Other Info Tab**** -->
+                <xpath expr="//page[@id='other_tab']//field[@name='company_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//page[@id='other_tab']//field[@name='ref']" position="attributes">
+                    <attribute name="readonly">state == 'posted'</attribute>
+                </xpath>
+                <xpath expr="//page[@id='other_tab']//field[@name='invoice_user_id']" position="attributes">
+                    <attribute name="readonly">state == 'posted'</attribute>
+                </xpath>
+                <xpath expr="//page[@id='other_tab']//field[@name='team_id']" position="attributes">
+                    <attribute name="readonly">state == 'posted'</attribute>
+                </xpath>
+                <xpath expr="//page[@id='other_tab']//field[@name='partner_bank_id']" position="attributes">
+                    <attribute name="readonly">state == 'posted'</attribute>
+                </xpath>
+                <xpath expr="//page[@id='other_tab']//field[@name='payment_reference']" position="attributes">
+                    <attribute name="readonly">state == 'posted'</attribute>
+                </xpath>
+
+                <xpath expr="//page[@id='other_tab']//field[@name='invoice_incoterm_id']" position="attributes">
+                    <attribute name="readonly">state == 'posted'</attribute>
+                </xpath>
+                <xpath expr="//page[@id='other_tab']//field[@name='incoterm_location']" position="attributes">
+                    <attribute name="readonly">state == 'posted'</attribute>
+                </xpath>
+                <xpath expr="//page[@id='other_tab']//field[@name='preferred_payment_method_line_id']" position="attributes">
+                    <attribute name="readonly">state == 'posted'</attribute>
+                </xpath>
+                <xpath expr="//page[@id='other_tab']//field[@name='checked']" position="attributes">
+                    <attribute name="readonly">state == 'posted'</attribute>
+                </xpath>
+
+                <!-- ****Audit Trail Tab**** -->
+                <xpath expr="//page[@id='other_tab']" position="after">
+                    <page string="Audit Trail" name="audit_trail">
+                        <group>
+                            <group>
+                                <field name="create_uid" readonly="1"/>
+                                <field name="create_date" readonly="1"/>
+                                <field name="confirm_uid" readonly="1"/>
+                                <field name="confirm_date" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="write_uid" readonly="1"/>
+                                <field name="write_date" readonly="1"/>
+                                <field name="cancel_uid" readonly="1"/>
+                                <field name="cancel_date" readonly="1"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+                <xpath expr="//field[@name='narration']" position="before">
+                    <field name="note"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="tw_account_invoice_filter_view" model="ir.ui.view">
+            <field name="name">tw.account.invoice.filter.view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter" />
+            <field name="arch" type="xml">
+                <field name="payment_reference" position="after">
+                    <field string="Payment Status" name="status_in_payment"/>
+                </field>
+            </field>
+        </record>
+        
+    </data>
+</odoo>

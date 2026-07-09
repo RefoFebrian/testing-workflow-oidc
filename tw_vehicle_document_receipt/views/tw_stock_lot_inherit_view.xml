@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_vehicle_document_receipt_lot_form" model="ir.ui.view">
+            <field name="name">tw.vehicle.document.receipt.lot.form</field>
+            <field name="model">stock.lot</field>
+            <field name="inherit_id"
+                ref="tw_vehicle_registration_process.view_vehicle_registration_process_lot_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='stnk_process']" position="after">  
+                    <group name="document_receipt" string="Proses Penerimaan">
+                        <group>
+                            <h3 class="o_stat_info" colspan="2" style="margin-top:0px;">
+                                <span class="text-success">Penerimaan STNK</span>
+                            </h3>
+                            <field name="vehicle_registration_receipt_id" string="Penerimaan STNK"
+                                readonly="1" />
+                            <field name="vehicle_registration_receipt_date"
+                                string="Tanggal Terima STNK" readonly="1" />
+                            <field name="stnk_date" readonly="1" />
+                            <field name="vehicle_registration_number" string="Nomor STNK"
+                                readonly="1" />
+                            <field name="vehicle_registration_location_id" string="Lokasi STNK"
+                                readonly="1" />
+                            <br />
+                            <h3 class="o_stat_info" colspan="2" style="margin-top:0px;">
+                                <span class="text-success">Penerimaan Notice</span>
+                            </h3>
+                            <field name="notice_receipt_id" string="Penerimaan Notice" readonly="1" />
+                            <field name="notice_receipt_date" string="Tanggal Terima Notice"
+                                readonly="1" />
+                            <field name="notice_number" string="Nomor Notice" readonly="1" />
+                            <field name="notice_date" string="Tanggal Notice" readonly="1" />
+                        </group>
+                        <group>
+                            <h3 class="o_stat_info" colspan="2" style="margin-top:0px;">
+                                <span class="text-success">Penerimaan Plat</span>
+                            </h3>
+                            <field name="plate_receipt_id" string="Penerimaan Plat" readonly="1" />
+                            <field name="plate_receipt_date" string="Tanggal Terima Plat"
+                                readonly="1" />
+                            <field name="plate_number" string="Nomor Plat" readonly="1" />
+                            <br />
+                            <h3 class="o_stat_info" colspan="2" style="margin-top:0px;">
+                                <span class="text-success">Penerimaan BPKB</span>
+                            </h3>
+                            <field name="vehicle_ownership_receipt_id" string="Penerimaan BPKB"
+                                readonly="1" />
+                            <field name="vehicle_ownership_receipt_date"
+                                string="Tanggal Terima BPKB" readonly="1" />
+                            <field name="vehicle_ownership_number" string="Nomor BPKB" readonly="1" />
+                            <field name="vehicle_ownership_date" string="Tanggal BPKB" readonly="1" />
+                            <field name="vehicle_ownership_location_id" string="Lokasi BPKB"
+                                readonly="1" />
+                            <br />
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

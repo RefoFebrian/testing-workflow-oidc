@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_selection_type_api_dgi" model="tw.selection">
+	    	<field name="name">DGI</field>
+            <field name="value">DGI</field> 
+	    	<field name="type">ApiType</field> 
+        </record>
+    </data>
+</odoo>

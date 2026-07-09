@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_mrp_bom_extras_read,tw_mrp_bom_extras.read,mrp.model_mrp_bom,group_tw_mrp_bom_extras_read,1,0,0,0
+access_tw_mrp_bom_extras_update,tw_mrp_bom_extras.update,mrp.model_mrp_bom,group_tw_mrp_bom_extras_update,0,1,1,0
+access_tw_mrp_bom_extras_orderpoint_update,tw_mrp_bom_extras_order_point.update,stock.model_stock_warehouse_orderpoint,group_tw_mrp_bom_extras_update,0,1,1,0
+access_tw_mrp_bom_extras_delete,tw_mrp_bom_extras.delete,mrp.model_mrp_bom,group_tw_mrp_bom_extras_delete,0,0,0,1
+access_tw_mrp_bom_line_extras_read,tw_mrp_bom_extras_line.read,mrp.model_mrp_bom_line,group_tw_mrp_bom_extras_read,1,0,0,0
+access_tw_mrp_bom_line_extras_update,tw_mrp_bom_extras_line.update,mrp.model_mrp_bom_line,group_tw_mrp_bom_extras_update,0,1,1,1
+access_tw_mrp_bom_line_extras_delete,tw_mrp_bom_extras_line.delete,mrp.model_mrp_bom_line,group_tw_mrp_bom_extras_delete,0,0,0,1

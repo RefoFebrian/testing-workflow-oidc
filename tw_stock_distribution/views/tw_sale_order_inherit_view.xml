@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="tw_stock_distribution_so_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.distribution.so.form</field>
+            <field name="model">tw.sale.order</field>
+            <field name="inherit_id" ref="tw_sale.tw_sale_order_form_view"/>
+            <field name="arch" type="xml">
+                <field name="origin" position="before">
+                    <field name="stock_distribution_id" readonly="1" invisible="not stock_distribution_id"/>
+                </field>
+                <field name="partner_id" position="attributes">
+                    <attribute name="readonly">state != 'draft' or stock_distribution_id or origin</attribute>
+                </field>
+                <field name="product_id" position="attributes">
+                    <attribute name="readonly">parent.stock_distribution_id or parent.origin</attribute>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

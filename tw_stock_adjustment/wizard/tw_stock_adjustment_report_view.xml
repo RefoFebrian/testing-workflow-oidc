@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Form View -->
+        <record model="ir.ui.view" id="tw_stock_adjustment_report_form_view">
+            <field name="name">tw.stock.adjustment.report.form</field>
+            <field name="model">tw.stock.adjustment.report</field>
+            <field name="arch" type="xml">
+                <form string="Report Stock Adjustment">
+                    <group col="4">
+                        <group col="2">
+                            <label for="start_date" string="Tanggal"/>
+                            <div>
+                                <field name="start_date" class="oe_inline" required="1"/>
+                                <field name="end_date" class="oe_inline" required="1"/>
+                            </div>
+                        </group>
+                        <group col="2">
+                            <field name="division" required="1"/>
+                        </group>
+                    </group>
+
+                    <notebook colspan="5">
+                        <page string="Branches">
+                            <field name="company_ids" colspan="4" nolabel="1">
+                                <list>
+                                    <field name="code"/>
+                                    <field name="name"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+
+                    <footer>
+                        <button name="action_download" string="Export Report" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record model="ir.actions.act_window" id="tw_stock_adjustment_report_action">
+            <field name="name">Report Stock Adjustment</field>
+            <field name="res_model">tw.stock.adjustment.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_lead_crm_lead_doodool_form_view" model="ir.ui.view">
+            <field name="name">tw.lead.crm.lead.doodool.form.view</field>
+            <field name="model">tw.lead</field>
+            <field name="inherit_id" ref="tw_lead.tw_lead_crm_lead_form_view" />
+            <field name="arch" type="xml">
+
+                <group name="other_info" position="inside">
+                    <field name="version_code" readonly="1" force_save="1" />
+                    <field name="version_name" readonly="1" force_save="1" />
+                </group>
+
+            </field>
+        </record>
+    </data>
+</odoo>

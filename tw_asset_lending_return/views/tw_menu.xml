@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <menuitem id="tw_rent_return_asset_menu" 
+                  parent="tw_menu.submenu_tw_general_affair_asset" 
+                  name="Rent / Return Asset" 
+                  sequence="150"/>
+        
+        <menuitem id="tw_config_rent_return_asset_menu" 
+                  parent="tw_menu.submenu_tw_general_affair_configuration" 
+                  name="Configuration Peminjaman / Pengembalian" 
+                  sequence="160"/>
+
+        <menuitem id="tw_master_rent_reason_asset_menu" 
+                  parent="tw_config_rent_return_asset_menu" 
+                  action="tw_master_rent_reason_asset_action" 
+                  groups="tw_asset_lending_return.tw_master_rent_reason_asset_group_read"
+                  sequence="10"/>
+
+        <menuitem id="tw_asset_lending_menu" 
+                  parent="tw_rent_return_asset_menu" 
+                  action="tw_asset_lending_action" 
+                  groups="tw_asset_lending_return.tw_rent_aset_group_read"
+                  sequence="20"/>
+
+        <menuitem id="tw_asset_return_menu" 
+                  parent="tw_rent_return_asset_menu" 
+                  action="tw_asset_return_action" 
+                  groups="tw_asset_lending_return.tw_return_aset_group_read"
+                  sequence="30"/>
+    
+    </data>
+</odoo>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- Tree View -->
+        <record id="tw_titik_keramaian_list_view" model="ir.ui.view">
+            <field name="name">tw.titik.keramaian.tree</field>
+            <field name="model">tw.titik.keramaian</field>
+            <field name="type">list</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="Titik Keramaian" delete="0">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="district_id"/>
+                    <field name="sub_district_id"/>
+                    <field name="lat"/>
+                    <field name="long"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="tw_titik_keramaian_form_view" model="ir.ui.view">
+            <field name="name">tw.titik.keramaian.form</field>
+            <field name="model">tw.titik.keramaian</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Titik Keramaian" delete="0">
+                    <header>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="description" class="oe_edit_only" string="Titik Keramaian"/>
+                            <h1><field name="description" required="1"/></h1>
+                        </div>
+                        <field name="name" readonly="1"/>
+                        <group>
+                            <group col="2">
+                                <field name="category_id" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="responsibility"/>
+                                <field name="ring_id" options="{'no_open': True, 'no_create': True}"/>
+                            </group>
+                            <group col="2">
+                                <field name="active" readonly="1"/>
+                                <field name="max_qty_unit_display"/>   
+                                <field name="target"/>
+                            </group>
+                            <group string="LOCATION">
+                                <field name="lat" required="1"/>
+                                <field name="long" required="1"/>
+                                <field name="map_location" widget="tw_map" options="{'lat_field': 'lat', 'long_field': 'long', 'address_field': 'street'}"/>
+                            </group>
+                            <group string="ADDRESS">
+                                <field name="street" placeholder="Street..." required="1"/>
+                                <div>
+                                    <field name="rt" placeholder="RT" style="width: 50%%"/>
+                                    <field name="rw" placeholder="RW" style="width: 50%%"/>
+                                </div>
+                                <field name="state_id" class="oe_no_button" placeholder="Provinsi" required="1" options='{"no_open": True, "no_create": True}'/>
+                                <field name="city_id" placeholder="Kota / Kab" required="1" options='{"no_open": True, "no_create": True}'/>
+                                <field name="district_id" placeholder="Kecamatan" required="1" options='{"no_open": True, "no_create": True}'/>					
+                                <field name="sub_district_id" placeholder="Kelurahan" required="1" options='{"no_open": True, "no_create": True}' />    
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                        <field name="create_date" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                        <field name="write_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="tw_titik_keramaian_search_view" model="ir.ui.view">
+            <field name="name">tw.titik.keramaian.search</field>
+            <field name="model">tw.titik.keramaian</field>
+            <field name="arch" type="xml">
+                <search string="Titik Keramaian">
+                    <field name="description" string="Titik Keramaian" select="True"/>
+                    <field name="name" select="True"/>
+                    <field name="description"/>
+                    <field name="district_id"/>
+                    <field name="sub_district_id"/>
+                    <field name="street"/>
+                    
+                    <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                    <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_activate_tw_titik_keramaian" model="ir.actions.server">
+            <field name="name">Activate</field>
+            <field name="model_id" ref="model_tw_titik_keramaian"/>
+            <field name="binding_model_id" ref="model_tw_titik_keramaian"/>
+            <field name="binding_type">action</field>
+            <field name="state">code</field>
+            <field name="code">records.action_activate()</field>
+        </record>
+
+        <record id="action_deactivate_tw_titik_keramaian" model="ir.actions.server">
+            <field name="name">Deactivate</field>
+            <field name="model_id" ref="model_tw_titik_keramaian"/>
+            <field name="binding_model_id" ref="model_tw_titik_keramaian"/>
+            <field name="binding_type">action</field>
+            <field name="state">code</field>
+            <field name="code">records.action_deactivate()</field>
+        </record>
+
+        <!-- Action View -->
+        <record id="tw_titik_keramaian_action" model="ir.actions.server">
+            <field name="name">Titik Keramaian</field>
+            <field name="model_id" ref="tw_activity_atl_btl.model_tw_titik_keramaian"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.titik.keramaian'].action_titik_keramaian_tree()
+            </field>
+        </record>
+        
+    </data>
+</odoo>

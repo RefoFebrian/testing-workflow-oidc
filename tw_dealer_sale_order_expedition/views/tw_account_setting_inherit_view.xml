@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_account_settings_dso_expedition_inherit_view" model="ir.ui.view">
+            <field name="name">tw.account.settings.dso.expedition.inherit.view</field>
+            <field name="model">tw.account.setting</field>
+            <field name="inherit_id" ref="tw_dealer_sale_order.tw_account_settings_dso_inherit_view" />
+            <field name="arch" type="xml">
+                <group name="account_discounts" position="after">
+                    <group name="accrue_expedition">
+                        <h3 class="o_stat_info" colspan="2" style="margin-top:20px;">
+                            <span class="text-success">Accrue Expedition</span>
+                        </h3>
+                        <label for="is_accrue_expedition" string="Accrue Expedition?" />
+                        <div class="d-flex">
+                            <field name="is_accrue_expedition" class="me-3" />
+                            <field name="accrue_expedition" invisible="is_accrue_expedition == False" required="is_accrue_expedition == True"/>
+                        </div>
+                        <field name="journal_dso_accrue_ekspedisi_id" options="{'no_quick_create': True}" invisible="is_accrue_expedition == False" required="is_accrue_expedition == True"/>
+                    </group>
+                </group>
+            </field>
+        </record>
+    </data>
+</odoo>

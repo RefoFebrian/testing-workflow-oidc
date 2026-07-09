@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_dgi_mapping_master_jasa,tw_dgi_mapping_master_jasa.tw_dgi_mapping_master_jasa,model_tw_dgi_mapping_master_jasa,base.group_user,1,0,0,0
+access_tw_dgi_mapping_master_jasa_line,tw_dgi_mapping_master_jasa.tw_dgi_mapping_master_jasa_line,model_tw_dgi_mapping_master_jasa_line,base.group_user,1,0,0,0
+access_tw_upload_mapping_jasa_wizard,tw_dgi_mapping_master_jasa.tw_upload_mapping_jasa_wizard,model_tw_upload_mapping_jasa_wizard,base.group_user,1,0,0,0

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_whatsapp_content_template_work_order_voucher_otp" model="tw.whatsapp.content.template">
+            <field name="name">Work Order Voucher OTP</field>
+            <field name="subject">TunasHonda_WA</field>
+            <field name="template_type_id" ref="tw_work_order_voucher_whatsapp.tw_selection_type_otp_voucher"/>
+            <field name="content">Salam 1 Hati,\n\nKode OTP anda atas No Transaksi [wo_number]\nadalah sebagai berikut :\nOTP : [otp_code]\n\nTerima kasih\n\n_pesan ini adalah pesan otomatis_</field>
+        </record>
+    
+    </data>
+</odoo>

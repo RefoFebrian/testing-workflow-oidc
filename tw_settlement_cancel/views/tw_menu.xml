@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>      
+        
+        <menuitem action="tw_settlement_cancel_action" id="tw_settlement_cancel_menuitem" parent="tw_cancellation.submenu_backoffice_tw_cancellation" groups="tw_settlement_cancel.group_tw_settlement_cancel_read" sequence="10"/>
+    </data>
+</odoo>

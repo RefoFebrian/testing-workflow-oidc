@@ -1,0 +1,117 @@
+<odoo>
+    <data>
+        <record id="tw_branch_setting_list_view" model="ir.ui.view">
+            <field name="name">tw.branch.setting.list</field>
+            <field name="model">tw.branch.setting</field>
+            <field name="type">list</field>
+            <field name="priority">0</field>
+            <field name="arch" type="xml">
+                <list string="Branch Setting" create='false' delete='false'>
+                    <field name="company_id"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_branch_setting_form_view" model="ir.ui.view">
+            <field name="name">tw.branch.setting.form</field>
+            <field name="model">tw.branch.setting</field>
+            <field name="priority">0</field>
+            <field name="arch" type="xml">
+                <form string="Branch Setting" create='false' delete='false'>
+                    <sheet>
+                        <div name="branch_name" class="oe_title">
+                            <label for="company_id"/>
+                            <h1>
+                                <field name="company_id" required="1"/>
+                            </h1>
+                        </div>
+                        <notebook>
+                            <page string="General Information" name="general_information">
+                                <group>
+                                    <group>
+                                        <field name="branch_category_id" string="Branch Category" readonly="1"/>
+                                        <field name="branch_category" invisible="1"/>
+                                        <field name="branch_head_id" required="1" options='{"no_open": True, "no_create": True}'/>
+                                        <field name="area_manager_id" required="1" options='{"no_open": True, "no_create": True}'/>
+                                        <field name="general_manager_id" required="1" options='{"no_open": True, "no_create": True}'/>
+                                        <field name="admin_head_id" required="1" options='{"no_open": True, "no_create": True}'/>
+                                        <field name="admin_pos_id" options='{"no_open": True, "no_create": True}'/>
+                                        <field name="cashier_id" options='{"no_open": True, "no_create": True}'/>
+                                    </group>
+                                    <group>
+                                        <field name="default_area_id" options="{'no_create': True, 'no_open': True}"/>
+                                        <field name="region_id" options="{'no_create': True, 'no_open': True}"/>
+                                        <field name="region_categ_id" options="{'no_create': True, 'no_open': True}"/>
+                                        <field name="taxpayer_identification"/>
+                                        <field name="taxable_person"/>
+                                        <field name="professional_allowance"/>
+                                        <field name="regional_minimum_wages"/>
+                                        <field name="provincial_minimum_wages"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <!-- This invisible page for inherit pages in the view branch settings. -->
+                            <page name="page_1" invisible="1"/>
+                            <page name="page_2" invisible="1"/>
+                            <page name="page_3" invisible="1"/>
+                            <page name="page_4" invisible="1"/>
+                            <page string="Audit Trail" name="audit_trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" options="{'no_open':True,'no_create':True}" readonly="1"/>
+                                        <field name="write_uid" options="{'no_open':True,'no_create':True}" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="create_date" readonly="1"/>
+                                        <field name="write_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- search -->
+        <record id="tw_branch_setting_search" model="ir.ui.view">
+            <field name="name">tw.branch.setting.search</field>
+            <field name="model">tw.branch.setting</field>
+            <field name="arch" type="xml">
+                <search string="Branch Setting">
+                    <filter string="Branch" name="filter_by_branch" domain="[('company_id','=','')]" />
+                    <field name="company_id" select="True"/>
+                    <field name="admin_head_id" select="True"/>
+                    <field name="admin_pos_id" select="True"/>
+                    <field name="cashier_id" select="True"/>
+                    <field name="general_manager_id" select="True"/>
+                    <field name="area_manager_id" select="True"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- action window -->
+        <record id="tw_branch_setting_action" model="ir.actions.act_window">
+            <field name="name">Branch Settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.branch.setting</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Branch Setting
+                </p>
+                <p>
+                Click the Create button to add a new Branch Setting
+                </p>
+            </field>
+        </record>
+
+        <record id="tw_branch_setting_action_list" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_branch_setting_list_view"/>
+            <field name="act_window_id" ref="tw_branch_setting_action"/>
+        </record>
+
+        <menuitem id="menuitem_tw_branch_setting" name="Branch Setting" parent="tw_menu.submenu_tw_branch" action="tw_branch_setting_action" sequence="2" groups="tw_branch_setting.group_tw_branch_setting_read"/>
+    </data>
+</odoo>

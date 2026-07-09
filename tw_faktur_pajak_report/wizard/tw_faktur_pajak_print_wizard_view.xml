@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Print Wizard Form View -->
+		<record id="tw_faktur_pajak_print_wizard_form_view" model="ir.ui.view">
+			<field name="name">tw.faktur.pajak.print.wizard.form</field>
+			<field name="model">tw.faktur.pajak.print.wizard</field>
+			<field name="arch" type="xml">
+				<form string="Print Faktur Pajak">
+					<group>
+						<field name="faktur_pajak_out_id" invisible="1"/>
+						<field name="signature_id" 
+							required="1" 
+							options="{'no_open':True,'no_create_edit':True}"/>
+						<field name="transaction_code" placeholder="Contoh: 010"/>
+						<field name="note" placeholder="Keterangan tambahan (opsional)"/>
+					</group>
+					<footer>
+						<button name="action_print" 
+							type="object" 
+							string="Print" 
+							class="btn-primary"/>
+						<button string="Cancel" class="btn-secondary" special="cancel"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+	</data>
+</odoo>

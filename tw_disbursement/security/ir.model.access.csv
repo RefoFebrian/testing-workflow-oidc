@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_all_tw_disbursement,access_all_tw_disbursement,model_tw_disbursement,base.group_user,1,0,0,0
+access_all_tw_disbursement_line,access_all_tw_disbursement_line,model_tw_disbursement_line,base.group_user,1,0,0,0

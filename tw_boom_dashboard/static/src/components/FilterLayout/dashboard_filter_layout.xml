@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-name="tw_boom_dashboard.FilterLayout">
+        <div class="o_filter_layout" t-att-style="containerStyle">
+            <label class="filter-label" t-att-style="labelStyle">
+                <t t-esc="state.filterLabel"/>
+            </label>
+
+            <!-- Employee / Many2One / Selection Filter -->
+            <t t-if="['employee', 'many2one', 'selection'].includes(state.filterType)">
+                <div class="filter-dropdown position-relative">
+                    <div class="input-group input-group-sm">
+                        <input type="text" 
+                               class="form-control" 
+                               t-att-placeholder="state.filterPlaceholder"
+                               t-att-value="state.searchText"
+                               t-att-style="inputStyle"
+                               t-on-input="onSearchInput"
+                               t-on-focus="onInputFocus"
+                               t-on-blur="onInputBlur"
+                               autocomplete="off"/>
+                        <div class="input-group-append" t-if="state.selectedValue">
+                            <button class="btn btn-outline-secondary" type="button" t-on-click="clearFilter">
+                                <i class="fa fa-times"/>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="dropdown-menu w-100" t-att-class="{'show': state.showDropdown}" style="max-height: 250px; overflow-y: auto;">
+                        <a t-if="filteredOptions.length === 0" class="dropdown-item disabled" href="#">No results</a>
+                        <t t-foreach="filteredOptions" t-as="opt" t-key="opt.id">
+                            <a class="dropdown-item" href="#" t-on-mousedown.prevent="(ev) => this.selectOption(opt)">
+                                <t t-esc="opt.name"/>
+                            </a>
+                        </t>
+                    </div>
+                </div>
+            </t>
+
+            <!-- Date Range Filter -->
+            <t t-if="state.filterType === 'date_range'">
+                <div class="filter-date-range d-flex flex-wrap align-items-center gap-2">
+                    <input type="date" 
+                           class="form-control form-control-sm" 
+                           t-att-style="inputStyle"
+                           t-att-value="state.dateStart"
+                           t-on-change="onDateStartChange"/>
+                    <span class="mx-1">-</span>
+                    <input type="date" 
+                           class="form-control form-control-sm" 
+                           t-att-style="inputStyle"
+                           t-att-value="state.dateEnd"
+                           t-on-change="onDateEndChange"/>
+                    <button t-if="state.dateStart or state.dateEnd" 
+                            class="btn btn-sm btn-outline-secondary" 
+                            t-on-click="clearFilter">
+                        <i class="fa fa-times"/>
+                    </button>
+                </div>
+            </t>
+
+            <!-- Manual Input Filter -->
+            <t t-if="state.filterType === 'manual'">
+                <div class="filter-manual">
+                    <div class="input-group input-group-sm">
+                        <input type="text" 
+                               class="form-control" 
+                               t-att-placeholder="state.filterPlaceholder"
+                               t-att-value="state.searchText"
+                               t-att-style="inputStyle"
+                               t-on-input="onManualInputChange"/>
+                        <div class="input-group-append" t-if="state.searchText">
+                            <button class="btn btn-outline-secondary" type="button" t-on-click="clearFilter">
+                                <i class="fa fa-times"/>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>

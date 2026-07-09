@@ -1,0 +1,1014 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    
+        <!-- 1. Retail WMS AHASS Saharjo (1) -->
+		<record id="res_partner_astrapay_wms_saharjo" model="res.partner">
+    		<field name="name">AstraPay WMS Saharjo</field>
+    		<field name="code">astrapay_wms_saharjo</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+            <field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_wms_saharjo" model="res.users">
+    		<field name="name">AstraPay WMS Saharjo</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_wms_saharjo"/>
+            <field name="login">astrapay_wms_saharjo</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+
+		<!-- 2. Retail CDN-ML AHASS Riau (1) -->
+		<record id="res_partner_astrapay_cdn_ml_riau" model="res.partner">
+    		<field name="name">AstraPay CDN-ML Riau</field>
+    		<field name="code">astrapay_cdn_ml_riau</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_cdn_ml_riau" model="res.users">
+    		<field name="name">AstraPay CDN-ML Riau</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_cdn_ml_riau"/>
+            <field name="login">astrapay_cdn_ml_riau</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 3. Retail ASP AHASS Bangka (1) -->
+		<record id="res_partner_astrapay_asp_bangka" model="res.partner">
+    		<field name="name">AstraPay ASP Bangka</field>
+    		<field name="code">astrapay_asp_bangka</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_asp_bangka" model="res.users">
+    		<field name="name">AstraPay ASP Bangka</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_asp_bangka"/>
+            <field name="login">astrapay_asp_bangka</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 4. Retail ASP AHASS Parit Tiga Jebu (2) -->
+		<record id="res_partner_astrapay_asp_parit_tiga_jebu" model="res.partner">
+    		<field name="name">AstraPay ASP Parit Tiga Jebu</field>
+    		<field name="code">astrapay_asp_parit_tiga_jebu</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_asp_parit_tiga_jebu" model="res.users">
+    		<field name="name">AstraPay ASP Parit Tiga Jebu</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_asp_parit_tiga_jebu"/>
+            <field name="login">astrapay_asp_parit_tiga_jebu</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 5. Retail ASP AHASS Kelapa (3) -->
+		<record id="res_partner_astrapay_asp_kelapa" model="res.partner">
+    		<field name="name">AstraPay ASP Kelapa</field>
+    		<field name="code">astrapay_asp_kelapa</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_asp_kelapa" model="res.users">
+    		<field name="name">AstraPay ASP Kelapa</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_asp_kelapa"/>
+            <field name="login">astrapay_asp_kelapa</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 6. Retail ASP AHASS Belitung (4) -->
+		<record id="res_partner_astrapay_asp_belitung" model="res.partner">
+    		<field name="name">AstraPay ASP Belitung</field>
+    		<field name="code">astrapay_asp_belitung</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_asp_belitung" model="res.users">
+    		<field name="name">AstraPay ASP Belitung</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_asp_belitung"/>
+            <field name="login">astrapay_asp_belitung</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 7. Retail ASP AHASS Manggar (5) -->
+		<record id="res_partner_astrapay_asp_manggar" model="res.partner">
+    		<field name="name">AstraPay ASP Manggar</field>
+    		<field name="code">astrapay_asp_manggar</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_asp_manggar" model="res.users">
+    		<field name="name">AstraPay ASP Manggar</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_asp_manggar"/>
+            <field name="login">astrapay_asp_manggar</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 8. Retail ASP AHASS Payung (6) -->
+		<record id="res_partner_astrapay_asp_payung" model="res.partner">
+    		<field name="name">AstraPay ASP Payung</field>
+    		<field name="code">astrapay_asp_payung</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_asp_payung" model="res.users">
+    		<field name="name">AstraPay ASP Payung</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_asp_payung"/>
+            <field name="login">astrapay_asp_payung</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 9. Retail ASP AHASS Sungailiat (7) -->
+		<record id="res_partner_astrapay_asp_sungailiat" model="res.partner">
+    		<field name="name">AstraPay ASP Sungailiat</field>
+    		<field name="code">astrapay_asp_sungailiat</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_asp_sungailiat" model="res.users">
+    		<field name="name">AstraPay ASP Sungailiat</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_asp_sungailiat"/>
+            <field name="login">astrapay_asp_sungailiat</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 10. Retail ASP AHASS Belinyu (8) -->
+		<record id="res_partner_astrapay_asp_belinyu" model="res.partner">
+    		<field name="name">AstraPay ASP Belinyu</field>
+    		<field name="code">astrapay_asp_belinyu</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_asp_belinyu" model="res.users">
+    		<field name="name">AstraPay ASP Belinyu</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_asp_belinyu"/>
+            <field name="login">astrapay_asp_belinyu</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 11. Retail ASP AHASS Simpangkatis (9) -->
+		<record id="res_partner_astrapay_asp_simpangkatis" model="res.partner">
+    		<field name="name">AstraPay ASP Simpangkatis</field>
+    		<field name="code">astrapay_asp_simpangkatis</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_asp_simpangkatis" model="res.users">
+    		<field name="name">AstraPay ASP Simpangkatis</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_asp_simpangkatis"/>
+            <field name="login">astrapay_asp_simpangkatis</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 12. Retail ASP AHASS Toboali (10) -->
+		<record id="res_partner_astrapay_asp_toboali" model="res.partner">
+    		<field name="name">AstraPay ASP Toboali</field>
+    		<field name="code">astrapay_asp_toboali</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_asp_toboali" model="res.users">
+    		<field name="name">AstraPay ASP Toboali</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_asp_toboali"/>
+            <field name="login">astrapay_asp_toboali</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 13. Retail DAM AHASS Caman (1) -->
+		<record id="res_partner_astrapay_dam_caman" model="res.partner">
+    		<field name="name">AstraPay DAM Caman</field>
+    		<field name="code">astrapay_dam_caman</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_dam_caman" model="res.users">
+    		<field name="name">AstraPay DAM Caman</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_dam_caman"/>
+            <field name="login">astrapay_dam_caman</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 14. Retail DAM AHASS Cimareme (2) -->
+		<record id="res_partner_astrapay_dam_cimareme" model="res.partner">
+    		<field name="name">AstraPay DAM Cimareme</field>
+    		<field name="code">astrapay_dam_cimareme</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_dam_cimareme" model="res.users">
+    		<field name="name">AstraPay DAM Cimareme</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_dam_cimareme"/>
+            <field name="login">astrapay_dam_cimareme</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 15. Retail DAM AHASS Sukabumi (3) -->
+		<record id="res_partner_astrapay_dam_sukabumi" model="res.partner">
+    		<field name="name">AstraPay DAM Sukabumi</field>
+    		<field name="code">astrapay_dam_sukabumi</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_dam_sukabumi" model="res.users">
+    		<field name="name">AstraPay DAM Sukabumi</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_dam_sukabumi"/>
+            <field name="login">astrapay_dam_sukabumi</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 16. Retail DAW AHASS Gorontalo (1) -->
+		<record id="res_partner_astrapay_daw_gorontalo" model="res.partner">
+    		<field name="name">AstraPay DAW Gorontalo</field>
+    		<field name="code">astrapay_daw_gorontalo</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_daw_gorontalo" model="res.users">
+    		<field name="name">AstraPay DAW Gorontalo</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_daw_gorontalo"/>
+            <field name="login">astrapay_daw_gorontalo</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 17. Retail DAW AHASS Tuminting (2) -->
+		<record id="res_partner_astrapay_daw_tuminting" model="res.partner">
+    		<field name="name">AstraPay DAW Tuminting</field>
+    		<field name="code">astrapay_daw_tuminting</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_daw_tuminting" model="res.users">
+    		<field name="name">AstraPay DAW Tuminting</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_daw_tuminting"/>
+            <field name="login">astrapay_daw_tuminting</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 18. Retail MPM AHASS Jombang (1) -->
+		<record id="res_partner_astrapay_mpm_jombang" model="res.partner">
+    		<field name="name">AstraPay MPM Jombang</field>
+    		<field name="code">astrapay_mpm_jombang</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_mpm_jombang" model="res.users">
+    		<field name="name">AstraPay MPM Jombang</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_mpm_jombang"/>
+            <field name="login">astrapay_mpm_jombang</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 19. Retail MPM AHASS Mojosari (2) -->
+		<record id="res_partner_astrapay_mpm_mojosari" model="res.partner">
+    		<field name="name">AstraPay MPM Mojosari</field>
+    		<field name="code">astrapay_mpm_mojosari</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_mpm_mojosari" model="res.users">
+    		<field name="name">AstraPay MPM Mojosari</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_mpm_mojosari"/>
+            <field name="login">astrapay_mpm_mojosari</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 20. Retail SSP AHASS Bangko (1) -->
+		<record id="res_partner_astrapay_ssp_bangko" model="res.partner">
+    		<field name="name">AstraPay SSP Bangko</field>
+    		<field name="code">astrapay_ssp_bangko</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_ssp_bangko" model="res.users">
+    		<field name="name">AstraPay SSP Bangko</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_ssp_bangko"/>
+            <field name="login">astrapay_ssp_bangko</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 21. Retail SSP AHASS Jambi (2) -->
+		<record id="res_partner_astrapay_ssp_jambi" model="res.partner">
+    		<field name="name">AstraPay SSP Jambi</field>
+    		<field name="code">astrapay_ssp_jambi</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_ssp_jambi" model="res.users">
+    		<field name="name">AstraPay SSP Jambi</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_ssp_jambi"/>
+            <field name="login">astrapay_ssp_jambi</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 22. Retail SSP AHASS Merlung (3) -->
+		<record id="res_partner_astrapay_ssp_merlung" model="res.partner">
+    		<field name="name">AstraPay SSP Merlung</field>
+    		<field name="code">astrapay_ssp_merlung</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_ssp_merlung" model="res.users">
+    		<field name="name">AstraPay SSP Merlung</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_ssp_merlung"/>
+            <field name="login">astrapay_ssp_merlung</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 23. Retail SSP AHASS Muara Sabak (4) -->
+		<record id="res_partner_astrapay_ssp_muara_sabak" model="res.partner">
+    		<field name="name">AstraPay SSP Muara Sabak</field>
+    		<field name="code">astrapay_ssp_muara_sabak</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_ssp_muara_sabak" model="res.users">
+    		<field name="name">AstraPay SSP Muara Sabak</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_ssp_muara_sabak"/>
+            <field name="login">astrapay_ssp_muara_sabak</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 24. Retail SSP AHASS Muara Bungo (5) -->
+		<record id="res_partner_astrapay_ssp_muara_bungo" model="res.partner">
+    		<field name="name">AstraPay SSP Muara Bungo</field>
+    		<field name="code">astrapay_ssp_muara_bungo</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_ssp_muara_bungo" model="res.users">
+    		<field name="name">AstraPay SSP Muara Bungo</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_ssp_muara_bungo"/>
+            <field name="login">astrapay_ssp_muara_bungo</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 25. Retail HSO-YGY AHASS Temanggung (1) -->
+		<record id="res_partner_astrapay_hso_ygy_temanggung" model="res.partner">
+    		<field name="name">AstraPay HSO-YGY Temanggung</field>
+    		<field name="code">astrapay_hso_ygy_temanggung</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_ygy_temanggung" model="res.users">
+    		<field name="name">AstraPay HSO-YGY Temanggung</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_ygy_temanggung"/>
+            <field name="login">astrapay_hso_ygy_temanggung</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 26. Retail HSO-YGY AHASS Godean (2) -->
+		<record id="res_partner_astrapay_hso_ygy_godean" model="res.partner">
+    		<field name="name">AstraPay HSO-YGY Godean</field>
+    		<field name="code">astrapay_hso_ygy_godean</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_ygy_godean" model="res.users">
+    		<field name="name">AstraPay HSO-YGY Godean</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_ygy_godean"/>
+            <field name="login">astrapay_hso_ygy_godean</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 27. Retail HSO-MTR AHASS Bima (1) -->
+		<record id="res_partner_astrapay_hso_mtr_bima" model="res.partner">
+    		<field name="name">AstraPay HSO-MTR Bima</field>
+    		<field name="code">astrapay_hso_mtr_bima</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_mtr_bima" model="res.users">
+    		<field name="name">AstraPay HSO-MTR Bima</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_mtr_bima"/>
+            <field name="login">astrapay_hso_mtr_bima</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 28. Retail HSO-MTR AHASS Lombok (2) -->
+		<record id="res_partner_astrapay_hso_mtr_lombok" model="res.partner">
+    		<field name="name">AstraPay HSO-MTR Lombok</field>
+    		<field name="code">astrapay_hso_mtr_lombok</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_mtr_lombok" model="res.users">
+    		<field name="name">AstraPay HSO-MTR Lombok</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_mtr_lombok"/>
+            <field name="login">astrapay_hso_mtr_lombok</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 29. Retail HSO-DPS AHASS Tabanan (1) -->
+		<record id="res_partner_astrapay_hso_dps_tabanan" model="res.partner">
+    		<field name="name">AstraPay HSO-DPS Tabanan</field>
+    		<field name="code">astrapay_hso_dps_tabanan</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_dps_tabanan" model="res.users">
+    		<field name="name">AstraPay HSO-DPS Tabanan</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_dps_tabanan"/>
+            <field name="login">astrapay_hso_dps_tabanan</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 30. Retail HSO-PLB AHASS Pangkalan Balai (1) -->
+		<record id="res_partner_astrapay_hso_plb_pangkalan_balai" model="res.partner">
+    		<field name="name">AstraPay HSO-PLB Pangkalan Balai</field>
+    		<field name="code">astrapay_hso_plb_pangkalan_balai</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_plb_pangkalan_balai" model="res.users">
+    		<field name="name">AstraPay HSO-PLB Pangkalan Balai</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_plb_pangkalan_balai"/>
+            <field name="login">astrapay_hso_plb_pangkalan_balai</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 31. Retail HSO-PLB AHASS Kayu Agung (2) -->
+		<record id="res_partner_astrapay_hso_plb_kayu_agung" model="res.partner">
+    		<field name="name">AstraPay HSO-PLB Kayu Agung</field>
+    		<field name="code">astrapay_hso_plb_kayu_agung</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_plb_kayu_agung" model="res.users">
+    		<field name="name">AstraPay HSO-PLB Kayu Agung</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_plb_kayu_agung"/>
+            <field name="login">astrapay_hso_plb_kayu_agung</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 32. Retail HSO-PLB AHASS Martapura (3) -->
+		<record id="res_partner_astrapay_hso_plb_martapura" model="res.partner">
+    		<field name="name">AstraPay HSO-PLB Martapura</field>
+    		<field name="code">astrapay_hso_plb_martapura</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_plb_martapura" model="res.users">
+    		<field name="name">AstraPay HSO-PLB Martapura</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_plb_martapura"/>
+            <field name="login">astrapay_hso_plb_martapura</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 33. Retail HSO-PLB AHASS Palembang (4) -->
+		<record id="res_partner_astrapay_hso_plb_palembang" model="res.partner">
+    		<field name="name">AstraPay HSO-PLB Palembang</field>
+    		<field name="code">astrapay_hso_plb_palembang</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_plb_palembang" model="res.users">
+    		<field name="name">AstraPay HSO-PLB Palembang</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_plb_palembang"/>
+            <field name="login">astrapay_hso_plb_palembang</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 34. Retail HSO-BKL AHASS Kepahyang (1) -->
+		<record id="res_partner_astrapay_hso_bkl_kepahyang" model="res.partner">
+    		<field name="name">AstraPay HSO-BKL Kepahyang</field>
+    		<field name="code">astrapay_hso_bkl_kepahyang</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_bkl_kepahyang" model="res.users">
+    		<field name="name">AstraPay HSO-BKL Kepahyang</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_bkl_kepahyang"/>
+            <field name="login">astrapay_hso_bkl_kepahyang</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 35. Retail HSO-BKL AHASS Putri Hijau (2) -->
+		<record id="res_partner_astrapay_hso_bkl_putri_hijau" model="res.partner">
+    		<field name="name">AstraPay HSO-BKL Putri Hijau</field>
+    		<field name="code">astrapay_hso_bkl_putri_hijau</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_bkl_putri_hijau" model="res.users">
+    		<field name="name">AstraPay HSO-BKL Putri Hijau</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_bkl_putri_hijau"/>
+            <field name="login">astrapay_hso_bkl_putri_hijau</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 36. Retail HSO-MKS AHASS Pangkep (1) -->
+		<record id="res_partner_astrapay_hso_mks_pangkep" model="res.partner">
+    		<field name="name">AstraPay HSO-MKS Pangkep</field>
+    		<field name="code">astrapay_hso_mks_pangkep</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_mks_pangkep" model="res.users">
+    		<field name="name">AstraPay HSO-MKS Pangkep</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_mks_pangkep"/>
+            <field name="login">astrapay_hso_mks_pangkep</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 37. Retail HSO-MKS AHASS Kendari (2) -->
+		<record id="res_partner_astrapay_hso_mks_kendari" model="res.partner">
+    		<field name="name">AstraPay HSO-MKS Kendari</field>
+    		<field name="code">astrapay_hso_mks_kendari</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_mks_kendari" model="res.users">
+    		<field name="name">AstraPay HSO-MKS Kendari</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_mks_kendari"/>
+            <field name="login">astrapay_hso_mks_kendari</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 38. Retail HSO-MKS AHASS Tomoni (3) -->
+		<record id="res_partner_astrapay_hso_mks_tomoni" model="res.partner">
+    		<field name="name">AstraPay HSO-MKS Tomoni</field>
+    		<field name="code">astrapay_hso_mks_tomoni</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_mks_tomoni" model="res.users">
+    		<field name="name">AstraPay HSO-MKS Tomoni</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_mks_tomoni"/>
+            <field name="login">astrapay_hso_mks_tomoni</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 39. Retail HSO-MKS AHASS Palopo (4) -->
+		<record id="res_partner_astrapay_hso_mks_palopo" model="res.partner">
+    		<field name="name">AstraPay HSO-MKS Palopo</field>
+    		<field name="code">astrapay_hso_mks_palopo</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_mks_palopo" model="res.users">
+    		<field name="name">AstraPay HSO-MKS Palopo</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_mks_palopo"/>
+            <field name="login">astrapay_hso_mks_palopo</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 40. Retail HSO-MKS AHASS Pinrang (5) -->
+		<record id="res_partner_astrapay_hso_mks_pinrang" model="res.partner">
+    		<field name="name">AstraPay HSO-MKS Pinrang</field>
+    		<field name="code">astrapay_hso_mks_pinrang</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_mks_pinrang" model="res.users">
+    		<field name="name">AstraPay HSO-MKS Pinrang</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_mks_pinrang"/>
+            <field name="login">astrapay_hso_mks_pinrang</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 41. Retail HSO-MKS AHASS Pare Pare (6) -->
+		<record id="res_partner_astrapay_hso_mks_pare_pare" model="res.partner">
+    		<field name="name">AstraPay HSO-MKS Pare Pare</field>
+    		<field name="code">astrapay_hso_mks_pare_pare</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_mks_pare_pare" model="res.users">
+    		<field name="name">AstraPay HSO-MKS Pare Pare</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_mks_pare_pare"/>
+            <field name="login">astrapay_hso_mks_pare_pare</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 42. Retail HSO-MKS AHASS Sengkang (7) -->
+		<record id="res_partner_astrapay_hso_mks_sengkang" model="res.partner">
+    		<field name="name">AstraPay HSO-MKS Sengkang</field>
+    		<field name="code">astrapay_hso_mks_sengkang</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_mks_sengkang" model="res.users">
+    		<field name="name">AstraPay HSO-MKS Sengkang</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_mks_sengkang"/>
+            <field name="login">astrapay_hso_mks_sengkang</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 43. Retail HSO-BPP AHASS Balikpapan (1) -->
+		<record id="res_partner_astrapay_hso_bpp_balikpapan" model="res.partner">
+    		<field name="name">AstraPay HSO-BPP Balikpapan</field>
+    		<field name="code">astrapay_hso_bpp_balikpapan</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_bpp_balikpapan" model="res.users">
+    		<field name="name">AstraPay HSO-BPP Balikpapan</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_bpp_balikpapan"/>
+            <field name="login">astrapay_hso_bpp_balikpapan</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 44. Retail HSO-BPP AHASS Tanah Grogot (2) -->
+		<record id="res_partner_astrapay_hso_bpp_tanah_grogot" model="res.partner">
+    		<field name="name">AstraPay HSO-BPP Tanah Grogot</field>
+    		<field name="code">astrapay_hso_bpp_tanah_grogot</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_bpp_tanah_grogot" model="res.users">
+    		<field name="name">AstraPay HSO-BPP Tanah Grogot</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_bpp_tanah_grogot"/>
+            <field name="login">astrapay_hso_bpp_tanah_grogot</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 45. Retail HSO-PTK AHASS Ketapang (1) -->
+		<record id="res_partner_astrapay_hso_ptk_ketapang" model="res.partner">
+    		<field name="name">AstraPay HSO-PTK Ketapang</field>
+    		<field name="code">astrapay_hso_ptk_ketapang</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_ptk_ketapang" model="res.users">
+    		<field name="name">AstraPay HSO-PTK Ketapang</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_ptk_ketapang"/>
+            <field name="login">astrapay_hso_ptk_ketapang</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 46. Retail HSO-PTK AHASS Nangah Pinoh (2) -->
+		<record id="res_partner_astrapay_hso_ptk_nangah_pinoh" model="res.partner">
+    		<field name="name">AstraPay HSO-PTK Nangah Pinoh</field>
+    		<field name="code">astrapay_hso_ptk_nangah_pinoh</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_ptk_nangah_pinoh" model="res.users">
+    		<field name="name">AstraPay HSO-PTK Nangah Pinoh</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_ptk_nangah_pinoh"/>
+            <field name="login">astrapay_hso_ptk_nangah_pinoh</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 47. Retail HSO-SMD AHASS Samarinda (1) -->
+		<record id="res_partner_astrapay_hso_smd_samarinda" model="res.partner">
+    		<field name="name">AstraPay HSO-SMD Samarinda</field>
+    		<field name="code">astrapay_hso_smd_samarinda</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_smd_samarinda" model="res.users">
+    		<field name="name">AstraPay HSO-SMD Samarinda</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_smd_samarinda"/>
+            <field name="login">astrapay_hso_smd_samarinda</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+        <!-- 48. Retail HSO-SMD AHASS Tenggarong (2) -->
+		<record id="res_partner_astrapay_hso_smd_tenggarong" model="res.partner">
+    		<field name="name">AstraPay HSO-SMD Tenggarong</field>
+    		<field name="code">astrapay_hso_smd_tenggarong</field>
+    		<field name="phone">+621500793</field>
+    		<field name="mobile">+621500793</field>
+    		<field name="is_company">True</field>
+    		<field name="is_fintech">True</field>
+            <field name="street">Jl. Jenderal Sudirman Lantai 56, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, DKI Jakarta, Indonesia</field>
+    		<field name="email">customercare@astrapay.com</field>
+    		<field name="website">https://www.astrapay.com/</field>
+    		<field name="category_id" eval="[(6, 0, [ref('tw_partner.contact_tags_fintech')])]"/>
+        </record>
+
+        <record id="res_users_astrapay_hso_smd_tenggarong" model="res.users">
+    		<field name="name">AstraPay HSO-SMD Tenggarong</field>
+    		<field name="partner_id" ref="tw_payment_astrapay.res_partner_astrapay_hso_smd_tenggarong"/>
+            <field name="login">astrapay_hso_smd_tenggarong</field>
+            <field name="email">customercare@astrapay.com</field>
+        </record>
+        
+    </data>
+</odoo>

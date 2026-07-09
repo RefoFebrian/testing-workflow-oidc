@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="menuitem_tw_selection_lead_source_data"
+        name="Lead Source Data"
+        parent="tw_selection.submenu_tw_selection"
+        action="tw_selection_lead_source_data_action"
+        sequence="11"
+        groups="tw_lead_integration.group_tw_selection_lead_source_data"
+    />
+
+</odoo>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Wizard Form View -->
+        <record id="view_response_mapping_import_wizard_form" model="ir.ui.view">
+            <field name="name">tw.response.mapping.import.wizard.form</field>
+            <field name="model">tw.response.mapping.import.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Import Response Mappings">
+                    <field name="endpoint_id" invisible="1"/>
+                    <sheet>
+                        <div class="alert alert-info" role="alert">
+                            <h4><i class="fa fa-info-circle" title="Info"/> Format File Excel</h4>
+                            <ul>
+                                <li>Pastikan file Excel memiliki kolom dengan urutan sebagai berikut:</li>
+                            </ul>
+                            <table class="table table-bordered" style="width: 95%; margin: 10px 0 20px 20px;">
+                                <tr style="background-color: #f8f9fa;">
+                                    <th style="padding: 8px; border: 1px solid #dee2e6;">sequence</th>
+                                    <th style="padding: 8px; border: 1px solid #dee2e6;">json_path</th>
+                                    <th style="padding: 8px; border: 1px solid #dee2e6;">target_model</th>
+                                    <th style="padding: 8px; border: 1px solid #dee2e6;">target_field</th>
+                                    <th style="padding: 8px; border: 1px solid #dee2e6;">field_type</th>
+                                    <th style="padding: 8px; border: 1px solid #dee2e6;">is_required</th>
+                                    <th style="padding: 8px; border: 1px solid #dee2e6;">relation_model</th>
+                                    <th style="padding: 8px; border: 1px solid #dee2e6;">relation_lookup_field</th>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">10</td>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">data.0.id</td>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">your.model</td>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">external_id</td>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">direct</td>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">TRUE</td>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;"></td>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;"></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">20</td>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">data.0.category_id</td>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">your.model</td>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">category_id</td>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">relation</td>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">FALSE</td>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">res.partner.category</td>
+                                    <td style="padding: 8px; border: 1px solid #dee2e6;">external_id</td>
+                                </tr>
+                            </table>
+                            <p><strong>Catatan:</strong> Baris pertama akan dianggap sebagai header. Kolom opsional: default_value, notes, relation_search_domain, validation</p>
+                        </div>
+                        <group>
+                            <group>
+                                <div class="mt-2">
+                                    <p class="text-muted">
+                                        <i class="fa fa-info-circle" title="Info"/> Unduh template untuk format yang benar
+                                    </p>
+                                    <button name="action_download_template" 
+                                            type="object" 
+                                            class="btn btn-outline-secondary">
+                                        <i class="fa fa-download me-2" title="Download"/>
+                                        Download Template Excel
+                                    </button>
+                                </div>
+                                <field name="file" filename="filename" string="Pilih File Excel"/>
+                                <field name="filename" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_import" string="Import" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

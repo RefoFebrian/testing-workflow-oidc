@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Button Groups -->
+        <record id="group_payment_request_confirm" model="res.groups">
+            <field name="category_id" ref="tw_payment_request.tw_module_category_payment_request"/>
+            <field name="name">TW Button Payment Request Confirm</field>
+        </record>
+        
+        <record id="group_payment_request_validate" model="res.groups">
+            <field name="category_id" ref="tw_payment_request.tw_module_category_payment_request"/>
+            <field name="name">TW Button Payment Request Validate</field>
+        </record>
+
+        <record id="group_tw_payment_request_print" model="res.groups">
+            <field name="category_id" ref="tw_payment_request.tw_module_category_payment_request"/>
+            <field name="name">TW Button Payment Request Print</field>
+        </record>
+        
+        <record id="group_payment_request_update" model="res.groups">
+            <field name="category_id" ref="tw_payment_request.tw_module_category_payment_request"/>
+            <field name="name">TW Button Payment Request Update</field>
+        </record>
+        <record id="group_tw_payment_request_view_payment" model="res.groups">
+           <field name="category_id" ref="tw_payment_request.tw_module_category_payment_request"/>
+           <field name="name">TW Button Payment Request View Payment</field> 
+        </record>
+        
+        <!-- Add all button groups to System Admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_payment_request_confirm')),
+                (4, ref('group_payment_request_validate')),
+                (4, ref('group_tw_payment_request_print')),
+                (4, ref('group_payment_request_update')),
+                (4, ref('group_tw_payment_request_view_payment')),
+            ]" />
+        </record>
+    </data>
+</odoo>

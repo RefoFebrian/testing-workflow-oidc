@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data> 
+        <record id="tw_nrfs_stock_picking_batch_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.nrfs.stock.picking.batch.inherit.form</field>
+            <field name="model">stock.picking.batch</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_picking_batch_inherit_form_view" />
+            <field name="arch" type="xml">
+                <field name="source_picking_ids" position="after">
+                    <field name="has_nrfs" invisible="1"/>
+                    <field name="nrfs_location_id" 
+                        required="has_nrfs == 'have_nrfs'" 
+                        readonly="state != 'draft'" 
+                        domain="[('company_id', '=', company_id),('type_id.value', '=', 'nrfs')]"
+                        options="{'no_create': True,'no_open': True}"
+                    />
+                </field>
+                <field name="is_rfs" position="after">
+                    <field name="unit_position_id" placeholder="e.g. AB3" options="{'no_create': True,'no_open': True}" required="is_rfs == False and parent.division == 'Unit'" column_invisible="parent.division != 'Unit'"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="tw_nrfs_stock_picking_batch_quality_check_form_view" model="ir.ui.view">
+            <field name="name">tw.nrfs.stock.picking.batch.quality.check.form</field>
+            <field name="model">stock.picking.batch</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_picking_batch_quality_check_form" />
+            <field name="arch" type="xml">
+                <field name="source_picking_ids" position="after">
+                    <field name="has_nrfs" invisible="1"/>
+                    <field name="nrfs_location_id" 
+                        required="has_nrfs == 'have_nrfs'" 
+                        readonly="state not in ('draft','in_progress')" 
+                        domain="[('company_id', '=', company_id),('type_id.value', '=', 'nrfs')]"
+                        options="{'no_create': True,'no_open': True}"
+                    />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

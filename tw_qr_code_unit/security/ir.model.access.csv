@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_qr_code_unit,tw_qr_code_unit,model_tw_qr_code_unit,base.group_user,1,0,0,0
+access_tw_generate_qr_code_unit_wizard,tw_generate_qr_code_unit_wizard,model_tw_generate_qr_code_unit_wizard,base.group_user,1,0,0,0
+access_tw_print_generate_qr_code,tw_print_generate_qr_code,model_tw_print_generate_qr_code,base.group_user,1,0,0,0
+access_tw_print_generate_qr_code_line,tw_print_generate_qr_code_line,model_tw_print_generate_qr_code_line,base.group_user,1,0,0,0

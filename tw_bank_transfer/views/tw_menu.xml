@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="tw_bank_transfer_menu" name="Bank Transfer" parent="tw_menu.submenu_tw_backoffice_bank_cash" action="banktransfer_action" groups="group_bank_transfer_read" sequence="5"/>
+    </data>
+</odoo>

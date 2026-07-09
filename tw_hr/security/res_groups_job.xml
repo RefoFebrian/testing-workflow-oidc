@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+
+		<!--ROLE MAIN DEALER-->
+
+		<record id="groups_staff" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">Staff</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user'))]"/>
+		</record>
+
+		<record id="groups_spv" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user'))]"/>
+		</record>
+
+		<record id="groups_manager" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">Manager</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user'))]"/>
+		</record>
+
+		<record id="groups_gm" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">GM</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user'))]"/>
+		</record>
+
+		<record id="groups_pdca" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">PDCA</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user'))]"/>
+		</record>
+
+		<record id="groups_secretary" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SECRETARY</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user'))]"/>
+		</record>
+
+		<record id="groups_coo" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">COO</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user'))]"/>
+		</record>
+
+		<!-- ~ -->
+
+		<record id="groups_crm_and_telemarketing" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">CRM AND TELEMARKETING</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user'))]"/>
+			<field name="implied_ids" eval="[(4,ref('groups_staff'))]"/>
+		</record>
+
+		<record id="groups_staff_administration" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">STAFF ADMINISTRATION</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user'))]"/>
+			<field name="implied_ids" eval="[(4,ref('groups_staff'))]"/>
+		</record>
+
+		<record id="groups_staff_ga" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">STAFF GA</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user'))]"/>
+			<field name="implied_ids" eval="[(4,ref('groups_staff'))]"/>
+		</record>
+
+		<record id="groups_staff_marketing" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">STAFF MARKETING</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user'))]"/>
+			<field name="implied_ids" eval="[(4,ref('groups_staff'))]"/>
+		</record>
+		
+		<!-- Manager -->
+		<record id="groups_manager_marketing" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">MANAGER MARKETING</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_manager'))]"/>
+		</record>
+		<record id="groups_manager_legal" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">MANAGER LEGAL</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_manager'))]"/>
+		</record>
+		<record id="groups_manager_tsd" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">MANAGER TSD</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_manager'))]"/>
+		</record>
+		<record id="groups_manager_sparepart" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">MANAGER SPAREPART</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_manager'))]"/>
+		</record>
+		<record id="groups_manager_promosi" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">MANAGER PROMOSI</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_manager'))]"/>
+		</record>
+		<record id="groups_manager_people_development" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">MANAGER PEOPLE DEVELOPMENT</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_manager'))]"/>
+		</record>
+		<record id="groups_manager_admin" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">MANAGER ADMIN</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_manager'))]"/>
+		</record>
+		<record id="groups_manager_hc3" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">MANAGER HC3</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_manager'))]"/>
+		</record>
+		<record id="groups_manager_area" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">MANAGER AREA</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_manager'))]"/>
+		</record>
+
+		<record id="groups_manager_warehouse" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">MANAGER WAREHOUSE</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_manager'))]"/>
+		</record>
+
+		<record id="groups_manager_pdca" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">MANAGER PDCA</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_manager')),
+											(4,ref('groups_pdca'))]"/>
+		</record>
+
+		<record id="groups_manager_it" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">MANAGER IT</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_manager'))]"/>
+		</record>
+
+		<record id="groups_manager_ga" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">MANAGER GA</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_manager'))]"/>
+		</record>
+
+		<record id="groups_manager_marketing_research_dept" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">MANAGER MARKETING RESEARCH DEPT</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_manager'))]"/>
+		</record>
+
+		<record id="groups_manager_finance_and_administration" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">MANAGER FINANCE AND ADMINISTRATION</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_manager'))]"/>
+		</record>
+
+		<record id="groups_manager_bbn" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">MANAGER BBN</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_manager'))]"/>
+		</record>
+
+		<record id="groups_manager_hrd" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">MANAGER HRD</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_manager'))]"/>
+		</record>
+
+		<record id="groups_manager_ho" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">MANAGER HO</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_manager'))]"/>
+		</record>
+
+
+		<!-- GM -->
+		<record id="groups_gm_marketing" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">GM MARKETING</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_gm')),
+											(4,ref('groups_manager_marketing_research_dept')),
+											(4,ref('groups_manager_promosi')),
+											(4,ref('groups_manager_marketing'))]"/>
+		</record>
+		<record id="groups_gm_operation" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">GM OPERATION</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_gm')),
+											(4,ref('groups_manager_sparepart')),
+											(4,ref('groups_manager_warehouse')),
+											(4,ref('groups_manager_tsd'))]"/>
+		</record>
+
+		<!-- SPV -->
+
+		<record id="groups_spv_ga" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV GA</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+
+		<record id="groups_spv_it" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV IT</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+
+		<record id="groups_spv_claim_control" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV CLAIM CONTROL MD</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+
+		<record id="groups_spv_area" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV AREA (SA)</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+		<record id="groups_spv_engineering" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV ENGINEERING (SE)</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+		<record id="groups_spv_logistik" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV LOGISTIK</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+		<record id="groups_spv_gudang" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV GUDANG</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+		<record id="groups_spv_sparepart" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV SPAREPART</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+		<record id="groups_spv_pdca" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV PDCA</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv')),
+											(4,ref('groups_pdca'))]"/>
+		</record>
+		<record id="groups_spv_tsd" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV TSD</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+		<record id="groups_spv_legal" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV LEGAL</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+		<record id="groups_spv_promosi" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV PROMOSI</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+		<record id="groups_spv_hc3" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV HC3</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+
+		<record id="groups_spv_finance_claim" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV FINANCE CLAIM</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+
+		<record id="groups_spv_claim_kpb" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV KPB CLAIM</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+
+		<record id="groups_spv_admin" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV ADMIN</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+
+		<record id="groups_spv_people_development" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV PEOPLE DEVELOPMENT</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+
+		<record id="groups_spv_marketing_research_dept" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV MARKETING RESEARCH DEPT</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+
+		<record id="groups_spv_marketing" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV MARKETING</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+
+		<record id="groups_spv_warehouse" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV WAREHOUSE</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+
+		<record id="groups_spv_finance_and_administration" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV FINANCE AND ADMINISTRATION</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+
+		<record id="groups_spv_bbn" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV BBN</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+
+		<record id="groups_spv_hrd" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV HRD</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+
+		<record id="groups_spv_ho" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">SPV HO</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_spv'))]"/>
+		</record>
+
+
+		<record id="groups_admin_stnk_bpkb_md" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">ADMIN STNK BPKB MD</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff'))]"/>
+		</record>
+
+		<record id="groups_admin_logistik" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">ADMIN LOGISTIK</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff'))]"/>
+		</record>
+		<record id="groups_admin_gudang" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">ADMIN GUDANG</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff'))]"/>
+		</record>
+		<record id="groups_admin_sparepart" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">ADMIN SPAREPART</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff'))]"/>
+		</record>
+		<record id="groups_admin_sparepart_hotline" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">ADMIN SPAREPART HOTLINE</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff'))]"/>
+		</record>
+		<record id="groups_staff_pdca" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">STAFF PDCA</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff')),
+											(4,ref('groups_pdca'))]"/>
+		</record>
+		<record id="groups_staff_legal" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">STAFF LEGAL</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff'))]"/>
+		</record>
+		<record id="groups_staff_hc3" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">STAFF HC3</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff'))]"/>
+		</record>
+		<record id="groups_staff_people_development" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">STAFF PEOPLE DEVELOPMENT</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff'))]"/>
+		</record>
+
+		<record id="groups_staff_finance_claim" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">STAFF FINANCE CLAIM</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff'))]"/>
+		</record>
+
+		<record id="groups_staff_claim_kpb" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">STAFF CLAIM KPB</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff'))]"/>
+		</record>
+
+		<record id="groups_staff_faktur" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">STAFF FAKTUR</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff'))]"/>
+		</record>
+
+		<record id="groups_staff_promosi" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">STAFF PROMOSI</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff'))]"/>
+		</record>
+
+		<record id="groups_staff_it" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">STAFF IT</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff'))]"/>
+		</record>
+
+		<record id="groups_staff_marketing_research_dept" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">STAFF MARKETING RESEARCH DEPT</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff'))]"/>
+		</record>
+
+		<record id="groups_staff_tsd" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">STAFF TSD</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff'))]"/>
+		</record>
+
+		<record id="groups_staff_warehouse" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">STAFF WAREHOUSE</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff'))]"/>
+		</record>
+
+		<record id="groups_staff_sparepart" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">STAFF SPAREPART</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff'))]"/>
+		</record>
+
+		<record id="groups_staff_bbn" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">STAFF BBN</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff'))]"/>
+		</record>
+
+		<record id="groups_staff_hrd" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">STAFF HRD</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff'))]"/>
+		</record>
+
+		<record id="groups_staff_ho" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">STAFF HO</field>
+			<field name="implied_ids" eval="[(4,ref('base.group_user')),
+											(4,ref('groups_staff'))]"/>
+		</record>
+
+		<record id="group_tw_activity_plan_md_admin" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_job"/>
+			<field name="name">TW MD admin</field>
+			<field name="implied_ids" eval="[
+               	(4, ref('groups_coo')),
+			   	(4, ref('groups_staff')),
+				(4, ref('groups_spv')),
+				(4, ref('groups_manager')),
+				(4, ref('groups_gm')),
+				(4, ref('groups_pdca')),
+				(4, ref('groups_secretary')),
+				(4, ref('groups_coo')),
+				(4, ref('groups_crm_and_telemarketing')),
+				(4, ref('groups_staff_administration')),
+				(4, ref('groups_staff_ga')),
+				(4, ref('groups_staff_marketing')),
+				(4, ref('groups_manager_marketing')),
+				(4, ref('groups_manager_legal')),
+				(4, ref('groups_manager_tsd')),
+				(4, ref('groups_manager_sparepart')),
+				(4, ref('groups_manager_promosi')),
+				(4, ref('groups_manager_people_development')),
+				(4, ref('groups_manager_admin')),
+				(4, ref('groups_manager_hc3')),
+				(4, ref('groups_manager_area')),
+				(4, ref('groups_manager_warehouse')),
+				(4, ref('groups_manager_pdca')),
+				(4, ref('groups_manager_it')),
+				(4, ref('groups_manager_ga')),
+				(4, ref('groups_manager_marketing_research_dept')),
+				(4, ref('groups_manager_finance_and_administration')),
+				(4, ref('groups_manager_bbn')),
+				(4, ref('groups_manager_hrd')),
+				(4, ref('groups_manager_ho')),
+				(4, ref('groups_gm_marketing')),
+				(4, ref('groups_gm_operation')),
+				(4, ref('groups_spv_ga')),
+				(4, ref('groups_spv_it')),
+				(4, ref('groups_spv_claim_control')),
+				(4, ref('groups_spv_area')),
+				(4, ref('groups_spv_engineering')),
+				(4, ref('groups_spv_logistik')),
+				(4, ref('groups_spv_gudang')),
+				(4, ref('groups_spv_sparepart')),
+				(4, ref('groups_spv_pdca')),
+				(4, ref('groups_spv_tsd')),
+				(4, ref('groups_spv_legal')),
+				(4, ref('groups_spv_promosi')),
+				(4, ref('groups_spv_hc3')),
+				(4, ref('groups_spv_finance_claim')),
+				(4, ref('groups_spv_claim_kpb')),
+				(4, ref('groups_spv_admin')),
+				(4, ref('groups_spv_people_development')),
+				(4, ref('groups_spv_marketing_research_dept')),
+				(4, ref('groups_spv_marketing')),
+				(4, ref('groups_spv_warehouse')),
+				(4, ref('groups_spv_finance_and_administration')),
+				(4, ref('groups_spv_bbn')),
+				(4, ref('groups_spv_hrd')),
+				(4, ref('groups_spv_ho')),
+				(4, ref('groups_admin_stnk_bpkb_md')),
+				(4, ref('groups_admin_logistik')),
+				(4, ref('groups_admin_gudang')),
+				(4, ref('groups_admin_sparepart')),
+				(4, ref('groups_admin_sparepart_hotline')),
+				(4, ref('groups_staff_pdca')),
+				(4, ref('groups_staff_legal')),
+				(4, ref('groups_staff_hc3')),
+				(4, ref('groups_staff_people_development')),
+				(4, ref('groups_staff_finance_claim')),
+				(4, ref('groups_staff_claim_kpb')),
+				(4, ref('groups_staff_faktur')),
+				(4, ref('groups_staff_promosi')),
+				(4, ref('groups_staff_it')),
+				(4, ref('groups_staff_marketing_research_dept')),
+				(4, ref('groups_staff_tsd')),
+				(4, ref('groups_staff_warehouse')),
+				(4, ref('groups_staff_sparepart')),
+				(4, ref('groups_staff_bbn')),
+				(4, ref('groups_staff_hrd')),
+				(4, ref('groups_staff_ho')),
+				]"/>
+		</record>
+	</data>
+</odoo>

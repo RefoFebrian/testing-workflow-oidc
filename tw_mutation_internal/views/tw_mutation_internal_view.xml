@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_mutation_internal_list_view" model="ir.ui.view">
+            <field name="name">tw.internal.transfer.list.view</field>
+            <field name="model">stock.picking</field>
+            <field name="arch" type="xml">
+                <list string="Internal Transfer" duplicate="0" default_order="id desc">
+                    <field name="name" readonly="1"/>
+                    <field name="division" readonly="1"/>
+                    <field name="company_id" readonly="1" options="{'no_create': True,'no_open': True}"/>
+                    <field name="location_id" string="Source Location" readonly="1" options="{'no_create': True,'no_open': True}"/>
+                    <field name="location_dest_id" string="Destination Location" readonly="1" options="{'no_create': True,'no_open': True}"/>
+                    <field name="scheduled_date" readonly="1"/>
+                    <field name="date" readonly="1"/>
+                    <field name="state" readonly="1" widget="badge" decoration-danger="state == 'cancel'" decoration-warning="state == 'assigned'" decoration-success="state == 'done'"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_mutation_internal_form_view" model="ir.ui.view">
+            <field name="name">tw.internal.transfer.form.view</field>
+            <field name="model">stock.picking</field>
+            <field name="arch" type="xml">
+                <form string="Transfer">
+                    <field name="is_locked" invisible="1"/>
+                    <field name="show_check_availability" invisible="1"/>
+                    <field name="show_lots_text" invisible="1"/>
+                    <field name="picking_type_code" invisible="1"/>
+                    <field name="show_allocation" invisible="1"/>
+                    <field name="move_line_exist" invisible="1"/>
+                    <field name="has_packages" invisible="1"/>
+                    <field name="picking_type_entire_packs" invisible="1"/>
+                    <field name="use_create_lots" invisible="1"/>
+                    <field name="use_existing_lots" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+                    <header>
+                        <button name="action_confirm_internal_transfer" invisible="state not in ('draft','approved')" string="Confirm" type="object" class="oe_highlight" data-hotkey="q" groups="tw_mutation_internal.group_tw_mutation_internal_button_confirm_read"/>
+                        <button name="action_validate_internal_transfer" invisible="state != 'assigned'" string="Validate" type="object" class="oe_highlight" data-hotkey="v" groups="tw_mutation_internal.group_tw_mutation_internal_button_validate_read"/>
+                        <button name="action_renew_available" invisible="state not in ('draft','approved')" string="Renew Available" type="object" class="oe_highlight" groups="tw_mutation_internal.group_tw_mutation_internal_button_renew_available_read"/>
+                        <button name="action_print_document" invisible="state != 'done'" string="Print" type="object" groups="tw_mutation_internal.group_tw_mutation_internal_button_print_document_read"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1 class="d-flex">
+                                <field name="priority" widget="priority" class="me-3"/>
+                                <div invisible="id">New <field name="picking_type_code"/>
+                                </div>
+                                <field name="name" invisible="not id"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="type" invisible="1"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="company_id" placeholder="e.g. Name/Code Dealer" options="{'no_create': True,'no_open': True}" readonly="state != 'draft'" required="1" force_save="1"/>
+                                <field name="picking_type_id" options="{'no_create': True,'no_open': True}" readonly="state != 'draft'" domain="[('code', '=', 'internal'),('sequence_code', 'in', ('INT','int','Int')),('company_id', '=', company_id)]" />
+                                <field name="location_id" domain="['|',('company_id', 'parent_of', company_id),('company_id', '=', False),('usage','in',('internal','inventory','transit','production'))]" readonly="state != 'draft'" options="{'no_create': True,'no_open': True}"/>
+                                <field name="is_include_sublocations" readonly="state != 'draft'"/>
+                                <field name="location_dest_id" domain="['|',('company_id', 'parent_of', company_id),('company_id', '=', False),('usage','in',('internal','inventory','transit','production'))]" readonly="state != 'draft'" options="{'no_create': True,'no_open': True}"/>
+                                <field name="backorder_id" invisible="not backorder_id"/>
+                            </group>
+                            <group>
+                                <field name="division" placeholder="e.g. Division" options="{'no_create': True,'no_open': True}" readonly="1" force_save="1"/>
+                                <field name="date" string="Date" readonly="1"/>
+                                <label for="scheduled_date"/>
+                                <div class="o_row">
+                                    <field name="scheduled_date" readonly="state != 'draft'" required="id" decoration-warning="state not in ('done', 'cancel') and scheduled_date &lt; now" decoration-danger="state not in ('done', 'cancel') and scheduled_date &lt; current_date" decoration-bf="state not in ('done', 'cancel') and (scheduled_date &lt; current_date or scheduled_date &lt; now)"/>
+                                    <field name="json_popover" nolabel="1" widget="stock_rescheduling_popover" invisible="not json_popover"/>
+                                </div>
+                                <field name="date_deadline" invisible="state in ('done', 'cancel') or not date_deadline" decoration-danger="date_deadline and date_deadline &lt; current_date" decoration-bf="date_deadline and date_deadline &lt; current_date"/>
+                                <field name="products_availability_state" invisible="1"/>
+                                <field name="products_availability" invisible="picking_type_code != 'outgoing' or state not in ['confirmed', 'waiting', 'assigned']" decoration-success="state == 'assigned' or products_availability_state == 'available'" decoration-warning="state != 'assigned' and products_availability_state in ('expected', 'available')" decoration-danger="state != 'assigned' and products_availability_state == 'late'"/>
+                                <field name="date_done" string="Effective Date" invisible="state != 'done'"/>
+                                <field name="origin" string="Source Document" invisible="origin == False"/>
+                            </group>
+                        </group>
+                        <field name="picking_properties" columns="2"/>
+                        <notebook>
+                            <page string="Picking Line" name="picking_line">
+                                <field name="picking_line_ids" readonly="state != 'draft'">
+                                    <list string="Picking Line" editable="bottom">
+                                        <field name="is_include_sublocations" column_invisible="True"/>
+                                        <field name="tracking" column_invisible="True"/>
+                                        <field name="product_id" domain="[('division', '=', parent.division)]" options="{'no_create': True,'no_open': True}" required="1"/>
+                                        <field name="available_lot_ids" optional="hide"/>
+                                        <field name="available_location_ids" optional="hide"/>
+                                        <field name="location_id" string="Pick From" domain="[('id', 'in', available_location_ids)]" readonly="tracking == 'serial'" options="{'no_create': True,'no_open': True}" required="1" force_save="1" optional="show"/>
+                                        <field name="lot_id" column_invisible="parent.use_create_lots" required="parent.use_existing_lots and tracking == 'serial'" readonly="not parent.use_existing_lots or tracking != 'serial'" domain="[('id', 'in', available_lot_ids)]" options="{'no_create': True, 'no_open': True}"/>
+                                        <field name="location_dest_id" string="Destination" domain="[('id', 'child_of', parent.location_dest_id)]" options="{'no_create': True,'no_open': True}" required="1" force_save="1" optional="show"/>
+                                        <field name="quantity" required="1"/>
+                                        <field name="qty_available" readonly="1" force_save="1"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Detailed Operations" name="page_detailed_operations">
+                                <field name="move_line_ids" widget="sml_x2_many" readonly="1">
+                                    <list editable="bottom" decoration-muted="state == 'cancel'" create="0" delete="0" string="Move Lines" default_order="location_id">
+                                        <field name="tracking" column_invisible="True"/>
+                                        <field name="state" column_invisible="True"/>
+                                        <field name="company_id" column_invisible="True"/>
+                                        <field name="picking_id" column_invisible="True"/>
+                                        <field name="location_id" column_invisible="True"/>
+                                        <field name="product_id" context="{'default_is_storable': True}" readonly="1" force_save="1" options="{'no_create': True,'no_open': True}"/>
+                                        <field name="lot_id" column_invisible="parent.use_create_lots" required="parent.use_existing_lots and tracking == 'serial'" domain="[('location_id', '=', parent.location_id),('product_id', '=', product_id),('state', '=', 'stock')]" options="{'no_create': True, 'no_open': True}" />
+                                        <field name="quant_id" domain="[('product_id', '=', product_id), ('location_id', 'child_of', parent.location_id)]" context="{'default_location_id': location_id, 'default_product_id': product_id, 'search_view_ref': 'stock.quant_search_view', 'list_view_ref': 'stock.view_stock_quant_tree', 'form_view_ref': 'stock.view_stock_quant_form', 'readonly_form': True}" widget="pick_from" readonly="1" force_save="1" options="{'no_create': True, 'no_open': True}"/>
+                                        <field name="quantity" required="1" readonly="parent.division == 'Unit'" force_save="1"/>
+                                        <field name="product_uom_id" readonly="1" force_save="1" options="{'no_create': True,'no_open': True}"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Operations" name="operations">
+                                <field name="move_ids_without_extras" mode="list,kanban" widget="stock_move_one2many" readonly="1" context="{'default_company_id': company_id, 'default_date': scheduled_date, 'default_date_deadline': date_deadline, 'picking_type_code': picking_type_code, 'default_picking_id': id, 'form_view_ref': 'stock.view_stock_move_operations', 'address_in_id': partner_id, 'default_picking_type_id': picking_type_id, 'default_location_id': location_id, 'default_location_dest_id': location_dest_id, 'default_partner_id': partner_id}" add-label="Add a Product">
+                                    <list decoration-muted="scrapped == True or state == 'cancel' or (state == 'done' and is_locked == True)" string="Stock Moves" editable="bottom">
+                                        <field name="name" column_invisible="True"/>
+                                        <field name="company_id" column_invisible="True"/>
+                                        <field name="state" readonly="0" column_invisible="True"/>
+                                        <field name="is_quantity_done_editable" column_invisible="True"/>
+                                        <field name="scrapped" column_invisible="True"/>
+                                        <field name="show_details_visible" column_invisible="True"/>
+                                        <field name="product_id" required="1" readonly="state != 'draft'" force_save="1" options="{'no_create': True,'no_open': True}" context="{'default_detailed_type': 'product'}" domain="[('product_tmpl_id.division','=',parent.division)]"/>
+                                        <field name="description_picking" string="Description" optional="hide"/>
+                                        <field name="date" optional="hide"/>
+                                        <field name="date_deadline" optional="hide"/>
+                                        <field name="product_uom_qty" string="Quantity" readonly="parent.state != 'draft'"/>
+                                        <field name="qty_available" string="Qty Available" readonly="parent.state != 'draft'"/>
+                                        <field name="quantity" string="Qty Request" column_invisible="True"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Note" name="note">
+                                <field name="note" string="Note" placeholder="Add an internal note that will be printed on the Picking Operations sheet"/>
+                            </page>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1" options="{'no_create': True,'no_open': True}"></field>
+                                        <field name="create_date" readonly="1"></field>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1" options="{'no_create': True,'no_open': True}"></field>
+                                        <field name="write_date" readonly="1"></field>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_tw_mutation_internal_sparepart" model="ir.actions.act_window">
+            <field name="name">Internal Transfer Spareparts</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{'default_division': 'Sparepart', 'default_state':'draft', 'search_default_waiting': 1, 'search_default_available': 1}" />
+            <field name="domain" eval="[('picking_type_id.sequence_code', 'in', ['INT','int','Int']),('division', '=', 'Sparepart')]"/>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+        </record>
+
+        <record id="action_tw_mutation_internal_sparepart_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_mutation_internal_list_view"/>
+            <field name="act_window_id" ref="action_tw_mutation_internal_sparepart"/>
+        </record>
+
+        <record id="action_tw_mutation_internal_sparepart_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_mutation_internal_form_view"/>
+            <field name="act_window_id" ref="action_tw_mutation_internal_sparepart"/>
+        </record>
+
+        <record id="action_tw_mutation_internal_unit" model="ir.actions.act_window">
+            <field name="name">Internal Transfer Units</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{'default_division': 'Unit', 'default_type': 'internal', 'default_state':'draft', 'search_default_waiting': 1, 'search_default_available': 1}" />
+            <field name="domain" eval="[('division', '=', 'Unit'), ('picking_type_id.sequence_code', 'in', ['INT','int','Int'])]"/>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+        </record>
+
+        <record id="action_tw_mutation_internal_unit_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_mutation_internal_list_view"/>
+            <field name="act_window_id" ref="action_tw_mutation_internal_unit"/>
+        </record>
+
+        <record id="action_tw_mutation_internal_unit_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_mutation_internal_form_view"/>
+            <field name="act_window_id" ref="action_tw_mutation_internal_unit"/>
+        </record>
+
+        <record id="action_tw_mutation_internal_extras" model="ir.actions.act_window">
+            <field name="name">Internal Transfer Extras</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{'default_division': 'Extras', 'default_type': 'internal', 'default_state':'draft', 'search_default_waiting': 1, 'search_default_available': 1}" />
+            <field name="domain" eval="[('division', '=', 'Extras'), ('picking_type_id.sequence_code', 'in', ['INT','int','Int'])]"/>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+        </record>
+
+        <record id="action_tw_mutation_internal_extras_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_mutation_internal_list_view"/>
+            <field name="act_window_id" ref="action_tw_mutation_internal_extras"/>
+        </record>
+
+        <record id="action_tw_mutation_internal_extras_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_mutation_internal_form_view"/>
+            <field name="act_window_id" ref="action_tw_mutation_internal_extras"/>
+        </record>
+    </data>
+</odoo>

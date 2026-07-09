@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Form View for Wizard -->
+    <record id="tw_payment_ocr_wizard_form_view" model="ir.ui.view">
+        <field name="name">tw.payment.ocr.wizard.form</field>
+        <field name="model">tw.payment.ocr.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Upload Document">
+                <sheet>
+                    <group>
+                        <!-- Custom Drag & Drop widget -->
+                        <field name="file_data" filename="file_name" widget="binary_dropzone" height="150" width="100%"/>
+                        <field name="file_name" invisible="1"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_process_ocr" type="object" string="Process" class="btn-primary" data-hotkey="q"/>
+                    <button special="cancel" string="Cancel" class="btn-secondary" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action to open wizard -->
+    <record id="action_tw_payment_ocr_wizard" model="ir.actions.act_window">
+        <field name="name">Upload Document (OCR)</field>
+        <field name="res_model">tw.payment.ocr.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

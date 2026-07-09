@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="birojasa_report" name="Teto Report Registration Handover">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="tw_web.teto_report_layout">
+                    <t t-call="tw_web.teto_report_styles_base" />
+                    <div class="page">
+
+                        <table class="table-borderless" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td width="50%"><strong t-esc="doc.company_id.sudo().parent_id.name"/> - <strong t-esc="doc.company_id.name"/></td>
+                                    <td colspan="3"><strong>PERMINTAAN PEMBAYARAN BBN</strong></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">
+                                        <t t-call="tw_web.teto_report_partner_address">
+                                            <t t-set="partner" t-value="doc.company_id.partner_id"/>
+                                            <t t-set="hide_name" t-value="True" />
+                                        </t>
+                                    </td>
+                                    <td width="13%">No Bukti</td>
+                                    <td width="2%">:</td>
+                                    <td width="35%"><span t-esc="doc.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-1">Tanggal</td>
+                                    <td>:</td>
+                                    <td><span t-esc="doc.date.strftime('%d-%m-%Y') if doc.date else ''"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="row mt-3">
+                            <div class="col" style="font-size: 0.9rem">
+                                Cetakan ke- <t t-esc="jumlah_cetakan()"/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                        <br/>
+                            <div class="col-12" style="border: 1px solid black">
+                                <div class="row">
+                                    <table class="table-borderless">
+                                        <tr>
+                                            <td width="10%">No Invoice</td>
+                                            <td width="1%">:</td>
+                                            <td><span t-esc="doc.invoice_id.name"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Biro Jasa</td>
+                                            <td>:</td>
+                                            <td><t t-esc="doc.biro_jasa_id.name"/></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <table width="100%" class="teto-table-content">
+                                            <thead>
+                                                <tr>
+                                                    <th width="2%">No</th>
+                                                    <th width="11%">No Mesin</th>
+                                                    <th width="15%">Atas Nama</th>
+                                                    <th width="10%">Notice</th>
+                                                    <th width="10%">No Pol</th>
+                                                    <th width="13%">Jumlah</th>
+                                                    <th width="13%">Koreksi</th>
+                                                    <th width="13%">Progresif</th>
+                                                    <th width="13%">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr t-foreach="doc.billing_line_ids" t-as="line">
+                                                    <td class="text-center"><t t-esc="no_urut()"/></td>
+                                                    <td><t t-esc="line.name"/></td>
+                                                    <td><t t-esc="line.customer_stnk_id.name"/></td>
+                                                    <td class="text-end"><t t-esc="line.notice_number"/></td>
+                                                    <td class="text-end"><t t-esc="line.lot_id.plate_number"/></td>
+                                                    <td class="text-end"><t t-esc="'{0:,.2f}'.format(line.estimation_amount)"/></td>
+                                                    <td class="text-end"><t t-esc="'{0:,.2f}'.format(line.correction_amount)"/></td>
+                                                    <td class="text-end"><t t-esc="'{0:,.2f}'.format(line.progressive_tax_amount)"/></td>
+                                                    <td class="text-end"><t t-esc="'{0:,.2f}'.format(line.amount_total)"/></td>
+                                                </tr>
+                                                <tr><td colspan="9" class="py-1" /></tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th class="text-start" colspan="5">Jumlah</th>
+                                                    <th class="text-end"><t t-esc="'{0:,.2f}'.format(accrue_amount())"/></th>
+                                                    <th class="text-end"><t t-esc="'{0:,.2f}'.format(correction_amount())"/></th>
+                                                    <th class="text-end"><t t-esc="'{0:,.2f}'.format(progressive_amount())"/></th>
+                                                    <th class="text-end"><t t-esc="'{0:,.2f}'.format(bill_amount())"/></th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col-5 offset-7">
+                                <table class="summary table-borderless" width="100%">
+                                    <t t-set="tax_totals" t-value="doc.tax_totals or {}"/>
+                                    <t t-if="tax_totals.get('subtotals')">
+                                        <t t-foreach="tax_totals.get('subtotals')[0].get('tax_groups', [])" t-as="tax_group">
+                                            <tr>
+                                                <th class="text-end bolder" width="59%">
+                                                    <t t-esc="tax_group.get('group_name')"/>
+                                                </th>
+                                                <th>:</th>
+                                                <th class="text-end bolder" width="40%">
+                                                    <t t-esc="'{0:,.2f}'.format(tax_group.get('tax_amount', 0.0))"/>
+                                                </th>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <tr>
+                                        <th class="text-end bolder">Total Tagihan</th>
+                                        <th>:</th>
+                                        <th class="text-end bolder">
+                                            <t t-esc="'{0:,.2f}'.format(doc.tax_totals.get('total_amount', 0.0))"/>
+                                        </th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-3">
+                                <div class="row"><div class="col">Dicetak Oleh</div></div>
+                                <br/><br/><br/>
+                                <div class="row"><div class="col border-bottom"/></div>
+                                <div class="row"><div class="col"><t t-esc="user.name"/>, <t t-esc="waktu_local()"/></div></div>
+                            </div>
+                            <div class="col-3 offset-3">
+                                <div class="row"><div class="col">Penerima</div></div>
+                                <br/><br/><br/>
+                                <div class="row"><div class="col border-bottom"/></div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

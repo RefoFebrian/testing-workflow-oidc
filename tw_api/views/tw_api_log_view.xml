@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_api_log_list_view" model="ir.ui.view">
+            <field name="name">tw.api.log.tree</field>
+            <field name="model">tw.api.log</field>
+            <field name="arch" type="xml">
+                <list string="API Log" create='false' edit='false'>
+                    <field name="name"/>
+                    <field name="api_type_id"/>
+                    <field name="description"/>
+                    <field name="url"/>
+                    <field name="date"/>
+                    <field name="reference"/>
+                    <field name="response_code"/>
+                    <field name="status_code"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_api_log_form_view" model="ir.ui.view">
+            <field name="name">tw.api.log.form</field>
+            <field name="model">tw.api.log</field>
+            <field name="arch" type="xml">
+                <form string="API Log" create='false' delete='false' edit='false'>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="url"/>
+                                <field name="description"/>
+                                <field name="ip_address"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                                <field name="api_type_id"/>
+                                <field name="method_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Log Detail">
+                                <group>
+                                    <field name="response_code"></field>
+                                    <field name="status_code"></field>
+                                    <field name="request_time"></field>
+                                    <field name="response_time"></field>
+                                </group>
+                                <div class="d-flex flex-wrap gap-2 mt-3">
+                                    <button name="action_view_payload" type="object" string="View Payload" class="btn btn-secondary" icon="fa-file-code-o"/>
+                                    <button name="action_view_header" type="object" string="View Header" class="btn btn-secondary" icon="fa-list-alt"/>
+                                    <button name="action_view_response" type="object" string="View Response" class="btn btn-primary" icon="fa-reply"/>
+                                </div>
+                            </page>
+                            <page string="Transaction Detail">
+                                <group>
+                                    <field name="reference"></field>
+                                    <field name="model_id"></field>
+                                    <field name="transaction_id"></field>
+                                    <field name="user_id"></field>
+                                </group>
+                            </page>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"></field>
+                                        <field name="create_date" readonly="1"></field>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1"></field>
+                                        <field name="write_date" readonly="1"></field>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_tw_api_log_detail_form" model="ir.ui.view">
+            <field name="name">API Log Detail Form</field>
+            <field name="model">tw.api.log.detail</field>
+            <field name="arch" type="xml">
+                <form string="API Log Detail">
+                    <sheet>
+                        <group col="1">
+                            <field name="type" readonly="1"/>
+                            <field name="value_formatted" widget="ace" readonly="1" nolabel="1"/>
+                        </group>
+                        <footer>
+                            <button string="Close" class="btn-primary" special="cancel" />
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_api_log_filter" model="ir.ui.view">
+            <field name="name">tw.api.log.filter</field>
+            <field name="model">tw.api.log</field>
+            <field name="arch" type="xml">
+                <search string="Search API Log">
+                    <field name="name"/>
+                    <field name="description" />
+                    <field name="ip_address" />
+                    <field name="url" />
+                    <field name="date" />
+                    <field name="reference" />
+                    <field name="api_type_id" />
+                    <group expand="1" string="Group By">
+                        <filter string="Date" name="group_by_date" context="{'group_by':'date'}"/>
+                        <filter string="Name" name="group_by_name" context="{'group_by':'name'}"/>
+                        <filter string="API Type" name="group_by_api_type" context="{'group_by':'api_type_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="tw_api_log_action" model="ir.actions.act_window">
+            <field name="name">API Log</field>
+            <field name="res_model">tw.api.log</field>
+            <field name="view_mode">list,form</field>
+            <!-- <field name="domain">[('api_type', '=', 'normal_api')]</field> -->
+            <field name="context">{ }</field>
+        </record>
+
+        <record id="tw_api_log_action_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_api_log_list_view"/>
+            <field name="act_window_id" ref="tw_api_log_action"/>
+        </record>
+
+        <record id="tw_api_log_action_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_api_log_form_view"/>
+            <field name="act_window_id" ref="tw_api_log_action"/>
+        </record>
+
+    </data>
+</odoo>

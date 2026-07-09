@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="payment_request_report" name="Advance Payment Report">
+            <t t-call="web.html_container">
+                <t t-call="tw_web.teto_report_layout">
+                    <t t-call="tw_web.teto_report_styles_base" />
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page">
+                            <div class="oe_structure">
+
+                                <div class="row mb-1">
+                                    <div class="col-6">
+                                        <t t-call="tw_web.teto_report_partner_address">
+                                            <t t-set="partner" t-value="o.company_id.partner_id" />
+                                        </t>
+                                    </div>
+                                    <div class="col-6">
+                                        <table class="table-borderless">
+                                            <tr>
+                                                <td class="bolder" colspan="3">PERMINTAAN PEMBAYARAN</td>
+                                            </tr>
+                                            <tr>
+                                                <td widtd="15%">No</td>
+                                                <td>:</td>
+                                                <td><t t-esc="o.name" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tanggal</td>
+                                                <td>:</td>
+                                                <td><t t-esc="o.date.strftime('%d-%m-%Y') if o.date else ''"/></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="row my-1 border">
+                                    <div class="col-12">
+                                        
+                                        <div class="row my-1">
+                                            <div class="col-6">
+                                                <table class="table-borderless" width="100%">
+                                                    <tr>
+                                                        <td width="30%">Supplier</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <t t-call="tw_web.teto_report_partner_address">
+                                                                <t t-set="partner" t-value="o.partner_id" />
+                                                            </t>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>No Rekening</td>
+                                                        <td>:</td>
+                                                        <td class="text-end"><t t-esc="o.partner_bank_id.acc_number" /></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="col-6">
+                                                <table class="table-borderless" width="100%">
+                                                    <tr>
+                                                        <td width="30%">Tempo</td>
+                                                        <td>:</td>
+                                                        <td><t t-esc="(o.due_date - o.date).days" /> Hari</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tanggal JTP</td>
+                                                        <td>:</td>
+                                                        <td><t t-esc="o.due_date.strftime('%d-%m-%Y') if o.due_date else ''" /></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="row my-1">
+                                            <div class="col-12">
+                                                <table class="teto-table-content">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 5%;">No</th>
+                                                            <th>Transaksi Detail</th>
+                                                            <th>Keterangan</th>
+                                                            <th>Jumlah Harga</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <t t-set="number" t-value="1" />
+                                                        <tr t-foreach="o.line_dr_ids" t-as="line">
+                                                            <td class="text-center"><t t-esc="number" /></td>
+                                                            <td><t t-esc="line.account_id.display_name" /></td>
+                                                            <td><t t-esc="line.name" /></td>
+                                                            <td class="pe-1 text-end"><t t-esc="'{:,.2f}'.format(line.amount)" /></td>
+                                                            <t t-set="number" t-value="number + 1" />
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td rowspan="5"></td>
+                                                            <td rowspan="5"></td>
+                                                            <td class="ps-1 border-bottom-0">Untaxed Amount</td>
+                                                            <td class="pe-1 border-bottom-0 text-end"><t t-esc="'{:,.2f}'.format(o.amount_untaxed)" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="ps-1 border-bottom-0 border-top-0">DPP</td>
+                                                            <td class="pe-1 text-end border-bottom-0 border-top-0"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="ps-1 border-bottom-0 border-top-0">PPN</td>
+                                                            <td class="pe-1 text-end border-bottom-0 border-top-0"><t t-esc="'{:,.2f}'.format(o.amount_tax)" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="ps-1 border-bottom-0 border-top-0">PPh</td>
+                                                            <td class="pe-1 text-end border-bottom-0 border-top-0"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="ps-1 border-top-0">Total</td>
+                                                            <td class="pe-1 text-end border-top-0"><t t-esc="'{:,.2f}'.format(o.amount_total)" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="4" class="text-end px-1">
+                                                                ## <t t-esc="terbilang(o.amount_total)" /> ##
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="row my-1">
+                                            <div class="col">
+                                                <table class="teto-table-footer text-center">
+                                                    <tr>
+                                                        <td width="33.33%">Diajukan oleh</td>
+                                                        <td width="33.33%">Diketahui oleh</td>
+                                                        <td width="33.33%">Disetujui oleh</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="height: 5rem"></td>
+                                                        <td style="height: 5rem"></td>
+                                                        <td style="height: 5rem"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><t t-esc="user.name" /></td>
+                                                        <td>.....................................</td>
+                                                        <td>.....................................</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </div>
+
+                                <div class="row my-1">
+                                    <div class="col-12">
+                                        <t t-esc="user.name" />, <t t-esc="print_datetime()" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <record id="action_report_tw_payment_request" model="ir.actions.report">
+            <field name="name">Print Settlement Advance Payment</field>
+            <field name="model">tw.payment.request</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_payment_request.payment_request_report</field>
+            <field name="report_file">tw_payment_request.payment_request_report</field>
+            <field name="print_report_name">'Payment_Request_%s.pdf' % (object.name)</field>
+            <field name="paperformat_id" ref="tw_web.tw_report_paperformat_a4"/>
+            <field name="binding_type">report</field>
+        </record>
+
+    </data>
+</odoo>

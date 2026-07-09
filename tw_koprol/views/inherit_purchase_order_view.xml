@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="tw_purchase_order_asset_koprol_inherit_view">
+            <field name="name">tw.purchase.order.asset.koprol.inherit</field>           
+            <field name="model">purchase.order.asset</field>                                  
+            <field name="inherit_id" ref="tw_asset_management.tw_inherit_purchase_order_asset_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='write_date']" position="after">
+                    <field name="last_modified_date" readonly="1" invisible="not write_date"/>
+                </xpath>
+            </field>
+        </record> 
+    </data>
+</odoo>

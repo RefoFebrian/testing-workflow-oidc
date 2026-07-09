@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_mutation_internal_approval_form_view" model="ir.ui.view">
+            <field name="name">tw.mutation_internal.approval.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="tw_mutation_internal.tw_mutation_internal_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_validate_internal_transfer']" position="after">
+					<button name="action_rfa" string="RFA" type="object" class="oe_highlight" invisible="state != 'draft' or is_approval == False" groups="tw_mutation_internal_approval.group_tw_mutation_internal_approval_rfa"/>
+					<button name="action_approval" string="Approve" type="object" class="oe_highlight" invisible="state != 'waiting_for_approval'"/>
+					<button name="action_reject_or_cancel" string="Reject" type="object" invisible="state != 'waiting_for_approval'"/>
+					<button name="action_reject_or_cancel" string="Cancel Approval" type="object" invisible="state not in ('waiting_for_approval', 'approved')" groups="tw_mutation_internal_approval.group_tw_mutation_internal_approval_cancel"/>
+				</xpath>
+
+                <xpath expr="//button[@name='action_confirm_internal_transfer']" position="attributes">
+                    <attribute name="invisible">state not in ('draft','approved') or (is_approval == True and state == 'draft')</attribute>
+                </xpath>
+                
+                <field name='date_done' position="after">
+					<field name="is_approval" invisible="is_approval == False"/>
+				</field>
+
+                <field name='state' position="replace">
+					<field name="state" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,assigned,done" invisible="is_approval == False"/>
+					<field name="state" widget="statusbar" statusbar_visible="draft,assigned,done" invisible="is_approval == True"/>
+				</field>
+
+                <xpath expr="//page[@name='note']" position="before">
+					<page string="Approval" invisible="is_approval == False">
+						<field name="approval_ids" readonly="1"/>
+					</page>
+				</xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

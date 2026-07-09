@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_dealer_sale_order_finco_incentive_form_view" model="ir.ui.view">
+            <field name="name">tw.dealer.sale.order.finco.incentive.form.view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                
+                <page name="internal_notes" position="after">
+                    <page name="incentive_partner" string="Incentive">
+                        <field name="incentive_partner_ids">
+                            <list>
+                                <field name="name" />
+                                <field name="start_date" />
+                                <field name="end_date" />
+                                <field name="active" />
+                                <field name="tax_ids" widget="many2many_tags" />
+                            </list>
+                            <form>
+                                <group>
+                                    <group>
+                                        <field name="name" />
+                                        <field name="active" />
+                                        <field name="tax_ids" widget="many2many_tags" />
+                                    </group>
+                                    <group>
+                                        <field name="start_date"
+                                               widget="daterange"
+                                               options="{'end_date_field': 'end_date'}"
+                                               required="1" />
+                                        <field name="end_date" invisible="1" />
+                                    </group>
+                                </group>
+                                <notebook>
+                                    <page string="Detail">
+                                        <field name="incentive_finco_detail_ids">
+                                            <list editable="bottom">
+                                                <field name="company_id" required="1" options="{'no_open': True, 'no_create': True}" />
+                                                <field name="amount" required="1" />
+                                            </list>
+                                        </field>
+                                    </page>
+                                </notebook>
+                            </form>
+                        </field>
+                    </page>
+                </page>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_purchase_order_showroom_type,tw_purchase_order_showroom_type,model_tw_purchase_order_type,base.group_user,1,0,0,0
+access_tw_purchase_order_workshop_type,tw_purchase_order_workshop_type,model_tw_purchase_order_type,base.group_user,1,0,0,0
+access_tw_purchase_order_master_type,tw_purchase_order_master_type,model_tw_purchase_order_type,base.group_user,1,0,0,0

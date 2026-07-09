@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Simple Form View for Output Template Editing -->
+        <record id="view_tw_endpoint_output_template_form" model="ir.ui.view">
+            <field name="name">tw.endpoint.configuration.output.template.form</field>
+            <field name="model">tw.endpoint.configuration</field>
+            <field name="arch" type="xml">
+                <form string="Configure Output Template">
+                    <sheet>
+                        <group>
+                            <field name="full_url" readonly="1"/>
+                            <field name="code" readonly="1"/>
+                        </group>
+
+                        <group>
+                            <field name="output_template" widget="ace" required="1" nolabel="1"/>
+                        </group>
+
+                        <group>
+                            <div class="alert alert-info" role="alert">
+                                <h4>Template Syntax</h4>
+                                <p>
+                                    <strong>Simple Mapping</strong>:                                    <code>"target_field": "json.path"</code>
+                                </p>
+                                <p>
+                                    <strong>Array Transformation</strong>: Use <code>_array_source</code> and <code>_item_template</code>
+                                </p>
+                                <p>
+                                    <strong>Relational Create Fallback</strong>: Use <code>_&lt;field&gt;_vals</code> dict for auto-create when lookup fails</p>
+
+                                <h5>Example (SPK with Partner Fallback):</h5>
+                                <pre>{
+  "company_id": "dealerId",
+  "partner_id": "noKtp",
+  "_partner_vals": {
+    "identification_number": "noKtp",
+    "name": "namaCustomer",
+    "phone": "noKontak"
+  },
+  "_spk_lines": {
+    "_array_source": "unit",
+    "_item_template": {
+      "product_id": "kodeTipeUnit",
+      "qty": "quantity"
+    }
+  }
+}</pre>
+                                <p class="text-muted">
+                                    <strong>Special Keywords:</strong>
+                                    <br/>
+                                    -                                    <code>_array_source</code>: JSON path to array<br/>
+                                    -                                <code>_item_template</code>: Template for each item<br/>
+                                    -                            <code>_&lt;field&gt;_vals</code>: Dict for create record when lookup fails
+                        </p>
+                    </div>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+</data>
+</odoo>

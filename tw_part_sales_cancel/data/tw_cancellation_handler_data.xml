@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="cancellation_handler_part_sales" model="tw.cancellation.handler">
+            <field name="model">tw.part.sales</field>
+            <field name="module">tw_part_sales_cancel</field>
+        </record>
+    </data>
+</odoo>

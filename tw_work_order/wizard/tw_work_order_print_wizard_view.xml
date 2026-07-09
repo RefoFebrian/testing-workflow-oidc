@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tw_work_order_print_wizard_form" model="ir.ui.view">
+        <field name="name">tw.work.order.print.wizard.form</field>
+        <field name="model">tw.work.order.print.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Print Document Options">
+                <field name="state" invisible="1"/>
+                <field name="work_order_ids" invisible="1"/>
+                
+                <h4 class="text-center mt-3 mb-2 text-muted">Select Document to Print</h4>
+                <div class="d-flex justify-content-center flex-wrap mt-3 mb-3 p-2">
+                    <!-- Thermal WO -->
+                    <button name="action_print_wo_thermal" invisible="state not in ('draft','waiting_for_approval','sale','done','cancel')" string=" Thermal WO" type="object" class="btn-outline-primary mx-1 mb-2 px-3 py-2 shadow-sm border rounded" icon="fa-file-text-o" groups="tw_work_order.group_button_wo_thermal" />
+                    
+                    <!-- Thermal Picking List -->
+                    <button name="action_print_picking_wo_thermal" type="object" string=" Thermal Picking List" invisible="state in ('draft','waiting_for_approval','approved','confirmed','except_picking','except_invoice','unused','cancel')" class="btn-outline-primary mx-1 mb-2 px-3 py-2 shadow-sm border rounded" icon="fa-list-alt" groups="tw_work_order.group_button_picking_wo_thermal" />
+                    
+                    <!-- Thermal Invoice WO -->
+                    <button name="action_print_wo_thermal_invoice" invisible="state not in ('sale', 'done')" string=" Thermal Invoice" type="object" class="btn-outline-primary mx-1 mb-2 px-3 py-2 shadow-sm border rounded" icon="fa-money" groups="tw_work_order.group_button_print_wo_invoice" />
+
+                    <!-- Invoice WO -->
+                    <button name="action_print_wo_invoice" invisible="state not in ('sale', 'done')" string=" Invoice WO" type="object" class="btn-outline-primary mx-1 mb-2 px-3 py-2 shadow-sm border rounded" icon="fa-money" groups="tw_work_order.group_button_print_wo_invoice" />
+                    
+                    <!-- Print WO -->
+                    <button name="action_print_wo" invisible="state in ('draft', 'waiting_for_approval')" string=" Print WO" type="object" class="btn-outline-primary mx-1 mb-2 px-3 py-2 shadow-sm border rounded" icon="fa-print" groups="tw_work_order.group_button_print_wo" />
+                </div>
+                <footer>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_tw_work_order_print_wizard" model="ir.actions.act_window">
+        <field name="name">Print Documents</field>
+        <field name="res_model">tw.work.order.print.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

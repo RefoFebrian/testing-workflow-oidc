@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_payment_request_inherit_proposal_list_view" model="ir.ui.view">
+            <field name="name">tw.payment.request.inherit.proposal.list</field>
+            <field name="model">tw.payment.request</field>
+            <field name="inherit_id" ref="tw_payment_request.view_payment_request_list"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="proposal_id" optional="hide"/>
+                </field>
+            </field>
+        </record>
+        
+        <record id="tw_payment_request_inherit_proposal_form_view" model="ir.ui.view">
+            <field name="name">tw.payment.request.inherit.proposal.form</field>
+            <field name="model">tw.payment.request</field>
+            <field name="inherit_id" ref="tw_payment_request.view_payment_request_form"/>
+            <field name="arch" type="xml">
+                <!-- Add Update Limit button -->
+                <xpath expr="//button[@name='action_validate']" position="after">
+                    <button 
+                        name="action_update_proposal_limit" 
+                        type="object" 
+                        string="Update Limit"
+                        invisible="not proposal_id or state != 'draft'"
+                        class="oe_highlight"
+                    />
+                </xpath>
+                
+                <!-- Add proposal_id field -->
+                <xpath expr="//field[@name='partner_bank_id']" position="after">
+                    <field name="proposal_domain" invisible="1"/>
+                    <field name="proposal_id" options="{'no_create': True, 'no_open': True}" domain="proposal_domain" readonly="state != 'draft'"/>
+                </xpath>
+                
+                <!-- Add proposal fields after memo -->
+                <xpath expr="//field[@name='memo']" position="after">
+                    <field name="proposal_total_amount" invisible="not proposal_id" readonly="1" force_save="1"/>
+                    <field name="proposal_limit_amount" invisible="not proposal_id" readonly="1" force_save="1"/>
+                    <field name="proposal_state" invisible="not proposal_id" readonly="1" force_save="1"/>
+                </xpath>
+                
+                <!-- Make name readonly when proposal_id is set -->
+                <xpath expr="//field[@name='memo']" position="attributes">
+                    <attribute name="readonly">proposal_id or state != 'draft'</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+                
+                <!-- Add proposal_line_id to line_dr_ids list -->
+                <xpath expr="//field[@name='line_dr_ids']/list/field[@name='account_id']" position="after">
+                    <field name="proposal_line_id" 
+                        column_invisible = "not parent.proposal_id"
+                        required="parent.proposal_id"
+                        options="{'no_create': True, 'no_open': True}" 
+                        domain="[
+                            ('proposal_id', '=', parent.proposal_id),
+                            ('supplier_id', '=', parent.partner_id),
+                            ('pay_to', '=', 'vendor')
+                        ]"/>
+                </xpath>
+                
+                <!-- Make name readonly when proposal_line_id is set -->
+                <xpath expr="//field[@name='line_dr_ids']/list/field[@name='name']" position="attributes">
+                    <attribute name="readonly">proposal_line_id</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_payment_request_inherit_proposal_search_view" model="ir.ui.view">
+            <field name="name">tw.payment.request.inherit.proposal.search</field>
+            <field name="model">tw.payment.request</field>
+            <field name="inherit_id" ref="tw_payment_request.view_payment_request_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="proposal_id"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_boom_sub_category_list" model="ir.ui.view">
+            <field name="name">tw.boom.sub.category.list</field>
+            <field name="model">tw.boom.sub.category</field>
+            <field name="arch" type="xml">
+                <list string="Boom Sub Kategory" editable="top" delete="0">
+                    <field name="main_category_id" required="1" options="{'no_create': True, 'no_open': True}"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_tw_boom_sub_category" model="ir.actions.act_window">
+            <field name="name">Sub Kategori</field>
+            <field name="res_model">tw.boom.sub.category</field>
+            <field name="path">master-sub-category</field>
+            <field name="view_mode">list</field>
+            <field name="context"></field>
+        </record>
+    </data>
+</odoo>

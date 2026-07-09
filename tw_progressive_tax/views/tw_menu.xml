@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menuitem_tw_progressive_tax" name="Pajak Progressive"
+        parent="tw_vehicle_registration_process.tw_vehicle_registration_process_menu_sub"
+        action="action_tw_progressive_tax"
+        sequence="18"
+        groups="tw_progressive_tax.group_progressive_tax_read"
+    />
+
+</odoo>

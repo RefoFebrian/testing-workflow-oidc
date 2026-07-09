@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_activity_atl_btl_line_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.activity.atl.btl.line.inherit.form.view</field>
+            <field name="model">tw.activity.atl.btl.line</field>
+            <field name="inherit_id" ref="tw_activity_atl_btl.tw_activity_atl_btl_line_all_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_view_avp" type="object" class="oe_stat_button" icon="fa-file-text" invisible="not advance_payment_ids">
+                        <field name="advance_payment_ids" widget="statinfo" string="AVP" />
+                    </button>
+                    <button name="action_view_nc" type="object" class="oe_stat_button" icon="fa-file-text" invisible="not payment_request_ids">
+                        <field name="payment_request_ids" widget="statinfo" string="NC" />
+                    </button>
+                    <button name="action_view_stl" type="object" class="oe_stat_button" icon="fa-file-text" invisible="not settlement_ids">
+                        <div>
+                            <field name="settlement_ids" widget="statinfo" string="STL" />
+                        </div>
+                    </button>
+                </xpath>
+                <field name="target_customer" position="after">
+                    <field name="advance_payment_ids" widget="many2many_tags" readonly="1" invisible="not advance_payment_ids"/>
+                    <field name="payment_request_ids" widget="many2many_tags" readonly="1" invisible="not payment_request_ids"/>
+                    <field name="settlement_ids" readonly="1" invisible="not settlement_ids" options="{'no_open':True,'no_create':True}"/>
+                </field>
+                <field name="detail_cost_ids" position="before">
+                    <group>
+                    </group>
+                </field>
+                <xpath expr="//field[@name='detail_cost_ids']/list/field[@name='source_payment_id']" position="replace">
+                    <field name="expense_source_id" required="1" readonly="state != 'draft'" options="{'no_open':True,'no_create':True}"/>
+                    <field name="upload_file" readonly="state != 'draft'" required="state == 'draft'" filename="upload_filename"/>
+                    <field name="upload_filename" readonly="1" force_save="1"/>
+                </xpath>
+                <field name="detail_cost_ids" position="after">
+                    <group class="oe_subtotal_footer oe_right">
+                        <field name="total_ho_expense" readonly="1"/>
+                        <field name="total_leasing_expense" readonly="1"/>
+                        <field name="total_company_expense" readonly="1"/>
+                        <field name="total_support_fund_expense" readonly="1"/>
+                        <field name="expense_amount" readonly="1" invisible="not expense_amount"/>
+                        <field name="support_fund_amount" readonly="1" invisible="not support_fund_amount"/>
+                    </group>
+                </field>
+
+                <field name="write_date" position="after">
+                    <field name="create_avp_date" readonly="1" invisible="not create_avp_date"/>
+                    <field name="create_avp_uid" readonly="1" invisible="not create_avp_uid" options="{'no_open':True,'no_create':True}"/>
+                    <field name="create_stl_date" readonly="1" invisible="not create_stl_date"/>
+                    <field name="create_stl_uid" readonly="1" invisible="not create_stl_uid" options="{'no_open':True,'no_create':True}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

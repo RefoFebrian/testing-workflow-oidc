@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit List View - Add GET DGI Button -->
+    <record id="tw_lead_list_view_dgi_inherit" model="ir.ui.view">
+        <field name="name">tw.lead.list.dgi.inherit</field>
+        <field name="model">tw.lead</field>
+        <field name="inherit_id" ref="tw_lead.tw_lead_crm_lead_list_view"/>
+        <field name="arch" type="xml">
+            <!-- Add GET DGI button in list header -->
+            <xpath expr="//list" position="inside">
+                <header>
+                    <button name="action_open_dgi_wizard" type="object" class="btn-secondary" string="GET DGI" data-hotkey="d" icon="fa-cloud-download" display="always" groups="tw_dgi_lead.tw_dgi_lead_button_group"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Form View - Show DGI Badge and Button -->
+    <record id="tw_lead_form_view_dgi_inherit" model="ir.ui.view">
+        <field name="name">tw.lead.form.dgi.inherit</field>
+        <field name="model">tw.lead</field>
+        <field name="inherit_id" ref="tw_lead.tw_lead_crm_lead_form_view"/>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_open_dgi_wizard" type="object" class="btn-secondary" string="Update from DGI" data-hotkey="d" icon="fa-cloud-download" invisible="not is_dgi" groups="tw_dgi_lead.tw_dgi_lead_button_group"/>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="is_dgi" invisible="1"/>
+                <button name="action_show_dgi_info" type="object" class="oe_stat_button" icon="fa-cloud-download" invisible="not is_dgi">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_text">From DGI</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- Inherit Search View - Add DGI filters -->
+    <record id="tw_lead_view_filter_dgi_inherit" model="ir.ui.view">
+        <field name="name">tw.lead.view.filter.dgi.inherit</field>
+        <field name="model">tw.lead</field>
+        <field name="inherit_id" ref="tw_lead.tw_lead_view_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="source_document" string="DGI Lead Ref"/>
+                <separator/>
+                <filter name="filter_is_dgi" string="From DGI" domain="[('is_dgi', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

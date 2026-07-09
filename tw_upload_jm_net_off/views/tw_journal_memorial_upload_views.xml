@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Journal Memorial Upload Wizard Form View -->
+    <record id="view_tw_journal_memorial_upload_wizard_form" model="ir.ui.view">
+        <field name="name">tw.journal.memorial.upload.wizard.form</field>
+        <field name="model">tw.journal.memorial.upload.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Upload Journal Memorial">
+                <sheet>
+                    <!-- Format guide -->
+                    <div class="alert alert-info" role="alert">
+                        <h4>
+                            <i class="fa fa-info-circle" title="Info"/>
+ Format File Excel</h4>
+                        <p>
+                            Baris pertama adalah header kolom. Baris data mulai dari baris ke-2.
+                            <strong>Kolom A–F</strong> hanya diisi pada baris pertama setiap Journal Memorial.
+                            Baris berikutnya dalam grup yang sama biarkan kosong.
+                        </p>
+                        <table class="table table-bordered" style="width: 100%; margin: 8px 0 16px 0; font-size: 10px;">
+                            <tr style="background-color: #1F4E79; color: white;">
+                                <th style="padding: 4px 6px; border: 1px solid #dee2e6;">A — Branch</th>
+                                <th style="padding: 4px 6px; border: 1px solid #dee2e6;">B — Periode</th>
+                                <th style="padding: 4px 6px; border: 1px solid #dee2e6;">C — Description</th>
+                                <th style="padding: 4px 6px; border: 1px solid #dee2e6;">D — Auto Reverse?</th>
+                                <th style="padding: 4px 6px; border: 1px solid #dee2e6;">E — Division</th>
+                                <th style="padding: 4px 6px; border: 1px solid #dee2e6; background-color: #FFF2CC; color: #000;">F — Partner Code <em>(opt)</em>
+                                </th>
+                                <th style="padding: 4px 6px; border: 1px solid #dee2e6;">G — Line/Branch</th>
+                                <th style="padding: 4px 6px; border: 1px solid #dee2e6;">H — Line/Account</th>
+                                <th style="padding: 4px 6px; border: 1px solid #dee2e6;">I — Line/Type</th>
+                                <th style="padding: 4px 6px; border: 1px solid #dee2e6;">J — Line/Amount</th>
+                                <th style="padding: 4px 6px; border: 1px solid #dee2e6; background-color: #E2EFDA; color: #000;">K — Reconcile <em>(opt)</em>
+                                </th>
+                                <th style="padding: 4px 6px; border: 1px solid #dee2e6; background-color: #FFF2CC; color: #000;">L — Line/Asset <em>(opt)</em>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6;">HHO</td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6;">2026/002</td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6;">Reclass Accrue Blind Bonus</td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6;">FALSE</td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6;">Unit</td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6;">MML</td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6;">MML</td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6;">21629907</td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6;">Dr</td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6; text-align: right;">61418960.25</td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6; background-color: #E2EFDA;">JM/HO/24/08/00006</td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6;"></td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6;"></td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6;"></td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6;"></td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6;"></td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6;"></td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6;">DLH</td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6;">21629907</td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6;">Cr</td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6; text-align: right;">61418960.25</td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6; background-color: #E2EFDA;">IC/23/05/00066</td>
+                                <td style="padding: 4px 6px; border: 1px solid #dee2e6;"></td>
+                            </tr>
+                        </table>
+                        <p class="mb-0">
+                            <strong>Catatan:</strong>
+                            Kolom F (Partner Code) dan K (Asset Code) bersifat opsional.
+                            Kolom K (Reconcile) diisi dengan <strong>nama Journal Item yang sudah ada</strong>
+                            untuk direkonsiliasi. Harus sudah diposting dan belum direkonsiliasi.
+                            Kolom L (Asset Code) bersifat opsional.
+                        </p>
+                    </div>
+
+                    <group>
+                        <group string="File Upload">
+                            <div class="mt-2 mb-2">
+                                <button name="action_download_format_file" type="object" class="btn btn-outline-secondary btn-sm">
+                                    <i class="fa fa-download me-1" title="Download"/>
+                                    Download Template Excel
+                                </button>
+                            </div>
+                            <field name="upload_file" filename="filename" string="Pilih File Excel"/>
+                            <field name="filename" invisible="1"/>
+                        </group>
+                        <group string="Opsi">
+                            <field name="is_auto_net_off"/>
+                        </group>
+                    </group>
+
+                    <!-- Warning when is_auto_net_off is checked -->
+                    <div class="alert alert-warning" role="alert" invisible="not is_auto_net_off">
+                        <i class="fa fa-exclamation-triangle me-1" title="Warning Icon" role="img" aria-label="Warning"/>
+                        <strong>Perhatian:</strong>
+                        Mengaktifkan <em>Auto Net Off</em> akan menyebabkan Journal Memorial
+                        <strong>dikonfirmasi secara otomatis</strong> saat import.
+                        Proses ini tidak dapat dibatalkan. Pastikan data sudah benar sebelum melanjutkan.
+                    </div>
+                </sheet>
+                <footer>
+                    <button name="action_import" string="Import" type="object" class="btn-primary"/>
+                    <button string="Batal" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for JM Upload Wizard -->
+    <record id="action_tw_journal_memorial_upload_wizard" model="ir.actions.act_window">
+        <field name="name">Upload Journal Memorial</field>
+        <field name="res_model">tw.journal.memorial.upload.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

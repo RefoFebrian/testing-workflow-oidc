@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="series_vario" model="tw.product.series">
+            <field name="name">Vario Series</field>
+            <field name="division">Unit</field>
+        </record>
+        <record id="series_blade" model="tw.product.series">
+            <field name="name">Blade Series</field>
+            <field name="division">Unit</field>
+        </record>
+        <record id="series_beat" model="tw.product.series">
+            <field name="name">Beat Series</field>
+            <field name="division">Unit</field>
+        </record>
+   </data>
+</odoo>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="tw_attachment.PdfUrlViewer" owl="1">
+        <input
+            type="text"
+            t-att-id="props.id"
+            class="o_input"
+            t-att-value="props.record.data[props.name] || ''"
+            t-on-change="update"
+            t-att-placeholder="props.placeholder"
+            readonly="1"
+        />
+        <div class="mt-2">
+            <iframe 
+                t-att-id="'pdf_iframe_' + props.id" 
+                style="width: 100%; height: 600px; border: 1px solid #ccc; display: none;"
+                title="PDF Preview"
+            >
+                Browser Anda tidak mendukung iframe.
+            </iframe>
+        </div>
+    </t>
+
+</templates>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">  
+    
+        <record id="group_category_approval_matrix" model="ir.module.category">
+            <field name="name">Matrix Approval</field>
+            <field name="sequence">60</field>
+        </record>	
+
+        <!-- Approval Configuration -->	
+	
+        <record id="group_approval_configuration_read" model="res.groups">
+            <field name="category_id" ref="group_category_approval_matrix"/>
+            <field name="name">TW Approval Form Read</field>
+        </record> 
+        
+        <record id="access_approval_configuration_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_approval_config"/>
+            <field name="name">approval_configuration read</field> 
+            <field name="group_id" ref="group_approval_configuration_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="group_approval_configuration_update" model="res.groups">
+            <field name="category_id" ref="group_category_approval_matrix"/>
+            <field name="name">TW Approval Form Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_approval_configuration_read'))]"/>            	            	
+        </record>
+                        
+        <record id="access_approval_configuration_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_approval_config"/>
+            <field name="name">approval_configuration update</field> 
+            <field name="group_id" ref="group_approval_configuration_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_approval_configuration_delete" model="res.groups">
+            <field name="category_id" ref="group_category_approval_matrix"/>
+            <field name="name">TW Approval Form Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_approval_configuration_read'))]"/>            	            	
+        </record>
+                        
+        <record id="access_approval_configuration_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_approval_config"/>
+            <field name="name">approval_configuration delete</field> 
+            <field name="group_id" ref="group_approval_configuration_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>      
+                
+    	
+<!-- Approval Matrix -->	
+	
+        <record id="group_approval_matrix_read" model="res.groups">
+            <field name="category_id" ref="group_category_approval_matrix"/>
+            <field name="name">TW Approval Matrix Read</field>
+        </record> 
+        
+        <record id="access_approval_matrix_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_approval_matrix"/>
+            <field name="name">approval_matrix read</field> 
+            <field name="group_id" ref="group_approval_matrix_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_approval_matrix_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_approval_matrix_line"/>
+            <field name="name">approval_matrix_line read</field> 
+            <field name="group_id" ref="group_approval_matrix_read"/>  
+            <field name="perm_read">1</field> 
+        </record>
+                
+        <record id="group_approval_matrix_update" model="res.groups">
+            <field name="category_id" ref="group_category_approval_matrix"/>
+            <field name="name">TW Approval Matrix Update</field>
+			<field name="implied_ids" eval="[(4, ref('group_approval_matrix_read'))]"/>            	            	
+        </record>
+                        
+        <record id="access_approval_matrix_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_approval_matrix"/>
+            <field name="name">approval_matrix update</field> 
+            <field name="group_id" ref="group_approval_matrix_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="access_approval_matrix_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_approval_matrix_line"/>
+            <field name="name">approval_line_matrix update</field> 
+            <field name="group_id" ref="group_approval_matrix_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_approval_matrix_delete" model="res.groups">
+            <field name="category_id" ref="group_category_approval_matrix"/>
+            <field name="name">TW Approval Matrix Delete</field>
+			<field name="implied_ids" eval="[(4, ref('group_approval_matrix_read'))]"/>            	            	
+        </record>
+                        
+        <record id="access_approval_matrix_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_approval_matrix"/>
+            <field name="name">approval_matrix delete</field> 
+            <field name="group_id" ref="group_approval_matrix_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>      
+                        
+        <record id="access_approval_matrix_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_approval_matrix_line"/>
+            <field name="name">approval_matrix_line delete</field> 
+            <field name="group_id" ref="group_approval_matrix_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>      
+        
+<!-- Approval Portal -->	
+	
+        <record id="group_approval_portal_read" model="res.groups">
+            <field name="category_id" ref="group_category_approval_matrix"/>
+            <field name="name">Approval Portal Read</field>   
+        </record> 
+        
+        <record id="access_approval_portal_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_approval_line"/>
+            <field name="name">approval_portal read</field> 
+            <field name="group_id" ref="group_approval_portal_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+         
+        <record id="group_approval_portal_update" model="res.groups">
+            <field name="category_id" ref="group_category_approval_matrix"/>
+            <field name="name">Approval Portal Update</field>    
+			<field name="implied_ids" eval="[(4, ref('group_approval_portal_read'))]"/>            	            	
+        </record>
+                        
+        <record id="access_approval_portal_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_approval_line"/>
+            <field name="name">approval_portal update</field> 
+            <field name="group_id" ref="group_approval_portal_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_approval_portal_delete" model="res.groups">
+            <field name="category_id" ref="group_category_approval_matrix"/>
+            <field name="name">Approval Portal Delete</field>    
+			<field name="implied_ids" eval="[(4, ref('group_approval_portal_read'))]"/>            	            	
+        </record>
+                        
+        <record id="access_approval_portal_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_approval_line"/>
+            <field name="name">approval_portal delete</field> 
+            <field name="group_id" ref="group_approval_portal_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>      
+
+
+        <record id="access_approval_approval_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_approval"/>
+            <field name="name">approval_approval update</field> 
+            <field name="group_id" ref="base.group_user"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+<!-- Copy Approval -->
+        <record id="group_copy_approval_read" model="res.groups">
+            <field name="category_id" ref="group_category_approval_matrix"/>
+            <field name="name">TW Copy Approval Read</field>
+        </record>
+                        
+        <record id="access_approval_portal_all" model="ir.model.access">
+            <field name="model_id" ref="model_tw_approval_copy"/>
+            <field name="name">approval_portal delete</field> 
+            <field name="group_id" ref="group_copy_approval_read"/>  
+            <field name="perm_read">1</field> 
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+            <field name="perm_unlink">1</field> 
+        </record>     
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_approval_configuration_read')),
+                (4,ref('group_approval_configuration_update')),
+                (4,ref('group_approval_configuration_delete')),
+                (4,ref('group_approval_matrix_read')),
+                (4,ref('group_approval_matrix_update')),
+                (4,ref('group_approval_matrix_delete')),
+                (4,ref('group_approval_portal_read')),
+                (4,ref('group_approval_portal_update')),
+                (4,ref('group_approval_portal_delete')),
+                (4,ref('group_copy_approval_read')),
+                ]"/>
+        </record>	
+
+        <record id="base.group_user" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_approval_portal_read')),
+                (4,ref('group_approval_portal_update')),
+                (4,ref('group_approval_portal_delete')),
+                ]"/>
+        </record>	                                             
+    </data>
+</odoo>

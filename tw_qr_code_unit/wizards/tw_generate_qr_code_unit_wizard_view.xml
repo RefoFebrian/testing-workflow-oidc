@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_generate_qr_code_unit_wizard_view" model="ir.ui.view">
+			<field name="name">tw.generate.qr.code.unit.wizard</field>
+			<field name="model">tw.generate.qr.code.unit.wizard</field>
+			<field name="arch" type="xml">
+				<form>
+					<group>
+						<field name="company_id" required="1" domain="[('branch_type_id.value','=','MD')]"/>
+						<field name="qty" required="1"/>
+					</group>
+					<footer>
+						<button name="action_generate_qr_code_unit" string="Generate" type="object" class="oe_highlight"/>
+						<button string="Close" class="oe_link" special="cancel" />
+					</footer>
+				</form>
+			</field>
+		</record>
+
+        <record id="action_tw_generate_qr_code_unit_wizard" model="ir.actions.act_window">
+            <field name="name">Generate QR Code</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.generate.qr.code.unit.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_generate_qr_code_unit_wizard_view"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

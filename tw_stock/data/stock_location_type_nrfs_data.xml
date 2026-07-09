@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_select_stock_loc_type_rfs" model="tw.selection">
+            <field name="name">Ready For Sale</field>
+            <field name="value">rfs</field> 
+	    	<field name="type">StockLocation</field>
+        </record>
+        <record id="tw_select_stock_loc_type_nrfs" model="tw.selection">
+            <field name="name">Not Ready For Sale</field>
+            <field name="value">nrfs</field> 
+	    	<field name="type">StockLocation</field>
+        </record>
+        <record id="tw_select_stock_loc_type_hotline" model="tw.selection">
+            <field name="name">Hotline</field>
+            <field name="value">hotline</field> 
+	    	<field name="type">StockLocation</field>
+        </record>
+        <record id="tw_select_stock_loc_type_event" model="tw.selection">
+            <field name="name">Event</field>
+            <field name="value">event</field> 
+	    	<field name="type">StockLocation</field>
+        </record>
+        <record id="tw_select_stock_loc_type_intransit_supplier" model="tw.selection">
+            <field name="name">Intransit Supplier</field>
+            <field name="value">intransit_supplier</field> 
+	    	<field name="type">StockLocation</field>
+        </record>
+        <record id="tw_select_stock_loc_type_intransit_mutasi" model="tw.selection">
+            <field name="name">Intransit Mutasi</field>
+            <field name="value">intransit_mutasi</field> 
+	    	<field name="type">StockLocation</field>
+        </record>
+    </data>
+</odoo>

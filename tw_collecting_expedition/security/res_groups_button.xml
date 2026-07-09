@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Button Group: RFA -->
+        <record id="group_tw_collecting_expedition_button_rfa" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Collecting Expedition Button RFA</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_collecting_expedition_read'))]"/>
+        </record>
+
+
+
+        <!-- Button Group: Confirm -->
+        <record id="group_tw_collecting_expedition_button_confirm" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Collecting Expedition Button Confirm</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_collecting_expedition_read'))]"/>
+        </record>
+
+        <!-- Button Group: Reject -->
+        <record id="group_tw_collecting_expedition_button_reject" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Collecting Expedition Button Reject</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_collecting_expedition_read'))]"/>
+        </record>
+
+        <!-- Button Group: Cancel Approval -->
+        <record id="group_tw_collecting_expedition_button_cancel" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_backoffice"/>
+            <field name="name">TW Collecting Expedition Button Cancel Approval</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_collecting_expedition_read'))]"/>
+        </record>
+    </data>
+
+    <!-- Add all button groups to System Admin -->
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_collecting_expedition_button_rfa')),
+                (4, ref('group_tw_collecting_expedition_button_confirm')),
+                (4, ref('group_tw_collecting_expedition_button_reject')),
+                (4, ref('group_tw_collecting_expedition_button_cancel')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

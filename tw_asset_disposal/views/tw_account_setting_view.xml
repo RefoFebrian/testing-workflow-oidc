@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+      <record id="tw_advance_payment_account_setting_inherit_form_view" model="ir.ui.view">
+          <field name="name">tw.advance.payment.account.setting.inherit.view.form</field>
+          <field name="model">tw.account.setting</field>
+          <field name="inherit_id" ref="tw_account_setting.tw_account_setting_form_view"/>
+          <field name="arch" type="xml">
+              <xpath expr="//group[@name='assets_disposal']" position="inside">
+                  <field name="journal_disposal_asset_id" options="{'no_create': True}"/>
+              </xpath>
+              <xpath expr="//group[@name='assets_account']" position="inside">
+                  <field name="account_gain_loss_id" options="{'no_create': True}"/>
+                  <field name="account_expense_asset_id" options="{'no_create': True}"/>
+              </xpath>
+          </field>
+      </record>
+    </data>
+</odoo>
+  

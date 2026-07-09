@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="tw_report_net_margin_dso_incentive_wizard_menuitem"
+            parent="tw_menu.submenu_tw_showroom_report"
+            action="action_report_net_margin_dso_wizard"
+            sequence="2"
+            groups="tw_dealer_sale_order_margin.group_tw_laporan_margin_dso_read" />
+    </data>
+    
+    <data>
+        <menuitem id="tw_report_net_margin_dso_showroom_wizard_menuitem"
+            parent="tw_menu.submenu_tw_showroom_report"
+            action="action_report_net_margin_dso_wizard"
+            sequence="50"
+            groups="tw_dealer_sale_order_margin.group_tw_laporan_margin_dso_read" />
+    </data>
+</odoo>

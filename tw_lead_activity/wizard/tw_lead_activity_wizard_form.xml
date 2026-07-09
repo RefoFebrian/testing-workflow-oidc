@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_lead_activity_first_view_form" model="ir.ui.view">
+            <field name="name">view.tw.lead.activity.first.view.form</field>
+            <field name="model">tw.lead.activity</field>
+            <field name="arch" type="xml">
+                <form string="Activity">
+                    <sheet>
+                        <group col="4">
+                            <field name="date" required="1" />
+                            <field name="stage_id" string="Stage" options="{'no_create':True, 'no_open': True}" required="1" />
+                            <field name="stage" invisible="1" />
+                            <!-- <field name="latitude" />
+                            <field name="longitude" /> -->
+                        </group>
+                        <footer>
+                            <button name="action_add_activity" string="Add Activity" type="object" class="oe_highlight" />
+                            <button string="Cancel" special="cancel" />
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_tw_lead_activity_second_form" model="ir.ui.view">
+            <field name="name">view.lead.activity.form.second</field>
+            <field name="model">tw.lead</field>
+            <field name="arch" type="xml">
+                <form string="Activity">
+                    <sheet>
+                        <group col="4" colspan="4">
+                            <field name="date" readonly="1" />
+                            <field name="stage_id" string="Stage" options="{'no_create':True, 'no_open': True}" readonly="1" />
+                        </group>
+                        <group>
+                            <group>
+                                <field name="interest_id" required="1" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="interest" invisible="1" />
+                                <field name="activity_result_id" required="1" options="{'no_open':True,'no_create':True}" domain="[('interest', '=', interest)]"/>
+                                <field name="product_id" required="interest != 'cold'" readonly="interest == 'cold'" invisible="interest == 'cold'" options="{'no_open': True,'no_create': True}" />
+                                <field name="discount" />
+                                <field name="product_category_ids" invisible="1" widget="many2many_tags" />
+                            </group>
+                            <group>
+                                <!-- <field name="remark" placeholder="Add notes here..." /> -->
+                            </group>
+                        </group>
+
+                        <group invisible="interest not in ('cold', 'medium', 'hot')">
+                            <group name="customer_info" string="Customer Info">
+                                <label for="birthplace" string="Tempat / Tgl Lahir" invisible="interest != 'hot'"/>
+                                <div class="d-flex justify-content-between" invisible="interest != 'hot'">
+                                    <field name="birthplace" required="interest == 'hot'"/>
+                                    <span class="m-1">/</span>
+                                    <field name="birthdate" required="interest == 'hot'"/>
+                                </div>
+                                <field name="gender_id" required="1" options="{'no_open': True,'no_create': True}" />
+                                <field name="identification_number" string="Nomor KTP" required="interest == 'hot'" invisible="interest != 'hot'" />
+                                <field name="identification_family_number" string="Nomor KK" required="interest == 'hot'" invisible="interest != 'hot'" />
+                                <field name="religion_id" required="interest == 'hot'" invisible="interest != 'hot'" options="{'no_open': True, 'no_create': True}" />
+                                <field name="mobile" required="1" />
+                                <label for="whatsapp" string="Whatsapp" invisible="interest != 'hot'"/>
+                                <div class="d-flex justify-content-between" invisible="interest != 'hot'">
+                                    <field name="is_same_with_mobile" required="interest == 'hot'" invisible="interest != 'hot'" help="This is a helpful description"/>
+                                    <field name="whatsapp" required="interest == 'hot'" invisible="interest != 'hot'"/>
+                                </div>
+                                <field name="phone" invisible="interest != 'hot'"/>
+                                <field name="email" invisible="interest != 'hot'"/>
+                            </group>
+                            <group name="customer_info2" string="">
+                                <field name="blood_type_id" required="interest == 'hot'" invisible="interest != 'hot'" options="{'no_open': True, 'no_create': True}" />
+                                <field name="hobby_id" required="interest == 'hot'" invisible="interest != 'hot'" options="{'no_open': True, 'no_create': True}" />
+                                <field name="education_id" required="interest == 'hot'" invisible="interest != 'hot'" options="{'no_open': True, 'no_create': True}" />
+                                <field name="occupation_id" required="interest != 'cold'" readonly="interest == 'cold'" invisible="interest == 'cold'" options="{'no_open': True,'no_create': True}" />
+                                <field name="marital_status_id" required="interest == 'hot'" invisible="interest != 'hot'" options="{'no_open': True, 'no_create': True}" />
+                                <field name="housing_tenure_id" required="interest == 'hot'" invisible="interest != 'hot'" options="{'no_open': True, 'no_create': True}" />
+                                <field name="mobile_plan_status_id" required="interest == 'hot'" invisible="interest != 'hot'" options="{'no_open': True, 'no_create': True}" />
+                                <field name="expense_id" invisible="interest != 'hot'" options="{'no_open': True, 'no_create': True}" />
+                                <field name="income_id" invisible="interest != 'hot'" options="{'no_open': True, 'no_create': True}" />
+                            </group>
+                        </group>
+                        <group invisible="interest not in ('cold', 'medium', 'hot')">
+                            <group name="customer_address" string="Alamat Sesuai KTP">
+                                <field name="street" placeholder="Street..." required="interest in ('medium','hot')" readonly="state != 'open'"/>
+                                <field name="street2" placeholder="Street2..." readonly="state != 'open'"/>
+                                <label for="rt" string="RT/RW"/>
+                                <div>
+                                    <field name="rt" placeholder="RT" style="width: 25%" required="interest in ('medium','hot')" readonly="state != 'open'"/>
+                                    <field name="rw" placeholder="RW" style="width: 25%" required="interest in ('medium','hot')" readonly="state != 'open'"/>
+                                </div>
+                                <field name="state_id" options="{'no_open': True,'no_create': True}" required="interest in ('medium','hot')" readonly="state != 'open'"/>
+                                <field name="city_id" options="{'no_open': True,'no_create': True}" required="interest in ('medium','hot')" readonly="state != 'open'"/>
+                                <field name="district_id" options="{'no_open': True,'no_create': True}" required="interest in ('medium','hot')" readonly="state != 'open'"/>
+                                <field name="sub_district_id" options="{'no_open': True,'no_create': True}" required="interest in ('medium','hot')" readonly="state != 'open'"/>
+                                <field name="zip" required="interest in ('medium','hot')" readonly="state != 'open'"/>
+                                <field name="country_id" invisible="1"/>
+                            </group>
+                            <group name="customer_address2" string="Alamat Domisili/Survei">
+                                <field name="is_same_ktp" readonly="state != 'open'"/>
+                                <field name="street_domicile" string="Street" placeholder="Street..." required="interest in ('medium','hot')" readonly="state != 'open'"/>
+                                <field name="street2_domicile" string="Street2" placeholder="Street2..." readonly="state != 'open'"/>
+                                <label for="rt_domicile" string="RT/RW"/>
+                                <div>
+                                    <field name="rt_domicile" placeholder="RT" style="width: 25%" required="interest in ('medium','hot')" readonly="state != 'open'"/>
+                                    <field name="rw_domicile" placeholder="RW" style="width: 25%" required="interest in ('medium','hot')" readonly="state != 'open'"/>
+                                </div>
+                                <field name="state_domicile_id" string="Provinsi" options="{'no_open': True,'no_create': True}" required="interest in ('medium','hot')" readonly="state != 'open'"/>
+                                <field name="city_domicile_id" string="Kota" options="{'no_open': True,'no_create': True}" required="interest in ('medium','hot')" readonly="state != 'open'"/>
+                                <field name="district_domicile_id" string="Kecamatan" options="{'no_open': True,'no_create': True}" required="interest in ('medium','hot')" readonly="state != 'open'"/>
+                                <field name="sub_district_domicile_id" string="Kelurahan" options="{'no_open': True,'no_create': True}" required="interest in ('medium','hot')" readonly="state != 'open'"/>
+                                <field name="zip_domicile" string="Zip" required="interest in ('medium','hot')" readonly="state != 'open'"/>
+                            </group>
+                        </group>
+                        <group invisible="interest not in ('cold', 'medium', 'hot')">
+                            <group name="motorcycle_info" string="Motorcycle and Usage" invisible="interest not in ('medium', 'hot')">
+                                <field name="unit_operator_id" required="interest in ('medium', 'hot')" options="{'no_open': True, 'no_create': True}" />
+                                <field name="unit_usage_id" required="interest in ('medium', 'hot')" options="{'no_open': True, 'no_create': True}" />
+                                <field name="current_motorcycle" required="interest in ('medium', 'hot')" options="{'no_open': True, 'no_create': True}" />
+                                <field name="motor_brand_id" required="interest in ('medium', 'hot')" options="{'no_open': True, 'no_create': True}" />
+                                <field name="motor_type_id" required="interest in ('medium', 'hot')" options="{'no_open': True, 'no_create': True}" />
+                            </group>
+                            <group name="credit_proposal" string="Credit Proposal" invisible="interest == 'cold'">
+                                <field name="payment_type_id" required="interest != 'cold'" invisible="interest == 'cold'" options="{'no_open': True,'no_create': True}" />
+                                <field name="payment_type" invisible="1" />
+                                <field name="finco_id" required="payment_type == 'Credit'" invisible="interest == 'cold' or payment_type != 'Credit'" options="{'no_open':True,'no_create':True}" />
+                                <field name="down_payment" required="interest != 'cold' and payment_type == 'Credit'" invisible="interest == 'cold' or payment_type != 'Credit'" />
+                                <field name="down_payment_date" required="interest != 'cold' and payment_type == 'Credit'" invisible="interest == 'cold' or payment_type != 'Credit'" />
+                                <field name="tenor" required="interest != 'cold' and payment_type == 'Credit'" invisible="interest == 'cold' or payment_type != 'Credit'" />
+                                <field name="installment" required="interest != 'cold' and payment_type == 'Credit'" invisible="interest == 'cold' or payment_type != 'Credit'" />
+                            </group>
+                            <group name="ownership" string="Ownership" invisible="interest != 'hot'">
+                                <field name="motor_ownership_id" required="interest == 'hot'" invisible="interest != 'hot'" options="{'no_create': True, 'no_open': True}" />
+                                <field name="motor_ownership" invisible="1" />
+                                <field name="partner_stnk_id" readonly="motor_ownership == 'self'" required="motor_ownership == 'other'" invisible="interest == 'hot'" context="{
+                                            'form_view_ref': 'tw_partner.tw_partner_contact_form_view',
+                                            'default_is_customer':1,
+                                            'default_company_id': company_id,
+                                            'no_create': True,
+                                            'no_open': True
+                                        }" />
+                            </group>
+                        </group>
+                        <footer>
+                            <button name="action_add_only" string="Add Only" type="object" class="oe_highlight" />
+                            <button name="action_add_and_next_activity" string="Add and Next Activity" type="object" />
+                            <button string="Cancel" special="cancel" />
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

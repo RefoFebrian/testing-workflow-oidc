@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="account.account_invoices" model="ir.actions.report">
+            <field name="report_name">tw_account.custom_report_invoice_document</field>
+            <field name="report_file">tw_account.custom_report_invoice_document</field>
+        </record>
+
+    </data>
+</odoo>

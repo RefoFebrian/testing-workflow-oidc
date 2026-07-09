@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_dgi_part_sales_wizard,tw_dgi_part_sales.tw_dgi_part_sales_wizard,model_tw_dgi_part_sales_wizard,base.group_user,1,0,0,0

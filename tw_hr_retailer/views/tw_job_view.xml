@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_hr_job_retailer_form_view" model="ir.ui.view">
+            <field name="name">tw.hr.job.retailer.form.view</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="arch" type="xml">
+				<field name="contract_type_id" position="after">
+					<field name="sales_force_id" />
+				</field>         
+            </field>
+        </record>
+    </data>
+</odoo>

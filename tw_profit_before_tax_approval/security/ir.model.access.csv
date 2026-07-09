@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_profit_before_tax_approval_tw_profit_before_tax_approval,tw_profit_before_tax_approval.tw_profit_before_tax_approval,model_tw_profit_before_tax_approval_tw_profit_before_tax_approval,base.group_user,1,1,1,1

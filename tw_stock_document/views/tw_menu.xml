@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Menu -->
+    <menuitem id="tw_stock_document_menu_root"
+        name="Stock Documents"
+        parent="tw_vehicle_document.tw_vehicle_document_request_menu_sub"
+        action="tw_stock_document_action"
+        groups="tw_stock_document.group_stock_document_read"
+        sequence="50"/>
+
+</odoo>

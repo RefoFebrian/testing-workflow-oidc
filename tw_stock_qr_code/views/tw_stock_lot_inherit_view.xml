@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_stock_lot_qr_code_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.lot.qr.code.form</field>
+            <field name="model">stock.lot</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_lot_form_view" />
+            <field name="arch" type="xml">
+                <field name="chassis_number" position="after">
+                    <field name="qr_code" readonly="1"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

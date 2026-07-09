@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- tree view -->
+        <record id="tw_master_rent_reason_asset_view_tree" model="ir.ui.view">
+            <field name="name">tw.master.rent.reason.asset.tree</field>
+            <field name="model">tw.master.rent.reason.asset</field>
+            <field name="arch" type="xml">
+                <list string="Master Reason Peminjaman Aset" editable="top">
+                    <field name="name" required="1" />
+                </list>
+            </field>
+        </record>
+
+
+        <!-- action window -->
+        <record id="tw_master_rent_reason_asset_action" model="ir.actions.act_window">
+            <field name="name">Master Reason Peminjaman Aset</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.master.rent.reason.asset</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        
+    </data>
+</odoo>

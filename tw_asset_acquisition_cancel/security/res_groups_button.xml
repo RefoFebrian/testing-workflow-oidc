@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Asset Acquisition Cancel Button Groups -->
+        <record id="group_asset_acquisition_cancel_rfa" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset"/>
+            <field name="name">TW Asset Acquisition Cancel RFA</field>
+            <field name="implied_ids" eval="[(4, ref('group_asset_acquisition_cancel_read'))]"/>
+        </record>
+
+        <record id="group_asset_acquisition_cancel_approval_cancel" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset"/>
+            <field name="name">TW Asset Acquisition Cancel Approval Cancel</field>
+            <field name="implied_ids" eval="[(4, ref('group_asset_acquisition_cancel_read'))]"/>
+        </record>
+
+        <record id="group_asset_acquisition_cancel_approval_confirm" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_module_category_asset"/>
+            <field name="name">TW Asset Acquisition Cancel Approval Confirm</field>
+            <field name="implied_ids" eval="[(4, ref('group_asset_acquisition_cancel_read'))]"/>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_asset_acquisition_cancel_rfa')),
+                (4, ref('group_asset_acquisition_cancel_approval_cancel')),
+                (4, ref('group_asset_acquisition_cancel_approval_confirm')),
+            ]"/>
+        </record>
+    </data>
+
+</odoo>

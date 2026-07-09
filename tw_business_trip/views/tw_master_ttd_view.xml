@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- list view -->
+        <record id="tw_master_ttd_view_list" model="ir.ui.view">
+            <field name="name">tw.master.ttd.list</field>
+            <field name="model">tw.master.ttd</field>
+            <field name="arch" type="xml">
+                <list string="Master TTD">
+                    <field name="employee_id"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- form view -->
+        <record id="tw_master_ttd_view_form" model="ir.ui.view">
+            <field name="name">tw.master.ttd.form</field>
+            <field name="model">tw.master.ttd</field>
+            <field name="arch" type="xml">
+                <form string="Approval">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="employee_id" options="{'no_create':True,'no_open':True}" required="1"/>
+                            </group>
+                            <group>
+                                <field name="filename_upload_foto" invisible="1"/>
+                                <field name="filename_foto" invisible="1"/>
+                                
+                                <label for="files_foto" string="Foto TTD"/>
+                                <div>
+                                    <field name="files_foto" readonly="1" filename="filename_foto" invisible="filename_foto == False" widget="image" img_width="150" img_height="150"/>
+                                    <field name="files_upload_foto" string="File Foto" filename="filename_upload_foto"/>
+                                </div>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Audit Trail" invisible="create_uid == False">
+                                <group>
+                                <group>
+                                    <field name="create_uid" readonly="1"/>
+                                    <field name="create_date" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="write_uid" readonly="1"/>
+                                    <field name="write_date" readonly="1"/>
+                                </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- search -->
+        <record id="tw_master_ttd_view_search" model="ir.ui.view">
+            <field name="name">tw.master.ttd.search</field>
+            <field name="model">tw.master.ttd</field>
+            <field name="arch" type="xml">
+                <search string="Master TTD">
+                    <field name="employee_id" select="True"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- action window -->
+        <record id="tw_master_ttd_action" model="ir.actions.act_window">
+            <field name="name">Master TTD</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.master.ttd</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new digital Master TTD
+                </p><p>
+                Click the Create button to add a new digital Master TTD
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

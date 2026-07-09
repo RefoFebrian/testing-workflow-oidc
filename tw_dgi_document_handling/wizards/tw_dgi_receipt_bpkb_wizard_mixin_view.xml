@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Wizard Form View -->
+    <record id="view_dgi_receipt_bpkb_wizard_form" model="ir.ui.view">
+        <field name="name">tw.dgi.receipt.bpkb.wizard.form</field>
+        <field name="model">tw.dgi.receipt.bpkb.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Get DGI Data - Receipt BPKB">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>Get Data from DGI</h1>
+                        <p>Retrieve Receipt BPKB data from DGI API for the specified time range</p>
+                    </div>   
+                    
+                    <!-- Company (Mandatory)-->
+                    <group>
+                        <field name="company_id" options="{'no_create': True}"/>
+                    </group>
+                    
+                    <!-- Date Range (Side by Side) -->
+                    <group string="Period">
+                        <label for="from_time" string="Date Range"/>
+                        <div>
+                            <field name="from_time" class="oe_inline" style="width: 45%;"/>
+                            <span style="margin: 0 10px;">to</span>
+                            <field name="to_time" class="oe_inline" style="width: 45%;"/>
+                        </div>
+                        <div class="alert alert-warning" role="alert" style="margin-top: 8px;">
+                            <i class="fa fa-warning" title="Warning"/> <strong>Note:</strong> Maximum period is 3 days
+                        </div>
+                    </group>
+                    
+                    <!-- Optional Filters -->
+                    <group string="Filters (Optional)">
+                        <group>
+                            <field name="id_spk" placeholder="e.g., 15537-SPK-25002757"/>
+                        </group>
+                    </group>
+                    
+                    <group string="Results" invisible="not found_count and not process_log">
+                        <field name="found_count"/>
+                        <field name="process_log" 
+                               invisible="not process_log"
+                               widget="text"
+                               readonly="1"/>
+                    </group>
+                    
+                    <footer>
+                        <button string="Get DGI Data" 
+                                name="action_get_dgi_data" 
+                                type="object" 
+                                class="btn-primary"
+                                icon="fa-download"/>
+                        <button string="Cancel" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

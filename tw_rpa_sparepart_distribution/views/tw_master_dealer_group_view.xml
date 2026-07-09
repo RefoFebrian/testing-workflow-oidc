@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_master_dealer_group_list" model="ir.ui.view">
+            <field name="name">tw.master.dealer.group.list</field>
+            <field name="model">tw.selection</field>
+            <field name="arch" type="xml">
+                <list string="Master Dealer Group" create="1" delete="0" editable="top">
+                    <field name="name" required="1" string="Dealer Group Name"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_tw_master_dealer_group" model="ir.actions.act_window">
+            <field name="name">Master Dealer Group</field>
+            <field name="res_model">tw.selection</field>
+            <field name="view_mode">list</field>
+            <field name="domain">[('type','=','DealerGroup')]</field>
+            <field name="context">{'default_type': 'DealerGroup'}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No master dealer group found. Let's create one!
+                </p>
+            </field>
+        </record>
+
+        <record id="tw_master_dealer_group_action_list" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="view_tw_master_dealer_group_list"/>
+            <field name="act_window_id" ref="action_tw_master_dealer_group"/>
+        </record>
+    </data>
+</odoo>

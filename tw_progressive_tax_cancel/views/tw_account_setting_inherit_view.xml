@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_progressive_tax_account_setting_journal_progressive_tax_cancel_form_view" model="ir.ui.view">
+            <field name="name">tw.progressive.tax.account.setting.journal.progressive.tax.cancel.form</field>
+            <field name="model">tw.account.setting</field>
+            <field name="inherit_id" ref="tw_birojasa_billing_process.tw_account_settings_birojasa_inherit_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='birojasa_journal_cancel']" position="inside">
+                    <field name="journal_progressive_tax_cancel_id" options="{'no_create': True}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

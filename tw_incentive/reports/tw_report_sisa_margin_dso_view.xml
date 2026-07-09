@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_report_sisa_margin_dso_wizard" model="ir.ui.view">
+            <field name="name">tw.report.sisa.margin.dso.wizard</field>
+            <field name="model">tw.report.sisa.margin.dso</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report Sisa Margin DSO">
+                    <group>
+                        <group>
+                            <field name="start_date"
+                                widget="daterange"
+                                options="{'end_date_field': 'end_date'}"
+                                required="1" />
+                            <field name="end_date" invisible="1" />
+                            <field name="employee_ids" widget="many2many_tags" options="{'no_create':True,'no_open':True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Branches">
+                            <field name="company_ids" colspan="4" nolabel="1" options="{'no_show':True,'no_create':True,'no_open':True}">
+                                <list create="1" delete="1" editable="bottom" edit="0">
+                                    <field name="code" />
+                                    <field name="name" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button name="action_excel_report" string="Export Data" type="object" class="oe_highlight" />
+                        <button string="Cancel" special="cancel" class="btn btn-default" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_report_sisa_margin_dso_wizard" model="ir.actions.act_window">
+            <field name="name">Laporan Sisa Margin DSO</field>
+            <field name="path">tw-report-sisa-margin-dso</field>
+            <field name="res_model">tw.report.sisa.margin.dso</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_report_sisa_margin_dso_wizard" />
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

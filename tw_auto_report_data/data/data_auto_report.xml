@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+         <record id="tw_auto_report_workshop" model="tw.report.automation">
+            <field name="name">Laporan Workshop</field>
+            <field name="directory">WorkshopReport</field>
+            <field name="parameter">{
+                'options': 'detail',
+                'start_date': (datetime.now() + relativedelta(hours=7) - relativedelta(months=1)).replace(day=1).strftime('%Y-%m-%d'),
+                'end_date': ((datetime.now() + relativedelta(hours=7)).replace(day=1) - relativedelta(days=1)).strftime('%Y-%m-%d'),
+                'state': 'all',
+                'company_ids': [],
+                'product_ids': [],
+                'partner_ids': [],
+            }</field>
+            <field name="method">generate_workshop_report</field>
+            <field name="ext">xlsx</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_work_order_report.model_tw_report_workshop_wizard" />
+            <field name="state">confirmed</field>
+        </record>
+
+        <record id="tw_auto_report_workshop_qty_measurement" model="tw.report.automation">
+            <field name="name">Laporan Workshop Qty Measurement</field>
+            <field name="directory">WorkshopQtyMeasurementReport</field>
+            <field name="parameter">{
+                'options': 'unit_entry',
+                'start_date': (datetime.now() + relativedelta(hours=7) - relativedelta(months=1)).replace(day=1).strftime('%Y-%m-%d'),
+                'end_date': ((datetime.now() + relativedelta(hours=7)).replace(day=1) - relativedelta(days=1)).strftime('%Y-%m-%d'),
+                'state': 'all',
+                'company_ids': [],
+                'product_ids': [],
+                'partner_ids': [],
+            }</field>
+            <field name="method">generate_workshop_report</field>
+            <field name="ext">xlsx</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_work_order_report.model_tw_report_workshop_wizard" />
+            <field name="state">confirmed</field>
+        </record>
+
+        <record id="tw_auto_report_main_dealer_sales_unit" model="tw.report.automation">
+            <field name="name">Laporan Penjualan Unit Main Dealer</field>
+            <field name="directory">MainDealerSalesReportUnit</field>
+            <field name="parameter">{
+                'division': 'Unit',
+                'product_ids': [],
+                'options': 'detail_per_type_warna',
+                'start_date': (date.today() - relativedelta(months=1)).replace(day=1).isoformat(),
+                'end_date': (date.today().replace(day=1) - relativedelta(days=1)).isoformat(),
+                'state': 'all',
+                'branch_ids': [],
+                'dealer_ids': [],
+                'type_file' : 'csv',
+            }</field>
+            <field name="method">generate_main_dealer_sales_report</field>
+            <field name="ext">csv</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_main_dealer_sales_report.model_tw_main_dealer_sales_report" />
+            <field name="state">confirmed</field>
+        </record>
+
+        <record id="tw_auto_report_main_dealer_sales_sparepart" model="tw.report.automation">
+            <field name="name">Laporan Penjualan Sparepart Main Dealer</field>
+            <field name="directory">MainDealerSalesReportSparepart</field>
+            <field name="parameter">{
+                'division': 'Sparepart',
+                'product_ids': [],
+                'options': 'detail_per_type_warna',
+                'start_date': (date.today() - relativedelta(months=1)).replace(day=1).isoformat(),
+                'end_date': (date.today().replace(day=1) - relativedelta(days=1)).isoformat(),
+                'state': 'all',
+                'branch_ids': [],
+                'dealer_ids': [],
+                'type_file' : 'csv',
+            }</field>
+            <field name="method">generate_main_dealer_sales_report</field>
+            <field name="ext">csv</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_main_dealer_sales_report.model_tw_main_dealer_sales_report" />
+            <field name="state">confirmed</field>
+        </record>
+
+        <record id="tw_auto_report_account_hutang" model="tw.report.automation">
+            <field name="name">Laporan Hutang</field>
+            <field name="directory">AccountHutangReport</field>
+            <field name="parameter">{
+                'option': 'all',
+                'start_date': (date.today() - relativedelta(months=1)).replace(day=1).isoformat(),
+                'end_date': (date.today().replace(day=1) - relativedelta(days=1)).isoformat(),
+                'state': 'outstanding',
+                'date': (date.today().replace(day=1) - relativedelta(days=1)).isoformat(),
+            }</field>
+            <field name="method">generate_account_hutang_report</field>
+            <field name="ext">xlsx</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_account_report_hutang_piutang.model_tw_account_report_hutang" />
+            <field name="state">confirmed</field>
+        </record>
+
+        <record id="tw_auto_report_account_piutang" model="tw.report.automation">
+            <field name="name">Laporan Piutang</field>
+            <field name="directory">AccountPiutangReport</field>
+            <field name="parameter">{
+                'option': 'all',
+                'start_date': (date.today() - relativedelta(months=1)).replace(day=1).isoformat(),
+                'end_date': (date.today().replace(day=1) - relativedelta(days=1)).isoformat(),
+                'state': 'outstanding',
+                'date': (date.today().replace(day=1) - relativedelta(days=1)).isoformat(),
+            }</field>
+            <field name="method">generate_account_piutang_report</field>
+            <field name="ext">xlsx</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_account_report_hutang_piutang.model_tw_account_report_piutang" />
+            <field name="state">confirmed</field>
+        </record>
+
+        <record id="tw_auto_report_stock_unit" model="tw.report.automation">
+            <field name="name">Laporan Stock Unit</field>
+            <field name="directory">StockUnitReport</field>
+            <field name="parameter">{
+                'location_ids': [],
+                'company_ids': [],
+                'product_ids': [],
+                'division': 'Unit',
+                'options_unit': 'detail',
+            }</field>
+            <field name="method">generate_stock_report_unit</field>
+            <field name="ext">xlsx</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_stock_report.model_tw_stock_report" />
+            <field name="state">confirmed</field>
+        </record> 
+
+        <record id="tw_auto_report_stock_direct_gift" model="tw.report.automation">
+            <field name="name">Laporan Stock Direct Gift</field>
+            <field name="directory">StockDirectGiftReport</field>
+            <field name="parameter">{
+                'location_ids': [],
+                'company_ids': [],
+                'product_ids': [],
+                'division': 'Umum',
+                'location_status': 'internal',
+            }</field>
+            <field name="method">generate_stock_report_unit</field>
+            <field name="ext">xlsx</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_stock_report.model_tw_stock_report" />
+            <field name="state">confirmed</field>
+        </record> 
+
+        <record id="tw_auto_report_stock_sparepart" model="tw.report.automation">
+            <field name="name">Laporan Stock Sparepart</field>
+            <field name="directory">StockSparepartReport</field>
+            <field name="parameter">{
+                'location_ids': [],
+                'company_ids': [],
+                'product_ids': [],
+                'division': 'Sparepart',
+                'options_sparepart': 'stock',
+                'location_status': 'all',
+            }</field>
+            <field name="method">generate_stock_report_sparepart</field>
+            <field name="ext">xlsx</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_stock_report.model_tw_stock_report" />
+            <field name="state">confirmed</field>
+        </record> 
+
+        <record id="tw_auto_report_stock_sparepart_intransit" model="tw.report.automation">
+            <field name="name">Laporan Stock Sparepart Intransit</field>
+            <field name="directory">StockSparepartIntransitReport</field>
+            <field name="parameter">{
+                'location_ids': [],
+                'company_ids': [],
+                'product_ids': [],
+                'division': 'Sparepart',
+                'options_sparepart': 'stock',
+                'location_status': 'transit',
+            }</field>
+            <field name="method">generate_stock_report_sparepart</field>
+            <field name="ext">xlsx</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_stock_report.model_tw_stock_report" />
+            <field name="state">confirmed</field>
+        </record>    
+        
+        <record id="tw_auto_report_stock_movement_unit" model="tw.report.automation">
+            <field name="name">Laporan Stock Movement Unit</field>
+            <field name="directory">StockMovementUnitReport</field>
+            <field name="parameter">{
+                'options': 'detail_movement',
+                'start_date': (datetime.now() + relativedelta(hours=7) - relativedelta(months=1)).replace(day=1).strftime('%Y-%m-%d'),
+                'end_date': ((datetime.now() + relativedelta(hours=7)).replace(day=1) - relativedelta(days=1)).strftime('%Y-%m-%d'),
+                'branch_ids': [],
+                'partner_ids': [],
+                'categ_ids' : [],
+                'product_ids' : [],
+                'picking_type' : 'all',
+                'division' : 'Unit',
+            }</field>
+            <field name="method">generate_stock_movement_report</field>
+            <field name="ext">xlsx</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_stock_report.model_tw_stock_movement_report" />
+            <field name="state">confirmed</field>
+        </record>  
+
+        <record id="tw_auto_report_stock_movement_sparepart" model="tw.report.automation">
+            <field name="name">Laporan Stock Movement Sparepart</field>
+            <field name="directory">StockMovementSparepartReport</field>
+            <field name="parameter">{
+                'options': 'detail_movement',
+                'start_date': (datetime.now() + relativedelta(hours=7) - relativedelta(months=1)).replace(day=1).strftime('%Y-%m-%d'),
+                'end_date': ((datetime.now() + relativedelta(hours=7)).replace(day=1) - relativedelta(days=1)).strftime('%Y-%m-%d'),
+                'branch_ids': [],
+                'partner_ids': [],
+                'categ_ids' : [],
+                'product_ids' : [],
+                'picking_type' : 'all',
+                'division' : 'Sparepart',
+            }</field>
+            <field name="method">generate_stock_movement_report</field>
+            <field name="ext">xlsx</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_stock_report.model_tw_stock_movement_report" />
+            <field name="state">confirmed</field>
+        </record>  
+
+        <record id="tw_auto_report_penjualan_unit" model="tw.report.automation">
+            <field name="name">Laporan Penjualan Unit</field>
+            <field name="directory">PenjualanReport</field>
+            <field name="parameter">{
+                'report_type': 'all',
+                'start_date': (datetime.now() + relativedelta(hours=7) - relativedelta(months=1)).replace(day=1).strftime('%Y-%m-%d'),
+                'end_date': ((datetime.now() + relativedelta(hours=7)).replace(day=1) - relativedelta(days=1)).strftime('%Y-%m-%d'),
+                'state_options': 'progress_done_cancelled',
+                'company_ids': [],
+                'finco_ids': [],
+                'product_ids': [],
+            }</field>
+            <field name="method">generate_penjualan_report</field>
+            <field name="ext">xlsx</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_dealer_sale_order.model_tw_dealer_sale_order_penjualan_report" />
+            <field name="state">confirmed</field>
+        </record>
+        
+        <record id="tw_auto_report_purchase_order_unit" model="tw.report.automation">
+            <field name="name">Laporan Purchase Order Unit</field>
+            <field name="directory">PurchaseOrderUnitReport</field>
+            <field name="parameter">{
+                'division': 'Unit',
+                'state': 'received',
+                'start_date': (datetime.now() + relativedelta(hours=7) - relativedelta(months=1)).replace(day=1).strftime('%Y-%m-%d'),
+                'end_date': ((datetime.now() + relativedelta(hours=7)).replace(day=1) - relativedelta(days=1)).strftime('%Y-%m-%d'),
+                'options': 'pembelian',
+                'company_ids': [],
+                'product_ids': [],
+                'partner_ids': [],
+            }</field>
+            <field name="method">generate_purchase_order_report</field>
+            <field name="ext">xlsx</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_purchase_order_report.model_tw_purchase_order_report" />
+            <field name="state">confirmed</field>
+        </record>
+
+        <record id="tw_auto_report_purchase_order_sparepart" model="tw.report.automation">
+            <field name="name">Laporan Purchase Order Sparepart</field>
+            <field name="directory">PurchaseOrderSparepartReport</field>
+            <field name="parameter">{
+                'division': 'Sparepart',
+                'state': 'received',
+                'start_date': (datetime.now() + relativedelta(hours=7) - relativedelta(months=1)).replace(day=1).strftime('%Y-%m-%d'),
+                'end_date': ((datetime.now() + relativedelta(hours=7)).replace(day=1) - relativedelta(days=1)).strftime('%Y-%m-%d'),
+                'options': 'pembelian',
+                'company_ids': [],
+                'product_ids': [],
+                'partner_ids': [],
+            }</field>
+            <field name="method">generate_purchase_order_report</field>
+            <field name="ext">xlsx</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_purchase_order_report.model_tw_purchase_order_report" />
+            <field name="state">confirmed</field>
+        </record>
+
+        <record id="tw_auto_report_asset_report" model="tw.report.automation">
+            <field name="name">Laporan Asset</field>
+            <field name="directory">AssetReport</field>
+            <field name="parameter">{
+                'option': 'asset',
+                'status': 'all',
+                'company_ids': [],
+                'category_ids': [],
+            }</field>
+            <field name="method">generate_asset_report</field>
+            <field name="ext">xlsx</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_asset_report.model_tw_asset_report" />
+            <field name="state">confirmed</field>
+        </record>
+
+        <record id="tw_auto_report_asset_prepaid_report" model="tw.report.automation">
+            <field name="name">Laporan Asset Prepaid</field>
+            <field name="directory">AssetPrepaidReport</field>
+            <field name="parameter">{
+                'option': 'prepaid',
+                'status': 'all',
+                'company_ids': [],
+                'category_ids': [],
+            }</field>
+            <field name="method">generate_asset_report</field>
+            <field name="ext">xlsx</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_asset_report.model_tw_asset_report" />
+            <field name="state">confirmed</field>
+        </record>
+
+        <record id="tw_auto_report_pembelian_part_ahm" model="tw.report.automation">
+            <field name="name">Laporan Pembelian Part AHM</field>
+            <field name="directory">PembelianPartAhmReport</field>
+            <field name="parameter">{
+                'division': 'Sparepart',
+                'start_date': date.today().replace(day=1).isoformat(),
+                'end_date': date.today().isoformat(),
+                'company_ids': [],
+            }</field>
+            <field name="method">generate_pembelian_part_ahm_report</field>
+            <field name="ext">xlsx</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_report_part_ahm.model_tw_report_pembelian_part_ahm" />
+            <field name="state">confirmed</field>
+        </record>
+
+        <record id="tw_auto_report_stock_picking_report" model="tw.report.automation">
+            <field name="name">Laporan Stock Picking</field>
+            <field name="directory">StockPickingReport</field>
+            <field name="parameter">{
+                'division': 'Unit',
+                'start_date': (date.today() - relativedelta(months=1)).replace(day=1),
+                'end_date': (date.today().replace(day=1) - relativedelta(days=1)),
+                'picking_type': 'in',
+                'company_ids': [],
+                'product_ids': [],
+                'partner_ids': [],
+                'categ_ids': [],
+            }</field>
+            <field name="method">generate_stock_picking_report</field>
+            <field name="ext">xlsx</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_stock_report.model_tw_stock_picking_report" />
+            <field name="state">confirmed</field>
+        </record>
+
+        <record id="tw_auto_report_order_fulfillment" model="tw.report.automation">
+            <field name="name">Laporan Order Fulfillment</field>
+            <field name="directory">OrderFulfillmentReport</field>
+            <field name="parameter">{
+                'start_date': (datetime.now() + relativedelta(hours=7) - relativedelta(months=1)).replace(day=1).strftime('%Y-%m-%d'),
+                'end_date': ((datetime.now() + relativedelta(hours=7)).replace(day=1) - relativedelta(days=1)).strftime('%Y-%m-%d'),
+                'trx_type': 'all',
+                'company_ids': False,
+                'division': False,
+            }</field>
+            <field name="method">generate_order_fulfillment_report</field>
+            <field name="ext">xlsx</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_stock_distribution_report.model_tw_report_order_fulfillment_wizard" />
+            <field name="state">confirmed</field>
+        </record>
+
+        <record id="tw_auto_report_trial_balance" model="tw.report.automation">
+            <field name="name">Laporan Trial Balance</field>
+            <field name="directory">TrialBalanceReport</field>
+            <field name="parameter">{
+                'period_id': (
+                    self.env['tw.account.period']
+                    .search([
+                        ('date_from', '=', (datetime.now() + relativedelta(hours=7) - relativedelta(months=1)).replace(day=1).strftime('%Y-%m-%d')),
+                        ('date_to', '=', ((datetime.now() + relativedelta(hours=7)).replace(day=1) - relativedelta(days=1)).strftime('%Y-%m-%d'))
+                    ], limit=1)
+                    .id
+                )
+            }</field>
+            <field name="method">generate_trial_balance_report</field>
+            <field name="ext">xlsx</field>
+            <field name="config_id" ref="tw_auto_report.tw_auto_report_config_files_auto_report" />
+            <field name="model_id" ref="tw_trial_balance_report.model_tw_trial_balance_report" />
+            <field name="state">confirmed</field>
+        </record>
+    
+    </data>
+    
+
+</odoo>

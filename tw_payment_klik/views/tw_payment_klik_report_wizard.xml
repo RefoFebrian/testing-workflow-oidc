@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="view_tw_laporan_payment_klik_wizard" model="ir.ui.view">
+			<field name="name">tw.payment.klik.report.wizard</field>
+			<field name="model">tw.payment.klik.report.wizard</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Laporan Payment Klik Bank">
+					<group>
+						<group>
+							<field name="report_type" invisible="1"/>
+							<field name="company_id" required="1" force_save="1"/>
+							<field name="options" required="1"/>
+							<field name="category" invisible="report_type != 'bank'" required="1" groups="tw_payment_klik.group_tw_field_category_report_payment_klik_bank"/>
+							<label for="start_date" string="Periode"/>
+							<div>
+								<field name="start_date" class="oe_inline" placeholder="Start Date" required="1"/>
+								<field name="end_date" class="oe_inline" placeholder="End Date" required="1"/>
+							</div>
+						</group>
+						<group>
+							<field name="bank_id" required="report_type == 'bank'" options="{'no_create': True,'no_open':True}" domain="[('code','in',('BCA','BRI','MDR','MANDIRI'))]"/>
+							<field name="journal_id" options="{'no_create': True,'no_open':True}"/>
+							<field name="user_id" options="{'no_create': True,'no_open':True}"/>
+							<field name="division"/>
+						</group>
+						<group colspan="4">
+							<field name="is_show_configuration" groups="tw_branch_setting.group_tw_branch_setting_update"/>
+						</group>
+					</group>
+					<group invisible="finance_email and city_id and district_id and not is_show_configuration"  groups="tw_branch_setting.group_tw_branch_setting_update">
+						<group colspan="4">
+							<div style="color:red;">
+								*Finance Email, City dan District hanya 1x di isi, dan akan ter-sync otomatis ke master.
+							</div>
+						</group>
+						<group>
+							<field name="finance_email" required="1" force_save="1"/>
+						</group>
+						<group>
+							<field name="city_id" required="1" options="{'no_create': True,'no_open':True}" force_save="1"/>
+							<field name="district_id" domain="[('city_id','=',city_id)]" required="1" options="{'no_create': True,'no_open':True}" force_save="1"/>
+						</group>
+					</group>
+					<notebook>
+						<page string="Branches">
+							<field name="company_ids" colspan="4" nolabel="1"/>
+						</page>
+					</notebook>
+	                <footer>
+	                    <button name="action_download" string="Export Data" type="object" class="oe_highlight"/>
+	                    <button string="Cancel" special="cancel" class="oe_link"/>
+	                </footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="tw_payment_klik_bank_report_action" model="ir.actions.act_window">
+			<field name="name">Report Payment Klik Bank</field> 
+			<field name="res_model">tw.payment.klik.report.wizard</field>
+			<field name="binding_view_types">form</field>
+			<field name="view_mode">form</field>
+	     	<field name="target">new</field>
+	     	<field name="context">{'default_report_type': 'bank'}</field>
+		</record>
+
+		<record id="tw_payment_klik_report_action" model="ir.actions.act_window">
+			<field name="name">Report Payment Klik</field> 
+			<field name="res_model">tw.payment.klik.report.wizard</field>
+			<field name="binding_view_types">form</field>
+			<field name="view_mode">form</field>
+	     	<field name="target">new</field>
+	     	<field name="context">{'default_report_type': 'standard','default_category':'all'}</field>
+		</record>
+
+	</data>
+</odoo>

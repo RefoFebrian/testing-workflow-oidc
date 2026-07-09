@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Vehicle Document Request -->
+        <record id="group_vehicle_document_request_button_post" model="res.groups">
+            <field name="category_id" ref="tw_document_handling"/>
+            <field name="name">Permohonan Faktur Post</field>
+            <field name="implied_ids" eval="[(4, ref('group_vehicle_document_request_read'))]"/>
+        </record>
+
+        <!-- Vehicle Document Receive -->
+
+        <record id="group_vehicle_document_receive_button_post" model="res.groups">
+            <field name="category_id" ref="tw_document_handling"/>
+            <field name="name">Penerimaan Faktur Post</field>
+            <field name="implied_ids" eval="[(4, ref('group_vehicle_document_receive_read'))]"/>
+        </record>
+
+        <!-- Hold CDB -->
+
+        <record id="group_vehicle_document_receive_button_hold_cdb" model="res.groups">
+            <field name="category_id" ref="tw_document_handling"/>
+            <field name="name">TW Button - Hold CDB</field>
+            <field name="implied_ids" eval="[(4, ref('group_vehicle_document_receive_read'))]"/>
+        </record>
+        
+        <!-- Unhold CDB -->
+        <record id="group_vehicle_document_receive_button_unhold_cdb" model="res.groups">
+            <field name="category_id" ref="tw_document_handling"/>
+            <field name="name">TW Button - Unhold CDB</field>
+            <field name="implied_ids" eval="[(4, ref('group_vehicle_document_receive_read'))]"/>
+        </record>
+
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_vehicle_document_request_button_post')),
+                (4,ref('group_vehicle_document_receive_button_post')),
+                (4,ref('group_vehicle_document_receive_button_hold_cdb')),
+                (4,ref('group_vehicle_document_receive_button_unhold_cdb')),
+                ]"/>
+        </record>
+
+    </data>
+</odoo>

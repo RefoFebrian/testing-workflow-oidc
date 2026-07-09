@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Wizard Form View -->
+    <record id="tw_main_dealer_sales_report_form" model="ir.ui.view">
+        <field name="name">tw.main.dealer.sales.report.form</field>
+        <field name="model">tw.main.dealer.sales.report</field>
+        <field name="arch" type="xml">
+            <form string="Main Dealer Sales Report">
+                <sheet>
+                    <group>
+                    <group invisible="1">
+                        <field name="name"/>
+                        <field name="file" filename="name"/>
+                    </group>
+                        <group>
+                            <field name="options" string="Options" required="1"/>
+                            <field name="state" string="State"/>
+                            <field name="product_ids" widget="many2many_tags" options="{'no_open':True,'no_create':True}"/>
+                        </group>
+                        <group>
+                            <field name="division" string="Division" required="1"/>
+                            <label for="start_date" string="Date" />
+                            <div>
+                                <field name="start_date" class="oe_inline" /> - <field name="end_date"
+                                  class="oe_inline" />
+                            </div>
+                            <field name="type_file" required="1" />
+                        </group>
+                    </group>
+                    <notebook colspan="5">
+                        <page string="Branch">
+                          <field name="company_ids" colspan="4" nolabel="1">
+                            <list>
+                                <field name="name"/>
+                                <field name="partner_id"/>
+                            </list>
+                          </field>
+                          </page>
+                          <page string="Dealer">
+                            <field name="dealer_ids" colspan="4" nolabel="1">
+                              <list>
+                                <field name="name"/>
+                                <field name="phone"/>
+                                <field name="email"/>
+                              </list>
+                            </field>
+                          </page>
+                    </notebook>
+                    <footer>
+                        <button name="excel_report" string="Generate Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action to open the wizard -->
+    <record id="action_main_dealer_sales_report_wizard" model="ir.actions.act_window">
+        <field name="name">Laporan Penjualan Main Dealer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tw.main.dealer.sales.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'dialog_size': 'medium'}</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_main_dealer_sales_report" name="Laporan Penjualan Main Dealer" parent="tw_menu.submenu_tw_showroom_report" action="action_main_dealer_sales_report_wizard" groups="tw_main_dealer_sales_report.group_tw_main_dealer_sales_report_read" sequence="35"/>
+</odoo>

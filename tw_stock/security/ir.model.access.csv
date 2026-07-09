@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_stock_picking_batch_line,tw_stock_picking_batch_line,model_tw_stock_picking_batch_line,base.group_user,1,0,0,0
+access_tw_stock_quality_check_incoming,tw_stock_quality_check_incoming,model_tw_stock_quality_check_incoming,base.group_user,1,0,0,0

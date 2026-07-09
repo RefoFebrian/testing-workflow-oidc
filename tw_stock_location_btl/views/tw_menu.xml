@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="menuitem_tw_selection_stock_location_btl"
+        name="Stock Location BTL"
+        parent="tw_selection.submenu_tw_selection"
+        action="tw_selection_stock_location_btl_action"
+        sequence="20"
+        groups="tw_stock_location_btl.group_tw_selection_stock_location_btl"
+    />
+
+</odoo>

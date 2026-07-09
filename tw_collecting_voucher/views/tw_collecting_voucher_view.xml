@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_collecting_voucher_list_view" model="ir.ui.view">
+            <field name="name">tw.collecting.voucher.list.view</field>
+            <field name="model">tw.collecting.voucher</field>
+            <field name="arch" type="xml">
+                <list string="Collecting Voucher" default_order="id desc" decoration-muted="state == 'cancel'" decoration-success="state == 'done'">
+                    <field name="company_id" string="Branch"/>
+                    <field name="name" string="Reference"/>
+                    <field name="division"/>
+                    <field name="date"/>
+                    <field name="account_id" groups="account.group_account_readonly"/>
+                    <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'confirm'"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_collecting_voucher_form_view" model="ir.ui.view">
+            <field name="name">tw.collecting.voucher.form_view</field>
+            <field name="model">tw.collecting.voucher</field>
+            <field name="arch" type="xml">
+                <form string="Collecting Voucher">
+                    <header>
+                        <button name="action_confirm" type="object" string="Confirm" class="oe_highlight" invisible="amount == 0 or state != 'draft'" groups="tw_collecting_voucher.group_tw_collecting_voucher_confirm"/>
+                        <button name="action_get_detail" type="object" string="Get Detail" class="oe_highlight" invisible="amount != 0 or state != 'draft'"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1 invisible="name"><span>Draft</span></h1>
+                            <h1 invisible="not name"><field name="name" readonly="1"/></h1>
+                        </div>
+                        <!-- Smart Button for Journal Entry -->
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_journal_entry" type="object" class="oe_stat_button" icon="fa-book" invisible="not collected_move_id">
+                                <field name="collected_move_id" invisible="1"/>
+                                <div class="o_stat_info">
+                                    <span class="o_stat_text">Journal Entry</span>
+                                </div>
+                            </button>
+                        </div>
+                        <field name="available_account_ids" invisible="1"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="collected_move_id" invisible="1"/>
+
+                        <group>
+                            <group>
+                                <field name="company_id" string="Branch" required="1" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft' or name"/>
+                                <field name="account_id" required="1" domain="[('id', 'in', available_account_ids)]" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'"/>
+                                <label for="date_start" string="Filter Date"/>
+                                <div class="o_row">
+                                    <field name="date_start" widget="date" readonly="state not in ('draft')" required="1"/>
+                                    <span><strong>to</strong></span>
+                                    <field name="date_end" widget="date" readonly="state not in ('draft')" required="1"/>
+                                </div>
+                                <field name="description" readonly="state != 'draft'" placeholder="Enter description here..."/>
+                            </group>
+                            
+                            <group>
+                                <field name="division" required="1" readonly="state != 'draft'"/>
+                                <field name="date" readonly="1"/>
+                                <field name="date_maturity" readonly="state != 'draft'"/>
+                                <field name="amount" readonly="1" groups="account.group_account_manager"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Move Lines" name="move_lines_tab">
+                                <field name="move_line_ids" nolabel="1" colspan="4" readonly="1">
+                                    <list string="Move Lines" editable="bottom" create="false" delete="false">
+                                        <field name="move_id" string="Entries" options="{'no_create': True}" readonly="1"/>
+                                        <field name="currency_id" column_invisible="1"/>
+                                        <field name="name" string="Label"/>
+                                        <field name="ref" string="Reference"/>
+                                        <field name="journal_id"/>
+                                        <field name="date" />
+                                        <field name="debit" sum="Total Debit" />
+                                        <field name="credit" sum="Total Credit" />
+                                        <field name="matching_number" string="Reconcile ID" column_invisible="parent.state != 'confirm'"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Result Journal Items" invisible="not collected_move_line_ids">
+                                <field name="collected_move_line_ids" readonly="1"/>
+                            </page>
+                            <page string="Audit Trail" name="audit_trail">
+                                <group string="Creation">
+                                    <label for="create_uid" string="Created by"/>
+                                    <div>
+                                        <field name="create_uid" readonly="1" class="oe_inline"/>
+                                        <field name="create_date" string="on" readonly="1" class="oe_inline" style="margin-left: 5px;"/>
+                                    </div>
+                                </group>
+                                
+                                <group string="Last Updated" groups="base.group_no_one">
+                                    <label for="write_uid" string="Last Updated by"/>
+                                    <div>
+                                        <field name="write_uid" readonly="1" class="oe_inline"/>
+                                        <field name="write_date" string="on" readonly="1" class="oe_inline" style="margin-left: 5px;"/>
+                                    </div>
+                                </group>
+                                
+                                <group string="Confirmation" invisible="not confirm_uid">
+                                    <label for="confirm_uid" string="Confirmed by"/>
+                                    <div>
+                                        <field name="confirm_uid" readonly="1" class="oe_inline"/>
+                                        <field name="confirm_date" string="on" readonly="1" class="oe_inline" style="margin-left: 5px;"/>
+                                    </div>
+                                </group>
+                            </page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+					</div>
+				</form>
+			</field>
+		</record>
+
+        <record id="tw_collecting_voucher_filter" model="ir.ui.view">
+            <field name="name">tw.collecting.voucher.filter</field>
+            <field name="model">tw.collecting.voucher</field>
+            <field name="arch" type="xml">
+                <search string="Collecting Voucher">
+                    <field name="name" string="Reference"/>
+                    <field name="company_id"/>
+                    <field name="date"/>
+                    <field name="account_id"/>
+                    <field name="description"/>
+                    <field name="move_line_ids" string="Move Line Entries" filter_domain="[('move_line_ids.move_id','ilike', self)]"/>
+                    <field name="move_line_ids" string="Move Line Label" filter_domain="[('move_line_ids.name','ilike', self)]"/>
+                    <field name="move_line_ids" string="Move Line Reference" filter_domain="[('move_line_ids.ref','ilike', self)]"/>
+                    <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                    <filter string="Confirmed" name="confirmed" domain="[('state','=','confirm')]"/>
+                    <filter string="Cancelled" name="cancelled" domain="[('state','=','cancel')]"/>
+                    <filter string="Outstanding" name="outstanding" domain="[('state','not in',('confirm','cancel'))]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                        <filter string="Date" name="group_date" context="{'group_by': 'date'}"/>
+                        <filter string="Branch" name="group_branch" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                        <filter string="Account" name="group_account" context="{'group_by': 'account_id'}"/>
+                        <filter string="Division" name="group_division" context="{'group_by': 'division'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="tw_collecting_voucher_action" model="ir.actions.act_window">
+            <field name="name">Collecting Voucher</field>
+            <field name="res_model">tw.collecting.voucher</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{'search_default_outstanding': '1'}" />
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first collecting voucher
+                </p>
+            </field>
+        </record>
+
+	</data>
+</odoo>

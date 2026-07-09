@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+    
+        <record id="group_button_tw_create_so" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_spk" />
+            <field name="name">TW Button Create SO</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_dealer_spk_read'))]" />
+        </record>
+
+        <record id="access_button_tw_create_so_dealer_spk" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_spk" />
+            <field name="name">access_button_tw_create_so_dealer_spk</field>
+            <field name="group_id" ref="group_button_tw_create_so" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_button_tw_view_so" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_spk" />
+            <field name="name">TW Button View SO</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_dealer_spk_read'))]" />
+        </record>
+
+        <record id="access_group_button_tw_view_so_dealer_spk" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_spk" />
+            <field name="name">access_group_button_tw_view_so_dealer_spk</field>
+            <field name="group_id" ref="group_button_tw_view_so" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_group_button_tw_view_so_dealer_sale_order" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_sale_order" />
+            <field name="name">access_group_button_tw_view_so_dealer_sale_order</field>
+            <field name="group_id" ref="tw_spk.group_button_tw_view_so" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_button_tw_confirm_spk" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_spk" />
+            <field name="name">TW Button Confirm SPK</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_dealer_spk_read')),
+                                             (4, ref('group_tw_dealer_spk_update'))]" />
+        </record>
+
+        <record id="access_button_tw_confirm_spk" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_spk" />
+            <field name="name">access_button_tw_confirm_spk</field>
+            <field name="group_id" ref="group_button_tw_confirm_spk" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_button_tw_cancel_spk" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_spk" />
+            <field name="name">TW Button Cancel SPK</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_dealer_spk_read')),
+                                             (4, ref('group_tw_dealer_spk_update'))]" />
+        </record>
+
+        <record id="access_button_tw_cancel_spk" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_spk" />
+            <field name="name">access_button_tw_cancel_spk</field>
+            <field name="group_id" ref="group_button_tw_cancel_spk" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_button_tw_cancel_reason" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_spk_cancel_reason" />
+            <field name="name">access_button_tw_cancel_reason</field>
+            <field name="group_id" ref="group_button_tw_cancel_spk" />
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_button_tw_set_draft_spk" model="res.groups">
+            <field name="category_id" ref="tw_module_category_dealer_spk" />
+            <field name="name">TW Button Set Draft SPK</field>
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_dealer_spk_read')), 
+                (4, ref('group_tw_dealer_spk_update'))]" />
+        </record>
+
+        <record id="access_button_tw_set_draft_spk" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_spk" />
+            <field name="name">access_button_tw_set_draft_spk</field>
+            <field name="group_id" ref="group_button_tw_set_draft_spk" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_button_tw_set_draft_reason" model="ir.model.access">
+            <field name="model_id" ref="model_tw_dealer_spk" />
+            <field name="name">access_button_tw_set_draft_reason</field>
+            <field name="group_id" ref="group_button_tw_set_draft_spk" />
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+    
+    </data>
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_button_tw_create_so')),
+                (4, ref('group_button_tw_view_so')),
+                (4, ref('group_button_tw_confirm_spk')),
+                (4, ref('group_button_tw_cancel_spk')),
+                (4, ref('group_button_tw_set_draft_spk')),
+            ]" />
+        </record>
+    </data>  
+
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_master_target_margin_approval_configuration" model="tw.approval.config">
+            <field name="name">Master Target Margin</field>
+            <field name="type">biaya</field>
+            <field name="model_id" ref="model_tw_master_target_margin" />
+        </record>
+
+        <record id="tw_master_target_margin_approval_matrix_example" model="tw.approval.matrix">
+            <field name="form_id" ref="tw_master_target_margin_approval_configuration" />
+            <field name="division">Unit</field>
+            <field name="approval_type">sequential</field>
+        </record>
+        
+        <record id="tw_master_incentive_approval_configuration" model="tw.approval.config">
+            <field name="name">Master Incentive</field>
+            <field name="type">biaya</field>
+            <field name="model_id" ref="model_tw_master_incentive" />
+        </record>
+
+        <record id="tw_master_incentive_approval_matrix_example" model="tw.approval.matrix">
+            <field name="form_id" ref="tw_master_incentive_approval_configuration" />
+            <field name="division">Unit</field>
+            <field name="approval_type">sequential</field>
+        </record>
+    </data>
+</odoo>

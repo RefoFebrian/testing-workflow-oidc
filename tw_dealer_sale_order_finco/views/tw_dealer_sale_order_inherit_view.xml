@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_dealer_sale_order_finco_view_list" model="ir.ui.view">
+            <field name="name">tw.dealer.sale.order.finco.view.list</field>
+            <field name="model">tw.dealer.sale.order</field>
+            <field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_sale_order_view_list" />
+            <field name="arch" type="xml">
+
+                <field name="sales_id" position="after">
+                    <field name="finco_id" optional="show" />
+                </field>
+
+            </field>
+        </record>
+
+        <record id="tw_dealer_order_finco_view_form" model="ir.ui.view">
+            <field name="name">tw.dealer.order.finco.view.form</field>
+            <field name="model">tw.dealer.sale.order</field>
+            <field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_order_view_form" />
+            <field name="arch" type="xml">
+                <field name="payment_type_id" position="after">
+                    <field name="finco_id"
+                           context="{'res_partner_search_mode': 'supplier', 'show_address': 1, 'show_vat': True}"
+                           placeholder="Type to find a finance company..."
+                           readonly="state != 'draft'" 
+                           required="payment_type == 'Credit'"
+                           invisible="payment_type != 'Credit'"
+                           options="{'no_create': True}"
+                           />
+                </field>
+
+                <field name="order_line" position="attributes">
+                    <attribute name="context">{
+                        'default_company_id': company_id,
+                        'default_division': division,
+                        'is_credit': True if finco_id else False
+                    }</attribute>
+                </field>
+
+            </field>
+        </record>
+
+        <record id="tw_dealer_order_line_finco_view_form" model="ir.ui.view">
+            <field name="name">tw.dealer.order.line.finco.view.form</field>
+            <field name="model">tw.dealer.sale.order.line</field>
+            <field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_sale_order_line_view_form" />
+            <field name="arch" type="xml">
+                <group name="payment_detail" position="replace">
+                    <group string="Payment" invisible="parent.finco_id == False">
+                        <field name="finco_incentive" invisible="1" />
+                        <field name="finco_incentive_tax" invisible="1" />
+                        <field name="finco_po_date" 
+                            required="parent.finco_id != False" 
+                            readonly="parent.state != 'draft'" />
+                        <field name="finco_po_number" 
+                            required="parent.finco_id != False" 
+                            readonly="parent.state != 'draft'" />
+                        <field name="tenor" 
+                            required="parent.finco_id != False" 
+                            readonly="parent.state != 'draft'" />
+                        <field name="installment" 
+                            required="parent.finco_id != False" 
+                            readonly="parent.state != 'draft'" />
+                        <field name="downpayment" 
+                            required="parent.finco_id != False" 
+                            readonly="parent.state != 'draft'" />
+                    </group>
+                </group>
+
+            </field>
+        </record>
+
+
+        <record id="tw_dealer_sales_order_finco_view_filter" model="ir.ui.view">
+            <field name="name">tw.dealer.sales.order.finco.view.filter</field>
+            <field name="model">tw.dealer.sale.order</field>
+            <field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_sales_order_view_filter" />
+            <field name="arch" type="xml">
+                <field name="company_id" position="after">
+                    <field name="finco_id" operator="child_of" />
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

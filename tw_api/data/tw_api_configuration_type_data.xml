@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_selection_type_api_hoki" model="tw.selection">
+	    	<field name="name">Hoki</field>
+            <field name="value">Hoki</field> 
+	    	<field name="type">ApiType</field> 
+        </record>
+    
+        <record id="tw_selection_type_api_umum" model="tw.selection">
+	    	<field name="name">Umum</field>
+            <field name="value">Umum</field> 
+	    	<field name="type">ApiType</field> 
+        </record>
+     </data>
+</odoo>

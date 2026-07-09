@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="picking_list_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div class="row">
+                            <!-- HEADER -->
+                            <table width="100%" style="font-size: 13px; font-family: Arial;">
+                                <tr>
+                                    <td width="40%">
+                                        <b>
+                                            <span style="font-size: 18px;" t-esc="o.company_id.name"/>
+                                        </b>
+                                    </td>
+                                    <td width="60%">
+                                        <b>
+                                            <span style="font-size: 18px;">PICKING LIST</span>
+                                        </b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span t-esc="o.company_id.street"/>
+                                    </td>
+                                    <td>
+                                        <table width="100%">
+                                            <tr>
+                                                <td width="25%" style="padding: 2px">No</td>
+                                                <td>: &#160;<span t-esc="o.name"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span t-esc="o.company_id.state_id.name"/>
+                                    </td>
+                                    <td>
+                                        <table width="100%">
+                                            <tr>
+                                                <td width="25%" style="padding: 2px">Lokasi</td>
+                                                <td>: &#160;<span t-esc="o.location_id.name"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- CONTENT LEAD -->
+                            <table width="100%" style="border: 1px solid; border-collapse: collapse; font-size: 13px; font-family: Arial; margin-top: 10px;">
+                                <tr>
+                                    <td width="40%" style="border-left: 1px solid; border-top: 1px solid; padding: 3px;">
+                                        <table width="100%">
+                                            <tr>
+                                                <td width="30%" style="padding: 2px">Kepada Yth</td>
+                                                <td>: &#160;<span t-esc="mutation_order(o).name"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 2px">Alamat</td>
+                                                <td>: &#160;<span t-esc="mutation_order(o).street"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td width="60%" style="border-right: 1px solid; border-top: 1px solid; padding: 3px; vertical-align: top;">
+                                        <table width="100%">
+                                            <tr>
+                                                <td width="30%" style="padding: 2px">Tanggal</td>
+                                                <td>: &#160;<span t-field="o.date" t-options='{"format": "dd-MM-yyyy"}'/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 2px">No Picking</td>
+                                                <td>: &#160;<span t-esc="o.origin"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="padding: 0;">
+                                        <!-- TABLE UNIT -->
+                                        <t t-if="o.division in ('Unit',)">
+                                            <table width="100%" style="border: 1px solid; border-collapse: collapse; font-size: 13px; font-family: Arial;">
+                                                <tr>
+                                                    <td style="padding: 3px; border: 1px solid; text-align: center;">
+                                                        <b>No</b>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid; text-align: center;" colspan="2">
+                                                        <b>Kode</b>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid; text-align: center;">
+                                                        <b>Nama Barang</b>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid; text-align: center;">
+                                                        <b>Keterangan</b>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid; text-align: center;" colspan="2">
+                                                        <b>Warna</b>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid; text-align: center;">
+                                                        <b>No Mesin</b>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid; text-align: center;">
+                                                        <b>No Rangka</b>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid; text-align: center;">
+                                                        <b>Plgn</b>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid; text-align: center;">
+                                                        <b>Qty</b>
+                                                    </td>
+                                                </tr>
+                                                <tr t-foreach="no_urut(o.move_ids_without_package)" t-as="line">
+                                                    <td style="padding: 3px; border: 1px solid; text-align: center;">
+                                                        <span t-esc="line[0]"/>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid;" colspan="2">
+                                                        <span t-esc="line[1].product_id.default_code"/>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid;">
+                                                        <span t-esc="line[1].product_id.product_tmpl_id.factur_code"/>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid;">
+                                                        <span t-esc="line[1].product_id.name"/>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid;" colspan="2">
+                                                        <span t-esc="product_color(line[1].product_id)"/>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid;">
+                                                        <t t-foreach="line[1].move_line_ids" t-as="move_line">
+                                                            <span t-esc="move_line.lot_id.name"/>
+                                                        </t>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid;" class="text-end">
+                                                        <t t-foreach="line[1].move_line_ids" t-as="move_line">
+                                                            <span t-esc="move_line.lot_id.chassis_number"/>
+                                                        </t>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid;">
+                                                        <span t-esc="o.company_id.code"/>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid; text-align: right;">
+                                                        <span t-esc="line[1].quantity"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </t>
+
+                                        <!-- TABLE SPAREPART -->
+                                        <t t-if="o.division in ('Sparepart',)">
+                                            <table width="100%" style="border: 1px solid; border-collapse: collapse; font-size: 13px; font-family: Arial;">
+                                                <tr>
+                                                    <td style="padding: 3px; border: 1px solid; text-align: center;">
+                                                        <b>No</b>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid; text-align: center;">
+                                                        <b>Kode</b>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid; text-align: center;">
+                                                        <b>Nama Barang</b>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid; text-align: center;">
+                                                        <b>Keterangan</b>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid; text-align: center;">
+                                                        <b>Plgn</b>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid; text-align: center;">
+                                                        <b>No Picking</b>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid; text-align: center;">
+                                                        <b>QTY</b>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid; text-align: center;">
+                                                        <b>Sub Loc</b>
+                                                    </td>
+                                                </tr>
+                                                <tr t-foreach="no_urut(o.move_ids_without_package)" t-as="line">
+                                                    <td style="padding: 3px; border: 1px solid;">
+                                                        <span t-esc="line[0]"/>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid;">
+                                                        <span t-esc="line[1].product_id.default_code"/>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid;">
+                                                        <span t-esc="line[1].product_id.name"/>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid;">
+                                                        <span t-esc="line[1].product_id.description"/>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid;">
+                                                        <span t-esc="o.company_id.code"/>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid;">
+                                                        <span t-esc="o.origin"/>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid; text-align: right;">
+                                                        <span t-esc="line[1].quantity"/>
+                                                    </td>
+                                                    <td style="padding: 3px; border: 1px solid; text-align: right;">
+                                                        <span t-esc="get_sub(o.company_id.id, line[1].product_id.id)"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- FOOTER -->
+                            <table width="100%" style="font-size: 13px; font-family: Arial;">
+                                <tr height="50px">
+                                    <td width="30%">
+                                        <b>Dicetak oleh</b>
+                                    </td>
+                                    <td width="40%"/>
+                                    <td width="15%" style="text-align: right;">
+                                        <b>Total</b>
+                                    </td>
+                                    <td width="15%" style="text-align: right;">
+                                        <b>
+                                            <span t-esc="qty_total(o)"/>
+ Unit</b>
+                                    </td>
+                                </tr>
+                                <tr height="11px">
+                                    <td>_____________________</td>
+                                    <td colspan="3" style="text-align: right;">Lembar ke-1 Gudang / Lembar ke-2 Arsip</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

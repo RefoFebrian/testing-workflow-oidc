@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Form Groups -->
+		
+        <record id="group_tw_company_form_read" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_role" />
+			<field name="name">TW Company Form Read</field>
+		</record>
+
+        <!-- TW Res Branch Group Read -->
+
+        <record id="tw_res_branch_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Branch Read</field>
+            <field name="implied_ids" eval="[(4,ref('group_tw_company_form_read'))]" />
+        </record>
+
+        <record id="tw_res_branch_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_res_company" />
+            <field name="name">tw_res_branch read</field>
+            <field name="group_id" ref="tw_res_branch_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+        <record id="tw_res_branch_partner_read" model="ir.model.access">
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="name">tw_res_branch_partner read</field>
+            <field name="group_id" ref="tw_res_branch_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+        <record id="tw_res_branch_head_read" model="ir.model.access">
+            <field name="model_id" ref="hr.model_hr_employee" />
+            <field name="name">tw_res_branch_head read</field>
+            <field name="group_id" ref="tw_res_branch_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+        <record id="tw_res_branch_country_state_read" model="ir.model.access">
+            <field name="model_id" ref="base.model_res_country_state" />
+            <field name="name">tw_res_branch_country_state read</field>
+            <field name="group_id" ref="tw_res_branch_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+        <record id="tw_res_branch_city_read" model="ir.model.access">
+            <field name="model_id" ref="tw_localization.model_res_city" />
+            <field name="name">tw_res_branch_city read</field>
+            <field name="group_id" ref="tw_res_branch_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+        <record id="tw_res_branch_district_read" model="ir.model.access">
+            <field name="model_id" ref="tw_localization.model_res_district" />
+            <field name="name">tw_res_branch_district read</field>
+            <field name="group_id" ref="tw_res_branch_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+        <record id="tw_res_branch_sub_district_read" model="ir.model.access">
+            <field name="model_id" ref="tw_localization.model_res_sub_district" />
+            <field name="name">tw_res_branch_sub_district read</field>
+            <field name="group_id" ref="tw_res_branch_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- TW Res Branch Group Update -->
+
+        <record id="tw_res_branch_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Branch Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_res_branch_group_read'))]" />
+        </record>
+
+        <record id="tw_res_branch_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_res_company" />
+            <field name="name">tw_res_branch update</field>
+            <field name="group_id" ref="tw_res_branch_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- TW Res Branch Group Delete -->
+
+        <record id="tw_res_branch_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Branch Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_res_branch_group_read'))]" />
+        </record>
+
+        <record id="tw_res_branch_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_res_company" />
+            <field name="name">tw_res_branch delete</field>
+            <field name="group_id" ref="tw_res_branch_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+    </data>
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('tw_res_branch_group_read')),
+                (4,ref('tw_res_branch_group_update')),
+                (4,ref('tw_res_branch_group_delete')),
+                (4,ref('group_tw_company_form_read')),
+                ]" />
+        </record>
+    </data>
+</odoo>
+

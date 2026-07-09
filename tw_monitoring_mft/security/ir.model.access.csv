@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_mft_config,tw_monitoring_mft.tw_mft_config,model_tw_mft_config,base.group_user,1,0,0,0
+access_tw_mft_log,tw_monitoring_mft.tw_mft_log,model_tw_mft_log,base.group_user,1,0,0,0
+access_tw_mft_log_detail,tw_monitoring_mft.tw_mft_log_detail,model_tw_mft_log_detail,base.group_user,1,0,0,0

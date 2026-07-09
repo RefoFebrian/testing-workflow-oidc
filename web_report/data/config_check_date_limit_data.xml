@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="web_report_report_date_range_limit" model="ir.config_parameter">
+            <field name="key">web_report.report_date_range_limit</field>
+            <field name="value">30</field>
+        </record>
+    </data>
+</odoo>

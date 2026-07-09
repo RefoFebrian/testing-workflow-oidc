@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TW Map Widget</title>
+</head>
+<body>
+    <section class="container mt-5 mb-5" style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4 font-weight-bold" style="color: #0d2b52; margin-bottom: 10px;">TW Map Widget</h1>
+                <p class="lead" style="color: #555; font-size: 1.25rem;">Premium Interactive Maps Integration for Odoo 18</p>
+                <img src="banner.png" alt="TW Map Widget Banner" class="img-fluid rounded shadow-lg mt-4 w-100" style="max-height: 500px; object-fit: cover;" />
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="row mt-5 pt-4">
+            <div class="col-md-12 text-center mb-5">
+                <h2 class="font-weight-bold" style="color: #0d2b52;">Key Features</h2>
+                <hr style="width: 60px; border-top: 4px solid #00a09d; margin: 15px auto;" />
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0" style="transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-4">
+                            <i class="fa fa-map-marker fa-4x" style="color: #00a09d;"></i>
+                        </div>
+                        <h5 class="card-title font-weight-bold mb-3" style="color: #0d2b52;">Interactive OWL Widget</h5>
+                        <p class="card-text text-muted">A fully responsive, modern OWL component that provides seamless map interactions directly in your Odoo forms.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0" style="transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-4">
+                            <i class="fa fa-globe fa-4x" style="color: #00a09d;"></i>
+                        </div>
+                        <h5 class="card-title font-weight-bold mb-3" style="color: #0d2b52;">Multi-Provider Support</h5>
+                        <p class="card-text text-muted">Easily switch between OpenStreetMap (Leaflet) and Google Maps API seamlessly based on your system parameters.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0" style="transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-4">
+                            <i class="fa fa-refresh fa-4x" style="color: #00a09d;"></i>
+                        </div>
+                        <h5 class="card-title font-weight-bold mb-3" style="color: #0d2b52;">Bi-directional Sync</h5>
+                        <p class="card-text text-muted">Drag a pin to update coordinates, or manually type coordinates to move the pin. Real-time data binding built-in.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0" style="transition: transform 0.3s; cursor: pointer; border-top: 4px solid #ff9800 !important;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-4">
+                            <i class="fa fa-lock fa-4x" style="color: #ff9800;"></i>
+                        </div>
+                        <h5 class="card-title font-weight-bold mb-3" style="color: #0d2b52;">Readonly Mode <span class="badge badge-warning text-white">NEW</span></h5>
+                        <p class="card-text text-muted">Fully supports <code>readonly="1"</code>. Locks the map pin in place while keeping the map visually interactive for panning and zooming.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0" style="transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-4">
+                            <i class="fa fa-address-card fa-4x" style="color: #00a09d;"></i>
+                        </div>
+                        <h5 class="card-title font-weight-bold mb-3" style="color: #0d2b52;">Reverse Geocoding</h5>
+                        <p class="card-text text-muted">Automatically resolves addresses. Dragging the pin will automatically populate the associated address fields.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0" style="transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-4">
+                            <i class="fa fa-mobile fa-4x" style="color: #00a09d;"></i>
+                        </div>
+                        <h5 class="card-title font-weight-bold mb-3" style="color: #0d2b52;">Mobile Friendly</h5>
+                        <p class="card-text text-muted">Works flawlessly on mobile and tablet devices, offering a native touch-friendly experience across the board.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- How it works -->
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <div class="p-5 rounded shadow-sm" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+                    <h2 class="font-weight-bold text-center mb-5" style="color: #0d2b52;">How to Use</h2>
+                    <ul class="list-unstyled mx-auto" style="font-size: 1.15rem; color: #444; max-width: 800px; line-height: 1.8;">
+                        <li class="mb-4 d-flex align-items-start">
+                            <i class="fa fa-check-circle mt-1 mr-3" style="color: #00a09d; font-size: 1.5rem;"></i> 
+                            <div><strong>1. Install:</strong> Install the TW Map Widget and configure your preferred provider in <em>Settings &gt; General Settings &gt; Integrations</em>.</div>
+                        </li>
+                        <li class="mb-4 d-flex align-items-start">
+                            <i class="fa fa-check-circle mt-1 mr-3" style="color: #00a09d; font-size: 1.5rem;"></i> 
+                            <div><strong>2. Add Field:</strong> Add a <code>JSON</code> field to your Python model to store map data.</div>
+                        </li>
+                        <li class="mb-4 d-flex align-items-start">
+                            <i class="fa fa-check-circle mt-1 mr-3" style="color: #00a09d; font-size: 1.5rem;"></i> 
+                            <div><strong>3. Add to View:</strong> In your XML view, simply use <code>widget="tw_map"</code> on your field.</div>
+                        </li>
+                        <li class="mb-4 d-flex align-items-start">
+                            <i class="fa fa-check-circle mt-1 mr-3" style="color: #00a09d; font-size: 1.5rem;"></i> 
+                            <div><strong>4. Configure Sync:</strong> Use <code>options="{'lat_field': 'your_lat_field', 'long_field': 'your_long_field', 'address_field': 'your_street'}"</code> to sync the map pin with specific fields.</div>
+                        </li>
+                        <li class="mb-4 d-flex align-items-start">
+                            <i class="fa fa-check-circle mt-1 mr-3" style="color: #00a09d; font-size: 1.5rem;"></i> 
+                            <div><strong>5. Readonly Support:</strong> Add <code>readonly="1"</code> to disable drag-and-drop map manipulation, perfect for approved or locked records.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="row mt-5 mb-5 text-center">
+            <div class="col-12">
+                <h3 class="font-weight-bold" style="color: #0d2b52;">Need Help or Customization?</h3>
+                <p class="text-muted mt-3 mb-4" style="font-size: 1.1rem;">Our team is ready to assist you in integrating or customizing the TW Map Widget for your unique business needs.</p>
+                <a href="http://www.tunasgroup.com" target="_blank" class="btn btn-lg px-5 py-3 font-weight-bold" style="background-color: #00a09d; color: white; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,160,157,0.3);">Contact Us</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

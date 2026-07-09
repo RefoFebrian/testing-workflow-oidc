@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_activity_atl_btl_result_filter" model="ir.ui.view">
+            <field name="name">tw.activity.atl.btl.result.filter</field>
+            <field name="model">tw.activity.atl.btl</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="month"/>
+                    <field name="year"/>
+                    <filter string="Open" name="state_open" domain="[('state','=','open')]"/>
+					<filter string="Done" name="state_done" domain="[('state','=','done')]"/>
+
+                    <group expand="1" string="Group By">
+                        <filter string="Branch" name="group_by_branch" context="{'group_by':'company_id'}"/>
+                        <filter string="Bulan" name="group_by_month" context="{'group_by':'month'}"/>
+                    </group>     
+                </search>
+            </field>
+        </record>
+
+        <record id="tw_activity_atl_btl_results_action" model="ir.actions.server">
+            <field name="name">Activity Results</field>
+            <field name="model_id" ref="tw_activity_atl_btl.model_tw_activity_atl_btl"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.activity.atl.btl'].action_result_activity_btl()
+            </field>
+        </record>  
+
+    </data>
+</odoo>

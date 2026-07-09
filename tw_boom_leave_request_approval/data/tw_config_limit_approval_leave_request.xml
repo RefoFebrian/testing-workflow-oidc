@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_boom_leave_request_approval_limit_config" model="ir.config_parameter">
+            <field name="key">tw_boom_leave_request_approval.limit_approval_leave_request</field>
+            <field name="value">3</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <!-- Report Employee Menu -->
+        <menuitem id="submenu_tw_employee_report" name="Laporan" parent="tw_menu.menu_tw_employee" sequence="4" groups="tw_hr_report.group_tw_employee_laporan"/>
+        <menuitem id="menuitem_tw_employee_report" name="Laporan Employee" parent="submenu_tw_employee_report" sequence="1" action="action_employee_report" groups="tw_hr_report.group_tw_employee_laporan"/>
+        <menuitem id="menuitem_tw_employee_historical_report" name="Laporan Employee Historical" parent="submenu_tw_employee_report" sequence="2" action="action_employee_historical_report" groups="tw_hr_report.group_tw_employee_historical_laporan"/>
+    
+    </data>
+    
+
+</odoo>

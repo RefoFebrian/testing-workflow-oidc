@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record model="ir.config_parameter" id="web_session_timeout_max_timeout_seconds">
+            <field name="key">web_session_timeout.max_timeout_seconds</field>
+            <field name="value">72000</field>
+        </record>
+
+        <record model="ir.config_parameter" id="web_session_timeout_max_idle_timeout_seconds">
+            <field name="key">web_session_timeout.max_idle_timeout_seconds</field>
+            <field name="value">7200</field>
+        </record>
+        
+    </data>
+</odoo>

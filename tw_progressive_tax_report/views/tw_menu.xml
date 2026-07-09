@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <menuitem id="menuitem_tw_progressive_tax_report" parent="tw_vehicle_document_report.tw_vehicle_document_report_menu_sub"
+    sequence="10" action="action_tw_progressive_tax_report" 
+    groups="tw_progressive_tax_report.group_tw_progressive_tax_report"
+  />
+
+</odoo>

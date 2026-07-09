@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_selection_branch_type_ho" model="tw.selection">
+	    	<field name="name">Head Office</field>
+            <field name="value">HO</field> 
+	    	<field name="type">BranchType</field> 
+        </record>
+        <record id="tw_selection_branch_type_md" model="tw.selection">
+	    	<field name="name">Main Dealer</field>
+            <field name="value">MD</field> 
+	    	<field name="type">BranchType</field> 
+        </record>
+        <record id="tw_selection_branch_type_dl" model="tw.selection">
+	    	<field name="name">Dealer</field>
+            <field name="value">DL</field> 
+	    	<field name="type">BranchType</field> 
+        </record>
+    </data>
+</odoo>

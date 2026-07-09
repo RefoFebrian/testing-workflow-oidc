@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- BASE VIEW: Hanya Langkah 1 (Validasi KTP/HP) -->
+    <record model="ir.ui.view" id="tw_customer_validation_base_view">
+        <field name="name">tw.customer.validation.base.view</field>
+        <field name="model">res.partner</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <form string="Form Add Customer">
+                <sheet>
+                    <!-- Hitung ID untuk cek Edit Mode vs Create Mode -->
+                    <field name="id" invisible="1"/>
+
+                    <!-- Step 1: Validation Section (Only Visible on Create before passing validation) -->
+                    <div id="validation_section" invisible="id or (search_ktp_hp and not duplicate_partner_id)">
+                        <div class="alert alert-info" role="alert" invisible="search_ktp_hp">
+                            <i class="fa fa-info-circle"/>
+ Bantu jaga data pelanggan kita tetap rapi yuk! Silakan masukkan <b>No HP</b> atau <b>No KTP</b> di bawah ini untuk mengecek apakah pelanggan sudah pernah terdaftar.
+                        </div>
+
+                        <!-- Duplicate Warning Banner -->
+                        <div class="alert alert-danger" role="alert" invisible="not duplicate_partner_id">
+                            <h5>
+                                <i class="fa fa-exclamation-triangle"/>
+ Data Pelanggan Sudah Terdaftar!</h5>
+                            <field name="duplicate_warning_message" nolabel="1" readonly="1"/>
+                            <p class="mt-2 mb-0 text-muted">Karena datanya sudah ada, yuk klik tombol di bawah untuk menutup form ini dan langsung pakai data tersebut.</p>
+                            <div class="mt-2 d-flex gap-2 align-items-center">
+                                <field name="duplicate_partner_html" nolabel="1" readonly="1" invisible="(context.get('active_model') and context.get('active_model') != 'res.partner') or context.get('form_view_ref')"/>
+                                <span invisible="not ((context.get('active_model') and context.get('active_model') != 'res.partner') or context.get('form_view_ref'))">Silakan tutup peringatan ini dan pilih pelanggan tersebut dari teks/dropdown pada form sebelumnya.</span>
+                                <button special="cancel" string="Tutup / Batal (Kembali ke Form)" class="btn-warning" icon="fa-times" invisible="not ((context.get('active_model') and context.get('active_model') != 'res.partner') or context.get('form_view_ref'))"/>
+                            </div>
+                        </div>
+
+                        <!-- 1 Kolom Pencarian -->
+                        <group name="validation_group" string="Langkah 1: Verifikasi Data">
+                            <field name="search_ktp_hp" placeholder="Masukkan No KTP atau No HP..." required="not id"/>
+                            <field name="duplicate_partner_id" invisible="1"/>
+                            <field name="duplicate_warning_message" invisible="1"/>
+                        </group>
+                    </div>
+
+                    <!-- Step 2: Full form, only visible when no duplicate found AND search is filled -->
+                    <!-- Form Input Dinamis: Akan diisi oleh child views melalui inheritance -->
+                    <div id="dynamic_input_area" invisible="not id and (not search_ktp_hp or duplicate_partner_id)">
+                        <!-- Konten akan diinjeksi di sini oleh modul turunannya -->
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

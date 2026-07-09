@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_stock_opname_pic_wizard" model="ir.ui.view">
+            <field name="name">view.tw.stock.opname.pic.wizard</field>
+            <field name="model">tw.stock.opname.pic</field>
+            <field name="arch" type="xml">
+                <form string="Input PIC Stock Opname">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="opname_id" class="oe_inline" options="{'no_open':True,'no_create_edit':True}" readonly="1" force_save="1"/>
+                            </h1>
+                        </div>
+                        <notebook invisible="context.get('default_division') != 'Unit'">
+                            <page string="List Lokasi">
+                                <separator string="UNIT"/>
+                                <field name="so_unit_pic_ids">
+                                    <list editable='bottom' create="false" edit='true' delete="false">
+                                        <field name="employee_id" required="1" options="{'no_open':True,'no_create':True}"/>
+                                        <field name="company_id" invisible="1"/>
+                                        <field name="location_id" options="{'no_open':True,'no_create_edit':True}" readonly="1" force_save="1"/>
+                                        <field name="is_showroom" widget="boolean_toggle"/>
+                                    </list>
+                                </field>
+                                <separator string="ACCESSORIES"/>
+                                <field name="so_accessories_pic_ids">
+                                    <list editable='bottom' create="false" edit='true' delete="false">
+                                        <field name="employee_id" required="1" options="{'no_open':True,'no_create':True}"/>
+                                        <field name="company_id" invisible="1"/>
+                                        <field name="location_id" options="{'no_open':True,'no_create_edit':True}" readonly="1" force_save="1"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                        <notebook invisible="context.get('default_division') != 'Sparepart'">
+                            <page string="List Lokasi">
+                                <separator string="SPAREPART"/>
+                                <field name="so_unit_pic_ids">
+                                    <list editable='bottom' create="false" edit='true' delete="false">
+                                        <field name="employee_id" required="1" options="{'no_open':True,'no_create':True}"/>
+                                        <field name="company_id" invisible="1"/>
+                                        <field name="location_id" options="{'no_open':True,'no_create_edit':True}" readonly="1" force_save="1"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <footer>
+                        <button name="action_generate_pic" string="Confirm" type="object" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

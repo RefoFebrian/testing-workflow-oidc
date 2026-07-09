@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Generate MFT File POD Menu -->
+        <menuitem id="tw_mft_file_pod_menuitem"
+            name="Generate File AHM POD"
+            parent="tw_monitoring_mft.tw_generate_mft_submenu"
+            action="tw_export_mft_file_pod_action"
+            sequence="10"
+            groups="group_tw_export_mft_file_pod_read"
+        />
+
+    </data>
+</odoo>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Menu Proposal -->
+        <menuitem id="tw_proposal_menuitem" parent="tw_menu.submenu_tw_backoffice_non_trade" action="action_tw_proposal" sequence="15" groups="group_tw_proposal_read"/>
+        
+    </data>
+</odoo>

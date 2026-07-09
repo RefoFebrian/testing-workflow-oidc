@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Inherit Form View to add remark field -->
+		<record id="tw_faktur_pajak_out_form_view_inherit_remark" model="ir.ui.view">
+			<field name="name">tw.faktur.pajak.out.form.inherit.remark</field>
+			<field name="model">tw.faktur.pajak.out</field>
+			<field name="inherit_id" ref="tw_faktur_pajak.tw_faktur_pajak_out_form_view"/>
+			<field name="arch" type="xml">
+				<field name="ref" position="after">
+					<field name="remark" readonly="1"/>
+				</field>
+			</field>
+		</record>
+
+		<!-- Inherit List View to add remark field -->
+		<record id="tw_faktur_pajak_out_list_view_inherit_remark" model="ir.ui.view">
+			<field name="name">tw.faktur.pajak.out.list.inherit.remark</field>
+			<field name="model">tw.faktur.pajak.out</field>
+			<field name="inherit_id" ref="tw_faktur_pajak.tw_faktur_pajak_out_list_view"/>
+			<field name="arch" type="xml">
+				<field name="state" position="before">
+					<field name="remark" optional="hide"/>
+				</field>
+			</field>
+		</record>
+	</data>
+</odoo>

@@ -1,0 +1,19 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_mrp_bundling_read,tw_mrp.bundling read,mrp.model_mrp_bom,group_tw_mrp_bom_bundling_read,1,0,0,0
+access_tw_mrp_bundling_update,tw_mrp.bundling update,mrp.model_mrp_bom,group_tw_mrp_bom_bundling_update,0,1,1,0
+access_tw_mrp_bundling_delete,tw_mrp.bundling delete,mrp.model_mrp_bom,group_tw_mrp_bom_bundling_delete,0,0,0,1
+access_tw_mrp_bundling_order_read,tw_mrp.bundling.order read,model_mrp_production,group_tw_mrp_bundling_order_read,1,0,0,0
+access_tw_mrp_bundling_order_update,tw_mrp.bundling.order update,model_mrp_production,group_tw_mrp_bundling_order_update,0,1,1,0
+access_tw_mrp_bundling_order_delete,tw_mrp.bundling.order delete,model_mrp_production,group_tw_mrp_bundling_order_delete,0,0,0,1
+access_tw_mrp_bundling_workorder_read,tw_mrp.bundling.workorder read,mrp.model_mrp_workorder,group_tw_mrp_bundling_order_read,1,0,0,0
+access_tw_mrp_bundling_workorder_update,tw_mrp.bundling.workorder update,mrp.model_mrp_workorder,group_tw_mrp_bundling_order_update,0,1,1,0
+access_tw_mrp_bundling_workorder_delete,tw_mrp.bundling.workorder delete,mrp.model_mrp_workorder,group_tw_mrp_bundling_order_delete,0,0,0,1
+access_tw_mrp_bundling_bom_read,tw_mrp.bundling.bom read,mrp.model_mrp_bom,group_tw_mrp_bundling_order_read,1,0,0,0
+access_tw_mrp_bundling_stock_scrap_read,tw_mrp.bundling.stock.scrap read,stock.model_stock_scrap,group_tw_mrp_bundling_order_read,1,0,0,0
+access_tw_mrp_bundling_stock_move_read,tw_mrp.bundling.stock.move read,stock.model_stock_move,group_tw_mrp_bundling_order_read,1,0,0,0
+access_tw_mrp_bundling_stock_move_update,tw_mrp.bundling.stock.move update,stock.model_stock_move,group_tw_mrp_bundling_order_update,0,1,1,0
+access_tw_mrp_bundling_stock_picking_read,tw_mrp.bundling.stock.picking read,stock.model_stock_picking,group_tw_mrp_bundling_order_read,1,0,0,0
+access_tw_mrp_bundling_stock_picking_update,tw_mrp.bundling.stock.picking update,stock.model_stock_picking,group_tw_mrp_bundling_order_update,0,1,1,0
+access_tw_upload_serial_wizard,tw.upload.serial.wizard access,model_tw_upload_serial_wizard,base.group_user,1,1,1,1
+access_tw_bundling_production_report,tw.bundling.production.report access,model_tw_bundling_production_report,group_tw_mrp_bundling_report_read,1,1,1,1
+

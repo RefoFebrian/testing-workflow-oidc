@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_asset_disposal_inherit_hutang_lain_form_view" model="ir.ui.view">
+            <field name="name">tw.asset.disposal.hutang.lain.inherit.form</field>
+            <field name="model">tw.asset.disposal</field>
+            <field name="inherit_id" ref="tw_asset_disposal.tw_disposal_asset_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='disposal_detail']" position="after">
+                    <page string="Alokasi HL" invisible="type != 'sold'">
+                        <field name="hl_ids" nolabel="1" widget="one2many_list" readonly="state != 'draft'">
+                            <list editable="bottom">
+                                <field name="hl_id" options="{'no_open':True,'no_create': True}" required="1"
+                                    domain="[('account_id.account_type','=','liability_payable'),('credit','>',0),('reconciled', '=', False),('company_id','=',parent.company_id),('division','=',parent.division),('partner_id','=',parent.partner_id)]"/>
+                                <field name="amount_hl_original" readonly="1" force_save="1"/>
+                                <field name="amount_hl_balance" readonly="1" force_save="1"/>
+                                <field name="amount_hl_allocation" required="1"/>
+                            </list>
+                        </field>
+                        <field name="hl_count" invisible="1"/>
+                        <button name="action_create_hutang_lain" type="object" string="Create Hutang Lain" invisible="state != 'draft'" class="btn btn-secondary me-1" groups="tw_asset_disposal_hutang_lain.group_tw_asset_disposal_button_create_hl_read"/>
+                        <button name="action_open_customer_hutang_lain" icon="fa-eye" class="btn btn-secondary me-1" type="object" string="View HL" invisible="state != 'draft' or hl_count == 0" groups="tw_asset_disposal_hutang_lain.group_tw_asset_disposal_button_open_customer_hl_read"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

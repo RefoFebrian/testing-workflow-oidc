@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_sale_order_plafond_form_view" model="ir.ui.view">
+            <field name="name">tw.sale.order.form</field>
+            <field name="model">tw.sale.order</field>
+            <field name="inherit_id" ref="tw_sale.tw_sale_order_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_set_plafond_avaibility" 
+                            type="object" 
+                            string="Set Plafond Avaibility" 
+                            invisible="state not in ['progress','done']" 
+                            class="oe_stat_button"
+                            icon="fa-money">
+                        <field name="plafond_avaibility" widget="statinfo" string="Plafond"/>
+                    </button>
+                </xpath>
+
+                <group name="order_details" position="after">
+                    <group name="plafond_group" string="Plafond" colspan="2">
+                        <field name="credit_limit" readonly="True" force_save="1"/>
+                        <field name="plafond_avaibility" readonly="True" force_save="1"/>
+                    </group>
+                </group>
+            </field>
+        </record>
+    </data>
+</odoo>

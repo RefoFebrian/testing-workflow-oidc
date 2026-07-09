@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="view_summary_forecast_report_wizard" model="ir.ui.view">
+			<field name="name">tw.summary.forecast.report.wizard</field>
+			<field name="model">tw.summary.forecast.report</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Report Summary Forecast Unit &#38; PBT">
+                    <group invisible="state_x == 'get'">
+                        <label for="start_date" string="Periode"/>
+                        <div>
+                            <field name="start_date" required="1" placeholder="Start date" style="width: 47%% !important; margin-right: 3px;" />
+                            <field name="end_date" required="1" placeholder="End date" style="width: 47%%;" />
+                        </div>
+                    </group>					
+                	<field invisible="1" name="state_x"/>                
+                	<newline/>    
+                	<group col="4" fill="0" invisible="state_x != 'get'">
+	                    <separator colspan="4" string="Excel Export Generated. Click link below to download ..." invisible="state_x == 'choose'"/>
+	                    <field name="file" width="100" invisible="state_x == 'choose'"/>
+	                    <field name="data_x" nolabel="1" readonly="0" width="100" filename="file" invisible="state_x == 'choose'"/>
+	                </group> 
+	                <footer>
+	                    <button name="excel_report" string="Export Data" type="object" class="oe_highlight" invisible="state_x == 'get'"/>
+	                    <button string="Cancel" special="cancel" class="btn btn-default" invisible="state_x == 'get'"/>
+	                </footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_summary_forecast_report_wizard" model="ir.actions.act_window">
+			<field name="name">Laporan Summary PBT</field> 
+			<field name="res_model">tw.summary.forecast.report</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_summary_forecast_report_wizard"/>
+			<field name="target">new</field>
+		</record>
+
+	  	
+	</data>
+</odoo>

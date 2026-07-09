@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record model="ir.actions.act_window" id="tw_mutation_request_workshop_action">
+            <field name="name">Mutation Request</field>
+            <field name="res_model">tw.mutation.request</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="tw_mutation_request.view_mutation_request_search"/>
+		    <field name="context">{
+				"search_default_state_draft":1,
+		    	"search_default_state_wfa":1,
+		    	"search_default_state_approved":1,
+		    	"search_default_state_confirm":1,
+		    	"search_default_state_open":1,
+                "default_division": 'Sparepart'
+				}</field>
+            <field name="domain">[('division','=','Sparepart')]</field>
+        </record>
+        
+        <record id="tw_mutation_request_workshop_action_list" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_mutation_request_list_view"/>
+            <field name="act_window_id" ref="tw_mutation_request_workshop_action"/>
+        </record>
+        
+        <record id="tw_mutation_request_workshop_action_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_mutation_request_form_view"/>
+            <field name="act_window_id" ref="tw_mutation_request_workshop_action"/>
+        </record>
+	</data>
+</odoo>

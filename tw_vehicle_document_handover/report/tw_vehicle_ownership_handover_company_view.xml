@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <template id="own_handover_report_company">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="tw_web.teto_report_layout">
+                        <t t-call="tw_web.teto_report_styles_base"/>
+                        <div class="page">
+                            <div class="row">
+                                <div class="col-12 text-center doc-header">
+                                    <span>TANDA TERIMA PENYERAHAN BPKB</span><br />
+                                    <span t-esc="doc.company_id.sudo().parent_id.name" /><br />
+                                    <span t-esc="doc.company_id.name" /><br />
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <table class="table-borderless" width="100%">
+                                        <tr>
+                                            <td width="15%">No Tanda Terima</td>
+                                            <td width="2%">:</td>
+                                            <td width="83%"><span t-esc="doc.name" /></td>
+                                        </tr>
+                                    </table>
+                                    Telah diterima dengan kondisi baik dan lengkap berupa <b>Asli</b>:
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-12">
+                                    1. Bukti Pemilik Kendaraan (BPKB) dengan data sebagai berikut:<br />
+                                    <table class="table-borderless" width="100%" style="margin-left: 3rem">
+                                        <tbody>
+                                            <tr>
+                                                <td width="3%">a.</td>
+                                                <td width="15%">Nama Pemilik</td>
+                                                <td width="2%">:</td>
+                                                <td width="80%"><span t-esc="doc.partner_id.name" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>b.</td>
+                                                <td>Alamat Pemilik</td>
+                                                <td>:</td>
+                                                <td><span t-esc="print_address(doc.partner_id)" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>c.</td>
+                                                <td>No KTP Pemilik</td>
+                                                <td>:</td>
+                                                <td><span t-esc="doc.partner_id.identification_number" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <col-12>
+                                    <table class="teto-table-content">
+                                        <thead>
+                                            <tr>
+                                                <th width="2%">No</th>
+                                                <th width="14%">Nama BPKB</th>
+                                                <th width="14%">Jenis / Model</th>
+                                                <th width="10%">Tahun</th>
+                                                <th width="12%">Warna</th>
+                                                <th width="12%">Rangka</th>
+                                                <th width="12%">Mesin</th>
+                                                <th width="12%">Plat Smt</th>
+                                                <th width="12%">No BPKB</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="9" class="teto-row-border p-2" />
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-set="number" t-value="1"/>
+                                            <tr t-foreach="doc.ownership_handover_line_ids" t-as="line">
+                                                <td><t t-esc="number" /></td>
+                                                <td><t t-esc="line.customer_stnk_id.name" /></td>
+                                                <td><t t-esc="line.lot_id.product_id.name" /></td>
+                                                <td><t t-esc="line.lot_id.production_year" /></td>
+                                                <td><t t-esc="line.lot_id.product_id.product_template_attribute_value_ids.code"/> - <span t-esc="line.lot_id.product_id.product_template_attribute_value_ids.name"/></td>
+                                                <td><t t-esc="line.lot_id.chassis_number" /></td>
+                                                <td><t t-esc="line.lot_id.name" /></td>
+                                                <td><t t-esc="line.lot_id.plate_number" /></td>
+                                                <td><t t-esc="line.bpkb_number" /></td>
+                                                <t t-set="number" t-value="number + 1"/>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </col-12>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    2. Copy Faktur dan Nomor Identitas Kendaraan (NIK):<br />
+                                    <table class="table-borderless" style="margin-left: 3rem">
+                                        <tr>
+                                            <td style="border: 2px solid black !important" width="30%"></td>
+                                            <td class="ps-3"><b>BPKB</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 2px solid black !important" class="mx-3"></td>
+                                            <td class="ps-3"><b>Copy Faktur</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 2px solid black !important"></td>
+                                            <td class="ps-3"><b>NIK</b></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <span t-esc="doc.company_id.state_id.name" />,
+                                    <span t-esc="format_date(doc.env, doc.ownership_handover_date, date_format='dd-MM-yyyy')" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    Yang Menyerahkan
+                                    <br/><br/><br/><br/>
+                                    <hr/>
+                                    <span t-esc="user.name"/>
+                                </div>
+                                <div class="col-4">
+                                    Mengetahui
+                                    <br/><br/><br/><br/>
+                                    <hr/>
+                                    <span>ADH</span>
+                                </div>
+                                <div class="col-4">
+                                    Penerima
+                                    <br/><br/><br/><br/>
+                                    <hr/>
+                                    <span t-esc="doc.receiver"/>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <b>Syarat dan Ketentuan</b><br />
+                                    TDM dan Konsumen sepakat bila:<br />
+                                    <ol>
+                                        <li>Seluruh tanggung jawab terhadap BPKB / Copy Faktur / NIK secara otomatis beralih
+                                            kepada Kosumen, setelah
+                                            konsumen / pelanggan menandatangani tanda terima ini.
+                                        </li>
+                                        <li>Konsumen yang namanya tercantum pada BPKB / Copy Faktur / NIK, WAJIB mengambil dan
+                                            menerima secara
+                                            langsung BPKB / Copy Faktur / NIK. Apabila diwakilkan, maka wajib:
+                                            <ol type="a">
+                                                <li>Melampirkan surat kuasa bermaterai 10.000 yang dibuat oleh pemilik kendaraan atau dibuat oleh nama yang sesuai BPKB</li>
+                                                <li>KTP Asli dan Fotocopy KTP sesuai BPKB</li>
+                                                <li>Fotocopy STNK</li>
+                                                <li>Membawa KTP asli penerima kuasa sebagai pihak yang mewakilkan</li>
+                                            </ol>
+                                        </li>
+                                        <li>Bila ketentuan no. 2 dilanggar, maka seluruh tanggung jawab berada di pihak konsumen.</li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col">
+                                    Dicetak oleh: <t t-esc="user.name"/> |
+                                    <t t-esc="format_datetime(doc.env, datetime.datetime.now(), tz=doc.env.user.tz, dt_format='dd-MM-yyyy HH:mm')"/>
+                                </div>
+                            </div>
+
+                            <div t-if="not line_last" style="page-break-after: always;"/>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

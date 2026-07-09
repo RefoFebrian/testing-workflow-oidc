@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="tw_dealer_order_discount_inherit_view_form" model="ir.ui.view">
+			<field name="name">tw.dealer.order.discount.inherit.view.form</field>
+			<field name="model">tw.dealer.sale.order</field>
+			<field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_order_view_form"/>
+			<field name="priority">60</field>
+			<field name="arch" type="xml">
+
+				<group name="amount_discount" position="inside">
+					<field name="amount_direct_gift" readonly="1"/>
+				</group>
+				
+				<xpath expr="//field[@name='summary_discount_ids']/list/field[@name='product_qty']" position="after">
+					<field name="expense_direct_gift" readonly="1"/>
+				</xpath>
+
+			</field>
+		</record>
+
+		<record id="tw_dealer_order_line_discount_inherit_view_form" model="ir.ui.view">
+			<field name="name">tw.dealer.order.line.discount.inherit.view.form</field>
+			<field name="model">tw.dealer.sale.order.line</field>
+			<field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_sale_order_line_view_form"/>
+			<field name="priority">60</field>
+			<field name="arch" type="xml">
+				<field name="analytic_line_ids" position="after">
+					<field name="available_direct_gift_ids" widget="many2many_tags" invisible="1"/>
+				</field>
+				<xpath expr="//page[@name='page_lines']" position="after">
+					<page string="Barang Bonus Line" name="dso_line_direct_gift">
+						<field name="direct_gift_ids" readonly="parent.state != 'draft'">
+							<list editable="bottom">
+								<field name="order_line_id" invisible="1" optional="hide"/>
+								<field name="direct_gift_id" options="{'no_create': True, 'no_open': True}" domain="[('id', 'in', parent.available_direct_gift_ids)]"/>
+								<field name="product_id" readonly="1" force_save="1" optional="show"/>
+								<field name="quantity" readonly="1" force_save="1" optional="show"/>
+								<field name="unit_price" readonly="1" force_save="1" optional="show"/>
+								<field name="product_tmpl_id" optional="hide" readonly="1" force_save="1"/>
+								<field name="direct_gift_md" readonly="1" force_save="1" optional="hide"/>
+								<field name="direct_gift_ahm" readonly="1" force_save="1" optional="hide"/>
+								<field name="direct_gift_finco" readonly="1" force_save="1" optional="hide"/>
+								<field name="direct_gift_dealer" readonly="1" force_save="1" optional="hide"/>
+								<field name="direct_gift_others" readonly="1" force_save="1" optional="hide"/>
+								<field name="force_cogs" readonly="1" force_save="1" optional="hide"/>
+							</list>
+							<form>
+								<group>
+									<group>
+										<field name="direct_gift_id"/>
+										<field name="product_id"/>
+										<field name="product_tmpl_id"/>
+									</group>
+									<group>
+										<field name="quantity"/>
+										<field name="unit_price"/>
+										<field name="direct_gift_md"/>
+										<field name="direct_gift_ahm"/>
+										<field name="direct_gift_finco"/>
+										<field name="direct_gift_dealer"/>
+										<field name="direct_gift_others"/>
+										<field name="force_cogs"/>
+									</group>
+								</group>
+							</form>
+						</field>
+					</page>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>

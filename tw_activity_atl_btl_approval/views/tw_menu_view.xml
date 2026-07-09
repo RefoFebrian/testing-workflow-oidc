@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+        <menuitem id="tw_activity_atl_btl_reject_menuitem" action="tw_activity_atl_btl_status_reject_action" parent="tw_activity_atl_btl.tw_activity_atl_btl_menu" sequence="04" groups="tw_activity_atl_btl_approval.group_tw_activity_atl_btl_reject_read"/>
+        <menuitem id="tw_activity_atl_btl_approval_menuitem" action="tw_activity_atl_btl_approval_action" parent="tw_activity_atl_btl.tw_activity_atl_btl_menu" sequence="04" groups="tw_activity_atl_btl_approval.group_tw_activity_atl_btl_approval_read"/>
+        <menuitem id="tw_activity_atl_btl_line_approval_menuitem" action="tw_activity_atl_btl_line_approval_action" parent="tw_activity_atl_btl.tw_activity_atl_btl_menu" sequence="04" groups="tw_activity_atl_btl_approval.group_tw_activity_atl_btl_approval_read"/>
+        <menuitem id="tw_activity_atl_btl_line_revision_menuitem" action="tw_activity_atl_btl_status_revision_action" parent="tw_activity_atl_btl.tw_activity_atl_btl_menu" sequence="04" groups="tw_activity_atl_btl_approval.group_tw_activity_atl_btl_revision_read"/>
+    </data>
+</odoo>

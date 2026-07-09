@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="tw_disbursement_menuitem" action="tw_disbursement.tw_disbursement_action" name="Disbursement EDC" parent="tw_menu.submenu_tw_backoffice_bank_cash" sequence="100" groups="tw_disbursement.group_tw_disbursement_read"/>
+    </data>
+</odoo>

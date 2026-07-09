@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Form View -->
+        <record id="view_tw_report_supplier_form" model="ir.ui.view">
+            <field name="name">tw.report.supplier.form</field>
+            <field name="model">tw.report.supplier</field>
+            <field name="arch" type="xml">
+                <form string="Report Supplier">
+                    <group>
+                        <group>
+                            <field name="option"/>
+                            <label for="start_date" string="Date"/>
+                            <div class="o_row">
+                                <field name="start_date" widget="date" class="oe_inline"/>
+                                <i class="fa fa-long-arrow-right mx-2" aria-label="Arrow icon" title="Arrow"/>
+                                <field name="end_date" widget="date" class="oe_inline"/>
+                            </div>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="action_print_report" string="Export Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_report_supplier" model="ir.actions.act_window">
+            <field name="name">Laporan Supplier</field>
+            <field name="res_model">tw.report.supplier</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_tw_report_cash_count" name="Laporan Cash Count" parent="tw_menu.submenu_tw_backoffice_report" action="action_tw_report_cash_count" groups="tw_report_cash_count.group_report_cash_count" sequence="30"/>
+    </data>
+</odoo>

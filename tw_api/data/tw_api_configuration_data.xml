@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_api_configuration_dms_tdm" model="tw.api.configuration">
+            <field name="name">DMS TDM</field>
+            <!-- TO DO: set base_url ke production -->
+            <!-- <field name="base_url"></field> -->
+            <field name="api_type_id" ref="tw_api.tw_selection_type_api_hoki"/>
+        </record>
+
+    </data>
+</odoo>

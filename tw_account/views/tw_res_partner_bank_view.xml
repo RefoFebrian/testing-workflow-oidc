@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <!-- Base Form Partners Bank Accounts -->
+        <record model="ir.ui.view" id="view_tw_partner_bank_form">
+            <field name="name">tw.res.partner.bank.form.inherit</field>
+            <field name="model">res.partner.bank</field>
+            <field name="inherit_id" ref="base.view_partner_bank_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="replace">
+                    <sheet>
+                        <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                        <group>
+                            <group>
+                                <field name="sequence" invisible="1"/>
+                                <field name="acc_type" invisible="1"/>
+                                <field name="bank_id" required="1" options="{'no_create': True}"/>
+                                <field name="acc_number" string="Nomor Rekening" required="1"/>
+                                <field name="acc_holder_name" string="Nama Pemilik Rek" required="1"/>
+                                <field name="code" string="Identifier Code"/>
+                                <field name="partner_id" options="{'no_create': True,'no_open': True}"/>
+                            </group>
+                            <group>
+                                <field name="company_id" readonly="0" groups="base.group_multi_company" options="{'no_create': True}"/>
+                                <field name="currency_id" groups="base.group_multi_currency" options="{'no_create': True}"/>
+                                <field name="allow_out_payment" widget="boolean_toggle"/>
+                                <field name="active" widget="boolean_toggle"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="tw_inherit_partner_bank_search" model="ir.ui.view">
+            <field name="name">tw.inherit.partner.bank.search</field>
+            <field name="model">res.partner.bank</field>
+            <field name="inherit_id" ref="base.view_partner_bank_search"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="acc_number" string="Nomor Rekening"/>
+                    <field name="bank_id" string="Bank"/>
+                    <field name="acc_holder_name" string="Nama Pemilik Rek"/>
+                    <field name="code" string="Identifier Code"/>
+                </field>
+
+            <!-- Tambahkan Group By -->
+            <xpath expr="//search/group[last()]" position="inside">
+                <filter string="Bank" name="group_by_bank"
+                    context="{'group_by': 'bank_id'}"/>
+
+                <filter string="Company" name="group_by_company"
+                    context="{'group_by': 'company_id'}"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

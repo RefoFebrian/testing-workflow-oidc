@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <record id="tw_settlement_approval_form_view" model="ir.ui.view">
+			<field name="name">tw.settlement.approval.form</field>
+			<field name="model">tw.settlement</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="tw_settlement.view_tw_settlement_form"/>
+			<field name="arch" type="xml">
+                
+                <field name="state" position="attributes">
+                    <attribute name="statusbar_visible">draft,waiting_for_approval,approved,done</attribute>
+                </field>
+
+                <xpath expr="//button[@name='action_confirm']" position="before">
+					<button name="action_request_approval" string="RFA" type="object" class="oe_highlight" invisible="state != 'draft'" groups="tw_settlement_approval.group_tw_settlement_approval_rfa"/>
+					<button name="action_approval" string="Approve" type="object" class="oe_highlight" invisible="state != 'waiting_for_approval'" groups="tw_settlement_approval.group_tw_settlement_approval_approve"/>
+					<button name="action_reject_or_cancel" string="Reject" type="object" invisible="state != 'waiting_for_approval'" groups="tw_settlement_approval.group_tw_settlement_approval_reject" context="{'window_title': 'Reject'}"/>
+					<button name="action_reject_or_cancel" string="Cancel Approval" type="object" invisible="state not in ('waiting_for_approval', 'approved')" groups="tw_settlement_approval.group_tw_settlement_approval_cancel" context="{'window_title': 'Cancel'}"/>
+				</xpath>
+
+                <button name="action_confirm" position="attributes">
+                    <attribute name="invisible">state != 'approved'</attribute>
+                </button>
+
+                <page name="audit_trail" position="before">
+                    <page string="Approval">
+                        <field name="approval_ids" readonly="True"/>
+                    </page>
+				</page>
+
+            </field>
+        </record>
+
+	</data>
+</odoo>

@@ -1,0 +1,63 @@
+<odoo>
+  <data>
+     <record id="tw_report_faktur_pajak_wizard" model="ir.ui.view">
+      <field name="name">Report All Faktur Pajak</field>
+      <field name="model">tw.report.faktur.pajak</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+         <form string="Laporan All Faktur Pajak">
+          <group>
+            <group>
+              <field name="option" required="1"/>
+              <field name="division" invisible="option != 'faktur_pajak_gabungan'"/>
+              <field name="pajak_gabungan" invisible="option not in ('faktur_pajak','faktur_pajak_others')"/>
+              <field name="thn_penggunaan" invisible="option == 'faktur_pajak_gabungan'"/>
+            </group>
+            <group>
+              <field name="state_faktur_pajak" invisible="option != 'faktur_pajak'"/>
+              <field name="state_generate_faktur_pajak" invisible="option != 'generate_faktur_pajak'"/>
+              <field name="state_other_faktur_pajak" invisible="option != 'faktur_pajak_others'"/>      
+              <field name="state_gabungan_faktur_pajak" invisible="option != 'faktur_pajak_gabungan'"/>
+              <label for="start_date" string="Date"/>
+              <div>
+                <field name="start_date" class="oe_inline"/> - <field name="end_date" class="oe_inline"/>
+              </div>                
+            </group>
+          </group>
+          
+          <notebook colspan="5">
+            <page string="Branchs" invisible="option != 'faktur_pajak_gabungan'">
+              <field name="company_ids" colspan="4" nolabel="1"/>
+            </page>
+            <page string="Form" invisible="option != 'faktur_pajak'">
+              <field name="model_ids" colspan="4" nolabel="1"/>
+            </page>    
+            <page string="Partners" invisible="option == 'generate_faktur_pajak'">
+              <field name="partner_ids" colspan="4" nolabel="1">
+                <list>
+                  <field name="name" />
+                  <field name="mobile" />
+                  <field name="email" />
+                </list>
+              </field>
+            </page>
+        </notebook>
+          <footer>
+            <button name="action_generate_report" string="Export" type="object" class="oe_highlight"/> Or
+            <button string="Cancel" class="oe_link" special="cancel" />
+          </footer>
+        </form>
+      </field>
+    </record>
+
+
+
+    <record id="tw_report_faktur_pajak_action" model="ir.actions.act_window">
+      <field name="name">All Faktur Pajak</field>
+      <field name="res_model">tw.report.faktur.pajak</field>
+      <field name="view_mode">form</field>
+      <field name="target">new</field>
+    </record>
+   <menuitem id="tw_report_faktur_pajak_menuitem"  parent="tw_menu.submenu_tw_backoffice_report" sequence="4"  action="tw_report_faktur_pajak_action" groups="tw_report_faktur_pajak.group_tw_report_faktur_pajak_read"/>  
+  </data>
+</odoo>

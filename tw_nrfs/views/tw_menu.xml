@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_tw_showroom_nrfs" name="NRFS" parent="tw_menu.menu_tw_showroom" sequence="15"></menuitem>
+            <menuitem id="tw_nrfs_md_menuitem" action="tw_nrfs.tw_nrfs_md_action" name="Outstanding NRFS" parent="tw_nrfs.menu_tw_showroom_nrfs" sequence="1" groups="tw_nrfs.tw_nrfs_group_read"/>
+            <menuitem id="tw_nrfs_vendor_menuitem" action="tw_nrfs.tw_nrfs_vendor_action" name="Outstanding NRFS Vendor" parent="tw_nrfs.menu_tw_showroom_nrfs" sequence="2" groups="tw_nrfs.tw_nrfs_vendor_group_read"/>
+            <menuitem id="tw_po_urgent_menuitem" action="tw_nrfs.tw_nrfs_po_urgent_action" name="Outstanding PO NRFS" parent="tw_nrfs.menu_tw_showroom_nrfs" sequence="3" groups="tw_nrfs.tw_nrfs_po_urgent_group_read"/>
+
+        <menuitem id="menu_tw_workshop_nrfs" name="NRFS" parent="tw_menu.menu_tw_workshop" sequence="15"></menuitem>
+
+        <!-- Master NRFS -->
+        <menuitem id="tw_master_nrfs_showroom_menuitem" parent="tw_nrfs.menu_tw_showroom_nrfs" name="Master NRFS" sequence="100"/>
+            <menuitem id="tw_master_gejala_showroom_menuitem" name="Master Gejala" parent="tw_nrfs.tw_master_nrfs_showroom_menuitem" action="tw_nrfs.action_tw_master_gejala" sequence="01" groups="tw_nrfs.tw_nrfs_admin_group_read"/>
+            <menuitem id="tw_master_penyebab_showroom_menuitem" name="Master Penyebab" parent="tw_nrfs.tw_master_nrfs_showroom_menuitem" action="tw_nrfs.action_tw_master_penyebab" sequence="02" groups="tw_nrfs.tw_nrfs_admin_group_read"/>
+            <menuitem id="tw_master_penanganan_unit_md_showroom_menuitem" name="Master Penanganan Unit MD" parent="tw_nrfs.tw_master_nrfs_showroom_menuitem" action="tw_nrfs.action_tw_master_penanganan_unit_md" sequence="03" groups="tw_nrfs.tw_nrfs_admin_group_read"/>
+            <menuitem id="tw_master_penanganan_unit_vendor_showroom_menuitem" name="Master Penanganan Unit Vendor" parent="tw_nrfs.tw_master_nrfs_showroom_menuitem" action="tw_nrfs.action_tw_master_penanganan_unit_vendor" sequence="04" groups="tw_nrfs.tw_nrfs_admin_group_read"/>
+        <menuitem id="tw_master_nrfs_workshop_menuitem" parent="tw_nrfs.menu_tw_workshop_nrfs" name="Master NRFS" sequence="100"/>
+            <menuitem id="tw_master_gejala_workshop_menuitem" name="Master Gejala" parent="tw_nrfs.tw_master_nrfs_workshop_menuitem" action="tw_nrfs.action_tw_master_gejala" sequence="01" groups="tw_nrfs.tw_nrfs_admin_group_read"/>
+            <menuitem id="tw_master_penyebab_workshop_menuitem" name="Master Penyebab" parent="tw_nrfs.tw_master_nrfs_workshop_menuitem" action="tw_nrfs.action_tw_master_penyebab" sequence="02" groups="tw_nrfs.tw_nrfs_admin_group_read"/>
+            <menuitem id="tw_master_penanganan_unit_md_workshop_menuitem" name="Master Penanganan Unit MD" parent="tw_nrfs.tw_master_nrfs_workshop_menuitem" action="tw_nrfs.action_tw_master_penanganan_unit_md" sequence="03" groups="tw_nrfs.tw_nrfs_admin_group_read"/>
+            <menuitem id="tw_master_penanganan_unit_vendor_workshop_menuitem" name="Master Penanganan Unit Vendor" parent="tw_nrfs.tw_master_nrfs_workshop_menuitem" action="tw_nrfs.action_tw_master_penanganan_unit_vendor" sequence="04" groups="tw_nrfs.tw_nrfs_admin_group_read"/>
+    </data>
+</odoo>

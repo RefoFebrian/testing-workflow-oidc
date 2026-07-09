@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_approval_part_hotline_view_form" model="ir.ui.view">
+            <field name="name">tw.approval.part.hotline.view.form</field>
+            <field name="model">tw.part.hotline</field>
+            <field name="inherit_id" ref="tw_part_hotline.tw_part_hotline_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//form/header/field[@name='state']" position="replace">
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="draft,waiting_for_approval,approved,done" />
+                </xpath>
+                <field name="customer_id" position="after">
+                    <field name="approval_state" readonly="1"/>
+                </field>
+                <button name="action_print_form" position="before">
+                    <button name="action_rfa" string="RFA" type="object" class="oe_highlight" invisible="state != 'draft'" groups="tw_part_hotline_approval.group_button_rfa_part_hotline"/>
+                    <button name="action_approval" string="Approve" type="object" class="oe_highlight" invisible="state != 'waiting_for_approval'"/>
+                    <button name="action_reject_or_cancel" invisible="state != 'waiting_for_approval'" string="Reject" type="object" context="{'window_title': 'Reject'}"/>
+                    <button name="action_reject_or_cancel" invisible="state not in ('waiting_for_approval', 'approved')" string="Cancel Approval" type="object" context="{'window_title': 'Cancel'}" groups="tw_part_hotline_approval.group_tw_part_hotline_cancel_button"/>
+                </button>
+                <xpath expr="//page[@name='detail_part']" position="after">
+                    <page name="approval" string="Approval">
+                        <field name="approval_ids"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_approval_part_hotline_view_search" model="ir.ui.view">
+            <field name="name">tw.approval.part.hotline.view.search</field>
+            <field name="model">tw.part.hotline</field>
+            <field name="inherit_id" ref="tw_part_hotline.tw_part_hotline_view_search" />
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='state_draft']" position="after">
+                    <filter string="Waiting for Approval" name="state_waiting_for_approval" domain="[('state','=','waiting_for_approval')]" />
+                    <filter string="Approved" name="state_approved" domain="[('state','=','approved')]"/>  
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

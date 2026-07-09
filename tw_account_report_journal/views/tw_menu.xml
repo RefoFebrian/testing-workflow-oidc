@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="menuitem_account_report_journal" name="Laporan Journal" parent="tw_menu.submenu_tw_backoffice_report" action="action_tw_account_report_journal" sequence="05" groups="tw_account_report_journal.group_account_laporan_journal"/>
+
+    </data>
+</odoo>

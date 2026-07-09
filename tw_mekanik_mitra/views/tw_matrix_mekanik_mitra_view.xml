@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+	    <record id="tw_matrix_mekanik_mitra_view_list" model="ir.ui.view">
+			<field name="name">tw.matrix.mekanik.mitra.list</field>
+			<field name="model">tw.matrix.mekanik.mitra</field>
+			<field name="arch" type="xml">
+				<list>
+					<field name="company_id"/>
+				</list>
+			</field>
+		</record>
+		
+		<record id="tw_matrix_mekanik_mitra_view_form" model="ir.ui.view">
+			<field name="name">tw.matrix.mekanik.mitra.form</field>
+			<field name="model">tw.matrix.mekanik.mitra</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<field name="company_id" required="1" options="{'no_open':True,'no_create':True}"/>
+						</group>
+					 	<notebook>
+					 		<page string="Detail">
+					 			<field name="detail_ids">
+					 				<list editable="top">
+					 					<field name="min_ue" required="1"/>
+										<field name="max_ue" required="1"/>
+										<field name="hari_kerja" required="1"/>
+										<field name="jasa" required="1"/>
+										<field name="part" required="1"/>
+					 				</list>
+					 			</field>
+					 		</page>
+							<page string="Audit Trail">
+								<group>
+									<group>
+										<field name="create_uid" readonly="1"></field>
+										<field name="create_date" readonly="1"></field>
+									</group>
+									<group>							
+										<field name="write_uid" readonly="1"></field>
+										<field name="write_date" readonly="1"></field>
+									</group>
+								</group>
+							</page>		                 
+			            </notebook>	
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="tw_matrix_mekanik_mitra_view_search" model="ir.ui.view">
+            <field name="name">tw.matrix.mekanik.mitra.search</field>
+            <field name="model">tw.matrix.mekanik.mitra</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="company_id"/> 
+					<filter name="company_id" string="Branch" domain="[('company_id', '=', 'value')]" context="{'group_by': 'company_id'}" />    
+                </search>
+            </field>
+        </record>  
+		
+		<record model="ir.actions.act_window" id="tw_matrix_mekanik_mitra_action">
+			<field name="name">Master Mekanik Mitra</field>
+			<field name="res_model">tw.matrix.mekanik.mitra</field>
+			<field name="view_mode">list,form</field>
+		</record>
+	</data>
+</odoo>

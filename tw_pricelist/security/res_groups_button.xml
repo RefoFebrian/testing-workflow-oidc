@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_pricelist_group_button_draft" model="res.groups">
+        <field name="category_id" ref="tw_base.tw_role"/>
+        <field name="name">TW Button Draft Pricelist</field>
+    </record>
+    
+    <record id="tw_pricelist_group_button_confirm" model="res.groups">
+        <field name="category_id" ref="tw_base.tw_role"/>
+        <field name="name">TW Button Confirm Pricelist Version</field>
+    </record>
+
+    <record id="tw_pricelist_group_button_new_item" model="res.groups">
+        <field name="category_id" ref="tw_base.tw_role"/>
+        <field name="name">TW Button Add New Item Pricelist Version</field>
+    </record>
+
+    <record id="tw_pricelist_group_button_upload_pricelist_version" model="res.groups">
+        <field name="category_id" ref="tw_base.tw_role"/>
+        <field name="name">TW Button Upload Pricelist Version</field>
+    </record>
+
+    <record id="tw_pricelist_group_button_copy" model="res.groups">
+        <field name="category_id" ref="tw_base.tw_role"/>
+        <field name="name">TW Button Copy Pricelist Version</field>
+    </record>
+
+    <record id="tw_base.group_system_admin" model="res.groups">
+        <field name="implied_ids" eval="[
+            (4,ref('tw_pricelist_group_button_draft')),
+            (4,ref('tw_pricelist_group_button_confirm')),
+            (4,ref('tw_pricelist_group_button_new_item')),
+            (4,ref('tw_pricelist_group_button_upload_pricelist_version')),
+            (4,ref('tw_pricelist_group_button_copy')),
+            ]" />
+    </record>
+</odoo>

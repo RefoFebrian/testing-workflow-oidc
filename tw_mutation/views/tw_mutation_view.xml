@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="tw_mutation_order_list_view" model="ir.ui.view">
+			<field name="name">tw.mutation.order.tree</field>
+			<field name="model">tw.mutation.order</field>
+			<field name="arch" type="xml">
+				<list string="Mutation Order" create="false" default_order="id desc">
+					<field name="name"/>
+					<field name="company_id"/>
+					<field name="requester_id"/>
+					<field name="division"/>
+					<field name="date"/>
+					<field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'done'" decoration-danger="state == 'cancel'"/>
+				</list>
+			</field>
+		</record>
+
+		<record id="tw_mutation_order_form_view" model="ir.ui.view">
+			<field name="name">tw.mutation.order.form</field>
+			<field name="model">tw.mutation.order</field>
+			<field name="arch" type="xml">
+				<form string="Mutation Order" create="false">
+					<header>
+						<button name="action_confirm" invisible="state != 'draft'" string="Confirm" type="object" class="oe_highlight" groups="tw_mutation.group_tw_mutation_order_confirm"/>
+						<button name="renew_available" invisible="state != 'draft'" string="Renew Available" type="object" class="oe_highlight" groups="tw_mutation.group_tw_mutation_order_renew_available"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,confirm,done" statusbar_colors='{"confirm":"blue","cancel":"red"}'/>
+					</header>
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<!-- Stock Picking Button -->
+							<button name="action_view_picking" type="object" class="oe_stat_button" icon="fa-truck" invisible="state not in ['confirm', 'done', 'cancelled']" help="Click to view the stock pickings for this order">
+								<div>
+									<field name="picking_count" widget="statinfo" string="Transfers"/>
+								</div>
+							</button>
+
+							<!-- Stock Distribution Button -->
+							<button name="action_view_stock_distribution" type="object" class="oe_stat_button" icon="fa-exchange" invisible="not stock_distribution_id" help="Click to view the linked stock distribution">
+								<div>
+									<span class="o_stat_text">Stock Distribution</span>
+									<field name="stock_distribution_id" string="Distribution" widget="statinfo" nolabel="1" class="ml0"/>
+								</div>
+							</button>
+						</div>
+						<div class="oe_title">
+							<h1>
+								<field name="name" class="oe_inline" readonly="1"/>
+							</h1>
+						</div>
+						<group>
+							<group>
+								<field name="company_id" options="{'no_create':True,'no_open':True}" readonly="True"/>
+								<field name="requester_id" options="{'no_create':True,'no_open':True}" readonly="True"/>
+								<field name="division" options="{'no_create':True,'no_open':True}" readonly="True"/>
+								<field name="employee_id" options="{'no_create':True,'no_open':True}" readonly="True"/>
+							</group>
+							<group>
+								<field name="date" string="Date" readonly="True"/>
+								<field name="start_date" readonly="True"/>
+								<field name="end_date" readonly="True"/>
+								<field name="description" readonly="True"/>
+								<field name="location_id" readonly="state != 'draft'" options="{'no_open':True,'no_create':True}"/>
+							</group>
+						</group>
+						<notebook>
+							<page name="mutation_order_ids" string="Mutation Line">
+								<field colspan="4" name="mutation_order_ids" nolabel="1" widget="one2many_list" readonly="state != 'draft'">
+									<list string="Order Line" editable="top" create="false">
+										<field name="stock_distribution_id" column_invisible="True"/>
+										<field name="state" column_invisible="True"/>
+										<field name="product_id" options="{'no_open':True, 'no_create':True}" readonly="True"/>
+										<field name="description" readonly="True"/>
+										<field name="qty" readonly="state != 'draft'"/>
+										<field name="qty_available" readonly="1"/>
+										<field name="qty_outgoing" readonly="1" optional="show"/>
+										<field name="qty_incoming" readonly="1" optional="show"/>
+										<field name="price" readonly="1"/>
+										<field name="sub_total" readonly="1"/>
+										<field name="initial_cogs" column_invisible="True"/>
+									</list>
+								</field>
+								<group class="oe_subtotal_footer oe_right">
+									<div class="oe_subtotal_footer_seperator oe_inline">
+										<label for="amount_total"/>
+									</div>
+									<field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary'/>
+								</group>
+								<div class="oe_clear"/>
+							</page>
+							<page string="Audit Trail">
+								<group>
+									<group>
+										<field name="create_uid" readonly="1"></field>
+										<field name="create_date" readonly="1"></field>
+										<field name="confirm_uid" readonly="1"></field>
+										<field name="confirm_date" readonly="1"></field>
+									</group>
+									<group>
+										<field name="write_uid" readonly="1"></field>
+										<field name="write_date" readonly="1"></field>
+										<field name="cancelled_uid" readonly="1"></field>
+										<field name="cancelled_date" readonly="1"></field>
+									</group>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+
+			</field>
+		</record>
+
+		<record id="view_mutation_order_search" model="ir.ui.view">
+			<field name="name">tw.mutation.order.search</field>
+			<field name="model">tw.mutation.order</field>
+			<field name="arch" type="xml">
+				<search string="Search Mutation Order">
+					<field name="name"/>
+					<field name="company_id"/>
+					<field name="requester_id"/>
+					<field name="date"/>
+					<field name="division"/>
+					<field name="stock_distribution_id"/>
+					<filter string="Draft" name="state_draft" domain="[('state','=','draft')]" />
+					<filter string="Confirmed" name="state_confirm" domain="[('state','=','confirm')]" />
+					<filter string="Done" name="state_done" domain="[('state','=','done')]" />
+					<filter string="Cancelled" name="state_cancelled" domain="[('state','=','cancelled')]" />
+					<group name="tw_mutation_order_groupby" string="Group By">
+						<filter name="name_groupby" string="Name" context="{'group_by':'name'}"/>
+						<filter name="branch_sender_groupby" string="Branch Sender" context="{'group_by':'company_id'}"/>
+						<filter name="branch_requester_groupby" string="Branch Requester" context="{'group_by':'requester_id'}"/>
+						<filter name="date_groupby" string="Date" context="{'group_by':'date'}"/>
+						<filter name="division_groupby" string="Division" context="{'group_by':'division'}"/>
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record id="tw_mutation_order_unit_action" model="ir.actions.act_window">
+			<field name="name">Mutation Order</field>
+			<field name="res_model">tw.mutation.order</field>
+			<field name="view_mode">list,form</field>
+			<field name="context">{
+				"search_default_state_draft": 1,
+				"search_default_state_confirm": 1
+			}</field>
+			<field name="domain">[('division','=','Unit')]</field>
+		</record>
+
+		<record id="tw_mutation_order_sparepart_action" model="ir.actions.act_window">
+			<field name="name">Mutation Order</field>
+			<field name="res_model">tw.mutation.order</field>
+			<field name="view_mode">list,form</field>
+			<field name="context">{
+				"search_default_state_draft": 1,
+				"search_default_state_confirm": 1
+			}</field>
+			<field name="domain">[('division','=','Sparepart')]</field>
+		</record>
+
+	</data>
+</odoo>

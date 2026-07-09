@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <!-- Inherit form preview to add orientation prop to StackedColumnChart -->
+    <t t-name="tw_boom_dashboard.formDashboardPreviewInherit" t-inherit="synconics_bi_dashboard.formDashboardPreview" t-inherit-mode="extension">
+        <xpath expr="//StackedColumnChart" position="attributes">
+            <attribute name="orientation">state.data.chart_orientation</attribute>
+        </xpath>
+    </t>
+</templates>

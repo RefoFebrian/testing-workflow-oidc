@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Cancel Registration Document Handover Groups -->
+        <record id="group_registration_document_handover_cancel_read" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">Cancel Penyerahan STNK Read</field>
+        </record>
+
+        <record id="group_registration_document_handover_cancel_write" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">Cancel Penyerahan STNK Write</field>
+            <field name="implied_ids" eval="[(4, ref('group_registration_document_handover_cancel_read'))]"/>
+        </record>
+
+        <record id="group_registration_document_handover_cancel_delete" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">Cancel Penyerahan STNK Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_registration_document_handover_cancel_write'))]"/>
+        </record>
+
+        <!-- BPKB Cancellation Groups -->
+        <record id="group_ownership_document_handover_cancel_read" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">Cancel Penyerahan BPKB Read</field>
+        </record>
+
+        <record id="group_ownership_document_handover_cancel_write" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">Cancel Penyerahan BPKB Write</field>
+            <field name="implied_ids" eval="[(4, ref('group_ownership_document_handover_cancel_read'))]"/>
+        </record>
+
+        <record id="group_ownership_document_handover_cancel_delete" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">Cancel Penyerahan BPKB Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_ownership_document_handover_cancel_write'))]"/>
+        </record>
+
+        <!-- Access Rights -->
+        <record id="access_registration_document_handover_cancel_read" model="ir.model.access">
+            <field name="name">tw_registration_document_handover_cancel_read</field>
+            <field name="model_id" ref="model_tw_registration_document_handover_cancel"/>
+            <field name="group_id" ref="group_registration_document_handover_cancel_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">0</field>
+            <field name="perm_create">0</field>
+            <field name="perm_unlink">0</field>
+        </record>
+
+        <record id="access_registration_document_handover_cancel_write" model="ir.model.access">
+            <field name="name">tw_registration_document_handover_cancel_write</field>
+            <field name="model_id" ref="model_tw_registration_document_handover_cancel"/>
+            <field name="group_id" ref="group_registration_document_handover_cancel_write"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">0</field>
+        </record>
+
+        <record id="access_registration_document_handover_cancel_delete" model="ir.model.access">
+            <field name="name">tw_registration_document_handover_cancel_delete</field>
+            <field name="model_id" ref="model_tw_registration_document_handover_cancel"/>
+            <field name="group_id" ref="group_registration_document_handover_cancel_delete"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- BPKB Cancellation Access Rights -->
+        <record id="access_ownership_document_handover_cancel_read" model="ir.model.access">
+            <field name="name">tw_ownership_document_handover_cancel_read</field>
+            <field name="model_id" ref="model_tw_ownership_document_handover_cancel"/>
+            <field name="group_id" ref="group_ownership_document_handover_cancel_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">0</field>
+            <field name="perm_create">0</field>
+            <field name="perm_unlink">0</field>
+        </record>
+
+        <record id="access_ownership_document_handover_cancel_write" model="ir.model.access">
+            <field name="name">tw_ownership_document_handover_cancel_write</field>
+            <field name="model_id" ref="model_tw_ownership_document_handover_cancel"/>
+            <field name="group_id" ref="group_ownership_document_handover_cancel_write"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">0</field>
+        </record>
+
+        <record id="access_ownership_document_handover_cancel_delete" model="ir.model.access">
+            <field name="name">tw_ownership_document_handover_cancel_delete</field>
+            <field name="model_id" ref="model_tw_ownership_document_handover_cancel"/>
+            <field name="group_id" ref="group_ownership_document_handover_cancel_delete"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Include to System Admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_registration_document_handover_cancel_delete')),
+                (4, ref('group_registration_document_handover_cancel_write')),
+                (4, ref('group_registration_document_handover_cancel_read')),
+                (4, ref('group_ownership_document_handover_cancel_delete')),
+                (4, ref('group_ownership_document_handover_cancel_write')),
+                (4, ref('group_ownership_document_handover_cancel_read')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

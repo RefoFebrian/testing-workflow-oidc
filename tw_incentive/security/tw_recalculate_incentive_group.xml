@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- TW Recalculate Incentive Group Read -->
+        <record id="group_tw_recalculate_incentive_read" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Recalculate Incentive Read</field>
+        </record>
+
+        <record id="access_tw_recalculate_incentive_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_recalculate_incentive"/>
+            <field name="name">TW Recalculate Incentive read</field>
+            <field name="group_id" ref="group_tw_recalculate_incentive_read"/>
+            <field name="perm_read">1</field>
+        </record>
+        
+        <!-- TW Recalculate Incentive Group Update -->
+        <record id="group_tw_recalculate_incentive_update" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Recalculate Incentive Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_recalculate_incentive_read'))]"/>
+        </record>
+
+        <record id="access_tw_recalculate_incentive_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_recalculate_incentive"/>
+            <field name="name">TW Recalculate Incentive update</field>
+            <field name="group_id" ref="group_tw_recalculate_incentive_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- TW Recalculate Incentive Group Delete -->
+        <record id="group_tw_recalculate_incentive_delete" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Recalculate Incentive Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_recalculate_incentive_read'))]"/>
+        </record>
+
+        <record id="access_tw_recalculate_incentive_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_recalculate_incentive"/>
+            <field name="name">TW Recalculate Incentive delete</field>
+            <field name="group_id" ref="group_tw_recalculate_incentive_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Button Groups -->
+        <record id="tw_recalculate_incentive_group_button_confirm" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Recalculate Incentive Group Button Confirm</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_recalculate_incentive_update'))]" />
+        </record>
+
+        <record id="tw_recalculate_incentive_group_button_confirm_admin" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Recalculate Incentive Group Button Confirm Admin</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_recalculate_incentive_update'))]" />
+        </record>
+
+        <record id="tw_recalculate_incentive_group_button_check_completion" model="res.groups">
+            <field name="category_id" ref="tw_incentive.module_category_incentive"/>
+            <field name="name">TW Recalculate Incentive Group Button Check Completion</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_recalculate_incentive_update'))]" />
+        </record>
+    </data>
+
+    <data>
+        <!-- Add Recalculate Incentive groups to System Admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_recalculate_incentive_read')),
+                (4, ref('group_tw_recalculate_incentive_update')),
+                (4, ref('group_tw_recalculate_incentive_delete'))
+            ]"/>
+        </record>
+    </data>
+</odoo>

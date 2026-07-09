@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="payment_provider_astrapay" model="payment.provider">
+            <field name="name">AstraPay</field>
+            <field name="code">astrapay</field>
+            <field name="payment_method_ids"
+                eval="[(6, 0, [
+                    ref('payment.payment_method_qris'),
+                ])]"/>
+        </record>
+        
+    </data>
+</odoo>

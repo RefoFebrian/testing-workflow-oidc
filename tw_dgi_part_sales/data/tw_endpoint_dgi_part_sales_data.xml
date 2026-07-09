@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--
+        =============================================================
+        DGI Part Sales Endpoint Configurations
+
+        Endpoint untuk sync Part Sales dari DGI API
+        Satu endpoint per API Config (HSO, ASP, DAM, DAW, NPM, SINSEN)
+
+        Output Template Notes:
+        - company_id: dealerId → res.company via atpm_code (mapping response)
+        - md_reference_ps: noSO → direct
+        - partner_id: namaCustomer → res.partner via name (create_if_not_found)
+        - order_line: iterasi array "parts" → product_id via default_code
+        =============================================================
+        -->
+
+        <!-- ==================== HSO ==================== -->
+        <record id="tw_endpoint_dgi_part_sales_hso" model="tw.endpoint.configuration">
+            <field name="code">dgi_get_part_sales</field>
+            <field name="version">1</field>
+            <field name="url_path">prsl/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_hso"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_part_sales.model_tw_part_sales"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h23"/>
+            <field name="output_template">{
+    "company_id": "dealerId",
+    "md_reference_ps": "noSO",
+    "partner_id": "namaCustomer",
+    "_partner_id_vals": {
+        "name": "namaCustomer",
+        "customer_rank": 1
+    },
+    "division": "Sparepart",
+    "date_order": "tglSO",
+    "order_line": {
+        "product_id": "parts.partsNumber",
+        "product_uom_qty": "parts.kuantitas",
+        "price_unit": "parts.hargaParts",
+        "discount": "parts.discPercentage"
+    }
+}</field>
+        </record>
+
+        <!-- ==================== ASP ==================== -->
+        <record id="tw_endpoint_dgi_part_sales_asp" model="tw.endpoint.configuration">
+            <field name="code">dgi_get_part_sales</field>
+            <field name="version">1</field>
+            <field name="url_path">prsl/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_asp"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_part_sales.model_tw_part_sales"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h23"/>
+            <field name="output_template">{
+    "company_id": "dealerId",
+    "md_reference_ps": "noSO",
+    "partner_id": "namaCustomer",
+    "_partner_id_vals": {
+        "name": "namaCustomer",
+        "customer_rank": 1
+    },
+    "division": "Sparepart",
+    "date_order": "tglSO",
+    "order_line": {
+        "product_id": "parts.partsNumber",
+        "product_uom_qty": "parts.kuantitas",
+        "price_unit": "parts.hargaParts",
+        "discount": "parts.discPercentage"
+    }
+}</field>
+        </record>
+
+        <!-- ==================== DAM ==================== -->
+        <record id="tw_endpoint_dgi_part_sales_dam" model="tw.endpoint.configuration">
+            <field name="code">dgi_get_part_sales</field>
+            <field name="version">1</field>
+            <field name="url_path">prsl/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_dam"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_part_sales.model_tw_part_sales"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h23"/>
+            <field name="output_template">{
+    "company_id": "dealerId",
+    "md_reference_ps": "noSO",
+    "partner_id": "namaCustomer",
+    "_partner_id_vals": {
+        "name": "namaCustomer",
+        "customer_rank": 1
+    },
+    "division": "Sparepart",
+    "date_order": "tglSO",
+    "order_line": {
+        "product_id": "parts.partsNumber",
+        "product_uom_qty": "parts.kuantitas",
+        "price_unit": "parts.hargaParts",
+        "discount": "parts.discPercentage"
+    }
+}</field>
+        </record>
+
+        <!-- ==================== DAW ==================== -->
+        <record id="tw_endpoint_dgi_part_sales_daw" model="tw.endpoint.configuration">
+            <field name="code">dgi_get_part_sales</field>
+            <field name="version">1</field>
+            <field name="url_path">prsl/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_daw"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_part_sales.model_tw_part_sales"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h23"/>
+            <field name="output_template">{
+    "company_id": "dealerId",
+    "md_reference_ps": "noSO",
+    "partner_id": "namaCustomer",
+    "_partner_id_vals": {
+        "name": "namaCustomer",
+        "customer_rank": 1
+    },
+    "division": "Sparepart",
+    "date_order": "tglSO",
+    "order_line": {
+        "product_id": "parts.partsNumber",
+        "product_uom_qty": "parts.kuantitas",
+        "price_unit": "parts.hargaParts",
+        "discount": "parts.discPercentage"
+    }
+}</field>
+        </record>
+
+        <!-- ==================== NPM ==================== -->
+        <record id="tw_endpoint_dgi_part_sales_npm" model="tw.endpoint.configuration">
+            <field name="code">dgi_get_part_sales</field>
+            <field name="version">1</field>
+            <field name="url_path">prsl/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_npm"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_part_sales.model_tw_part_sales"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h23"/>
+            <field name="output_template">{
+    "company_id": "dealerId",
+    "md_reference_ps": "noSO",
+    "partner_id": "namaCustomer",
+    "_partner_id_vals": {
+        "name": "namaCustomer",
+        "customer_rank": 1
+    },
+    "division": "Sparepart",
+    "date_order": "tglSO",
+    "order_line": {
+        "product_id": "parts.partsNumber",
+        "product_uom_qty": "parts.kuantitas",
+        "price_unit": "parts.hargaParts",
+        "discount": "parts.discPercentage"
+    }
+}</field>
+        </record>
+
+        <!-- ==================== SINSEN ==================== -->
+        <record id="tw_endpoint_dgi_part_sales_sinsen" model="tw.endpoint.configuration">
+            <field name="code">dgi_get_part_sales</field>
+            <field name="version">1</field>
+            <field name="url_path">prsl/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_sinsen"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_part_sales.model_tw_part_sales"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h23"/>
+            <field name="output_template">{
+    "company_id": "dealerId",
+    "md_reference_ps": "noSO",
+    "partner_id": "namaCustomer",
+    "_partner_id_vals": {
+        "name": "namaCustomer",
+        "customer_rank": 1
+    },
+    "division": "Sparepart",
+    "date_order": "tglSO",
+    "order_line": {
+        "product_id": "parts.partsNumber",
+        "product_uom_qty": "parts.kuantitas",
+        "price_unit": "parts.hargaParts",
+        "discount": "parts.discPercentage"
+    }
+}</field>
+        </record>
+
+        <!-- ==================== WAHANA ==================== -->
+        <record id="tw_endpoint_dgi_part_sales_wahana" model="tw.endpoint.configuration">
+            <field name="code">dgi_get_part_sales</field>
+            <field name="version">1</field>
+            <field name="url_path">prsl/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_wahana"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_part_sales.model_tw_part_sales"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h23"/>
+            <field name="output_template">{
+    "company_id": "dealerId",
+    "md_reference_ps": "noSO",
+    "partner_id": "namaCustomer",
+    "_partner_id_vals": {
+        "name": "namaCustomer",
+        "customer_rank": 1
+    },
+    "division": "Sparepart",
+    "date_order": "tglSO",
+    "order_line": {
+        "product_id": "parts.partsNumber",
+        "product_uom_qty": "parts.kuantitas",
+        "price_unit": "parts.hargaParts",
+        "discount": "parts.discPercentage"
+    }
+}</field>
+        </record>
+
+    </data>
+</odoo>

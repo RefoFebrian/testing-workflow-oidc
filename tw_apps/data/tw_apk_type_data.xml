@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_apk_type_hoki" model="tw.selection">
+	    	<field name="name">Hoki</field>
+            <field name="value">hoki</field> 
+	    	<field name="type">APPType</field> 
+        </record>
+
+        <record id="tw_apk_type_hondaku" model="tw.selection">
+	    	<field name="name">Hondaku</field>
+            <field name="value">hondaku</field> 
+	    	<field name="type">APPType</field> 
+        </record>
+
+        <record id="tw_apk_type_thor" model="tw.selection">
+	    	<field name="name">THOR</field>
+            <field name="value">thor</field> 
+	    	<field name="type">APPType</field> 
+        </record>
+
+        <record id="tw_apk_type_genz" model="tw.selection">
+	    	<field name="name">Gen-Z</field>
+            <field name="value">gen-Z</field> 
+	    	<field name="type">APPType</field> 
+        </record>
+
+        <record id="tw_apk_type_antrian" model="tw.selection">
+	    	<field name="name">Antrian</field>
+            <field name="value">antrian</field> 
+	    	<field name="type">APPType</field> 
+        </record>
+    </data>
+</odoo>

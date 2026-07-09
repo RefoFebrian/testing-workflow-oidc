@@ -1,0 +1,41 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="tw_account_report_filter_view_list">
+      <field name="name">tw_account_report_filter list</field>
+      <field name="model">tw.account.report.filter</field>
+      <field name="arch" type="xml">
+        <list string="Account Report Filter">
+          <field name="name"/>
+          <field name="account_ids" widget="many2many_tags"/>
+        </list>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="tw_account_report_filter_view_form">
+      <field name="name">tw_account_report_filter form</field>
+      <field name="model">tw.account.report.filter</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="name" required="1"/>
+            </group>
+            <notebook>
+              <page string="Account">
+                <field name="account_ids"/>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="tw_account_report_filter_action_window">
+      <field name="name">Account Filter</field>
+      <field name="res_model">tw.account.report.filter</field>
+      <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem name="Account Report Filter" id="tw_account_report_filter_menuitem" parent="tw_menu.submenu_tw_backoffice_configuration" action="tw_account_report_filter_action_window" groups="tw_account_report_filter.group_tw_account_report_filter_read"/>
+  </data>
+</odoo>

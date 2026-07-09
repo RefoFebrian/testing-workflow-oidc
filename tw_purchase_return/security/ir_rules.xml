@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Access Rights Rules -->
+    <record id="tw_purchase_return_user_rule" model="ir.rule">
+        <field name="name">tw.purchase.return.user.rule</field>
+        <field name="model_id" ref="model_tw_purchase_return"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[
+            (4, ref('group_tw_purchase_return_read')),
+            (4, ref('group_tw_purchase_return_update')),
+            (4, ref('group_tw_purchase_return_delete'))
+        ]"/>
+    </record>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_api_url,tw_b2b_bank.tw_api_url,model_tw_api_url,base.group_user,1,0,0,0
+access_tw_api_schedule,tw_b2b_bank.tw_api_schedule,model_tw_api_schedule,base.group_user,1,0,0,0
+access_tw_api_schedule_line,tw_b2b_bank.tw_api_schedule_line,model_tw_api_schedule_line,base.group_user,1,0,0,0

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Module Category Other Receivable -->
+        <record id="tw_module_category_other_receivable" model="ir.module.category">
+            <field name="name">TW Other Receivable</field>
+        </record>
+        
+    
+        <!-- Read Access -->
+        <record id="group_other_receivable_read" model="res.groups">
+            <field name="category_id" ref="tw_other_receivable.tw_module_category_other_receivable"/>
+            <field name="name">TW Other Receivable Read</field>
+        </record>
+
+        <!-- Update Access -->
+        <record id="group_other_receivable_update" model="res.groups">
+            <field name="category_id" ref="tw_other_receivable.tw_module_category_other_receivable"/>
+            <field name="name">TW Other Receivable Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_other_receivable_read'))]"/>
+        </record>
+
+        <!-- Delete Access -->
+        <record id="group_other_receivable_delete" model="res.groups">
+            <field name="category_id" ref="tw_other_receivable.tw_module_category_other_receivable"/>
+            <field name="name">TW Other Receivable Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_other_receivable_read'))]"/>
+        </record>
+
+        <record id="group_other_receivable_print_wizard_read" model="res.groups">
+            <field name="category_id" ref="tw_other_receivable.tw_module_category_other_receivable"/>
+            <field name="name">TW Other Receivable Print Wizard Read</field>
+        </record>
+        <record id="access_other_receivable_print_wizard_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_wizard_print_kwitansi"/>
+            <field name="name">other_receivable print wizard read</field>
+            <field name="group_id" ref="group_other_receivable_print_wizard_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_other_receivable_print_wizard_update" model="res.groups">
+            <field name="category_id" ref="tw_other_receivable.tw_module_category_other_receivable"/>
+            <field name="name">TW Other Receivable Print Wizard Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_other_receivable_print_wizard_read'))]"/>
+        </record>
+        <record id="access_other_receivable_print_wizard_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_wizard_print_kwitansi"/>
+            <field name="name">other_receivable print wizard update</field>
+            <field name="group_id" ref="group_other_receivable_print_wizard_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <record id="group_other_receivable_print_wizard_delete" model="res.groups">
+            <field name="category_id" ref="tw_other_receivable.tw_module_category_other_receivable"/>
+            <field name="name">TW Other Receivable Print Wizard Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_other_receivable_print_wizard_read'))]"/>
+        </record>
+        <record id="access_other_receivable_print_wizard_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_wizard_print_kwitansi"/>
+            <field name="name">other_receivable print wizard delete</field>
+            <field name="group_id" ref="group_other_receivable_print_wizard_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+    </data>
+
+    <data>
+        <!-- Add to System Admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_other_receivable_read')),
+                (4, ref('group_other_receivable_update')),
+                (4, ref('group_other_receivable_delete')),
+                (4, ref('group_other_receivable_print_wizard_read')),
+                (4, ref('group_other_receivable_print_wizard_update')),
+                (4, ref('group_other_receivable_print_wizard_delete')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

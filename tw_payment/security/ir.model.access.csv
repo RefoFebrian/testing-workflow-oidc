@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_account_payment,tw_payment.tw_account_payment,model_tw_account_payment,base.group_user,1,0,0,0
+access_tw_account_payment_line,tw_payment.tw_account_payment_line,model_tw_account_payment_line,base.group_user,1,0,0,0
+access_tw_account_payment_method,tw_payment.account_payment_method,account.model_account_payment_method,tw_base.group_system_admin,1,1,1,1

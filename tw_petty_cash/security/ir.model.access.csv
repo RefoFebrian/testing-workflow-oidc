@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_petty_cash_out_read,tw_petty_cash_out_read,model_tw_petty_cash_out,base.group_user,1,0,0,0
+access_tw_petty_cash_out_line_read,tw_petty_cash_out_line_read,model_tw_petty_cash_out_line,base.group_user,1,0,0,0
+access_tw_petty_cash_in_read,tw_petty_cash_in_read,model_tw_petty_cash_in,base.group_user,1,0,0,0
+access_tw_petty_cash_in_line_read,tw_petty_cash_in_line_read,model_tw_petty_cash_in_line,base.group_user,1,0,0,0
+access_tw_petty_cash_type_read,tw_petty_cash_type_read,model_tw_petty_cash_type,base.group_user,1,0,0,0
+access_tw_petty_cash_type_line_read,tw_petty_cash_type_line_read,model_tw_petty_cash_type_line,base.group_user,1,0,0,0
+
+access_tw_petty_cash_out_res_company_read,res_company_read,base.model_res_company,base.group_user,1,0,0,0
+access_tw_petty_cash_out_account_journal_read,account_journal_read,account.model_account_journal,base.group_user,1,0,0,0
+access_tw_petty_cash_out_account_account_read,account_account_read,account.model_account_account,base.group_user,1,0,0,0
+access_tw_petty_cash_out_account_move_read,account_move_read,account.model_account_move,base.group_user,1,0,0,0
+access_tw_petty_cash_out_account_move_line_read,account_move_line_read,account.model_account_move_line,base.group_user,1,0,0,0
+access_tw_petty_cash_out_tw_approval_line_read,tw_approval_line_read,tw_approval.model_tw_approval_line,base.group_user,1,0,0,0

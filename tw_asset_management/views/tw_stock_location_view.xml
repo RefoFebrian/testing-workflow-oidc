@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <record model="ir.actions.act_window" id="tw_stock_location_assets_action">
+		    <field name="name">Stock Location Assets</field>
+            <field name="path">stock-location-assets</field>
+		    <field name="res_model">stock.location</field>
+		    <field name="view_mode">list</field>
+			<field name="domain" eval="[('type_id.value', '=', 'asset')]"/>
+			<field name="context" eval="
+            {
+                'form_type': 'Stock Location Assets',
+				'readonly_by_pass': 1,
+                'default_type_id': ref('tw_asset_management.tw_select_stock_location_asset'),
+                'default_usage': 'internal'
+            }
+            " />
+		</record>
+
+        <!-- Custom List View for Asset Locations -->
+        <record id="tw_stock_location_assets_list_view" model="ir.ui.view">
+            <field name="name">tw.stock.location.assets.list.view</field>
+            <field name="model">stock.location</field>
+            <field name="arch" type="xml">
+                <list string="Stock Location Assets" editable="top">
+                    <field name="name" string="Location Name" required="1"/>
+                    <field name="location_id" string="Parent Location" options="{'no_create': True}"/>
+                    <field name="company_id" string="Branch" options="{'no_create': True}"/>
+                    <field name="usage" string="Location Type" readonly="1" force_save="1"/>
+                    <field name="type_id" string="Type" readonly="1" force_save="1"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Link the Action to the Custom List View -->
+        <record id="tw_stock_location_assets_action_view_list" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_stock_location_assets_list_view"/>
+            <field name="act_window_id" ref="tw_stock_location_assets_action"/>
+        </record>
+
+    </data>
+</odoo>

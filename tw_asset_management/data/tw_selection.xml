@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">    
+        <!-- PO Type Assets -->
+        <record id="tw_po_type_asset_non_cip" model="tw.selection">
+            <field name="name">Non CIP</field>
+            <field name="value">non_cip</field>
+            <field name="type">PoTypeAssets</field>
+        </record>
+
+        <record id="tw_po_type_asset_cip" model="tw.selection">
+            <field name="name">CIP</field>
+            <field name="value">cip</field>
+            <field name="type">PoTypeAssets</field>
+        </record>
+
+        <record id="tw_asset_code_b" model="tw.selection">
+            <field name="name">B</field>
+            <field name="value">B</field>
+            <field name="type">AssetCode</field>
+        </record>
+
+        <record id="tw_asset_code_v" model="tw.selection">
+            <field name="name">V</field>
+            <field name="value">V</field>
+            <field name="type">AssetCode</field>
+        </record>
+
+        <record id="tw_asset_code_e" model="tw.selection">
+            <field name="name">E</field>
+            <field name="value">E</field>
+            <field name="type">AssetCode</field>
+        </record>
+
+        <record id="tw_asset_code_pe" model="tw.selection">
+            <field name="name">PE</field>
+            <field name="value">PE</field>
+            <field name="type">AssetCode</field>
+        </record>
+
+        <record id="tw_asset_code_pi" model="tw.selection">
+            <field name="name">PI</field>
+            <field name="value">PI</field>
+            <field name="type">AssetCode</field>
+        </record>
+
+        <record id="tw_asset_code_pr" model="tw.selection">
+            <field name="name">PR</field>
+            <field name="value">PR</field>
+            <field name="type">AssetCode</field>
+        </record>
+
+        <record id="tw_asset_code_prm" model="tw.selection">
+            <field name="name">PRM</field>
+            <field name="value">PRM</field>
+            <field name="type">AssetCode</field>
+        </record>
+
+        <record id="tw_asset_code_l" model="tw.selection">
+            <field name="name">L</field>
+            <field name="value">L</field>
+            <field name="type">AssetCode</field>
+        </record>
+
+    </data>
+</odoo>

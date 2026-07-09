@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_e_faktur_wizard" model="ir.ui.view">
+            <field name="name">Generate eFaktur Pajak Core Tax</field>
+            <field name="model">tw.e.faktur.coretax.pajak.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Generate eFaktur Pajak">
+                    <sheet>
+                        <!-- Filter Section -->
+                        <group>
+                            <group string="Filter Periode">
+                                <label for="start_date" string="Periode"/>
+                                <div class="o_row">
+                                    <field name="start_date" class="oe_inline"/>
+                                    <span class="mx-1">-</span>
+                                    <field name="end_date" class="oe_inline"/>
+                                </div>
+                                <field name="no_faktur" placeholder="Nomor Faktur..."/>
+                                <field name="ref" placeholder="No Transaksi..."/>
+                                <field name="state"/>
+                            </group>
+                        </group>
+                        
+                        <!-- Partner Section -->
+                        <notebook>
+                            <page string="Partner" name="page_partner">
+                                <field name="partner_ids" nolabel="1">
+                                    <list>
+                                        <field name="name"/>
+                                        <field name="no_npwp" optional="show"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    
+                    <!-- Footer -->
+                    <footer>
+                        <button name="action_print_report" string="Export Report" type="object" 
+                                class="btn-primary"/>
+                        <button string="Close" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_report_efaktur_wizard" model="ir.actions.act_window">
+            <field name="name">Generate eFaktur Pajak Core Tax</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.e.faktur.coretax.pajak.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_e_faktur_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_efaktur_pajak" 
+                  parent="tw_faktur_pajak.tw_backoffice_tax_submenu" 
+                  sequence="900" 
+                  action="action_report_efaktur_wizard" 
+                  groups="tw_faktur_pajak.group_tw_faktur_pajak_read"/>
+    </data>
+</odoo>

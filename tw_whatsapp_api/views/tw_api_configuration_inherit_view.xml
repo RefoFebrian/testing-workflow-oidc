@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tw_api_configuration_whatsapp_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.api.configuration.whatsapp.inherit.form</field>
+        <field name="model">tw.api.configuration</field>
+        <field name="inherit_id" ref="tw_api.tw_api_configuration_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='api_secret']" position="attributes">
+                <attribute name="required">auth_type == 'hmac' and api_type_value != 'Whatsapp'</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

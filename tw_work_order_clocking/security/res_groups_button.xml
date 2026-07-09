@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_start_stop_wo_group_button" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Button Start Stop WO</field>
+        </record>
+
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids"
+                eval="[
+            (4,ref('tw_start_stop_wo_group_button')),
+            ]" />
+        </record>
+
+        <record id="tw_work_order_group_button_update_status_invoice" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Button Update Status Invoice</field>
+            <field name="implied_ids" eval="[(4, ref('tw_work_order.tw_work_order_group_read'))]" />
+        </record>
+
+        <record id="access_button_update_status_invoice" model="ir.model.access">
+            <field name="model_id" ref="model_tw_work_order" />
+            <field name="name">button_update_status_invoice update</field>
+            <field name="group_id" ref="tw_work_order_group_button_update_status_invoice" />
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_work_order_group_button_reset_clocking" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Button Reset Clocking WO</field>
+            <field name="implied_ids" eval="[(4, ref('tw_work_order.tw_work_order_group_read'))]" />
+        </record>
+    </data>
+
+</odoo>

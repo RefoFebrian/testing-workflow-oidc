@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_stock_move_line_qr_code_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.move.line.qr.code.form</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_move_line_operation_inherit_view_tree" />
+            <field name="arch" type="xml">
+                <field name="lot_id" position="after">
+                    <field name="qr_code" 
+                        required="parent.use_existing_lots and parent.picking_code == 'incoming' and parent.division == 'Unit' and parent.has_qr_code == 'yes'" 
+                        column_invisible="parent.has_tracking != 'serial' or parent.picking_code != 'incoming' or parent.use_create_lots or parent.division != 'Unit' or parent.has_qr_code == 'no'" 
+                    />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

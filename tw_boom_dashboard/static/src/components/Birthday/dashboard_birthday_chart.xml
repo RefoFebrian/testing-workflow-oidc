@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="tw_boom_dashboard.BirthdayChart" owl="1">
+        <div class="birthday_chart_container d-flex align-items-center justify-content-center h-100 w-100"
+             t-att-class="'justify-content-' + (props.record.text_align === 'right' ? 'end' : (props.record.text_align === 'left' ? 'start' : 'center'))"
+             t-att-style="'background-color:' + (props.record.background_color || 'transparent') + '; color:' + (props.record.font_color || '#000') + '; border-radius: 8px; cursor: pointer; padding: 8px;'"
+             t-on-click="onClick">
+            <div class="d-flex align-items-center justify-content-center">
+                <span t-esc="state.label" t-att-style="'color:' + (props.record.font_color || '#000') + '; margin: 0; font-size:' + (props.record.font_size || 16) + 'px; font-weight:' + (props.record.font_weight_bold || props.record.font_weight || 700) + '; font-style:' + (props.record.font_style || 'normal') + '; font-family:' + (props.record.font_family || 'Arial') + ';'"/>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="tw_boom_dashboard.BirthdayDialog" owl="1">
+        <Dialog title="props.title">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Branch</th>
+                            <th>Job</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="props.birthdayData" t-as="b" t-key="b.id">
+                            <tr>
+                                <td t-esc="b.name"/>
+                                <td t-esc="b.company"/>
+                                <td t-esc="b.job"/>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <t t-set-slot="footer">
+                <button class="btn btn-primary" t-on-click="props.close">Close</button>
+            </t>
+        </Dialog>
+    </t>
+</templates>

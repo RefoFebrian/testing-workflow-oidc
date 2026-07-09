@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+         <record model="ir.ui.view" id="tw_partner_driver_tree">
+            <field name="name">tw.partner.driver</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <list string="Driver">
+                    <field name="code"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_tw_driver_partner_filter" model="ir.ui.view">
+            <field name="name">tw.driver.partner.filter</field>
+            <field name="model">res.partner</field>
+            <field name="priority">50</field>
+            <field name="arch" type="xml">
+                <search string="Driver">
+                    <field name="name" filter_domain="['|', '|', ('name', 'ilike', self), ('parent_id', 'ilike', self), ('ref' , '=', self)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_tw_partner_driver">
+            <field name="name">Driver</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">kanban,list,form,activity</field>
+            <field name="search_view_id" ref="view_tw_driver_partner_filter"/>
+            <field name="domain">[('company_type','=','person'),('category_id.name','=','Driver')]</field>
+            <field name="context" eval="{
+                'form_type': 'Driver',
+                'is_readonly': True,
+                'default_company_type': 'person',
+                'default_category_id': [ref('tw_stock_inbound.contact_tags_driver')]
+            }" />
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                  Add a new Driver
+                </p><p>
+                  Helps you easily track all activities related to a Driver's Data
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_tw_driver_list_view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_partner_driver_tree"/>
+            <field name="act_window_id" ref="action_tw_partner_driver"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_tw_driver_form_view">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_partner.tw_partner_contact_form_view"/>
+            <field name="act_window_id" ref="action_tw_partner_driver"/>
+        </record>
+
+         <record model="ir.actions.act_window.view" id="action_tw_driver_view_kanban">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="base.res_partner_kanban_view"/>
+            <field name="act_window_id" ref="action_tw_partner_driver"/>
+        </record>
+
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+        
+        <!-- Asset Acquisition Cancel Menu -->
+        <menuitem 
+            id="tw_asset_acquisition_cancel_menuitem" 
+            name="Asset Acquisition Cancel" 
+            parent="tw_po_asset_cancel.submenu_tw_general_affair_cancellation" 
+            action="tw_asset_acquisition_cancel.tw_asset_acquisition_cancel_action" 
+            groups="tw_asset_acquisition_cancel.group_asset_acquisition_cancel_read" 
+            sequence="30"/>
+
+    </data>
+</odoo>

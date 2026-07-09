@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve" owl="1">
+  <t t-name="tw_qris_display.BackendPage">
+    <div class="o_qris_wrap"
+         style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:16px;padding:24px">
+      
+      <t t-if="state.qrisSrc">
+        <div id="amount" style="font-size:48px;font-weight:700" t-esc="state.amountText"/>
+      </t>
+
+      <!-- ✅ show image only if available AND not errored -->
+      <t t-if="!state.imageError">
+        <t t-if="state.qrisSrc">
+          <img id="qris-img"
+              t-att-src="state.qrisSrc"
+              alt="QRIS"
+              t-on-error="handleImageError"
+              style="max-width:70vmin;max-height:70vmin;image-rendering:pixelated;border:6px solid #eee;border-radius:16px;padding:12px;"/>
+        </t>
+        <t t-else="">
+          <img id="qris-default"
+              src="/tw_qris_display/static/src/img/qris.svg"
+              alt="QRIS"
+              style="max-width:50vmin;max-height:30vmin;image-rendering:pixelated;border:6px solid #eee;border-radius:16px;padding:12px;"/>
+        </t>
+      </t>
+
+      <!-- ✅ show fallback if missing or failed -->
+      <t t-else="">
+        <div style="font-size:20px;color:#a00;font-weight:500;text-align:center;max-width:480px;">
+          ⚠️ QRIS tidak dapat digenerate, silahkan coba lagi
+        </div>
+      </t>
+
+      <h2 t-esc="state.displayCode"/>
+
+      <div id="status" style="font-size:18px;color:#666" t-esc="state.statusText"/>
+    </div>
+  </t>
+</templates>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_dealer_sale_order_approval_configuration" model="tw.approval.config">
+            <field name="name">Dealer Sale Order</field>
+            <field name="type">discount</field>
+            <field name="model_id" ref="tw_dealer_sale_order.model_tw_dealer_sale_order" />
+        </record>
+
+        <record id="tw_dealer_sale_order_approval_matrix_example" model="tw.approval.matrix">
+            <field name="form_id" ref="tw_dealer_sale_order_approval_configuration" />
+            <field name="division">Unit</field>
+            <field name="approval_type">sequential</field>
+        </record>
+    </data>
+</odoo>

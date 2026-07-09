@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <menuitem id="tw_expedition_price_menuitem" name="Pricelist Expedition" parent="tw_menu.submenu_tw_showroom_configuration_misc" action="tw_expedition_price.tw_expedition_price_action" sequence="150" groups="tw_expedition_price.group_tw_expedition_price_read"/>
+	</data>
+</odoo>

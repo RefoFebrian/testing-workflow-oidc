@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Access Rights for tw.asset.disposal.hutang.lain -->
+        <record id="access_tw_asset_disposal_hutang_lain_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_disposal_hutang_lain"/>
+            <field name="name">tw.asset.disposal.hutang.lain read</field>
+            <field name="group_id" ref="tw_asset_disposal.group_asset_disposal_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_asset_disposal_hutang_lain_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_disposal_hutang_lain"/>
+            <field name="name">tw.asset.disposal.hutang.lain update</field>
+            <field name="group_id" ref="tw_asset_disposal.group_asset_disposal_update"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_asset_disposal_hutang_lain_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_asset_disposal_hutang_lain"/>
+            <field name="name">tw.asset.disposal.hutang.lain delete</field>
+            <field name="group_id" ref="tw_asset_disposal.group_asset_disposal_delete"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+    </data>
+</odoo>

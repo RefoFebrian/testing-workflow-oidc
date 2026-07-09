@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="1">
+		<record id="firebase_notification_category_reminder_followup_tomorrow" model="tw.firebase.notification.category">
+			<field name="name">Reminder Followup Tomorrow</field>
+			<field name="title">Follow Up mu besok</field>
+			<field name="sumber_data">proactive</field>
+			<field name="jenis_reminder">harian</field>
+			<field name="content_template_id" ref="tw_firebase.firebase_content_template_tomorrow_followup_reminder"/>
+		</record>
+
+		<record id="firebase_notification_category_reminder_followup_before" model="tw.firebase.notification.category">
+			<field name="name">Reminder Followup an Hour Before</field>
+			<field name="title">Reminder Follow Up</field>
+			<field name="sumber_data">proactive</field>
+			<field name="jenis_reminder">harian</field>
+			<field name="content_template_id" ref="tw_firebase.firebase_content_template_followup_reminder"/>
+		</record>
+
+		<record id="firebase_notification_category_reminder_followup_harian" model="tw.firebase.notification.category">
+			<field name="name">Reminder Followup Harian</field>
+			<field name="sumber_data">proactive</field>
+			<field name="jenis_reminder">harian</field>
+			<field name="content_template_id" ref="tw_firebase.firebase_content_template_daily_followup_reminder"/>
+		</record>
+
+		<record id="firebase_notification_category_reminder_followup_overdue" model="tw.firebase.notification.category">
+			<field name="name">Reminder Followup Overdue</field>
+			<field name="title">Overdue Followup</field>
+			<field name="sumber_data">proactive</field>
+			<field name="jenis_reminder">overdue</field>
+			<field name="content_template_id" ref="tw_firebase.firebase_content_template_overdue_notification"/>
+		</record>
+
+		<record id="firebase_notification_category_reminder_followup_overdue_kepala_cabang" model="tw.firebase.notification.category">
+			<field name="name">Reminder Followup Overdue Kacab</field>
+			<field name="title">Overdue Followup di dealer anda</field>
+			<field name="sumber_data">proactive</field>
+			<field name="jenis_reminder">overdue</field>
+			<field name="max_jam">1</field>
+			<!-- ref empty because there no job_sales_operation_head in tw_job -->
+      		<field name="job_id" ref=""/> 
+			<field name="content_template_id" ref="tw_firebase.firebase_content_template_overdue_kacab_reminder"/>
+		</record>
+
+		<record id="firebase_notification_category_reminder_followup_overdue_kawil" model="tw.firebase.notification.category">
+			<field name="name">Reminder Followup Overdue Kawil</field>
+			<field name="title">Overdue Followup di dealer anda</field>
+			<field name="sumber_data">proactive</field>
+			<field name="jenis_reminder">overdue</field>
+			<field name="max_jam">12</field>
+			<!-- ref empty because there no job_area_manager in tw_job -->
+      		<field name="job_id" ref=""/>
+			<field name="content_template_id" ref="tw_firebase.firebase_content_template_overdue_kacab_reminder"/>
+		</record>
+
+		<record id="firebase_notification_category_reminder_followup_overdue_owner" model="tw.firebase.notification.category">
+			<field name="name">Reminder Followup Overdue Owner</field>
+			<field name="title">Overdue Followup di dealer anda</field>
+			<field name="sumber_data">proactive</field>
+			<field name="jenis_reminder">overdue</field>
+			<field name="max_jam">24</field>
+			<!-- ref empty because there no job_owner in tw_job -->
+      		<field name="job_id" ref=""/>
+			<field name="content_template_id" ref="tw_firebase.firebase_content_template_overdue_kacab_reminder"/>
+		</record>
+				
+		<record id="firebase_notification_category_reminder_followup_overdue_koordinator" model="tw.firebase.notification.category">
+			<field name="name">Reminder Followup Overdue Koordinator</field>
+			<field name="sumber_data">proactive</field>
+			<field name="jenis_reminder">overdue</field>
+			<field name="max_jam">2</field>
+			<!-- ref empty because there no job_sales_coordinator in tw_job -->
+      		<field name="job_id" ref=""/>
+			<field name="content_template_id" ref="tw_firebase.firebase_content_template_overdue_notification"/>
+		</record>
+
+		<record id="firebase_notification_category_reminder_followup_stnk" model="tw.firebase.notification.category">
+			<field name="name">Reminder Followup STNK</field>
+			<field name="sumber_data">proactive</field>
+			<field name="jenis_reminder">reminder</field>
+			<field name="content_template_id" ref="tw_firebase.firebase_content_template_stnk_followup_reminder"/>
+		</record>
+
+		<record id="firebase_notification_category_reminder_followup_bpkb" model="tw.firebase.notification.category">
+			<field name="name">Reminder Followup BPKB</field>
+			<field name="sumber_data">proactive</field>
+			<field name="jenis_reminder">reminder</field>
+			<field name="content_template_id" ref="tw_firebase.firebase_content_template_bpkb_followup_reminder"/>
+		</record>
+
+		<record id="firebase_notification_category_open_notification_sp_kacab" model="tw.firebase.notification.category">
+			<field name="name">Notification SP Open Kacab</field>
+			<field name="title">Notifikasi SP di dealer anda</field>
+			<field name="sumber_data">proactive</field>
+			<field name="jenis_reminder">reminder</field>
+			<field name="content_template_id" ref="tw_firebase.firebase_content_template_sp_notification_open_kacab_reminder"/>
+		</record>
+
+		<record id="firebase_notification_category_confirmed_notification_sp_kacab" model="tw.firebase.notification.category">
+			<field name="name">Notification SP Confirmed Kacab</field>
+			<field name="title">Notifikasi SP Aktif di dealer anda</field>
+			<field name="sumber_data">proactive</field>
+			<field name="jenis_reminder">reminder</field>
+			<field name="content_template_id" ref="tw_firebase.firebase_content_template_sp_notification_confirmed_kacab_reminder"/>
+		</record>
+
+		<record id="firebase_notification_category_confirmed_notification_sp_employee" model="tw.firebase.notification.category">
+			<field name="name">Notification SP Employee</field>
+			<field name="title">Notifikasi mengenai SP anda</field>
+			<field name="sumber_data">proactive</field>
+			<field name="jenis_reminder">reminder</field>
+			<field name="content_template_id" ref="tw_firebase.firebase_content_template_sp_notification_confirmed_employee_reminder"/>
+		</record>
+		
+		<record id="firebase_notification_approval_pbt_to_am_and_gm" model="tw.firebase.notification.category">
+			<field name="name">Notification Approval PBT</field>
+			<field name="title">Notifikasi Approval Input Sisa Margin</field>
+			<field name="sumber_data">proactive</field>
+			<field name="jenis_reminder">reminder</field>
+			<field name="content_template_id" ref="tw_firebase.firebase_content_template_notification_approval_pbt"/>
+		</record>
+		
+		<record id="firebase_notification_reminder_input_pbt_to_soh" model="tw.firebase.notification.category">
+			<field name="name">Notification Reminder Input PBT</field>
+			<field name="title">Reminder Input Sisa Margin</field>
+			<field name="sumber_data">proactive</field>
+			<field name="jenis_reminder">reminder</field>
+			<field name="content_template_id" ref="tw_firebase.firebase_content_template_notification_reminder_input_pbt_to_soh"/>
+		</record>
+
+  </data>
+</odoo>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-name="tw_boom_dashboard.DashboardAmchartsInherit" t-inherit="synconics_bi_dashboard.DashboardAmcharts" t-inherit-mode="extension">
+        
+        <xpath expr="//div[hasclass('grid-stack')]" position="attributes">
+            <attribute name="gs-w">36</attribute>
+            <attribute name="gs-column">36</attribute>
+        </xpath>
+        <xpath expr="//DashboardChartWrapper" position="attributes">
+            <attribute name="color_palette">chart.color_palette</attribute>
+            <attribute name="dashboard_filters">state.dashboardFilters</attribute>
+            <attribute name="chart_orientation">chart.chart_orientation</attribute>
+            <attribute name="show_legend">chart.show_legend</attribute>
+        </xpath>
+    </t>
+
+    <t t-name="TWBoomDashboardUser.BirthdayDialog">
+        <Dialog title="props.title">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Branch</th>
+                            <th>Job</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="props.birthdayData" t-as="b" t-key="b.id">
+                            <tr>
+                                <td t-esc="b.name"/>
+                                <td t-esc="b.company"/>
+                                <td t-esc="b.job"/>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <t t-set-slot="footer">
+                <button class="btn btn-primary" t-on-click="props.close">Close</button>
+            </t>
+        </Dialog>
+    </t>
+</templates>

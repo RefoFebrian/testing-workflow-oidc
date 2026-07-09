@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="mutation_internal_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="tw_web.teto_report_layout">
+                    <div class="page">
+                        <style>
+                            th {
+                                border: 1px solid black;
+                                text-align: center;
+                                font-weight: bolder;
+                                padding: 3px;
+                                background-color: #ffff00;
+                            }
+                            td {
+                                border: 1px solid black;
+                                padding: 3px;
+                            }
+                            .header, .footer {
+                                border: 0;
+                                border-collapse: collapse;
+                                width: 100%
+                            }
+                            .header tr,
+                            .footer tr {
+                                border: 0
+                            }
+                            .header th, .header td,
+                            .footer th, .footer td {
+                                border: 0;
+                                padding: 3px;
+                            }
+                        </style>
+
+                        <div class="oe_structure"/>
+
+                        
+                        <div class="row px-1">
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-12"><strong t-esc="o.company_id.name" /></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12" t-esc="print_partner_address(o.company_id.partner_id)"></div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-12"><strong>MUTASI ANTAR LOKASI</strong></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">No : &#160;<span t-field="o.name"/></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                        <div class="row" style="border: 1px solid black;">
+                            <div class="col-12">
+                                <div class="row px-1">
+                                    <div class="col-6">
+                                        <table class="header table-borderless">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Tanggal</td>
+                                                    <td>:</td>
+                                                    <td><span t-field="o.scheduled_date" t-options='{"widget": "date", "format": "dd-MM-yyyy"}'/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lokasi Asal</td>
+                                                    <td>:</td>
+                                                    <td><span t-field="o.location_id"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lokasi Tujuan</td>
+                                                    <td>:</td>
+                                                    <td><span t-field="o.location_dest_id"/></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>    
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <table style="width: 100%; border-collapse: collapse;">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 5%;">No</th>
+                                                    <th>Type</th>
+                                                    <th>Description</th>
+                                                    <t t-if="o.product_id.tracking != 'none'">
+                                                        <th>Warna</th>
+                                                        <th>No. Mesin</th>
+                                                        <th>No. Rangka</th>
+                                                    </t>
+                                                    <th>Jumlah</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-set="index_no" t-value="1"/>
+                                                <t t-foreach="o.move_line_ids" t-as="line">
+                                                    <tr>
+                                                        <td align="center"><span t-esc="index_no"/></td>
+                                                        <td><span t-field="line.product_id.default_code"/></td>
+                                                        <td><span t-field="line.product_id.product_tmpl_id.name"/></td>
+                                                        <t t-if="o.product_id.tracking != 'none'">
+                                                            <t t-if="product_color(line.product_id.default_code)">
+                                                                <td><span t-esc="product_color(line.product_id.default_code)"/></td>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <td>-</td>
+                                                            </t>
+                                                            <t t-if="line.lot_id.name">
+                                                                <td><span t-field="line.lot_id.name"/></td>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <td>-</td>
+                                                            </t>
+                                                            <t t-if="line.lot_id.chassis_number">
+                                                                <td><span t-field="line.lot_id.chassis_number"/></td>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <td>-</td>
+                                                            </t>
+                                                        </t>
+                                                        <td align="center"><span t-esc="int(line.quantity_product_uom)"/></td>
+                                                    </tr>
+                                                    <t t-set="index_no" t-value="index_no+1"/>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <table style="width: 100%;" class="table-borderless">
+                                    <tr>
+                                        <td width="5.00%"><h1/></td>
+                                        <td style="font-size: 12;">Dicetak oleh,</td>
+                                        <td width="5.00%"><h1/></td>
+                                        <td style="font-size: 12;">Dikeluarkan,</td>
+                                        <td width="5.00%"><h1/></td>
+                                        <td style="font-size: 12;">Diterima,</td>
+                                    </tr>
+                                </table>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <table style="width: 100%;" class="table-borderless">
+                                    <tr>
+                                        <td width="5.00%"><h1/></td>
+                                        <td>_______________________</td>
+                                        <td width="5.00%"><h1/></td>
+                                        <td>_______________________</td>
+                                        <td width="5.00%"><h1/></td>
+                                        <td>_______________________</td>
+                                    </tr>
+                                    <tr>
+                                        <td><h1/></td>
+                                        <td style="font-size: 12;"> <span t-esc="print_user()"/>, <span t-esc="time_date(o.date)"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="5.00%"><h1/></td>
+                                        <td style="font-size: 12;">Cetakan Ke : &#160;<span t-esc="print_counter()"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

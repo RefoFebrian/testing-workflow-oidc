@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+		<record id="view_tw_spk_activity_form" model="ir.ui.view">
+			<field name="name">tw.activity.spk.form</field>
+			<field name="model">tw.dealer.spk</field>
+			<field name="inherit_id" ref="tw_spk.tw_dealer_spk_form_view"/>
+			<field name="arch" type="xml">
+				<field name="identification_number" position="after">
+					<field name="is_btl" invisible="1"/>
+					<field name="is_requires_act_type" invisible="1"/>
+					<field name="is_pos" invisible="1"/>
+					<field name="sales_channel_id" readonly="state != 'draft'" required="not sales_channel_id"/>
+					<field name="sales_channel" invisible="1"/>
+					<field name="sales_source_location_id" 
+						options="{'no_create': True,'no_open':True}" 
+						class="oe_inline" 
+						invisible="not is_pos or is_btl"
+						required="is_pos and not is_btl and state == 'draft'"
+						readonly="state != 'draft'"
+						domain="[('company_id','=',company_id),('btl_loc_type_id.value','=','POS'),('effective_start_date','&lt;=',time.strftime('%Y-%m-%d %H:%M:%S')),('effective_end_date','&gt;=',time.strftime('%Y-%m-%d %H:%M:%S'))]" />
+					<field name="act_type_id" 
+						invisible="not is_requires_act_type" 
+						readonly="state != 'draft'" 
+						required="is_requires_act_type" 
+						options="{'no_open':True,'no_create':True}"/>
+					<field name="activity_plan_id" invisible="not is_btl and not activity_plan_id" readonly="state != 'draft'" options="{'no_open':True,'no_create':True}"/>
+					<field name="activity_point_id" invisible="1"/>
+				</field>
+			</field>
+		</record>
+    </data>
+</odoo>

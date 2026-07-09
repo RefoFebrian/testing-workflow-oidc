@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Dashboard User -->
+        <record id="tw_boom_dashboard_header_user" model="dashboard.dashboard">
+            <field name="name">Dashboard User</field>
+            <field name="menu_sequence">1</field>
+            <field name="menu_active">True</field>
+            <field name="auto_reload_duration">120000</field>
+            <field name="company_id" eval="False"/>
+            <field name="parent_menu_id" ref="tw_boom_dashboard.tw_boom_dashboards_menu"/>
+            <field name="header_domain">[('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <!-- Dashboard Admin Area -->
+        <record id="tw_boom_dashboard_header_admin_area" model="dashboard.dashboard">
+            <field name="name">Dashboard Admin Area</field>
+            <field name="menu_sequence">2</field>
+            <field name="menu_active">True</field>
+            <field name="auto_reload_duration">120000</field>
+            <field name="company_id" eval="False"/>
+            <field name="parent_menu_id" ref="tw_boom_dashboard.tw_boom_dashboards_menu"/>
+            <field name="header_domain">[('company_id', 'in', company_ids)]</field>
+
+        </record>
+
+        <!-- Dashboard Area Manager -->
+        <record id="tw_boom_dashboard_header_area_manager" model="dashboard.dashboard">
+            <field name="name">Dashboard Area Manager</field>
+            <field name="menu_sequence">3</field>
+            <field name="menu_active">True</field>
+            <field name="auto_reload_duration">120000</field>
+            <field name="company_id" eval="False"/>
+            <field name="parent_menu_id" ref="tw_boom_dashboard.tw_boom_dashboards_menu"/>
+            <field name="header_domain">[('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <!-- Dashboard Admin Manager -->
+        <record id="tw_boom_dashboard_header_admin_manager" model="dashboard.dashboard">
+            <field name="name">Dashboard Admin Manager</field>
+            <field name="menu_sequence">4</field>
+            <field name="menu_active">True</field>
+            <field name="auto_reload_duration">120000</field>
+            <field name="company_id" eval="False"/>
+            <field name="parent_menu_id" ref="tw_boom_dashboard.tw_boom_dashboards_menu"/>
+            <field name="header_domain">[('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <!-- Dashboard GM & COO -->
+        <record id="tw_boom_dashboard_header_gm_coo" model="dashboard.dashboard">
+            <field name="name">Dashboard GM &amp; COO</field>
+            <field name="menu_sequence">5</field>
+            <field name="menu_active">True</field>
+            <field name="auto_reload_duration">120000</field>
+            <field name="company_id" eval="False"/>
+            <field name="parent_menu_id" ref="tw_boom_dashboard.tw_boom_dashboards_menu"/>
+            <field name="header_domain">[('company_id', 'in', company_ids)]</field>
+        </record>
+    </data>
+</odoo>

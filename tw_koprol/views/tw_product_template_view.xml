@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_product_template_asset_koprol_form_inherit" model="ir.ui.view">
+            <field name="name">Product Template Assets Koprol</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="tw_asset_management.view_product_template_asset_form_inherit"/>
+            <field name="arch" type="xml">
+                <group name="assets_information_product" position="after">
+					<group string="Koprol">
+						<field name="koprol_code" readonly="1" help="code product from Koprol"/>
+						<field name="last_modified_date" readonly="1"/>
+					</group>
+				</group>
+            </field>
+        </record>
+    </data>
+
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="submenu_tw_part_hotline" name="Part Hotline" parent="tw_menu.submenu_tw_workshop_h3" sequence="60" />
+
+        <menuitem id="menu_tw_part_hotline" parent="submenu_tw_part_hotline" action="action_tw_part_hotline" sequence="50" groups="tw_part_hotline.group_tw_part_hotline_read"/>
+
+        <menuitem id="menu_tw_part_hotline_monitoring" parent="tw_part_hotline.submenu_tw_part_hotline" action="tw_part_hotline_monitoring_wizard" sequence="50" groups="tw_part_hotline.group_tw_part_hotline_monitoring_wizard_all"/>
+
+        <!-- Report -->
+        <menuitem id="menu_tw_laporan_part_hotline_wizard" parent="tw_menu.submenu_tw_workshop_report" sequence="10" action="tw_laporan_part_hotline_wizard_action" groups="tw_part_hotline.group_tw_laporan_part_hotline_wizard"/>
+    </data>
+</odoo>

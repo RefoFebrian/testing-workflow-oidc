@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--
+        =============================================================
+        DGI Work Order (PKB) Endpoint Configurations
+
+        Endpoint untuk sync Work Order dari DGI API (pkb/read)
+        Satu endpoint per API Config (HSO, ASP, DAM, DAW, NPM, SINSEN, WAHANA)
+        =============================================================
+        -->
+
+        <!-- ==================== HSO ==================== -->
+        <record id="tw_endpoint_dgi_wo_hso" model="tw.endpoint.configuration">
+            <field name="code">dgi_wo</field>
+            <field name="version">1</field>
+            <field name="url_path">pkb/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_hso"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_work_order.model_tw_work_order"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h23"/>
+        </record>
+
+        <!-- ==================== ASP ==================== -->
+        <record id="tw_endpoint_dgi_wo_asp" model="tw.endpoint.configuration">
+            <field name="code">dgi_wo</field>
+            <field name="version">1</field>
+            <field name="url_path">pkb/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_asp"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_work_order.model_tw_work_order"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h23"/>
+        </record>
+
+        <!-- ==================== DAM ==================== -->
+        <record id="tw_endpoint_dgi_wo_dam" model="tw.endpoint.configuration">
+            <field name="code">dgi_wo</field>
+            <field name="version">1</field>
+            <field name="url_path">pkb/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_dam"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_work_order.model_tw_work_order"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h23"/>
+        </record>
+
+        <!-- ==================== DAW ==================== -->
+        <record id="tw_endpoint_dgi_wo_daw" model="tw.endpoint.configuration">
+            <field name="code">dgi_wo</field>
+            <field name="version">1</field>
+            <field name="url_path">pkb/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_daw"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_work_order.model_tw_work_order"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h23"/>
+        </record>
+
+        <!-- ==================== NPM ==================== -->
+        <record id="tw_endpoint_dgi_wo_npm" model="tw.endpoint.configuration">
+            <field name="code">dgi_wo</field>
+            <field name="version">1</field>
+            <field name="url_path">pkb/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_npm"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_work_order.model_tw_work_order"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h23"/>
+        </record>
+
+        <!-- ==================== SINSEN ==================== -->
+        <record id="tw_endpoint_dgi_wo_sinsen" model="tw.endpoint.configuration">
+            <field name="code">dgi_wo</field>
+            <field name="version">1</field>
+            <field name="url_path">pkb/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_sinsen"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_work_order.model_tw_work_order"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h23"/>
+        </record>
+
+        <!-- ==================== WAHANA ==================== -->
+        <record id="tw_endpoint_dgi_wo_wahana" model="tw.endpoint.configuration">
+            <field name="code">dgi_wo</field>
+            <field name="version">1</field>
+            <field name="url_path">pkb/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_wahana"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_work_order.model_tw_work_order"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h23"/>
+        </record>
+
+    </data>
+</odoo>

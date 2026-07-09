@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    
+        <record id="data_tw_purchase_type_fix" model="tw.purchase.order.type">
+            <field name="name">Fix</field>
+            <field name="division">Unit</field>
+            <field name="start_date_id" ref="tw_purchase_order.selection_date_po_type_next_month"/>
+            <field name="end_date_id" ref="tw_purchase_order.selection_date_po_type_end_of_next_month"/>
+        </record>
+    
+        <record id="data_tw_purchase_type_additional" model="tw.purchase.order.type">
+            <field name="name">Additional</field>
+            <field name="division">Unit</field>
+            <field name="start_date_id" ref="tw_purchase_order.selection_date_po_type_now"/>
+            <field name="end_date_id" ref="tw_purchase_order.selection_date_po_type_end_month"/>
+        </record>
+    
+        <record id="data_tw_purchase_type_waiting_list" model="tw.purchase.order.type">
+            <field name="name">Waiting List</field>
+            <field name="division">Unit</field>
+            <field name="start_date_id" ref="tw_purchase_order.selection_date_po_type_now"/>
+            <field name="end_date_id" ref="tw_purchase_order.selection_date_po_type_new_2_month"/>
+        </record>
+    
+        <record id="data_tw_purchase_type_sparepart_fix" model="tw.purchase.order.type">
+            <field name="name">Fix</field>
+            <field name="division">Sparepart</field>
+            <field name="start_date_id" ref="tw_purchase_order.selection_date_po_type_new_2_month"/>
+            <field name="end_date_id" ref="tw_purchase_order.selection_date_po_type_end_of_next_2_months"/>
+        </record>
+    
+        <record id="data_tw_purchase_type_sparepart_additional" model="tw.purchase.order.type">
+            <field name="name">Additional</field>
+            <field name="division">Sparepart</field>
+            <field name="start_date_id" ref="tw_purchase_order.selection_date_po_type_now"/>
+            <field name="end_date_id" ref="tw_purchase_order.selection_date_po_type_end_month"/>
+        </record>  
+
+    </data>
+</odoo>

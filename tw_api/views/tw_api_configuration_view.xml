@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_api_configuration_list_view" model="ir.ui.view">
+            <field name="name">tw.api.configuration.tree</field>
+            <field name="model">tw.api.configuration</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="api_type_id"/>
+                    <field name="auth_type"/>
+                    <field name="company_id"/>
+                    <field name="base_url"/>
+                </list>
+            </field>
+        </record>
+        
+        <record id="tw_api_configuration_form_view" model="ir.ui.view">
+            <field name='name'>tw.api.configuration.form</field>
+            <field name='model'>tw.api.configuration</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <form string="API Configuration">
+                    <header>
+                        <button name="action_get_token" 
+                                type="object" 
+                                string="Get Token" 
+                                class="btn-primary"
+                                invisible="auth_type != 'basic' or not username or not password"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" required="1" placeholder="e.g., DGI Production API"/>
+                            </h1>
+                        </div>
+                        
+                        <group>
+                            <group string="API Information">
+                                <field name="api_type_id" 
+                                       required="1"
+                                       options="{'no_create': True, 'no_open': True}"/>
+                                <field name="api_type_value" invisible="1"/>
+                                <field name="company_id" 
+                                       options="{'no_create': True}"/>
+                            </group>
+                            <group string="Authentication Method">
+                                <field name="auth_type" 
+                                       widget="radio"
+                                       required="1"
+                                       options="{'horizontal': True}"/>
+                                <div class="text-muted" invisible="not auth_type">
+                                    <span invisible="auth_type != 'basic'">
+                                        <i class="fa fa-info-circle"/> Basic Auth uses username/password or Bearer token
+                                    </span>
+                                    <span invisible="auth_type != 'hmac'">
+                                        <i class="fa fa-info-circle"/> HMAC Auth uses API Key + Secret with SHA256 signature
+                                    </span>
+                                </div>
+                            </group>
+                        </group>
+                        
+                        <group string="API Endpoint" col="2">
+                            <field name="base_url" 
+                                   required="1"
+                                   placeholder="https://api.example.com"/>
+                            <field name="auth_url" 
+                                   placeholder="/api/auth/token"
+                                   invisible="auth_type != 'basic'"/>
+                        </group>
+                        
+                        <notebook>
+                            <page name="endpoints" string="Endpoints">
+                                <field name="endpoint_config_ids">
+                                    <list editable="bottom">
+                                        <field name="code" required="1"/>
+                                        <field name="version" required="1"/>
+                                        <field name="method" required="1"/>
+                                        <field name="base_url_override" optional="show"/>
+                                        <field name="url_path" required="1"/>
+                                        <field name="full_url" readonly="1"/>
+                                        <field name="active" widget="boolean_toggle"/>
+                                    </list>
+                                </field>
+                                <div class="alert alert-info" role="alert" style="margin: 16px;">
+                                    <strong>Endpoints:</strong> Configure API endpoints for this configuration.
+                                    <br/>Each endpoint represents a specific API call with its own URL path and HTTP method.
+                                </div>
+                            </page>
+                            
+                            <page name="basic_auth" 
+                                  string="Basic Authentication" 
+                                  invisible="auth_type != 'basic'">
+                                <group>
+                                    <group string="Credentials">
+                                        <field name="username" 
+                                               placeholder="api_username"
+                                               required="auth_type == 'basic'"/>
+                                        <field name="password" 
+                                               password="1"
+                                               placeholder="••••••••"
+                                               required="auth_type == 'basic'"/>
+                                    </group>
+                                    <group string="Token (Optional)">
+                                        <field name="token" 
+                                               placeholder="Will be generated after clicking 'Get Token'"/>
+                                        <field name="expired_on" 
+                                               readonly="1"
+                                               invisible="not token"/>
+                                    </group>
+                                </group>
+                                <div class="alert alert-info" role="alert" style="margin: 16px;">
+                                    <strong>Note:</strong> If both username/password and token are provided, 
+                                    the system will use Bearer token authentication.
+                                </div>
+                            </page>
+                            
+                            <page name="hmac_auth" 
+                                  string="HMAC Authentication" 
+                                  invisible="auth_type != 'hmac'">
+                                <group>
+                                    <group string="Client Credentials">
+                                        <field name="client_id" 
+                                               placeholder="client_id_123"/>
+                                        <field name="client_secret" 
+                                               password="1"
+                                               placeholder="••••••••"/>
+                                    </group>
+                                    <group string="API Keys">
+                                        <field name="api_key" 
+                                               required="auth_type == 'hmac'"
+                                               placeholder="your_api_key"/>
+                                        <field name="api_secret" 
+                                               password="1"
+                                               required="auth_type == 'hmac'"
+                                               placeholder="••••••••"/>
+                                    </group>
+                                </group>
+                                
+                                <group string="Header Configuration" col="1">
+                                    <label for="header_mapping" string="Header Mapping"/>
+                                    <field name="header_mapping" widget="ace" nolabel="1" options="{'minLines': 5, 'maxLines': 15}"/>
+                                    <div class="text-muted" style="margin-top: 8px;">
+                                        Map internal keys to actual HTTP header names.
+                                        <br/><strong>Keys:</strong> api_key, signature, timestamp
+                                        <br/><strong>Example (DGI):</strong> 
+                                        <code>{"api_key": "DGI-API-Key", "signature": "DGI-API-Token", "timestamp": "X-Request-Time"}</code>
+                                    </div>
+                                    
+                                    <label for="additional_headers" string="Additional Headers (Optional)" style="margin-top: 16px;"/>
+                                    <field name="additional_headers" widget="ace" nolabel="1" options="{'minLines': 3, 'maxLines': 10}"/>
+                                    <div class="text-muted" style="margin-top: 8px;">
+                                        Static headers to include in all requests.
+                                        <br/><strong>Example:</strong> 
+                                        <code>{"X-Custom-Header": "value", "X-Client-ID": "client123"}</code>
+                                    </div>
+                                </group>
+                                
+                                <div class="alert alert-info" role="alert" style="margin: 16px;">
+                                    <strong>Signature Algorithm:</strong> SHA256(API_KEY + API_SECRET + TIMESTAMP)
+                                    <br/>
+                                    <strong>Flexible Headers:</strong> Configure any header names using JSON mapping above.
+                                    <br/>The system will automatically use your custom header names when making API calls.
+                                </div>
+                            </page>
+                            
+                            <page name="provider_auth" 
+                                  string="Provider Authentication" 
+                                  invisible="auth_type != 'provider'">
+                                <group>
+                                    <group string="Provider Configuration">
+                                        <field name="oauth_provider_id" 
+                                               options="{'no_create': True, 'no_create_edit': True}"
+                                               required="auth_type == 'provider'"/>
+                                        <field name="auth_url" 
+                                               placeholder="https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token"
+                                               required="auth_type == 'provider'"/>
+                                        <field name="client_id" 
+                                               placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+                                               required="auth_type == 'provider'"/>
+                                        <field name="client_secret" 
+                                               password="1"
+                                               placeholder="••••••••"
+                                               required="auth_type == 'provider'"/>
+                                        <field name="client_scope" 
+                                               placeholder="api://your-app-id/.default"/>
+                                        <field name="tenant_id" 
+                                               placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"/>
+                                    </group>
+                                    <group string="Token Status">
+                                        <field name="token" 
+                                               placeholder="Will be generated after getting token"
+                                               readonly="1"/>
+                                        <field name="expired_on" 
+                                               readonly="1"/>
+                                    </group>
+                                </group>
+                                <group name="token_validation_group">
+                                    <group string="Token Validation" name="token_validation">
+                                        
+                                    </group>
+                                </group>
+                                <div class="alert alert-info" role="alert" style="margin: 16px;">
+                                    <strong>Provider Auth (OAuth 2.0 Client Credentials):</strong>
+                                    <br/>Konfigurasi ini digunakan untuk mendapatkan token dari OAuth Provider menggunakan Client Credentials flow.
+                                </div>
+                            </page>
+                            
+                            <page string="Audit Trail">
+                                <group>
+                                    <group string="Created">
+                                        <field name="create_uid" readonly="1"/>
+                                        <field name="create_date" readonly="1"/>
+                                    </group>
+                                    <group string="Last Modified">
+                                        <field name="write_uid" readonly="1"/>
+                                        <field name="write_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_api_configuration_filter" model="ir.ui.view">
+            <field name="name">tw.api.configuration.filter</field>
+            <field name="model">tw.api.configuration</field>
+            <field name="arch" type="xml">
+                <search string="Search API Configuration">
+                    <field name="name"/>
+                    <field name="api_type_id" />
+                    <field name="company_id" />
+                    <field name="base_url" />
+                    <field name="auth_url" />
+                    <group expand="1" string="Group By">
+                        <filter string="Branch" name="group_by_company" context="{'group_by':'company_id'}"/>
+					</group>
+                </search>
+            </field>
+        </record>  
+
+        <record id="tw_api_configuration_action" model="ir.actions.act_window">
+            <field name="name">API Configuration</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.api.configuration</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a new API Configuration
+                </p>
+                <p>
+                    Configure external API connections with authentication credentials.
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

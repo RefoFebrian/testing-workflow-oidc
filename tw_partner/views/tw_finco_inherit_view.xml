@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+         <!-- Finance Company-->
+
+         <record id="tw_finco_inherit_partner_list_view" model="ir.ui.view">
+            <field name="name">Finance Company</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <list string="Finco">
+                    <field name="code"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_tw_finco_inherit_partner" model="ir.actions.act_window">
+            <field name="name">Finance Company</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">kanban,list,form,activity</field>
+            <field name="search_view_id" ref="tw_partner.view_tw_all_partner_inherit_filter"/>
+            <field name="domain">[('company_type','=','company'),('category_id.name','=','Finance Company')]</field>
+            <field name="context" eval="
+            {   
+                'form_type': 'Finance Company',
+                'is_readonly': True,
+                'default_company_type': 'company',
+                'default_category_id': [ref('tw_partner.contact_tags_finco')]
+            }
+            " />
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                  Add a new Finance Company
+                </p><p>
+                  TEDS 2.0 helps you easily track all activities related to a Finance Company's Data
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_tw_finco_inherit_partner_list_view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_finco_inherit_partner_list_view"/>
+            <field name="act_window_id" ref="action_tw_finco_inherit_partner"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_tw_finco_inherit_partner_form_view">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_partner_contact_form_view"/>
+            <field name="act_window_id" ref="action_tw_finco_inherit_partner"/>
+        </record>
+         <record model="ir.actions.act_window.view" id="action_tw_finco_inherit_partner_kanban_view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="base.res_partner_kanban_view"/>
+            <field name="act_window_id" ref="action_tw_finco_inherit_partner"/>
+        </record>
+
+</odoo>

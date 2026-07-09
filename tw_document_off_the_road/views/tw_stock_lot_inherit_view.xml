@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+        <record  id="tw_stock_lot_document_offtr_view_form" model="ir.ui.view">
+            <field name="name">tw.stock.lot.document.offtr.form.view</field>
+            <field name="model">stock.lot</field>
+            <field name="inherit_id" ref="tw_vehicle_document.view_production_lot_vehicle_document_form" />
+            <field name="arch" type="xml">
+                <xpath expr='//page[@name="page_document_handling"]' position='after'>
+                    <page string="Proses Off The Road">
+                        <group>
+                            <group>
+                                <field name="process_otr_id" readonly="1"/>
+                                <field name="process_otr_date" readonly="1"/>
+                                <field name="inv_process_otr_id" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="vehicle_document_submission_id" readonly="1"/>
+                                <field name="vehicle_document_submission_date" readonly="1"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

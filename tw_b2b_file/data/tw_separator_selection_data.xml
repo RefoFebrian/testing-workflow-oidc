@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_selection_separator_space" model="tw.selection">
+	    	<field name="name">space</field>
+            <field name="value">32</field> 
+	    	<field name="type">Separator</field> 
+        </record>
+
+        <record id="tw_selection_separator_comma" model="tw.selection">
+	    	<field name="name">comma</field>
+            <field name="value">44</field> 
+	    	<field name="type">Separator</field> 
+        </record>
+
+        <record id="tw_selection_separator_semicolon" model="tw.selection">
+	    	<field name="name">semicolon</field>
+            <field name="value">59</field> 
+	    	<field name="type">Separator</field> 
+        </record>
+
+        <record id="tw_selection_separator_index" model="tw.selection">
+	    	<field name="name">index</field>
+            <field name="value">65</field> 
+	    	<field name="type">Separator</field> 
+        </record>
+
+    </data>
+</odoo>

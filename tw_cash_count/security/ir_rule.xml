@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_cash_count_rule" model="ir.rule">
+            <field name="name">tw.cash.count branch rule</field>
+            <field name="model_id" ref="model_tw_cash_count"/>
+            <field name="domain_force">[('company_id','in',[b.id for b in user.company_ids])]</field>
+        </record>
+    </data>
+</odoo>

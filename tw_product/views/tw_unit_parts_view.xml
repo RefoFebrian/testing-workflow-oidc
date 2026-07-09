@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_unit_parts_view_tree" model="ir.ui.view">
+            <field name="name">tw.unit.parts.tree</field>
+            <field name="model">tw.unit.parts</field>
+            <field name="arch" type="xml">
+                <list string="Unit Parts">
+                    <field name="name" />
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_unit_parts_view_form" model="ir.ui.view">
+            <field name="name">tw.unit.parts.form</field>
+            <field name="model">tw.unit.parts</field>
+            <field name="arch" type="xml">
+                <form string="Unit Parts">
+                    <group col="4" colspan="4">
+                        <field name="name" required="1" />
+                    </group>
+                    <notebook>
+                        <page string="Parts Unit">
+                            <field name="line_ids" nolabel="1" colspan="4">
+                                <list string="Spareparts" editable="bottom">
+                                    <field name="part_code_id" required="1" options="{'no_open':True, 'no_create':True}" />
+                                    <field name="desc_part" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Audit Trail">
+                            <group>
+                                <group>
+                                    <field name="create_uid" readonly="1" />
+                                    <field name="create_date" readonly="1" />
+                                </group>
+                                <group>
+                                    <field name="write_uid" readonly="1" />
+                                    <field name="write_date" readonly="1" />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="tw_unit_parts_action">
+            <field name="name">Parts Unit</field>
+            <field name="res_model">tw.unit.parts</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+    </data>
+</odoo>

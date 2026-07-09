@@ -1,0 +1,2 @@
+from . import tw_vehicle_document_bakso_ownership
+from . import tw_vehicle_document_bakso_registration

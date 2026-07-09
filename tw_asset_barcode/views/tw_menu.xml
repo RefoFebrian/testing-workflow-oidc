@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <menuitem action="action_tw_barcode_labelling_asset" id="menu_tw_barcode_labelling_asset" name="Barcode Labelling Asset" groups="tw_asset_barcode.tw_barcode_label_asset_group_read" parent="tw_menu.submenu_tw_general_affair_asset" sequence="91"/>
+    
+    </data>
+    
+
+</odoo>

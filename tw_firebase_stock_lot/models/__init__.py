@@ -1,0 +1,1 @@
+from . import tw_firebase_notification_inherit

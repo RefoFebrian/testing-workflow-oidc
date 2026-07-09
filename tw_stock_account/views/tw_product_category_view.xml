@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tw_product_category_account_form_view" model="ir.ui.view">
+        <field name="name">tw.product.category.account.form.view</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="stock.product_category_form_view_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='property_cost_method']" position="before">
+                <field name="cost_method_template" required="True"/>
+            </xpath>
+
+            <group name="account_stock_property" position="inside">
+                <button name="action_sync_accounting_data" icon="fa-refresh" string="Sync Accounting Data" type="object" class="oe_highlight"/>
+            </group>
+            
+            <field name="property_cost_method" position="attributes">
+                <attribute name="readonly">1</attribute>
+                <attribute name="force_save">1</attribute>
+            </field>
+        </field>
+    </record>
+    
+
+</odoo>

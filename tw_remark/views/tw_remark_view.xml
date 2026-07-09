@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- List View -->
+		<record id="tw_remark_list_view" model="ir.ui.view">
+			<field name="name">tw.remark.list</field>
+			<field name="model">tw.remark</field>
+			<field name="arch" type="xml">
+				<list string="Remark" editable="top">
+					<field name="model_id" required="1" options="{'no_create': True, 'no_open': True}"/>
+					<field name="remark" required="1"/>
+				</list>
+			</field>
+		</record>
+		
+		<!-- Form View -->
+		<record id="tw_remark_form_view" model="ir.ui.view">
+			<field name="name">tw.remark.form</field>
+			<field name="model">tw.remark</field>
+			<field name="arch" type="xml">
+				<form string="Remark">
+					<sheet>
+						<div class="oe_title">
+							<h1>
+								<span class="o_form_label">Remark</span>
+							</h1>
+						</div>
+						<group>
+							<group>
+								<field name="model_id" required="1" options="{'no_create': True, 'no_open': True}"/>
+								<field name="remark" required="1"/>
+							</group>
+						</group>
+						<notebook>
+							<page string="Audit Trail" name="audit_trail">
+								<group>
+									<group>
+										<field name="create_uid" readonly="1" options="{'no_open':True,'no_create_edit':True}"/>
+										<field name="create_date" readonly="1"/>
+									</group>
+									<group>
+										<field name="write_uid" readonly="1" options="{'no_open':True,'no_create_edit':True}"/>
+										<field name="write_date" readonly="1"/>
+									</group>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<!-- Search View -->
+		<record id="tw_remark_search_view" model="ir.ui.view">
+			<field name="name">tw.remark.search</field>
+			<field name="model">tw.remark</field>
+			<field name="arch" type="xml">
+				<search string="Search Remark">
+					<field name="model_id"/>
+					<field name="remark"/>
+				</search>
+			</field>
+		</record>
+		
+		<!-- Action -->
+		<record id="tw_remark_action" model="ir.actions.act_window">
+			<field name="name">Remark</field>
+			<field name="res_model">tw.remark</field>
+			<field name="view_mode">list,form</field>
+		</record>
+	</data>
+</odoo>

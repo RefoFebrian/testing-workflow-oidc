@@ -1,0 +1,44 @@
+<odoo>
+  <data>
+
+    <record id="hr.menu_hr_root" model="ir.ui.menu">
+        <field name="parent_id" ref="tw_menu.menu_tw_odoo_default" />
+    </record>
+
+    <menuitem id="submenu_tw_hr" name="Employees" parent="tw_menu.menu_tw_employee" sequence="1"/>
+    <menuitem id="menuitem_tw_employee_all" parent="submenu_tw_hr" sequence="1" action="tw_employee_all_action" groups="tw_hr.group_tw_employee_read"/>
+    <menuitem id="menuitem_tw_employee_salesman" parent="submenu_tw_hr" sequence="2" action="tw_employee_salesman_action" groups="tw_hr.group_tw_employee_salesman_access"/>
+    <menuitem id="menuitem_tw_employee_mechanic" parent="submenu_tw_hr" sequence="3" action="tw_employee_mechanic_action" groups="tw_hr.group_tw_employee_mechanic_access"/>
+
+    <menuitem id="menuitem_tw_job" parent="tw_menu.menu_tw_employee" sequence="2" action="tw_job_action" groups="tw_hr.group_tw_job_read"/>
+    <menuitem id="submenu_tw_departemen" parent="tw_menu.menu_tw_employee" sequence="3" action="tw_department_action" groups="tw_hr.group_tw_department_read"/>
+
+    <menuitem
+      id="menuitem_tw_selection_job_category"
+      name="Job Category"
+      parent="tw_selection.submenu_tw_selection"
+      action="tw_selection_job_category_action"
+      sequence="3"
+      groups="tw_hr.group_tw_selection_job_category"
+    />
+    
+    <menuitem
+      id="menuitem_tw_selection_job_level"
+      name="Job Level"
+      parent="tw_selection.submenu_tw_selection"
+      action="tw_selection_job_level_action"
+      sequence="4"
+      groups="tw_hr.group_tw_selection_job_level"
+    />
+    
+    <menuitem
+      id="menuitem_tw_selection_sales_force"
+      name="Sales Force"
+      parent="tw_selection.submenu_tw_selection"
+      action="tw_selection_sales_force_action"
+      sequence="5"
+      groups="tw_hr.group_tw_selection_sales_force"
+    />
+    
+  </data>
+</odoo>

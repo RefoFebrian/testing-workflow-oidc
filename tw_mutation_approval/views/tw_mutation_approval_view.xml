@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="tw_mutation_order_approval_form_view" model="ir.ui.view">
+			<field name="name">tw.mutation.order.approval.form</field>
+			<field name="model">tw.mutation.order</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="tw_mutation.tw_mutation_order_form_view"/>
+			<field name="arch" type="xml">
+				<xpath expr="//button[@name='action_confirm']" position="replace">
+					<field name="is_approval_required" invisible="1"/>
+					<button name="action_request_approval" string="RFA" type="object" class="oe_highlight" invisible="state != 'draft' or not is_approval_required" groups="tw_mutation_approval.group_tw_mutation_order_approval_rfa"/>
+					<button name="action_approval" string="Approve" type="object" class="oe_highlight" invisible="state != 'waiting_for_approval' or not is_approval_required"/>
+					<button name="action_reject_or_cancel" string="Reject" type="object" invisible="state != 'waiting_for_approval' or not is_approval_required" context="{'window_title': 'Reject'}"/>
+					<button name="action_confirm" invisible="(is_approval_required and state != 'approved') or (not is_approval_required and state != 'draft')" string="Confirm" type="object" class="oe_highlight" groups="tw_mutation.group_tw_mutation_order_confirm"/>
+					<button name="action_reject_or_cancel" string="Cancel Approval" type="object" invisible="state not in ('waiting_for_approval', 'approved') or not is_approval_required" groups="tw_mutation_approval.group_tw_mutation_order_approval_cancel" context="{'window_title': 'Cancel'}"/>
+				</xpath>
+				<xpath expr="//page[@name='mutation_order_ids']" position="after">
+					<page string="Approval" invisible="not is_approval_required">
+						<field name="approval_ids" readonly="True"/>
+					</page>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>

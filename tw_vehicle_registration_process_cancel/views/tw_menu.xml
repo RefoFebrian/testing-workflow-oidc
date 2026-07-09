@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_vehicle_registration_process_cancel_root" 
+                 name="Proses STNK" 
+                 parent="tw_vehicle_document_cancel.tw_vehicle_document_cancel_menu_sub"
+                 sequence="20"
+                />
+        <menuitem id="menu_vehicle_registration_process_cancel" 
+                 name="Cancel Proses STNK" 
+                 parent="menu_vehicle_registration_process_cancel_root"
+                 action="tw_vehicle_process_stnk_cancel_action"
+                 sequence="10"
+                 groups="tw_vehicle_registration_process_cancel.group_vehicle_registration_process_cancel_read"/>
+
+    </data>
+</odoo>

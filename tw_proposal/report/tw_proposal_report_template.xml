@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="proposal_report" name="Proposal Report">
+            <t t-call="web.html_container">
+                <t t-call="tw_web.teto_report_layout">
+                    <t t-call="tw_web.teto_report_styles_base" />
+                    <t t-foreach="docs" t-as="o">
+                        
+                        <div class="page border font-xs">
+                            <div class="oe_structure">
+                                <div class="row border-bottom" name="title_section">
+                                    <div class="col-12 text-center font-md bolder">
+                                        <t t-esc="o.name" />
+                                    </div>
+                                </div>
+                                <div class="row my-1" name="document_section">
+                                    <div class="col-6">
+                                        <table class="table-borderless" width="100%">
+                                            <tr>
+                                                <td class="bolder italic" colspan="3">Filled by User</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Activity</td>
+                                                <td>:</td>
+                                                <td><t t-esc="o.event" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Budget Code</td>
+                                                <td>:</td>
+                                                <td><t t-esc="o.code_budget" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Department</td>
+                                                <td>:</td>
+                                                <td><t t-esc="o.department_id.name" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"></td>
+                                                <td style="height: 4rem" class="border-top border-start border-end">Proposed by,</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Nama PIC</td>
+                                                <td>:</td>
+                                                <td class="border-start border-end"><t t-esc="o.pic_id.name" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>NIK</td>
+                                                <td>:</td>
+                                                <td class="border-bottom border-start border-end"><t t-esc="o.pic_id.identification_id" /></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row my-1" name="background_section">
+                                    <div class="col-12 px-1">
+                                        <strong class="italic"><u>Background</u></strong><br />
+                                        <t t-esc="o.background_text" />
+                                    </div>
+                                </div>
+                                <div class="row my-1" name="what_section">
+                                    <div class="col-12 px-1">
+                                        <strong class="italic"><u>What</u></strong><br />
+                                        <t t-esc="o.what_text" />
+                                    </div>
+                                </div>
+                                <div class="row my-1" name="where_when_section">
+                                    <div class="col-12">
+                                        <strong class="italic px-1"><u>Where &amp; When</u></strong><br />
+                                        <table class="teto-table-content">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 5%;">No</th>
+                                                    <th>Lokasi</th>
+                                                    <th>Start Date</th>
+                                                    <th>End Date</th>
+                                                    <th>Days</th>
+                                                    <th>Close Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-set="number" t-value="1" />
+                                                <tr t-foreach="o.schedule_ids" t-as="line">
+                                                    <td class="text-center"><t t-esc="number" /></td>
+                                                    <td><t t-esc="line.location" /></td>
+                                                    <td class="text-center"><span t-field="line.date_start" t-options="{'widget': 'date', 'format': 'dd-MM-yyyy'}" /></td>
+                                                    <td class="text-center"><span t-field="line.date_end" t-options="{'widget': 'date', 'format': 'dd-MM-yyyy'}" /></td>
+                                                    <td class="text-center"><t t-esc="line.day_count" /></td>
+                                                    <td></td>
+                                                    <t t-set="number" t-value="number + 1" />
+                                                </tr>
+
+                                                <t t-set="min_rows" t-value="3" />
+                                                <t t-set="actual_rows" t-value="len(o.schedule_ids)" />
+                                                <t t-set="remaining" t-value="min_rows - actual_rows if actual_rows &lt; min_rows else 0" />
+                                                <tr t-foreach="range(remaining)" t-as="r">
+                                                    <td class="text-center"><t t-esc="number" /></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <t t-set="number" t-value="number + 1" />
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row my-1" name="how_section">
+                                    <div class="col-12 px-1">
+                                        <strong class="italic"><u>How</u></strong><br />
+                                        <t t-esc="o.how_text" />
+                                    </div>
+                                </div>
+                                <div class="row my-1">
+                                    <div class="col-6 px-1" name="how_much_section">
+                                        <table class="table-borderless" width="100%">
+                                            <tr>
+                                                <td colspan="2">
+                                                    <strong class="italic"><u>How Much</u></strong> <i>(Details Attached)</i>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <t t-set="transfer_to_supplier" t-value="sum([l.amount_paid for l in o.line_ids.filtered(lambda x: x.pay_to == 'vendor')])" />
+                                                <td width="70%">Transfer to Supplier</td>
+                                                <td width="30%" class="text-end"><t t-esc="'{:,.2f}'.format(transfer_to_supplier)" /></td>
+                                            </tr>
+                                            <tr>
+                                                <t t-set="cash_to_pic" t-value="sum([l.amount_paid for l in o.line_ids.filtered(lambda x: x.pay_to == 'pic')])" />
+                                                <td>Cash to PIC</td>
+                                                <td class="text-end border-bottom"><t t-esc="'{:,.2f}'.format(cash_to_pic)" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bolder">Total</td>
+                                                <td class="bolder text-end"><t t-esc="'{:,.2f}'.format(transfer_to_supplier + cash_to_pic)" /></td>
+                                            </tr>
+                                            <tr>
+                                                <t t-set="sponsorship" t-value="sum([l.amount for l in o.sponsor_ids])" />
+                                                <td>Biaya Sponsorship</td>
+                                                <td class="text-end border-bottom"><t t-esc="'{:,.2f}'.format(sponsorship)" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bolder">Net Expense</td>
+                                                <td class="bolder text-end"><t t-esc="'{:,.2f}'.format((transfer_to_supplier + cash_to_pic) - sponsorship)" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Available Budget</td>
+                                                <td class="text-end border-bottom"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="italic">Budget Balance (Over)*</td>
+                                                <td class="text-end border-bottom"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-3 border" name="over_budget_section">
+                                        <table class="table-borderless" width="100%">
+                                            <tr><td colspan="3" class="text-center bolder italic">Over Budget Approval</td></tr>
+                                            <tr><td colspan="3">&amp;nbsp;</td></tr>
+                                            <tr><td colspan="3">&amp;nbsp;</td></tr>
+                                            <tr><td colspan="3">&amp;nbsp;</td></tr>
+                                            <tr><td colspan="3">&amp;nbsp;</td></tr>
+                                            <tr><td colspan="3">&amp;nbsp;</td></tr>
+                                            <tr>
+                                                <td width="20%">BOD</td>
+                                                <td>:</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Date</td>
+                                                <td>:</td>
+                                                <td></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-3 border" name="budget_control_section">
+                                        <table class="table-borderless" width="100%">
+                                            <tr><td colspan="3" class="text-center bolder italic">Budget Control Signed-off</td></tr>
+                                            <tr><td colspan="3" class="text-center italic">Budget Balance (Over)*</td></tr>
+                                            <tr><td colspan="3">&amp;nbsp;</td></tr>
+                                            <tr><td colspan="3">&amp;nbsp;</td></tr>
+                                            <tr>
+                                                <td width="50%">Name</td>
+                                                <td>:</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>NIK</td>
+                                                <td>:</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Received Date</td>
+                                                <td>:</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Rejected Date</td>
+                                                <td>:</td>
+                                                <td></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row my-1">
+                                    <div class="col-6 px-1" name="sponsor_partners_section">
+                                        <table class="table-borderless">
+                                            <tr><td colspan="3" class="bolder"><u>Sponsor Partner(s)</u></td></tr>
+                                            <tr>
+                                                <th class="text-center bolder">No</th>
+                                                <th class="text-center bolder">Company</th>
+                                                <th class="text-center bolder">Amount</th>
+                                            </tr>
+                                            <t t-set="number" t-value="1" />
+                                            <tr t-foreach="o.sponsor_ids" t-as="line">
+                                                <th width="3%" class="text-center"><t t-esc="number" /></th>
+                                                <th><t t-esc="line.supplier_id.name" /></th>
+                                                <th><t t-esc="'{:.,2f}'.format(line.amount)" /></th>
+                                                <t t-set="number" t-value="number + 1" />
+                                            </tr>
+                                            <t t-set="min_rows" t-value="5" />
+                                            <t t-set="actual_rows" t-value="len(o.sponsor_ids)" />
+                                            <t t-set="remaining_rows" t-value="min_rows - actual_rows if actual_rows &lt; min_rows else 0" />
+                                            <tr t-foreach="range(remaining_rows)" t-as="line">
+                                                <th width="3%" class="text-center"><t t-esc="number" /></th>
+                                                <th></th>
+                                                <th></th>
+                                                <t t-set="number" t-value="number + 1" />
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="bolder text-center">Total</td>
+                                                <td class="border-top border-bottom bolder text-end">
+                                                    <t t-esc="'{:,.2f}'.format(sum([l.amount for l in o.sponsor_ids]))" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-3 border" name="tax_section">
+                                        <table class="table-borderless" width="100%">
+                                            <tr><th class="text-center bolder italic" colspan="2">Filled by Tax</th></tr>
+                                            <tr>
+                                                <th class="bolder text-center">PPN</th>
+                                                <th class="bolder text-center">FP Reg. No.</th>
+                                            </tr>
+                                            <tr><td colspan="2">&amp;nbsp;</td></tr>
+                                            <tr><td colspan="2">&amp;nbsp;</td></tr>
+                                            <tr><td colspan="2">&amp;nbsp;</td></tr>
+                                            <tr><td colspan="2">&amp;nbsp;</td></tr>
+                                            <tr><td colspan="2">&amp;nbsp;</td></tr>
+                                            <tr><td colspan="2">&amp;nbsp;</td></tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-3 border" name="ar_control_section">
+                                        <table class="table-borderless" width="100%">
+                                            <tr><th class="text-center bolder italic" colspan="2">Filled by AR Control</th></tr>
+                                            <tr>
+                                                <th class="bolder text-center">AR Other (227) Reg. No.</th>
+                                                <th class="bolder text-center">Receipt No.</th>
+                                            </tr>
+                                            <tr><td colspan="2">&amp;nbsp;</td></tr>
+                                            <tr><td colspan="2">&amp;nbsp;</td></tr>
+                                            <tr><td colspan="2">&amp;nbsp;</td></tr>
+                                            <tr><td colspan="2">&amp;nbsp;</td></tr>
+                                            <tr><td colspan="2">&amp;nbsp;</td></tr>
+                                            <tr><td colspan="2">&amp;nbsp;</td></tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row my-1" name="fund_detail_section">
+                                    <div class="col-12">
+                                        <span class="ms-1 bolder"><u>Rincian Biaya</u></span><br />
+                                        <table class="teto-table-content">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 5%;">No</th>
+                                                    <th>Description</th>
+                                                    <th>Qty</th>
+                                                    <th>Price/unit</th>
+                                                    <th>Total Price</th>
+                                                    <th>PPN</th>
+                                                    <th>Price after PPN</th>
+                                                    <th>Cash/Transfer</th>
+                                                    <th>Vendor</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-set="number" t-value="1" />
+                                                <tr t-foreach="o.line_ids" t-as="line">
+                                                    <td class="text-center"><t t-esc="number" /></td>
+                                                    <td><t t-esc="line.description" /></td>
+                                                    <td class="text-end"><t t-esc="line.qty" /></td>
+                                                    <td class="text-end"><t t-esc="'{:,.2f}'.format(line.price_unit)" /></td>
+                                                    <td class="text-end"><t t-esc="'{:,.2f}'.format(line.amount_total)" /></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><t t-esc="'Transfer' if line.pay_to == 'vendor' else 'Cash'" /></td>
+                                                    <td><t t-esc="line.supplier_id.name" /></td>
+                                                    <t t-set="number" t-value="number + 1" />
+                                                </tr>
+
+                                                <t t-set="min_rows" t-value="10" />
+                                                <t t-set="actual_rows" t-value="len(o.line_ids)" />
+                                                <t t-set="remaining_rows" t-value="min_rows - actual_rows if min_rows &gt; actual_rows else 0" />
+
+                                                <tr t-foreach="range(remaining_rows)" t-as="r">
+                                                    <td class="text-center"><t t-esc="number" /></td>
+                                                    <td>&amp;nbsp;</td>
+                                                    <td>&amp;nbsp;</td>
+                                                    <td>&amp;nbsp;</td>
+                                                    <td>&amp;nbsp;</td>
+                                                    <td>&amp;nbsp;</td>
+                                                    <td>&amp;nbsp;</td>
+                                                    <td>&amp;nbsp;</td>
+                                                    <td>&amp;nbsp;</td>
+                                                    <t t-set="number" t-value="number + 1" />
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th colspan="2" class="bolder italic">Total Expense</th>
+                                                    <th>&amp;nbsp;</th>
+                                                    <th>&amp;nbsp;</th>
+                                                    <th class="bolder text-end"><t t-esc="'{:,.2f}'.format(o.amount_total)" /></th>
+                                                    <th>&amp;nbsp;</th>
+                                                    <th>&amp;nbsp;</th>
+                                                    <th>&amp;nbsp;</th>
+                                                    <th>&amp;nbsp;</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row my-1" name="additional_section">
+                                    <div class="col-12 pb-5">
+                                        <span class="ps-1 bolder italic"><u>Additional Note</u></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <record id="action_proposal_report" model="ir.actions.report">
+            <field name="name">Print Proposal Report</field>
+            <field name="model">tw.proposal</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_proposal.proposal_report</field>
+            <field name="report_file">tw_proposal.proposal_report</field>
+            <field name="print_report_name">'Proposal_%s.pdf' % (object.name)</field>
+            <field name="paperformat_id" ref="tw_web.tw_report_paperformat_a4_narrow"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_vehicle_document_request,tw_vehicle_document_request,model_tw_vehicle_document_request,base.group_user,1,0,0,0
+access_tw_vehicle_document_receive,tw_vehicle_document_receive,model_tw_vehicle_document_receive,base.group_user,1,0,0,0
+access_tw_vehicle_document_receive_line,tw_vehicle_document_receive_line,model_tw_vehicle_document_receive_line,base.group_user,1,0,0,0
+access_tw_vehicle_document_request_line,tw_vehicle_document_request_line,model_tw_vehicle_document_request_line,base.group_user,1,0,0,0
+
+

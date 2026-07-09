@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+    <record model='ir.ui.view' id='tw_employee_report_view'>
+    	<field name='name'>TW Employee Report</field>
+    	<field name='model'>tw.employee.report</field>
+    	<field name='type'>form</field>
+    	<field name='arch' type='xml'>
+    		<form string='Report Employee'>
+                <group>
+                    <group>
+                        <field name='status' string='Status' required="1"/>
+                    </group>
+                    <group>
+                        <label for="start_date" string="Date" invisible="status != 'non_aktif'"/>  
+                        <div invisible="status != 'non_aktif'">
+                            <field name="start_date" class="oe_inline" invisible="status != 'non_aktif'" required="status == 'non_aktif'"/> - <field name="end_date" class="oe_inline" invisible="status != 'non_aktif'" required="status == 'non_aktif'"/>
+                        </div>
+                    </group>
+                </group>
+                <notebook> 
+                    <page string="Branches">
+                        <field name="company_ids" colspan="4" nolabel="1">
+                            <list>
+                                <field name="name" string= "Branch"/>
+                            </list>
+                        </field>
+                    </page>
+		      		<page string="Job Title">
+		          		<field name="job_ids" colspan="4" nolabel="1"/>
+		          	</page>
+                    <page string="Department">
+                        <field name="department_ids" colspan="4" nolabel="1"/>
+                    </page>
+                </notebook>              
+                <footer>
+                    <button name="excel_report" string="Export Report" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+    		</form>
+    	</field>
+    </record>
+    
+    <record model='ir.actions.act_window' id='action_employee_report'>
+    	<field name='name'>Laporan Employee</field>
+    	<field name='res_model'>tw.employee.report</field>
+    	<field name='view_mode'>form</field>
+    	<field name='target'>new</field>
+    </record>
+        
+    </data>
+</odoo>

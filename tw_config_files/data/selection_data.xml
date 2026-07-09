@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="selection_umum_type_configfiles" model="tw.selection">
+	    	<field name="name">Umum</field>
+            <field name="value">umum</field> 
+	    	<field name="type">TypeConfigFiles</field> 
+        </record>
+
+        <record id="selection_mft_type_configfiles" model="tw.selection">
+	    	<field name="name">MFT</field>
+            <field name="value">mft</field> 
+	    	<field name="type">TypeConfigFiles</field> 
+        </record>
+     </data>
+</odoo>

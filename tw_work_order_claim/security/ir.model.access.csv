@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_work_order_claim,tw_work_order_claim,model_tw_work_order_claim,base.group_user,1,0,0,0
+access_tw_work_order_claim_line,tw_work_order_claim_line,model_tw_work_order_claim_line,base.group_user,1,0,0,0

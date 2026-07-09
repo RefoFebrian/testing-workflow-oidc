@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    
+        <!-- MUTATION ORDER SHOWROOM READ -->
+        <record id="group_tw_mutation_order_showroom_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Mutation Order Showroom Read</field>
+        </record>
+
+        <record id="access_tw_mutation_order_showroom_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_mutation_order"/>
+            <field name="name">tw_mutation_order_showroom read</field>
+            <field name="group_id" ref="group_tw_mutation_order_showroom_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_mutation_order_line_showroom_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_mutation_order_line"/>
+            <field name="name">tw_mutation_order_showroom_line read</field>
+            <field name="group_id" ref="group_tw_mutation_order_showroom_read"/>
+            <field name="perm_read">1</field>
+        </record>
+            
+        <!-- MUTATION ORDER SHOWROOM UPDATE -->
+        <record id="group_tw_mutation_order_showroom_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Mutation Order Showroom Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_mutation_order_showroom_read'))]"/>
+        </record>
+
+        <record id="access_tw_mutation_order_showroom_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_mutation_order"/>
+            <field name="name">tw_mutation_order_showroom update</field>
+            <field name="group_id" ref="group_tw_mutation_order_showroom_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_mutation_order_line_showroom_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_mutation_order_line"/>
+            <field name="name">tw_mutation_order_showroom_line update</field>
+            <field name="group_id" ref="group_tw_mutation_order_showroom_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- MUTATION ORDER SHOWROOM DELETE -->
+        <record id="group_tw_mutation_order_showroom_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Mutation Order Showroom Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_mutation_order_showroom_read'))]"/>
+        </record>
+
+        <record id="access_tw_mutation_order_showroom_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_mutation_order"/>
+            <field name="name">tw_mutation_order_showroom delete</field>
+            <field name="group_id" ref="group_tw_mutation_order_showroom_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_mutation_order_line_showroom_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_mutation_order_line"/>
+            <field name="name">tw_mutation_order_showroom_line delete</field>
+            <field name="group_id" ref="group_tw_mutation_order_showroom_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- MUTATION ORDER WORKSHOP READ -->
+        <record id="group_tw_mutation_order_workshop_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Mutation Order Workshop Read</field>
+        </record>
+
+        <record id="access_tw_mutation_order_workshop_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_mutation_order"/>
+            <field name="name">tw_mutation_order_workshop read</field>
+            <field name="group_id" ref="group_tw_mutation_order_workshop_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_mutation_order_line_workshop_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_mutation_order_line"/>
+            <field name="name">tw_mutation_order_workshop_line read</field>
+            <field name="group_id" ref="group_tw_mutation_order_workshop_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- MUTATION ORDER WORKSHOP UPDATE -->
+        <record id="group_tw_mutation_order_workshop_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Mutation Order Workshop Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_mutation_order_workshop_read'))]"/>
+        </record>
+
+        <record id="access_tw_mutation_order_workshop_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_mutation_order"/>
+            <field name="name">tw_mutation_order_workshop update</field>
+            <field name="group_id" ref="group_tw_mutation_order_workshop_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_mutation_order_line_workshop_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_mutation_order_line"/>
+            <field name="name">tw_mutation_order_workshop_line update</field>
+            <field name="group_id" ref="group_tw_mutation_order_workshop_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- MUTATION ORDER WORKSHOP DELETE -->
+        <record id="group_tw_mutation_order_workshop_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Mutation Order Workshop Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_mutation_order_workshop_read'))]"/>
+        </record>
+
+        <record id="access_tw_mutation_order_workshop_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_mutation_order"/>
+            <field name="name">tw_mutation_order_workshop delete</field>
+            <field name="group_id" ref="group_tw_mutation_order_workshop_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_mutation_order_line_workshop_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_mutation_order_line"/>
+            <field name="name">tw_mutation_order_workshop_line delete</field>
+            <field name="group_id" ref="group_tw_mutation_order_workshop_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+    
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_mutation_order_showroom_read')),
+                (4, ref('group_tw_mutation_order_showroom_update')),
+                (4, ref('group_tw_mutation_order_showroom_delete')),
+                (4, ref('group_tw_mutation_order_workshop_read')),
+                (4, ref('group_tw_mutation_order_workshop_update')),
+                (4, ref('group_tw_mutation_order_workshop_delete')),
+            ]"/>
+        </record>
+    </data>
+
+</odoo>

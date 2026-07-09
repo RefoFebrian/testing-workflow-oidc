@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record model="ir.config_parameter" id="tw_dealer_sale_order_extra_reward_pph_based_on_npwp">
+            <field name="key">tw_dealer_sale_order_extra_reward.pph_based_on_npwp</field>
+            <field name="value">0</field>
+        </record>
+        
+    </data>
+</odoo>

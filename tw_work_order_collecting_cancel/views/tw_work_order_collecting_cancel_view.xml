@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="tw_work_order_collecting_cancel_view_list">
+            <field name="name">tw.work.order.collecting.cancel.list</field>
+            <field name="model">tw.work.order.collecting.cancel</field>
+            <field name="arch" type="xml">
+                <list string="Work Order Collecting Cancel">
+                	<field name="name"/>
+                    <field name="company_id"/>
+                    <field name="division"/>
+                	<field name="work_order_collecting_id"/>
+                    <field name="date"/>
+                    <field name="state"/>
+				</list>
+			</field>
+        </record>
+
+        <record id="tw_work_order_collecting_cancel_view_search" model="ir.ui.view">
+            <field name="name">tw.work.order.collecting.cancel.search</field>
+            <field name="model">tw.work.order.collecting.cancel</field>
+            <field name="arch" type="xml">
+                <search string="Search Work Order Collecting Cancel">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="work_order_collecting_id"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record model="ir.ui.view" id="tw_work_order_collecting_cancel_inherit_view_form">
+            <field name="name">tw.work.order.collecting.cancel.form</field>
+            <field name="model">tw.work.order.collecting.cancel</field>
+            <field name="inherit_id" ref="tw_cancellation.tw_cancellation_form_view"/>
+            <field name="arch" type="xml">
+                <button name="action_confirm" position="after">
+                    <button name="action_print_work_order_collecting_cancel" type="object" string="Print Form" class="oe_highlight" invisible="context.get('default_model_type') != 'tw.work.order.collecting.cancel'"/>
+                </button>
+                <field name="transaction_name" position="after">
+                    <field name="work_order_collecting_id" readonly="state != 'draft'" options="{'no_create':True,'no_open':True}" domain="[('company_id','=',company_id),('division','=',division),('state','=','posted')]" required="context.get('default_model_type') == 'tw.work.order.collecting.cancel' and context.get('default_model_type')" invisible="context.get('default_model_type') != 'tw.work.order.collecting.cancel'"/>
+                </field>
+                <xpath expr="//button[@name='action_request_approval']" position="attributes">
+                    <attribute name="groups">tw_work_order_collecting_cancel.group_tw_work_order_collecting_cancel_rfa_approve</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_reject_or_cancel' and contains(@context, 'Cancel')]" position="attributes">
+                    <attribute name="groups">tw_work_order_collecting_cancel.group_tw_work_order_collecting_cancel_approval_cancel</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_confirm']" position="attributes">
+                    <attribute name="groups">tw_work_order_collecting_cancel.group_tw_work_order_collecting_cancel_approval_confirm</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="tw_work_order_collecting_cancel_action">
+            <field name="name">Work Order Collecting Cancel</field>
+            <field name="res_model">tw.work.order.collecting.cancel</field>
+            <field name="search_view_id" ref="tw_work_order_collecting_cancel_view_search"/>
+            <field name="context" eval="
+            {
+            'default_model_id': ref('tw_work_order.model_tw_work_order'),
+            'default_model_type': 'tw.work.order.collecting.cancel',
+            }
+            "/>
+            <field name="domain">['|',('work_order_collecting_id','!=',False),('model_id.model','=','tw.work.order.collecting.cancel')]</field>
+        </record>
+
+        <!-- Action -->
+        <record id="tw_work_order_collecting_cancel_action_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_work_order_collecting_cancel_view_list"/>
+            <field name="act_window_id" ref="tw_work_order_collecting_cancel_action"/>
+        </record>
+        
+        <record id="tw_work_order_collecting_cancel_action_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_work_order_collecting_cancel_inherit_view_form"/>
+            <field name="act_window_id" ref="tw_work_order_collecting_cancel_action"/>
+        </record>
+    </data>
+</odoo>

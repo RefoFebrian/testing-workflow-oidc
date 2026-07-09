@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <menuitem id="submenu_tw_payment_klik" name="Payment Klik" parent="tw_menu.submenu_tw_backoffice_non_trade" sequence="150"/>
+        <menuitem id="tw_payment_klik_report_menu" name="Laporan Payment Klik" parent="submenu_tw_payment_klik" action="tw_payment_klik.tw_payment_klik_report_action" sequence="20" groups="tw_payment_klik.group_tw_laporan_payment_klik_wizard"/>
+        <menuitem id="tw_payment_klik_bank_report_menu" name="Laporan Payment Klik Bank" parent="submenu_tw_payment_klik" action="tw_payment_klik.tw_payment_klik_bank_report_action" sequence="30" groups="tw_payment_klik.group_tw_laporan_payment_klik_bank_wizard"/>
+        <menuitem id="tw_payment_klik_verification_menu" name="Verification Payment Klik" parent="submenu_tw_payment_klik" action="tw_payment_klik.tw_payment_klik_verification_action" sequence="40" groups="tw_payment_klik.group_tw_verification_payment_klik"/>
+        <menuitem id="tw_payment_klik_approval_menu" name="Approval Payment Klik" parent="submenu_tw_payment_klik" action="tw_payment_klik.tw_payment_klik_approval_action" sequence="60" groups="tw_payment_klik.group_tw_approval_payment_klik"/>
+        <menuitem id="tw_payment_klik_process_menu" name="Process Payment Klik" parent="submenu_tw_payment_klik" action="tw_payment_klik.tw_payment_klik_process_action" sequence="80" groups="tw_payment_klik.group_tw_process_payment_klik"/>
+    </data>
+    
+
+</odoo>

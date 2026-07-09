@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit Purchase Order List View - Add DGI Sync Buttons in header -->
+    <record id="tw_purchase_order_dgi_inherit_list" model="ir.ui.view">
+        <field name="name">purchase.order.dgi.inbound.inherit.list</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="tw_purchase_order.tw_purchase_order_list_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <header>
+                    <button name="action_open_dgi_uinb_wizard" type="object" class="btn-secondary" string="Sync UINB" data-hotkey="d" icon="fa-cloud-download" display="always" invisible="context.get('default_division') != 'Unit'"/>
+                    <button name="action_open_dgi_pinb_wizard" type="object" class="btn-secondary" string="Sync PINB" data-hotkey="d" icon="fa-cloud-download" display="always" invisible="context.get('default_division') != 'Sparepart'"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Purchase Order Form View - Add DGI fields and badge -->
+    <record id="tw_purchase_order_dgi_inherit_form" model="ir.ui.view">
+        <field name="name">purchase.order.dgi.inbound.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="priority">50</field>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <field name="is_dgi" invisible="1"/>
+                <field name="md_reference_sl" invisible="1"/>
+                <button name="action_show_dgi_info" type="object" class="oe_stat_button" icon="fa-cloud-download" invisible="not is_dgi">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_text">From DGI</span>
+                        <span class="o_stat_value" invisible="not md_reference_sl">
+                            <field name="md_reference_sl" readonly="1"/>
+                        </span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- Inherit Search View - Add DGI filters (Standard Filter) -->
+    <record id="purchase_order_view_filter_dgi_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.view.filter.dgi.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="md_reference_po" string="DGI PO Ref"/>
+                <field name="md_reference_sl" string="DGI SL Ref"/>
+                <separator/>
+                <filter name="filter_is_dgi" string="From DGI" domain="[('is_dgi', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Search View - Add DGI filters (Select Search) -->
+    <record id="purchase_order_view_search_dgi_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.view.search.dgi.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="md_reference_po" string="DGI PO Ref"/>
+                <field name="md_reference_sl" string="DGI SL Ref"/>
+                <separator/>
+                <filter name="filter_is_dgi" string="From DGI" domain="[('is_dgi', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

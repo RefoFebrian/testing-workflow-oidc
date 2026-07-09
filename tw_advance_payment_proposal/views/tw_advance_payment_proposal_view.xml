@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>     
+        <record id="view_tw_advance_payment_form_inherited" model="ir.ui.view">
+            <field name="name">tw.advance.payment.form.inherited</field>
+            <field name="model">tw.advance.payment</field>
+            <field name="inherit_id" ref="tw_advance_payment.tw_advance_payment_form_view"/>
+            <field name="arch" type="xml">
+                <field name="description" position="attributes">
+                    <attribute name="force_save">1</attribute>
+                </field>
+
+                <field name="description" position="before">
+                    <field name="proposal_id" domain="[('company_id','=',company_id),('division','=',division),('state','in',['approved','rfa']),('pic_id','=',employee_id)]" readonly="state != 'draft'" options="{'no_create': True,'no_open':True}"/>
+                    <button name="update_proposal_limit" type="object" string="Update Limit" invisible="not name or (not proposal_id or (proposal_id and (state != 'draft' or not name)))"/>
+                </field>
+                <field name="account_number" position="after">
+                    <field name="proposal_limit_amount" readonly="1" invisible="not proposal_id"/>
+                    <field name="proposal_state" string="Status Budget" invisible="not proposal_state or not proposal_id"/>
+                </field>
+                <xpath expr="//notebook/page[1]" position="before">
+                    <page string="Detail Proposal" invisible="not proposal_id" readonly="state != 'draft'">
+                        <field name="proposal_item_ids" nolabel="1" readonly="state != 'draft'">
+                            <list editable="top">
+                                <field name="proposal_line_id" required="1" options="{'no_create': True, 'no_open': True}" domain="[('proposal_id','=',parent.proposal_id),('pay_to','=','pic')]"/> <!--  -->
+                                <field name="amount_proposal" force_save="1" readonly="1" invisible="not proposal_line_id"/>
+                                <field name="amount_total"/>
+                            </list>
+                        </field>
+                        <group>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="proposal_total_amount" readonly="1" class="oe_subtotal_footer_separator"/>
+                            </group>
+                        </group>
+                    </page>                
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- Search View -->
+        <record id="view_advance_payment_proposal_search" model="ir.ui.view">
+            <field name="name">tw.advance.payment.proposal.search</field>
+            <field name="model">tw.advance.payment</field>
+            <field name="inherit_id" ref="tw_advance_payment.view_advance_payment_search"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="proposal_id" string="Proposal"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Add journal_collecting_expedition_id to account setting form -->
+        <record id="tw_collecting_expedition_account_setting_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.collecting.expedition.account.setting.inherit.form</field>
+            <field name="model">tw.account.setting</field>
+            <field name="inherit_id" ref="tw_account_stock_inbound.tw_stock_inbound_account_setting_inherit_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='journal_expedition_id']" position="after">
+                    <field name="journal_collecting_expedition_id" options='{"no_create": True}'/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

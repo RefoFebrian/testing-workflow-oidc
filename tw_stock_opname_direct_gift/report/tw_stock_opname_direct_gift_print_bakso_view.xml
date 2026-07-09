@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="so_dg_bakso">
+            <t t-call="web.html_container">
+                <t t-call="tw_web.teto_report_layout">
+                    <t t-call="tw_web.teto_report_styles_base" />
+                    <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <style>
+                            table td,
+                            table th {
+                            padding: 6px 8px !important;
+                            vertical-align: middle;
+                            }
+                            .report-container {
+                            
+                            
+                            
+                            padding: 10mm 13mm;
+                            }
+                            .report-title {
+                            text-align: center;
+                            font-weight: bolder;
+                            margin-bottom: 20px;
+                            border-bottom: 1px solid black;
+                            }
+                            .info-table,
+                            .detail-table,
+                            .signature-table {
+                            border-collapse: collapse;
+                            width: 100%;
+                            margin-top: 8px;
+                            }
+                            .info-table th,
+                            .info-table td,
+                            .detail-table th,
+                            .detail-table td,
+                            .signature-table th,
+                            .signature-table td {
+                            border: 1px solid #333;
+                            }
+                            .info-table th {
+                            width: 20%;
+                            text-align: left;
+                            }
+                            .section-title {
+                            font-weight: bold;
+                            text-decoration: underline;
+                            margin-top: 20px;
+                            margin-bottom: 6px;
+                            }
+                            .signature-space td {
+                            height: 70px;
+                            }
+                            .bold {
+                            font-weight: bold;
+                            }
+                        </style>
+
+                        <div class="report-container">
+                            <div class="report-title">BERITA ACARA STOCK OPNAME DIRECT GIFT</div>
+
+                            <table class="info-table">
+                                <tr>
+                                    <th>No Referensi</th>
+                                    <td>: &#160;<span t-esc="data.get('name', '')"/>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <table class="info-table">
+                                <tr>
+                                    <th>Branch</th>
+                                    <td>: &#160;<span t-esc="data.get('branch', '')"/>
+                                    </td>
+                                    <th>Jam Mulai</th>
+                                    <td>: &#160;<span t-esc="data.get('jam_mulai', '')"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Division</th>
+                                    <td>: &#160;<span t-esc="data.get('division', '')"/>
+                                    </td>
+                                    <th>Jam Selesai</th>
+                                    <td>: &#160;<span t-esc="data.get('jam_selesai', '')"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Tanggal SO</th>
+                                    <td colspan="3">: &#160;<span t-esc="data.get('tgl_so', '')"/>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <div style="margin-top:15px; font-weight:bold;">
+                                Hasil Stock Opname hari ini sebagai berikut:
+                            </div>
+
+                            <table class="detail-table">
+                                <tr>
+                                    <th class="bold" style="width:50%;">Keterangan</th>
+                                    <th class="bold" style="width:25%; text-align:center;">Qty</th>
+                                    <th class="bold" style="width:25%; text-align:center;">Amount</th>
+                                </tr>
+
+                                <t t-if="data.get('tot_qty', 0) != 0">
+                                    <tr>
+                                        <td class="bold">1. Total Secara Sistem</td>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data.get('tot_qty', 0)"/>
+                                        </td>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data.get('tot_amount', 0)"/>
+                                        </td>
+                                    </tr>
+                                </t>
+
+                                <t t-if="data.get('tot_qty_fisik_total', 0) != 0">
+                                    <tr>
+                                        <td>Saldo Fisik (hasil hitungan)</td>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data.get('tot_qty_fisik_total', 0)"/>
+                                        </td>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data.get('tot_amount_total', 0)"/>
+                                        </td>
+                                    </tr>
+                                </t>
+
+                                <t t-if="data.get('tot_qty_fisik_baik', 0) != 0">
+                                    <tr>
+                                        <td>Fisik Baik</td>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data.get('tot_qty_fisik_baik', 0)"/>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </t>
+
+                                <t t-if="data.get('tot_qty_fisik_rusak', 0) != 0">
+                                    <tr>
+                                        <td>Fisik Rusak</td>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data.get('tot_qty_fisik_rusak', 0)"/>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </t>
+
+                                <t t-if="data.get('tot_selisih_qty', 0) != 0">
+                                    <tr>
+                                        <td>Selisih</td>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data.get('tot_selisih_qty', 0)"/>
+                                        </td>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data.get('tot_selisih_amount', 0)"/>
+                                        </td>
+                                    </tr>
+                                </t>
+
+                                <t t-if="data.get('tot_saldo_log_book', 0) != 0">
+                                    <tr>
+                                        <td>Saldo Logbook</td>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data.get('tot_saldo_log_book', 0)"/>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </t>
+
+                                <t t-if="data.get('tot_dg_other', 0) != 0">
+                                    <tr>
+                                        <td class="bold">2. Total Tidak Tercatat Di Sistem (Hasil Hitungan)</td>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data.get('tot_dg_other', 0)"/>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </t>
+
+                                <t t-if="data.get('tot_qty_fisik_baik_other', 0) != 0">
+                                    <tr>
+                                        <td>Fisik Baik</td>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data.get('tot_qty_fisik_baik_other', 0)"/>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </t>
+
+                                <t t-if="data.get('tot_qty_fisik_rusak_other', 0) != 0">
+                                    <tr>
+                                        <td>Fisik Rusak</td>
+                                        <td style="text-align:right;">
+                                            <span t-esc="data.get('tot_qty_fisik_rusak_other', 0)"/>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </t>
+
+                                <t t-if="data.get('tot_dg', 0) != 0">
+                                    <tr>
+                                        <th class="bold">Total Direct Gift</th>
+                                        <th class="bold" style="text-align:right;">
+                                            <span t-esc="data.get('tot_dg', 0)"/>
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </t>
+                            </table>
+
+                            <div class="section-title">PERNYATAAN</div>
+                            <p style="text-align: justify;">
+                                Proses stock opname ini telah berjalan dengan baik dan hasil ini telah dinyatakan
+                                sah untuk diakui dan telah didukung oleh dokumen yang seharusnya dilampirkan.
+                            </p>
+
+                            <div style="margin-top: 10px;">
+                                <b>Note:</b>
+                                <table class="detail-table" style="margin-top: 5px;">
+                                    <tr>
+                                        <td style="height: 50px;">
+                                            <span t-esc="data.get('note_bakso', '')"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <table class="signature-table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="3" style="text-align:center;">PERSON IN CHARGE YANG BERTUGAS</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:33.3%;">PIC SO</th>
+                                        <th colspan="2" style="text-align:center;">MENGETAHUI</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="signature-space">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span t-esc="data.get('pdi', '')"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="data.get('adh', '')"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="data.get('soh', '')"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>PDI</td>
+                                        <td>ADH</td>
+                                        <td>SOH</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:left; border:none; background:white; ">
+                                            <span t-esc="data.get('user_id', {}).get('name', '')"/>
+,
+                                            <span t-esc="data.get('date', '')"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

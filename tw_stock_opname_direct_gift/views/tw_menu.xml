@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <menuitem id="tw_stock_opname_direct_gift_menu_showroom" name="Direct Gift" parent="tw_stock_opname.submenu_stock_opname_showroom" action="action_tw_stock_opname_direct_gift" sequence="12" groups="tw_stock_opname_direct_gift.group_stock_opname_direct_gift_showroom_read"/>
+        <menuitem id="tw_stock_opname_direct_gift_menu_workshop" name="Direct Gift" parent="tw_stock_opname.submenu_stock_opname_workshop" action="action_tw_stock_opname_direct_gift" sequence="12" groups="tw_stock_opname_direct_gift.group_stock_opname_direct_gift_workshop_read"/>
+
+    </data>
+</odoo>

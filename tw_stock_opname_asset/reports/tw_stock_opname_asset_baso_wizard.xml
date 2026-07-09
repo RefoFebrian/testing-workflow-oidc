@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_tw_stock_opname_asset_baso_wizard" model="ir.ui.view">
+            <field name="name">tw.stock.opname.asset.baso.wizard</field>
+            <field name="model">tw.stock.opname.asset.baso.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Berita Acara Stock Opname Asset">
+                    <sheet>
+                        <group>
+                            <field name="opname_id" readonly="1" options="{'no_open':True,'no_create':True}"/>
+                            <field name="note_bakso"/>
+                        </group>
+                        <footer>
+                            <button name="action_submit" string="Print" type="object" class="oe_highlight" />
+                            <button string="Close" class="oe_link" special="cancel" />
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="paperformat_bakso_stock_opname_asset" model="report.paperformat">
+            <field name="name">Berita Acara Stock Opname Asset</field>
+            <field name="default" eval="True"/>
+            <field name="header_spacing">0</field>
+        </record>
+
+        <record id="action_print_bakso_stock_opname_asset" model="ir.actions.report">
+            <field name="name">Print Bakso Stock Opname Asset</field>
+            <field name="model">tw.stock.opname.asset</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_stock_opname_asset.tw_stock_opname_asset_print_bakso</field>
+            <field name="report_file">tw_stock_opname_asset.tw_stock_opname_asset_print_bakso</field>
+            <field name="print_report_name">'Print_Berita_Acara_SO_Asset_%s.pdf' % (object.name)</field>
+            <field name="paperformat_id" ref="tw_web.tw_report_paperformat_a4"/>
+        </record>
+        
+        <record id="action_stock_opname_asset_print_validasi" model="ir.actions.report">
+            <field name="name">Print Validasi Stock Opname Asset</field>
+            <field name="model">tw.stock.opname.asset</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_stock_opname_asset.tw_stock_opname_asset_print_validasi</field>
+            <field name="report_file">tw_stock_opname_asset.tw_stock_opname_asset_print_validasi</field>
+            <field name="print_report_name">'Print_validasi_stock_opname_asset_%s.pdf' % (object.name)</field>
+            <field name="paperformat_id" ref="tw_web.tw_report_paperformat_a4_landscape"/>
+        </record>
+
+    </data>
+</odoo>

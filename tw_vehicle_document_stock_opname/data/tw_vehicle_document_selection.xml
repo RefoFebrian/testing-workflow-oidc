@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="selection_nama_sesuai_dengan_buku" model="tw.selection">
+            <field name="name">Nama sesuai dengan buku</field>
+            <field name="type">ValNamaBpkb</field>
+            <field name="value">Nama sesuai dengan buku</field>
+        </record>
+        <record id="selection_nama_tidak_sesuai_dengan_buku" model="tw.selection">
+            <field name="name">Nama tidak sesuai dengan buku</field>
+            <field name="type">ValNamaBpkb</field>
+            <field name="value">Nama tidak sesuai dengan buku</field>
+        </record>
+        <record id="selection_tanda_strip_nama_bpkb" model="tw.selection">
+            <field name="name">-</field>
+            <field name="type">ValNamaBpkb</field>
+            <field name="value">-</field>
+        </record>
+
+        <record id="selection_no_mesin_sesuai_dengan_buku" model="tw.selection">
+            <field name="name">No mesin sesuai dengan buku</field>
+            <field name="type">ValNoEngBpkb</field>
+            <field name="value">No mesin sesuai dengan buku</field>
+        </record>
+        <record id="selection_no_mesin_tidak_sesuai_dengan_buku" model="tw.selection">
+            <field name="name">No mesin tidak sesuai dengan buku</field>
+            <field name="type">ValNoEngBpkb</field>
+            <field name="value">No mesin tidak sesuai dengan buku</field>
+        </record>
+        <record id="selection_tanda_strip_no_engine_bpkb" model="tw.selection">
+            <field name="name">-</field>
+            <field name="type">ValNoEngBpkb</field>
+            <field name="value">-</field>
+        </record>
+
+        <record id="selection_no_bpkb_sesuai_dengan_buku" model="tw.selection">
+            <field name="name">No BPKB sesuai dengan buku</field>
+            <field name="type">ValNoBpkb</field>
+            <field name="value">No BPKB sesuai dengan buku</field>
+        </record>
+        <record id="selection_no_bpkb_tidak_sesuai_dengan_buku" model="tw.selection">
+            <field name="name">No BPKB tidak sesuai dengan buku</field>
+            <field name="type">ValNoBpkb</field>
+            <field name="value">No BPKB tidak sesuai dengan buku</field>
+        </record>
+        <record id="selection_tanda_strip_no_bpkb" model="tw.selection">
+            <field name="name">-</field>
+            <field name="type">ValNoBpkb</field>
+            <field name="value">-</field>
+        </record>
+
+        <record id="selection_fisik_ada_bpkb" model="tw.selection">
+            <field name="name">Fisik Ada</field>
+            <field name="type">CekFisikBpkb</field>
+            <field name="value">Fisik Ada</field>
+        </record>
+        <record id="selection_fisik_di_ho_bpkb" model="tw.selection">
+            <field name="name">Fisik di HO</field>
+            <field name="type">CekFisikBpkb</field>
+            <field name="value">Fisik di HO</field>
+        </record>
+        <record id="selection_fisik_di_ga_bpkb" model="tw.selection">
+            <field name="name">Fisik di GA</field>
+            <field name="type">CekFisikBpkb</field>
+            <field name="value">Fisik di GA</field>
+        </record>
+        <record id="selection_fisik_di_md_bpkb" model="tw.selection">
+            <field name="name">Fisik di MD</field>
+            <field name="type">CekFisikBpkb</field>
+            <field name="value">Fisik di MD</field>
+        </record>
+        <record id="selection_revisi_biro_jasa_bpkb" model="tw.selection">
+            <field name="name">Revisi Biro Jasa</field>
+            <field name="type">CekFisikBpkb</field>
+            <field name="value">Revisi Biro Jasa</field>
+        </record>
+        <record id="selection_sudah_penyerahan_ke_konsumen_bpkb" model="tw.selection">
+            <field name="name">Sudah Penyerahan ke Konsumen</field>
+            <field name="type">CekFisikBpkb</field>
+            <field name="value">Sudah Penyerahan ke Konsumen</field>
+        </record>
+        <record id="selection_sudah_penyerahan_ke_leasing_bpkb" model="tw.selection">
+            <field name="name">Sudah Penyerahan ke Leasing</field>
+            <field name="type">CekFisikBpkb</field>
+            <field name="value">Sudah Penyerahan ke Leasing</field>
+        </record>
+        <record id="selection_hilang_fisik_tidak_diketahui_bpkb" model="tw.selection">
+            <field name="name">Hilang / Fisik tidak diketahui</field>
+            <field name="type">CekFisikBpkb</field>
+            <field name="value">Hilang / Fisik tidak diketahui</field>
+        </record>
+
+        <record id="selection_nama_sesuai_dengan_stnk" model="tw.selection">
+            <field name="name">Nama sesuai dengan STNK</field>
+            <field name="type">ValNamaStnk</field>
+            <field name="value">Nama sesuai dengan STNK</field>
+        </record>
+        <record id="selection_nama_tidak_sesuai_dengan_stnk" model="tw.selection">
+            <field name="name">Nama tidak sesuai dengan STNK</field>
+            <field name="type">ValNamaStnk</field>
+            <field name="value">Nama tidak sesuai dengan STNK</field>
+        </record>
+        <record id="selection_tanda_strip_nama_stnk" model="tw.selection">
+            <field name="name">-</field>
+            <field name="type">ValNamaStnk</field>
+            <field name="value">-</field>
+        </record>
+
+        <record id="selection_no_mesin_sesuai_dengan_stnk" model="tw.selection">
+            <field name="name">No mesin sesuai dengan STNK</field>
+            <field name="type">ValNoEngStnk</field>
+            <field name="value">No mesin sesuai dengan STNK</field>
+        </record>
+        <record id="selection_no_mesin_tidak_sesuai_dengan_stnk" model="tw.selection">
+            <field name="name">No mesin tidak sesuai dengan STNK</field>
+            <field name="type">ValNoEngStnk</field>
+            <field name="value">No mesin tidak sesuai dengan STNK</field>
+        </record>
+        <record id="selection_tanda_strip_no_engine_stnk" model="tw.selection">
+            <field name="name">-</field>
+            <field name="type">ValNoEngStnk</field>
+            <field name="value">-</field>
+        </record>
+
+        <record id="selection_no_polisi_sesuai_dengan_stnk" model="tw.selection">
+            <field name="name">No Polisi sesuai dengan STNK</field>
+            <field name="type">ValNoPolisi</field>
+            <field name="value">No Polisi sesuai dengan STNK</field>
+        </record>
+        <record id="selection_no_polisi_tidak_sesuai_dengan_stnk" model="tw.selection">
+            <field name="name">No Polisi tidak sesuai dengan STNK</field>
+            <field name="type">ValNoPolisi</field>
+            <field name="value">No Polisi tidak sesuai dengan STNK</field>
+        </record>
+        <record id="selection_no_polisi_belum_diterima" model="tw.selection">
+            <field name="name">No Polisi belum diterima</field>
+            <field name="type">ValNoPolisi</field>
+            <field name="value">No Polisi belum diterima</field>
+        </record>
+        <record id="selection_tanda_strip_no_polisi" model="tw.selection">
+            <field name="name">-</field>
+            <field name="type">ValNoPolisi</field>
+            <field name="value">-</field>
+        </record>
+
+        <record id="selection_fisik_ada_stnk" model="tw.selection">
+            <field name="name">Fisik Ada</field>
+            <field name="type">CekFisikStnk</field>
+            <field name="value">Fisik Ada</field>
+        </record>
+        <record id="selection_fisik_di_ho_stnk" model="tw.selection">
+            <field name="name">Fisik di HO</field>
+            <field name="type">CekFisikStnk</field>
+            <field name="value">Fisik di HO</field>
+        </record>
+        <record id="selection_fisik_di_md_stnk" model="tw.selection">
+            <field name="name">Fisik di MD</field>
+            <field name="type">CekFisikStnk</field>
+            <field name="value">Fisik di MD</field>
+        </record>
+        <record id="selection_revisi_biro_jasa_stnk" model="tw.selection">
+            <field name="name">Revisi Biro Jasa</field>
+            <field name="type">CekFisikStnk</field>
+            <field name="value">Revisi Biro Jasa</field>
+        </record>
+        <record id="selection_sudah_penyerahan_ke_konsumen_stnk" model="tw.selection">
+            <field name="name">Sudah Penyerahan ke Konsumen</field>
+            <field name="type">CekFisikStnk</field>
+            <field name="value">Sudah Penyerahan ke Konsumen</field>
+        </record>
+        <record id="selection_hilang_fisik_tidak_diketahui_stnk" model="tw.selection">
+            <field name="name">Hilang / Fisik tidak diketahui</field>
+            <field name="type">CekFisikStnk</field>
+            <field name="value">Hilang / Fisik tidak diketahui</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,5 @@
+<odoo>
+    <data>
+        <menuitem id="menu_tw_report_advance_payment" name="Laporan Advance Payment" parent="tw_menu.submenu_tw_backoffice_report" action="action_tw_report_advance_payment" groups="group_report_advance_payment" sequence="11"/>
+    </data>
+</odoo>

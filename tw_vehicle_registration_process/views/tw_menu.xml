@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- STNK Process -->
+        <menuitem id="tw_vehicle_registration_process_menu_sub" name="STNK Process" parent="tw_vehicle_document.tw_document_handling_menu_root" sequence="20"/>
+        <menuitem id="tw_vehicle_registration_process_menuitem" name="Proses STNK" parent="tw_vehicle_registration_process_menu_sub" action="tw_vehicle_registration_process_action" sequence="10" groups="tw_vehicle_registration_process.group_tw_vehicle_registration_process_read"/>
+    </data>
+</odoo>

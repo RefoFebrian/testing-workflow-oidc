@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <record id="tw_bank_transfer_approval_form_view" model="ir.ui.view">
+			<field name="name">tw.bank.transfer.approval.form</field>
+			<field name="model">tw.bank.transfer</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="tw_bank_transfer.tw_bank_transfer_form_view"/>
+			<field name="arch" type="xml">
+                
+                <field name="state" position="attributes">
+                    <attribute name="statusbar_visible">draft,waiting_for_approval,approved</attribute>
+                </field>
+
+                <xpath expr="//button[@name='action_confirm']" position="before">
+					<button name="action_request_approval" string="RFA" type="object" class="oe_highlight" invisible="state != 'draft'" groups="tw_bank_transfer_approval.group_tw_bank_transfer_approval_rfa"/>
+					<button name="action_approval" string="Approve" type="object" class="oe_highlight" invisible="state != 'waiting_for_approval'"/>
+					<button name="action_reject_or_cancel" string="Reject" type="object" invisible="state != 'waiting_for_approval'" context="{'window_title': 'Reject'}"/>
+					<button name="action_reject_or_cancel" string="Cancel Approval" type="object" invisible="state not in ('waiting_for_approval', 'approved')" groups="tw_bank_transfer_approval.group_tw_bank_transfer_approval_cancel" context="{'window_title': 'Cancel'}"/>
+				</xpath>
+
+                <button name="action_confirm" position="attributes">
+                    <attribute name="invisible">state != 'approved'</attribute>
+                </button>
+
+                <page name="audit_trail" position="before">
+                    <page string="Approval">
+                        <field name="approval_ids" readonly="True"/>
+                    </page>
+				</page>
+
+            </field>
+        </record>
+
+        <record id="tw_bank_transfer_search_view_inherit" model="ir.ui.view">
+        <field name="name">tw.bank.transfer.search.inherit</field>
+        <field name="model">tw.bank.transfer</field>
+        <field name="inherit_id" ref="tw_bank_transfer.tw_bank_transfer_search_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='cancelled']" position="after">
+                <filter name="waiting_for_approval" string="Waiting for Approval" domain="[('state','=','waiting_for_approval')]"/>
+                <filter name="approved" string="Approved" domain="[('state','=','approved')]"/>
+                <filter name="done" string="Done" domain="[('state','=','done')]"/>
+                <filter name="rejected" string="Rejected" domain="[('state','=','rejected')]"/>
+            </xpath>
+        </field>
+    </record>
+
+	</data>
+</odoo>

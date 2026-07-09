@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_upload_mapping_jasa_wizard_result_form" model="ir.ui.view">
+    <field name="name">tw.upload.mapping.jasa.wizard.result.form</field>
+    <field name="model">tw.upload.mapping.jasa.result.wizard</field>
+    <field name="arch" type="xml">
+        <form string="Hasil Upload Mapping Jasa">
+            <sheet>
+                <group>
+                    <field name="total_success" readonly="1"/>
+                    <field name="total_failed" readonly="1"/>
+                    <field name="total_processed" readonly="1" />
+                </group>
+                <group string="Detail Hasil Upload">
+                    <field name="not_found_list" readonly="1" nolabel="1"/>
+                </group>
+            </sheet>
+            <footer>
+                <button string="Tutup" class="btn-primary" special="cancel"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+
+</odoo>

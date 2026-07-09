@@ -1,0 +1,35 @@
+# -*- coding: utf-8 -*-
+{
+    'name': "Tw Auto Report Data",
+
+    'summary': "Automates the generation and management of reports for streamlined business operations.",
+
+    'description': """
+    This module is designed to automate the creation, scheduling, and management of business reports. 
+    It provides tools to define report templates, set up automated report generation based on specific triggers or schedules, 
+    and manage access permissions for different user groups. By streamlining the reporting process, 
+    this module helps businesses save time, reduce errors, and ensure consistent reporting practices.
+    """,
+
+    'author': "Tunas Honda",
+    'website': "http://www.honda-ku.com",
+
+    # Categories can be used to filter modules in modules listing
+    # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
+    # for the full list
+    'category': 'Uncategorized',
+    'version': '0.1',
+    'license': 'LGPL-3',
+
+    # any module necessary for this one to work correctly
+    'depends': ['base','tw_auto_report','tw_work_order_report','tw_main_dealer_sales_report','tw_account_report_hutang_piutang','tw_stock_report','tw_stock_report','tw_dealer_sale_order','tw_purchase_order_report','tw_asset_report','tw_report_part_ahm','tw_stock_report','tw_stock_distribution_report','tw_trial_balance_report'],
+
+    # always loaded
+    'data': [
+        'data/data_auto_report.xml',
+        'data/data_cron.xml',
+    ],
+    'installable': True,
+    'application': False,
+}
+

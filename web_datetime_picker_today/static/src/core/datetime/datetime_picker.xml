@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="web_datetime_picker_today.DateTimePicker" t-inherit="web.DateTimePicker.Days" t-inherit-mode="extension">
+        <xpath expr="//div[contains(@t-attf-class, 'o_datetime_buttons')][1]" position="attributes">
+            <attribute name="t-attf-class" add="d-flex gap-1 align-items-center" separator=" "/>
+        </xpath>
+        <xpath expr="//div[contains(@t-attf-class, 'o_datetime_buttons')][1]" position="inside">
+            <button class="btn btn-secondary btn-sm h-100 w-100 w-md-auto d-flex align-items-center justify-content-center" t-on-click="selectToday" tabindex="-1" t-esc="todayButtonLabel"/>
+        </xpath>
+    </t>
+</templates>

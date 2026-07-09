@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="tw_print_qr_code_unit_template">
+            <t t-call="web.html_container">
+                <div class="page">
+                    <div style="width: 21cm; height: 29.7cm; margin: 0; padding: 0;"> <!-- A4 size -->
+                        <table style="width: 100%; border-collapse: separate; border-spacing: 0.5cm;"> <!-- Adjust spacing -->
+                            <t t-set="columns" t-value="10" /> <!-- Adjust column count -->
+                            <t t-set="rows" t-value="(len(docs) + columns - 1) // columns" /> <!-- Calculate rows -->
+
+                            <!-- Loop through rows -->
+                            <t t-foreach="range(rows)" t-as="row_index">
+                                <tr>
+                                    <!-- Loop through columns -->
+                                    <t t-foreach="range(columns)" t-as="col_index">
+                                        <t t-set="current_index" t-value="row_index * columns + col_index" />
+                                        <td style="width: 2cm; height: 2cm; text-align: center; background: #f9f9f9; border: 1px solid #ddd;">
+                                            <t t-if="current_index &lt; len(docs)">
+                                                <img t-att-src="'data:image/png;base64,' + docs[current_index].qr_code_id.qr_code_base64" style="width: 2cm; height: 2cm;" />
+                                                <div style="font-size: 5px; margin-top: 0.1cm;"><span t-esc="docs[current_index].name"/></div>
+                                                <div style="font-size: 5px; margin-top: 0.1cm;">Ini Identitas Motor Anda</div>
+                                                <div style="font-size: 5px; margin-top: 0.1cm;"><b>MOHON TIDAK DILEPAS</b></div>
+                                            </t>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

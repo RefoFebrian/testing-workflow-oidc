@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+          <!-- List View Product Variant Asset -->
+        <record id="tw_product_variant_asset_list_view" model="ir.ui.view">
+            <field name="name">product.variant.asset.view.list</field>
+            <field name="model">product.product</field>
+            <field name="priority" eval="60" />
+            <field name="arch" type="xml">
+            <list string="Product Variant Assets" default_order="id desc">
+                    <field name="categ_id" optional="show"/>
+                    <field name="default_code" optional="show"/>
+                    <field name="name" optional="show"/>
+                    <field name="is_need_gr" optional="show"/>
+                    <field name="asset_category_id" optional="show"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_product_variant_asset_form_inherit" model="ir.ui.view">
+            <field name="name">Product Variant Assets</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                
+                <field name="sale_ok" position="attributes">
+                    <attribute name="readonly">asset_category_id</attribute>
+                </field>
+
+                <page name="inventory" position="after">
+                    <page string="Assets" name="asset" invisible="context.get('page_name') != 'Assets'">
+                        <group>
+                            <group string="Assets Information" name="assets_information_product">
+                                <field name="is_asset"/>
+                                <field name="is_need_gr"/>
+                                <field name="asset_category_id"
+                                    domain="[('type', '=', 'purchase')]"
+                                    context="{'default_type': 'purchase'}"/>
+                            </group>
+                        </group>
+                        <group name="register_assets" string="Register Assets" readonly="1">
+                            <field name="account_asset_ids" readonly="1"/>
+                        </group>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+        <record id="tw_product_product_variants_assets_action" model="ir.actions.act_window">
+            <field name="name">Product Variants (Assets)</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain" eval="[('categ_id', 'ilike', 'Non-trade')]"/>
+            <field name="context" eval="{
+                'default_sale_ok': False,
+                'default_purchase_ok': True,
+                'default_is_asset': True,
+                'action_name' : 'Non-trade'
+			}"/>
+        </record>
+
+        <record id="tw_product_variant_assets_unit_tree_action_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_asset_management.tw_product_variant_asset_list_view"/>
+            <field name="act_window_id" ref="tw_product_product_variants_assets_action"/>
+        </record>
+
+    </data>
+
+</odoo>

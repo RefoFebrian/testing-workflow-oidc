@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="province_id_1100" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Nanggroe Aceh Darussalam</field> 
+            <field name="code">1100</field>
+            <field name="sequence">2</field>
+        </record>
+        
+        <record id="province_id_1200" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Sumatera Utara</field> 
+            <field name="code">1200</field>
+            <field name="sequence">3</field>
+        </record>
+        
+        <record id="province_id_1300" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Sumatera Barat</field> 
+            <field name="code">1300</field>
+            <field name="sequence">4</field>
+        </record>
+        
+        <record id="province_id_1400" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Riau</field> 
+            <field name="code">1400</field>
+            <field name="sequence">5</field>
+        </record>
+        
+        <record id="province_id_1500" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Jambi</field> 
+            <field name="code">1500</field>
+            <field name="sequence">6</field>
+        </record>
+        
+        <record id="province_id_1600" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Sumatera Selatan</field> 
+            <field name="code">1600</field>
+            <field name="sequence">7</field>
+        </record>
+        
+        <record id="province_id_1700" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Bengkulu</field> 
+            <field name="code">1700</field>
+            <field name="sequence">8</field>
+        </record>
+        
+        <record id="province_id_1800" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Lampung</field> 
+            <field name="code">1800</field>
+            <field name="sequence">1</field>
+        </record>
+        
+        <record id="province_id_1900" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Bangka-Belitung</field> 
+            <field name="code">1900</field>
+            <field name="sequence">9</field>
+        </record>
+        
+        <record id="province_id_2100" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Kepulauan Riau</field> 
+            <field name="code">2100</field>
+            <field name="sequence">10</field>
+        </record>
+        
+        <record id="province_id_3100" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">D K I Jakarta</field> 
+            <field name="code">3100</field>
+            <field name="sequence">11</field>
+        </record>
+        
+        <record id="province_id_3200" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Jawa Barat</field> 
+            <field name="code">3200</field>
+            <field name="sequence">12</field>
+        </record>
+        
+        <record id="province_id_3300" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Jawa Tengah</field> 
+            <field name="code">3300</field>
+            <field name="sequence">13</field>
+        </record>
+        
+        <record id="province_id_3400" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">D I Yogyakarta</field> 
+            <field name="code">3400</field>
+            <field name="sequence">14</field>
+        </record>
+        
+        <record id="province_id_3500" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Jawa Timur</field> 
+            <field name="code">3500</field>
+            <field name="sequence">15</field>
+        </record>
+        
+        <record id="province_id_3600" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Banten</field> 
+            <field name="code">3600</field>
+            <field name="sequence">16</field>
+        </record>
+        
+        <record id="province_id_5100" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Bali</field> 
+            <field name="code">5100</field>
+            <field name="sequence">17</field>
+        </record>
+        
+        <record id="province_id_5200" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Nusa Tenggara Barat</field> 
+            <field name="code">5200</field>
+            <field name="sequence">18</field>
+        </record>
+        
+        <record id="province_id_5300" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Nusa Tenggara Timur</field> 
+            <field name="code">5300</field>
+            <field name="sequence">19</field>
+        </record>
+        
+        <record id="province_id_6100" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Kalimantan Barat</field> 
+            <field name="code">6100</field>
+            <field name="sequence">20</field>
+        </record>
+        
+        <record id="province_id_6200" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Kalimantan Tengah</field> 
+            <field name="code">6200</field>
+            <field name="sequence">21</field>
+        </record>
+        
+        <record id="province_id_6300" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Kalimantan Selatan</field> 
+            <field name="code">6300</field>
+            <field name="sequence">22</field>
+        </record>
+        
+        <record id="province_id_6400" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Kalimantan Timur</field> 
+            <field name="code">6400</field>
+            <field name="sequence">23</field>
+        </record>
+        
+        <record id="province_id_6500" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Kalimantan Utara</field> 
+            <field name="code">6500</field>
+            <field name="sequence">32</field>
+        </record>
+        
+        <record id="province_id_7100" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Sulawesi Utara</field> 
+            <field name="code">7100</field>
+            <field name="sequence">24</field>
+        </record>
+        
+        <record id="province_id_7200" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Sulawesi Tengah</field> 
+            <field name="code">7200</field>
+            <field name="sequence">25</field>
+        </record>
+        
+        <record id="province_id_7300" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Sulawesi Selatan</field> 
+            <field name="code">7300</field>
+            <field name="sequence">26</field>
+        </record>
+        
+        <record id="province_id_7400" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Sulawesi Tenggara</field> 
+            <field name="code">7400</field>
+            <field name="sequence">27</field>
+        </record>
+        
+        <record id="province_id_7500" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Gorontalo</field> 
+            <field name="code">7500</field>
+            <field name="sequence">28</field>
+        </record>
+        
+        <record id="province_id_7600" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Sulawesi Barat</field> 
+            <field name="code">7600</field>
+            <field name="sequence">29</field>
+        </record>
+        
+        <record id="province_id_8100" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Maluku</field> 
+            <field name="code">8100</field>
+            <field name="sequence">30</field>
+        </record>
+        
+        <record id="province_id_8200" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Maluku Utara</field> 
+            <field name="code">8200</field>
+            <field name="sequence">31</field>
+        </record>
+        
+        <record id="province_id_9100" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Papua Barat</field> 
+            <field name="code">9100</field>
+            <field name="sequence">33</field>
+        </record>
+        
+        <record id="province_id_9400" model="res.country.state">
+            <field name="country_id" ref="base.id"/>
+            <field name="name">Papua</field> 
+            <field name="code">9400</field>
+            <field name="sequence">34</field>
+        </record>
+        
+    </data>
+</odoo>

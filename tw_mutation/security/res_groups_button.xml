@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+        <!-- Mutation Order Confirm -->
+		<record id="group_tw_mutation_order_confirm" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Mutation Order Confirm</field>
+        </record>
+        
+        <record id="access_tw_mutation_order_confirm" model="ir.model.access">
+            <field name="model_id" ref="model_tw_mutation_order"/>
+            <field name="name">tw_mutation_order_confirm update</field>
+            <field name="group_id" ref="group_tw_mutation_order_confirm"/>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <!-- Mutation Order Renew Available -->
+		<record id="group_tw_mutation_order_renew_available" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Mutation Order Renew Available</field>
+        </record>
+        
+        <record id="access_tw_mutation_order_renew_available" model="ir.model.access">
+            <field name="model_id" ref="model_tw_mutation_order"/>
+            <field name="name">tw_mutation_order_renew_available update</field>
+            <field name="group_id" ref="group_tw_mutation_order_renew_available"/>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_base.group_system_admin" model="res.groups">
+			<field name="implied_ids" eval="[
+				(4,ref('group_tw_mutation_order_confirm')),
+				(4,ref('group_tw_mutation_order_renew_available')),
+            ]">
+			</field>
+		</record>
+	
+	</data>
+</odoo>

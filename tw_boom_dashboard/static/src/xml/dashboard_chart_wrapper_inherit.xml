@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <!-- Inherit the parent template -->
+    <t t-name="tw_boom_dashboard.DashboardChartWrapperInherit" t-inherit="synconics_bi_dashboard.DashboardChartWrapper" t-inherit-mode="extension">
+
+        <!-- Example: Insert a new chart type at the end of the list -->
+        <!-- 
+        <xpath expr="//div[hasclass('chart-header')]" position="after">
+             <MyCustomChart t-if="state.chart_type == 'my_custom_chart'" theme="state.theme" chartId="state.chartId" name="state.name" recordSets="state.recordSets" update_chart="this.update_chart" />
+        </xpath>
+        -->
+
+        <!-- XPath to remove default white box style for Greeting, Quote, Birthday -->
+        <xpath expr="//div[contains(@t-attf-class, 'grid-stack-item-content')]" position="attributes">
+            <attribute name="style"></attribute>
+            <attribute name="t-att-style">(['greeting', 'quote', 'birthday', 'label'].includes(state.chart_type) ? 'height: 100%; border: none; background: transparent;' : 'height: 100%; position: relative; border-radius: 10px; background: white; border: 1px #dfdfdff5 solid;') + 'font-family:' + (state.font_family || 'Arial') + ';' + 'font-weight:' + (state.font_weight_bold || 'normal') + ';' + 'font-style:' + (state.font_style || 'normal') + ';'</attribute>
+            <attribute name="t-attf-class">#{['tile','kpi'].includes(state.chart_type) &amp;&amp; !state.isKpiError ? 'grid-stack-item-content' : 'grid-stack-item-content ' + (['greeting', 'quote', 'birthday', 'label', 'progress_bar', 'filter', 'stacked_progress'].includes(state.chart_type) ? '' : 'p-2')}</attribute>
+        </xpath>
+
+        <!-- XPath to restore buttons for custom types using absolute positioning -->
+        <xpath expr="//div[hasclass('chart-header')]" position="attributes">
+            <attribute name="t-att-style">['greeting', 'quote', 'birthday', 'label', 'progress_bar', 'filter', 'stacked_progress'].includes(state.chart_type) ? 'position: absolute; right: 0; z-index: 9; background: transparent !important;' : (['tile', 'kpi'].includes(state.chart_type) &amp;&amp; !state.isKpiError ? 'position: absolute; right: 0; z-index: 9; background-color:' + state.background_color +'!important;' : 'height: 6%;')</attribute>
+            <attribute name="t-att-class">['greeting', 'quote', 'birthday', 'label', 'progress_bar', 'filter', 'stacked_progress'].includes(state.chart_type) ? '' : 'chart-header'</attribute>
+        </xpath>
+
+        <!-- Hide chart name for custom types -->
+        <xpath expr="//span[hasclass('title')]" position="attributes">
+            <attribute name="t-out">(state.isKpiError || !['tile', 'kpi', 'greeting', 'quote', 'birthday', 'label', 'progress_bar', 'filter', 'stacked_progress'].includes(state.chart_type)) ? state.name : ''</attribute>
+            <attribute name="t-att-style">
+                'font-size:' + (state.header_font_size || 22) + 'px; ' + 
+                'color:' + (state.header_font_color || '') + ';' +
+                'font-weight:' + (state.header_font_weight || 'bold') + ';' +
+                'font-style:' + (state.header_font_style || 'normal') + ';' +
+                'font-family:' + (state.header_font_family || 'Arial') + ';'
+            </attribute>
+        </xpath>
+
+        <xpath expr="//AreaChart" position="attributes">
+            <attribute name="color_palette">state.color_palette</attribute>
+        </xpath>
+        <xpath expr="//BarChart" position="attributes">
+            <attribute name="color_palette">state.color_palette</attribute>
+        </xpath>
+        <xpath expr="//ColumnChart" position="attributes">
+            <attribute name="color_palette">state.color_palette</attribute>
+        </xpath>
+        <xpath expr="//DoughnutChart" position="attributes">
+            <attribute name="color_palette">state.color_palette</attribute>
+        </xpath>
+        <xpath expr="//FunnelChart" position="attributes">
+            <attribute name="color_palette">state.color_palette</attribute>
+        </xpath>
+        <xpath expr="//PyramidChart" position="attributes">
+            <attribute name="color_palette">state.color_palette</attribute>
+        </xpath>
+        <xpath expr="//LineChart" position="attributes">
+            <attribute name="color_palette">state.color_palette</attribute>
+        </xpath>
+        <xpath expr="//PieChart" position="attributes">
+            <attribute name="color_palette">state.color_palette</attribute>
+        </xpath>
+        <xpath expr="//RadarChart" position="attributes">
+            <attribute name="color_palette">state.color_palette</attribute>
+        </xpath>
+        <xpath expr="//StackedColumnChart" position="attributes">
+            <attribute name="color_palette">state.color_palette</attribute>
+            <attribute name="orientation">state.chart_orientation</attribute>
+            <attribute name="show_legend">state.show_legend</attribute>
+        </xpath>
+        <xpath expr="//RadialChart" position="attributes">
+            <attribute name="color_palette">state.color_palette</attribute>
+        </xpath>
+        <xpath expr="//ScatterChart" position="attributes">
+            <attribute name="color_palette">state.color_palette</attribute>
+        </xpath>
+        <xpath expr="//MapChart" position="attributes">
+            <attribute name="color_palette">state.color_palette</attribute>
+        </xpath>
+        <xpath expr="//MeterChart" position="attributes">
+            <attribute name="color_palette">state.color_palette</attribute>
+        </xpath>
+
+        <xpath expr="//TodoView" position="after">
+            <GreetingChart t-if="state.chart_type == 'greeting'" record="state.recordSets" />
+            <QuoteChart t-if="state.chart_type == 'quote'" record="state.recordSets" />
+            <BirthdayChart t-if="state.chart_type == 'birthday'" record="state.recordSets" />
+            <LabelChart t-if="state.chart_type == 'label'" record="state.recordSets" />
+            <ProgressBarChart t-if="state.chart_type == 'progress_bar'" record="state.recordSets" />
+            <FilterLayout t-if="state.chart_type == 'filter'" record="state.recordSets" />
+            <StackedProgressBarChart t-if="state.chart_type == 'stacked_progress'" record="state.recordSets" />
+        </xpath>
+
+    </t>
+
+</templates>

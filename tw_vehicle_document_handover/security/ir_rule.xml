@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- STNK Handover Multi-Company Rule -->
+        <record id="tw_vehicle_stnk_handover_company_rule" model="ir.rule">
+            <field name="name">Penyerahan STNK Multi-Company</field>
+            <field name="model_id" ref="tw_vehicle_document_handover.model_tw_vehicle_registration_handover"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <!-- BPKB Handover Multi-Company Rule -->
+        <record id="tw_vehicle_ownership_handover_company_rule" model="ir.rule">
+            <field name="name">Penyerahan BPKB Multi-Company</field>
+            <field name="model_id" ref="tw_vehicle_document_handover.model_tw_vehicle_ownership_handover"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+    </data>
+</odoo>

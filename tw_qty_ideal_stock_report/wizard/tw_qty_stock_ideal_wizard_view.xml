@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_qty_stock_ideal_view_wizard" model="ir.ui.view">
+            <field name="name">Laporan Qty Ideal Stock</field>
+            <field name="model">tw.qty.ideal.stock.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Laporan Qty Ideal Stock">
+                    <group>
+                        <group>
+                            <field name="month" />
+                        </group>
+                        <group>
+                            <field name="year" />
+                        </group>
+                    </group>
+                    <div>
+                        <button name="action_generate_data" string="Generate Data" type="object" />
+                        <span style="opacity:0">--</span>
+                        <button name="action_export" string="Export Report" type="object"
+                            class="oe_highlight" />
+                    </div>
+                    <notebook>
+                        <page>
+                            <field name="data_ids" readonly="1">
+                                <list>
+                                    <field name="month_text" width="50%" />
+                                    <field name="ready_to_export" width="50%" force_save="1" />
+                                </list>
+                                <form>
+                                    <field name="month_text" />
+                                    <field name="ready_to_export" />
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button string="Cancel" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_tw_qty_stock_ideal_wizard" model="ir.actions.server">
+            <field name="name">Laporan Qty Ideal Stock</field>
+            <field name="model_id" ref="tw_qty_ideal_stock_report.model_tw_qty_ideal_stock_wizard" />
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.qty.ideal.stock.wizard'].action_open_view()
+            </field>
+        </record>
+
+    </data>
+</odoo>

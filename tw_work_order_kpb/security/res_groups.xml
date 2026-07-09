@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="1">
+    
+        <!-- TW KPB Engine Type Group Read -->
+        <record id="tw_kpb_engine_type_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW KPB Engine Type Read</field>
+        </record>
+
+        <record id="tw_kpb_engine_type_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_kpb_engine_type" />
+            <field name="name">tw_kpb_engine_type read</field>
+            <field name="group_id" ref="tw_kpb_engine_type_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+        
+        <record id="tw_kpb_engine_price_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_kpb_engine_price" />
+            <field name="name">tw_kpb_engine_price read</field>
+            <field name="group_id" ref="tw_kpb_engine_type_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="tw_kpb_engine_type_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW KPB Engine Type Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_kpb_engine_type_group_read'))]" />
+        </record>
+
+        <record id="tw_kpb_engine_type_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_kpb_engine_type" />
+            <field name="name">tw_kpb_engine_type update</field>
+            <field name="group_id" ref="tw_kpb_engine_type_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_kpb_engine_price_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_kpb_engine_price" />
+            <field name="name">tw_kpb_engine_price update</field>
+            <field name="group_id" ref="tw_kpb_engine_type_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_kpb_engine_type_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_kpb_engine_type" />
+            <field name="name">tw_kpb_engine_type update</field>
+            <field name="group_id" ref="tw_kpb_engine_type_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_kpb_engine_type_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW KPB Engine Type Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_kpb_engine_type_group_read'))]" />
+        </record>
+
+        <record id="tw_kpb_engine_type_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_kpb_engine_type" />
+            <field name="name">tw_kpb_engine_type delete</field>
+            <field name="group_id" ref="tw_kpb_engine_type_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="tw_kpb_engine_price_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_kpb_engine_price" />
+            <field name="name">tw_kpb_engine_price delete</field>
+            <field name="group_id" ref="tw_kpb_engine_type_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- TW KPB Expired -->
+        <record id="tw_kpb_expired_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW KPB Expired Read</field>
+        </record>
+
+        <record id="tw_kpb_expired_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_kpb_expired" />
+            <field name="name">tw_kpb_expired read</field>
+            <field name="group_id" ref="tw_kpb_expired_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="tw_kpb_expired_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW KPB Expired Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_kpb_expired_group_read'))]" />
+        </record>
+
+        <record id="tw_kpb_expired_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_kpb_expired" />
+            <field name="name">tw_kpb_expired update</field>
+            <field name="group_id" ref="tw_kpb_expired_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_kpb_expired_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW KPB Expired Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_kpb_expired_group_read'))]" />
+        </record>
+
+        <record id="tw_kpb_expired_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_kpb_expired" />
+            <field name="name">tw_kpb_expired delete</field>
+            <field name="group_id" ref="tw_kpb_expired_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+    
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('tw_kpb_engine_type_group_read')),
+                (4,ref('tw_kpb_engine_type_group_update')),
+                (4,ref('tw_kpb_engine_type_group_delete')),
+                (4,ref('tw_kpb_expired_group_read')),
+                (4,ref('tw_kpb_expired_group_update')),
+                (4,ref('tw_kpb_expired_group_delete')),
+                ]" />
+        </record>
+    </data>
+    
+</odoo>

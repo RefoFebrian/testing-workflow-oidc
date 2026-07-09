@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_boom_master_quotes_list" model="ir.ui.view">
+            <field name="name">tw.boom.master.quotes.list</field>
+            <field name="model">tw.boom.master.quotes</field>
+            <field name="arch" type="xml">
+                <list string="Master Quotes" editable="bottom" delete="0">
+                    <field name="name" required="1"/>
+                    <field name="author" required="1"/>
+                    <field name="category"/>
+                    <field name="time_periode"/>
+                    <field name="start_date" 
+                        required="category == 'specific_date'"
+                        readonly="category != 'specific_date'"/>
+                    <field name="end_date" 
+                        required="category == 'specific_date'"
+                        readonly="category != 'specific_date'"/>
+                    <field name="day_name" 
+                        required="category == 'specific_day'"
+                        readonly="category != 'specific_day'"/>
+                    <field name="is_active"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_tw_boom_master_quotes_filter" model="ir.ui.view">
+            <field name="name">tw.boom.master.quotes.filter.view</field>
+            <field name="model">tw.boom.master.quotes</field>
+            <field name="arch" type="xml">
+                <search string="Search Master Quotes">
+                    <field name="author"/>
+                    <field name="category"/>
+                    <field name="time_periode"/>
+                    <group>
+                        <filter name="filter_by_category" string="Category" context="{'group_by':'category'}"/>
+                        <filter name="filter_by_time_periode" string="Time Periode" context="{'group_by':'time_periode'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_tw_boom_master_quotes" model="ir.actions.act_window">
+            <field name="name">Master Quotes</field>
+            <field name="res_model">tw.boom.master.quotes</field>
+            <field name="path">master-master-quotes</field>
+            <field name="view_mode">list</field>
+            <field name="context"></field>
+            <field name="domain"></field>
+            <field name="search_view_id" ref="view_tw_boom_master_quotes_filter"/>
+        </record>
+    </data>
+</odoo>

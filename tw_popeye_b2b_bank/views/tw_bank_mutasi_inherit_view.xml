@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_popeye_b2b_bank_mutasi_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.popeye.b2b.bank.mutasi.inherit.form</field>
+        <field name="model">tw.bank.mutasi</field>
+        <field name="inherit_id" ref="tw_bank_reconcile.tw_bank_mutasi_form_view"/>
+        <field name="arch" type="xml">
+            <field name="format" position="after">
+                <field name="popeye_origin" readonly="1" invisible="popeye_origin == False"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

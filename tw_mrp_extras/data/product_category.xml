@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    
+        <!-- Category Extras -->
+    
+        <record id="product_category_extras_charger" model="product.category">
+            <field name="name">Charger</field>
+            <field name="parent_id" ref="tw_product.product_category_extras" />
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+    
+        <record id="product_category_extras_battery" model="product.category">
+            <field name="name">Battery</field>
+            <field name="parent_id" ref="tw_product.product_category_extras" />
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">fifo</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        
+        <record id="product_category_extras_buku_manual" model="product.category">
+            <field name="name">Buku Manual</field>
+            <field name="parent_id" ref="tw_product.product_category_extras" />
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">average</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        
+        <record id="product_category_extras_buku_service" model="product.category">
+            <field name="name">Buku Service</field>
+            <field name="parent_id" ref="tw_product.product_category_extras" />
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">average</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        
+        <record id="product_category_extras_helm" model="product.category">
+            <field name="name">Helm</field>
+            <field name="parent_id" ref="tw_product.product_category_extras" />
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">average</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        
+        <record id="product_category_extras_spion" model="product.category">
+            <field name="name">Spion</field>
+            <field name="parent_id" ref="tw_product.product_category_extras" />
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">average</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+        
+        <record id="product_category_extras_tools" model="product.category">
+            <field name="name">Tools</field>
+            <field name="parent_id" ref="tw_product.product_category_extras" />
+            <field name="property_valuation">real_time</field>
+            <field name="property_cost_method">average</field>
+            <field name="property_stock_account_input_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_account_output_categ_id" ref="tw_product.tw_account_categ_interim_stock"/>
+            <field name="property_stock_valuation_account_id" ref="tw_product.tw_account_categ_other_inventory"/>
+        </record>
+
+    </data>
+</odoo>

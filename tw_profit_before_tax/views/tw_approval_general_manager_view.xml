@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Approval Manual atau Reject AM -->
+        <record id="view_tw_profit_before_tax_gm_approval_list" model="ir.ui.view">
+            <field name="name">view.tw.profit.before.tax.gm.approval.list</field>
+            <field name="model">tw.profit.before.tax</field>
+            <field name="arch" type="xml">
+                <list string="Approval GM" create="false" edit="false" delete="false">
+                    <field name="period_time_formated" />
+                    <field name="company_id" />
+                    <field name="area_manager_id" />
+                    <field name="total_unit" />
+                    <field name="total_unit_lm" />
+                    <field name="diff_unit" />
+                    <field name="pbt_propose" />
+                    <field name="pbt_propose_lm" />
+                    <field name="diff_pbt" />
+                    <field name="state" />
+                </list>
+            </field>
+        </record>
+
+        <record id="view_tw_profit_before_tax_gm_approval_search" model="ir.ui.view">
+            <field name="name">tw.profit.before.tax.gm.approval.search</field>
+            <field name="model">tw.profit.before.tax</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="company_id"/>
+                    <field name="area_manager_id" />
+                    <filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+                    <filter name="reject" string="Reject" domain="[('state','=','reject')]"/>
+                    <filter name="approved" string="Approved" domain="[('state','=','approved')]"/>
+                    <separator/>
+                    <group string="Group By">
+                        <filter name="groupby_period_time_formated" string="Periode" context="{'group_by': 'period_time_formated'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Approval Manual atau Reject AM - Action -->
+        <record id="action_tw_profit_before_tax_approval_gm" model="ir.actions.server">
+            <field name="name">Approval GM</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="tw_profit_before_tax.model_tw_profit_before_tax"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.profit.before.tax'].action_net_margin_approval_gm_list()
+            </field>
+        </record>
+
+        
+        <record id="approval_gm" model="ir.actions.server">
+            <field name="name">Approve</field>
+            <field name="model_id" ref="model_tw_profit_before_tax"/>
+            <field name="binding_model_id" ref="tw_profit_before_tax.model_tw_profit_before_tax"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.profit.before.tax'].action_approve()
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

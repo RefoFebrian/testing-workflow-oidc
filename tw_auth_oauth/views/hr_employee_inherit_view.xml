@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>   
+        <record model="ir.ui.view" id="hr_employee_oauth_inherit_view">
+            <field name="name">hr.employee.oauth.inherit</field>           
+            <field name="model">hr.employee</field>                                  
+            <field name="inherit_id" ref="tw_hr.tw_hr_employee_form_view"/>
+            <field name="arch" type="xml">
+                <field name="is_user" position="after">
+                    <field name="is_oauth" invisible="not is_user"/>
+                </field>
+            </field>
+        </record> 
+    </data>
+</odoo>

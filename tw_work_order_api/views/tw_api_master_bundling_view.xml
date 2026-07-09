@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="tw_api_master_partner_bundling_list_view">
+            <field name="name">tw.api.master.partner.bundling.list</field>
+            <field name="model">tw.api.master.partner.bundling</field>
+            <field name="arch" type="xml">
+                <list string="Partner Bundling">
+                    <field name="company_id" />
+                </list>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="tw_api_master_partner_bundling_form_view">
+            <field name="name">tw.api.master.partner.bundling.form</field>
+            <field name="model">tw.api.master.partner.bundling</field>
+            <field name="arch" type="xml">
+                <form string="Partner Bundling">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="company_id" class="oe_edit_only" />                      
+                            <h1>
+                                <field name="company_id" required="1" style="max-width: none;" options="{'no_create':True, 'no_open':True}" /> 
+                            </h1>
+                        </div>
+                        <notebook>
+                            <page string="Partner Bundling">
+                                <field name="partner_bundling_ids" nolabel="1" colspan="4">
+                                    <list string="Partner Bundling" editable="top">
+                                        <field name="partner_id" />
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="tw_api_master_partner_bundling_action">
+            <field name="name">API Partner Bundling</field>
+            <field name="res_model">tw.api.master.partner.bundling</field>
+            <field name="view_mode">list,form</field>
+        </record>
+    </data>
+</odoo>

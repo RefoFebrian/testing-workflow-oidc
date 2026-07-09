@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_dealer_sale_order_inherit_hutang_lain_form_view" model="ir.ui.view">
+            <field name="name">tw.dealer.sale.order.hutang.lain.inherit.form</field>
+            <field name="model">tw.dealer.sale.order</field>
+            <field name="inherit_id" ref="tw_dealer_sale_order.tw_dealer_order_view_form" />
+            <field name="arch" type="xml">
+                <page name="payment_lines" position="inside">
+                    <field name="hl_count" invisible="1"/>
+                    <button name="action_create_hutang_lain" type="object" string="Create Hutang Lain" invisible="state != 'draft'" class="btn btn-secondary me-1" groups="tw_payment.group_account_payment_receive_payment_update"/>
+                    <button name="action_open_customer_hutang_lain" icon="fa-eye" class="btn btn-secondary me-1" type="object" string="View HL" invisible="state != 'draft' or hl_count == 0" groups="tw_payment.group_account_payment_receive_payment_read"/>
+                </page>
+            </field>
+        </record>
+    </data>
+</odoo>

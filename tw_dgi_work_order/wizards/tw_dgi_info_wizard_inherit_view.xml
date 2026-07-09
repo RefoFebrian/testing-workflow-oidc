@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inject WO-specific DGI reference fields into base DGI Info popup -->
+    <record id="view_tw_dgi_info_wizard_form_inherit_wo" model="ir.ui.view">
+        <field name="name">tw.dgi.info.wizard.form.inherit.wo</field>
+        <field name="model">tw.dgi.info.wizard</field>
+        <field name="inherit_id" ref="tw_dgi.view_tw_dgi_info_wizard_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@id='dgi_reference_group']" position="inside">
+                <field name="md_reference_pkb" invisible="not md_reference_pkb"/>
+                <field name="md_reference_sa" invisible="not md_reference_sa"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

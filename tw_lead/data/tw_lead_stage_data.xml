@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_lead_crm_stage_riding_test" model="crm.stage">
+            <field name="name">Riding Test</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="tw_lead_crm_stage_call" model="crm.stage">
+            <field name="name">Call</field>
+            <field name="sequence">2</field>
+        </record>
+        <record id="tw_lead_crm_stage_wa" model="crm.stage">
+            <field name="name">WA</field>
+            <field name="sequence">3</field>
+        </record>
+        <record id="tw_lead_crm_stage_sms" model="crm.stage">
+            <field name="name">SMS</field>
+            <field name="sequence">4</field>
+        </record>
+        <record id="tw_lead_crm_stage_visit" model="crm.stage">
+            <field name="name">Visit</field>
+            <field name="sequence">5</field>
+        </record>
+        <record id="tw_lead_crm_stage_pengambilan_stnk" model="crm.stage">
+            <field name="name">Pengambilan STNK</field>
+            <field name="sequence">6</field>
+        </record>
+        <record id="tw_lead_crm_stage_pengambilan_bpkb" model="crm.stage">
+            <field name="name">Pengambilan BPKB</field>
+            <field name="sequence">7</field>
+        </record>
+        <record id="tw_lead_crm_stage_mohon_faktur" model="crm.stage">
+            <field name="name">Mohon Faktur</field>
+            <field name="sequence">8</field>
+        </record>
+        <record id="tw_lead_crm_stage_penerimaan_faktur" model="crm.stage">
+            <field name="name">Penerimaan Faktur</field>
+            <field name="sequence">9</field>
+        </record>
+        <record id="tw_lead_crm_stage_penerimaan_stnk" model="crm.stage">
+            <field name="name">Penerimaan STNK</field>
+            <field name="sequence">10</field>
+        </record>
+        <record id="tw_lead_crm_stage_penyerahan_stnk" model="crm.stage">
+            <field name="name">Penyerahan STNK</field>
+            <field name="sequence">11</field>
+        </record>
+        <record id="tw_lead_crm_stage_penerimaan_bpkb" model="crm.stage">
+            <field name="name">Penerimaan BPKB</field>
+            <field name="sequence">12</field>
+        </record>
+        <record id="tw_lead_crm_stage_penyerahan_bpkb" model="crm.stage">
+            <field name="name">Penyerahan BPKB</field>
+            <field name="sequence">13</field>
+        </record>
+
+    </data>
+</odoo>

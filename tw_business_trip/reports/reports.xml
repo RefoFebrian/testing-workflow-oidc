@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_business_trip" model="report.paperformat">
+            <field name="name">business_trip</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">3</field>
+            <field name="margin_left">3</field>
+            <field name="margin_right">3</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">80</field>
+        </record>
+
+        <record id="action_print_business_trip_pdf" model="ir.actions.report">
+            <field name="name">Perjalanan Dinas</field>
+            <field name="model">tw.business.trip</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_business_trip.print_business_trip_pdf</field>
+            <field name="report_file">tw_business_trip.print_business_trip_pdf</field>
+            <!-- <field name="print_report_name">'Print %s.pdf' % (object.name)</field> -->
+            <field name="paperformat_id" ref="paperformat_business_trip"/>
+        </record>
+
+    </data>
+</odoo>

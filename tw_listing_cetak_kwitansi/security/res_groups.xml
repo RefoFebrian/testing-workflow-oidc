@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+    <!-- Listing Cetak Kwitansi Group Read -->
+        <record id="group_tw_listing_cetak_kwitansi_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">Listing Cetak Kwitansi Read</field>
+        </record>
+        <record id="access_tw_listing_cetak_kwitansi_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_listing_cetak_kwitansi"/>
+            <field name="name">tw_listing_cetak_kwitansi read</field>
+            <field name="group_id" ref="group_tw_listing_cetak_kwitansi_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Listing Cetak Kwitansi Group Update -->
+        <record id="group_tw_listing_cetak_kwitansi_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">Listing Cetak Kwitansi Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_listing_cetak_kwitansi_read'))]"/>
+        </record>
+        <record id="access_tw_listing_cetak_kwitansi_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_listing_cetak_kwitansi"/>
+            <field name="name">tw_listing_cetak_kwitansi update</field>
+            <field name="group_id" ref="group_tw_listing_cetak_kwitansi_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Listing Cetak Kwitansi Group Delete -->
+        <record id="group_tw_listing_cetak_kwitansi_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">Listing Cetak Kwitansi Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_listing_cetak_kwitansi_read'))]"/>
+        </record>
+        <record id="access_tw_listing_cetak_kwitansi_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_listing_cetak_kwitansi"/>
+            <field name="name">tw_listing_cetak_kwitansi delete</field>
+            <field name="group_id" ref="group_tw_listing_cetak_kwitansi_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    <!-- Listing Cetak Kwitansi Report -->
+        <record id="group_tw_listing_cetak_kwitansi_report_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Listing Cetak Kwitansi</field>
+        </record>
+        <record id="access_tw_listing_cetak_kwitansi_report_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_listing_cetak_kwitansi_report"/>
+            <field name="name">tw_listing_cetak_kwitansi_report update</field>
+            <field name="group_id" ref="group_tw_listing_cetak_kwitansi_report_read"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_tw_listing_cetak_kwitansi_read')),
+                (4,ref('group_tw_listing_cetak_kwitansi_update')),
+                (4,ref('group_tw_listing_cetak_kwitansi_delete')),
+                (4,ref('group_tw_listing_cetak_kwitansi_report_read')),
+            ]"/>
+        </record>
+    </data>
+    
+</odoo>

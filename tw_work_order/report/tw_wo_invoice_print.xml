@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="print_wo_invoice">
+            <style type="text/css">
+                * {
+                    font-family: Arial;
+                }
+            </style>
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <div class="row"> 
+                        </div>
+                        <table width="100%">
+                            <tr>
+                                <td width="15.00%" rowspan="3">
+                                    <t t-if="o.company_id.code == 'MMW'">
+                                        <t t-set="base_url" t-value="request.httprequest.host_url.rstrip('/')"/>
+                                        <img t-att-src="base_url + '/tw_work_order/static/src/img/icon_ws.jpg'"
+                                            style="width: 110px; height: 50px; align: center;"/>
+                                    </t>
+                                    <t t-if="o.company_id.code != 'MMW'">
+                                        <t t-set="base_url" t-value="request.httprequest.host_url.rstrip('/')"/>
+                                        <img t-att-src="base_url + '/tw_work_order/static/src/img/ahass.jpg'"
+                                            style="width: 80px; height: 30px; align: center;"/>
+                                    </t>
+                                </td>
+                                <td width="60.00%">
+                                    <t t-if="o.company_id.code == 'MMW'">
+                                        <h3>Warunk Spareparts</h3>
+                                    </t>
+                                    <t-if t-if="o.company_id.code != 'MMW'">
+                                        <h3>
+                                            <span t-field="o.company_id.parent_id.name"></span> 
+                                            <span t-field="o.company_id.name"></span>
+                                        </h3>
+                                    </t-if>
+                                    <span t-field="o.company_id.street"></span>
+                                </td>
+                                <td width="25.00%"><h3>Invoice</h3></td>
+                            </tr>
+                        </table>
+                        <table width="100%" style="font-size: 11px; font-family: Arial;">
+                            <tr>
+                                <td width="15.00%"></td>
+                                <td width="1.00%"></td>
+                                <td><span id="s01"></span></td>
+                                <td width="15.00%">No</td>
+                                <td width="1.00%">:</td>
+                                <td><span id="s01" t-esc="invoice_obj().name"></span></td>
+                            </tr>
+                            <tr>
+                                <td width="15.00%">No. Telp</td>
+                                <td width="1.00%">:</td>
+                                <td><span id="s01" t-field="o.company_id.phone"></span></td>
+                                <td width="15.00%">No. PKB</td>
+                                <td width="1.00%">:</td>
+                                <td><span id="s01" t-esc="o.name"></span></td>
+                            </tr>
+                            <tr>
+                                <td width="15.00%">NPWP</td>
+                                <td width="1.00%">:</td>
+                                <td><span id="s01" t-field="o.company_id.vat"></span></td>
+                                <td width="15.00%">Tanggal</td>
+                                <td width="1.00%">:</td>
+                                <td><span id="s01" t-esc="o.date.strftime('%d-%m-%Y') if o.date else ''"></span></td>
+                            </tr>
+                            <tr>
+                                <td width="15.00%">No Honda Card</td>
+                                <td width="1.00%">:</td>
+                                <td><span id="s01"></span></td>
+                                <td width="15.00%"></td>
+                                <td width="1.00%"></td>
+                                <td><span id="s01"></span></td>
+                            </tr>
+                            <tr>
+                                <td width="15.00%">Tanggal Pengukuhan</td>
+                                <td width="1.00%">:</td>
+                                <td><span id="s01" t-field="o.company_id.establishment_date" t-options='{"widget": "date", "format": "dd-MM-yyyy"}'></span></td>
+                                <td width="15.00%">Jenis Motor</td>
+                                <td width="1.00%">:</td>
+                                <td><span id="s01" t-field="o.product_id.product_tmpl_id.name"></span></td>
+                            </tr>
+                            <tr>
+                                <td width="15.00%"></td>
+                                <td width="1.00%"></td>
+                                <td><span id="s01"></span></td>
+                                <td width="15.00%">No. Mesin</td>
+                                <td width="1.00%">:</td>
+                                <td><span id="s01" t-field="o.lot_id.name"></span></td>
+                            </tr>
+                            <tr>
+                                <td width="15.00%">No. Polisi</td>
+                                <td width="1.00%">:</td>
+                                <td><span id="s01" t-field="o.lot_id.plate_number"></span></td>
+                                <td width="15.00%">No. Rangka</td>
+                                <td width="1.00%">:</td>
+                                <td><span id="s01" t-field="o.lot_id.chassis_number"></span></td>
+                            </tr>
+                            <tr>
+                                <td width="15.00%">Nama Pemilik</td>
+                                <td width="1.00%">:</td>
+                                <td><span id="s01" t-field="o.customer_stnk_id.name"></span></td>
+                                <td width="15.00%">Warna</td>
+                                <td width="1.00%">:</td>
+                                <td width="17.00%">
+                                    <t t-foreach="o.product_id.attribute_line_ids.value_ids" t-as="attr">
+                                        <span t-field="attr.name"/>,
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="15.00%">Mekanik</td>
+                                <td width="1.00%">:</td>
+                                <td><span id="s01" t-field="o.mechanic_id.name"></span></td>
+                                <td width="15.00%">KM</td>
+                                <td width="1.00%">:</td>
+                                <td><span id="s01" t-field="o.km"></span></td>
+                            </tr>
+                        </table>
+                        
+                        <br/>
+                        <div>
+                            <tr>
+                                <td width="20.00%" style="font-weight: bold;">Jenis Pekerjaan</td>
+                                <td width="5.00%" style="text-align: Right">:</td>
+                                <td></td>
+                            </tr>
+                        </div>
+                        <table id="t01" width="100%" style="border: 1px solid; border-collapse: collapse; font-size: 12px; font-family: Arial;">
+                            <thead>
+                                <tr id="tr01" height="20" style="border: 1px solid; font-size: 13px; font-family: Arial;">
+                                    <td id="td02" style="border: 1px solid; padding-left: 5px" width="5.00%">No</td>
+                                    <td id="td02" style="border: 1px solid; padding-left: 5px" width="15.00%">Nama Jasa</td>
+                                    <td id="td02" style="border: 1px solid; padding-left: 5px" width="20.00%">Deskripsi</td>
+                                    <td id="td02" style="border: 1px solid; padding-left: 5px" width="15.00%">HET</td>
+                                    <td id="td02" style="border: 1px solid; padding-left: 5px" width="15.00%">Jumlah</td>
+                                    <td id="td02" style="border: 1px solid; padding-left: 5px" width="15.00%">Disc</td>
+                                    <td id="td02" style="border: 1px solid; padding-left: 5px" width="20.00%">Sub Total</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="tr01" style="border: 1px solid;" t-foreach="o.order_line.filtered(lambda l: l.division == 'Service')" t-as="line" height="30%">
+                                    <t>
+                                        <td id="td01" style="border: 1px solid; text-align: Center"><span t-esc="line_index + 1"/></td>
+                                        <td id="td02" style="border: 1px solid; padding-left: 5px" height="20"><span id="s01" t-field="line.product_id.name"/></td>
+                                        <td id="td02" style="border: 1px solid; padding-left: 5px" height="20"><span id="s01" t-field="line.product_id.default_code"/></td>
+                                        <td id="td02" style="border: 1px solid; padding-left: 5px" height="20"><span id="s01" t-field="line.price_unit"/></td>
+                                        <td id="td02" style="border: 1px solid; padding-left: 5px" height="20"><span id="s01" t-field="line.product_qty"/></td>
+                                        <td id="td02" style="border: 1px solid; padding-left: 5px" height="20"><span id="s01" t-field="line.discount"/></td>
+                                        <td id="td02" style="border: 1px solid; padding-left: 5px" height="20" class="text-end"><span id="s01" t-esc="line.price_subtotal" t-options='{"widget": "float", "precision": 2}'/></td>
+                                    </t>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr id="tr01" height="20" style="border: 1px solid; font-size: 13px; font-family: Arial;">
+                                    <td colspan="5" style="border: 1px solid;" width="75.00%"></td>
+                                    <td id="td02" style="border: 1px solid; padding-left: 5px" width="15.00%">Total</td>
+                                    <td id="td02" style="border: 1px solid; padding-left: 5px" width="20.00%"><span t-esc="harga_total_service()" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <br/>
+                        <div>
+                            <tr>
+                                <td width="20.00%" style="font-weight: bold;">Sparepart</td>
+                                <td width="5.00%" style="text-align: Right">:</td>
+                                <td></td>
+                            </tr>
+                        </div>
+                        <table id="t01" width="100%" style="border: 1px solid; border-collapse: collapse; font-size: 12px; font-family: Arial;">
+                            <thead>
+                                <tr id="tr01" height="20" style="border: 1px solid; font-size: 13px; font-family: Arial;">
+                                    <td id="td02" style="border: 1px solid; padding-left: 5px" width="5.00%">No</td>
+                                    <td id="td02" style="border: 1px solid; padding-left: 5px" width="15.00%">Nama Part</td>
+                                    <td id="td02" style="border: 1px solid; padding-left: 5px" width="20.00%">Deskripsi</td>
+                                    <td id="td02" style="border: 1px solid; padding-left: 5px" width="15.00%">HET</td>
+                                    <td id="td02" style="border: 1px solid; padding-left: 5px" width="15.00%">Jumlah</td>
+                                    <td id="td02" style="border: 1px solid; padding-left: 5px" width="15.00%">Disc</td>
+                                    <td id="td02" style="border: 1px solid; padding-left: 5px" width="20.00%">Sub Total</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="tr01" style="border: 1px solid;" t-foreach="o.order_line.filtered(lambda l: l.division == 'Sparepart')" t-as="line" height="30%">
+                                    <t>
+                                        <td id="td01" style="border: 1px solid; text-align: Center"><span t-esc="line_index + 1"/></td>
+                                        <td id="td02" style="border: 1px solid; padding-left: 5px" height="20"><span id="s01" t-field="line.product_id.name"/></td>
+                                        <td id="td02" style="border: 1px solid; padding-left: 5px" height="20"><span id="s01" t-field="line.product_id.default_code"/></td>
+                                        <td id="td02" style="border: 1px solid; padding-left: 5px" height="20"><span id="s01" t-field="line.price_unit"/></td>
+                                        <td id="td02" style="border: 1px solid; padding-left: 5px" height="20"><span id="s01" t-field="line.product_qty"/></td>
+                                        <td id="td02" style="border: 1px solid; padding-left: 5px" height="20"><span id="s01" t-field="line.discount"/></td>
+                                        <td id="td02" style="border: 1px solid; padding-left: 5px" height="20" class="text-end"><span id="s01" t-esc="line.price_subtotal" t-options='{"widget": "float", "precision": 2}'/></td>
+                                    </t>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr id="tr01" height="20" style="border: 1px solid; font-size: 13px; font-family: Arial;">
+                                    <td colspan="5" style="border: 1px solid;" width="75.00%"></td>
+                                    <td id="td02" style="border: 1px solid; padding-left: 5px" width="15.00%">Total</td>
+                                    <td id="td02" style="border: 1px solid; padding-left: 5px" width="20.00%"><span t-esc="harga_total_sparepart()" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <br/>
+                        <div class="oe_structure"> 
+                            <table id="total_summary" width="100%" style="font-size: 11px; font-family: Arial;" border="0">
+                                <tr>
+                                    <td width="25.00%"></td>
+                                    <td width="50.00%" style="text-align: Right">Untaxed Amount :</td>
+                                    <td width="25.00%" style="text-align: Right" class="text-end"><span t-esc="invoice_obj().amount_untaxed" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                                <tr>
+                                    <td width="25.00%"></td>
+                                    <td width="50.00%" style="text-align: Right">DPP :</td>
+                                    <td width="25.00%" style="text-align: Right"><span t-esc="get_dpp()" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td width="50.00%" style="text-align: Right"> PPN :</td>
+                                    <td style="text-align: Right" class="text-end"><span t-esc="invoice_obj().amount_tax" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end">** <span t-esc="totals(invoice_obj().amount_total)"/></td>
+                                    <td width="50.00%" style="text-align: Right; font-weight: bold;"> Grand Total :</td>
+                                    <td style="text-align: Right" class="text-end"><span t-esc="invoice_obj().amount_total" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table width="100%" style="font-size: 11px; font-family: Arial;">
+                                <t t-if="o.type == 'SLS'">
+                                    <tr>
+                                        <td width="28.00%">Dicetak Oleh</td>
+                                        <td>
+                                            <span style="font-size: 11px; font-family: Arial;">
+                                                Barang yang sudah disetujui dan dibeli tidak bisa dikembalikan.
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="o.type != 'SLS'">
+                                    <tr>
+                                        <td width="28.00%">Dicetak Oleh</td>
+                                        <td colspan="2"><span style="font-size: 11px; font-family: Arial;">[1] Garansi KPB, service reguler dan jasa pasang 7 hari / 500 km dari tanggal invoice *</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="28.00%"></td>
+                                        <td colspan="2"><span style="font-size: 11px; font-family: Arial;">[2] Garansi semi overhaul 14 hari / 750 km dari tanggal invoice *</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="28.00%"></td>
+                                        <td colspan="2"><span style="font-size: 11px; font-family: Arial;">[3] Garansi overhaul 30 hari / 1000 km dari tanggal invoice *</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="28.00%"></td>
+                                        <td colspan="2"><span style="font-size: 11px; font-family: Arial;">[4] Garansi service premium CBR 250 dan PCX 1000 km / 1 bulan dari tanggal invoice *</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="28.00%"></td>
+                                        <td colspan="2"><span style="font-size: 11px; font-family: Arial;">[5] Garansi overhaul premium CBR 250 dan PCX 1500 km / 45 hari dari tanggal invoice *</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="28.00%"></td>
+                                        <td colspan="2"><span style="font-size: 11px; font-family: Arial;">[6] Part bekas adalah hak konsumen AHASS</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="28.00%"></td>
+                                        <td colspan="2"><span style="font-size: 11px; font-family: Arial;">* Mana yang tercapai terlebih dahulu</span></td>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td width="28.00%">__________________________</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><span t-esc="print_user()"/>, <span t-esc="time_date()"/></td>
+                                    <td>Lembar ke-1 Pelanggan / Lembar ke-2 Arsip Cabang</td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</openerp>

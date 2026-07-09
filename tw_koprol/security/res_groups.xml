@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Koprol Wizard READ -->
+        <record id="group_koprol_wizard_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Koprol Wizard Read</field>
+        </record>
+
+        <record id="access_koprol_wizard_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_api_koprol_wizard"/>
+            <field name="name">tw_api_koprol_wizard read</field>
+            <field name="group_id" ref="group_koprol_wizard_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Koprol Wizard UPDATE -->
+        <record id="group_koprol_wizard_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Koprol Wizard Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_koprol_wizard_read'))]"/>
+        </record>
+
+        <record id="access_koprol_wizard_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_api_koprol_wizard"/>
+            <field name="name">tw_api_koprol_wizard update</field>
+            <field name="group_id" ref="group_koprol_wizard_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Koprol Wizard DELETE -->
+        <record id="group_koprol_wizard_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Koprol Wizard Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_koprol_wizard_read'))]"/>
+        </record>
+
+        <record id="access_koprol_wizard_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_api_koprol_wizard"/>
+            <field name="name">tw_api_koprol_wizard delete</field>
+            <field name="group_id" ref="group_koprol_wizard_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    </data>
+
+    <!-- Assign to System Admin -->
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_koprol_wizard_read')),
+                (4, ref('group_koprol_wizard_update')),
+                (4, ref('group_koprol_wizard_delete')),
+            ]"/>
+        </record>
+    </data>
+
+</odoo>

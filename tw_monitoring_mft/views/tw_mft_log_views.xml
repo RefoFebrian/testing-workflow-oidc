@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <!-- ===================== -->
+        <!-- MFT LOG VIEWS         -->
+        <!-- ===================== -->
+
+        <!-- List View -->
+        <record id="tw_mft_log_view_list" model="ir.ui.view">
+            <field name="name">tw.mft.log.view.list</field>
+            <field name="model">tw.mft.log</field>
+            <field name="arch" type="xml">
+                <list string="MFT Logs" create="0" default_order="fetch_date desc" decoration-success="state == 'success'" decoration-warning="state == 'warning'" decoration-danger="state == 'error'">
+                    <field name="name"/>
+                    <field name="filename"/>
+                    <field name="fileext"/>
+                    <field name="filesize_display" string="Size"/>
+                    <field name="dfinish" string="Finish"/>
+                    <field name="irec" string="Total"/>
+                    <field name="irecok" string="OK"/>
+                    <field name="irecnok" string="NOK"/>
+                    <field name="status" widget="progressbar"/>
+                    <field name="config_id"/>
+                    <field name="fetch_date"/>
+                    <field name="state" column_invisible="1"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="tw_mft_log_view_form" model="ir.ui.view">
+            <field name="name">tw.mft.log.view.form</field>
+            <field name="model">tw.mft.log</field>
+            <field name="arch" type="xml">
+                <form string="MFT Log" create="0" edit="0">
+                    <header>
+                        <button name="action_update_success_rate" string="Update Success Rate" type="object" 
+                                class="btn-secondary" icon="fa-refresh"/>
+                        <button name="action_fetch_detail" string="Fetch Error Details" type="object" 
+                                class="btn-primary" icon="fa-bug"
+                                invisible="irecnok == 0"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_details" type="object" class="oe_stat_button" icon="fa-exclamation-triangle"
+                                    invisible="detail_count == 0">
+                                <field name="detail_count" widget="statinfo" string="Errors"/>
+                            </button>
+                        </div>
+                        <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                            <h3>
+                                <field name="filename" class="text-muted"/>
+                            </h3>
+                        </div>
+                        <group>
+                            <group string="File Information">
+                                <field name="fileid"/>
+                                <field name="fileext"/>
+                                <field name="filesize_display" string="File Size"/>
+                                <field name="config_id" options="{'no_create': True}"/>
+                            </group>
+                            <group string="Transfer Details">
+                                <field name="sendername"/>
+                                <field name="receivername"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Timestamps">
+                                <field name="dstart"/>
+                                <field name="dstart2"/>
+                                <field name="dfinish"/>
+                                <field name="fetch_date"/>
+                            </group>
+                            <group string="Statistics">
+                                <field name="irec"/>
+                                <field name="irecok" class="text-success"/>
+                                <field name="irecnok" class="text-danger"/>
+                                <field name="status" widget="progressbar"/>
+                                <field name="status_code"/>
+                                <field name="state" invisible="1"/>
+                                <field name="active" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Error Details" name="error_details" invisible="detail_count == 0">
+                                <field name="detail_ids" readonly="1">
+                                    <list create="0" delete="0">
+                                        <field name="errorrow"/>
+                                        <field name="filename"/>
+                                        <field name="errormsg"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="tw_mft_log_view_search" model="ir.ui.view">
+            <field name="name">tw.mft.log.view.search</field>
+            <field name="model">tw.mft.log</field>
+            <field name="arch" type="xml">
+                <search string="Search MFT Logs">
+                    <field name="name"/>
+                    <field name="fileid"/>
+                    <field name="filename"/>
+                    <field name="fileext"/>
+                    <field name="config_id"/>
+                    <separator/>
+                    <filter string="100% Success" name="filter_success" domain="[('status', '=', 100)]"/>
+                    <filter string="Belum 100%" name="filter_incomplete" domain="[('status', '&lt;', 100)]"/>
+                    <filter string="Has Errors" name="filter_errors" domain="[('irecnok', '&gt;', 0)]"/>
+                    <separator/>
+                    <filter string="Today" name="filter_today" domain="[('fetch_date', '&gt;=', (context_today()).strftime('%Y-%m-%d'))]"/>
+                    <filter string="This Week" name="filter_week" domain="[('fetch_date', '&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+                    <filter string="This Month" name="filter_month" domain="[('fetch_date', '&gt;=', (context_today() - datetime.timedelta(days=30)).strftime('%Y-%m-%d'))]"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter string="File Extension" name="group_ext" context="{'group_by': 'fileext'}"/>
+                        <filter string="Success Category" name="group_success_category" context="{'group_by': 'success_rate_category'}"/>
+                        <filter string="Configuration" name="group_config" context="{'group_by': 'config_id'}"/>
+                        <filter string="Fetch Date" name="group_date" context="{'group_by': 'fetch_date:day'}"/>
+                        <filter string="State" name="group_state" context="{'group_by': 'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="tw_mft_log_action" model="ir.actions.act_window">
+            <field name="name">MFT Logs</field>
+            <field name="res_model">tw.mft.log</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="tw_mft_log_view_search"/>
+            <field name="context">{'search_default_filter_today': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No MFT logs yet.
+                </p>
+                <p>
+                    MFT data will be logged here when you fetch data from Portal AHM.
+                </p>
+            </field>
+        </record>
+
+
+        <!-- ======================== -->
+        <!-- MFT LOG DETAIL VIEWS     -->
+        <!-- ======================== -->
+
+        <!-- List View -->
+        <record id="tw_mft_log_detail_view_list" model="ir.ui.view">
+            <field name="name">tw.mft.log.detail.view.list</field>
+            <field name="model">tw.mft.log.detail</field>
+            <field name="arch" type="xml">
+                <list string="MFT Error Details" create="0" delete="0">
+                    <field name="errorrow"/>
+                    <field name="filename"/>
+                    <field name="errormsg"/>
+                    <field name="log_id"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="tw_mft_log_detail_view_form" model="ir.ui.view">
+            <field name="name">tw.mft.log.detail.view.form</field>
+            <field name="model">tw.mft.log.detail</field>
+            <field name="arch" type="xml">
+                <form string="MFT Error Detail" create="0" edit="0">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="log_id"/>
+                                <field name="fileid"/>
+                                <field name="filename"/>
+                                <field name="errorrow"/>
+                            </group>
+                        </group>
+                        <group string="Error Message">
+                            <field name="errormsg" nolabel="1" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="tw_mft_log_detail_view_search" model="ir.ui.view">
+            <field name="name">tw.mft.log.detail.view.search</field>
+            <field name="model">tw.mft.log.detail</field>
+            <field name="arch" type="xml">
+                <search string="Search Error Details">
+                    <field name="filename"/>
+                    <field name="errormsg"/>
+                    <field name="log_id"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter string="Log" name="group_log" context="{'group_by': 'log_id'}"/>
+                        <filter string="File" name="group_file" context="{'group_by': 'filename'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="tw_mft_log_detail_action" model="ir.actions.act_window">
+            <field name="name">MFT Error Details</field>
+            <field name="res_model">tw.mft.log.detail</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="tw_mft_log_detail_view_search"/>
+        </record>
+
+    </data>
+
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record model="ir.ui.view" id="tw_work_order_collecting_kpb_form_view">
+			<field name="name">tw.work.order.collecting.kpb.form</field>
+			<field name="model">tw.work.order.collecting</field>
+			<field name="inherit_id"
+				ref="tw_work_order_collecting.tw_work_order_collecting_form_view" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='work_order_ids']/list/field[@name='claim_type_id']"
+					position="after">
+					<field name="kpb_ke" />
+				</xpath>
+
+				<xpath expr="//field[@name='work_order_ids']/form/field[@name='claim_type_id']"
+					position="after">
+					<field name="kpb_ke" />
+				</xpath>
+
+				<xpath expr="//field[@name='collecting_line_ids']/list/field[@name='categ']"
+					position="after">
+					<field name="kpb_ke" />
+				</xpath>
+			</field>
+		</record>
+
+	</data>
+</odoo>
+															

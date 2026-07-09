@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		
+		<record id="tw_approval_line_portal_list_view" model="ir.ui.view">
+		    <field name="name">tw.approval.line.portal.tree</field>
+		    <field name="model">tw.approval.line</field>
+			<field name="priority">10</field>
+		    <field name="arch" type="xml" >
+		        <list string="Approval Matrix Biaya" default_order="id desc" create="0" action="action_open_reference" type="object">
+		        	<field name="transaction_no"/>
+		        	<field name="config_id"/>
+		        	<field name="model_id" groups="base.group_erp_manager"/>
+                    <field name="company_id"/>
+		        	<field name="division"/>
+		        	<field name="group_id"/>
+		        	<field name="value"/>
+		        	<field name="create_date" string="Tanggal" widget="date"/>
+		        	<field name="state"/>
+		        	<field name="is_must_approve" invisible="1"/>
+		        </list>
+		     </field>
+		</record>
+
+ 		<record id="view_approval_line_filter" model="ir.ui.view">
+            <field name="name">approval.line.filter</field>
+            <field name="model">tw.approval.line</field>
+            <field name="arch" type="xml">
+                <search string="Search Approval">
+                    <field name="transaction_no"/> 
+                    <field name="config_id"/>
+                    <field name="model_id" groups="base.group_erp_manager"/>
+                    <field name="group_id"/> 
+                    <field name="company_id"/>
+					<filter string="Need my approval" name="is_must_approve" domain="[('is_must_approve','!=',False)]" />
+                    <group expand="1" string="Group By">
+                        <filter string="Branch" name="group_by_branch" context="{'group_by':'company_id'}"/>                    
+                        <filter string="Form" name="group_by_form" context="{'group_by':'config_id'}"/>                                            	
+                        <filter string="model" name="group_by_model" context="{'group_by':'model_id'}"/>                                            	
+                    </group>
+                </search>
+            </field>
+        </record>    	    
+
+		<record id="tw_approval_portal_action" model="ir.actions.act_window">
+		    <field name="name">Portal Approval Matrix Biaya</field>
+		    <field name="res_model">tw.approval.line</field>
+		    <field name="view_mode">list</field>
+			<field name="view_id" ref="tw_approval_line_portal_list_view"/>
+		    <field name="domain">[('state','=','open'),('is_mygroup','=',True)]</field>
+		    <field name="context">{'search_default_is_must_approve':1,'search_default_group_by_form':1}</field>
+		</record>
+
+		<record id="action_mass_approve_approval_line" model="ir.actions.server">
+			<field name="name">Approve All</field>
+			<field name="model_id" ref="model_tw_approval_line"/>
+			<field name="binding_model_id" ref="model_tw_approval_line"/>
+			<field name="binding_view_types">list</field>
+			<field name="state">code</field>
+			<field name="code">action = records.action_mass_approve()</field>
+		</record>
+
+    	          
+ 	</data>
+ </odoo>
+       		
+       		
+	

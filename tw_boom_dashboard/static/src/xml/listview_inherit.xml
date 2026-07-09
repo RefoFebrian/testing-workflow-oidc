@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <!-- Override ListView to support compact mode with summaries -->
+    <t t-name="tw_boom_dashboard.ListViewCompact" t-inherit="synconics_bi_dashboard.ListView" t-inherit-mode="primary">
+        <xpath expr="." position="replace">
+            <t t-if="this.state.isError">
+                <div class="w-100 d-flex align-items-center justify-content-center" style="height: 90%;">
+                    <h5 t-out="this.state.errorMessage"/>
+                </div>
+            </t>
+            <t t-else="">
+                <div style="overflow: auto; height: 92%;">
+                    <div class="table-responsive">
+                        <div class="card-body col-md-12 sync_list_view">
+                            <t t-if="state.columns and state.columns.length">
+                                <div class="table-container">
+                                    <!-- COMPACT MODE: Summary badges at top -->
+                                    <t t-if="state.displayMode === 'compact' and state.columnSummaries and state.columnSummaries.length">
+                                        <div class="d-flex align-items-center mb-3 flex-wrap gap-2">
+                                            <t t-foreach="state.columnSummaries" t-as="summary" t-key="summary.column">
+                                                <div class="summary-badge d-flex flex-column align-items-center">
+                                                    <span class="summary-value" t-att-style="'font-size: 24px; font-weight: bold; padding: 8px 16px; border-radius: 20px; background: ' + (summary.color or '#f0f0f0') + ';'">
+                                                        <t t-esc="summary.value"/>
+                                                    </span>
+                                                </div>
+                                            </t>
+                                        </div>
+                                    </t>
+                                    
+                                    <t t-if="state.data and state.data.length">
+                                        <table t-attf-id="listPreview-{{props.chartId}}" class="table styled-table oe_dashboard_table">
+                                            <thead>
+                                                <tr>
+                                                    <th t-foreach="state.columns" t-as="column" t-key="column.id" t-on-click="(ev) =&gt; sortTable(ev, column)" t-att-style="'position: sticky; top: 0; background: white; z-index: 2; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);' + (column.color and column.color != '#000000' ? ' color: ' + column.color + ';' : '')">
+                                                        <t t-esc="column.name"/>
+                                                        <span t-attf-class="sort-icon fa {{state.columns_order[column.column_name] == undefined or state.columns_order[column.column_name] == 'desc' ? 'fa-angle-down' : 'fa-angle-up'}} ml16"/>
+                                                    </th>
+                                                    <th class="o_icon" style="position: sticky; top: 0; background: white; z-index: 2; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);"/>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="table-body">
+                                                <!-- Show "No data" message if empty -->
+                                                <t t-if="!state.currentRecords or !state.currentRecords.length">
+                                                    <tr>
+                                                        <td t-att-colspan="state.columns.length + 1" class="text-center text-muted py-3">
+                                                            No data available in table
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                                <t t-else="">
+                                                    <tr t-foreach="state.currentRecords" t-as="record" t-key="record.id">
+                                                        <td t-foreach="state.columns" t-as="column" t-key="column.id" t-att-style="column.color and column.color != '#000000' ? 'color: ' + column.color + ';' : ''">
+                                                            <t t-if="record[column.column_name] !== false">
+                                                                <t t-esc="record[column.column_name]"/>
+                                                            </t>
+                                                            <t t-else="">-</t>
+                                                        </td>
+                                                        <td t-on-click="(ev) =&gt; openRecords(ev, record.currentIds)" class="btn_list_edit o_icon" style="cursor: pointer;">
+                                                            <i class="fa fa-pencil-square-o"/>
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </t>
+                                    <t t-else="">
+                                        <div class="text-center text-muted py-3">No data available in table</div>
+                                    </t>
+
+                                    <!-- Hide pagination in compact mode -->
+                                    <t t-if="state.displayMode !== 'compact'">
+                                        <div class="pagination-container">
+                                            <p id="pagination-info">Page <t t-esc="state.currentPage"/> of <t t-esc="state.totalPages"/></p>
+                                            <p id="page-info">Showing <t t-esc="state.currentPage != 1 ? ((state.currentPage - 1) * 10) + 1 : 1"/> to
+                                            <t t-if="state.currentPage == 1 and state.totalRecords &lt; 10">
+                                                <t t-esc="state.totalRecords"/>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-esc="state.currentPage != 1 ? ((state.currentPage - 1) * 10) + state.currentRecords.length : 10"/>
+                                            </t>
+                                             of <t t-esc="state.totalRecords"/> entries</p>
+                                            <button id="prevPage" t-att-disabled="state.currentPage &lt;= 1" t-on-click="() =&gt; this.changePage(-1)">⬅️ Previous</button>
+                                            <input type="number" id="currentPage" min="1" t-att-max="state.totalPages" t-att-value="state.currentPage" t-on-change="goToPage"/>
+                                            <button id="nextPage" t-att-disabled="state.currentPage &gt;= state.totalPages" t-on-click="() =&gt; this.changePage(1)">Next ➡️</button>
+                                        </div>
+                                    </t>
+                                </div>
+                            </t>
+                            <t t-else="">
+                                <div class="text-center text-muted py-3">No columns configured</div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </t>
+
+</templates>

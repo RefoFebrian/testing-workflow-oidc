@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+    
+        <record id="tw_vehicle_registration_process_cancel_confirm_button" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">TW Button Vehicle Registration Process Cancel Confirm</field>
+        </record>
+        <record id="access_tw_vehicle_registration_process_cancel_confirm_button" model="ir.model.access">
+            <field name="model_id" ref="tw_vehicle_registration_process_cancel.model_tw_registration_process_cancel"/>
+            <field name="name">tw_vehicle_registration_process_cancel_confirm_button update</field>
+            <field name="group_id" ref="tw_vehicle_registration_process_cancel.tw_vehicle_registration_process_cancel_confirm_button"/>
+            <field name="perm_write">1</field>
+        </record>
+
+    </data>
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+            (4,ref('tw_vehicle_registration_process_cancel_confirm_button')),
+            ]"/>
+        </record>
+    </data>
+    
+
+</odoo>

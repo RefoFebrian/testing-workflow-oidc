@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Action Selection -->
+        <record id="tw_master_tools_category_action" model="ir.actions.act_window">
+            <field name="name">Category Master Tools</field>
+            <field name="res_model">tw.selection</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('type', '=', 'MasterToolCategory')]</field>
+            <field name="context">{'default_type': 'MasterToolCategory'}</field>
+        </record>
+
+        <!-- Custom List View -->
+        <record id="tw_master_category_tools_selection_list_view" model="ir.ui.view">
+            <field name="name">tw.master.tools.location.selection.list</field>
+            <field name="model">tw.selection</field>
+            <field name="arch" type="xml">
+                <list delete="false" editable="top">
+                    <field name="name" required="1"/>
+                    <field name="value" column_invisible="1"/>
+                    <field name="internal_value" column_invisible="1"/>
+                    <field name="type" column_invisible="1"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Master List View -->
+        <record id="tw_master_tools_category_action_list_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_master_category_tools_selection_list_view"/>
+            <field name="act_window_id" ref="tw_master_tools_category_action"/>
+        </record>
+
+    </data>
+</odoo>

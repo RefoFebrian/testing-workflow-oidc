@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <record id="tw_work_order_search_view" model="ir.ui.view">
+      <field name="name">tw.work.order.search.view</field>
+      <field name="model">tw.work.order</field>
+      <field name="arch" type="xml">
+        <search string="Search WO">
+          <field name='name' />
+          <field name='company_id' />
+          <field name='division' />
+          <field name='date' />
+          <field name='customer_stnk_id' />
+          <field name='partner_id' string="Customer Pembawa" />
+          <field name='lot_id' />
+          <field name="mobile" string="No HP" />
+          <filter string="Draft" name="state_draft" domain="[('state','=','draft')]" />
+          <filter string="Confirmed" name="state_confirmed" domain="[('state','=','confirmed')]" />
+          <filter string="Open" name="state_open" domain="[('state','=','open')]" />
+          <filter string="Done" name="state_done" domain="[('state','=','done')]" />
+          <group expand="0" string="Group By">
+            <filter string="Branch" name="group_by_branch" domain="[]" context="{'group_by': 'company_id'}" />
+            <filter name="date" string="Date" context="{'group_by': 'date'}" />
+          </group>
+        </search>
+      </field>
+    </record>
+
+    <record id="tw_work_order_list_view" model="ir.ui.view">
+      <field name="name">work.order.list.view</field>
+      <field name="model">tw.work.order</field>
+      <field name="priority">1</field>
+      <field name="arch" type="xml">
+        <list string="Work Order">
+
+          <field name="name" />
+          <field name="date" />
+          <field name="plate_number" />
+          <field name='lot_id' />
+          <field name='customer_stnk_id' />
+          <field name='partner_id' string="Customer Pembawa" />
+          <field name="mobile" string="No HP" />
+          <field name="state" />
+        </list>
+      </field>
+    </record>
+
+    <record id="tw_work_order_form_view" model="ir.ui.view">
+      <field name="name">tw.work.order.form.view</field>
+      <field name="model">tw.work.order</field>
+      <field name="priority">1</field>
+      <field name="arch" type="xml">
+        <form string="Work Order">
+          <header name="header_1">
+            <button name="action_tidak_digunakan" invisible="state != 'draft'" string="Unused" type="object"/>
+            <button name="action_open" invisible="is_invisible_action_open" string="Open" type="object" class="oe_highlight" />
+            <button name="action_supply" invisible="is_shipped or state in ('draft','waiting_for_approval','sale','done','cancel') or is_supply" string="Supply Products" type="object" class="oe_highlight" />
+            <button id="create_invoice" name="action_create_invoice" string="Create Invoice" type="object" class="btn-primary" data-hotkey="q" invisible="invoice_status != 'to invoice'" />
+            <button name="action_start_stop_wo" type="object" invisible="is_invisible_action_start_stop_wo" string="Start Stop WO" class="oe_highlight" />
+            <button name="picking_ok" invisible="state != 'except_picking'" string="Manually Corrected" />
+            <button name="invoice_ok" invisible="state != 'except_invoice'" string="Manually Corrected" />
+            <!-- Invisible anchors for backward compatibility with inherited views -->
+            <button name="action_print_wo_thermal" invisible="1" string="Print Thermal WO" type="object" />
+            <button name="action_print_picking_wo_thermal" invisible="1" string="Print Thermal Picking List" type="object" />
+            <button name="action_print_wo_invoice" invisible="1" string="Print Invoice WO" type="object" />
+            <button name="action_print_wo" invisible="1" string="Print WO" type="object" />
+            <!-- Print Wizard is now moved to Smart Button Box -->
+            <field name="state" widget="statusbar" statusbar_visible="draft,sale,done" />
+          </header>
+          <sheet>
+            <div class="oe_button_box" name="button_box">
+              <button name="%(tw_work_order.action_tw_work_order_print_wizard)d" 
+                      invisible="state == 'draft'" 
+                      type="action" 
+                      class="oe_stat_button" 
+                      icon="fa-print">
+                  <div class="o_field_widget o_stat_info">
+                      <span class="o_stat_text">Print</span>
+                      <span class="o_stat_text">Document</span>
+                  </div>
+              </button>
+              <button type="object" name="action_view_delivery" class="oe_stat_button" icon="fa-truck" invisible="delivery_count == 0" groups="tw_work_order.tw_work_order_button_view_delivery_group">
+                <field name="delivery_count" widget="statinfo" string="Delivery" />
+              </button>
+              <button name="action_view_journal_entries" type="object" class="oe_stat_button ms-2" icon="fa-bars" invisible="journal_entry_count == 0" groups="tw_work_order.tw_work_order_button_view_journal_group">
+                <field name="journal_entry_count" widget="statinfo" string="Journal Entries" />
+              </button>
+              <button name="action_view_invoice" type="object" class="oe_stat_button" icon="fa-pencil-square-o" invisible="invoice_count == 0" groups="tw_work_order.tw_work_order_button_view_invoice_group">
+                <field name="invoice_count" widget="statinfo" string="Invoices" />
+              </button>
+              <button name="action_view_customer_payment" string="Customers Payment (AR)" type="object" class="oe_stat_button ms-2" invisible="customer_payment_id == False" icon="fa-credit-card">
+              </button>
+            </div>
+            <div class="oe_title">
+              <h1> Work Order <field name="name" class="oe_inline" readonly="1" />
+              </h1>
+              <field name="is_invisible_action_open" invisible="1" />
+              <field name="is_invisible_action_invoice_create" invisible="1" />
+              <field name="is_invisible_action_start_stop_wo" invisible="1" />
+            </div>
+            <!-- Line 1 -->
+            <group name="wo_line_1">
+              <!-- Left -->
+              <group name="wo_line_1_left">
+                <field name="company_id" options="{'no_show':True,'no_create':True,'no_open':True}" readonly="state != 'draft'" string="Branch" />
+                <field name="type" invisible="1"/>
+                <field name="type_id" readonly="state != 'draft'" options="{'no_open':True, 'no_create':True}"/>
+                <field name="mechanic_id" options="{'no_open':True, 'no_create':True}" readonly="state != 'draft'" />
+                <field name='reason_to_ahass_id' string='Alasan Ke Ahass' readonly="state != 'draft'" options="{'no_open':True,'no_create':True}" required="state == 'draft'"/>
+                <field name="reason_to_ahass_value" invisible="1" />
+              </group>
+              <!-- Right -->
+              <group name="wo_line_1_right">
+                <field name="division" />
+                <field name="date" readonly="True" />
+              </group>
+            </group>
+
+            <!-- Line 2 -->
+            <group name="wo_line_2">
+              <!-- Left -->
+              <group name="wo_line_2_left" string="Unit Information">
+                <field name="qr_code" readonly="state != 'draft'" />
+                <field name="lot_id" widget="many2one" options="{'no_quick_create': True}" required="1" readonly="state != 'draft'" domain="[('state','in',['sold', 'paid','workshop','sold_offtr','paid_offtr','False']),('product_id.division','=','Unit')]" context="{'default_partner_id':partner_id,'default_product_id':product_id,'form_view_ref':'tw_work_order.tw_stock_lot_serial_number_wizard_form_view'}" />
+                <field name="lot_state" invisible="1"/>
+                <div class="alert alert-danger text-dark" role="alert" colspan="2" invisible="lot_state != 'stock'" style="padding: 10px; margin-top: 5px; margin-bottom: 5px;">
+                  <i class="fa fa-exclamation-triangle" title="Perhatian"/> <b>Perhatian!</b> Unit ini belum dijual (masih berada di stok).
+                </div>
+                <field name="chassis_number" readonly="1" />
+                <field name="product_id" options="{'no_show':True, 'no_create':True, 'no_open':True}" readonly="state != 'draft'" />
+                <field name="km" required="1" readonly="state != 'draft'" />
+                <field name="payment_type" required="1" readonly="state != 'draft'" />
+                <field name="purchase_date" required="1" readonly="state != 'draft'" />
+                <field name="fuel" string="Bensin(%)" readonly="state != 'draft'" />
+                <field name="production_year" readonly="state != 'draft'" />
+                <field name="is_washing_the_motorbike" readonly="state != 'draft'" widget="radio" />
+                <field name="mechanic_advice" readonly="state in ('done','unused','cancel','rejected')"/>
+              </group>
+              <!-- Right -->
+              <group name="wo_line_2_right" string="Customer Information">
+                <field name="customer_stnk_id" context="{'form_view_ref':'tw_partner.tw_customer_wizard_form_view'}" readonly="True" force_save="1" />
+                <field name="is_same_customer" readonly="state != 'draft'"/>
+                <field name="partner_id" string="Customer Pembawa" options="{'no_quick_create': True}" context="{'form_view_ref':'tw_partner.tw_customer_wizard_form_view'}" required="1" readonly="state != 'draft'" />
+                <field name="mobile" required="1" readonly="state != 'draft'" />
+                <div string="Dummy Division that used on WO CRM and Part Hotline Modul" invisible="1"></div>
+                <!-- Banner Highlight History -->
+                <div class="alert alert-warning text-dark mt-2 mb-3" role="alert" invisible="not lot_id" colspan="2">
+                  <field name="history_story_html" nolabel="1" readonly="1" widget="html"/>
+                </div>
+              </group>
+            </group>
+
+            <!-- End Of Line WO -->
+
+            <!-- Invisible Group, used from sale.order -->
+            <group>
+              <group name="customer_details" string="Customer" invisible="1">
+                <field name="partner_id" widget="res_partner_many2one" context="{
+                    'res_partner_search_mode': 'customer',
+                    'show_address': 1, 'show_vat': True,
+                    'form_view_ref': 'tw_partner.tw_partner_contact_form_view'
+                    }" placeholder="Type to find a customer..." readonly="state != 'draft'" force_save="1" />
+              </group>
+              <group name="product_details" string="Product" invisible="1">
+                <field name="lot_id" options="{'no_open': True, 'no_create': True}" readonly="state != 'draft'" />
+                <field name="chassis_number" readonly="state != 'draft'" />
+                <field name="product_id" options="{'no_open':True,'no_create':True}" readonly="state != 'draft'" />
+                <field name="customer_payment_id" options="{'no_open': True, 'no_create': True}" invisible="1"/>
+              </group>
+            </group>
+            <notebook colspan="5">
+              <page name="order_lines" string="Order lines">
+                <field name="order_line" mode="list" readonly="state not in ('draft','waiting_for_approval','approved','finished') or locked">
+                  <list string="Work Order Lines" editable="bottom" limit="200" decoration-warning="state in ['draft', 'sent'] and is_product_archived">
+                    <field name="state" column_invisible='1' />
+                    <!-- Sale Order -->
+                    <control>
+                      <create name="add_product_control" string="Add a product" />
+                      <button name="action_add_from_catalog" string="Catalog" type="object" class="px-4 btn-link" context="{'order_id': parent.id}" />
+                    </control>
+                    <field name="division" force_save="1"/>
+                    <field name="sequence" widget="handle" />
+                    <!-- We do not display the type because we don't want the user to be bothered
+                    with that information if he has no section or note. -->
+                    <field name="display_type" column_invisible="True" />
+                    <field name="product_uom_category_id" column_invisible="True" />
+                    <field name="product_type" column_invisible="True" />
+                    <field name="product_updatable" column_invisible="True" />
+                    <field name="is_downpayment" column_invisible="True" />
+                    <field name="product_id" string="Product" readonly="not product_updatable" required="not display_type and not is_downpayment" force_save="1" context="{
+                              'partner_id': parent.partner_id,
+                              'quantity': product_uom_qty,
+                              'pricelist': parent.pricelist_id,
+                              'company_id': parent.company_id,
+                              'default_lst_price': price_unit,
+                          }" options="{
+                              'no_open': True,
+                              'no_create': True
+                          }" optional="show" domain="[('sale_ok', '=', True),('division','=',division)]" widget="sol_product_many2one" />
+                    <field name="product_template_attribute_value_ids" column_invisible="1" />
+                    <field name="product_custom_attribute_value_ids" column_invisible="1">
+                      <list>
+                        <field name="custom_product_template_attribute_value_id" />
+                        <field name="custom_value" />
+                      </list>
+                    </field>
+                    <field name="product_no_variant_attribute_value_ids" column_invisible="1" />
+                    <field name="is_configurable_product" column_invisible="1" />
+                    <field name="linked_line_id" column_invisible="1" />
+                    <field name="virtual_id" column_invisible="1" />
+                    <field name="linked_virtual_id" column_invisible="1" />
+                    <field name="selected_combo_items" column_invisible="1" />
+                    <field name="combo_item_id" column_invisible="1" />
+                    <!-- WO -->
+                    <field name="name" column_invisible="1" />
+                    <field name="available_location_ids" column_invisible="1" />
+                    <field name="location_id" readonly="division == 'Service' or state not in ('draft','waiting_for_approval','approved','finished')" required="division == 'Sparepart'" options="{'no_show':True,'no_create':True,'no_open':True}" domain="[('id', 'in', available_location_ids)]" />
+                    <!--  -->
+                    <field name="name" widget="sol_text" optional="show" force_save="1" />
+                    <field name="analytic_distribution" widget="analytic_distribution" optional="hide" groups="analytic.group_analytic_accounting" options="{'product_field': 'product_id', 'business_domain': 'sale_order', 'amount_field': 'price_subtotal'}" />
+                    <field name="qty_available" readonly="True" force_save="1" optional="show" />
+                    <field name="product_uom_qty" decoration-info="(not display_type and invoice_status == 'to invoice')" decoration-bf="(not display_type and invoice_status == 'to invoice')" context="{
+                              'partner_id': parent.partner_id,
+                              'quantity': product_uom_qty,
+                              'pricelist': parent.pricelist_id,
+                              'company_id': parent.company_id
+                          }" readonly="is_downpayment" force_save="1" />
+                    <field name="qty_delivered" decoration-info="(not display_type and invoice_status == 'to invoice')" decoration-bf="(not display_type and invoice_status == 'to invoice')" string="Delivered" column_invisible="parent.state != 'sale'" readonly="qty_delivered_method != 'manual' or is_downpayment" optional="show" />
+                    <field name="qty_delivered_method" column_invisible="True" />
+                    <field name="qty_invoiced" decoration-info="(not display_type and invoice_status == 'to invoice')" decoration-bf="(not display_type and invoice_status == 'to invoice')" string="Invoiced" column_invisible="parent.state != 'sale'" optional="show" />
+                    <field name="qty_to_invoice" column_invisible="True" />
+                    <field name="discount" force_save="1"/>
+                    <field name="price_unit" force_save="1" readonly="state != 'draft'" />
+                    <field name="technical_price_unit" column_invisible="1" />
+                    <field name="tax_id" widget="many2many_tags" options="{'no_create': True}" domain="[('type_tax_use', '=', 'sale'), ('company_id', 'parent_of', parent.company_id), ('country_id', '=', parent.tax_country_id)]" context="{'active_test': True}" readonly="state != 'draft'" optional="show" />
+                    <field name="is_downpayment" column_invisible="True" />
+                    <field name="price_subtotal" string="Amount" />
+                    <!-- Others fields -->
+                    <field name="tax_calculation_rounding_method" column_invisible="True" />
+                    <field name="state" column_invisible="True" />
+                    <field name="invoice_status" column_invisible="True" />
+                    <field name="currency_id" column_invisible="True" />
+                    <field name="price_tax" column_invisible="True" />
+                    <field name="company_id" column_invisible="True" />
+
+                  </list>
+                </field>
+                <group name="note_group" col="6" class="mt-2 mt-md-0">
+                  <group colspan="4" class="order-1 order-lg-0">
+                    <field colspan="2" name="note" nolabel="1" placeholder="Keluhan..." />
+                  </group>
+                  <group class="oe_subtotal_footer d-flex order-0 order-lg-1 flex-column gap-0 gap-sm-3" colspan="2" name="sale_total">
+                    <field name="tax_totals" widget="account-tax-totals-field" nolabel="1" readonly="1" />
+                  </group>
+                </group>
+
+                <div class="oe_clear" />
+              </page>
+              <page name="history_service" string='History Service'>
+                <field name='work_order_history_ids'>
+                  <list name="work_order_history_list">
+                    <field name="name" string="Work Order" />
+                    <field name="mechanic_advice" />
+                    <field name="date" string="Order Date" />
+                    <field name="plate_number" />
+                    <field name="lot_id" />
+                    <field name="customer_stnk_id" />
+                    <field name="partner_id" string="Pembawa" />
+                    <field name="mobile" />
+                    <field name="state" string="Status"/>
+                  </list>
+                </field>
+              </page>
+              <page name="other_information" string="Other Information">
+                <group>
+                  <group>
+                    <field name="payment_term_id" readonly="1" />
+                    <field name="is_shipped" groups="base.group_no_one" />
+                    <field invisible="True" name="is_type_wo" groups="base.group_no_one" />
+                  </group>
+                </group>
+              </page>
+              <page name="audit_trail" string="Audit Trail">
+                <group name="audit_trail_group">
+                  <!-- Group 1: System Timestamps -->
+                  <group string="System Info" name="audit_system" invisible="not create_date and not write_date">
+                    <field name="create_uid" readonly="1" invisible="not create_date"/>
+                    <field name="create_date" readonly="1" invisible="not create_date"/>
+                    <field name="write_uid" readonly="1" invisible="not write_date"/>
+                    <field name="write_date" readonly="1" invisible="not write_date"/>
+                  </group>
+                  <!-- Group 2: Process History (Confirmation, Open, Done) -->
+                  <group string="Process History" name="audit_confirmation" invisible="not confirm_date and not open_date and not done_date">
+                    <field name="confirm_uid" readonly="1" invisible="not confirm_date"/>
+                    <field name="confirm_date" readonly="1" invisible="not confirm_date"/>
+                    <field name="open_uid" readonly="1" invisible="not open_date"/>
+                    <field name="open_date" readonly="1" invisible="not open_date"/>
+                    <field name="done_uid" readonly="1" invisible="not done_date"/>
+                    <field name="done_date" readonly="1" invisible="not done_date"/>
+                  </group>
+                  <!-- Group 3: Cancellation -->
+                  <group string="Cancellation" name="audit_cancellation" invisible="not cancelled_date">
+                    <field name="cancelled_uid" readonly="1" invisible="not cancelled_date"/>
+                    <field name="cancelled_date" readonly="1" invisible="not cancelled_date"/>
+                  </group>
+                </group>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Work Order Kanban View -->
+    <record model="ir.ui.view" id="tw_work_order_kanban_view">
+      <field name="name">tw.work.order.kanban.view</field>
+      <field name="model">tw.work.order</field>
+      <field name="arch" type="xml">
+        <kanban class="o_tw_work_order_kanban" sample="1" quick_create="false" default_order="create_date desc">
+
+          <templates>
+            <t t-name="card">
+              <!-- Baris Atas -->
+              <div class="row" name="div_header">
+                <div class="pe-2 col-6 d-flex justify-content-between">
+                  <field name="name" class="fw-bolder fs-3 mb-2"/>
+                </div>
+                <div class="col-6 fw-bold ps-0 d-flex justify-content-end">
+                  <button name="action_open" invisible="is_invisible_action_open" string="Open" type="object" class="oe_highlight m-1"/>
+                  <button name="action_supply" invisible="is_shipped or state in ('sale','done') or is_supply" string="Supply Products" type="object" class="oe_highlight m-1"/>
+                  <button id="create_invoice" name="action_create_invoice" string="Create Invoice" type="object" class="oe_highlight m-1" data-hotkey="q" invisible="invoice_status != 'to invoice'"/>
+                </div>
+              </div>
+
+              <!-- Baris Tengah -->
+              <div class="row" name="div_no_pol">
+                <div class="pe-2 col-3 d-flex justify-content-between tw_wo_form_string">
+                  <span>No Polisi</span>
+                  <span> :</span>
+                </div>
+                <div class="col-9 fw-bold ps-0">
+                  <field name="plate_number" />
+                </div>
+              </div>
+
+              <div class="row" name="div_engine_no">
+                <div class="pe-2 col-3 d-flex justify-content-between tw_wo_form_string">
+                  <span>Engine No</span>
+                  <span> :</span>
+                </div>
+                <div class="col-9 fw-bold ps-0">
+                  <field name="lot_id" />
+                </div>
+              </div>
+
+              <div class="row" name="div_pemilik_stnk">
+                <div class="pe-2 col-3 d-flex justify-content-between tw_wo_form_string">
+                  <span>Pemilik (STNK)</span>
+                  <span> :</span>
+                </div>
+                <div class="col-9 fw-bold ps-0">
+                  <field name="customer_stnk_id" />
+                </div>
+              </div>
+
+              <div class="row" name="div_type_wo">
+                <div class="pe-2 col-3 d-flex justify-content-between tw_wo_form_string">
+                  <span>Type</span>
+                  <span> :</span>
+                </div>
+                <div class="col-9 fw-bold ps-0">
+                  <field name="type_id" />
+                </div>
+              </div>
+              <div class="row" name="div_pembawa">
+                <div class="pe-2 col-3 d-flex justify-content-between tw_wo_form_string">
+                  <span>Pembawa</span>
+                  <span> :</span>
+                </div>
+                <div class="col-9 fw-bold ps-0">
+                  <field name="partner_id" />
+                </div>
+              </div>
+              <div class="row" name="div_mobile">
+                <div class="pe-2 col-3 d-flex justify-content-between tw_wo_form_string">
+                  <span>Mobile</span>
+                  <span> :</span>
+                </div>
+                <div class="col-9 fw-bold ps-0">
+                  <field name="mobile"/>
+                </div>
+              </div>
+
+              <!-- Footer -->
+              <footer class="d-flex align-items-center" name="tw_wo_kanban_footer">
+                <field name="date" class="fs-6 me-1 tw_wo_form_string" />
+                <i class="fa fa-calendar tw_wo_form_string"></i>
+                <span class="ms-auto tw_wo_form_string">Status :</span>
+                <field name="state" widget="label_selection" options="{'classes': {
+                                  'draft': 'secondary', 
+                                  'cancel': 'danger', 
+                                  'waiting_for_approval': 'warning', 
+                                  'approved': 'info', 
+                                  'finished': 'success',
+                                  'sale': 'info', 
+                                  'done': 'success',
+                                  'unused': 'danger',
+                                  'rejected': 'danger'
+                              }}" class="ms-2 override_label_selection_widget" />
+              </footer>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="tw_work_order_form_action">
+      <field name="name">Work Order</field>
+      <field name="res_model">tw.work.order</field>
+      <field name="view_mode">kanban,list,form</field>
+      <field name="domain">[('state','!=',True)]</field>
+      <field name="context">{
+        "search_default_state_draft": 1,
+        "search_default_state_confirmed": 1,
+        "search_default_state_open": 1,
+        "default_division": 'Sparepart',
+        "readonly_by_pass": 1
+        }</field>
+      <field name="search_view_id" ref="tw_work_order.tw_work_order_search_view"/>
+    </record>
+
+    <record id="tw_work_order_import_wizard_action" model="ir.actions.server">
+      <field name="name">Import Data</field>
+      <field name="model_id" ref="tw_work_order.model_tw_work_order" />
+      <field name="code">
+        if context.get('active_ids'):
+        action = {
+        "type": "ir.actions.act_window",
+        "view_mode": "form",
+        "res_model": "tw.work.order.import.wizard",
+        "target": "new",
+        }
+      </field>
+    </record>
+
+    <record id="action_forced_unused_wo_action" model="ir.actions.server">
+      <field name="name">Forced Unused</field>
+      <field name="model_id" ref="tw_work_order.model_tw_work_order" />
+      <field name="state">code</field>
+      <field name="code">
+        action = records.action_forced_unused()
+      </field>
+    </record>
+
+    <record id="paperformat_swo_thermal" model="report.paperformat">
+      <field name="name">Work Order Thermal Paper</field>
+      <field name="default" eval="True" />
+      <field name="format">custom</field>
+      <field name="page_height">430</field>
+      <field name="page_width">120</field>
+      <field name="orientation">Portrait</field>
+      <field name="margin_top">2</field>
+      <field name="margin_bottom">2</field>
+      <field name="margin_left">0</field>
+      <field name="margin_right">0</field>
+      <field name="header_line" eval="False" />
+      <field name="header_spacing">3</field>
+      <field name="dpi">80</field>
+    </record>
+
+    <record id="paperformat_wo_invoice" model="report.paperformat">
+      <field name="name">Work Order Invoice Paper</field>
+      <field name="default" eval="True"/>
+      <field name="format">A4</field>
+      <field name="page_height">0</field>
+      <field name="page_width">0</field>
+      <field name="orientation">Portrait</field>
+      <field name="margin_top">4</field>
+      <field name="margin_bottom">3</field>
+      <field name="margin_left">3</field>
+      <field name="margin_right">3</field>
+      <field name="header_line" eval="False"/>
+      <field name="header_spacing">35</field>
+      <field name="dpi">90</field>
+    </record>
+
+    <record id="action_print_wo_thermal" model="ir.actions.report">
+      <field name="name">WO Thermal</field>
+      <field name="model">tw.work.order</field>
+      <field name="report_type">qweb-pdf</field>
+      <field name="report_name">tw_work_order.print_service_wo_direct_print</field>
+      <field name="report_file">tw_work_order.print_service_wo_direct_print</field>
+      <field name="paperformat_id" ref="tw_work_order.paperformat_swo_thermal" />
+    </record>
+
+    <record id="action_print_picking_wo_thermal" model="ir.actions.report">
+      <field name="name">Picking WO Thermal</field>
+      <field name="model">tw.work.order</field>
+      <field name="report_type">qweb-pdf</field>
+      <field name="report_name">tw_work_order.print_wo_picking_list</field>
+      <field name="report_file">tw_work_order.print_wo_picking_list</field>
+      <field name="paperformat_id" ref="tw_work_order.paperformat_swo_thermal" />
+    </record>
+
+    <record id="action_print_wo_thermal_invoice" model="ir.actions.report">
+      <field name="name">Thermal WO Invoice</field>
+      <field name="model">tw.work.order</field>
+      <field name="report_type">qweb-pdf</field>
+      <field name="report_name">tw_work_order.print_wo_thermal_invoice</field>
+      <field name="report_file">tw_work_order.print_wo_thermal_invoice</field>
+      <field name="print_report_name">'Print_Work_Order_Thermal_Invoice_%s' % (object.name)</field>
+      <field name="paperformat_id" ref="tw_work_order.paperformat_swo_thermal"/>
+    </record>
+
+    <record id="action_print_wo_invoice" model="ir.actions.report">
+      <field name="name">WO Invoice</field>
+      <field name="model">tw.work.order</field>
+      <field name="report_type">qweb-pdf</field>
+      <field name="report_name">tw_work_order.print_wo_invoice</field>
+      <field name="report_file">tw_work_order.print_wo_invoice</field>
+      <field name="paperformat_id" ref="tw_work_order.paperformat_wo_invoice"/>
+    </record>
+
+    <record id="paperformat_wo_print" model="report.paperformat">
+      <field name="name">Work Order Print Paper</field>
+      <field name="default" eval="True"/>
+      <field name="format">A4</field>
+      <field name="page_height">0</field>
+      <field name="page_width">0</field>
+      <field name="orientation">Portrait</field>
+      <field name="margin_top">4</field>
+      <field name="margin_bottom">3</field>
+      <field name="margin_left">3</field>
+      <field name="margin_right">3</field>
+      <field name="header_line" eval="False"/>
+      <field name="header_spacing">35</field>
+      <field name="dpi">90</field>
+    </record>
+
+    <record id="action_print_wo" model="ir.actions.report">
+      <field name="name">Print WO</field>
+      <field name="model">tw.work.order</field>
+      <field name="report_type">qweb-pdf</field>
+      <field name="report_name">tw_work_order.print_wo</field>
+      <field name="report_file">tw_work_order.print_wo</field>
+      <field name="paperformat_id" ref="tw_work_order.paperformat_wo_print"/>
+    </record>
+  </data>
+</odoo>

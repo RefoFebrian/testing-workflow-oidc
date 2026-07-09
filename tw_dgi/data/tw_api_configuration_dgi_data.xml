@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--
+        =============================================================
+        DGI API Configuration Data
+        
+        Master data untuk konfigurasi API DGI per Main Dealer
+        
+        Mapping:
+        - api_key = client_id
+        - api_secret = client_secret (null untuk semua config)
+        =============================================================
+        -->
+
+        <!-- 1. Config HSO (Astra / Honda Sales Operation) -->
+        <record id="tw_api_config_dgi_hso" model="tw.api.configuration">
+            <field name="name">DGI HSO</field>
+            <field name="base_url">https://astraapigc.astra.co.id/dmsahassapi/dgi-api</field>
+            <field name="api_key">dgi-key-live:8A1D636E-4ECA-4417-BDCB-C57732FCA2D4</field>
+            <field name="api_secret"></field>
+            <field name="api_type_id" ref="tw_selection_type_api_dgi"/>
+            <field name="auth_type">hmac</field>
+            <field name="header_mapping">{
+                "api_key": "DGI-API-Key",
+                "signature": "DGI-API-Token",
+                "timestamp": "X-Request-Time"
+            }</field>
+        </record>
+
+        <!-- 2. Config ASP (Astra Sumbagsel Perdana) -->
+        <record id="tw_api_config_dgi_asp" model="tw.api.configuration">
+            <field name="name">DGI ASP</field>
+            <field name="base_url">https://dms.asper-honda.com/api/b2b/dgi-api</field>
+            <field name="api_key">2c458d1175c0e60e8b075f606a6d9f51c214a9e84869d19e</field>
+            <field name="api_secret"></field>
+            <field name="api_type_id" ref="tw_selection_type_api_dgi"/>
+            <field name="auth_type">hmac</field>
+            <field name="header_mapping">{
+                "api_key": "DGI-API-Key",
+                "signature": "DGI-API-Token",
+                "timestamp": "X-Request-Time"
+            }</field>
+        </record>
+
+        <!-- 3. Config DAM (Daya Adicipta Motora) -->
+        <record id="tw_api_config_dgi_dam" model="tw.api.configuration">
+            <field name="name">DGI DAM</field>
+            <field name="base_url">https://gvt-apigateway.daya-dms.id/ahmh23cbr/dgi-api</field>
+            <field name="api_key">1992e802-0ec1-4d67-aac5-693e77aa470f</field>
+            <field name="api_secret"></field>
+            <field name="api_type_id" ref="tw_selection_type_api_dgi"/>
+            <field name="auth_type">hmac</field>
+            <field name="header_mapping">{
+                "api_key": "DGI-API-Key",
+                "signature": "DGI-API-Token",
+                "timestamp": "X-Request-Time"
+            }</field>
+        </record>
+
+        <!-- 4. Config DAW (Daya Adicipta Wisesa) -->
+        <record id="tw_api_config_dgi_daw" model="tw.api.configuration">
+            <field name="name">DGI DAW</field>
+            <field name="base_url">https://gvt-apigateway.daya-dms.id/ahmh23daw/dgi-api</field>
+            <field name="api_key">c19e030f-3c7c-4eee-b7c2-35de3ad7841c</field>
+            <field name="api_secret"></field>
+            <field name="api_type_id" ref="tw_selection_type_api_dgi"/>
+            <field name="auth_type">hmac</field>
+            <field name="header_mapping">{
+                "api_key": "DGI-API-Key",
+                "signature": "DGI-API-Token",
+                "timestamp": "X-Request-Time"
+            }</field>
+        </record>
+
+        <!-- 5. Config NPM (Nusantara Sakti / MPM) -->
+        <record id="tw_api_config_dgi_npm" model="tw.api.configuration">
+            <field name="name">DGI NPM</field>
+            <field name="base_url">https://api.mpm-motor.com/dgi-api</field>
+            <field name="api_key">dgi-key-live:44LM4A8BE3XZF</field>
+            <field name="api_secret"></field>
+            <field name="api_type_id" ref="tw_selection_type_api_dgi"/>
+            <field name="auth_type">hmac</field>
+            <field name="header_mapping">{
+                "api_key": "DGI-API-Key",
+                "signature": "DGI-API-Token",
+                "timestamp": "X-Request-Time"
+            }</field>
+        </record>
+
+        <!-- 6. Config SINSEN (Sinar Sentosa Primatama) -->
+        <record id="tw_api_config_dgi_sinsen" model="tw.api.configuration">
+            <field name="name">DGI SINSEN</field>
+            <field name="base_url">https://sinarsentosaprimatama.com/dgi-api</field>
+            <field name="api_key">kgwc0ws0g04k4wsk80wocskw8</field>
+            <field name="api_secret"></field>
+            <field name="api_type_id" ref="tw_selection_type_api_dgi"/>
+            <field name="auth_type">hmac</field>
+            <field name="header_mapping">{
+                "api_key": "DGI-API-Key",
+                "signature": "DGI-API-Token",
+                "timestamp": "X-Request-Time"
+            }</field>
+        </record>
+
+        <!-- 7. Config WAHANA (Wahana Makmur Sejati / WMS) -->
+        <record id="tw_api_config_dgi_wahana" model="tw.api.configuration">
+            <field name="name">DGI WAHANA</field>
+            <field name="base_url">https://wanda-ahass.wahanaartha.com/dgi-api</field>
+            <field name="api_key"></field>
+            <field name="api_secret"></field>
+            <field name="api_type_id" ref="tw_selection_type_api_dgi"/>
+            <field name="auth_type">hmac</field>
+            <field name="header_mapping">{
+                "api_key": "DGI-API-Key",
+                "signature": "DGI-API-Token",
+                "timestamp": "X-Request-Time"
+            }</field>
+        </record>
+
+    </data>
+</odoo>

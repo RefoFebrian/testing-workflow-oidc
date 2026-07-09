@@ -1,0 +1,1290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!--
+        Prospect mappings disesuaikan dengan response dokumentasi terbaru:
+        idProspect, sumberProspect, namaLengkap, noKontak, noKtp, alamat,
+        kodePropinsi, kodeKota, kodeKecamatan, kodeKelurahan, kodePos,
+        kodePekerjaan, idSalesPeople, unit.kodeTipeUnit.
+        -->
+
+        <!-- ==================== HSO ==================== -->
+        <record id="mapping_hso_source_document" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">idProspect</field>
+            <field name="target_field">source_document</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+        </record>
+        <record id="mapping_hso_customer_name" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">namaLengkap</field>
+            <field name="target_field">customer_name</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_hso_phone" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">noKontak</field>
+            <field name="target_field">phone</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_hso_identification_number" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">noKtp</field>
+            <field name="target_field">identification_number</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_hso_street" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">alamat</field>
+            <field name="target_field">street</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_hso_zip" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">kodePos</field>
+            <field name="target_field">zip</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_hso_sales" model="tw.mapping.response">
+            <field name="sequence">70</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">idSalesPeople</field>
+            <field name="target_field">sales_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="hr.model_hr_employee"/>
+            <field name="relation_lookup_field">md_employee_id</field>
+            <field name="relation_search_domain">['|', ('working_end_date', '=', False), ('working_end_date', '&gt;', today)]</field>
+            <field name="fallback_domain">[('job_id.name', 'in', ['Sales Digital', 'Koordinator Sales Digital', 'Kepala Cabang Sales Digital']), '|', ('working_end_date', '=', False), ('working_end_date', '&gt;', today)]</field>
+            <field name="is_required">True</field>
+        </record>
+        <record id="mapping_hso_kelurahan" model="tw.mapping.response">
+            <field name="sequence">80</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">kodeKelurahan</field>
+            <field name="target_field">sub_district_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_sub_district"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_hso_kecamatan" model="tw.mapping.response">
+            <field name="sequence">90</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">kodeKecamatan</field>
+            <field name="target_field">district_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_district"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_hso_kota" model="tw.mapping.response">
+            <field name="sequence">100</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">kodeKota</field>
+            <field name="target_field">city_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_city"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_hso_propinsi" model="tw.mapping.response">
+            <field name="sequence">110</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">kodePropinsi</field>
+            <field name="target_field">state_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_country_state"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_hso_sumber" model="tw.mapping.response">
+            <field name="sequence">120</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">sumberProspect</field>
+            <field name="target_field">sales_channel_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'SalesChannel')]</field>
+            <field name="value_alias">{"0001": "Showroom", "0002": "Showroom", "0003": "Channel", "0004": "Walk In", "0005": "Walk In", "0006": "Walk In", "0007": "Website", "0008": "Social Media", "0009": "External Parties", "0010": "Website", "0011": "Channel", "0012": "Channel"}</field>
+            <field name="default_value">Walk In</field>
+        </record>
+        <record id="mapping_hso_pekerjaan" model="tw.mapping.response">
+            <field name="sequence">130</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">kodePekerjaan</field>
+            <field name="target_field">occupation_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'Occupation')]</field>
+        </record>
+        <record id="mapping_hso_product" model="tw.mapping.response">
+            <field name="sequence">140</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+        </record>
+
+        <!-- ==================== ASP ==================== -->
+        <record id="mapping_asp_source_document" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">idProspect</field>
+            <field name="target_field">source_document</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+        </record>
+        <record id="mapping_asp_customer_name" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">namaLengkap</field>
+            <field name="target_field">customer_name</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_asp_phone" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">noKontak</field>
+            <field name="target_field">phone</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_asp_identification_number" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">noKtp</field>
+            <field name="target_field">identification_number</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_asp_street" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">alamat</field>
+            <field name="target_field">street</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_asp_zip" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">kodePos</field>
+            <field name="target_field">zip</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_asp_sales" model="tw.mapping.response">
+            <field name="sequence">70</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">idSalesPeople</field>
+            <field name="target_field">sales_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="hr.model_hr_employee"/>
+            <field name="relation_lookup_field">md_employee_id</field>
+            <field name="relation_search_domain">['|', ('working_end_date', '=', False), ('working_end_date', '&gt;', today)]</field>
+            <field name="fallback_domain">[('job_id.name', 'in', ['Sales Digital', 'Koordinator Sales Digital', 'Kepala Cabang Sales Digital']), '|', ('working_end_date', '=', False), ('working_end_date', '&gt;', today)]</field>
+            <field name="is_required">True</field>
+        </record>
+        <record id="mapping_asp_kelurahan" model="tw.mapping.response">
+            <field name="sequence">80</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">kodeKelurahan</field>
+            <field name="target_field">sub_district_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_sub_district"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_asp_kecamatan" model="tw.mapping.response">
+            <field name="sequence">90</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">kodeKecamatan</field>
+            <field name="target_field">district_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_district"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_asp_kota" model="tw.mapping.response">
+            <field name="sequence">100</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">kodeKota</field>
+            <field name="target_field">city_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_city"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_asp_propinsi" model="tw.mapping.response">
+            <field name="sequence">110</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">kodePropinsi</field>
+            <field name="target_field">state_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_country_state"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_asp_sumber" model="tw.mapping.response">
+            <field name="sequence">120</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">sumberProspect</field>
+            <field name="target_field">sales_channel_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'SalesChannel')]</field>
+            <field name="value_alias">{"0001": "Showroom", "0002": "Showroom", "0003": "Channel", "0004": "Walk In", "0005": "Walk In", "0006": "Walk In", "0007": "Website", "0008": "Social Media", "0009": "External Parties", "0010": "Website", "0011": "Channel", "0012": "Channel"}</field>
+            <field name="default_value">Walk In</field>
+        </record>
+        <record id="mapping_asp_pekerjaan" model="tw.mapping.response">
+            <field name="sequence">130</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">kodePekerjaan</field>
+            <field name="target_field">occupation_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'Occupation')]</field>
+        </record>
+        <record id="mapping_asp_product" model="tw.mapping.response">
+            <field name="sequence">140</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+        </record>
+
+        <!-- ==================== DAM ==================== -->
+        <record id="mapping_dam_source_document" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">idProspect</field>
+            <field name="target_field">source_document</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+        </record>
+        <record id="mapping_dam_customer_name" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">namaLengkap</field>
+            <field name="target_field">customer_name</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_dam_phone" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">noKontak</field>
+            <field name="target_field">phone</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_dam_identification_number" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">noKtp</field>
+            <field name="target_field">identification_number</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_dam_street" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">alamat</field>
+            <field name="target_field">street</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_dam_zip" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">kodePos</field>
+            <field name="target_field">zip</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_dam_sales" model="tw.mapping.response">
+            <field name="sequence">70</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">idSalesPeople</field>
+            <field name="target_field">sales_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="hr.model_hr_employee"/>
+            <field name="relation_lookup_field">md_employee_id</field>
+            <field name="relation_search_domain">['|', ('working_end_date', '=', False), ('working_end_date', '&gt;', today)]</field>
+            <field name="fallback_domain">[('job_id.name', 'in', ['Sales Digital', 'Koordinator Sales Digital', 'Kepala Cabang Sales Digital']), '|', ('working_end_date', '=', False), ('working_end_date', '&gt;', today)]</field>
+            <field name="is_required">True</field>
+        </record>
+        <record id="mapping_dam_kelurahan" model="tw.mapping.response">
+            <field name="sequence">80</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">kodeKelurahan</field>
+            <field name="target_field">sub_district_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_sub_district"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_dam_kecamatan" model="tw.mapping.response">
+            <field name="sequence">90</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">kodeKecamatan</field>
+            <field name="target_field">district_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_district"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_dam_kota" model="tw.mapping.response">
+            <field name="sequence">100</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">kodeKota</field>
+            <field name="target_field">city_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_city"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_dam_propinsi" model="tw.mapping.response">
+            <field name="sequence">110</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">kodePropinsi</field>
+            <field name="target_field">state_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_country_state"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_dam_sumber" model="tw.mapping.response">
+            <field name="sequence">120</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">sumberProspect</field>
+            <field name="target_field">sales_channel_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'SalesChannel')]</field>
+            <field name="value_alias">{"0001": "Showroom", "0002": "Showroom", "0003": "Channel", "0004": "Walk In", "0005": "Walk In", "0006": "Walk In", "0007": "Website", "0008": "Social Media", "0009": "External Parties", "0010": "Website", "0011": "Channel", "0012": "Channel"}</field>
+            <field name="default_value">Walk In</field>
+        </record>
+        <record id="mapping_dam_pekerjaan" model="tw.mapping.response">
+            <field name="sequence">130</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">kodePekerjaan</field>
+            <field name="target_field">occupation_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'Occupation')]</field>
+        </record>
+        <record id="mapping_dam_product" model="tw.mapping.response">
+            <field name="sequence">140</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+        </record>
+
+        <!-- ==================== DAW ==================== -->
+        <record id="mapping_daw_source_document" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">idProspect</field>
+            <field name="target_field">source_document</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+        </record>
+        <record id="mapping_daw_customer_name" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">namaLengkap</field>
+            <field name="target_field">customer_name</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_daw_phone" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">noKontak</field>
+            <field name="target_field">phone</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_daw_identification_number" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">noKtp</field>
+            <field name="target_field">identification_number</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_daw_street" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">alamat</field>
+            <field name="target_field">street</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_daw_zip" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">kodePos</field>
+            <field name="target_field">zip</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_daw_sales" model="tw.mapping.response">
+            <field name="sequence">70</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">idSalesPeople</field>
+            <field name="target_field">sales_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="hr.model_hr_employee"/>
+            <field name="relation_lookup_field">md_employee_id</field>
+            <field name="relation_search_domain">['|', ('working_end_date', '=', False), ('working_end_date', '&gt;', today)]</field>
+            <field name="fallback_domain">[('job_id.name', 'in', ['Sales Digital', 'Koordinator Sales Digital', 'Kepala Cabang Sales Digital']), '|', ('working_end_date', '=', False), ('working_end_date', '&gt;', today)]</field>
+            <field name="is_required">True</field>
+        </record>
+        <record id="mapping_daw_kelurahan" model="tw.mapping.response">
+            <field name="sequence">80</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">kodeKelurahan</field>
+            <field name="target_field">sub_district_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_sub_district"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_daw_kecamatan" model="tw.mapping.response">
+            <field name="sequence">90</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">kodeKecamatan</field>
+            <field name="target_field">district_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_district"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_daw_kota" model="tw.mapping.response">
+            <field name="sequence">100</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">kodeKota</field>
+            <field name="target_field">city_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_city"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_daw_propinsi" model="tw.mapping.response">
+            <field name="sequence">110</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">kodePropinsi</field>
+            <field name="target_field">state_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_country_state"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_daw_sumber" model="tw.mapping.response">
+            <field name="sequence">120</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">sumberProspect</field>
+            <field name="target_field">sales_channel_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'SalesChannel')]</field>
+            <field name="value_alias">{"0001": "Showroom", "0002": "Showroom", "0003": "Channel", "0004": "Walk In", "0005": "Walk In", "0006": "Walk In", "0007": "Website", "0008": "Social Media", "0009": "External Parties", "0010": "Website", "0011": "Channel", "0012": "Channel"}</field>
+            <field name="default_value">Walk In</field>
+        </record>
+        <record id="mapping_daw_pekerjaan" model="tw.mapping.response">
+            <field name="sequence">130</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">kodePekerjaan</field>
+            <field name="target_field">occupation_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'Occupation')]</field>
+        </record>
+        <record id="mapping_daw_product" model="tw.mapping.response">
+            <field name="sequence">140</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+        </record>
+
+        <!-- ==================== NPM ==================== -->
+        <record id="mapping_npm_source_document" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">idProspect</field>
+            <field name="target_field">source_document</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+        </record>
+        <record id="mapping_npm_customer_name" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">namaLengkap</field>
+            <field name="target_field">customer_name</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_npm_phone" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">noKontak</field>
+            <field name="target_field">phone</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_npm_identification_number" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">noKtp</field>
+            <field name="target_field">identification_number</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_npm_street" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">alamat</field>
+            <field name="target_field">street</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_npm_zip" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">kodePos</field>
+            <field name="target_field">zip</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_npm_sales" model="tw.mapping.response">
+            <field name="sequence">70</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">idSalesPeople</field>
+            <field name="target_field">sales_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="hr.model_hr_employee"/>
+            <field name="relation_lookup_field">md_employee_id</field>
+            <field name="relation_search_domain">['|', ('working_end_date', '=', False), ('working_end_date', '&gt;', today)]</field>
+            <field name="fallback_domain">[('job_id.name', 'in', ['Sales Digital', 'Koordinator Sales Digital', 'Kepala Cabang Sales Digital']), '|', ('working_end_date', '=', False), ('working_end_date', '&gt;', today)]</field>
+            <field name="is_required">True</field>
+        </record>
+        <record id="mapping_npm_kelurahan" model="tw.mapping.response">
+            <field name="sequence">80</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">kodeKelurahan</field>
+            <field name="target_field">sub_district_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_sub_district"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_npm_kecamatan" model="tw.mapping.response">
+            <field name="sequence">90</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">kodeKecamatan</field>
+            <field name="target_field">district_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_district"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_npm_kota" model="tw.mapping.response">
+            <field name="sequence">100</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">kodeKota</field>
+            <field name="target_field">city_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_city"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_npm_propinsi" model="tw.mapping.response">
+            <field name="sequence">110</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">kodePropinsi</field>
+            <field name="target_field">state_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_country_state"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_npm_sumber" model="tw.mapping.response">
+            <field name="sequence">120</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">sumberProspect</field>
+            <field name="target_field">sales_channel_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'SalesChannel')]</field>
+            <field name="value_alias">{"0001": "Showroom", "0002": "Showroom", "0003": "Channel", "0004": "Walk In", "0005": "Walk In", "0006": "Walk In", "0007": "Website", "0008": "Social Media", "0009": "External Parties", "0010": "Website", "0011": "Channel", "0012": "Channel"}</field>
+            <field name="default_value">Walk In</field>
+        </record>
+        <record id="mapping_npm_pekerjaan" model="tw.mapping.response">
+            <field name="sequence">130</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">kodePekerjaan</field>
+            <field name="target_field">occupation_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'Occupation')]</field>
+        </record>
+        <record id="mapping_npm_product" model="tw.mapping.response">
+            <field name="sequence">140</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+        </record>
+
+        <!-- ==================== SINSEN ==================== -->
+        <record id="mapping_sinsen_source_document" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_sinsen"/>
+            <field name="json_path">idProspect</field>
+            <field name="target_field">source_document</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+        </record>
+        <record id="mapping_sinsen_customer_name" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_sinsen"/>
+            <field name="json_path">namaLengkap</field>
+            <field name="target_field">customer_name</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_sinsen_phone" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_sinsen"/>
+            <field name="json_path">noKontak</field>
+            <field name="target_field">phone</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_sinsen_identification_number" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_sinsen"/>
+            <field name="json_path">noKtp</field>
+            <field name="target_field">identification_number</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_sinsen_street" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_sinsen"/>
+            <field name="json_path">alamat</field>
+            <field name="target_field">street</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_sinsen_zip" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_sinsen"/>
+            <field name="json_path">kodePos</field>
+            <field name="target_field">zip</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_sinsen_sales" model="tw.mapping.response">
+            <field name="sequence">70</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_sinsen"/>
+            <field name="json_path">idSalesPeople</field>
+            <field name="target_field">sales_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="hr.model_hr_employee"/>
+            <field name="relation_lookup_field">md_employee_id</field>
+            <field name="relation_search_domain">['|', ('working_end_date', '=', False), ('working_end_date', '&gt;', today)]</field>
+            <field name="fallback_domain">[('job_id.name', 'in', ['Sales Digital', 'Koordinator Sales Digital', 'Kepala Cabang Sales Digital']), '|', ('working_end_date', '=', False), ('working_end_date', '&gt;', today)]</field>
+            <field name="is_required">True</field>
+        </record>
+        <record id="mapping_sinsen_kelurahan" model="tw.mapping.response">
+            <field name="sequence">80</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_sinsen"/>
+            <field name="json_path">kodeKelurahan</field>
+            <field name="target_field">sub_district_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_sub_district"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_sinsen_kecamatan" model="tw.mapping.response">
+            <field name="sequence">90</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_sinsen"/>
+            <field name="json_path">kodeKecamatan</field>
+            <field name="target_field">district_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_district"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_sinsen_kota" model="tw.mapping.response">
+            <field name="sequence">100</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_sinsen"/>
+            <field name="json_path">kodeKota</field>
+            <field name="target_field">city_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_city"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_sinsen_propinsi" model="tw.mapping.response">
+            <field name="sequence">110</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_sinsen"/>
+            <field name="json_path">kodePropinsi</field>
+            <field name="target_field">state_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_country_state"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_sinsen_sumber" model="tw.mapping.response">
+            <field name="sequence">120</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_sinsen"/>
+            <field name="json_path">sumberProspect</field>
+            <field name="target_field">sales_channel_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'SalesChannel')]</field>
+            <field name="value_alias">{"0001": "Showroom", "0002": "Showroom", "0003": "Channel", "0004": "Walk In", "0005": "Walk In", "0006": "Walk In", "0007": "Website", "0008": "Social Media", "0009": "External Parties", "0010": "Website", "0011": "Channel", "0012": "Channel"}</field>
+            <field name="default_value">Walk In</field>
+        </record>
+        <record id="mapping_sinsen_pekerjaan" model="tw.mapping.response">
+            <field name="sequence">130</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_sinsen"/>
+            <field name="json_path">kodePekerjaan</field>
+            <field name="target_field">occupation_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'Occupation')]</field>
+        </record>
+        <record id="mapping_sinsen_product" model="tw.mapping.response">
+            <field name="sequence">140</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_sinsen"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+        </record>
+
+        <!-- === ADDITIONS FOR EMAIL & KK (ALL ENDPOINTS) === -->
+
+        <record id="mapping_hso_identification_family_number" model="tw.mapping.response">
+            <field name="sequence">45</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">noKK</field>
+            <field name="target_field">identification_family_number</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_hso_email" model="tw.mapping.response">
+            <field name="sequence">46</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">email</field>
+            <field name="target_field">email</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_asp_identification_family_number" model="tw.mapping.response">
+            <field name="sequence">45</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">noKK</field>
+            <field name="target_field">identification_family_number</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_asp_email" model="tw.mapping.response">
+            <field name="sequence">46</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">email</field>
+            <field name="target_field">email</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_dam_identification_family_number" model="tw.mapping.response">
+            <field name="sequence">45</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">noKK</field>
+            <field name="target_field">identification_family_number</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_dam_email" model="tw.mapping.response">
+            <field name="sequence">46</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">email</field>
+            <field name="target_field">email</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_daw_identification_family_number" model="tw.mapping.response">
+            <field name="sequence">45</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">noKK</field>
+            <field name="target_field">identification_family_number</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_daw_email" model="tw.mapping.response">
+            <field name="sequence">46</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">email</field>
+            <field name="target_field">email</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_npm_identification_family_number" model="tw.mapping.response">
+            <field name="sequence">45</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">noKK</field>
+            <field name="target_field">identification_family_number</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_npm_email" model="tw.mapping.response">
+            <field name="sequence">46</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">email</field>
+            <field name="target_field">email</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_sinsen_identification_family_number" model="tw.mapping.response">
+            <field name="sequence">45</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_sinsen"/>
+            <field name="json_path">noKK</field>
+            <field name="target_field">identification_family_number</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_sinsen_email" model="tw.mapping.response">
+            <field name="sequence">46</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_sinsen"/>
+            <field name="json_path">email</field>
+            <field name="target_field">email</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <!-- === ADDITIONS: tipePembayaran (payment_type_id) FOR ALL ENDPOINTS === -->
+        <!-- value_alias: 2/CREDIT/credit → Credit | 1/CASH/cash → Cash -->
+
+        <record id="mapping_hso_payment_type" model="tw.mapping.response">
+            <field name="sequence">125</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">tipePembayaran</field>
+            <field name="target_field">payment_type_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'PaymentType')]</field>
+            <field name="value_alias">{"2": "Credit", "CREDIT": "Credit", "credit": "Credit", "1": "Cash", "CASH": "Cash", "cash": "Cash"}</field>
+        </record>
+
+        <record id="mapping_asp_payment_type" model="tw.mapping.response">
+            <field name="sequence">125</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">tipePembayaran</field>
+            <field name="target_field">payment_type_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'PaymentType')]</field>
+            <field name="value_alias">{"2": "Credit", "CREDIT": "Credit", "credit": "Credit", "1": "Cash", "CASH": "Cash", "cash": "Cash"}</field>
+        </record>
+
+        <record id="mapping_dam_payment_type" model="tw.mapping.response">
+            <field name="sequence">125</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">tipePembayaran</field>
+            <field name="target_field">payment_type_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'PaymentType')]</field>
+            <field name="value_alias">{"2": "Credit", "CREDIT": "Credit", "credit": "Credit", "1": "Cash", "CASH": "Cash", "cash": "Cash"}</field>
+        </record>
+
+        <record id="mapping_daw_payment_type" model="tw.mapping.response">
+            <field name="sequence">125</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">tipePembayaran</field>
+            <field name="target_field">payment_type_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'PaymentType')]</field>
+            <field name="value_alias">{"2": "Credit", "CREDIT": "Credit", "credit": "Credit", "1": "Cash", "CASH": "Cash", "cash": "Cash"}</field>
+        </record>
+
+        <record id="mapping_npm_payment_type" model="tw.mapping.response">
+            <field name="sequence">125</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">tipePembayaran</field>
+            <field name="target_field">payment_type_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'PaymentType')]</field>
+            <field name="value_alias">{"2": "Credit", "CREDIT": "Credit", "credit": "Credit", "1": "Cash", "CASH": "Cash", "cash": "Cash"}</field>
+        </record>
+
+        <record id="mapping_sinsen_payment_type" model="tw.mapping.response">
+            <field name="sequence">125</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_sinsen"/>
+            <field name="json_path">tipePembayaran</field>
+            <field name="target_field">payment_type_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'PaymentType')]</field>
+            <field name="value_alias">{"2": "Credit", "CREDIT": "Credit", "credit": "Credit", "1": "Cash", "CASH": "Cash", "cash": "Cash"}</field>
+        </record>
+
+    
+<!-- ==================== WAHANA ==================== -->
+        <record id="mapping_wahana_source_document" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_wahana"/>
+            <field name="json_path">idProspect</field>
+            <field name="target_field">source_document</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+        </record>
+        <record id="mapping_wahana_customer_name" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_wahana"/>
+            <field name="json_path">namaLengkap</field>
+            <field name="target_field">customer_name</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_wahana_phone" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_wahana"/>
+            <field name="json_path">noKontak</field>
+            <field name="target_field">phone</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_wahana_identification_number" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_wahana"/>
+            <field name="json_path">noKtp</field>
+            <field name="target_field">identification_number</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_wahana_street" model="tw.mapping.response">
+            <field name="sequence">50</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_wahana"/>
+            <field name="json_path">alamat</field>
+            <field name="target_field">street</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_wahana_zip" model="tw.mapping.response">
+            <field name="sequence">60</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_wahana"/>
+            <field name="json_path">kodePos</field>
+            <field name="target_field">zip</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_wahana_sales" model="tw.mapping.response">
+            <field name="sequence">70</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_wahana"/>
+            <field name="json_path">idSalesPeople</field>
+            <field name="target_field">sales_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="hr.model_hr_employee"/>
+            <field name="relation_lookup_field">md_employee_id</field>
+            <field name="relation_search_domain">['|', ('working_end_date', '=', False), ('working_end_date', '&gt;', today)]</field>
+            <field name="fallback_domain">[('job_id.name', 'in', ['Sales Digital', 'Koordinator Sales Digital', 'Kepala Cabang Sales Digital']), '|', ('working_end_date', '=', False), ('working_end_date', '&gt;', today)]</field>
+            <field name="is_required">True</field>
+        </record>
+        <record id="mapping_wahana_kelurahan" model="tw.mapping.response">
+            <field name="sequence">80</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_wahana"/>
+            <field name="json_path">kodeKelurahan</field>
+            <field name="target_field">sub_district_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_sub_district"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_wahana_kecamatan" model="tw.mapping.response">
+            <field name="sequence">90</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_wahana"/>
+            <field name="json_path">kodeKecamatan</field>
+            <field name="target_field">district_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_district"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_wahana_kota" model="tw.mapping.response">
+            <field name="sequence">100</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_wahana"/>
+            <field name="json_path">kodeKota</field>
+            <field name="target_field">city_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_localization.model_res_city"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_wahana_propinsi" model="tw.mapping.response">
+            <field name="sequence">110</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_wahana"/>
+            <field name="json_path">kodePropinsi</field>
+            <field name="target_field">state_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="base.model_res_country_state"/>
+            <field name="relation_lookup_field">code</field>
+        </record>
+        <record id="mapping_wahana_sumber" model="tw.mapping.response">
+            <field name="sequence">120</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_wahana"/>
+            <field name="json_path">sumberProspect</field>
+            <field name="target_field">sales_channel_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'SalesChannel')]</field>
+            <field name="value_alias">{"0001": "Showroom", "0002": "Showroom", "0003": "Channel", "0004": "Walk In", "0005": "Walk In", "0006": "Walk In", "0007": "Website", "0008": "Social Media", "0009": "External Parties", "0010": "Website", "0011": "Channel", "0012": "Channel"}</field>
+            <field name="default_value">Walk In</field>
+        </record>
+        <record id="mapping_wahana_pekerjaan" model="tw.mapping.response">
+            <field name="sequence">130</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_wahana"/>
+            <field name="json_path">kodePekerjaan</field>
+            <field name="target_field">occupation_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'Occupation')]</field>
+        </record>
+        <record id="mapping_wahana_product" model="tw.mapping.response">
+            <field name="sequence">140</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_wahana"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+        </record>
+
+        <!-- === ADDITIONS FOR EMAIL & KK (ALL ENDPOINTS) === -->
+
+        <record id="mapping_hso_identification_family_number" model="tw.mapping.response">
+            <field name="sequence">45</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">noKK</field>
+            <field name="target_field">identification_family_number</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_hso_email" model="tw.mapping.response">
+            <field name="sequence">46</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">email</field>
+            <field name="target_field">email</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_asp_identification_family_number" model="tw.mapping.response">
+            <field name="sequence">45</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">noKK</field>
+            <field name="target_field">identification_family_number</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_asp_email" model="tw.mapping.response">
+            <field name="sequence">46</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">email</field>
+            <field name="target_field">email</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_dam_identification_family_number" model="tw.mapping.response">
+            <field name="sequence">45</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">noKK</field>
+            <field name="target_field">identification_family_number</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_dam_email" model="tw.mapping.response">
+            <field name="sequence">46</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">email</field>
+            <field name="target_field">email</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_daw_identification_family_number" model="tw.mapping.response">
+            <field name="sequence">45</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">noKK</field>
+            <field name="target_field">identification_family_number</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_daw_email" model="tw.mapping.response">
+            <field name="sequence">46</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">email</field>
+            <field name="target_field">email</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_npm_identification_family_number" model="tw.mapping.response">
+            <field name="sequence">45</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">noKK</field>
+            <field name="target_field">identification_family_number</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_npm_email" model="tw.mapping.response">
+            <field name="sequence">46</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">email</field>
+            <field name="target_field">email</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <record id="mapping_wahana_identification_family_number" model="tw.mapping.response">
+            <field name="sequence">45</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_wahana"/>
+            <field name="json_path">noKK</field>
+            <field name="target_field">identification_family_number</field>
+            <field name="field_type">direct</field>
+        </record>
+        <record id="mapping_wahana_email" model="tw.mapping.response">
+            <field name="sequence">46</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_wahana"/>
+            <field name="json_path">email</field>
+            <field name="target_field">email</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <!-- === ADDITIONS: tipePembayaran (payment_type_id) FOR ALL ENDPOINTS === -->
+        <!-- value_alias: 2/CREDIT/credit → Credit | 1/CASH/cash → Cash -->
+
+        <record id="mapping_hso_payment_type" model="tw.mapping.response">
+            <field name="sequence">125</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">tipePembayaran</field>
+            <field name="target_field">payment_type_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'PaymentType')]</field>
+            <field name="value_alias">{"2": "Credit", "CREDIT": "Credit", "credit": "Credit", "1": "Cash", "CASH": "Cash", "cash": "Cash"}</field>
+        </record>
+
+        <record id="mapping_asp_payment_type" model="tw.mapping.response">
+            <field name="sequence">125</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">tipePembayaran</field>
+            <field name="target_field">payment_type_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'PaymentType')]</field>
+            <field name="value_alias">{"2": "Credit", "CREDIT": "Credit", "credit": "Credit", "1": "Cash", "CASH": "Cash", "cash": "Cash"}</field>
+        </record>
+
+        <record id="mapping_dam_payment_type" model="tw.mapping.response">
+            <field name="sequence">125</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">tipePembayaran</field>
+            <field name="target_field">payment_type_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'PaymentType')]</field>
+            <field name="value_alias">{"2": "Credit", "CREDIT": "Credit", "credit": "Credit", "1": "Cash", "CASH": "Cash", "cash": "Cash"}</field>
+        </record>
+
+        <record id="mapping_daw_payment_type" model="tw.mapping.response">
+            <field name="sequence">125</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">tipePembayaran</field>
+            <field name="target_field">payment_type_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'PaymentType')]</field>
+            <field name="value_alias">{"2": "Credit", "CREDIT": "Credit", "credit": "Credit", "1": "Cash", "CASH": "Cash", "cash": "Cash"}</field>
+        </record>
+
+        <record id="mapping_npm_payment_type" model="tw.mapping.response">
+            <field name="sequence">125</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">tipePembayaran</field>
+            <field name="target_field">payment_type_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'PaymentType')]</field>
+            <field name="value_alias">{"2": "Credit", "CREDIT": "Credit", "credit": "Credit", "1": "Cash", "CASH": "Cash", "cash": "Cash"}</field>
+        </record>
+
+        <record id="mapping_wahana_payment_type" model="tw.mapping.response">
+            <field name="sequence">125</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_wahana"/>
+            <field name="json_path">tipePembayaran</field>
+            <field name="target_field">payment_type_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="relation_lookup_field">value</field>
+            <field name="relation_search_domain">[('type', '=', 'PaymentType')]</field>
+            <field name="value_alias">{"2": "Credit", "CREDIT": "Credit", "credit": "Credit", "1": "Cash", "CASH": "Cash", "cash": "Cash"}</field>
+        </record>
+
+        <!-- === MAPPING idEvent → activity_plan_id (ALL ENDPOINTS) ===
+             Mengisi field activity_plan_id di tw.lead berdasarkan idEvent dari
+             response DGI. Mencari tw.activity.atl.btl.line dengan activity_md_id
+             yang sesuai dengan nilai idEvent. -->
+
+        <record id="mapping_hso_activity_btl" model="tw.mapping.response">
+            <field name="sequence">150</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_hso"/>
+            <field name="json_path">idEvent</field>
+            <field name="target_field">activity_plan_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_activity_atl_btl.model_tw_activity_atl_btl_line"/>
+            <field name="relation_lookup_field">activity_md_id</field>
+        </record>
+
+        <record id="mapping_asp_activity_btl" model="tw.mapping.response">
+            <field name="sequence">150</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_asp"/>
+            <field name="json_path">idEvent</field>
+            <field name="target_field">activity_plan_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_activity_atl_btl.model_tw_activity_atl_btl_line"/>
+            <field name="relation_lookup_field">activity_md_id</field>
+        </record>
+
+        <record id="mapping_dam_activity_btl" model="tw.mapping.response">
+            <field name="sequence">150</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_dam"/>
+            <field name="json_path">idEvent</field>
+            <field name="target_field">activity_plan_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_activity_atl_btl.model_tw_activity_atl_btl_line"/>
+            <field name="relation_lookup_field">activity_md_id</field>
+        </record>
+
+        <record id="mapping_daw_activity_btl" model="tw.mapping.response">
+            <field name="sequence">150</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_daw"/>
+            <field name="json_path">idEvent</field>
+            <field name="target_field">activity_plan_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_activity_atl_btl.model_tw_activity_atl_btl_line"/>
+            <field name="relation_lookup_field">activity_md_id</field>
+        </record>
+
+        <record id="mapping_npm_activity_btl" model="tw.mapping.response">
+            <field name="sequence">150</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_npm"/>
+            <field name="json_path">idEvent</field>
+            <field name="target_field">activity_plan_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_activity_atl_btl.model_tw_activity_atl_btl_line"/>
+            <field name="relation_lookup_field">activity_md_id</field>
+        </record>
+
+        <record id="mapping_sinsen_activity_btl" model="tw.mapping.response">
+            <field name="sequence">150</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_sinsen"/>
+            <field name="json_path">idEvent</field>
+            <field name="target_field">activity_plan_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_activity_atl_btl.model_tw_activity_atl_btl_line"/>
+            <field name="relation_lookup_field">activity_md_id</field>
+        </record>
+
+        <record id="mapping_wahana_activity_btl" model="tw.mapping.response">
+            <field name="sequence">150</field>
+            <field name="endpoint_id" ref="tw_dgi_lead.tw_endpoint_dgi_prospect_wahana"/>
+            <field name="json_path">idEvent</field>
+            <field name="target_field">activity_plan_id</field>
+            <field name="field_type">relation</field>
+            <field name="relation_model_id" ref="tw_activity_atl_btl.model_tw_activity_atl_btl_line"/>
+            <field name="relation_lookup_field">activity_md_id</field>
+        </record>
+
+    </data>
+</odoo>

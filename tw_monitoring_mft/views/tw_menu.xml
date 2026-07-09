@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <!-- MFT Logs Menu -->
+        <menuitem id="tw_mft_menu_logs"
+                  name="MFT Logs"
+                  parent="tw_menu.menu_tw_mft_monitoring"
+                  action="tw_mft_log_action"
+                  sequence="10"
+                  groups="tw_monitoring_mft.group_mft_log_read"/>
+
+        <!-- Error Details Menu -->
+        <menuitem id="tw_mft_menu_details"
+                  name="Error Details"
+                  parent="tw_menu.menu_tw_mft_monitoring"
+                  action="tw_mft_log_detail_action"
+                  sequence="20"
+                  groups="tw_monitoring_mft.group_mft_log_detail_read"/>
+        
+        <!-- Generate MFT Menu -->
+        <menuitem id="tw_generate_mft_submenu"
+                  name="Generate MFT"
+                  sequence="30"
+                  parent="tw_menu.menu_tw_mft_monitoring"/>
+
+        <!-- MFT Config Menu -->
+        <menuitem id="tw_mft_menu_config"
+                  name="MFT Out Configurations"
+                  parent="tw_menu.menu_tw_mft_monitoring_configuration"
+                  action="tw_mft_config_action"
+                  sequence="40"
+                  groups="tw_monitoring_mft.group_mft_config_read"/>
+
+    </data>
+
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_master_expense_source,tw.master.expense.source,model_tw_master_expense_source,,1,0,0,0
+access_tw_activity_settlement_wizard,tw.activity.settlement.wizard,model_tw_activity_settlement_wizard,,1,1,1,0
+access_tw_activity_settlement_wizard_line,tw.activity.settlement.wizard.line,model_tw_activity_settlement_wizard_line,,1,1,1,0

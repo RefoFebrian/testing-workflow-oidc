@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_stock_location_approval_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.location.approval.form</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_location_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='is_temporary_location']" position="after">
+                    <field name="is_approval"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.tw.stock</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="30"/>
+            <field name="inherit_id" ref="stock_account.res_config_settings_view_form" />
+            <field name="arch" type="xml">
+                <setting id="group_lot_on_invoice" position="after">
+                    <setting id="incoming_valuation_on_last_route" help="Incoming valuation on last route" title="Make Incoming valuation on last route on Incoming stock">
+                        <field name="incoming_valuation_on_last_route"/>
+                    </setting>
+                </setting>
+            </field>
+        </record>
+    </data>
+</odoo>

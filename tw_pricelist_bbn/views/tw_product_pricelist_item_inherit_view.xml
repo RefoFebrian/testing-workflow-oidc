@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+
+		<record id="tw_pricelist_bbn_form_view" model="ir.ui.view">
+			<field name="name">tw.pricelist.bbn.form.view</field>
+			<field name="model">product.pricelist</field>
+			<field name="inherit_id" ref="tw_pricelist.tw_pricelist_form_view" />
+			<field name="arch" type="xml">
+
+				<field name="country_group_ids" position="after">
+					<field name="partner_id" invisible="type != 'bbn_purchase'" required="type == 'bbn_purchase'" />
+					<field name="area_id" invisible="type in ('sales', 'purchase')" />
+					<field name="plate_id"
+						   invisible="type != 'bbn_sales'"
+						   required="type == 'bbn_sales'"
+						   options="{'no_create': True, 'no_open': True}" />
+				</field>
+
+				<field name="version_ids" position="attributes">
+					<attribute name="context">{
+						'default_type': type
+					}</attribute>
+				</field>
+				
+				<field name="item_ids" position="attributes">
+					<attribute name="context">{
+						'default_type': type
+					}</attribute>
+				</field>
+
+			</field>
+		</record>
+
+		<record id="tw_product_pricelist_version_bbn_form_view" model="ir.ui.view">
+			<field name="name">tw.product.pricelist.version.bbn.form.view</field>
+			<field name="model">tw.product.pricelist.version</field>
+			<field name="inherit_id" ref="tw_pricelist.tw_product_pricelist_version_form_view" />
+			<field name="arch" type="xml">
+
+				<field name="item_ids" position="attributes">
+					<attribute name="invisible">context.get('default_type') == 'bbn_purchase'</attribute>
+				</field>
+
+				<page name="item_list" position="inside">
+					<field name="item_ids" invisible="context.get('default_type') != 'bbn_purchase'" >
+						<list editable="bottom">
+							<field name="pricelist_id" optional="hide"/>
+							<field name="product_tmpl_id" options="{'no_create': True, 'no_open': True}"/>
+							<field name="service_category_id" optional="hide"/>
+							<field name="city_id" options="{'no_create': True, 'no_open': True}" invisible="context.get('bbn_purchase') == False"/>
+							<field name="notice_price" string="Harga Notice" invisible="context.get('bbn_purchase') == False"/>
+							<field name="process_price" string="PNBP dan STCK" invisible="context.get('bbn_purchase') == False"/>
+							<field name="serv_price" string="Harga Jasa" invisible="context.get('bbn_purchase') == False"/>
+							<field name="serv_area_price" string="Harga Jasa Area" invisible="context.get('bbn_purchase') == False"/>
+							<field name="capital_fee_price" string="Harga Pusat" invisible="context.get('bbn_purchase') == False"/>
+							<field name="fixed_price" string="Total"/>
+							<field name="min_quantity" optional="hide"/>
+							<field name="date_start" optional="hide"/>
+							<field name="date_end" optional="hide"/>
+							<field name="company_id" optional="hide"/>
+						</list>
+					</field>
+				</page>
+
+			</field>
+		</record>
+
+	</data>
+</odoo>

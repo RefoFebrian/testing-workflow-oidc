@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_selection_type_otp_voucher" model="tw.selection">
+	    	<field name="name">Work Order Voucher OTP</field>
+            <field name="value">work_order_voucher_otp</field>
+	    	<field name="type">TemplateWhatsapp</field> 
+        </record>
+
+    </data>
+</odoo>

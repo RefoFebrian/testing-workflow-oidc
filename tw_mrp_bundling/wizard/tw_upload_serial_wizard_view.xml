@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tw_upload_serial_wizard_form" model="ir.ui.view">
+        <field name="name">tw.upload.serial.wizard.form</field>
+        <field name="model">tw.upload.serial.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Upload Engine Numbers">
+                <group>
+                    <field name="production_id" invisible="1"/>
+                    <field name="file_data" filename="file_name" widget="binary" required="0"/>
+                    <field name="file_name" invisible="1"/>
+                </group>
+                <div class="text-muted">
+                    <p>Please upload an Excel (.xlsx) file containing the serial numbers.</p>
+                    <p>The file should have two columns: "Product Name" and "Engine Number".</p>
+                    <p>You can download a pre-filled template by clicking the button below.</p>
+                </div>
+                <footer>
+                    <button string="Upload" name="action_upload" type="object" class="btn-primary" data-hotkey="q"/>
+                    <button string="Download Template" name="action_download_template" type="object" class="btn-secondary" data-hotkey="w" invisible="file_data"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

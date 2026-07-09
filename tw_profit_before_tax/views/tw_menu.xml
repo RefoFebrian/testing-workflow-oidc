@@ -1,0 +1,94 @@
+<?xml version="1.0"
+          encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="tw_profit_before_tax_menu"
+                  name="PBT"
+                  parent="tw_incentive.tw_incentive_top_menu"
+                  sequence="15" />
+
+                <!-- Wizard menus for download and filling up PBT -->
+                <menuitem id="tw_profit_before_tax_wizard_separator"
+                          name="Input Net Margin"
+                          parent="tw_profit_before_tax_menu"
+                          sequence="1" />
+                        
+                        <menuitem id="tw_download_net_margin_wizard_menuitem"
+                                  parent="tw_profit_before_tax_wizard_separator"
+                                  action="action_tw_download_net_margin_wizard"
+                                  sequence="1"
+                                  groups="tw_profit_before_tax.group_tw_download_profit_before_tax_group_read" />
+                        
+                         <menuitem id="tw_upload_period_profit_before_tax_wizard_menuitem"
+                                   parent="tw_profit_before_tax_wizard_separator"
+                                   action="action_upload_period_profit_before_tax_wizard"
+                                   sequence="2"
+                                   groups="tw_profit_before_tax.group_tw_upload_period_profit_before_tax_group_read" />
+                        
+                        <menuitem id="tw_upload_net_margin_wizard_menuitem"
+                                  parent="tw_profit_before_tax_wizard_separator"
+                                  action="action_upload_net_margin_wizard"
+                                  sequence="3"
+                                  groups="tw_profit_before_tax.group_tw_download_profit_before_tax_group_read" /> 
+                
+                <!-- Already inserted or uploaded PBT -->
+                <menuitem id="tw_profit_before_tax_separator"
+                          name="Profit Before Tax"
+                          parent="tw_profit_before_tax_menu"
+                          sequence="2" />
+                
+                        <menuitem id="tw_period_profit_before_tax_menuitem"
+                                  parent="tw_profit_before_tax_separator"
+                                  action="action_tw_period_profit_before_tax"
+                                  sequence="1"
+                                  groups="tw_profit_before_tax.tw_period_profit_before_tax_group_read" />
+                        
+                        <menuitem id="tw_profit_before_tax_menuitem"
+                                  parent="tw_profit_before_tax_separator"
+                                  action="action_tw_profit_before_tax"
+                                  sequence="4"
+                                  groups="tw_profit_before_tax.tw_profit_before_tax_group_read" />
+                        
+                        <menuitem id="tw_profit_before_tax_line_menuitem"
+                                  parent="tw_profit_before_tax_separator"
+                                  action="action_tw_profit_before_tax_line"
+                                  sequence="2"
+                                  groups="tw_profit_before_tax.tw_profit_before_tax_group_read" />
+                        
+                        <menuitem id="tw_profit_before_tax_approval_gm_menuitem"
+                                  parent="tw_profit_before_tax_separator"
+                                  action="action_tw_profit_before_tax_approval_gm"
+                                  sequence="3"
+                                  groups="tw_profit_before_tax.tw_profit_before_tax_group_read" />
+
+        
+        <!-- Reports Menu -->
+        <menuitem id="tw_profit_before_tax_report_menu"
+                  name="Report Profit Before Tax"
+                  parent="tw_menu.submenu_tw_showroom_report"
+                  sequence="3" />
+            
+	  	        <menuitem id="tw_target_net_margin_wizard_menuitem"
+                          parent="tw_profit_before_tax_report_menu"
+                          action="action_target_net_margin_wizard"
+                          sequence="1" 
+                          groups="tw_profit_before_tax.group_tw_laporan_pbt_group_read" />
+
+                <menuitem id="tw_summary_forecast_report_wizard_menuitem"
+                          parent="tw_profit_before_tax_report_menu"
+                          action="action_summary_forecast_report_wizard"
+                          sequence="2"
+                          groups="tw_profit_before_tax.group_tw_laporan_pbt_group_read" />
+                
+                <menuitem id="tw_progress_pbt_report_wizard_menuitem"
+                          parent="tw_profit_before_tax_report_menu"
+                          action="action_progress_pbt_report_wizard"
+                          sequence="3"
+                          groups="tw_profit_before_tax.group_tw_laporan_pbt_group_read" />
+        
+        
+
+    </data>
+</odoo>
+

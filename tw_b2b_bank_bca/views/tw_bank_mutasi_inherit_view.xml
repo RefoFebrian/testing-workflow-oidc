@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_bank_mutasi_b2b_bank_bca_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.bank.mutasi.b2b.bank.bca.inherit.form</field>
+        <field name="model">tw.bank.mutasi</field>
+        <field name="inherit_id" ref="tw_bank_reconcile.tw_bank_mutasi_form_view"/>
+        <field name="arch" type="xml">
+            <button name="action_reconcile" position="after">
+                <button name="action_schedule_auto_posting_bca" string="Auto Posting BCA" invisible="format != 'bca'" type="object" groups="tw_b2b_bank_bca.group_tw_bank_mutasi_button_auto_posting_bca"/>
+                <button name="schedule_auto_posting_bca" string="Auto Posting BCA - ALL" invisible="format != 'bca'" type="object" groups="tw_b2b_bank_bca.group_tw_bank_mutasi_button_auto_posting_bca"/>
+            </button>
+        </field>
+    </record>
+
+</odoo>

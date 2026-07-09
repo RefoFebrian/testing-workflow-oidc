@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="menuitem_tw_selection_grant_type"
+        name="Grant Type"
+        parent="tw_selection.submenu_tw_selection"
+        action="tw_selection_grant_type_action"
+        sequence="2"
+        groups="rest_api.group_tw_selection_grant_type"
+    />
+
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_sale_order_drawdown_form_view" model="ir.ui.view">
+            <field name="name">tw.sale.order.form</field>
+            <field name="model">tw.sale.order</field>
+            <field name="inherit_id" ref="tw_sale_plafond.tw_sale_order_plafond_form_view"/>
+            <field name="arch" type="xml">
+                <field name="credit_limit" position="after">
+                    <field name="drawdown" readonly="True" force_save="1"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

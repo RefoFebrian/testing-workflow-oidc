@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+    Inherit Branch Setting view untuk menambahkan DGI Inbound config
+    di dalam tab DGI Config yang sudah ada (dari tw_dgi).
+    -->
+    <record id="view_branch_setting_form_inherit_dgi_inbound" model="ir.ui.view">
+        <field name="name">tw.branch.setting.form.inherit.dgi.inbound</field>
+        <field name="model">tw.branch.setting</field>
+        <field name="inherit_id" ref="tw_dgi.view_branch_setting_form_inherit_dgi_config"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='dgi_config_id']" position="after">
+                <field name="dgi_auto_confirm_po"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

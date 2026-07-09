@@ -1,0 +1,5 @@
+<odoo>
+    <data>
+        <menuitem id="menu_report_all_petty_cash" name="Laporan All Petty Cash" parent="tw_menu.submenu_tw_backoffice_report" sequence="4" groups="tw_report_all_pettycash.group_report_all_pettycash" action="action_report_all_petty_cash_wizard"/>
+    </data>
+</odoo>

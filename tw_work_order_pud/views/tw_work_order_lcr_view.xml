@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="tw_work_order_lcr_form_view" model="ir.ui.view">
+        <field name="name">tw.work.order.lcr</field>
+        <field name="model">tw.work.order</field>
+        <field name="inherit_id" ref="tw_work_order.tw_work_order_form_view" />
+        <field name="arch" type="xml">
+            <field name="customer_type" position="after">
+                <field name="consumer_willingness"
+                  readonly="True"
+                  invisible="not state_lcr or state_lcr == 'done' or consumer_willingness != '01'"
+                  required="state_lcr and state_lcr in ('draft', 'outstanding') and type == 'CLA'" />
+                <field name="check_results"
+                  invisible="consumer_willingness != '01'"
+                  required="state == 'open' and consumer_willingness == '01' and type == 'CLA' and state_lcr == 'draft'"
+                  readonly="state_lcr == 'outstanding' or (state != 'open' and state_lcr != 'draft')" />
+            </field>
+            <xpath expr="//sheet/div/h1" position="after">
+                <h3 colspan="2" style="margin-top:0px;"
+                    invisible="notification == False or consumer_willingness != '01'">
+                    <span class="label label-danger">Pemberitahuan</span>
+                </h3>
+                <p colspan="2"
+                    style="color:red; font-weight:bold; font-size:18px; margin-bottom:0px;"
+                    invisible="notification == False or consumer_willingness != '01'">
+                    <field name="notification" readonly="1" nolabel="1"
+                        invisible="notification == False or consumer_willingness != '01'" />
+                </p>
+                <!-- TODO: Pindahkan ke Modul WO Pud -->
+                <field name="state_lcr" invisible="1" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="tw_work_order_lcr_claim_inheritform_view" model="ir.ui.view">
+        <field name="name">tw.work.order.lcr.claim.inherit</field>
+        <field name="model">tw.work.order</field>
+        <field name="inherit_id" ref="tw_work_order_claim.tw_work_order_inherit_claim_view_form" />
+        <field name="arch" type="xml">
+            <field name="claim_number" position="replace">
+                <field name="claim_number" invisible="type not in ['CLA','Claim Program']"
+                        required="state == 'finished' and claim_type_id.value == 'Claim Program' and consumer_willingness not in ('02','03')"
+                        readonly="state in ('sale','done')" />
+            </field>
+        </field>
+    </record>
+</odoo>

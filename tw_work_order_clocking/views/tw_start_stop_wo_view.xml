@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="tw_start_stop_wo_form_view">
+			<field name="name">tw.start.stop.wo.form</field>
+			<field name="model">tw.start.stop.wo</field>
+			<field name="priority">99</field>
+			<field name="arch" type="xml">
+				<form string="Start / Stop Work Order">
+					<sheet>
+						<p class="text-muted mb-4">
+							Silakan pilih Mekanik yang bertugas untuk memulai clocking Work Order ini.
+						</p>
+						<group>
+							<group>
+								<field name="company_id" invisible="1"/>
+								<field name='employee_id' invisible="1"/>
+								<field name="start_date" invisible="1"/>
+								<field name="end_break_date" invisible="1"/>
+								<field name="break_date" invisible="1"/>
+								<field name="finish_date" invisible="1"/>
+
+								<field name="work_order_id" options="{'no_open':True,'no_create':True}" readonly="1"/>
+								<field name="mechanic_id" required="True" options="{'no_open':True,'no_create':True}" domain="[('company_id','=',company_id),('job_id.sales_force_id.value','=','mechanic')]"/>
+							</group>
+						</group>
+					</sheet>
+					<footer>
+						<button name="action_start_clocking" type="object" string="START CLOCKING" class="btn-success" invisible="start_date"/>
+						<button name="action_break_clocking" type="object" string="PAUSE CLOCKING" class="btn-warning text-dark" invisible="not start_date or break_date or finish_date"/>
+						<button name="action_end_break_clocking" type="object" string="RESUME CLOCKING" class="btn-info text-white" invisible="not break_date or end_break_date or finish_date"/>
+						<button name="action_finish_clocking" type="object" string="FINISH CLOCKING" class="btn-danger" invisible="not start_date or (break_date and not end_break_date) or finish_date" confirm="Selesaikan clocking WO ini?" />
+						<button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="tw_start_stop_wo_form_action">
+			<field name="name">Start Stop WO</field>
+			<field name="res_model">tw.start.stop.wo</field>
+			<field name="view_mode">form</field>
+		</record>
+
+	</data>
+</odoo>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Sale Order -->
+        <record id="group_tw_part_sales_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Part Sales Read</field>
+        </record>
+        
+        <record id="access_tw_part_sales_read" model="ir.model.access">
+            <field name="model_id" ref="tw_part_sales.model_tw_part_sales"/>
+            <field name="name">tw_part_sales read</field>
+            <field name="group_id" ref="group_tw_part_sales_read"/>
+            <field name="perm_read">1</field>
+        </record> 
+
+        <record id="access_tw_part_sales_line_read" model="ir.model.access">
+            <field name="model_id" ref="tw_part_sales.model_tw_part_sales_line"/>
+            <field name="name">tw_part_sales_line read</field>
+            <field name="group_id" ref="group_tw_part_sales_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_part_sales_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Part Sales Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_part_sales_read'))]"/>
+        </record>
+        
+        <record id="access_tw_part_sales_update" model="ir.model.access">
+            <field name="model_id" ref="tw_part_sales.model_tw_part_sales"/>
+            <field name="name">tw_part_sales update</field>
+            <field name="group_id" ref="group_tw_part_sales_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record> 
+
+        <record id="access_tw_part_sales_line_update" model="ir.model.access">
+            <field name="model_id" ref="tw_part_sales.model_tw_part_sales_line"/>
+            <field name="name">tw_part_sales_line update</field> 
+            <field name="group_id" ref="group_tw_part_sales_update"/>  
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_part_sales_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Part Sales Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_part_sales_read'))]"/>
+        </record>
+        
+        <record id="access_tw_part_sales_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_part_sales.model_tw_part_sales"/>
+            <field name="name">tw_part_sales delete</field>
+            <field name="group_id" ref="group_tw_part_sales_delete"/>
+            <field name="perm_unlink">1</field>
+        </record> 
+
+        <record id="access_tw_part_sales_line_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_part_sales.model_tw_part_sales_line"/>
+            <field name="name">tw_part_sales_line delete</field>
+            <field name="group_id" ref="group_tw_part_sales_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- HPP Fields -->
+        <record id="group_part_sales_view_hpp_average" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">Part Sales View HPP Average</field>
+        </record>
+    </data>
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_part_sales_read')),
+                (4, ref('group_tw_part_sales_update')),
+                (4, ref('group_tw_part_sales_delete')),
+                (4, ref('group_part_sales_view_hpp_average')),
+            ]"/>
+        </record>       
+    </data>
+</odoo>

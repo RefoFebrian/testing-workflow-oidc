@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="unit_validation">
+            <t t-call="web.html_container">
+                <t t-call="tw_web.teto_report_layout">
+                    <t t-call="tw_web.teto_report_styles_base" />
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page font-sm">
+                            <div class="oe_structure">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <table class="teto-table-header">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="4" class="bolder font-lg px-2">
+                                                        <t t-esc="doc.name" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th width="15%">Branch</th>
+                                                    <td width="35%">: &#160;<t t-esc="doc.company_id.name" /></td>
+                                                    <th width="15%">PDI</th>
+                                                    <td width="35%">: &#160;<t t-esc="doc.pdi_id.name" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <th width="15%">Division</th>
+                                                    <td width="35%">: &#160;<t t-esc="doc.division" /></td>
+                                                    <th width="15%">ADH</th>
+                                                    <td width="35%">: &#160;<t t-esc="doc.adh_id.name" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <th width="15%">Tanggal SO</th>
+                                                    <td width="35%">: &#160;<span t-field="doc.date" t-options="{'widget': 'date', 'format': 'dd-MM-yyyy'}"/></td>
+                                                    <th width="15%">SOH</th>
+                                                    <td width="35%">: &#160;<t t-esc="doc.soh_id.name" /></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row my-2">
+                                    <t t-if="doc.env.context.get('validate') != 'Accessories'">
+                                        <div class="col bolder font-lg">Data Stock Unit</div>
+                                    </t>
+                                    <t t-elif="doc.env.context.get('validate') == 'Accessories'">
+                                        <div class="col bolder font-lg">Data Stock Aksesoris</div>
+                                    </t>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <table width="100%" class="teto-table-content">
+                                            <t t-if="doc.env.context.get('validate') != 'Accessories'">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 5%;">No</th>
+                                                        <th>No Engine</th>
+                                                        <th>No Chassis</th>
+                                                        <th>Validasi Fisik</th>
+                                                        <th>Product Type</th>
+                                                        <th>Warna</th>
+                                                        <th>Incoming Date</th>
+                                                        <th>Lokasi</th>
+                                                        <th>Kondisi Fisik</th>
+                                                        <th>Keterangan</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <t t-set="number" t-value="1" />
+                                                    <tr t-foreach="doc.detail_opname_ids" t-as="line">
+                                                        <td class="text-center"><t t-esc="number" /></td>
+                                                        <td><t t-esc="line.lot_id.name" /></td>
+                                                        <td class="text-end"><t t-esc="line.lot_id.chassis_number" /></td>
+                                                        <td class="text-end"><t t-esc="'Fisik Ada' if line.qty_count > 0 else 'Fisik Tidak Ada'" /></td>
+                                                        <td><t t-esc="line.lot_id.product_id.default_code" /></td>
+                                                        <td>
+                                                            <t t-set="color_val" t-value="line.lot_id.product_id.product_template_attribute_value_ids.filtered(lambda x: x.attribute_id.name in ('Color', 'Warna', 'Colour'))"/>
+                                                            <t t-esc="', '.join(c for c in color_val.mapped('code') if c)" /> - 
+                                                            <t t-esc="', '.join(c for c in color_val.mapped('name') if c)" />
+                                                        </td>
+                                                        <td><t t-esc="line.lot_id.receive_date.strftime('%d-%m-%Y') if line.lot_id.receive_date else ''" /></td>
+                                                        <td><t t-esc="line.location_id.name" /></td>
+                                                        <td><t t-esc="'Fisik Baik' if line.rfs else 'Fisik Tidak Baik'" /></td>
+                                                        <td><t t-esc="line.reason" /></td>
+                                                        <t t-set="number" t-value="number + 1" />
+                                                    </tr>
+                                                </tbody>
+                                            </t>
+                                            <t t-elif="doc.env.context.get('validate') == 'Accessories'">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 5%;">No</th>
+                                                        <th>Product</th>
+                                                        <th>Category</th>
+                                                        <th>Good</th>
+                                                        <th>Not Good</th>
+                                                        <th>Total Fisik</th>
+                                                        <th>Total Unit</th>
+                                                        <th>(+/- NG dr SO lalu)</th>
+                                                        <th>Selisih</th>
+                                                        <th>Selisih SO Lalu</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <t t-set="number" t-value="1" />
+                                                    <tr t-foreach="doc.detail_accessories_ids" t-as="line">
+                                                        <td class="text-center"><t t-esc="number" /></td>
+                                                        <td><t t-esc="line.product_id.categ_id.name" /></td>
+                                                        <td><t t-esc="line.segment_name" /></td>
+                                                        <td class="text-center"><t t-esc="line.qty_good" /></td>
+                                                        <td class="text-center"><t t-esc="line.qty_not_good" /></td>
+                                                        <td class="text-center"><t t-esc="line.qty_good + line.qty_not_good" /></td>
+                                                        <td class="text-center"><t t-esc="line.qty_system" /></td>
+                                                        <td class="text-center"><t t-esc="not_good_diff_from_previous_so(line)" /></td>
+                                                        <td class="text-center"><t t-esc="diff(line)" /></td>
+                                                        <td class="text-center"><t t-esc="diff_from_previous_so(line)" /></td>
+                                                        <t t-set="number" t-value="number + 1" />
+                                                    </tr>
+                                                </tbody>
+                                            </t>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-5">
+                                    <div class="col-12">
+                                        <table class="teto-table-signature">
+                                            <tr>
+                                                <td>PIC SO</td>
+                                                <td colspan="2">Mengetahui</td>
+                                            </tr>
+                                            <tr class="signature-row">
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bold"><t t-esc="doc.adh_id.name" /></td>
+                                                <td class="bold"><t t-esc="doc.pdi_id.name" /></td>
+                                                <td class="bold"><t t-esc="doc.soh_id.name" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>ADH</td>
+                                                <td>PID</td>
+                                                <td>SOH</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3"><t t-esc="user.name" />, <t t-esc="print_datetime()" /></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+                

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Partner Form View to add route_type field -->
+        <record id="view_partner_form_inherit_mutation" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit.mutation</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!-- Add route_type field after category_id (tags) -->
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="route_type" widget="radio" options="{'horizontal': true}" 
+                           invisible="context.get('form_type') not in ['Dealer', 'Branch']"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

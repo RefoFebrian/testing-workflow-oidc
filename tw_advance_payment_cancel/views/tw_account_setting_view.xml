@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="inherit_tw_account_setting_form_view_avp_cancel">
+            <field name="name">tw.account.setting.form.avp.cancel</field>
+            <field name="model">tw.account.setting</field>
+            <field name="inherit_id" ref="tw_account_setting.tw_account_setting_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='backoffice_journal_cancel']" position="inside">
+                    <field name="journal_avp_cancel_id" string="Journal Advance Payment Cancel" options="{'no_create': True, 'no_open': True}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

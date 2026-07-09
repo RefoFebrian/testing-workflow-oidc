@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_lead_activity_inherit_crm_lead_form_view" model="ir.ui.view">
+            <field name="name">tw.lead.activity.plan.inherit.crm.lead.form.view</field>
+            <field name="model">tw.lead</field>
+            <field name="inherit_id" ref="tw_lead.tw_lead_crm_lead_form_view" />
+            <field name="arch" type="xml">
+
+                <field name="state" position="before">
+                    <button name="action_activity" invisible="state not in ('open','reject')" type="object"
+                            string="Activity" groups="tw_lead_activity.group_tw_lead_activity_read"/>
+                </field>
+
+                <page name="lead_addresses" position="before">
+                    <page string="Activity Plan" groups="tw_lead_activity.group_tw_lead_activity_read">
+                        <group>
+                            <field name="next_activity_id" readonly="1" options="{'no_open': True, 'no_create': True}" groups="tw_lead_activity.group_tw_lead_activity_read" />
+                            <field name="not_followed_up" invisible="1" groups="tw_lead_activity.group_tw_lead_activity_read" />
+                            <field name="follow_up_date" readonly="1" groups="tw_lead_activity.group_tw_lead_activity_read" />
+                            <field name="follow_up_count" readonly="1" groups="tw_lead_activity.group_tw_lead_activity_read" />
+                        </group>
+                        <field name="lead_activity_ids" context="{'default_lead_id': id}" mode="list,form">
+                            <list create="false" delete="false" edit="false">
+                                <field name="name" optional="hide" />
+                                <field name="date" optional="show" />
+                                <field name="done_date" optional="show" />
+                                <field name="stage_id" optional="show" />
+                                <field name="next_activity_id" optional="hide" />
+                                <field name="activity_result_id" optional="show" groups="tw_lead_activity.group_tw_lead_activity_result_read" />
+                                <field name="remark" optional="show" />
+                                <field name="write_uid" optional="show" />
+                                <field name="lead_id" optional="hide" />
+                                <field name="interest" optional="hide" />
+                                <field name="latitude" optional="hide" />
+                                <field name="longitude" optional="hide" />
+                                <field name="identification_number" optional="hide" />
+                                <field name="identification_family_number" optional="hide" />
+                                <field name="mobile" optional="hide" />
+                                <field name="birthplace" optional="hide" />
+                                <field name="birthdate" optional="hide" />
+                                <field name="neighborhood" optional="hide" />
+                                <field name="community" optional="hide" />
+                                <field name="current_motorcycle" optional="hide" />
+                                <field name="down_payment" optional="hide" />
+                                <field name="down_payment_date" optional="hide" />
+                                <field name="tenor" optional="hide" />
+                                <field name="installment" optional="hide" />
+                                <field name="payment_type" optional="hide" />
+                                <field name="due_date" optional="hide" />
+                                <field name="followup_state" optional="hide" />
+                                <field name="gender_id" optional="hide" />
+                                <field name="blood_type_id" optional="hide" />
+                                <field name="religion_id" optional="hide" />
+                                <field name="education_id" optional="hide" />
+                                <field name="occupation_id" optional="hide" />
+                                <field name="finco_id" optional="hide" />
+                            </list>
+                            <form>
+                                <sheet>
+                                    <group>
+                                        <group readonly="1">
+                                            <field name="name" />
+                                            <field name="date" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                            <field name="done_date" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                            <field name="remark" readonly="1"/>
+                                            <field name="next_activity_id" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                            <field name="activity_result_id" readonly="1" options="{'no_open': True, 'no_create': True}" groups="tw_lead_activity.group_tw_lead_activity_result_read" />
+                                        </group>
+                                        <group readonly="1">
+                                            <field name="interest" />
+                                            <field name="followup_state" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                            <field name="is_test_ride" 
+                                                   readonly="1" 
+                                                   invisible="stage_id.name != 'Riding Test'"/>
+                                            <field name="test_ride_date" 
+                                                   readonly="1" 
+                                                   invisible="is_test_ride != True"/>
+                                        </group>
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </page>
+                </page>
+            </field>
+        </record>
+    </data>
+</odoo>

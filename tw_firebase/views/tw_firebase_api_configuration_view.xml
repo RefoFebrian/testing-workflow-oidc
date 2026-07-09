@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Views -->
+            <record id="tw_firebase_api_configuration_list" model="ir.ui.view">
+                <field name="name">tw.firebase.api.configuration.list</field>
+                <field name="model">tw.api.configuration</field>
+                <field name="type">list</field>
+                <field name="arch" type="xml">
+                    <list string="Firebase API Configuration">
+                        <field name="name" />
+                    </list>
+                </field>
+            </record>
+
+            
+        <!-- Views -->
+
+        <!-- inherited form view -->
+        <record id="tw_firebase_api_configuration_form" model="ir.ui.view">
+            <field name="name">tw.firebase.api.configuration.form</field>
+            <field name="model">tw.api.configuration</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="tw_api.tw_api_configuration_form_view" />
+            <field name="arch" type="xml">
+                
+                <!-- Patchments -->
+                    <xpath expr="//field[@name='base_url']" position="attributes">
+                        <attribute name="required">api_type_value != 'Firebase'</attribute>
+                    </xpath>
+                    <xpath expr="//page[@name='hmac_auth']" position="after">
+                        <page name="firebase_config" 
+                              string="Firebase Configuration" 
+                              invisible="api_type_value != 'Firebase'">
+                            <group>
+                                <group string="Service Account Credentials">
+                                    <field name="project_id" required="api_type_value == 'Firebase'" />
+                                    <field name="creds_file" 
+                                           filename="creds_filename"
+                                           required="api_type_value == 'Firebase'"/>
+                                    <field name="creds_filename" readonly="1"/>
+                                </group>
+                                <group>
+                                    <!-- Placeholder for additional Firebase settings -->
+                                </group>
+                            </group>
+                            <div class="alert alert-info" role="alert" style="margin: 16px;">
+                                <strong>Firebase Service Account:</strong> Upload your Firebase service account JSON file here.
+                                <br/>
+                                This file contains authentication credentials for accessing Firebase services.
+                            </div>
+                        </page>
+                    </xpath>
+                <!-- Patchments -->
+
+                <!-- Attributes -->
+                    <xpath expr="//field[@name='company_id']" position="attributes">
+                        <attribute name="invisible">api_type_value == 'Firebase'</attribute>
+                        <attribute name="required">api_type_value == 'Umum'</attribute>
+                    </xpath>
+                    <!-- <xpath expr="//field[@name='database']" position="attributes">
+                        <attribute name="invisible">api_type_value == 'Firebase'</attribute>
+                        <attribute name="required">api_type_value == 'Umum'</attribute>
+                    </xpath> -->
+                    <xpath expr="//field[@name='username']" position="attributes">
+                        <attribute name="invisible">api_type_value == 'Firebase'</attribute>
+                        <attribute name="required">api_type_value == 'Umum'</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='password']" position="attributes">
+                        <attribute name="invisible">api_type_value == 'Firebase'</attribute>
+                        <attribute name="required">api_type_value == 'Umum'</attribute>
+                    </xpath>
+                    <!-- TODO: not found in parent, either there is no field with this name -->
+                     <!-- or in other module -->
+                    <!-- <xpath expr="//field[@name='host']" position="attributes">
+                        <attribute name="invisible">api_type_value == 'Firebase'</attribute>
+                    </xpath> -->
+                    <!-- <xpath expr="//field[@name='port']" position="attributes">
+                        <attribute name="invisible">api_type_value == 'Firebase'</attribute>
+                    </xpath> -->
+                    <xpath expr="//field[@name='token']" position="attributes">
+                        <attribute name="invisible">api_type_value == 'Firebase'</attribute>
+                    </xpath>
+                <!-- Attributes -->
+
+            </field>
+        </record>
+    <!-- inherited form view -->
+
+    <!-- Actions -->
+        <record id="action_tw_firebase_api_configuration" model="ir.actions.act_window">
+            <field name="name">Firebase API Configuration</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.api.configuration</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('api_type_value', '=', 'Firebase')]</field>
+            <field name="context" eval="{'default_api_type_id': ref('tw_firebase.tw_selection_type_api_firebase')}"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a new Firebase API Configuration
+                </p>
+                <p>
+                    Click the Create button to add a new Firebase content template
+                </p>
+            </field>
+        </record>
+
+        <record id="action_tw_firebase_api_configuration_list" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_firebase_api_configuration_list"/>
+            <field name="act_window_id" ref="action_tw_firebase_api_configuration"/>
+        </record>
+
+        <record id="action_tw_firebase_api_configuration_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_firebase_api_configuration_form"/>
+            <field name="act_window_id" ref="action_tw_firebase_api_configuration"/>
+        </record>
+    <!-- Actions -->
+
+    </data>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tw_branch_setting_part_hotline_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.branch.setting.part.hotline.inherit.form</field>
+        <field name="model">tw.branch.setting</field>
+        <field name="inherit_id" ref="tw_branch_setting.tw_branch_setting_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='provincial_minimum_wages']" position="after">
+                <field name="minimal_dp_part_hotline" string="Minimal DP Part Hotline (%)"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

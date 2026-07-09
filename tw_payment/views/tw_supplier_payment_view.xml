@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+         <!-- suppliers Payment-->
+
+         <record id="tw_supplier_payment_list_view" model="ir.ui.view">
+            <field name="name">Suppliers Payment</field>
+            <field name="model">tw.account.payment</field>
+            <field name="arch" type="xml">
+                <list edit="false" sample="1" default_order="id desc" decoration-info="state == 'draft'" decoration-muted="state == 'canceled'">
+                    <header>
+                        <button name="action_post" type="object" string="Confirm"/>
+                    </header>
+                    <field name="company_currency_id" column_invisible="True"/>
+                    <!-- <field name="suitable_journal_ids" column_invisible="True"/> -->
+                    <field name="available_payment_method_line_ids" column_invisible="True"/>
+                    <field name="company_id" string="Branch" readonly="state in ['cancel', 'in_process']"/>
+                    <field name="beneficiary_company_id" string="Bayar untuk" optional="show"/>
+                    <field name="division"/>
+                    <field name="name"/>
+                    <field name="journal_id"/>
+                    <field name="company_id" optional="hide" groups="base.group_multi_company"/>
+                    <field name="payment_method_line_id" context="{'hide_payment_journal_id': 1}"/>
+                    <field name="partner_id" string="Customer"/>
+                    <field name="currency_id" string="Payment Currency" optional="hide"/>
+                    <field name="activity_ids" widget="list_activity" optional="hide"/>
+                    <field name="amount" widget="monetary" optional="show"/>
+                    <field name="date" readonly="state in ['cancel', 'in_process']"/>
+                    <field name="state" widget="badge" decoration-info="state in ('draft','cancel','rejected')" decoration-warning="state not in ('draft','canceled','rejected','paid')" decoration-success="state == 'paid'"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_supplier_payment_action" model="ir.actions.act_window">
+            <field name="name">Suppliers Payment</field>
+            <field name="res_model">tw.account.payment</field>
+            <field name="view_mode">kanban,list,form,activity</field>
+            <field name="search_view_id" ref="tw_account_payment_search_view"/>
+            <field name="domain">[('type','=','supplier_payment'),('payment_type','=','outbound'),('partner_type','=','supplier')]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                  Add a new Suppliers Payment
+                </p><p>
+                  TEDS 2.0 helps you easily track all activities related to a Suppliers's Data
+                </p>
+            </field>
+        </record>
+
+        <!-- Need to be separated, because it cant read its own ID on install -->
+        <record id="tw_payment.tw_supplier_payment_action" model="ir.actions.act_window">
+            <field name="context" eval="
+                {
+                    'default_payment_type': 'outbound',
+                    'default_type': 'supplier_payment',
+                    'default_partner_type': 'supplier',
+                    'search_default_outbound_filter': 1,
+                    'search_default_draft': 1,
+                    'default_move_journal_types': ('bank', 'cash'),
+                    'display_account_trust': True,
+                    'action_id': ref('tw_payment.tw_supplier_payment_action'),
+                }
+            " />
+        </record>
+
+        <record id="tw_action_tw_supplier_payment_view_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_supplier_payment_list_view"/>
+            <field name="act_window_id" ref="tw_supplier_payment_action"/>
+        </record>
+
+        <record id="tw_action_tw_supplier_payment_form_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_account_payment_form_view"/>
+            <field name="act_window_id" ref="tw_supplier_payment_action"/>
+        </record>
+
+
+</odoo>

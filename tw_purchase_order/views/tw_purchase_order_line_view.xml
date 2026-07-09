@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherited List View -->
+			<record id="tw_inherit_purchase_order_line_tree" model="ir.ui.view">
+				<field name="name">tw.purchase.order.line.view.tree</field>
+				<field name="model">purchase.order.line</field>
+				<field name="inherit_id" ref="purchase.purchase_order_line_tree"/>
+				<field name="arch" type="xml">
+                    <xpath expr="//list" position="attributes">
+                        <attribute name="create">0</attribute>
+                        <attribute name="delete">0</attribute>
+                    </xpath>
+				</field>
+			</record>
+
+        <!-- Inherited Form View -->
+			<record id="tw_inherit_purchase_order_line_form" model="ir.ui.view">
+				<field name="name">tw.purchase.order.line.form</field>
+				<field name="model">purchase.order.line</field>
+				<field name="inherit_id" ref="purchase.purchase_order_line_form2" />
+				<field name="arch" type="xml">
+
+                    <xpath expr="//form" position="attributes">
+                        <attribute name="create">0</attribute>
+                        <attribute name="delete">0</attribute>
+                    </xpath>
+                    
+                    <field name="order_id" position="attributes">
+                        <attribute name="readonly">1</attribute>
+                        <attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+                    </field>
+                    
+                    <field name="product_id" position="attributes">
+                        <attribute name="readonly">1</attribute>
+                        <attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+                    </field>
+
+                    <field name="partner_id" position="attributes">
+                        <attribute name="readonly">1</attribute>
+                        <attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+                    </field>
+                    
+                    <field name="taxes_id" position="attributes">
+                        <attribute name="readonly">1</attribute>
+                        <attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+                    </field>
+                    
+                    <field name="company_id" position="attributes">
+                        <attribute name="readonly">1</attribute>
+                        <attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+                    </field>
+                    
+                    <field name="analytic_distribution" position="attributes">
+                        <attribute name="readonly">1</attribute>
+                        <attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+                    </field>
+                    
+                    <field name="price_unit" position="attributes">
+                        <attribute name="readonly">1</attribute>
+                    </field>
+                    
+                    <field name="name" position="attributes">
+                        <attribute name="readonly">1</attribute>
+                    </field>
+                </field>
+            </record>
+        
+        <record id="purchase_line_form_action" model="ir.actions.act_window">
+            <field name="name">On Purchase Order Lines</field>
+            <field name="res_model">purchase.order.line</field>
+            <field name="domain">[('state','in',('purchase','done')), ('qty_invoiced', '&lt;=', 0)]</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="purchase.purchase_order_line_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Here you can track all the lines of purchase orders where the
+                    invoicing is "Based on Purchase Order Lines", and for which you
+                    have not received a supplier invoice yet. You can generate a
+                    draft supplier invoice based on the lines from this list.
+                </p>
+            </field>
+        </record>
+       
+        <record id="purchase_line_form_action_tree2" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="purchase.purchase_order_line_tree"/>
+            <field name="act_window_id" ref="purchase_line_form_action"/>
+        </record>
+        <record id="purchase_line_form_action_form2" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_inherit_purchase_order_line_form"/>
+            <field name="act_window_id" ref="purchase_line_form_action"/>
+        </record>
+        
+    
+    </data>
+</odoo>

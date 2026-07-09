@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <!-- Header -->
+        <!-- BOOM -->
+        <menuitem id="tw_boom_menu" name="BOOM" sequence="5" parent="tw_menu.menu_tw_boom_top" groups="tw_boom.group_tw_boom"/>
+        <menuitem id="tw_boom_laporan_menu" name="Laporan" parent="tw_menu.menu_tw_boom_top" sequence="6" groups="tw_boom.group_tw_boom"/>
+        <menuitem id="tw_boom_configuration_menu" name="Configuration" parent="tw_menu.menu_tw_boom_top" sequence="7" groups="tw_boom.group_tw_boom"/>
+        
+        <!-- Submenu BOOM -->
+        <menuitem id="tw_boom_main_category_menu" 
+            action="action_tw_boom_main_category" 
+            name="Main Kategori" 
+            parent="tw_boom_configuration_menu" 
+            sequence="1" 
+            groups="tw_boom.group_tw_master_main_kategori_read" />
+
+        <menuitem id="tw_boom_sub_category_menu" 
+            action="action_tw_boom_sub_category" 
+            name="Sub Kategori" 
+            parent="tw_boom_configuration_menu" 
+            sequence="2" 
+            groups="tw_boom.group_tw_master_sub_kategori_read" />
+        
+        <menuitem id="tw_boom_category_menu" 
+            action="action_tw_boom_category" 
+            name="Kategori" 
+            parent="tw_boom_configuration_menu" 
+            sequence="3" 
+            groups="tw_boom.group_tw_master_category_read" />
+
+        <menuitem id="tw_boom_master_escalation_menu" 
+            action="action_tw_boom_master_escalation" 
+            name="Master Escalation" 
+            parent="tw_boom_configuration_menu" 
+            sequence="4" 
+            groups="tw_boom.group_tw_master_escalation_read" />
+
+        <menuitem id="tw_boom_master_quotes_menu"
+            action="action_tw_boom_master_quotes"
+            name="Master Quotes"
+            parent="tw_boom_configuration_menu"
+            sequence="5"
+            groups="tw_boom.group_tw_boom_master_quotes_read"/>
+
+        <menuitem id="tw_boom_task_menu" 
+            action="action_tw_boom_task_all" 
+            name="Task" 
+            parent="tw_boom_menu" 
+            sequence="1" 
+            groups="tw_boom.group_tw_boom_task_read" />
+
+        <menuitem id="tw_boom_task_delegated_menu" 
+            action="action_tw_boom_task_delegated" 
+            name="Task Delegated" 
+            parent="tw_boom_menu" 
+            sequence="1" 
+            groups="tw_boom.group_tw_boom_delegation_task_read" />
+
+        <menuitem id="tw_boom_delegation_task_menu" 
+            action="action_tw_boom_delegation_task" 
+            name="Delegation Task" 
+            parent="tw_boom_menu" 
+            sequence="2" 
+            groups="tw_boom.group_tw_boom_delegation_task_read" />
+
+        <menuitem id="tw_boom_task_history_root_menu" 
+              name="History Log" 
+              parent="tw_boom_configuration_menu" 
+              sequence="50"
+              groups="base.group_system"/>   
+
+        <menuitem id="tw_boom_task_history_menu" 
+            action="action_tw_boom_task_history" 
+            name="History Task Log" 
+            parent="tw_boom_task_history_root_menu" 
+            sequence="10"
+            groups="tw_boom.group_tw_boom_task_read"/>
+
+        <menuitem id="tw_boom_task_report_menu"
+            action="action_tw_boom_task_report_wizard"
+            name="Laporan BOOM Task"
+            parent="tw_boom_laporan_menu" 
+            sequence="10"
+            groups="tw_boom.group_tw_boom_task_read"/>
+
+        <menuitem id="tw_boom_task_delegate_report_menu"
+            action="action_tw_boom_task_delegate_report_wizard"
+            name="Laporan Delegasi BOOM Task"
+            parent="tw_boom_laporan_menu" 
+            sequence="11"
+            groups="tw_boom.group_tw_boom_delegation_task_read"/>
+    </data>
+</odoo>

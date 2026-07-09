@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">  
+        <!-- Account Filter Transaction Type Selections -->
+
+        <record id="selection_account_filter_collecting" model="tw.selection">
+            <field name="type">AccountFilterTransactionType</field>
+            <field name="value">collecting</field>
+            <field name="name">Collecting</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="selection_account_filter_collecting_branch" model="tw.selection">
+            <field name="type">AccountFilterTransactionType</field>
+            <field name="value">collecting_branch</field>
+            <field name="name">Collecting Cabang</field>
+            <field name="active" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

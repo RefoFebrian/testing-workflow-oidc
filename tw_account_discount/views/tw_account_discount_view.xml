@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_account_discount_master_list_view" model="ir.ui.view">
+            <field name="name">tw.account.discount.master.list.view</field>
+            <field name="model">tw.account.discount</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name" />
+                    <field name="type" />
+                    <field name="is_all_branch" optional="hide" />
+                    <field name="company_id" optional="hide" />
+                    <field name="currency_id" optional="hide" />
+                    <field name="account_id" />
+                    <field name="company_ids" widget="many2many_tags" optional="hide" />
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_account_discount_master_form_view" model="ir.ui.view">
+            <field name="name">tw.account.discount.master.form.view</field>
+            <field name="model">tw.account.discount</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1" />
+                                <field name="type" required="1" />
+                                <field name="discount_type" required="1" />
+                                <field name="invoice_filter_type_domain" invisible="1" />
+                                <field name="account_id" required="1" />
+                                <field name="tax_country_id" invisible="1" />
+                                <field name="fiscal_position_id" invisible="1" />
+                                <field name="price_include_override" required="1" />
+                                <field name="tax_ids" widget="many2many_tags" domain="[('type_tax_use', '=', invoice_filter_type_domain), ('price_include_override', '=', price_include_override)]" options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+                            <group>
+                                <field name="is_all_branch" />
+                                <field name="company_id" />
+                                <field name="currency_id" invisible="1" />
+                                <field name="company_ids" widget="many2many_tags" readonly="is_all_branch == True" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="audit_trail" string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" />
+                                        <field name="create_date" />
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" />
+                                        <field name="write_date" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_account_discount_master_filter" model="ir.ui.view">
+            <field name="name">tw.account.discount.master.filter</field>
+            <field name="model">tw.account.discount</field>
+            <field name="arch" type="xml">
+                <search string="Search Account Discount">
+                    <field name="name"/>
+                    <field name="type" />
+                    <field name="account_id" />
+                    <field name="company_id" />
+                    <field name="company_ids" />
+                    <group expand="1" string="Group By">
+						<filter string="Type" name="group_by_type" context="{'group_by':'type'}"/>
+                        <filter string="Account" name="group_by_account" context="{'group_by':'account_id'}"/>
+                        <filter string="Branch" name="group_by_company" context="{'group_by':'company_id'}"/>
+                        <filter string="Discount Type" name="group_by_discount_type" context="{'group_by':'discount_type'}"/>
+                        <filter string="Include In Price" name="group_by_include_in_price" context="{'group_by':'price_include_override'}"/>
+                        <filter string="Tax" name="group_by_tax" context="{'group_by':'tax_ids'}"/>
+					</group>
+                </search>
+            </field>
+        </record>  
+
+        <record id="tw_account_discount_master_act_window" model="ir.actions.act_window">
+            <field name="name">Account Discount</field>
+            <field name="res_model">tw.account.discount</field>
+            <field name="path">account-discount</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+    </data>
+</odoo>

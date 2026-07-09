@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+        <record id="tw_sales_program_partner_list_view" model="ir.ui.view">
+            <field name="name">tw.sales.program.partner.list</field>
+            <field name="model">tw.sales.program</field>
+            <field name="inherit_id" ref="tw_sales_program.tw_sales_program_list_view"/>
+            <field name="arch" type="xml">
+                <field name="sales_program_type_id" position="after">
+                    <field name="finco_id" widget="many2many_tags" optional="hide"/>
+                </field>
+            </field>
+        </record>
+        
+        <record id="tw_sales_program_partner_form_view" model="ir.ui.view">
+            <field name="name">tw.sales.program.partner.form</field>
+            <field name="model">tw.sales.program</field>
+            <field name="inherit_id" ref="tw_sales_program.tw_sales_program_form_view"/>
+            <field name="arch" type="xml">
+                <field name="partner_ref" position="after">
+                    <field name="subsidy_type" required="sales_program_type_name == 'Program Subsidi'" invisible="sales_program_type_name != 'Program Subsidi'" readonly="state not in ('draft', 'on_revision')"/>
+                    <field name="finco_id" widget="many2many_tags" invisible="sales_program_type_name != 'Program Subsidi'" readonly="state not in ('draft', 'on_revision')" options="{'no_create': True, 'no_open': True}"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="tw_sales_program_partner_search_view" model="ir.ui.view">
+            <field name="name">tw.sales.program.partner.search</field>
+            <field name="model">tw.sales.program</field>
+            <field name="inherit_id" ref="tw_sales_program.tw_sales_program_search_view"/>
+            <field name="arch" type="xml">
+                <field name="division" position="after">
+                    <field name="subsidy_type"/>
+                    <field name="finco_id" filter_domain="[('finco_id', 'in', [self])]"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

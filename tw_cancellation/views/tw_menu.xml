@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>      
+        <!-- Showroom -->
+        <menuitem id="submenu_showroom_tw_cancellation" name="Cancellation" parent="tw_menu.menu_tw_showroom" sequence="40" />
+        <menuitem id="submenu_workshop_tw_cancellation" name="Cancellation" parent="tw_menu.menu_tw_workshop" sequence="40" />
+        <menuitem id="submenu_backoffice_tw_cancellation" name="Cancellation" parent="tw_menu.menu_tw_backoffice" sequence="79" />
+        
+        <menuitem action="tw_cancellation_action" id="tw_cancellation_menu" parent="tw_cancellation.submenu_showroom_tw_cancellation" sequence="1"/>
+    </data>
+</odoo>

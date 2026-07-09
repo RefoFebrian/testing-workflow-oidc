@@ -1,0 +1,20 @@
+<odoo>
+	<data>
+
+		<record id="sale.sale_menu_root" model="ir.ui.menu">
+			<field name="parent_id" ref="tw_menu.menu_tw_odoo_default" />
+		</record>
+
+		<record id="utm.menu_link_tracker_root" model="ir.ui.menu">
+			<field name="parent_id" ref="tw_menu.menu_tw_odoo_default" />
+		</record>
+
+		<record id="spreadsheet_dashboard.spreadsheet_dashboard_menu_root" model="ir.ui.menu">
+			<field name="parent_id" ref="tw_menu.menu_tw_odoo_default" />
+		</record>
+
+		<menuitem id="menu_tw_sale_order_showroom" name="Sales Order" action="tw_sale.tw_sale_order_action_showroom" parent="tw_menu.submenu_tw_showroom_h1" sequence="2" groups="tw_sale.group_tw_sale_order_showroom_read"/>
+		<menuitem id="submenu_tw_sale_order" name="Sales Order" parent="tw_menu.submenu_tw_workshop_h3" sequence="20" />
+		<menuitem id="menu_tw_sale_order_workshop" name="Sales Order" action="tw_sale.tw_sale_order_action_workshop" parent="tw_sale.submenu_tw_sale_order" sequence="10" groups="tw_sale.group_tw_sale_order_workshop_read"/>
+	</data>
+</odoo>

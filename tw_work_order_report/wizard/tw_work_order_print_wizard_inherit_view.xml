@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tw_work_order_print_wizard_form_inherit_kwitansi" model="ir.ui.view">
+        <field name="name">tw.work.order.print.wizard.form.inherit.kwitansi</field>
+        <field name="model">tw.work.order.print.wizard</field>
+        <field name="inherit_id" ref="tw_work_order.view_tw_work_order_print_wizard_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('d-flex', 'justify-content-center', 'flex-wrap')]" position="inside">
+                <button name="action_print_kwitansi" string=" Kwitansi WO" type="object" class="btn-outline-primary mx-1 mb-2 px-3 py-2 shadow-sm border rounded" icon="fa-file-pdf-o" groups="tw_work_order_report.group_button_print_kuitansi" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

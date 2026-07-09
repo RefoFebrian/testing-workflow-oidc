@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- Menu Item -->
+    <menuitem id="tw_vehicle_document_update_data_menu" name="Change Data" parent="tw_vehicle_document.tw_vehicle_document_misc_menu_sub" sequence="25"/>
+    <menuitem id="tw_vehicle_document_update_data_submenu" name="Change Data Serial Number" parent="tw_vehicle_document_update_data_menu" action="tw_vehicle_document_update_data_action" sequence="10" groups="tw_vehicle_document_update_data.group_tw_vehicle_document_update_data_read"/>
+  </data>
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_select_stock_location_asset" model="tw.selection">
+            <field name="name">Asset</field>
+            <field name="value">asset</field> 
+	    	<field name="type">StockLocation</field>
+        </record>
+        
+    </data>
+</odoo>

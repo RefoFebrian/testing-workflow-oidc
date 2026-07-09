@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_stock_location_branch_inherit_view" model="ir.ui.view">
+            <field name="name">tw.stock.location.branch.inherit.tree</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_tree2" />
+            <field name="arch" type="xml">
+                <field name="complete_name" position="after">
+                    <field name="company_id" optional="show"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="tw_stock_location_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.location.form</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='location_id']" position="before">
+                    <label for="company_id"/>
+                    <h3>
+                        <field name="company_id" placeholder="e.g. Name/Code Dealer" options="{'no_create': True}"/>
+                    </h3>
+                </xpath>
+                <xpath expr="//field[@name='storage_category_id']" position="after">
+                    <field name="description"/>
+                    <field name="type_id" options="{'no_create': True}"/>
+                    <field name="division"/>
+                    <field name="capacity" invisible="division == 'Sparepart'" required="is_restrict_capacity == True"/>
+                    <field name="residual_capacity" invisible="division == 'Sparepart'"/>
+                    <field name="taken_capacity" widget="progressbar" invisible="division == 'Sparepart'"/>
+                    <field name="is_restrict_capacity"/>
+                    <field name="is_temporary_location"/>
+                    <field name="is_allow_negative_stock" invisible="location_id"/>
+                </xpath>
+                <xpath expr="//group[@name='additional_info']" position="after">
+                    <group string="Address">
+                        <div>
+                            <field name="street" placeholder="Street..." modifiers="{}"/>
+                            <div>
+                                <field name="street2" placeholder="Street" style="width: 50%" modifiers="{}"/>
+                                <field name="rt" placeholder="RT" style="width: 25%" modifiers="{}"/>
+                                <field name="rw" placeholder="RW" style="width: 25%" modifiers="{}"/>
+                                <field name="state_id" class="oe_no_button" placeholder="Province" style="width: 50%" options="{'no_open': True}" modifiers="{}"/>
+                                <field name="city_id" placeholder="City" style="width: 50%" options="{'no_open': True}" modifiers="{}"/>
+                                <field name="district_id" placeholder="Kecamatan" style="width: 50%" options="{'no_open': True}" modifiers="{}"/>
+                                <field name="district" placeholder="Kecamatan" style="width: 50%" modifiers="{}"/>
+                                <field name="sub_district_id" placeholder="Kelurahan" style="width: 50%" options="{'no_open': True}" modifiers="{}"/>
+                                <field name="sub_district" class="oe_no_button" placeholder="Kelurahan" style="width: 50%" modifiers="{}"/>
+                            </div>
+                        </div>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_stock_location_filter_inherit" model="ir.ui.view">
+            <field name="name">tw.stock.location.filter.inherit</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_search" />
+            <field name="arch" type="xml">
+                <field name="complete_name" position="before">
+                    <field name="company_id"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

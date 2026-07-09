@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Backoffice -->
+    <menuitem id="menu_collecting_ar_ap" name="Collecting AR/AP" parent="tw_menu.submenu_tw_backoffice_non_trade" action="tw_collecting_ar_ap_action" sequence="130" groups="tw_collecting.group_tw_collecting_read"/>
+    <menuitem id="menu_collecting" name="Collecting Journal Entries" parent="tw_menu.submenu_tw_backoffice_non_trade" action="tw_collecting_action" sequence="140" groups="tw_collecting.group_tw_collecting_entries_read"/>
+
+</odoo>

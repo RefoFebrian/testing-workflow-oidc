@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_work_order_crm_regular_visit_ahass_data" model="tw.selection">
+            <field name="name">Regular Visit AHASS</field>
+            <field name="type">AlasanKeAHASS</field>
+            <field name="value">regular_visit_ahass</field>
+            <field name="internal_value">regular_visit_ahass</field>
+        </record>
+        <record id="tw_work_order_crm_sms_call_reminder_data" model="tw.selection">
+            <field name="name">SMS &amp; Call Reminder</field>
+            <field name="type">AlasanKeAHASS</field>
+            <field name="value">sms_call_reminder</field>
+            <field name="internal_value">sms_call_reminder</field>
+        </record>
+        <record id="tw_work_order_crm_service_visit_data" model="tw.selection">
+            <field name="name">Service Visit</field>
+            <field name="type">AlasanKeAHASS</field>
+            <field name="value">service_visit</field>
+            <field name="internal_value">service_visit</field>
+        </record>
+        <record id="tw_work_order_crm_ahass_keliling_data" model="tw.selection">
+            <field name="name">AHASS Keliling</field>
+            <field name="type">AlasanKeAHASS</field>
+            <field name="value">ahass_keliling</field>
+            <field name="internal_value">ahass_keliling</field>
+        </record>
+        <record id="tw_work_order_crm_home_care_data" model="tw.selection">
+            <field name="name">Home Care</field>
+            <field name="type">AlasanKeAHASS</field>
+            <field name="value">home_care</field>
+            <field name="internal_value">home_care</field>
+        </record>
+        <record id="tw_work_order_crm_pos_service_data" model="tw.selection">
+            <field name="name">Pos Service</field>
+            <field name="type">AlasanKeAHASS</field>
+            <field name="value">pos_service</field>
+            <field name="internal_value">pos_service</field>
+        </record>
+        <record id="tw_work_order_crm_join_dealer_activity_data" model="tw.selection">
+            <field name="name">Join Dealer Activity</field>
+            <field name="type">AlasanKeAHASS</field>
+            <field name="value">join_dealer_activity</field>
+            <field name="internal_value">join_dealer_activity</field>
+        </record>
+        <record id="tw_work_order_crm_group_customer_data" model="tw.selection">
+            <field name="name">Group Customer</field>
+            <field name="type">AlasanKeAHASS</field>
+            <field name="value">group_customer</field>
+            <field name="internal_value">group_customer</field>
+        </record>
+        <record id="tw_work_order_crm_public_area_data" model="tw.selection">
+            <field name="name">Public Area</field>
+            <field name="type">AlasanKeAHASS</field>
+            <field name="value">public_area</field>
+            <field name="internal_value">public_area</field>
+        </record>
+        <record id="tw_work_order_crm_emergency_data" model="tw.selection">
+            <field name="name">Emergency</field>
+            <field name="type">AlasanKeAHASS</field>
+            <field name="value">emergency</field>
+            <field name="internal_value">emergency</field>
+        </record>
+        <record id="tw_work_order_crm_ahass_event_ahm_data" model="tw.selection">
+            <field name="name">AHASS Event yang di Develop oleh AHM</field>
+            <field name="type">AlasanKeAHASS</field>
+            <field name="value">ahass_event_ahm</field>
+            <field name="internal_value">ahass_event_ahm</field>
+        </record>
+        <record id="tw_work_order_crm_ahass_event_md_data" model="tw.selection">
+            <field name="name">AHASS Event yang di Develop oleh MD</field>
+            <field name="type">AlasanKeAHASS</field>
+            <field name="value">ahass_event_md</field>
+            <field name="internal_value">ahass_event_md</field>
+        </record>
+        <record id="tw_work_order_crm_ahass_event_ahass_data" model="tw.selection">
+            <field name="name">AHASS Event yang di Develop oleh AHASS</field>
+            <field name="type">AlasanKeAHASS</field>
+            <field name="value">ahass_event_ahass</field>
+            <field name="internal_value">ahass_event_ahass</field>
+        </record>
+        <record id="tw_work_order_crm_pit_express_outdoor_data" model="tw.selection">
+            <field name="name">Pit Express Outdoor</field>
+            <field name="type">AlasanKeAHASS</field>
+            <field name="value">pit_express_outdoor</field>
+            <field name="internal_value">pit_express_outdoor</field>
+        </record>
+        <record id="tw_work_order_crm_pit_express_indoor_data" model="tw.selection">
+            <field name="name">Pit Express Indoor</field>
+            <field name="type">AlasanKeAHASS</field>
+            <field name="value">pit_express_indoor</field>
+            <field name="internal_value">pit_express_indoor</field>
+        </record>
+        <record id="tw_work_order_crm_non_promotion_data" model="tw.selection">
+            <field name="name">Non Promotion (Walk in)</field>
+            <field name="type">AlasanKeAHASS</field>
+            <field name="value">non_promotion</field>
+            <field name="internal_value">non_promotion</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- List View -->
+        <record id="tw_listing_cetak_kwitansi_list_view" model="ir.ui.view">
+            <field name="name">tw.listing.cetak.kwitansi.list</field>
+            <field name="model">tw.listing.cetak.kwitansi</field>
+            <field name="type">list</field>
+            <field name="arch" type="xml">
+                <list string="Listing Cetak Kwitansi" default_order="id desc">
+                    <field name="company_id"/>
+					<field name="name"/>
+					<field name="date"/>
+					<field name="reference_no"/>
+					<field name="payer_name"/>
+					<field name="total"/>
+					<field name="state" widget="badge" decoration-info="state in ('draft', 'cancelled')" decoration-warning="state not in ('draft', 'cancelled', 'posted')" decoration-success="state == 'posted'"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="tw_listing_cetak_kwitansi_form_view" model="ir.ui.view">
+            <field name="name">tw.listing.cetak.kwitansi.form</field>
+            <field name="model">tw.listing.cetak.kwitansi</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Listing Cetak Kwitansi">
+ 		        	<header>
+                        <button name="action_post" string="Post" type="object" invisible="state != 'draft'" groups="tw_listing_cetak_kwitansi.group_tw_listing_cetak_kwitansi_button_post"/>
+						<button name="action_update_faktur_pajak_kwitansi" string="Faktur Pajak" type="object" invisible="state in ('draft', 'cancelled') or number_faktur_pajak != False" groups="tw_listing_cetak_kwitansi.group_tw_listing_cetak_kwitansi_button_faktur_pajak"/>
+						<button name="action_to_revisi" string="Revisi" type="object" invisible="state != 'posted'" groups="tw_listing_cetak_kwitansi.group_tw_listing_cetak_kwitansi_button_revisi"/>
+						<button name="action_cancel_kwitansi" string="Cancel" type="object" invisible="state != 'posted'" groups="tw_listing_cetak_kwitansi.group_tw_listing_cetak_kwitansi_button_cancel"/>
+						<button name="action_pembayaran_kwitansi" string="Pembayaran" type="object" invisible="state != 'posted'" groups="tw_listing_cetak_kwitansi.group_tw_listing_cetak_kwitansi_button_payment"/>
+						<button name="action_print_listing_cetak_kwitansi_pdf" string="Print" type="object" invisible="state != 'posted'"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,posted" statusbar_colors='{"draft": "red", "posted": "blue"}'/>
+		        	</header>
+                    <sheet>
+                        <div class="oe_title">
+	                        <label for="name" class="oe_edit_only" string="No Kwitansi"/>
+	                        <h1>
+	                            <field name="name" readonly="1"/>
+	                        </h1>
+  						</div>
+                        <group>
+                            <group>
+                                <field name="company_id" options="{'no_create': True, 'no_open': True}" required="1" readonly="name != False"/>
+								<field name="payer_name" required="1" readonly="state != 'draft'"/>
+								<field name="total" required="1" readonly="state != 'draft'"/>
+								<field name="editorial" required="1" readonly="state != 'draft'"/>
+								<field name="journal_id" domain="['|', ('code','=','BK01HHO'), ('company_id','=',company_id), ('type','=','bank')]" options="{'no_create': True, 'no_open': True}" required="1" readonly="state != 'draft'"/>
+								<field name="account_name" readonly="1"/>
+								<field name="proof_of_payment_no" readonly="1" invisible="proof_of_payment_no == False"/> 
+								<field name="payment_date" readonly="1" invisible="payment_date == False"/>
+								<field name="cancel_reason" readonly="1" invisible="cancel_reason == False"/>
+                            </group>
+                            <group>
+                                <field name="date" readonly="1"/>
+								<field name="transaction_type" required="1" readonly="state != 'draft'"/>
+								<field name="reference_no" readonly="state != 'draft'"/>
+								<field name="branch_head_name" required="1" readonly="state != 'draft'"/>
+								<field name="is_ppn" readonly="1"/>
+								<field name="number_faktur_pajak" required="is_ppn != False" invisible="is_ppn == False" readonly="state != 'draft'"/>
+								<field name="print_to" readonly="1" groups="tw_listing_cetak_kwitansi.group_tw_listing_cetak_kwitansi_button_print_pdf"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"/>
+                                        <field name="create_date" readonly="1"/>
+                                        <field name="confirm_uid" readonly="1" invisible="confirm_uid == False"/>
+										<field name="confirm_date" readonly="1" invisible="confirm_date == False"/>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1"/>
+                                        <field name="write_date" readonly="1"/>
+                                        <field name="cancel_uid" readonly="1" invisible="cancel_uid == False"/>
+										<field name="cancel_date" readonly="1" invisible="cancel_date == False"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+			    </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="tw_listing_cetak_kwitansi_search_view" model="ir.ui.view">
+            <field name="name">tw.listing.cetak.kwitansi.search</field>
+            <field name="model">tw.listing.cetak.kwitansi</field>
+            <field name="arch" type="xml">
+                <search string="Listing Cetak Kwitansi">
+                    <field name="name" select="True"/>
+                    <field name="company_id" select="True"/>
+                    <field name="reference_no" select="True"/>
+                    <field name="payer_name" select="True"/>
+                    <field name="branch_head_name" select="True"/>   
+                    <field name="editorial" select="True"/> 
+                    <field name="account_name" select="True"/>
+                    <field name="journal_id" select="True"/>
+                    <filter name="draft_state" string="Draft" domain="[('state','=','draft')]"/>
+                    <filter name="posted_state" string="Posted" domain="[('state','=','posted')]"/>
+                    <filter name="paid_state" string="Paid" domain="[('state','=','paid')]"/>
+                    <filter name="cancelled_state" string="Cancelled" domain="[('state','=','cancelled')]"/>
+                    <group string="Group By..">
+                        <filter string="Branch" domain="[]" name="group_by_company_id" context="{'group_by': 'company_id'}"/>
+                        <filter string="State" domain="[]" name="group_by_state" context="{'group_by': 'state'}"/>
+                        <filter string="Tanggal Kwitansi" domain="[]" name="group_by_date" context="{'group_by': 'date'}"/>
+                        <filter string="Transaction Type" domain="[]" name="group_by_transaction_type" context="{'group_by': 'transaction_type'}"/>
+                        <filter string="Jenis Transaksi" domain="[]" name="group_by_jenis_transaksi" context="{'group_by': 'transaction_type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Wizard Form View -->
+        <record id="tw_listing_cetak_kwitansi_wizard_view" model="ir.ui.view">
+			<field name="name">tw.listing.cetak.kwitansi.wizard</field>
+			<field name="model">tw.listing.cetak.kwitansi</field>
+			<field name="priority">20</field>
+			<field name="arch" type="xml">
+				<form>
+					<group>
+                        <!-- Faktur Pajak Kwitansi -->
+						<field name="number_faktur_pajak" invisible="context.get('wizard_type') != 'faktur_pajak'" required="context.get('wizard_type') == 'faktur_pajak'"/>
+
+                        <!-- Cancel Kwitansi -->
+                        <field name="cancel_reason" invisible="context.get('wizard_type') != 'cancel_kwt'" required="context.get('wizard_type') == 'cancel_kwt'"/>
+                        
+                        <!-- Pembayaran Kwitansi -->
+                        <field name="proof_of_payment_no" invisible="context.get('wizard_type') != 'payment_kwt'" required="context.get('wizard_type') == 'payment_kwt'"/>
+						<field name="payment_date" invisible="context.get('wizard_type') != 'payment_kwt'" required="context.get('wizard_type') == 'payment_kwt'"/>
+					</group>
+					<footer>
+						<button name="action_submit_faktur" string="Update" type="object" invisible="context.get('wizard_type') != 'faktur_pajak'" class="oe_highlight"/>
+                        <button name="action_cancel" string="Submit" type="object" invisible="context.get('wizard_type') != 'cancel_kwt'" class="oe_highlight"/>
+                        <button name="action_submit_pembayaran" string="Submit" type="object" invisible="context.get('wizard_type') != 'payment_kwt'" class="oe_highlight"/>
+						<button string="Cancel" class="oe_link" special="cancel"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+        <!-- Action View -->
+        <record id="tw_listing_cetak_kwitansi_action" model="ir.actions.server">
+            <field name="name">Listing Cetak Kwitansi</field>
+            <field name="model_id" ref="tw_listing_cetak_kwitansi.model_tw_listing_cetak_kwitansi"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['tw.listing.cetak.kwitansi'].action_listing_cetak_kwitansi_tree()
+            </field>
+        </record>
+        
+    </data>
+</odoo>

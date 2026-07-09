@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="contact_tags_expedition" model="res.partner.category">
+            <field name="name">Expedition</field>
+            <field name="color" eval="4"/>
+        </record>
+        <record id="contact_tags_driver" model="res.partner.category">
+            <field name="name">Driver</field>
+            <field name="color" eval="2"/>
+        </record>
+    </data>
+</odoo>

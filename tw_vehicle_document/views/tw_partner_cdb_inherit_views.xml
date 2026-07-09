@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_partner_cdb_form_inherit_add_footer" model="ir.ui.view">
+            <field name="name">tw.partner.cdb.form.inherit.add.footer</field>
+            <field name="model">tw.partner.cdb</field>
+            <field name="inherit_id" ref="tw_partner_cdb.view_tw_partner_cdb_form"/>
+            <field name="arch" type="xml">
+              <xpath expr="//form/sheet" position="after">
+                <footer>
+                    <field name="context_is_edit_cdb_lot" invisible="1"/>
+                  <button name="action_save_cdb"
+                          string="Save &amp; Confirm CDB"
+                          type="object"
+                          class="oe_highlight btn-primary"
+                          invisible="not context_is_edit_cdb_lot"/>
+                  <button string="Discard" class="btn-secondary" special="cancel"/>
+                </footer>
+              </xpath>
+            </field>
+          </record>
+          
+          
+
+        <record id="tw_customer_action" model="ir.actions.act_window">
+            <field name="name">Form CDDB</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.partner.cdb</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_partner_cdb.view_tw_partner_cdb_form"/>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

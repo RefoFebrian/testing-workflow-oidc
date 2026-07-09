@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Add Xendit smart button to payment form -->
+    <record id="tw_account_payment_form_inherit_xendit_view" model="ir.ui.view">
+        <field name="name">tw.account.payment.form.inherit.xendit</field>
+        <field name="model">tw.account.payment</field>
+        <field name="inherit_id" ref="tw_payment.tw_account_payment_form_view"/>
+        <field name="arch" type="xml">
+            <field name="payment_method_line_id" position="after">
+                <field name="payment_transaction_id" readonly="1" force_save="1" options="{'no_create': True, 'no_open': True}" invisible="not payment_transaction_id"/>
+            </field>
+
+            <button name="action_validate" position="attributes">
+                <attribute name="invisible" add="payment_method_code == 'xendit'" separator=" or "/>
+            </button>
+
+            <button name="action_post" position="after">
+                <button name="action_create_xendit_payment" string="Create Xendit Payment" type="object" invisible="payment_transaction_id or payment_method_code != 'xendit' or state not in ('in_process')"/>
+                <button name="action_open_payment_url" string="Open Payment Page" type="object" invisible="not payment_transaction_id" class="btn btn-primary"/>
+                <button name="action_check_payment_status" string="Check Status" type="object" invisible="state not in ('draft', 'in_process') or not payment_transaction_id"/>
+                <button name="action_cancel_online_payment" string="Cancel Online Payment" type="object" invisible="not payment_transaction_id or payment_method_code != 'xendit' or state not in ('in_process')"/>
+                <button name="action_draft" string="Set to Draft" type="object" invisible="payment_transaction_id or payment_method_code != 'xendit' or state not in ('in_process')"/>
+            </button>
+
+            <field name="id" position="before">
+                <widget name="web_ribbon" title="Paid" invisible="state != 'paid' or payment_method_code != 'xendit'"/>
+            </field>
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <div name="xendit_button_box" class="d-inline-flex align-items-center ms-2">
+                    
+                    <button 
+                        name="action_view_payment_transaction" 
+                        type="object" 
+                        class="btn btn-outline-secondary"
+                        invisible="not payment_transaction_id"
+                        groups="tw_payment_xendit.group_tw_payment_xendit_view_payment_transaction">
+                        <i class="fa fa-eye me-1" title="View"/> View Payment
+                    </button>
+
+                    
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

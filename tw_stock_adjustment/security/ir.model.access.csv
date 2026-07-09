@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_stock_adjustment,tw_stock_adjustment,model_tw_stock_adjustment,base.group_user,1,0,0,0
+access_tw_stock_adjustment_line,tw_stock_adjustment_line,model_tw_stock_adjustment_line,base.group_user,1,0,0,0
+access_tw_stock_adjustment_report,tw_stock_adjustment_report,model_tw_stock_adjustment_report,base.group_user,1,1,1,0

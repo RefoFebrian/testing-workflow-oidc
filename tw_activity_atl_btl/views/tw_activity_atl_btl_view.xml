@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_activity_atl_btl_list_view" model="ir.ui.view">
+            <field name="name">tw.activity.plan.list</field>
+            <field name="model">tw.activity.atl.btl</field>
+            <field name="arch" type="xml">
+                <list delete="0">
+                    <field name="company_id"/>
+                    <field name="name"/>
+                    <field name="month"/>
+                    <field name="year"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_activity_atl_btl_form_view" model="ir.ui.view">
+            <field name="name">tw.activity.plan.form</field>
+            <field name="model">tw.activity.atl.btl</field>
+            <field name="arch" type="xml">
+                <form delete="0">
+                    <header>
+                        <button name="action_add_activity" string="Add Activity" type="object" class="oe_highlight" invisible="context.get('result_btl') or state not in ('approved','open')" groups="tw_activity_atl_btl.group_add_activity_btl_button"/>
+                        <button name="action_print_btl" string="Print BTL" type="object" invisible="state not in ('approved','open')"/>
+                        <button name="action_done_activity_atl_btl" string="Done" type="object" class="oe_highlight" invisible="not context.get('result_btl') and state != 'open'" groups="tw_activity_atl_btl.group_done_activity_btl_button"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,open"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" invisible="not name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group col="2">
+                                <field name="company_id" options="{'no_open':True,'no_create':True}" required="1" readonly="name != False"/>
+                                <label for="month" string="Periode"/>
+                                <div>
+                                    <field name="month" required="1" class="oe_inline" readonly="state != 'draft'"/>
+/
+                                    <field name="year" required="1" class="oe_inline" readonly="state != 'draft'"/>
+                                </div>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Detail" name="activity_atl_btl_detail">
+                                <field name="activity_line_ids" options="{'no_open':True,'no_create':True}" nolabel="1" readonly="state != 'draft'" context="{
+                                        'list_view_ref': 'tw_activity_atl_btl.tw_activity_atl_btl_line_all_list_view',
+                                        'form_view_ref': 'tw_activity_atl_btl.tw_activity_atl_btl_line_all_form_view',
+                                        'create': True,
+                                        'edit': True,
+                                        'delete': True
+                                    }">
+                                </field>
+                            </page>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group col="2">
+                                        <field name="create_uid" readonly="1"/>
+                                        <field name="create_date" readonly="1"/>
+                                    </group>
+                                    <group col="2">
+                                        <field name="write_uid" readonly="1"/>
+                                        <field name="write_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_activity_atl_btl_filter" model="ir.ui.view">
+            <field name="name">tw.activity.atl.btl.filter</field>
+            <field name="model">tw.activity.atl.btl</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="month"/>
+                    <field name="year"/>
+                    <field name="activity_line_ids" string="Activity Name" filter_domain="[('activity_line_ids.activity_name', 'ilike', self)]"/>
+                    <field name="activity_line_ids" string="Jaringan Penjualan" filter_domain="[('activity_line_ids.sales_channel_id', 'ilike', self)]"/>
+                    <field name="activity_line_ids" string="Activity Type" filter_domain="[('activity_line_ids.act_type_id', 'ilike', self)]"/>
+                    <field name="activity_line_ids" string="Mapping Titik Keramaian" filter_domain="[('activity_line_ids.mapping_activity_id', 'ilike', self)]"/>
+                    <field name="activity_line_ids" string="PIC" filter_domain="[('activity_line_ids.pic_id', 'ilike', self)]"/>
+                    <field name="activity_line_ids" string="Start Date" filter_domain="[('activity_line_ids.start_date', 'ilike', self)]"/>
+
+                    <filter string="Draft" name="state_draft" domain="[('state','=','draft')]" />
+                    <filter string="Waiting for Approval" name="state_waiting_for_approval" domain="[('state','=','waiting_for_approval')]" />
+                    <filter string="Approved" name="state_approved" domain="[('state','=','approved')]"/>
+                    <filter string="Open" name="state_open" domain="[('state','=','open')]"/>
+                    <filter string="Done" name="state_done" domain="[('state','=','done')]"/>
+
+                    <group expand="1" string="Group By">
+                        <filter string="Branch" name="group_by_branch" context="{'group_by':'company_id'}"/>
+                        <filter string="Status" name="group_by_state" context="{'group_by':'state'}"/>
+                        <filter string="Bulan" name="group_by_month" context="{'group_by':'month'}"/>
+                        <filter string="Tahun" name="group_by_year" context="{'group_by':'year'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="tw_activity_atl_btl_action" model="ir.actions.act_window">
+            <field name="name">Activity Plans</field>
+            <field name="res_model">tw.activity.atl.btl</field>
+            <field name="path">activity-atl-btl</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="tw_activity_atl_btl.tw_activity_atl_btl_filter"/>
+            <field name="context">{
+                'result_btl': False,
+                'search_default_state_draft':1,
+                'search_default_state_approved':1,
+                'search_default_state_open':1}</field>
+        </record>
+
+        <record id="tw_activity_atl_btl_activity_list_action" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_activity_atl_btl_list_view"/>
+            <field name="act_window_id" ref="tw_activity_atl_btl_action"/>
+        </record>
+
+        <record id="tw_activity_atl_btl_activity_form_action" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_activity_atl_btl_form_view"/>
+            <field name="act_window_id" ref="tw_activity_atl_btl_action"/>
+        </record>
+
+    </data>
+</odoo>

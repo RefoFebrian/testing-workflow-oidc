@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="mrp.menu_mrp_root" model="ir.ui.menu">
+            <field name="parent_id" ref="tw_menu.menu_tw_odoo_default" />
+        </record>
+
+        <!-- Showroom -->
+        <menuitem id="submenu_showroom_tw_manufacture_workcenter" action="mrp.mrp_workcenter_action" parent="tw_mrp.submenu_showroom_tw_manufacture_configuration" sequence="90" groups="tw_mrp_workcenter.group_tw_mrp_workcenter_read"/>    
+        
+        <!-- Master -->
+        <menuitem id="submenu_master_tw_manufacture_workcenter" action="mrp.mrp_workcenter_action" parent="tw_mrp.submenu_master_tw_manufacture_configuration" sequence="90" groups="tw_mrp_workcenter.group_tw_mrp_workcenter_master_read"/>    
+        
+        <!-- Warehouse -->
+        <menuitem id="submenu_warehouse_tw_manufacture_workcenter" action="mrp.mrp_workcenter_action" parent="tw_mrp.submenu_warehouse_tw_manufacture_configuration" sequence="90" groups="tw_mrp_workcenter.group_tw_mrp_workcenter_warehouse_read"/>
+    
+    </data>
+</odoo>

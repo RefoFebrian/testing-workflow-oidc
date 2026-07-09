@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+        <!-- Disbursement Post -->
+		<record id="group_tw_dgi_part_sales" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button GET DGI Part Sales</field>
+        </record>
+
+        <record id="tw_base.group_system_admin" model="res.groups">
+			<field name="implied_ids" eval="[
+				(4,ref('group_tw_dgi_part_sales')),
+            ]">
+			</field>
+		</record>
+	
+	</data>
+</odoo>

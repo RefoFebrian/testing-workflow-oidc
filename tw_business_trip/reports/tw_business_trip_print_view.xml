@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="print_business_trip_pdf">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <style>
+                            table#outborder {
+                                width: 100%;
+                                padding: 2px;
+                                border: 2px solid black;
+                                border-collapse: collapse;
+                            }
+                            table.nborder {
+                                width: 100%;
+                                border: .5pt solid windowtext;
+                                border-collapse: collapse;
+                            }
+                            table.content {
+                                width: 100%;
+                                font-size: 14px;
+                                border-collapse: collapse;
+                            }
+                            .xl65 {
+                                mso-style-parent: style0;
+                                border: .5pt solid windowtext;
+                            }
+
+                            .xl66 {
+                                mso-style-parent: style16;
+                                mso-number-format: "_-* \#\,\#\#0_-\;\\-* \#\,\#\#0_-\;_-* \0022-\0022_-\;_-\@_-";
+                                border: .5pt solid windowtext;
+                            }
+
+                            .xl67 {
+                                mso-style-parent: style0;
+                                text-align: center;
+                                border: .5pt solid windowtext;
+                            }
+
+                            .xl68 {
+                                mso-style-parent: style0;
+                                text-align: center;
+                                border-top: .5pt solid windowtext;
+                                border-right: .5pt solid windowtext;
+                                border-bottom: .5pt solid windowtext;
+                                border-left: none;
+                            }
+
+                            .xl69 {
+                                mso-style-parent: style0;
+                                text-align: left;
+                                border-top: .5pt solid windowtext;
+                                border-right: none;
+                                border-bottom: .5pt solid windowtext;
+                                border-left: .5pt solid windowtext;
+                            }
+
+                            .xl70 {
+                                mso-style-parent: style0;
+                                text-align: right;
+                                border: .5pt solid windowtext;
+                            }
+
+                            .xl71 {
+                                mso-style-parent: style0;
+                                mso-number-format: "_-* \#\,\#\#0_-\;\\-* \#\,\#\#0_-\;_-* \0022-\0022_-\;_-\@_-";
+                                text-align: center;
+                                border-top: .5pt solid windowtext;
+                                border-right: none;
+                                border-bottom: .5pt solid windowtext;
+                                border-left: .5pt solid windowtext;
+                            }
+
+                            .xl72 {
+                                mso-style-parent: style0;
+                                text-align: center;
+                                border-top: .5pt solid windowtext;
+                                border-right: none;
+                                border-bottom: .5pt solid windowtext;
+                                border-left: .5pt solid windowtext;
+                            }
+
+                            .xl73 {
+                                mso-style-parent: style0;
+                                mso-number-format: "Short Date";
+                                text-align: center;
+                                border-top: .5pt solid windowtext;
+                                border-right: none;
+                                border-bottom: .5pt solid windowtext;
+                                border-left: .5pt solid windowtext;
+                            }
+
+                            .xl74 {
+                                mso-style-parent: style0;
+                                text-align: center;
+                                border: .5pt solid windowtext;
+                                background: #930202;
+                                color: white;
+                                mso-pattern: black none;
+                            }
+
+                            .xl75 {
+                                mso-style-parent: style0;
+                                text-align: center;
+                                border-top: .5pt solid windowtext;
+                                border-right: none;
+                                border-bottom: .5pt solid windowtext;
+                                border-left: .5pt solid windowtext;
+                                background: #930202;
+                                color: white;
+                                mso-pattern: black none;
+                            }
+
+                            .xl76 {
+                                mso-style-parent: style0;
+                                text-align: center;
+                                border-top: .5pt solid windowtext;
+                                border-right: .5pt solid windowtext;
+                                border-bottom: .5pt solid windowtext;
+                                border-left: none;
+                                background: #930202;
+                                color: white;
+                                mso-pattern: black none;
+                            }
+
+                            .xl77 {
+                                mso-style-parent: style0;
+                                text-align: center;
+                                border-top: .5pt solid windowtext;
+                                border-right: none;
+                                border-bottom: .5pt solid windowtext;
+                                border-left: none;
+                                background: #930202;
+                                color: white;
+                                mso-pattern: black none;
+                            }
+                        </style>
+                        <table id="outborder">
+                            <!-- HEADER -->
+                            <tr>
+                                <td>
+                                    <table class="nborder">
+                                        <tr>
+                                            <td colspan="2" style="padding-top: 3px; font-size: 20px; font-weight: bold; text-align: center; background-color: #930202;"><span t-esc="o.name" style="color: #fffefe !important;"/></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <!--  -->
+                            <tr>
+                                <td>
+                                    <table class="content" style="margin-top:10px;">
+                                        <tr style="padding-top:10px;">
+                                            <td style="width: 15%; padding-left:10px;">Branch</td>
+                                            <td style="width: 1%;">:</td>
+                                            <td colspan="2" style="width: 84%;">[<span t-esc="o.company_id.code" />] <span t-esc="o.company_id.name" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 15%; padding-left:10px;">Nama</td>
+                                            <td style="width: 1%;">:</td>
+                                            <td colspan="2" style="width: 84%;"><span t-esc="o.pic_id.name" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 15%; padding-left:10px;">Jenis</td>
+                                            <td style="width: 1%;">:</td>
+                                            <td colspan="2" style="width: 84%;">
+                                                <span t-if="o.is_domestic">Domestik</span>
+                                                <span t-else="">Internasional</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 15%; padding-left:10px;">Departemen</td>
+                                            <td style="width: 1%;">:</td>
+                                            <td colspan="2" style="width: 84%;"><span t-esc="o.pic_id.department_id.complete_name" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 15%; padding-left:10px;">Tujuan</td>
+                                            <td style="width: 1%;">:</td>
+                                            <td colspan="2" style="width: 84%;"><span t-esc="o.objective" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 15%; padding-left:10px;">Keperluan</td>
+                                            <td style="width: 1%;">:</td>
+                                            <td colspan="2" style="width: 84%;"><span t-esc="o.necessary" /></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <table class="content" style="margin-top: 20px;">
+                                        <tr height="20" style="height:20.0pt">
+                                            <td colspan="2" height="20" class="xl75" style="font-weight: bold; border-right:.5pt solid black; height:20.0pt">Rincian Waktu</td>
+                                            <td colspan="2" class="xl74" style="font-weight: bold; border-left:none">Planning</td>
+                                            <td colspan="2" class="xl74" style="font-weight: bold; border-left:none">Aktual</td>
+                                        </tr>
+                                        <tr height="20" style="height:20.0pt">
+                                            <td height="20" class="xl69" colspan="2" style="padding-left:5px; height:20.0pt;mso-ignore:colspan; border-right:.5pt solid black">Berangkat</td>
+                                            <td colspan="2" class="xl73" style="border-right:.5pt solid black;border-left: none"><span t-esc="o.planning_departure_date.strftime('%d-%m-%Y') if o.planning_departure_date else ''" /></td>
+                                            <td colspan="2" class="xl72" style="border-right:.5pt solid black;border-left: none"><span t-esc="o.actual_departure_date.strftime('%d-%m-%Y') if o.actual_departure_date else ''" /> </td>
+                                        </tr>
+                                        <tr height="20" style="height:20.0pt">
+                                            <td height="20" class="xl69" colspan="2" style="padding-left:5px; height:20.0pt;mso-ignore:colspan; border-right:.5pt solid black">Kembali</td>
+                                            <td colspan="2" class="xl73" style="border-right:.5pt solid black;border-left: none"><span t-esc="o.planning_arrival_date.strftime('%d-%m-%Y') if o.planning_arrival_date else ''" /></td>
+                                            <td colspan="2" class="xl72" style="border-right:.5pt solid black;border-left: none"><span t-esc="o.actual_arrival_date.strftime('%d-%m-%Y') if o.actual_arrival_date else ''" /> </td>
+                                        </tr>
+                                    </table>
+                                    <table class="content" style="margin-top: 15px;">
+                                        <tr height="20" style="height:20.0pt; margin-top: 10px;">
+                                            <td colspan="2" height="20" class="xl75" style="font-weight: bold; border-right:.5pt solid black; height:20.0pt">Rincian Biaya</td>
+                                            <td colspan="2" class="xl74" style="font-weight: bold; border-left:none">Planning</td>
+                                            <td colspan="2" class="xl74" style="font-weight: bold; border-left:none">Aktual</td>
+                                        </tr>
+                                        <tr height="20" style="height:20.0pt">
+                                            <td height="20" class="xl67" style="height:20.0pt;border-top:none">No.</td>
+                                            <td class="xl67" style="border-top:none;border-left:none">Jenis Biaya</td>
+                                            <td class="xl67" style="border-top:none;border-left:none">Qty</td>
+                                            <td class="xl67" style="border-top:none;border-left:none">Nominal</td>
+                                            <td class="xl67" style="border-top:none;border-left:none">Qty</td>
+                                            <td class="xl67" style="border-top:none;border-left:none">Nominal</td>
+                                        </tr>
+                                        <t t-set="number" t-value="1"/>
+                                        <template t-foreach="cost_breakdown.get(o.id, [])" t-as="cost">
+                                            <tr height="20" style="height:20.0pt">
+                                                <td height="20" class="text-end xl65" align="right" style="height:20.0pt;border-top:none;text-align: center;"><t t-esc="number" /> </td>
+                                                <td class="xl65" style="padding-left:5px; border-top:none;border-left:none"><t t-esc="cost.get('name')"/></td>
+                                                <td class="xl66" style="border-top:none;border-left:none;text-align: center;"><span style="mso-spacerun:yes"> </span><t t-esc="cost.get('count_planning')" /></td>
+                                                <td class="text-end xl66" style="padding-right:5px; border-top:none;border-left:none;text-align: right;"><span style="mso-spacerun:yes"> </span><t t-esc="'{:,.0f}'.format(cost.get('cost_planning'))"/> </td>
+                                                <td class="xl66" style="border-top:none;border-left:none;text-align: center;"><span style="mso-spacerun:yes"> </span><t t-esc="cost.get('count_actual')" /></td>
+                                                <td class="text-end xl66" style="padding-right:5px; border-top:none;border-left:none;text-align: right;"><span style="mso-spacerun:yes"> </span><t t-esc="'{:,.0f}'.format(cost.get('cost_actual'))" /></td>
+                                                <t t-set="number" t-value="number+1"/>
+                                            </tr>
+                                        </template>
+                                        <tr height="20" style="height:20.0pt">
+                                            <td colspan="2"  height="20" class="xl70" style="font-weight: bold; padding-right:5px; height:20.0pt">Total</td>
+                                            <td colspan="2" class="text-end xl71" style="padding-right:5px; border-right:.5pt solid black;border-left: none; text-align: right; font-weight: bold;"><span style="mso-spacerun:yes">
+                                            </span><t t-esc="'{:,.0f}'.format(o.planning_amount_total)" /> </td>
+                                            <td colspan="2" class="text-end xl71" style="padding-right:5px; border-right:.5pt solid black;border-left: none; text-align: right; font-weight: bold;"><span style="mso-spacerun:yes">
+                                            </span><t t-esc="'{:,.0f}'.format(o.actual_amount_total)" /> </td>
+                                        </tr>
+                                        <tr height="20" style="height:20.0pt">
+                                            <td colspan="2" height="20" class="xl70" style="font-weight: bold; padding-right:5px; height:20.0pt">Selisih</td>
+                                            <td colspan="4" class="text-end xl71" style="padding-right:5px; border-right:.5pt solid black;border-left: none; font-weight: bold;"><span style="mso-spacerun:yes">
+                                            </span><t t-esc="'{:,.0f}'.format(o.selisih_amount_total)" /></td>
+                                        </tr>
+                                        <tr height="20" style="height:20.0pt">
+                                            <tr height="20" style="height:20.0pt">
+                                                <td colspan="6">
+                                                    <table class="content" style="margin-top: 3px; margin-bottom: 10px;">
+                                                        <tr>
+                                                            <td colspan="6" style="font-weight: bold; text-decoration: underline; padding-left: 3px; padding-right: 3px; background-color: #C0C0C0;">Approved by</td>
+                                                        </tr>
+                                                        <tr style="padding-top:10px;">
+                                                            <td style="width: 10%;"></td>
+                                                            <td style="width: 10%;"></td>
+                                                            <td style="width: 10%;"></td>
+                                                            <td style="width: 10%;"></td>
+                                                            <td style="width: 10%;"></td>
+                                                            <td style="width: 10%;"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <template t-foreach="approval" t-as="approved">
+                                                                <td style="width: 10%; font-style: italic; text-align: center;"><t  t-esc="approved.get('name')"/></td>
+                                                            </template>
+                                                            <td style="width: 10%; font-style: italic; text-align: center;"></td>
+                                                            <td style="width: 10%; font-style: italic; text-align: center;"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <template t-foreach="approval" t-as="approved" >
+                                                                <td t-if="approved.get('ttd_file_foto')" style="width: 10%; font-style: italic; text-align: center;">
+                                                                    <img t-att-src="'data:image/png;base64,' + approved.get('ttd_file_foto')" style="max-width: 200px;"/>
+                                                                </td>
+                                                                <td t-else="" style="width: 10%; font-style: italic; text-align: center; max-width: 200px;"><div style="height: 60px;"></div></td>
+                                                            </template>
+                                                            <td style="width: 10%;"></td>
+                                                            <td style="width: 10%;"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <template t-foreach="approval" t-as="approved">
+                                                                <td style="width: 10%; font-style: italic; font-weight: bold; text-align: center;"><t t-esc="approved.get('group_name')" /></td>
+                                                            </template>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p style="page-break-before:always;"> </p>
+
+                        <table id="outborder">
+                            <!-- HEADER -->
+                            <tr>
+                                <td>
+                                    <table class="nborder">
+                                        <tr>
+                                            <td colspan="2" style="padding-top: 3px; font-size: 20px; font-weight: bold; text-align: center; background-color: #930202;"><span style="color: #fffefe !important;">SURAT TUGAS</span></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="content" style="margin-top:10px;">
+                                        <tr height="20" style="height:20.0pt">
+                                            <td height="20" width="203" style="padding-left:10px; height:20.0pt;mso-ignore:colspan;width:152pt">Yang bertanda tangan di bawah ini : </td>
+                                        </tr>
+                                        <tr height="20" style="height:20.0pt">
+                                            <td height="20" style="padding-left:10px; height:20.0pt;mso-ignore:colspan">Nama</td>
+                                            <td height="20" width="50" />
+                                            <td colspan="3" style="mso-ignore:colspan"><span>: </span><span t-esc="o.pic_id.department_id.manager_id.name" /></td>
+                                        </tr>
+                                        <tr height="20" style="height:20.0pt">
+                                            <td height="20" style="padding-left:10px; height:20.0pt;mso-ignore:colspan">Jabatan</td>
+                                            <td height="20" width="50" />
+                                            <td colspan="3" style="mso-ignore:colspan"><span>: </span><span t-esc="o.pic_id.department_id.manager_id.job_id.name" /></td>
+                                        </tr>
+                                        <tr height="40" style="height:20.0pt"></tr>
+                                        <tr height="20" style="height:20.0pt">
+                                            <td height="20" width="203" style="padding-left:10px; height:20.0pt;mso-ignore:colspan;width:152pt">Dengan ini menugaskan kepada : </td>
+                                        </tr>
+                                        <tr height="20" style="height:20.0pt">
+                                            <td height="20" style="padding-left:10px; height:20.0pt;mso-ignore:colspan">Nama</td>
+                                            <td height="20" width="50" />
+                                            <td colspan="3" style="mso-ignore:colspan"><span>: </span><span t-esc="o.pic_id.name" /></td>
+                                        </tr>
+                                        <tr height="20" style="height:20.0pt">
+                                            <td height="20" style="padding-left:10px; height:20.0pt;mso-ignore:colspan">Jabatan</td>
+                                            <td height="20" width="50" />
+                                            <td colspan="3" style="mso-ignore:colspan"><span>: </span><span t-esc="o.pic_id.job_id.name" /></td>
+                                        </tr>
+                                        <tr height="20" style="height:20.0pt">
+                                            <td height="20" style="padding-left:10px; height:20.0pt;mso-ignore:colspan">Branch</td>
+                                            <td height="20" width="50" />
+                                            <td colspan="3" style="mso-ignore:colspan"><span>: </span>[<span t-esc="o.company_id.code" />] <span t-esc="o.company_id.name" /></td>
+                                        </tr>
+                                        <tr height="20" style="height:20.0pt">
+                                            <td height="20" style="padding-left:10px; height:20.0pt;mso-ignore:colspan">Tanggal Planning</td>
+                                            <td height="20" width="50" />
+                                            <td colspan="3" style="mso-ignore:colspan"><span>: </span><span t-esc="o.planning_departure_date.strftime('%d-%m-%Y') if o.planning_departure_date else ''" /> s/d <span t-esc="o.planning_arrival_date.strftime('%d-%m-%Y') if o.planning_arrival_date else ''" /></td>
+                                        </tr>
+                                        <t t-if="o.actual_departure_date"><tr height="20" style="height:20.0pt">
+                                            <td height="20" style="padding-left:10px; height:20.0pt;mso-ignore:colspan">Tanggal Actual</td>
+                                            <td height="20" width="50" />
+                                            <td colspan="3" style="mso-ignore:colspan"><span>: </span><span t-esc="o.actual_departure_date.strftime('%d-%m-%Y') if o.actual_departure_date else ''" /> s/d <span t-esc="o.actual_arrival_date.strftime('%d-%m-%Y') if o.actual_arrival_date else ''" /></td>
+                                        </tr></t>
+                                        <tr height="20" style="height:20.0pt">
+                                            <td height="20" style="padding-left:10px; height:20.0pt;mso-ignore:colspan">Tujuan</td>
+                                            <td height="20" width="50" />
+                                            <td colspan="3" style="mso-ignore:colspan"><span>: </span><span t-esc="o.objective" /></td>
+                                        </tr>
+                                        <tr height="20" style="height:20.0pt">
+                                            <td height="20" style="padding-left:10px; height:20.0pt;mso-ignore:colspan">Tugas / Keperluan</td>
+                                            <td height="20" width="50" />
+                                            <td colspan="3" style="mso-ignore:colspan"><span>: </span><span t-esc="o.necessary" /></td>
+                                        </tr>
+                                        <tr height="40" style="height:20.0pt"></tr>
+                                        <tr height="20" style="height:20.0pt">
+                                            <td height="20" colspan="3" width="203" style="padding-left:10px; height:20.0pt;mso-ignore:colspan;width:152pt">Demikian surat ini diberikan, agar dapat diketahui oleh departement terkait dan dipergunakan sebagaimana mestinya.</td>
+                                        </tr>
+                                        <tr height="20" style="height:20.0pt">
+                                            <tr height="20" style="height:20.0pt">
+                                                <td>
+                                                    <table class="content" style="margin-top: 3px; margin-bottom: 10px;">
+                                                        <tr>
+                                                            <td style="width: 10%;"></td>
+                                                            <td style="width: 10%;"></td>
+                                                            <td style="width: 10%;"></td>
+                                                            <td style="width: 10%;"></td>
+                                                            <td style="width: 10%;"></td>
+                                                            <td style="width: 10%;"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 10%; font-style: italic; text-align: center;">Bangka, <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/></td>
+                                                            <td style="width: 10%; font-style: italic; text-align: center;"></td>
+                                                            <td style="width: 10%; font-style: italic; text-align: center;"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 10%; font-style: italic; text-align: center;">Yang menugaskan</td>
+                                                            <td style="width: 10%; font-style: italic; text-align: center;"></td>
+                                                            <td style="width: 10%; font-style: italic; text-align: center;"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td t-if="manager.get('ttd_file_foto')" style="width: 10%; font-style: italic; text-align: center;">
+                                                                    <img t-att-src="'data:image/png;base64,' + manager.get('ttd_file_foto')" style="max-width: 200px;"/>
+                                                                </td>
+                                                            <td t-else="" style="width: 10%; font-style: italic; text-align: center; max-width: 200px;"><div style="height: 60px;"></div></td>
+                                                            <td style="width: 10%;"></td>
+                                                            <td style="width: 10%;"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 10%; font-style: italic; font-weight: bold; text-align: center;"><t t-esc="o.pic_id.department_id.manager_id.name" /> </td>
+                                                            <td style="width: 10%;"></td>
+                                                            <td style="width: 10%;"></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p style="page-break-before:always;"> </p>
+
+                        <table id="outborder" t-if="o.detail_activity_line_ids">
+                            <!-- HEADER -->
+                            <tr>
+                                <td>
+                                    <table class="nborder">
+                                        <tr>
+                                            <td colspan="2" style="padding-top: 3px; font-size: 20px; font-weight: bold; text-align: center; background-color: #930202;"><span style="color: #fffefe !important;">DETAIL KEGIATAN</span></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <hr style="border: none; border-top: 2px solid black; width: 100%;" />
+                                    <t t-if="o.detail_activity_line_ids" t-foreach="o.detail_activity_line_ids" t-as="activity">
+                                        <div style="margin-top: 20px;">
+                                            <ul style="list-style-type: none; padding-left: 0; margin: 0;">
+                                                <li style="padding-left: 10px; margin-bottom: 10px;"><span style="font-weight: bold;">Tgl : </span><t t-esc="activity.activity_date.strftime('%d-%m-%Y') if activity.activity_date else ''"/></li>
+                                                <li style="padding-left: 10px; font-weight: bold;">Kegiatan: </li>
+                                                <li style="padding-left: 10px; margin-bottom: 10px;"><t t-esc="activity.activity" /></li>
+                                                <li style="padding-left: 10px; font-weight: bold;">Uraian: </li>
+                                                <li style="padding-left: 10px; margin-bottom: 10px;"><t t-esc="activity.description" /></li>
+                                                <li style="padding-left: 10px; font-weight: bold;">Hasil: </li>
+                                                <li style="padding-left: 10px;"><t t-esc="activity.result" /></li>
+                                            </ul>
+                                            <hr style="border: none; border-top: 2px solid black; width: 100%;" />
+                                        </div>
+                                    </t>
+                                    <table class="content" style="margin-top: 10px; margin-bottom: 10px;">
+                                        <tr>
+                                            <td colspan="6" style="font-weight: bold; text-decoration: underline; padding-left: 3px; padding-right: 3px; background-color: #C0C0C0;">Approved by</td>
+                                        </tr>
+                                        <tr>
+                                            <t t-if="len(approval) &gt; 0">
+                                                <td style="width: 10%; font-style: italic; text-align: center;">Pemohon</td>
+                                            </t>
+                                            <td style="width: 10%; font-style: italic; text-align: center;">Pemberi Tugas</td>
+                                            <td style="width: 10%; font-style: italic; text-align: center;">Manager</td>
+                                            <t t-if="len(approval) - 1 &gt;= 0">
+                                                <td style="width: 10%; font-style: italic; text-align: center;"><t t-esc="approval[-1].get('group_name')" /></td>
+                                            </t>
+                                        </tr>
+                                        <tr>
+                                            <t t-if="len(approval) &gt; 0">
+                                                <td t-if="approval[0].get('ttd_file_foto')" style="width: 10%; font-style: italic; text-align: center;">
+                                                    <img t-att-src="'data:image/png;base64,' + approval[0].get('ttd_file_foto')" style="max-width: 200px;"/>
+                                                </td>
+                                                <td t-else="" style="width: 10%; font-style: italic; text-align: center; max-width: 200px;"><div style="height: 60px;"></div></td>
+                                            </t>
+                                            <td t-if="manager.get('ttd_file_foto')" style="width: 10%; font-style: italic; text-align: center;">
+                                                <img t-att-src="'data:image/png;base64,' + manager.get('ttd_file_foto')" style="max-width: 200px;"/>
+                                            </td>
+                                            <td t-else="" style="width: 10%; font-style: italic; text-align: center; max-width: 200px;"><div style="height: 60px;"></div></td>
+                                            <td t-if="manager.get('ttd_file_foto')" style="width: 10%; font-style: italic; text-align: center;">
+                                                <img t-att-src="'data:image/png;base64,' + manager.get('ttd_file_foto')" style="max-width: 200px;"/>
+                                            </td>
+                                            <td t-else="" style="width: 10%; font-style: italic; text-align: center; max-width: 200px;"><div style="height: 60px;"></div></td>
+                                            <t t-if="len(approval) - 1 &gt;= 0">
+                                                <td t-if="approval[-1].get('ttd_file_foto')" style="width: 10%; font-style: italic; text-align: center;">
+                                                    <img t-att-src="'data:image/png;base64,' + approval[-1].get('ttd_file_foto')" style="max-width: 200px;"/>
+                                                </td>
+                                                <td t-else="" style="width: 10%; font-style: italic; text-align: center; max-width: 200px;"><div style="height: 60px;"></div></td>
+                                            </t>
+                                        </tr>
+                                        <tr>
+                                            <t t-if="len(approval) &gt; 0">
+                                                <td style="width: 10%; font-style: italic; font-weight: bold; text-align: center;"><t t-esc="approval[0].get('name')" /></td>
+                                            </t>
+                                            <td style="width: 10%; font-style: italic; font-weight: bold; text-align: center;"><t t-esc="manager.get('name')" /></td>
+                                            <td style="width: 10%; font-style: italic; font-weight: bold; text-align: center;"><t t-esc="manager.get('name')" /></td>
+                                            <t t-if="len(approval) - 1 &gt;= 0">
+                                                <td style="width: 10%; font-style: italic; font-weight: bold; text-align: center;"><t t-esc="approval[-1].get('name')" /></td>
+                                            </t>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

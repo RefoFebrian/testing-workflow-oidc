@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="custom_document_tax_totals" inherit_id="account.document_tax_totals_template">
+        <xpath expr="//tr[hasclass('o_subtotal')]" position="after">
+            <t t-if="o.discount_line_ids">
+                <t t-foreach="o.discount_line_ids" t-as="discount">
+                    <tr class="o_discount">
+                        <td>
+                            <span t-field="discount.name"/>
+                        </td>
+                        <td class="text-end">
+                            <span t-field="discount.amount" t-options='{"widget": "monetary", "display_currency": currency}'/>
+                        </td>
+                    </tr>
+                </t>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="customize_discount_in_invoice" inherit_id="tw_account.custom_report_invoice_document">
+        <xpath expr="//t[@t-call='account.document_tax_totals']" position="replace">
+            <t t-if="o.tax_totals" t-call="tw_account_discount.custom_document_tax_totals">
+                <t t-set="tax_totals" t-value="o.tax_totals"/>
+                <t t-set="currency" t-value="o.currency_id"/>
+            </t>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,19 @@
+<odoo>
+  <data>
+
+    <record id="contacts.menu_contacts" model="ir.ui.menu">
+      <field name="parent_id" ref="tw_menu.menu_tw_odoo_default" />
+    </record>
+
+    <menuitem id="menu_all_partners" name="All Partners" parent="tw_menu.submenu_tw_partner" action="action_tw_all_partner_inherit_partner" sequence="1" groups="tw_partner.group_tw_res_partner_all_read"/>
+    <menuitem id="menu_customers" name="Customers" parent="tw_menu.submenu_tw_partner" action="action_tw_customer_inherit_partner" sequence="2" groups="tw_partner.group_res_partner_customer_read" />
+    <menuitem id="menu_supplier" name="Supplier" parent="tw_menu.submenu_tw_partner" action="action_tw_supplier_inherit_partner" sequence="3" groups="tw_partner.group_tw_res_partner_vendor_read"/>
+    <menuitem id="menu_service_bureau" name="Biro Jasa" parent="tw_menu.submenu_tw_partner" action="action_tw_service_bureau_inherit_partner" sequence="4" groups="tw_partner.group_tw_res_partner_birojasa_read"/>
+    <menuitem id="menu_finco" name="Finance Company" parent="tw_menu.submenu_tw_partner" action="action_tw_finco_inherit_partner" sequence="5" groups="tw_partner.group_tw_res_partner_finco_read"/>
+    <menuitem id="menu_dealer" name="Dealer" parent="tw_menu.submenu_tw_partner" action="action_tw_dealer_inherit_partner" sequence="6" groups="tw_partner.group_tw_res_partner_dealer_read"/>
+    <menuitem id="menu_tw_principle_partner" name="Principle" parent="tw_menu.submenu_tw_partner" action="action_tw_principle_partner" sequence="7" groups="tw_partner.group_tw_res_partner_principle_read"/>
+    <menuitem id="menu_tw_tags_root" name="Tags" parent="tw_menu.submenu_tw_partner" sequence="100" groups="tw_partner.group_tw_res_partner_category_read"/>
+    <menuitem id="menu_tw_master_tags" name="Master Tags" parent="menu_tw_tags_root" action="action_tw_master_tags" sequence="1"/>
+
+  </data>
+</odoo>

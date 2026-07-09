@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_job" model="ir.module.category">
+            <field name="name">TW Job</field>
+        </record>  
+
+        <record id="tw_role" model="ir.module.category">
+            <field name="name">TW Role</field>
+        </record>  	
+
+        <!-- ? Buat Module Category untuk tiap menu -->
+         <record id="tw_backoffice" model="ir.module.category">
+            <field name="name">TW Backoffice</field>
+        </record>
+
+        <record id="tw_module_category_asset" model="ir.module.category">
+            <field name="name">TW Assets</field>
+        </record>
+
+        <record id="group_system_admin" model="res.groups">
+            <field name="name">System Admin</field>            
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record> 
+		                                             
+    </data>
+</odoo>

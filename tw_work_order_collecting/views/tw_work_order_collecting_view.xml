@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record model="ir.ui.view" id="tw_work_order_collecting_tree_view">
+			<field name="name">tw.work.order.collecting.tree</field>
+			<field name="model">tw.work.order.collecting</field>
+			<field name="arch" type="xml">
+				<list string="Collecting">
+					<field name="name" />
+					<field name="company_id" />
+					<field name="division" />
+					<field name="supplier_id" />
+					<field name="date" />
+					<field name="start_date" />
+					<field name="end_date" />
+					<field name="state" widget="badge" decoration-success="state == 'posted'" decoration-muted="state == 'draft'"/>
+				</list>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="tw_work_order_collecting_form_view">
+			<field name="name">tw.work.order.collecting.form</field>
+			<field name="model">tw.work.order.collecting</field>
+			<field name="arch" type="xml">
+				<form string="Collecting">
+					<header>
+						<button string="Get Detail" invisible="amount != 0" name="action_get_detail" type="object" groups="tw_work_order_collecting.tw_work_order_collecting_get_detail_button"/>
+						<button name="action_confirm" type="object" invisible="state != 'draft'" string="Validate" class="oe_highlight" groups="tw_work_order_collecting.tw_work_order_collecting_confirm_button"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,posted" statusbar_colors='{"draft":"red","posted":"blue"}' />
+					</header>
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="action_view_invoice" type="object" class="oe_stat_button" icon="fa-pencil-square-o" invisible="invoice_count == 0">
+								<field name="invoice_count" widget="statinfo" string="Journal Entry"/>
+							</button>
+						</div>
+						<h1>
+							<div class="oe_title"> Collecting <field name="name" class="oe_inline" />
+							</div>
+						</h1>
+						<group col="2" colspan="2">
+							<group>
+								<field name="company_id" options="{'no_show':True,'no_create':True,'no_open':True}" readonly="state != 'draft'" />
+								<field name="amount" invisible='1' />
+								<field name="supplier_id" options="{'no_show':True,'no_create':True,'no_open':True}" readonly="state != 'draft'" />
+								<field name="claim_type_id" required='1' options="{'no_create': True}" readonly="state != 'draft'" />
+								<field name="supplier_ref" readonly="state != 'draft'" />
+							</group>
+							<group>
+								<field name="division" readonly="state != 'draft'" />
+								<field name='date' readonly='1' />
+								<label for="start_date" string="WO Date" />
+								<div>
+									<field name="start_date" required='1' class="oe_inline" readonly="state != 'draft'" />
+ -									<field name="end_date" required='1' class="oe_inline" readonly="state != 'draft'" />
+								</div>
+								<field name="due_date" readonly="1" force_save="1"/>
+							</group>
+						</group>
+						<div invisible="transaction_message == False">
+							<font color="orange">
+								<b>Jumlah WO lebih besar dari limit yg ditentukan</b>
+							</font>
+							<field name="transaction_message" readonly="1" />
+						</div>
+						<notebook colspan="5">
+							<page string="Order line">
+								<field colspan="4" name="work_order_ids" nolabel="1" widget="one2many_list" readonly="state != 'draft'">
+									<list string="" editable="top" edit="false" create="false">
+										<field name="name" />
+										<field name="date" />
+										<field name="lot_id" />
+										<field name="chassis_number" />
+										<field name="claim_type_id" string="Claim Type" />
+										<field name="km" />
+										<field name="state" column_invisible='1' />
+									</list>
+									<form>
+										<field name="name" />
+										<field name="date" />
+										<field name="lot_id" options="{'no_open':True,'no_create':True}" />
+										<field name="chassis_number" />
+										<field name="claim_type_id" string="Claim Type" />
+										<field name="km" />
+										<field name="state" invisible='1' />
+									</form>
+								</field>
+							</page>
+							<page string="Collecting Line">
+								<field colspan="4" name="collecting_line_ids" nolabel="1" widget="one2many_list" readonly="1">
+									<list string="" editable="top" edit="false" create="false">
+										<field name="categ" column_invisible="1" />
+										<field name="qty" />
+										<field name="jasa" column_invisible="1" />
+										<field name="oli" column_invisible="1" />
+										<field name="total_jasa" />
+										<field name="total_oli" />
+									</list>
+								</field>
+							</page>
+							<page string="Audit Trail">
+								<group>
+									<group>
+										<field name="create_uid" readonly="1"></field>
+										<field name="create_date" readonly="1"></field>
+										<field name="confirm_uid" readonly="1"></field>
+										<field name="confirm_date" readonly="1"></field>
+									</group>
+									<group>
+										<field name="write_uid" readonly="1"></field>
+										<field name="write_date" readonly="1"></field>
+									</group>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="tw_work_order_collecting_search_view" model="ir.ui.view">
+			<field name="name">tw.work.order.collecting.search</field>
+			<field name="model">tw.work.order.collecting</field>
+			<field name="arch" type="xml">
+				<search string="Search Collecting">
+					<field name='name' />
+					<field name='company_id' />
+					<field name='division' />
+					<field name='supplier_id' />
+					<field name='supplier_ref' />
+					<field name="work_order_ids" string="Order Reference" filter_domain="[('work_order_ids.name', 'ilike', self)]"/>
+					<field name="work_order_ids" string="Engine No" filter_domain="[('work_order_ids.lot_id', 'ilike', self)]"/>
+					<field name="work_order_ids" string="Chassis No" filter_domain="[('work_order_ids.chassis_number', 'ilike', self)]"/>
+					<filter name="wo_claim_lcr" string="Claim Program" domain="[('claim_type_id.value','=','LCR')]" />
+					<filter name="draft" string="Draft" domain="[('state','=','draft')]" />
+					<filter name="posted" string="Posted" domain="[('state','=','posted')]" />
+					<group expand="0" string="Group By">
+						<filter name="group_by_branch" string="Branch" context="{'group_by': 'company_id'}"/>
+						<filter name="group_by_date" string="Date" context="{'group_by': 'date'}"/>
+						<filter name="group_by_collecting" string="Collecting" context="{'group_by': 'name'}"/>
+						<filter name="group_by_supplier" string="Supplier" context="{'group_by': 'supplier_id'}"/>
+						<filter name="group_by_division" string="Division" context="{'group_by': 'division'}"/>
+						<filter name="group_by_start_date" string="Start Date" context="{'group_by': 'start_date'}"/>
+						<filter name="group_by_end_date" string="End Date" context="{'group_by': 'end_date'}"/>
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="tw_work_order_collecting_action">
+			<field name="name">Collecting Data</field>
+			<field name="res_model">tw.work.order.collecting</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="view_mode">list,form</field>
+			<field name="context">{'search_default_draft': 1}</field>
+		</record>
+
+	</data>
+</odoo>
+															

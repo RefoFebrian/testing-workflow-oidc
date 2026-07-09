@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tw_whatsapp_content_template_wo_selesai_pembayaran" model="tw.whatsapp.content.template">
+            <field name="name">Kwitansi Pembayaran ke Konsumen</field>
+            <field name="subject">TunasHonda_WA</field>
+            <field name="template_type_id" ref="tw_whatsapp_api.tw_selection_type_cp_kwitansi"/>
+            <field name="content">Salam 1 Hati,\n\nTagihan service motor Honda Anda dengan detail sebagai berikut :\nNama Konsumen : {{1}}\nNomor WO : {{2}}\nTotal Jasa Service : {{3}}\nTotal Sparepart : {{4}}\nPPN : {{5}}\nGrand Total : {{6}}\n\nStatus : *Sudah dibayar* \n\nKwitansi pembayaran ini dapat Anda unduh di link ini : {{7}}\n\nTerima kasih\n\n_pesan ini adalah pesan otomatis_</field>
+        </record>
+
+        <record id="tw_whatsapp_content_template_wo_menunggu_pembayaran" model="tw.whatsapp.content.template">
+            <field name="name">Invoice Pembayaran ke Konsumen</field>
+            <field name="subject">TunasHonda_WA</field>
+            <field name="template_type_id" ref="tw_whatsapp_api.tw_selection_type_wo_invoice"/>
+            <field name="content">Salam 1 Hati,\n\nTagihan service motor Honda Anda dengan detail sebagai berikut :\nNama Konsumen : {{1}}\nNomor WO : {{2}}\nTotal Jasa Service : {{3}}\nTotal Sparepart : {{4}}\nPPN : {{5}}\nGrand Total : {{6}}\n\nStatus : *Menunggu Pembayaran*\n\nSilakan ke Kasir untuk melakukan pembayaran dengan cara :\n1. QRIS\n2. Transfer Bank\n3. Uang tunai\n\nInvoice ini dapat Anda unduh di link ini : {{7}}\n\nTerima kasih\n\n_pesan ini adalah pesan otomatis_</field>
+        </record>
+        
+        <record id="tw_whatsapp_content_template_dso_payment" model="tw.whatsapp.content.template">
+            <field name="name">Kwitansi Pembayaran Unit ke Konsumen</field>
+            <field name="subject">TunasHonda_WA</field>
+            <field name="template_type_id" ref="tw_whatsapp_api.tw_selection_type_cp_kwitansi"/>
+            <field name="content">Salam 1 Hati,\n\nBukti penerimaan uang pembelian Motor Honda dengan detail sebagai berikut :\nNama Konsumen : {{1}}\nNomor Transaksi : {{2}}\nJumlah Uang : {{3}}\nUntuk Pembayaran : {{4}}\n\nBukti penerimaan uang ini dapat Anda unduh di link ini : {{5}}\n\nTerima kasih\n\n_pesan ini adalah pesan otomatis_</field>
+        </record>
+
+        <record id="tw_whatsapp_content_template_dso_invoice" model="tw.whatsapp.content.template">
+            <field name="name">Invoice Pembayaran Unit ke Konsumen</field>
+            <field name="subject">TunasHonda_WA</field>
+            <field name="template_type_id" ref="tw_whatsapp_api.tw_selection_type_dso_invoice"/>
+            <field name="content">Salam 1 Hati,\n\nTagihan pembelian motor Honda Anda dengan detail sebagai berikut :\nNama Konsumen : {{1}}\nNomor SO : {{2}}\nTotal Harga Motor + PPN : {{3}}\n\nInvoice ini dapat Anda unduh di link ini : {{4}}\n\nTerima kasih\n\n_pesan ini adalah pesan otomatis_</field>
+        </record>
+
+    </data>
+</odoo>

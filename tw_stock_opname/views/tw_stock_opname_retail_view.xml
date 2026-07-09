@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_stock_opname_retail_form" model="ir.ui.view">
+            <field name="name">view.tw.stock.opname.retail.form</field>
+            <field name="model">tw.stock.opname</field>
+            <field name="type">form</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <form string="Stock Opname">
+                    <header>
+                        <button name="action_partial" type="object" string="Generate Stock" class="oe_highlight" invisible="state != 'draft'" groups="tw_stock_opname.group_tw_stock_opname_button_generate"/>
+                        <button name="action_done" type="object" string="Done" class="oe_highlight" invisible="state != 'in_progress'" groups="tw_stock_opname.group_tw_stock_opname_button_done"/>
+                        <button name="action_baso" type="object" string="Berita Acara" invisible="state != 'done'" groups="tw_stock_opname.group_tw_stock_opname_button_baso"/>
+                        <button name="action_print_unit_validation" type="object" string="Print Validasi Unit" class="oe_highlight" invisible="state != 'done'" groups="tw_stock_opname.group_button_print_validasi_stock_opname" context="{'validate': 'Unit' }"/>
+                        <button name="action_print_unit_validation" type="object" string="Print Validasi Aksesoris" class="oe_highlight" invisible="state != 'done'" groups="tw_stock_opname.group_button_print_validasi_stock_opname" context="{'validate': 'Accessories' }"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,open,in_progress,done" statusbar_colors='{"draft":"red","done":"blue"}'/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" class="oe_inline" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="company_id" required="1" options="{'no_create': True,'no_open':True}" string="Branch" readonly="state != 'draft'"/>
+                                <label for="periode_awal" string="Periode" required="1"/>
+                                <div>
+                                    <field name="periode_awal" required="1" class="oe_inline" style="font-family:'monospace';font-weight: bold"/>
+ s/d <field name="periode_akhir" required="1" class="oe_inline" style="font-family:'monospace';font-weight: bold"/>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="division" readonly="1" string="Division" force_save="1"/>
+                                <field name="date" string="Date" readonly="1" />
+                            </group>
+                            <group invisible="state == 'draft'" string="Summary">
+                                <field name="total_data" readonly="1" force_save="1"/>
+                                <label for="counted" string="Counted" readonly="1"/>
+                                <div>
+                                    <field name="counted" readonly="1" force_save="1" class="oe_inline"/>
+ (                                    <field name="counted_percentage" readonly="1" force_save="1" class="oe_inline"/>
+%)
+                                </div>
+                                <label for="not_counted" string="Not Counted" readonly="1"/>
+                                <div>
+                                    <field name="not_counted" readonly="1" force_save="1" class="oe_inline"/>
+ (                                    <field name="not_counted_percentage" readonly="1" force_save="1" class="oe_inline"/>
+%)
+                                </div>
+                                <label for="anomali" string="Anomali" readonly="1"/>
+                                <div>
+                                    <field name="anomali" readonly="1" force_save="1" class="oe_inline"/>
+ (                                    <field name="anomali_percentage" readonly="1" force_save="1" class="oe_inline"/>
+%)
+                                </div>
+                            </group>
+                            <group string="PIC">
+                                <field name="employee_id" required="1" options="{'no_create': True,'no_open':True}" readonly="state != 'draft'"/>
+                                <field name="pdi_id" required="1" options="{'no_create': True,'no_open':True}" readonly="state != 'draft'"/>
+                                <field name="adh_id" required="1" options="{'no_create': True,'no_open':True}" readonly="state != 'draft'"/>
+                                <field name="soh_id" required="1" options="{'no_create': True,'no_open':True}" readonly="state != 'draft'"/>
+                            </group>
+                            <group>
+                                <field name="alasan_reject" string="Alasan Reject" readonly="1" invisible="alasan_reject == False"/>
+                                <field name="code" string="Kode Unik" readonly="1" invisible="code == False"/>
+                                <button name="action_input_pic" type="object" string="Input PIC" class="oe_highlight" invisible="not (state in ['open', 'recount'])"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Unit">
+                                <field name="detail_opname_ids">
+                                    <list delete="false" create="false" no_open="true">
+                                        <field name="product_id" width="180px"/>
+                                        <field name="location_id" force_save="1"/>
+                                        <field name="lot_id"/>
+                                        <field name="chassis_no" width="120px"/>
+                                        <field name="qty_system" width="80px"/>
+                                        <field name="qty_count" width="140px"/>
+                                        <field name="selisih"/>
+                                        <field name="employee_id" width="160px"/>
+                                        <field name="count_date"/>
+                                        <field name="perhitungan_ke" width="120px"/>
+                                        <field name="reason"/>
+                                        <field name="state"/>
+                                        <button name="action_view_file_foto_unit" string="View Foto" type="object" class="oe_highlight" invisible="filename_upload == False"/>
+                                        <button name="action_view_file_maps" string="View Maps" type="object" class="oe_highlight" invisible="maps == False"/>
+                                    </list>
+                                    <form>
+                                        <header>
+                                            <button name="action_reject" type="object" string="Reject" class="oe_highlight" invisible="state == 'force_done'"/>
+                                            <field name="state" invisible="1"/>
+                                        </header>
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="product_id" readonly="1" />
+                                                    <field name="location_id" readonly="1" force_save="1"/>
+                                                    <field name="lot_id" readonly="1" />
+                                                    <field name="chassis_no" readonly="1" />
+                                                    <field name="qty_system" readonly="1" />
+                                                    <field name="has_accessories" readonly="1" />
+                                                    <field name="qty_count" readonly="1" />
+                                                </group>
+                                                <group>
+                                                    <field name="selisih" readonly="1" />
+                                                    <field name="count_date" readonly="1" />
+                                                    <field name="is_showroom" readonly="1" />
+                                                    <field name="state" readonly="1" />
+                                                    <field name="maps" readonly="1" widget='url'/>
+                                                    <field name="reason" readonly="1" />
+                                                    <field name="alasan_reject" string="Alasan Reject" readonly="1" invisible="alasan_reject == False"/>
+                                                    <field name="filename_upload" invisible="1"/>
+                                                </group>
+                                                <br/>
+                                                <br/>
+                                                <label for="file_foto_show" string="Foto Unit"/>
+                                                <div>
+                                                    <field name="file_foto_show" widget="image" img_width="150" img_height="150" invisible="filename_upload == False" filename="filename_upload" readonly="1"/>
+                                                </div>
+                                            </group>
+                                            <notebook>
+                                                <page string="History">
+                                                    <field name="history_opname_ids">
+                                                        <list delete="false" create="false">
+                                                            <field name="employee_id" readonly="1"/>
+                                                            <field name="perhitungan_ke" readonly="1"/>
+                                                            <field name="qty_count" readonly="1"/>
+                                                            <field name="count_date" readonly="1"/>
+                                                            <field name="state" readonly="1"/>
+                                                        </list>
+                                                    </field>
+                                                </page>
+                                                <page string="Audit Trail">
+                                                    <group>
+                                                        <group>
+                                                            <field name="reject_uid" readonly="1" invisible="reject_uid == False"></field>
+                                                        </group>
+                                                        <group>
+                                                            <field name="reject_date" readonly="1" invisible="reject_date == False"></field>
+                                                        </group>
+                                                    </group>
+                                                </page>
+                                            </notebook>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Accessories">
+                                <field name="detail_accessories_ids">
+                                    <list delete="false" create="false" no_open="true">
+                                        <field name="product_id" width="180px"/>
+                                        <field name="location_id"/>
+                                        <field name="segment_name"/>
+                                        <field name="qty_system" width="80px"/>
+                                        <field name="qty_good"/>
+                                        <field name="qty_not_good" width="120px"/>
+                                        <field name="employee_id" width="180px"/>
+                                        <field name="alasan_notgood" width="180px"/>
+                                        <field name="reason"/>
+                                        <field name="state"/>
+                                        <button name="action_view_file_foto_accessories" string="View Foto" type="object" class="oe_highlight" invisible="filename_upload == False"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Selisih">
+                                <separator string="UNIT"/>
+                                <field name="selisih_opname_ids">
+                                    <list delete="false" create="false" no_open="true">
+                                        <field name="product_id"/>
+                                        <field name="location_id" force_save="1"/>
+                                        <field name="lot_id"/>
+                                        <field name="chassis_no" width="120px"/>
+                                        <field name="qty_system" width="80px"/>
+                                        <field name="qty_count" width="180px"/>
+                                        <field name="selisih"/>
+                                        <field name="employee_id" width="180px"/>
+                                        <field name="count_date"/>
+                                        <field name="perhitungan_ke" width="120px"/>
+                                        <field name="state"/>
+                                        <field name="reason"/>
+                                    </list>
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="product_id" readonly="1" />
+                                                    <field name="location_id" readonly="1" force_save="1"/>
+                                                    <field name="lot_id" readonly="1"/>
+                                                    <field name="chassis_no" readonly="1"/>
+                                                    <field name="qty_system" readonly="1" />
+                                                    <field name="has_accessories" readonly="1" />
+                                                </group>
+                                                <group>
+                                                    <field name="qty_count" readonly="1" />
+                                                    <field name="selisih" readonly="1" />
+                                                    <field name="count_date" readonly="1" />
+                                                    <field name="is_showroom" readonly="1" />
+                                                    <field name="state" readonly="1" />
+                                                    <field name="maps" readonly="1" widget='url'/>
+                                                    <field name="filename_upload" invisible="1"/>
+                                                </group>
+                                                <br/>
+                                                <br/>
+                                                <label for="file_foto_show" string="Foto Unit"/>
+                                                <div>
+                                                    <field name="file_foto_show" widget="image" img_width="150" img_height="150" invisible="filename_upload == False" filename="filename_upload" readonly="1"/>
+                                                </div>
+                                            </group>
+                                            <notebook>
+                                                <page string="History">
+                                                    <field name="history_opname_ids">
+                                                        <list delete="false" create="false">
+                                                            <field name="employee_id" readonly="1"/>
+                                                            <field name="perhitungan_ke" readonly="1"/>
+                                                            <field name="qty_count" readonly="1"/>
+                                                            <field name="count_date" readonly="1"/>
+                                                            <field name="state" readonly="1"/>
+                                                        </list>
+                                                    </field>
+                                                </page>
+                                            </notebook>
+                                        </sheet>
+                                    </form>
+                                </field>
+                                <separator string="ACCESSORIES"/>
+                                <field name="selisih_accessories_ids">
+                                    <list delete="false" create="false" no_open="true">
+                                        <field name="product_id"/>
+                                        <field name="location_id"/>
+                                        <field name="segment_name"/>
+                                        <field name="qty_system" width="80px"/>
+                                        <field name="qty_good"/>
+                                        <field name="qty_not_good" width="120px"/>
+                                        <field name="employee_id" width="180px"/>
+                                        <field name="state"/>
+                                        <field name="alasan_notgood" width="180px"/>
+                                        <field name="reason"/>
+                                    </list>
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="product_id" readonly="1"/>
+                                                    <field name="location_id" readonly="1"/>
+                                                    <field name="segment_name" readonly="1"/>
+                                                    <field name="qty_system" readonly="1"/>
+                                                </group>
+                                                <group>
+                                                    <field name="qty_good" readonly="1"/>
+                                                    <field name="qty_not_good" readonly="1"/>
+                                                    <field name="alasan_notgood" readonly="1"/>
+                                                    <field name="state" readonly="1"/>
+                                                    <field name="employee_id" readonly="1"/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Lokasi">
+                                <separator string="UNIT"/>
+                                <field name="so_location_ids">
+                                    <list delete="false" create="false" no_open="true">
+                                        <field name="location_id" width="180px" readonly="1"/>
+                                        <field name="jumlah_unit" width="180px" readonly="1"/>
+                                        <button name="action_view_file_foto_selfie" string="View Foto Selfie" type="object" class="oe_highlight" invisible="filename_upload_foto_selfie == False"/>
+                                        <button name="action_view_file_foto_all_stock" string="View Foto All Stock" type="object" class="oe_highlight" invisible="filename_upload_foto_all_stock == False"/>
+                                    </list>
+                                    <form delete="false" create="false">
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <div class="oe_title">
+                                                        <h1>
+                                                            <field name="location_id" readonly="1" options="{'no_create': True,'no_open':True}"/>
+                                                        </h1>
+                                                    </div>
+                                                    <field name="jumlah_unit" readonly="1"/>
+                                                    <field name="filename_upload_foto_selfie" invisible="1"/>
+                                                    <field name="filename_upload_foto_all_stock" invisible="1"/>
+                                                </group>
+                                                <br/>
+                                                <br/>
+                                                <label for="filename_upload_foto_selfie" string="File Foto Selfie"/>
+                                                <div>
+                                                    <field name="file_foto_selfie_show" widget="image" img_width="200" img_height="200" invisible="filename_upload_foto_selfie == False"/>
+                                                    <field name="file_foto_selfie" invisible="filename_upload_foto_selfie != False" filename="filename_upload_foto_selfie"/>
+                                                    <br/>
+                                                </div>
+                                                <label for="filename_upload_foto_all_stock" string="File Foto All Stock"/>
+                                                <div>
+                                                    <field name="file_foto_all_stock_show" widget="image" img_width="200" img_height="200" invisible="filename_upload_foto_all_stock == False"/>
+                                                    <field name="file_foto_all_stock" invisible="filename_upload_foto_all_stock != False" filename="filename_upload_foto_all_stock"/>
+                                                    <br/>
+                                                </div>
+                                            </group>
+                                            <notebook>
+                                                <page string="Condition">
+                                                    <field name="condition_opname_ids">
+                                                        <list delete="false" create="false">
+                                                            <field name="condition_id" readonly="1"/>
+                                                            <field name="status_kondisi" readonly="1"/>
+                                                            <field name="other_information" readonly="1"/>
+                                                        </list>
+                                                    </field>
+                                                </page>
+                                            </notebook>
+                                        </sheet>
+                                    </form>
+                                </field>
+                                <separator string="Accessories"/>
+                                <field name="so_accessories_location_ids">
+                                    <list delete="false" create="false" no_open="true">
+                                        <field name="location_id" width="180px" readonly="1"/>
+                                        <field name="jumlah_unit" width="180px" readonly="1"/>
+                                        <button name="action_view_file_foto_selfie" string="View Foto Selfie" type="object" class="oe_highlight" invisible="filename_upload_foto_selfie == False"/>
+                                        <button name="action_view_file_foto_all_stock" string="View Foto All Stock" type="object" class="oe_highlight" invisible="filename_upload_foto_all_stock == False"/>
+                                    </list>
+                                    <form delete="false" create="false">
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <div class="oe_title">
+                                                        <h1>
+                                                            <field name="location_id" readonly="1" options="{'no_create': True,'no_open':True}"/>
+                                                        </h1>
+                                                    </div>
+                                                    <field name="jumlah_unit" readonly="1"/>
+                                                    <field name="filename_upload_foto_selfie" invisible="1"/>
+                                                    <field name="filename_upload_foto_all_stock" invisible="1"/>
+                                                </group>
+                                                <br/>
+                                                <br/>
+                                                <label for="filename_upload_foto_selfie" string="File Foto Selfie"/>
+                                                <div>
+                                                    <field name="file_foto_selfie_show" widget="image" img_width="200" img_height="200" invisible="filename_upload_foto_selfie == False"/>
+                                                    <field name="file_foto_selfie" invisible="filename_upload_foto_selfie != False" filename="filename_upload_foto_selfie"/>
+                                                    <br/>
+                                                </div>
+                                                <label for="filename_upload_foto_all_stock" string="File Foto All Stock"/>
+                                                <div>
+                                                    <field name="file_foto_all_stock_show" widget="image" img_width="200" img_height="200" invisible="filename_upload_foto_all_stock == False"/>
+                                                    <field name="file_foto_all_stock" invisible="filename_upload_foto_all_stock != False" filename="filename_upload_foto_all_stock"/>
+                                                    <br/>
+                                                </div>
+                                            </group>
+                                            <notebook>
+                                                <page string="Condition">
+                                                    <field name="condition_opname_ids">
+                                                        <list delete="false" create="false">
+                                                            <field name="condition_id" readonly="1"/>
+                                                            <field name="status_kondisi" readonly="1"/>
+                                                            <field name="other_information" readonly="1"/>
+                                                        </list>
+                                                    </field>
+                                                </page>
+                                            </notebook>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Audit Trail" name="audit_trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"></field>
+                                        <field name="open_uid" readonly="1" invisible="open_uid == False"></field>
+                                        <field name="confirm_uid" readonly="1" invisible="confirm_uid == False"></field>
+                                        <field name="force_done_uid" readonly="1" invisible="force_done_uid == False"></field>
+                                        <field name="recount_uid" readonly="1" invisible="recount_uid == False"></field>
+                                        <field name="done_uid" readonly="1" invisible="done_uid == False"></field>
+                                    </group>
+                                    <group>
+                                        <field name="create_date" readonly="1"></field>
+                                        <field name="open_date" readonly="1" invisible="open_date == False"></field>
+                                        <field name="confirm_date" readonly="1" invisible="confirm_date == False"></field>
+                                        <field name="force_done_date" readonly="1" invisible="force_done_date == False"></field>
+                                        <field name="recount_date" readonly="1" invisible="recount_date == False"></field>
+                                        <field name="done_date" readonly="1" invisible="done_date == False"></field>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Wizard view confirmation Generate SO -->
+        <record id="view_force_done_wizard" model="ir.ui.view">
+            <field name="name">tw.stock.opname.force.form</field>
+            <field name="model">tw.stock.opname</field>
+            <field name="arch" type="xml">
+                <form string="Confirm Force Done">
+                    <group>
+                        <div class="alert alert-info" role="alert">
+                            <i class="fa fa-info-circle me-2" title="Info"/>
+                            <span>Masih terdapat stock yang <strong>belum selesai</strong> dilakukan stock opname, jika ingin tetap melanjutkan maka detail akan menjadi selisih. Apakah akan dilanjutkan?</span>
+                        </div>
+                    </group>
+                    <notebook>
+                        <page string="Detail">
+                            <separator string="UNIT"/>
+                            <field name="open_opname_ids">
+                                <list editable='bottom' edit='true' delete='false' create='false'>
+                                    <field name="location_id" readonly="1"/>
+                                    <field name="product_id" readonly="1"/>
+                                    <field name="lot_id" readonly="1"/>
+                                    <field name="chassis_no" readonly="1"/>
+                                    <field name="reason" required="1"/>
+                                </list>
+                            </field>
+                            <separator string="ACCESSORIES"/>
+                            <field name="open_accessories_opname_ids">
+                                <list editable='bottom' edit='true' delete='false' create='false'>
+                                    <field name="location_id" readonly="1"/>
+                                    <field name="product_id" readonly="1"/>
+                                    <field name="segment_name" readonly="1"/>
+                                    <field name="reason" required="1"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button name="action_force_done" string="Save" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_stock_opname_retail">
+            <field name="name">Stock Opname</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.stock.opname</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain" eval="[('division', '=', 'Unit')]"/>
+            <field name="context" eval="{
+				'default_division': 'Unit'
+			}"/>
+        </record>
+
+        <record id="actions_tw_stock_opname_retail_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_stock_opname.view_tw_stock_opname_tree"/>
+            <field name="act_window_id" ref="action_stock_opname_retail"/>
+        </record>
+
+        <record id="actions_tw_stock_opname_retail_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_stock_opname_retail_form"/>
+            <field name="act_window_id" ref="action_stock_opname_retail"/>
+        </record>
+
+        <menuitem id="tw_stock_opname_retail_menuitem" name="Stock Opname" parent="tw_stock_opname.submenu_stock_opname_showroom" action="action_stock_opname_retail" sequence="11" groups="tw_stock_opname.tw_stock_opname_retail_group_read"/>
+
+    </data>
+</odoo>

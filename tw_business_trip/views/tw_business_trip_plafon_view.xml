@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+	<data>
+    <!-- Business Trip Plafon -->
+        <record id="tw_business_trip_plafon_view_list" model="ir.ui.view" >
+            <field name="name">tw.business.trip.plafon.list</field>
+            <field name="model">tw.business.trip.plafon</field>
+            <field name="arch" type="xml">
+                <list string="Plafon Business Trip / Perjalanan Dinas">
+                    <field name="name" />
+                    <field name="group_id" />
+                    <field name="nominal_domestic" />
+                    <field name="nominal_asia" />
+                    <field name="nominal_non_asia" />
+                    <field name="dollar_rate" />
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_business_trip_plafon_view_form" model="ir.ui.view" >
+            <field name="name">tw.business.trip.plafon.form</field>
+            <field name="model">tw.business.trip.plafon</field>
+            <field name="arch" type="xml">
+                <form string="Plafon Business Trip / Perjalanan Dinas">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                                <field name="group_id" required="1" options="{'no_create': True, 'no_open': True}" />
+                                <field name="nominal_domestic"  required="1"/>
+                                <field name="nominal_asia"  required="1"/>
+                                <field name="nominal_non_asia"  required="1"/>
+                                <field name="dollar_rate"  required="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                             <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"/>
+                                        <field name="create_date" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1"/>
+                                        <field name="write_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record> 
+
+        <record id="tw_business_trip_plafon_action" model="ir.actions.act_window">
+            <field name="name">Perjalan Dinas Plafon</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.business.trip.plafon</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Master Plafon Perjalan Dinas
+                </p><p>
+                Click the Create button to add a new Master Plafon Perjalan Dinas
+                </p>
+            </field>
+        </record> 
+
+    </data>
+</odoo>

@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_business_trip_plafon,tw_business_trip_plafon all,model_tw_business_trip_plafon,base.group_user,1,0,0,0
+access_tw_business_trip,tw_business_trip all,model_tw_business_trip,base.group_user,1,0,0,0
+access_tw_business_trip_transport,tw_business_trip_transport all,model_tw_business_trip_transport,base.group_user,1,0,0,0
+access_tw_business_trip_detail,tw_business_trip_detail all,model_tw_business_trip_detail,base.group_user,1,0,0,0
+access_tw_master_ttd,tw_master_ttd all,model_tw_master_ttd,base.group_user,1,0,0,0

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="group_tw_purchase_order_confirm" model="res.groups">
+            <field name="category_id" ref="tw_module_category_purchase_order"/>
+            <field name="name">TW Button Purchase Order Confirm</field>
+        </record>
+             
+        <record id="access_tw_purchase_order_confirm_read" model="ir.model.access">
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="name">tw_purchase_order_confirm read</field> 
+            <field name="group_id" ref="group_tw_purchase_order_confirm"/>  
+            <field name="perm_read">1</field> 
+        </record>    
+
+        <record id="group_tw_purchase_order_receive_product" model="res.groups">
+            <field name="category_id" ref="tw_module_category_purchase_order"/>
+            <field name="name">TW Button Purchase Order Receive Product</field>
+        </record>
+             
+        <record id="access_tw_purchase_order_receive_product_read" model="ir.model.access">
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="name">tw_purchase_order_receive_product read</field> 
+            <field name="group_id" ref="group_tw_purchase_order_receive_product"/>  
+            <field name="perm_read">1</field> 
+        </record>  
+
+        <record id="group_tw_purchase_order_create_invoice" model="res.groups">
+            <field name="category_id" ref="tw_module_category_purchase_order"/>
+            <field name="name">TW Button Purchase Order Create Invoice</field>
+            <field name="implied_ids" eval="[(4, ref('tw_account.group_tw_account_invoicing_read'))]"/>
+        </record>
+             
+        <record id="access_tw_purchase_order_create_invoice_read" model="ir.model.access">
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="name">tw_purchase_order_create_invoice read</field> 
+            <field name="group_id" ref="group_tw_purchase_order_create_invoice"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_purchase_order_create_invoice_account_move_read" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="name">tw_purchase_order_create_invoice_account_move read</field> 
+            <field name="group_id" ref="group_tw_purchase_order_create_invoice"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_purchase_order_create_invoice_account_move_line_read" model="ir.model.access">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="name">tw_purchase_order_create_invoice_account_move_line read</field> 
+            <field name="group_id" ref="group_tw_purchase_order_create_invoice"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="group_tw_purchase_order_confirm_reminder_mail" model="res.groups">
+            <field name="category_id" ref="tw_module_category_purchase_order"/>
+            <field name="name">TW Button Purchase Order Confirm Reminder Mail</field>
+        </record>
+             
+        <record id="access_tw_purchase_order_confirm_reminder_mail_read" model="ir.model.access">
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="name">tw_purchase_order_confirm_reminder_mail read</field> 
+            <field name="group_id" ref="group_tw_purchase_order_confirm_reminder_mail"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="group_tw_purchase_order_button_draft" model="res.groups">
+            <field name="category_id" ref="tw_module_category_purchase_order"/>
+            <field name="name">TW Button Purchase Order Button Draft</field>
+        </record>
+             
+        <record id="access_tw_purchase_order_button_draft_read" model="ir.model.access">
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="name">tw_purchase_order_button_draft read</field> 
+            <field name="group_id" ref="group_tw_purchase_order_button_draft"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="group_tw_purchase_order_button_unlock" model="res.groups">
+            <field name="category_id" ref="tw_module_category_purchase_order"/>
+            <field name="name">TW Button Purchase Order Button Unlock</field>
+        </record>
+             
+        <record id="access_tw_purchase_order_button_unlock_read" model="ir.model.access">
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="name">tw_purchase_order_button_unlock read</field> 
+            <field name="group_id" ref="group_tw_purchase_order_button_unlock"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="group_tw_purchase_order_print_quotation" model="res.groups">
+            <field name="category_id" ref="tw_module_category_purchase_order"/>
+            <field name="name">TW Button Purchase Order Print Quotation</field>
+        </record>
+
+        <record id="access_tw_purchase_order_print_quotation_read" model="ir.model.access">
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="name">tw_purchase_order_print_quotation read</field> 
+            <field name="group_id" ref="group_tw_purchase_order_print_quotation"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+			<field name="implied_ids" eval="[
+                (4,ref('group_tw_purchase_order_confirm')),
+                (4,ref('group_tw_purchase_order_receive_product')),
+                (4,ref('group_tw_purchase_order_create_invoice')),
+                (4,ref('group_tw_purchase_order_confirm_reminder_mail')),
+                (4,ref('group_tw_purchase_order_button_draft')),
+                (4,ref('group_tw_purchase_order_button_unlock')),
+                (4,ref('group_tw_purchase_order_print_quotation')),
+            ]">
+			</field>
+		</record>
+    </data>
+</odoo>

@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+    <!-- TW NRFS Warehouse Read -->
+        <record id="tw_nrfs_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Outstanding NRFS Showroom Read</field>
+        </record>
+
+        <record id="tw_nrfs_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs" />
+            <field name="name">tw_nrfs read</field>
+            <field name="group_id" ref="tw_nrfs_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="tw_nrfs_line_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line" />
+            <field name="name">tw_nrfs_line read</field>
+            <field name="group_id" ref="tw_nrfs_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="tw_nrfs_line_stock_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line_stock" />
+            <field name="name">tw_nrfs_line_stock read</field>
+            <field name="group_id" ref="tw_nrfs_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+        
+    <!-- TW NRFS Warehouse Update -->
+        <record id="tw_nrfs_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Outstanding NRFS Showroom Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_nrfs_group_read'))]" /> 
+        </record>
+
+        <record id="tw_nrfs_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs" />
+            <field name="name">tw_nrfs update</field>
+            <field name="group_id" ref="tw_nrfs_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_nrfs_line_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line" />
+            <field name="name">tw_nrfs_line update</field>
+            <field name="group_id" ref="tw_nrfs_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_nrfs_line_stock_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line_stock" />
+            <field name="name">tw_nrfs_line_stock update</field>
+            <field name="group_id" ref="tw_nrfs_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+    <!-- TW NRFS Warehouse Delete -->
+        <record id="tw_nrfs_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Outstanding NRFS Showroom Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_nrfs_group_read'))]" />
+        </record>
+
+        <record id="tw_nrfs_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs" />
+            <field name="name">tw_nrfs delete</field>
+            <field name="group_id" ref="tw_nrfs_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="tw_nrfs_line_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line" />
+            <field name="name">tw_nrfs_line delete</field>
+            <field name="group_id" ref="tw_nrfs_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="tw_nrfs_line_stock_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line_stock" />
+            <field name="name">tw_nrfs_line_stock delete</field>
+            <field name="group_id" ref="tw_nrfs_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+    <!-- TW NRFS Vendor Read -->
+        <record id="tw_nrfs_vendor_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Outstanding NRFS Vendor Read</field>
+        </record>
+
+        <record id="tw_nrfs_vendor_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs" />
+            <field name="name">tw_nrfs_vendor read</field>
+            <field name="group_id" ref="tw_nrfs_vendor_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="tw_nrfs_line_vendor_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line" />
+            <field name="name">tw_nrfs_line_vendor read</field>
+            <field name="group_id" ref="tw_nrfs_vendor_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="tw_nrfs_line_stock_vendor_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line_stock" />
+            <field name="name">tw_nrfs_line_stock_vendor read</field>
+            <field name="group_id" ref="tw_nrfs_vendor_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+    <!-- TW NRFS Vendor Update -->
+        <record id="tw_nrfs_vendor_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Outstanding NRFS Vendor Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_nrfs_vendor_group_read'))]" /> 
+        </record>
+
+        <record id="tw_nrfs_vendor_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs" />
+            <field name="name">tw_nrfs_vendor update</field>
+            <field name="group_id" ref="tw_nrfs_vendor_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_nrfs_line_vendor_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line" />
+            <field name="name">tw_nrfs_line_vendor update</field>
+            <field name="group_id" ref="tw_nrfs_vendor_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_nrfs_line_stock_vendor_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line_stock" />
+            <field name="name">tw_nrfs_line_stock_vendor update</field>
+            <field name="group_id" ref="tw_nrfs_vendor_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+    <!-- TW NRFS Vendor Delete -->
+        <record id="tw_nrfs_vendor_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Outstanding NRFS Vendor Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_nrfs_vendor_group_read'))]" />
+        </record>
+        
+        <record id="tw_nrfs_vendor_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs" />
+            <field name="name">tw_nrfs_vendor delete</field>
+            <field name="group_id" ref="tw_nrfs_vendor_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="tw_nrfs_line_vendor_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line" />
+            <field name="name">tw_nrfs_line_vendor delete</field>
+            <field name="group_id" ref="tw_nrfs_vendor_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="tw_nrfs_line_stock_vendor_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line_stock" />
+            <field name="name">tw_nrfs_line_stock_vendor delete</field>
+            <field name="group_id" ref="tw_nrfs_vendor_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+    
+    <!-- TW NRFS Administrator Read -->
+        <record id="tw_nrfs_admin_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Master NRFS Read</field>
+        </record>
+
+        <record id="tw_nrfs_admin_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs" />
+            <field name="name">tw_nrfs_admin read</field>
+            <field name="group_id" ref="tw_nrfs_admin_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="tw_nrfs_line_admin_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line" />
+            <field name="name">tw_nrfs_line_admin read</field>
+            <field name="group_id" ref="tw_nrfs_admin_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="tw_nrfs_line_admin_stock_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line_stock" />
+            <field name="name">tw_nrfs_line_admin_stock read</field>
+            <field name="group_id" ref="tw_nrfs_admin_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+    <!-- TW NRFS Administrator Update -->
+        <record id="tw_nrfs_admin_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Master NRFS Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_nrfs_admin_group_read')), (4, ref('tw_selection.group_tw_selection_update'))]"/>
+        </record>
+
+        <record id="tw_nrfs_admin_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs" />
+            <field name="name">tw_nrfs_admin update</field>
+            <field name="group_id" ref="tw_nrfs_admin_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_nrfs_line_admin_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line" />
+            <field name="name">tw_nrfs_line_admin update</field>
+            <field name="group_id" ref="tw_nrfs_admin_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_nrfs_line_stock_admin_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line_stock" />
+            <field name="name">tw_nrfs_line_stock_admin update</field>
+            <field name="group_id" ref="tw_nrfs_admin_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+    <!-- TW NRFS Administrator Delete -->
+        <record id="tw_nrfs_admin_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Master NRFS Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_nrfs_admin_group_read'))]" />
+        </record>
+
+        <record id="tw_nrfs_admin_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs" />
+            <field name="name">tw_nrfs_admin delete</field>
+            <field name="group_id" ref="tw_nrfs_admin_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+        <record id="tw_nrfs_line_admin_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line" />
+            <field name="name">tw_nrfs_line_admin delete</field>
+            <field name="group_id" ref="tw_nrfs_admin_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="tw_nrfs_line_stock_admin_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line_stock" />
+            <field name="name">tw_nrfs_line_stock_admin delete</field>
+            <field name="group_id" ref="tw_nrfs_admin_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+    <!-- TW PO Urgent Read -->
+        <record id="tw_nrfs_po_urgent_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Outstanding PO NRFS Read</field>
+        </record>
+
+        <record id="tw_nrfs_po_urgent_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs" />
+            <field name="name">tw_nrfs_po_urgent read</field>
+            <field name="group_id" ref="tw_nrfs_po_urgent_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="tw_nrfs_line_po_urgent_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line" />
+            <field name="name">tw_nrfs_line_po_urgent read</field>
+            <field name="group_id" ref="tw_nrfs_po_urgent_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="tw_nrfs_line_stock_po_urgent_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line_stock" />
+            <field name="name">tw_nrfs_line_stock_po_urgent read</field>
+            <field name="group_id" ref="tw_nrfs_po_urgent_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+    <!-- TW PO Urgent Update -->
+        <record id="tw_nrfs_po_urgent_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Outstanding PO NRFS Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_nrfs_po_urgent_group_read'))]" /> 
+        </record>
+
+        <record id="tw_nrfs_po_urgent_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs" />
+            <field name="name">tw_nrfs_po_urgent update</field>
+            <field name="group_id" ref="tw_nrfs_po_urgent_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="tw_nrfs_line_po_urgent_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_nrfs_line" />
+            <field name="name">tw_nrfs_line_po_urgent update</field>
+            <field name="group_id" ref="tw_nrfs_po_urgent_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+    <!-- Admin Menus -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('tw_nrfs_group_read')),
+   	            (4,ref('tw_nrfs_group_update')),
+   	            (4,ref('tw_nrfs_group_delete')),
+                (4,ref('tw_nrfs_vendor_group_read')),
+   	            (4,ref('tw_nrfs_vendor_group_update')),
+   	            (4,ref('tw_nrfs_vendor_group_delete')),
+                (4,ref('tw_nrfs_admin_group_read')),
+   	            (4,ref('tw_nrfs_admin_group_update')),
+   	            (4,ref('tw_nrfs_admin_group_delete')),
+                (4,ref('tw_nrfs_po_urgent_group_read')),
+   	            (4,ref('tw_nrfs_po_urgent_group_update'))
+            ]" />
+        </record>
+    </data>
+</odoo>

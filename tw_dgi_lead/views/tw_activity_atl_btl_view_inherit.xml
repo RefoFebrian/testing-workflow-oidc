@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit form view tw.activity.atl.btl.line untuk menambahkan field
+             activity_md_id (MD Event ID dari DGI). Field ini ada di module
+             tw_dgi_lead karena hanya relevan untuk keperluan integrasi DGI.
+             Digunakan sebagai kunci lookup saat mapping idEvent dari response
+             DGI prospect ke field activity_plan_id di tw.lead. -->
+        <record id="tw_activity_atl_btl_line_form_view_dgi_inherit" model="ir.ui.view">
+            <field name="name">tw.activity.atl.btl.line.form.dgi.inherit</field>
+            <field name="model">tw.activity.atl.btl.line</field>
+            <field name="inherit_id" ref="tw_activity_atl_btl.tw_activity_atl_btl_line_all_form_view"/>
+            <field name="arch" type="xml">
+                <!-- Tambahkan MD Event ID setelah field sales_channel_id -->
+                <field name="sales_channel_id" position="after">
+                    <field name="activity_md_id"
+                           readonly="state not in ('draft', 'revision')"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
+

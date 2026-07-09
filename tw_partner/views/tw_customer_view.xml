@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Customers-->
+    <record id="tw_customer_partner_form_view" model="ir.ui.view">
+        <field name="name">Customers</field>
+        <field name="model">res.partner</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="tw_partner.tw_customer_validation_base_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='dynamic_input_area']" position="inside">
+                <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active" />
+                    <field name="image_1920" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}" on_change="1" />
+                    <div class="oe_title mb24">
+                        <field name="company_type" widget="radio" options="{'horizontal': true}" readonly="context.get('form_type') in ('Finance Company', 'General Supplier','Biro Jasa')" on_change="1" />
+                        <h1>
+                            <field id="company" options="{'line_breaks': False}" widget="field_partner_autocomplete" class="text-break" name="name" default_focus="1" placeholder="e.g. Lumber Inc" invisible="not is_company" required="type == 'contact'" on_change="1" />
+                            <field name="code" placeholder="Partner Code" required="1" readonly="code"/>
+                            <field id="individual" options="{'line_breaks': False}" widget="no_special_char" class="text-break" name="name" default_focus="1" placeholder="e.g. Brandon Freeman" invisible="is_company" required="type == 'contact'" on_change="1"/>
+                        </h1>
+                        <div class="o_row">
+                            <field name="company_id" placeholder="Branch" readonly="company_id != False" options="{'no_open': True, 'no_create': True}" force_save="1" can_create="True" can_write="True" />
+                            <field name="company_name" invisible="not company_name or company_name == '' or is_company" />
+                            <button name="create_company" icon="fa-plus-square" string="Create company" type="object" class="oe_edit_only btn-link" invisible="is_company or company_name == '' or not company_name" />
+                        </div>
+                        <div class="o_row">
+                            <label for="category_id" string="Tags" class="oe_edit_only"/>
+                            <field name="category_id" widget="many2many_tags" options="{'color_field': 'color'}" placeholder="e.g. &quot;B2B&quot;, &quot;VIP&quot;, &quot;Consulting&quot;, ..." readonly="context.get('is_readonly', False)" on_change="1" can_create="True" can_write="True" />
+                        </div>
+                    </div>
+
+                    <group>
+                        <group string="Address">
+                            <label for="street" string="Street Address" class="o_edit_only"/>
+                            <div>
+                                <field name="street" placeholder="Street..." required="1" readonly="type == 'contact' and parent_id" widget="no_special_char"/>
+                                <field name="street2" placeholder="Street 2..." readonly="type == 'contact' and parent_id" widget="no_special_char"/>
+                            </div>
+                            <label for="rt" string="RT/RW" />
+                            <div>
+                                <field name="rt" placeholder="RT" style="width: 25%" readonly="type == 'contact' and parent_id" required="1" />
+                                <field name="rw" placeholder="RW" style="width: 25%" readonly="type == 'contact' and parent_id" required="1" />
+                            </div>
+                            <label for="state_id" string="Provinsi"/>
+                            <div class="d-flex">
+                                <field name="state_id" class="oe_no_button" placeholder="Provinsi" options="{'no_open': True,'no_create': True}" nolabel="1" readonly="type == 'contact' and parent_id" context="{'country_id': country_id, 'default_country_id': country_id}" required="1" on_change="1" can_create="True" can_write="True"/>
+                                <field name="state_text" nolabel="1" placeholder="Provinsi" required="1" readonly="type == 'contact' and parent_id"/>
+                            </div>
+                            <label for="city_id" string="Kota/Kabupaten"/>
+                            <div class="d-flex">
+                                <field name="city_id" placeholder="Kota/Kabupaten" nolabel="1" options="{'no_open': True,'no_create': True}" readonly="type == 'contact' and parent_id" required="1" can_create="True" can_write="True"/>
+                                <field name="city_text" nolabel="1" placeholder="Kota/Kabupaten" required="1" readonly="type == 'contact' and parent_id"/>
+                            </div>
+                            <label for="district_id" string="Kecamatan"/>
+                            <div class="d-flex">
+                                <field name="district_id" placeholder="Kecamatan" nolabel="1" options="{'no_open': True,'no_create': True}" readonly="type == 'contact' and parent_id" required="1" can_create="True" can_write="True"/>
+                                <field name="district_text" nolabel="1" placeholder="Kecamatan" required="1" readonly="type == 'contact' and parent_id"/>
+                            </div>
+                            <label for="sub_district_id" string="Kelurahan" />
+                            <div class="d-flex">
+                                <field name="sub_district_id" placeholder="Kelurahan" string="Kelurahan" options="{'no_open': True,'no_create': True}" readonly="type == 'contact' and parent_id" required="1" can_create="True" can_write="True" />
+                                <field name="sub_district_text" nolabel="1" placeholder="Kelurahan" required="1" readonly="type == 'contact' and parent_id"/>
+                            </div>
+                            <field name="zip" placeholder="Kode Pos" readonly="type == 'contact' and parent_id" required="1" on_change="1" />
+                            <field name="no_npwp" placeholder="No NPWP" required="is_company" invisible="is_company == False"/>
+                            <field name="alamat_pkp" placeholder="Alamat di PKP" invisible="is_company == False"/>
+                            <field name="l10n_id_pkp" string="Is PKP" invisible="is_company == False"/>
+                            <field name="l10n_id_kode_transaksi" string="Invoice Transaction Code" invisible="not l10n_id_pkp"/>
+                        </group>
+                        <group string="Address Domicile">
+                            <field name="same_address" widget="boolean_button" force_save="1"/>
+                            <label for="street_domicile" string="Street Address" class="o_edit_only"/>
+                            <div>
+                                <field name="street_domicile" placeholder="Street..." required="1" readonly="type == 'contact' and parent_id" force_save="1" widget="no_special_char"/>
+                                <field name="street2_domicile" placeholder="Street 2..." readonly="type == 'contact' and parent_id" force_save="1" widget="no_special_char"/>
+                            </div>
+                            <label for="rt_domicile" string="RT/RW" />
+                            <div>
+                                <field name="rt_domicile" placeholder="RT" style="width: 25%" readonly="type == 'contact' and parent_id" required="1" force_save="1"/>
+                                <field name="rw_domicile" placeholder="RW" style="width: 25%" readonly="type == 'contact' and parent_id" required="1" force_save="1"/>
+                            </div>
+                            <field name="state_domicile_id" class="oe_no_button" placeholder="Provinsi" options="{'no_open': True,'no_create': True}" string="Provinsi" readonly="type == 'contact' and parent_id" context="{'country_id': country_domicile_id, 'default_country_id': country_domicile_id}" required="1" can_create="True" can_write="True" force_save="1"/>
+                            <field name="city_domicile_id" placeholder="Kota/Kabupaten" string="Kota/Kabupaten" options="{'no_open': True,'no_create': True}" readonly="type == 'contact' and parent_id" required="1" can_create="True" can_write="True" force_save="1"/>
+                            <label for="district_domicile_id" string="Kecamatan"/>
+                            <div>
+                                <field name="district_domicile_id" placeholder="Kecamatan" string="Kecamatan" options="{'no_open': True,'no_create': True}" readonly="type == 'contact' and parent_id" required="1" can_create="True" can_write="True" force_save="1" />
+                            </div>
+                            <label for="sub_district_domicile_id" string="Kelurahan" />
+                            <div>
+                                <field name="sub_district_domicile_id" placeholder="Kelurahan" string="Kelurahan" options="{'no_open': True,'no_create': True}" readonly="type == 'contact' and parent_id" required="1" can_create="True" can_write="True" force_save="1"/>
+                            </div>
+                            <field name="zip_domicile" placeholder="Kode Pos" string="Kode Pos" readonly="type == 'contact' and parent_id" required="1" force_save="1"/>
+                        </group>
+                    </group>
+                    <group name="detail_info" string="Information" invisible="not is_company">
+                        <group name="personal_info">
+                            <field name="mobile" placeholder="e.g. 0812xxxxxx" required="is_company == False" on_change="1"/>
+                            <field name="phone" placeholder="e.g. 021xxxxxx" on_change="1" required="is_company == True"/>
+                            <field name="email" widget="email" context="{'gravatar_image': True}" required="user_ids" on_change="1"/>
+                        </group>
+                    </group>
+                    <group name="detail_info" string="Personal Information" invisible="is_company">
+                        <group name="personal_info">
+                            <field name="identification_number" required="is_company == False" placeholder="e.g. 1871xxxxxx" invisible="is_company" on_change="1" />
+                            <field name="mobile" required="is_company == False" placeholder="e.g. 0812xxxxxx" on_change="1" />
+                            <field name="phone" required="is_company" placeholder="e.g. 021xxxxxx" on_change="1" />
+                            <field name="is_pkp" invisible="is_company == False" />
+                            <field name="tgl_pengukuhan" invisible="is_pkp == False or is_company == False" required="is_pkp != False" />
+                            <field name="no_npwp" required="is_company" invisible="is_company == False" />
+                            <field name="alamat_npwp" invisible="is_company == False" />
+                            <field name="email" widget="email" context="{'gravatar_image': True}" required="user_ids" on_change="1" />
+                            <field name="birthplace" required="not is_company" invisible="is_company" string="Tempat Lahir" />
+                            <field name="birthdate" required="not is_company" invisible="is_company" string="Tanggal Lahir" />
+                            <!-- <field name="whatsapp" /> -->
+                            <field name="occupation_id" required="not is_company" invisible="is_company" string="Pekerjaan" can_create="True" can_write="True" />
+                            <field name="another_job" invisible="is_company" string="Pekerjaan Lainnya" />
+                        </group>
+                        <group name="personal_info_2">
+                            <field name="religion_id" required="not is_company" invisible="is_company" string="Agama" can_create="True" can_write="True" />
+                            <field name="gender_id" required="not is_company" invisible="is_company" string="Jenis Kelamin" can_create="True" can_write="True" />
+                            <field name="education_id" required="not is_company" invisible="is_company" string="Pendidikan" can_create="True" can_write="True" />
+                            <field name="housing_tenure_id" required="not is_company" invisible="is_company" string="Status Rumah" can_create="True" can_write="True" />
+                            <field name="blood_type_id" required="not is_company" invisible="is_company" string="Golongan Darah" can_create="True" can_write="True" />
+                        </group>
+                    </group>
+                    <notebook colspan="4">
+                        <page name="other_info" string="Other Information" autofocus="autofocus">
+                            <group>
+                                <group name="customer_data" string="Customer Data" invisible="is_company">
+                                    <field name="customer_code_id" required="not is_company" invisible="is_company" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="hobby_id" required="not is_company" invisible="is_company" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="ethnic_group" required="not is_company" invisible="is_company" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="expense_id" string="Pengeluaran" required="not is_company" invisible="is_company" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="mobile_plan_status_id" required="not is_company" invisible="is_company" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="unit_operator_id" required="not is_company" invisible="is_company" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="unit_usage_id" required="not is_company" invisible="is_company" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="motor_brand_id" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="motor_type_id" options="{'no_open': True, 'no_create': True}"/>
+                                </group>
+                                <group name="media_social" string="Media Social" invisible="is_company">
+                                    <field name="facebook" placeholder="e.g. Facebook Account" invisible="is_company" />
+                                    <field name="instagram" placeholder="e.g. @instgram_account" invisible="is_company" />
+                                    <field name="twitter" string="X / Twitter" placeholder="e.g. @x_account" invisible="is_company" />
+                                    <field name="youtube" placeholder="e.g. Youtube Account" invisible="is_company" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Contacts &amp; Addresses" name="contact_addresses">
+                            <field name="contact_ids" mode="kanban" context="{'default_partner_id': id}">
+                                <kanban>
+                                    <field name="name" widget="field_partner_autocomplete" on_change="1" />
+                                    <field name="type_id" on_change="1" />
+                                    <field name="company_id" />
+                                    <field name="dapat_dihubungi" />
+                                    <templates>
+                                        <t t-name="card">
+                                            <div>
+                                                <div class="o_kanban_image" title="Phone">
+                                                    <img class="fa fa-phone" alt="Contact image" title="Phone" />
+                                                </div>
+                                                <div class="oe_kanban_details">
+                                                    <div>Branch: <field name="company_id" />
+                                                    </div>
+                                                    <div>Tipe: <field name="type_id" on_change="1" />
+                                                    </div>
+                                                    <div>Value: <field name="name" widget="field_partner_autocomplete" on_change="1" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                                <form string="Contact / Address">
+                                    <sheet>
+                                        <field name="company_id" placeholder="Branch" can_create="True" can_write="True" />
+                                        <div class="text-muted oe_edit_only">
+                                            <p class="mb-0">
+                                                <span>Insert Branch of Customer's Contact</span>
+                                            </p>
+                                        </div>
+                                        <group>
+                                            <group>
+                                                <field name="type_id" string="Tipe Kontak" required="1" on_change="1" can_create="True" can_write="True" />
+                                                <field name="name" string="Value" required="1" widget="field_partner_autocomplete" on_change="1" />
+                                                <field name="dapat_dihubungi" invisible="type_id.name != 'Phone'" required="type_id.name == 'Phone'" />
+                                            </group>
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                        <page name="bank_accounts" string="Bank Accounts">
+                            <group string="Bank Accounts" name="banks">
+                                <field name="bank_ids" nolabel="1" colspan="2" context="{'default_partner_id': id}" widget="auto_save_res_partner" on_change="1">
+                                    <list>
+                                        <field name="sequence" widget="handle" />
+                                        <field name="bank_id" />
+                                        <field name="acc_holder_name" optional="show" />
+                                        <field name="acc_number" on_change="1" />
+                                        <field name="allow_out_payment" />
+                                        <field name="acc_holder_name" column_invisible="True" />
+                                    </list>
+                                </field>
+                            </group>
+                        </page>
+                        <page name="internal_notes" string="Internal Notes">
+                            <field name="comment" placeholder="Internal notes..." />
+                        </page>
+                    </notebook>
+            </xpath>
+            <xpath expr="//sheet" position="after">
+                <!-- Invisible Field -->
+                <field name="active" invisible="True" readonly="True" data-used-by="invisible='active' (widget,web_ribbon)" on_change="1" />
+                <field name="is_company" invisible="True" readonly="True" data-used-by="invisible='not is_company' (field,industry_id); required='not is_company' (field,type); invisible='is_company or not parent_id' (div,parent_pricelists); invisible='is_company or not parent_id' (page,accounting_disabled)" on_change="1" />
+                <field name="user_ids" invisible="True" readonly="True" data-used-by="readonly='user_ids' (field,type); required='user_ids' (field,email)" on_change="1" />
+                <field name="country_id" invisible="True" readonly="True" data-used-by="context=&quot;{'default_parent_id': id, 'default_street': street, 'default_street2': street2, 'default_city': city, 'default_state_id': state_id, 'default_zip': zip, 'default_country_id': country_id, 'default_lang': lang, 'default_user_id': user_id, 'default_type': 'other'}&quot; (field,child_ids)" on_change="1" />
+                <field name="country_domicile_id" invisible="True" readonly="True" data-used-by="context=&quot;{'country_id': country_domicile_id, 'default_country_id': country_domicile_id}&quot; (field,state_domicile_id)" />
+                <field name="active_lang_count" invisible="True" readonly="True" data-used-by="invisible='active_lang_count &lt;= 1' (field,lang)" />
+                <field name="city" invisible="True" readonly="True" data-used-by="context=&quot;{'default_parent_id': id, 'default_street': street, 'default_street2': street2, 'default_city': city, 'default_state_id': state_id, 'default_zip': zip, 'default_country_id': country_id, 'default_lang': lang, 'default_user_id': user_id, 'default_type': 'other'}&quot; (field,child_ids)" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="tw_customer_inherit_partner_list_view" model="ir.ui.view">
+        <field name="name">Customers</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <list string="Customers">
+                <field name="code" />
+                <field name="name" />
+            </list>
+        </field>
+    </record>
+
+    <record id="action_tw_customer_inherit_partner" model="ir.actions.act_window">
+        <field name="name">Customers</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,list,form,activity</field>
+        <field name="search_view_id" ref="tw_partner.view_tw_all_partner_inherit_filter" />
+        <field name="domain">[('company_type','=','person'),('category_id.name','=','Customer')]</field>
+        <field name="context" eval="
+            {
+                'default_company_type': 'person',
+                'default_category_id': [ref('tw_partner.contact_tags_customer')]
+            }
+            " />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new Customers
+            </p>
+            <p>
+                TEDS 2.0 helps you easily track all activities related to a Customers's Data
+            </p>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="action_tw_customer_inherit_partner_view_tree">
+        <field name="sequence" eval="2" />
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="tw_customer_inherit_partner_list_view" />
+        <field name="act_window_id" ref="action_tw_customer_inherit_partner" />
+    </record>
+
+    <record model="ir.actions.act_window.view" id="action_tw_customer_inherit_partner_form_view">
+        <field name="sequence" eval="3" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="tw_customer_partner_form_view" />
+        <field name="act_window_id" ref="action_tw_customer_inherit_partner" />
+    </record>
+    <record model="ir.actions.act_window.view" id="action_tw_customer_inherit_partner_view_kanban">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="base.res_partner_kanban_view" />
+        <field name="act_window_id" ref="action_tw_customer_inherit_partner" />
+    </record>
+
+</odoo>

@@ -1,0 +1,1 @@
+from . import tw_listing_cetak_kwitansi_inherit

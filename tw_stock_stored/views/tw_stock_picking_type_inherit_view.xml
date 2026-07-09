@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data> 
+        <record id="tw_stock_stored_stock_picking_type_form_inherit" model="ir.ui.view">
+            <field name="name">tw.stock.stored.stock.picking.type.form.inherit</field>
+            <field name="model">stock.picking.type</field>
+            <field name="inherit_id" ref="stock.view_picking_type_form"/>
+            <field name="arch" type="xml">
+                <div name="default_location_dest_id_div" position="after">
+                    <label for="temporary_location_id" name="temporary_location_id_label"/>
+                    <div class="o_row" name="temporary_location_id_div">
+                        <field name="temporary_location_id" options="{'no_open': True,'no_create': True}" invisible="code != 'incoming'" domain="[('company_id', '=', company_id)]"/>
+                    </div>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

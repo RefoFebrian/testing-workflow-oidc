@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="tw_pilot_project_discount_dso" model="tw.pilot.project">
+            <field name="name">Discount DSO</field>
+            <field name="description">Additional amount to GP Unit if any discount is not fully given to customers.</field>
+            <field name="is_using_rule">0</field>
+            <field name="company_ids" eval="[]"/>
+        </record>
+    </data>
+</openerp>
+            

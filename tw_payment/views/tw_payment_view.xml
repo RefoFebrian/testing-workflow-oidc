@@ -1,0 +1,435 @@
+<odoo>
+  <data>
+  
+    <record id="tw_account_payment_form_view" model="ir.ui.view">
+        <field name="name">tw.account.payment.form</field>
+        <field name="model">tw.account.payment</field>
+        <field name="arch" type="xml">
+            <form string="Pay">
+                <header>
+                    <button name="action_post" string="Confirm" type="object" class="oe_highlight" invisible="state != 'draft'" data-hotkey="q" groups="tw_payment.group_tw_customer_payment_confirm_button,tw_payment.group_tw_supplier_payment_confirm_button"/>
+                    <button name="action_validate" string="Validate" type="object" class="oe_highlight" invisible="state != 'in_process' or move_id" data-hotkey="q" groups="tw_payment.group_tw_customer_payment_validate_button,tw_payment.group_tw_supplier_payment_validate_button"/>
+                    <button name="action_cancel" string="Cancel" type="object" invisible="not id or not (state == 'draft' or (state == 'in_process' and is_sent))" data-hotkey="x" groups="tw_payment.group_tw_customer_payment_cancel_button,tw_payment.group_tw_supplier_payment_cancel_button"/>
+                    <button name="action_print_customer_payment" string="Print" type="object" invisible="state != 'paid' or type == 'supplier_payment'" data-hotkey="p" groups="tw_payment.group_tw_payment_customer_report_button"/>
+                    <button name="action_print_supplier_payment" string="Print" type="object" invisible="state != 'paid' or type == 'customer_payment'" data-hotkey="p" groups="tw_payment.group_tw_payment_supplier_report_button"/>
+                    <button name="action_print_kwitansi" string="Print Kwitansi" type="object" invisible="state != 'paid' or type == 'supplier_payment'" data-hotkey="k"/>
+                    <button name="mark_as_sent" string="Mark as Sent" type="object" data-hotkey="v" invisible="state != 'in_process' or is_sent or payment_method_code != 'manual'"/>
+                    <button name="unmark_as_sent" string="Unmark as Sent" type="object" data-hotkey="k" invisible="state != 'in_process' or not is_sent or payment_method_code != 'manual'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,paid"/>
+                </header>
+                <div class="alert alert-warning mb-0" role="alert" invisible="not duplicate_payment_ids or state!='draft'">
+                    <span>This payment has the same partner, amount and date as </span>
+                    <field name="duplicate_payment_ids" widget="x2many_buttons" string="Duplicated Payments"/>
+                </div>
+                <sheet>
+                    <!-- Invisible fields -->
+                    <field name="id" invisible="1"/>
+                    <field name="is_sent" invisible="1"/>
+                    <field name="need_cancel_request" invisible="1"/>
+                    <field name="is_reconciled" invisible="1"/>
+                    <field name="is_matched" invisible="1"/>
+                    <field name="payment_method" invisible="1"/>
+                    <field name="payment_method_code" invisible="1"/>
+                    <field name="show_partner_bank_account" invisible="1"/>
+                    <field name="require_partner_bank_account" invisible="1"/>
+                    <field name="available_payment_method_line_ids" invisible="1"/>
+                    <field name="available_account_ids" invisible="1"/>
+                    <field name="available_acc_payment_method_ids" invisible="1"/>
+                    <field name="available_partner_bank_ids" invisible="1"/>
+                    <field name="country_code" invisible="1"/>
+                    <field name="partner_type" invisible="1"/>
+                    <field name="reconciled_invoices_type" invisible="1"/>
+                    <field name="type" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+                    <field name="paired_internal_transfer_payment_id" invisible="1"/>
+                    <field name="available_journal_ids" invisible="1"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="outstanding_account_id" invisible="1"/>
+
+
+                    <div class="oe_button_box" name="button_box">
+                        <!-- Invoice stat button -->
+                        <button name="button_open_invoices" type="object" class="oe_stat_button" icon="fa-bars" invisible="reconciled_invoices_count == 0">
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">
+                                    <field name="reconciled_invoices_count"/>
+                                    <span invisible="reconciled_invoices_type != 'invoice'"> Invoice</span>
+                                    <span invisible="reconciled_invoices_type == 'invoice'"> Credit Note</span>
+                                </span>
+                            </div>
+                        </button>
+
+                        <!-- Bill stat button -->
+                        <button name="button_open_bills" type="object" class="oe_stat_button" icon="fa-bars" invisible="reconciled_bills_count == 0">
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">
+                                    <field name="reconciled_bills_count"/>
+                                    <span> Bill</span>
+                                </span>
+                            </div>
+                        </button>
+
+                        <!-- Statement stat button -->
+                        <button name="button_open_statement_lines" type="object"
+                                class="oe_stat_button" icon="fa-bars"
+                                invisible="reconciled_statement_lines_count == 0">
+                            <div class="o_form_field o_stat_info">
+                                <field name="reconciled_statement_lines_count"/>
+                                <span class="o_stat_text">Transaction</span>
+                            </div>
+                        </button>
+
+                        <!-- Journal Entry  button -->
+                        <button name="button_open_journal_entry" type="object" class="oe_stat_button" icon="fa-bars" invisible="not move_id" groups="account.group_account_user,account.group_account_readonly">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Journal Entry</span>
+                            </div>
+                        </button>
+                    </div>
+
+                    <widget name="web_ribbon" text="Invoicing App Legacy"
+                            bg_color="text-bg-info"
+                            invisible="state != 'invoicing_legacy'"
+                            tooltip="This payment has been generated through the Invoicing app, before installing Accounting. It has been disabled by the 'Invoicing Switch Threshold Date' setting so that it does not impact your accounting."/>
+
+                    <div class="oe_title">
+                        <h1 invisible="name"><span>Draft</span></h1>
+                        <h1 invisible="not name"><field name="name" readonly="1"/></h1>
+                    </div>
+
+                    <group name="main_group">
+                        <group name="group1">
+                            <field name="company_id" string="Branch" required="1" readonly="state != 'draft'" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="payment_type" widget="radio" invisible="1" readonly="1" options="{'horizontal': True}"/>
+                            <field name="partner_id" context="{'default_is_company': True}" string="Customer"
+                                    options="{'no_create': True}"
+                                    invisible="partner_type != 'customer'"
+                                    required="1"
+                                    readonly="state != 'draft'"/>
+                            <field name="partner_id" context="{'default_is_company': True}" string="Vendor"
+                                    options="{'no_create': True}"
+                                    invisible="partner_type != 'supplier'"
+                                    required="1"
+                                    readonly="state != 'draft'"/>
+
+                            <field name="payment_method_id" required="state == 'draft'" readonly="state != 'draft'" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="payment_method_line_id" required="payment_method_id != False" readonly="state != 'draft'" invisible="payment_type != 'inbound' and type != 'customer_payment'" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="payment_provider" readonly="1" invisible="not payment_provider"/>
+                            <field name="partner_bank_id" string="Bank Account"
+                                    context="{'default_partner_id': partner_id, 'display_account_trust': True}"
+                                    invisible="not show_partner_bank_account or partner_type != 'supplier' or payment_type == 'inbound'"
+                                    required="require_partner_bank_account" 
+                                    readonly="state != 'draft'"
+                                    options="{'no_create': True}"/>
+                            <field name="bank_id" string="Bank"
+                                    options="{'no_create': True, 'no_open': True}"
+                                    invisible="not show_account_number or partner_type != 'supplier' or payment_type == 'inbound'"
+                                    required="require_account_number" 
+                                    readonly="state != 'draft'"
+                                    />
+                            <field name="account_number" string="Account Number"
+                                    invisible="not show_account_number or partner_type != 'supplier' or payment_type == 'inbound'"
+                                    required="require_account_number" 
+                                    readonly="state != 'draft'"
+                                    />
+                            <field name="account_holder" string="Account Holder"
+                                    invisible="not show_account_number or partner_type != 'supplier' or payment_type == 'inbound'"
+                                    readonly="state != 'draft'"
+                                    />
+                            <field name="transfer_note" readonly="1" invisible="partner_type != 'supplier' or payment_type == 'inbound' or not account_number"/>
+
+                            <label for="amount"/>
+                            <div name="amount_div" class="o_row">
+                                <field name="amount" readonly="state != 'draft'"/>
+                                <field name="currency_id" options="{'no_create': True, 'no_open': True}" required="1" readonly="1" force_save="1" groups="base.group_multi_currency"/>
+                            </div>
+                            <field name="journal_id" domain="[('id', 'in', available_journal_ids)]" readonly="state != 'draft'" options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                        <group name="group2">
+                            <field name="division" required="1" readonly="(context.get('default_division') in ('Unit','Sparepart') and context.get('default_division')) or state != 'draft'" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="beneficiary_company_id" string="Bayar Untuk" invisible="payment_type != 'outbond' and type != 'supplier_payment'" required="partner_type == 'supplier' and payment_type == 'outbond' and type == 'supplier_payment'" readonly="state != 'draft'" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="beneficiary_company_id" string="Terima Untuk" invisible="payment_type != 'inbound' and type != 'customer_payment'" required="partner_type == 'supplier' and payment_type == 'inbound' and type == 'customer_payment'" readonly="state != 'draft'" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="date" readonly="1"/>
+                            <field name="due_date" readonly="1" invisible="payment_type != 'outbond' and type != 'supplier_payment'"/>
+                            <field name="schedule_date" readonly="state != 'draft'" invisible="payment_type != 'outbond' and type != 'supplier_payment'"/>
+                            <field name="memo" readonly="state != 'draft'" string="Memo"/>
+                            <field name="is_receipt_printed" readonly="state != 'draft'" invisible="payment_type != 'inbound' and type != 'customer_payment'"/>
+                            <field name="receipt_print_count" readonly="1" force_save="1" invisible="payment_type != 'inbound' and type != 'customer_payment'"/>
+                        </group>
+                        <group>
+                            <field name="qr_code" invisible="1"/>
+                            <div invisible="not qr_code" colspan="2" class="text-center">
+                                <field name="qr_code" widget="html"/>
+                            </div>
+                        </group>
+                    </group>
+                    
+                    <!-- From Supplier Payment Form -->
+                    <notebook invisible="payment_type != 'outbond' and type != 'supplier_payment'">
+                        <page name="details" string="Detail Payment">
+                            <group name="group3">
+                            </group>
+                            <group name="group4" >
+                                <field name="line_dr_ids" widget="one2many" readonly="state != 'draft'"
+                                    context="{'journal_id':journal_id, 'partner_id':partner_id, 'company_id':company_id, 'division':division, 'default_beneficiary_company_id': company_id}"
+                                    on_change="onchange_line_ids(line_dr_ids, line_cr_ids, amount, currency_id, payment_type, context)">
+                                    <list string="Credits" editable="bottom" colors="gray:amount==0">
+                                            <field name="move_line_id"
+                                                context="{'journal_id':parent.journal_id, 'partner_id':parent.partner_id, 'company_id':parent.company_id, 'division':parent.division}"
+                                                on_change="onchange_move_line_id(move_line_id,parent.amount,parent.currency_id,parent.journal_id)"
+                                                domain="[('account_id.account_type','=','liability_payable'),('credit','!=',0), ('full_reconcile_id','=', False), ('partner_id','=',parent.partner_id),('division','=',parent.division), ('company_id','=',parent.beneficiary_company_id)]"
+                                                options="{'no_create': True}"
+                                                required="1" />
+                                            <field name="account_id" domain="[('account_type','=','liability_payable'),('id','in',parent.available_account_ids)]" />
+                                            <field name="date_original" readonly="1" />
+                                            <field name="date_due" readonly="1" />
+                                            <field name="amount_original" readonly="1" width="125%"/>
+                                            <field name="amount_unreconciled" readonly="1" width="125%"/>
+                                            <field name="is_reconciled" on_change="onchange_reconcile(is_reconciled, amount, amount_unreconciled, context)" />
+                                            <field name="amount" sum="Total Allocation" on_change="onchange_amount(amount, amount_unreconciled, context)" width="125%" string="Allocation" />
+                                    </list>
+                                </field>
+                            </group>
+                            <group name="group5">
+                                <field name="line_cr_ids" string="Credits" readonly="state != 'draft'"
+                                    widget="one2many"
+                                    context="{'journal_id':journal_id, 'type':payment_type, 'partner_id':partner_id, 'company_id':beneficiary_company_id, 'division':division, 'default_beneficiary_company_id': company_id}">
+                                    <list string="Invoices and outstanding transactions"
+                                        editable="bottom" colors="gray:amount==0">
+                                        <field name="move_line_id"
+                                            context="{'journal_id':parent.journal_id, 'partner_id':parent.partner_id, 'company_id':parent.beneficiary_company_id, 'division':parent.division}"
+                                            on_change="onchange_move_line_id(move_line_id,parent.amount,parent.currency_id,parent.journal_id)"
+                                            domain="[('account_id.account_type','=','asset_receivable'),('debit','!=',0), ('full_reconcile_id','=', False),('partner_id','=',parent.partner_id),('company_id','=',parent.company_id),('division','=',parent.division)]"
+                                            options="{'no_create': True}"
+                                            required="1" />
+                                        <field name="account_id" domain="[('account_type','=','asset_receivable'),('id','in',parent.available_account_ids)]" />
+                                        <field name="date_original" readonly="1" />
+                                        <field name="date_due" readonly="1" />
+                                        <field name="amount_original" readonly="1" width="125%"/>
+                                        <field name="amount_unreconciled" readonly="1" width="125%"/>
+                                        <field name="is_reconciled" on_change="onchange_reconcile(is_reconciled, amount, amount_unreconciled, context)" />
+                                        <field name="amount" sum="Total Allocation" on_change="onchange_amount(amount, amount_unreconciled, context)" string="Allocation" width="125%" />
+                                    </list>
+                                </field>
+                            </group>
+                            <group name="group5">
+                                <field name="line_wo_ids" widget="one2many" readonly="state != 'draft'"
+                                    context="{'journal_id':journal_id, 'partner_id':partner_id, 'company_id':company_id, 'division':division, 'default_beneficiary_company_id': company_id}"
+                                    on_change="onchange_line_ids(line_dr_ids, line_cr_ids, amount, currency_id, payment_type, context)">
+                                    <list string="Write-Offs" editable="bottom" colors="gray:amount==0">
+                                        <field name="account_id"
+                                            context="{'journal_id':parent.journal_id, 'partner_id':parent.partner_id,'company_id':parent.beneficiary_company_id,'division':parent.division}"
+                                            on_change="writeoff_account_onchange(account_id,parent.company_id,parent.division)" 
+                                            domain="[('id','in',parent.available_account_ids)]"
+                                            />
+                                        <field name='name' required='1' />
+                                        <field name="amount" sum="Total Writeoff" string="Amount" />
+                                    </list>
+                                </field>
+                            </group>
+                            <group col="3">
+                                <group string="Internal Notes">
+                                    <field name="narration" colspan="2" nolabel="1" />
+                                </group>
+                                <group>
+                                    <field name="writeoff_amount" widget="monetary" />
+                                    <field name="is_round" readonly="state != 'draft'" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Journal Items" invisible="not move_id">
+                            <field name="move_ids" readonly="1" />
+                        </page>
+                        <page name="other_info" string="Other Info">
+                            <group>
+                                <field name="type" readonly="1"/>
+                                <field name="payment_method_line_id" readonly="1" force_save="1" options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+                        </page>
+                        <page name="audit_trail" string="Audit Trail">
+                            <group>
+                                <group>
+                                    <field name="create_uid" readonly="1"></field>
+                                    <field name="create_date" readonly="1"></field>
+                                    <field name="confirm_uid" readonly="1"></field>
+                                    <field name="confirm_date" readonly="1"></field>
+                                </group>
+                                <group>
+                                    <field name="write_uid" readonly="1"></field>
+                                    <field name="write_date" readonly="1"></field>
+                                    <field name="validate_uid" readonly="1"></field>
+                                    <field name="validate_date" readonly="1"></field>
+                                </group>
+                            </group>
+                        </page>				
+                    </notebook>
+                  
+                    <!-- From Customer Payment Form -->
+                    <notebook invisible="payment_type != 'inbound' and partner_type != 'customer'">
+                        <page name="details" string="Details">
+                            <group name="group3">
+                            </group>
+                            <group name="group4">
+                                <field name="line_cr_ids" string="Credits" readonly="state != 'draft'"
+                                    widget="one2many"
+                                    context="{'journal_id':journal_id, 'type':payment_type, 'partner_id':partner_id, 'company_id':beneficiary_company_id, 'default_beneficiary_company_id': company_id,'division':division}">
+                                    <list string="Invoices and outstanding transactions"
+                                        editable="bottom" colors="gray:amount==0">
+                                        <field name="move_line_id"
+                                            context="{'journal_id':parent.journal_id, 'partner_id':parent.partner_id, 'company_id':parent.company_id, 'division':parent.division}"
+                                            on_change="onchange_move_line_id(move_line_id,parent.amount,parent.currency_id,parent.journal_id)"
+                                            domain="[('account_id.account_type','=','asset_receivable'),('debit','!=',0), ('full_reconcile_id','=', False), ('partner_id','=',parent.partner_id),('company_id','=',parent.beneficiary_company_id),('division','=',parent.division)]"
+                                            options="{'no_create': True}"
+                                            required="1" />
+                                        <field name="account_id" domain="[('account_type','=','asset_receivable'), ('id','in',parent.available_account_ids)]" />
+                                        <field name="date_original" readonly="1" />
+                                        <field name="date_due" readonly="1" />
+                                        <field name="amount_original" readonly="1" />
+                                        <field name="amount_unreconciled" readonly="1" />
+                                        <field name="is_reconciled"
+                                            on_change="onchange_reconcile(is_reconciled, amount, amount_unreconciled, context)" />
+                                        <field name="amount" sum="Total Allocation"
+                                            on_change="onchange_amount(amount, amount_unreconciled, context)"
+                                            string="Allocation" />
+                                    </list>
+                                </field>
+                            </group>
+                            <group name="group5">
+                                <field name="line_dr_ids" widget="one2many" readonly="state != 'draft'"
+                                    context="{'journal_id':journal_id, 'partner_id':partner_id, 'company_id':company_id, 'default_beneficiary_company_id': company_id, 'division':division}"
+                                    on_change="onchange_line_ids(line_dr_ids, line_cr_ids, amount, currency_id, payment_type, context)">
+                                    <list string="Debit" editable="bottom" colors="gray:amount==0">
+                                        <field name="move_line_id"
+                                            context="{'journal_id':parent.journal_id, 'partner_id':parent.partner_id, 'company_id':parent.company_id, 'division':parent.division}"
+                                            on_change="onchange_move_line_id(move_line_id,parent.amount,parent.currency_id,parent.journal_id)"
+                                            domain="[('account_id.account_type','=','liability_payable'),('credit','!=',0), ('full_reconcile_id','=', False), ('partner_id','=',parent.partner_id),('company_id','=',parent.company_id),('division','=',parent.division)]"
+                                            options="{'no_create': True}"
+                                            required="1" />
+                                        <field name="account_id" domain="[('account_type','=','liability_payable'), ('id','in',parent.available_account_ids)]" />
+                                        <field name="date_original" readonly="1" />
+                                        <field name="date_due" readonly="1" />
+                                        <field name="amount_original" readonly="1" />
+                                        <field name="amount_unreconciled" readonly="1" />
+                                        <field name="is_reconciled"
+                                            on_change="onchange_reconcile(is_reconciled, amount, amount_unreconciled, context)" />
+                                        <field name="amount" sum="Total Allocation"
+                                            on_change="onchange_amount(amount, amount_unreconciled, context)"
+                                            string="Allocation" />
+                                    </list>
+                                </field>
+                            </group>
+                            <group name="group5">
+                                <field name="line_wo_ids" widget="one2many" readonly="state != 'draft'"
+                                    context="{'journal_id':journal_id, 'partner_id':partner_id, 'default_beneficiary_company_id': company_id, 'company_id':company_id, 'division':division}"
+                                    on_change="onchange_line_ids(line_dr_ids, line_cr_ids, amount, currency_id, payment_type, context)">
+                                    <list string="Write-Offs" editable="bottom" colors="gray:amount==0">
+                                        <field name="account_id" domain="[('id','in',parent.available_account_ids)]" on_change="writeoff_account_onchange(account_id,parent.company_id,parent.division)" />
+                                        <field name='name' required='1' />
+                                        <field name="amount" sum="Total Writeoff" string="Amount" />
+                                    </list>
+                                </field>
+                            </group>
+                            <group col="3">
+                                <group string="Internal Notes">
+                                    <field name="narration" colspan="2" nolabel="1" />
+                                </group>
+                                <group>
+                                    <field name="writeoff_amount" widget="monetary" />
+                                    <field name="is_round" readonly="state != 'draft'" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Journal Items" invisible="state != 'paid'">
+                            <field name="move_ids" readonly="1" />
+                        </page>
+                        <page name="audit_trail_customer_payment" string="Audit Trail">
+                            <group>
+                                <group>
+                                    <field name="create_uid" readonly="1"></field>
+                                    <field name="create_date" readonly="1"></field>
+                                    <field name="confirm_uid" readonly="1"></field>
+                                    <field name="confirm_date" readonly="1"></field>
+                                </group>
+                                <group>
+                                    <field name="write_uid" readonly="1"></field>
+                                    <field name="write_date" readonly="1"></field>
+                                    <field name="validate_uid" readonly="1"></field>
+                                    <field name="validate_date" readonly="1"></field>
+                                </group>
+                            </group>
+                        </page>				
+                    </notebook>
+
+                    <group>
+                        <!-- To be used in localizations requiring to add a page -->
+                        <notebook name="payment_notebook" colspan="2"/>
+                    </group>
+                </sheet>
+                <div class="o_attachment_preview"/>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Payment Kanban View  -->
+    <record model="ir.ui.view" id="tw_account_payment_kanban_view">
+        <field name="name">tw.account.payment.kanban.view</field>
+        <field name="model">tw.account.payment</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile" sample="1" quick_create="false">
+                <field name="date"/>
+                <field name="currency_id"/>
+                <progressbar field="activity_state" colors='{"planned": "success", "today": "warning", "overdue": "danger"}'/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex align-items-baseline">
+                            <field name="name" class="fw-bolder fs-5 me-2"/>
+                            <field name="amount" widget="monetary" class="fw-bolder ms-auto flex-shrink-0"/>
+                        </div>
+                        <div class="d-flex align-items-baseline">
+                            <field name="company_id" class="mt-1 me-1"/>
+                            <field name="date" options="{'show_time': false}" class="ms-auto flex-shrink-0"/>
+                        </div>
+                        <footer class="align-items-end">
+                            <field name="partner_id" class="fs-5 me-2"/>
+                            <field name="state" widget="label_selection" options="{'classes': {'draft': 'default', 'cancel': 'default', 'paid': 'success', 'approved': 'warning', 'in_process': 'warning'}}" class="ms-auto"/>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <!-- Search View -->
+    <record id="tw_account_payment_search_view" model="ir.ui.view">
+        <field name="name">tw.account.payment.search</field>
+        <field name="model">tw.account.payment</field>
+        <field name="arch" type="xml">
+            <search string="Payment">
+                <field name="name" filter_domain="[('name', 'ilike', self)]"/>
+                <field name="company_id" string="Branch"/>
+                <field name="partner_id" string="Partner"/>
+                <field name="journal_id" string="Journal"/>
+                <field name="account_id" string="Account"/>
+                <field name="partner_bank_id" string="Partner Bank Account"/>
+                <field name="memo" string="Memo"/>
+                <field name="state"/>
+                <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Posted" name="posted" domain="[('state', '=', 'posted')]"/>
+                <filter string="Cancelled" name="cancel" domain="[('state', '=', 'cancel')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Branch" name="branch" context="{'group_by':'company_id'}"/>
+                    <filter string="Partner" name="partner" context="{'group_by':'partner_id'}"/>
+                    <filter string="Journal" name="journal" context="{'group_by':'journal_id'}"/>
+                    <filter string="Account" name="account" context="{'group_by':'account_id'}"/>
+                    <filter string="State" name="state" context="{'group_by':'state'}"/>
+                    <filter string="Bill Date" name="date" context="{'group_by':'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+  </data>
+</odoo>

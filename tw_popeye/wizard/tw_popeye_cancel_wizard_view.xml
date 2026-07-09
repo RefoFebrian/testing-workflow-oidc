@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_popeye_cancel_wizard_form_view" model="ir.ui.view">
+        <field name="name">tw.popeye.cancel.wizard.form</field>
+        <field name="model">tw.popeye.cancel.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Cancel Popeye Transaction">
+                <group>
+                    <field name="cancel_reason" placeholder="Masukkan alasan pembatalan..." widget="text"/>
+                </group>
+                <footer>
+                    <button name="action_confirm_cancel" string="Confirm Cancel" type="object" class="btn-primary"/>
+                    <button string="Batal" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

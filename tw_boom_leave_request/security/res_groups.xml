@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- TW Boom Leave Request Read -->
+        <record id="group_tw_boom_leave_request_read" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW Button BOOM Leave Request Read</field>
+        </record>
+
+        <record id="access_tw_boom_leave_request_read" model="ir.model.access">
+            <field name="model_id" ref="tw_boom_leave_request.model_tw_boom_leave_request"/>
+            <field name="name">tw_boom_leave_request read</field>
+            <field name="group_id" ref="group_tw_boom_leave_request_read"/>
+            <field name="perm_read">1</field>
+        </record>  
+
+        <!-- TW Boom Leave Request Update -->
+        <record id="group_tw_boom_leave_request_update" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW Button BOOM Leave Request Update</field>
+        </record>
+
+        <record id="access_tw_boom_leave_request_update" model="ir.model.access">
+            <field name="model_id" ref="tw_boom_leave_request.model_tw_boom_leave_request"/>
+            <field name="name">tw_boom_leave_request update</field>
+            <field name="group_id" ref="group_tw_boom_leave_request_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- TW Boom Leave Request Delete -->
+        <record id="group_tw_boom_leave_request_delete" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW Button BOOM Leave Request Delete</field>
+        </record>
+        <record id="access_tw_boom_leave_request_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_boom_leave_request.model_tw_boom_leave_request"/>
+            <field name="name">tw_boom_leave_request delete</field>
+            <field name="group_id" ref="group_tw_boom_leave_request_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>        
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_boom_leave_request_read')),
+                (4, ref('group_tw_boom_leave_request_update')),
+                (4, ref('group_tw_boom_leave_request_delete')),
+            ]" />
+        </record>
+    </data>
+</odoo>

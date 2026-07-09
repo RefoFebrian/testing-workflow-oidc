@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_stock_quant_inherit_view_tree" model="ir.ui.view">
+            <field name="name">tw.stock.quant.inherit.tree</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree_editable" />
+            <field name="arch" type="xml">
+                <field name="reserved_quantity" position="after">
+                    <field name="reservation_ids" widget="many2many_tags"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="tw_stock_quant_inherit_view_tree_simple" model="ir.ui.view">
+            <field name="name">tw.stock.quant.inherit.tree.simple</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree_simple" />
+            <field name="arch" type="xml">
+                <field name="product_uom_id" position="after">
+                    <field name="reserved_quantity"/>
+                    <field name="reservation_ids" widget="many2many_tags"/>
+                </field>
+            </field>
+        </record>
+
+
+        <record id="tw_stock_quant_inherit_view_form" model="ir.ui.view">
+            <field name="name">tw.stock.quant.inherit.form</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_form_editable" />
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/group[2]" position="after">
+                    <notebook>
+                        <page name="reservation_moves" string="Reservation Moves">
+                            <field name="reservation_ids" widget="one2many_list" readonly="1">
+                                <list string="Reservation Moves" create="0" edit="0" delete="0">
+                                    <field name="name"/>
+                                    <field name="product_id" options="{'no_create': True, 'no_open': True}"/>
+                                    <field name="location_id" options="{'no_create': True, 'no_open': True}"/>
+                                    <field name="quantity"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Audit Trail">
+                            <group>
+                                <group>
+                                    <field name="create_uid" readonly="1"></field>
+                                    <field name="create_date" readonly="1"></field>
+                                </group>
+                                <group>
+                                    <field name="write_uid" readonly="1"></field>
+                                    <field name="write_date" readonly="1"></field>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_stock_quant_inherit_view_search" model="ir.ui.view">
+            <field name="name">tw.stock.quant.inherit.search</field>
+            <field name="model">stock.quant</field>
+            <field name="arch" type="xml">
+                <search string="Stock Quant">
+                    <field name="product_id"/>
+                    <field name="lot_id"/>
+                    <field name="location_id"/>
+                    <field name="package_id"/>
+                    <field name="company_id"/>
+                    <field name="reservation_ids" string="Reservation Move Description" filter_domain="[('reservation_ids.name', 'ilike',self)]"/>
+                    <field name="reservation_ids" string="Reservation Move Product" filter_domain="[('reservation_ids.product_id', 'ilike',self)]"/>
+                    <field name="reservation_ids" string="Reservation Move Source Location" filter_domain="[('reservation_ids.location_id', 'ilike',self)]"/>
+                    <filter name="product_id" string="Product" context="{'group_by': 'product_id'}" />
+                    <filter name="location_id" string="Location" context="{'group_by': 'location_id'}" />
+                </search>
+            </field>
+        </record>
+
+        <record id="action_tw_stock_quant_inherit" model="ir.actions.act_window">
+            <field name="name">Stock Quant</field>
+            <field name="res_model">stock.quant</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="tw_stock_quant_inherit_view_search"/>
+        </record>
+
+        <record id="action_tw_stock_quant_inherit_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="stock.view_stock_quant_tree_simple"/>
+            <field name="act_window_id" ref="action_tw_stock_quant_inherit"/>
+        </record>
+
+        <record id="action_tw_stock_quant_inherit_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_stock_quant_inherit_view_form"/>
+            <field name="act_window_id" ref="action_tw_stock_quant_inherit"/>
+        </record>
+        
+    </data>
+</odoo>

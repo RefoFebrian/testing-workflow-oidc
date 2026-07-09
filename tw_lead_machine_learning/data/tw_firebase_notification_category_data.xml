@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+		<record id="firebase_notification_category_reminder_reassign_crm_harian" model="tw.firebase.notification.category">
+            <field name="name">Notification Reassign CRM</field>
+            <field name="title">Reassign CRM</field>
+            <field name="sumber_data">proactive</field>
+            <field name="jenis_reminder">harian</field>
+            <field name="content_template_id" ref="tw_lead_machine_learning.firebase_content_template_reassign_crm_notification"/>
+        </record>
+        
+    </data>
+</odoo>

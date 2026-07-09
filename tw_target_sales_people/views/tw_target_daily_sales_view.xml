@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_target_daily_sales_view_list" model="ir.ui.view">
+            <field name="name">tw.target.daily.sales.view.list</field>
+            <field name="model">tw.target.daily.sales</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="company_id"/>
+                    <field name="year"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_target_daily_sales_view_form" model="ir.ui.view">
+            <field name="name">tw.target.daily.sales.view.form</field>
+            <field name="model">tw.target.daily.sales</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="company_id"/>
+                            <field name="year"/>
+                        </group>
+                        <notebook>
+                            <page string="Detail">
+                                <field name="target_line_ids" nolabel="1">
+                                    <list editable="bottom">
+                                        <field name="series" required="1"/>
+                                        <field name="month"/>
+                                        <field name="target" required="1"/>
+                                    </list>
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <field name="series" required="1"/>
+                                                <field name="month"/>
+                                                <field name="target" required="1"/>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_date" readonly="1"/>
+                                        <field name="create_uid" readonly="1" options="{'no_open':True,'no_create':True}"/>
+                                    </group>
+                                    <group>
+                                        <field name="write_date" readonly="1"/>
+                                        <field name="write_uid" readonly="1" options="{'no_open':True,'no_create':True}"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_target_daily_sales_filter" model="ir.ui.view">
+            <field name="name">tw.target.daily.sales.filter</field>
+            <field name="model">tw.target.daily.sales</field>
+            <field name="arch" type="xml">
+                <search string="Search Target Daily Sales">
+                    <field name="company_id" string="Branch"/>
+                    <field name="year" string="Tahun"/>
+                    <filter name="year" string="year" context="{'group_by': 'year'}" />
+                </search>
+            </field>
+        </record>
+
+        <record id="action_tw_target_daily_sales" model="ir.actions.act_window">
+            <field name="name">Target Daily Sales</field>
+            <field name="res_model">tw.target.daily.sales</field>
+            <field name="view_mode">list,form</field>
+        </record>
+    </data>
+</odoo>

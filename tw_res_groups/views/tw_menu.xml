@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+        
+        <menuitem id="tw_res_groups_wizard_menuitem"  parent="base.menu_users" sequence="10"  action="actions_tw_res_groups_wizard" groups="group_tw_res_groups_wizard_read"/> 
+    
+    </data>
+</odoo>

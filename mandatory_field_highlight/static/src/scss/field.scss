@@ -1,0 +1,27 @@
+:root {
+  --background-color:red;
+  --margin-left-color:inherit;
+  --margin-right-color:inherit;
+  --margin-top-color:inherit;
+  --margin-bottom-color:inherit;
+}
+$backgroundColor: var(--background-color);
+$marginLeftColor: var(--margin-left-color);
+$marginRightColor: var(--margin-right-color);
+$marginTopColor: var(--margin-top-color);
+$marginBottomColor: var(--margin-bottom-color);
+
+.o_required_modifier .o_input, .o_required_modifier .o-paragraph  {
+    background: $backgroundColor !important;
+    border-bottom : solid $marginBottomColor 2px !important;
+    border-left : solid $marginLeftColor 2px !important;
+    border-right : solid $marginRightColor 2px !important;
+    border-top : solid $marginTopColor 2px !important;
+    border-radius: 4px;
+    min-height: 32px;
+    line-height: 32px !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    align-items: center !important;
+    vertical-align: middle !important;
+}

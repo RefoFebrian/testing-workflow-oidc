@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_inherit_popeye_form_view" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.popeye</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="10"/>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <block name="default_taxes_setting_container" position="before">
+                <block title="Check Account Number Partner to Popeye" name="check_account_popeye">
+                    <setting id="check_account_popeye" string="Check Account Number ?" title="Check Account Number Partner to Popeye" help="Check Account Number Partner to Popeye">
+                        <field name="is_check_account_popeye"/>
+                    </setting>
+                </block>
+            </block>
+        </field>
+    </record> 
+</odoo>

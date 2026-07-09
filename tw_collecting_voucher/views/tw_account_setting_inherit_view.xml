@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_account_settings_collecting_voucher_inherit_view" model="ir.ui.view">
+            <field name="name">tw.account.settings.collecting.voucher.inherit.view</field>
+            <field name="model">tw.account.setting</field>
+            <field name="inherit_id" ref="tw_account_setting.tw_account_setting_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='backoffice_journal_voucher']" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                </xpath>
+                <xpath expr="//group[@name='backoffice_journal_voucher']" position="inside">
+                    <field name="journal_collecting_voucher_id" options="{ 'no_open': True, 'no_create': True }"/>
+                    <field name="account_collecting_remaining_voucher_id" options="{ 'no_open': True, 'no_create': True }"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

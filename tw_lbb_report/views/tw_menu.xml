@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="tw_lbb_report_menu"
+        parent="tw_menu.submenu_tw_workshop_report"
+        sequence="13" action="action_tw_lbb_report_wizard"
+        groups="tw_lbb_report.group_tw_lbb_report" />
+
+</odoo>

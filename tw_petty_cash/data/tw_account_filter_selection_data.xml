@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">  
+        <!-- Account Filter Transaction Type Selections -->
+
+        <record id="selection_account_filter_petty_cash_in" model="tw.selection">
+            <field name="type">AccountFilterTransactionType</field>
+            <field name="value">petty_cash_in</field>
+            <field name="name">Petty Cash In</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="selection_account_filter_petty_cash_out" model="tw.selection">
+            <field name="type">AccountFilterTransactionType</field>
+            <field name="value">petty_cash_out</field>
+            <field name="name">Petty Cash Out</field>
+            <field name="active" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+    
+    <!-- Collecting Cancellation -->
+    	
+    	<record model="ir.ui.view" id="collecting_cancel_list_view">
+            <field name="name">tw.collecting.cancel.list</field>
+            <field name="model">tw.collecting.cancel</field>
+            <field name="arch" type="xml">
+                <list string="Collecting Cancel">
+                	<field name="name"/>
+                    <field name="company_id"/>
+                    <field name="division"/>
+                	<field name="collecting_id"/>
+                    <field name="date"/>
+                    <field name="state"/>
+				</list>
+			</field>
+        </record>
+        
+        <record id="view_collecting_cancel_search" model="ir.ui.view">
+            <field name="name">tw.collecting.cancel.search</field>
+            <field name="model">tw.collecting.cancel</field>
+            <field name="arch" type="xml">
+                <search string="Search Collecting Cancel">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="collecting_id"/>
+                    <field name="date" />
+                    <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                    <filter string="Waiting For Approval" name="waiting_approval" domain="[('state','=','waiting_for_approval')]"/>
+                    <filter string="Confirmed" name="confirmed" domain="[('state','=','confirmed')]"/>
+                    <filter string="Approved" name="approved" domain="[('state','=','approved')]"/>
+                    <filter string="Outstanding" name="outstanding" domain="[('state','!=','confirmed')]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                        <filter string="Date" name="group_date" context="{'group_by': 'date'}"/>
+                        <filter string="Branch" name="group_branch" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                        <filter string="Division" name="group_division" context="{'group_by': 'division'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="inherit_collecting_cancel_form_view">
+            <field name="name">tw.collecting.cancel.form</field>
+            <field name="model">tw.collecting.cancel</field>
+            <field name="priority">1</field>
+            <field name="inherit_id" ref="tw_cancellation.tw_cancellation_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/div[@name='button_box']" position="inside">
+                    <!-- <button name="button_open_journal_entry" type="object" class="oe_stat_button" icon="fa-bars" invisible="not move_id" groups="account.group_account_user,account.group_account_readonly">
+                        <div class="o_stat_info">
+                            <span class="o_stat_text">Journal Entry</span>
+                        </div>
+                    </button> -->
+                </xpath>
+                <xpath expr="//button[@name='action_request_approval']" position="attributes">
+                    <attribute name="groups">tw_collecting_cancel.group_tw_collecting_cancel_rfa</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_reject_or_cancel' and contains(@context, 'Cancel')]" position="attributes">
+                    <attribute name="groups">tw_collecting_cancel.group_tw_collecting_cancel_cancel_approval</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_confirm']" position="attributes">
+                    <attribute name="groups">tw_collecting_cancel.group_tw_collecting_cancel_confirm</attribute>
+                </xpath>
+               <field name="transaction_name" position="after">
+                    <field name="collecting_id" domain="[('company_id','=',company_id),('division','=',division),('state','not in',('draft','canceled','rejected'))]" readonly="state != 'draft'" options="{'no_create':True,'no_open':True}" required="1" invisible="context.get('default_model_type') != 'tw.collecting'"/>
+                </field>
+            </field>
+        </record>
+        
+        <record id="collecting_cancel_action" model="ir.actions.act_window">
+            <field name="name">Collecting AR/AP Cancel</field>
+            <field name="res_model">tw.collecting.cancel</field>
+            <field name="search_view_id" ref="view_collecting_cancel_search"/>
+            <field name="context" eval="
+                {
+                    'default_model_id': ref('tw_collecting.model_tw_collecting'),
+                    'default_model_type': 'tw.collecting',
+                    'search_default_outstanding':'1',
+                }
+            "/>
+            <field name="domain">['|',('collecting_id','!=',False),('model_id.model','=','tw.collecting')]</field>
+        </record>
+        
+        <record id="collecting_cancel_action_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="collecting_cancel_list_view"/>
+            <field name="act_window_id" ref="collecting_cancel_action"/>
+        </record>
+        
+        <record id="collecting_cancel_action_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="inherit_collecting_cancel_form_view"/>
+            <field name="act_window_id" ref="collecting_cancel_action"/>
+        </record>
+        
+	</data>
+</odoo>

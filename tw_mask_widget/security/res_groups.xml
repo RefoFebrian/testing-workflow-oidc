@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Admin Data Pribadi Group - users with this group can see unmasked sensitive data -->
+        <record id="group_admin_data_pribadi" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">Admin Data Pribadi</field>
+            <field name="comment">Users with this group can see unmasked sensitive information (phone, email, ID, etc.)</field>
+        </record>
+    </data>
+</odoo>

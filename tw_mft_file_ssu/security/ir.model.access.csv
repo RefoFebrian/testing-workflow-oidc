@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_b2b_file_ssu_receive_report_wizard,tw.b2b.file.ssu.receive.report.wizard,model_tw_b2b_file_ssu_receive_report_wizard,tw_mft_file_ssu.group_tw_b2b_file_ssu_receive_report_read,1,1,1,1

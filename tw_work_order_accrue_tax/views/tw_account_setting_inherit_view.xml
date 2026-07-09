@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <record id="tw_work_order_account_setting_journal_wo_accrue_tax_form_view" model="ir.ui.view">
+            <field name="name">tw.work.order.branch.setting.inherit.form</field>
+            <field name="model">tw.account.setting</field>
+            <field name="inherit_id" ref="tw_work_order.tw_account_setting_account_journal_wo_pricelist_form_view"/>
+            <field name="arch" type="xml">
+                <field name="wo_reg_journal_id" position="after">
+                    <field name="journal_wo_accrue_tax_id" options="{'no_create': True}"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

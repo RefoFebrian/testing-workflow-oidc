@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menuitem_report_stock_distribution_showroom" parent="tw_menu.submenu_tw_showroom_report" sequence="3" action="action_report_stock_distribution_showroom_wizard" groups="tw_stock_distribution_report.group_stock_distribution_report_showroom_read"/>
+    <menuitem id="menuitem_report_stock_distribution_workshop" parent="tw_menu.submenu_tw_workshop_report" sequence="3" action="action_report_stock_distribution_workshop_wizard" groups="tw_stock_distribution_report.group_stock_distribution_report_workshop_read"/>
+    <menuitem id="menuitem_report_order_fulfillment_wizard" parent="tw_menu.submenu_tw_showroom_report" sequence="4" action="action_report_order_fulfillment_wizard" groups="tw_stock_distribution_report.group_stock_distribution_report_order_fulfillment_read"/>
+
+</odoo>

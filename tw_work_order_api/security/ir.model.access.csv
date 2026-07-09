@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_api_master_partner_bundling,tw_work_order_api.tw_api_master_partner_bundling,model_tw_api_master_partner_bundling,base.group_user,1,0,0,0
+access_tw_api_master_partner_bundling_line,tw_work_order_api.tw_api_master_partner_bundling_line,model_tw_api_master_partner_bundling_line,base.group_user,1,0,0,0

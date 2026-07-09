@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_attendance,tw.attendance,model_tw_attendance,base.group_user,1,0,0,0
+access_tw_attendance_full,tw.attendance full,model_tw_attendance,tw_hr.group_tw_employee_read,1,1,1,1
+access_tw_hr_attendance_report,tw.hr.attendance.report,model_tw_hr_attendance_report,base.group_user,1,1,1,1
+access_tw_attendance_request,tw.attendance.request,model_tw_attendance_request,base.group_user,1,1,1,1
+access_tw_attendance_request_line,tw.attendance.request.line,model_tw_attendance_request_line,base.group_user,1,1,1,1

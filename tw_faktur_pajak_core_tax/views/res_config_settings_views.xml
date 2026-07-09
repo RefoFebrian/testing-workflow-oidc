@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tw_res_config_settings_core_tax_form_view" model="ir.ui.view">
+        <field name="name">res.config.settings.core.tax.form.view</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="100"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Place Core Tax at the top of General Settings (above Users) -->
+            <xpath expr="//block[1]" position="before">
+                <block title="Core Tax" name="core_tax_block">
+                    <setting id="use_coretax_setting" 
+                             string="Tax Use Coretax Format" 
+                             help="Aktifkan untuk menggunakan format Coretax pada generate Faktur Pajak dan report.">
+                        <field name="use_coretax"/>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

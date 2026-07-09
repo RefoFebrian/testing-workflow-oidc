@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit List View - Add GET DGI Button -->
+    <record id="view_tw_vehicle_ownership_receipt_list_dgi" model="ir.ui.view">
+        <field name="name">tw.vehicle.ownership.receipt.list.dgi</field>
+        <field name="model">tw.vehicle.ownership.receipt</field>
+        <field name="inherit_id"
+            ref="tw_vehicle_document_receipt.tw_vehicle_ownership_receipt_view_list" />
+        <field name="arch" type="xml">
+            <!-- Add GET DGI button like CRM Generate Leads -->
+            <xpath expr="//list" position="inside">
+                <header>
+                    <button name="action_open_dgi_wizard"
+                        type="object"
+                        class="btn-secondary"
+                        string="GET DGI"
+                        icon="fa-cloud-download"
+                        groups="tw_dgi_document_handling.group_tw_dgi_document_receipt"
+                        display="always" />
+                </header>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Form View - Show DGI Info -->
+    <record id="view_tw_vehicle_ownership_receipt_form_dgi" model="ir.ui.view">
+        <field name="name">tw.vehicle.ownership.receipt.form.dgi</field>
+        <field name="model">tw.vehicle.ownership.receipt</field>
+        <field name="inherit_id"
+            ref="tw_vehicle_document_receipt.tw_vehicle_ownership_receipt_view_form" />
+        <field name="arch" type="xml">
+
+            <!-- Add DGI fields invisible (need to be in form) -->
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="is_dgi" invisible="1" />
+            </xpath>
+
+            <xpath expr="//div[hasclass('oe_title')]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="action_show_dgi_info" type="object" class="oe_stat_button"
+                        icon="fa-cloud-download"
+                        invisible="not is_dgi">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">DGI Info</span>
+                        </div>
+                    </button>
+                </div>
+            </xpath>
+
+            <!-- Add ref_doc_number to line tree -->
+            <xpath
+                expr="//field[@name='vehicle_ownership_receipt_line_ids']//list//field[@name='state']"
+                position="before">
+                <field name="ref_doc_number" string="MD-Ref Faktur STNK" optional="show" width="120" />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Search View - Add DGI filters -->
+    <record id="view_tw_vehicle_ownership_receipt_search_dgi_inherit" model="ir.ui.view">
+        <field name="name">tw.vehicle.ownership.receipt.search.dgi.inherit</field>
+        <field name="model">tw.vehicle.ownership.receipt</field>
+        <field name="inherit_id" ref="tw_vehicle_document_receipt.tw_vehicle_ownership_receipt_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="md_reference_number" string="DGI BPKB Ref"/>
+                <separator/>
+                <filter name="filter_is_dgi" string="From DGI" domain="[('is_dgi', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record model="ir.ui.view" id="tw_kpb_expired_tree_view">
+			<field name="name">tw.kpb.expired.tree</field>
+			<field name="model">tw.kpb.expired</field>
+			<field name="arch" type="xml">
+				<list string="List Master KPB Expired">
+					<field name="name" />
+					<field name="description" />
+					<field name="service" />
+					<field name="hari" />
+					<field name="km" />
+				</list>
+			</field>
+		</record>
+
+
+		<record model="ir.ui.view" id="tw_kpb_expired_form_view">
+			<field name="name">tw.kpb.expired.form</field>
+			<field name="model">tw.kpb.expired</field>
+			<field name="arch" type="xml">
+				<form string="Form KPB Expired">
+					<group col="4">
+						<field name="name" />
+						<field name="description" />
+						<field name="service" />
+						<field name="hari" />
+						<field name="km" />
+					</group>
+					<notebook>
+						<page string="Audit Trail">
+							<group>
+								<group>
+									<field name="create_uid" readonly="1"></field>
+									<field name="create_date" readonly="1"></field>
+								</group>
+								<group>
+									<field name="write_uid" readonly="1"></field>
+									<field name="write_date" readonly="1"></field>
+								</group>
+							</group>
+						</page>
+					</notebook>
+				</form>
+			</field>
+		</record>
+
+		<record id="tw_kpb_expired_search_view" model="ir.ui.view">
+		<field name="name">tw.kpb.expired.search</field>
+		<field name="model">tw.kpb.expired</field>
+		<field name="arch" type="xml">
+			<search string="Search KPB Expired">
+			<field name="name" />
+			<field name="description"/>
+			<field name="hari"/>
+			<field name="km"/>
+			<filter string="Service 1"   name="service_1"   domain="[('service', '=', '1')]"/>
+			<filter string="Service 2" name="service_2" domain="[('service', '=', '2')]"/>
+			<filter string="Service 3" name="service_3" domain="[('service', '=', '3')]"/>
+			<filter string="Service 4" name="service_4" domain="[('service', '=', '4')]"/>
+			<separator/>
+			<group expand="0" string="Group By">
+				<filter string="name"     name="group_by_name"     domain="[]" context="{'group_by': 'name'}"/>
+				<filter string="description" name="group_by_description" domain="[]" context="{'group_by': 'description'}"/>
+				<filter string="hari"    name="group_by_hari"    domain="[]" context="{'group_by': 'hari'}"/>
+				<filter string="km"    name="group_by_km"    domain="[]" context="{'group_by': 'km'}"/>
+			</group>
+			</search>
+		</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="tw_kpb_expired_action">
+			<field name="name">KPB Expired</field>
+			<field name="res_model">tw.kpb.expired</field>
+			<field name="view_mode">list,form</field>
+		</record>
+
+		
+
+	</data>
+</odoo>

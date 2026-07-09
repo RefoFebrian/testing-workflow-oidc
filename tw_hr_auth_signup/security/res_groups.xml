@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- TW Employee User Auth Signup Group Read -->
+        <record id="tw_employee_res_users_auth_signup_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Employee User Auth Signup Read</field>
+        </record>
+
+        <record id="tw_employee_auth_signup_access_read" model="ir.model.access">
+            <field name="model_id" ref="tw_hr.model_hr_employee"/>
+            <field name="name">tw_employee_auth_signup read</field>
+            <field name="group_id" ref="tw_employee_res_users_auth_signup_group_read"/>
+            <field name="perm_read">1</field>
+        </record>
+        <record id="tw_res_users_auth_signup_access_read" model="ir.model.access">
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="name">tw_res_users_auth_signup read</field>
+            <field name="group_id" ref="tw_employee_res_users_auth_signup_group_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        
+        <!-- TW Employee User Auth Signup Group Update -->
+        <record id="tw_employee_res_users_auth_signup_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Employee User Auth Signup Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_employee_res_users_auth_signup_group_read'))]"/>
+        </record>
+
+        <record id="tw_employee_auth_signup_access_update" model="ir.model.access">
+            <field name="model_id" ref="tw_hr.model_hr_employee"/>
+            <field name="name">tw_employee_auth_signup update</field>
+            <field name="group_id" ref="tw_employee_res_users_auth_signup_group_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        <record id="tw_res_users_auth_signup_access_update" model="ir.model.access">
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="name">tw_res_users_auth_signup update</field>
+            <field name="group_id" ref="tw_employee_res_users_auth_signup_group_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        
+        <!-- TW Employee User Auth Signup Group Delete -->
+        <record id="tw_employee_res_users_auth_signup_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Employee User Auth Signup Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_employee_res_users_auth_signup_group_read'))]"/>
+        </record>
+
+        <record id="tw_employee_auth_signup_access_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_hr.model_hr_employee"/>
+            <field name="name">tw_employee_auth_signup delete</field>
+            <field name="group_id" ref="tw_employee_res_users_auth_signup_group_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+        <record id="tw_res_users_auth_signup_access_delete" model="ir.model.access">
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="name">tw_res_users_auth_signup delete</field>
+            <field name="group_id" ref="tw_employee_res_users_auth_signup_group_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('tw_employee_res_users_auth_signup_group_read')),
+                (4,ref('tw_employee_res_users_auth_signup_group_update')),
+                (4,ref('tw_employee_res_users_auth_signup_group_delete')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

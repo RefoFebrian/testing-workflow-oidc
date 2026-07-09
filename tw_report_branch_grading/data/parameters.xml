@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="ir_config_default_branch_grading_account" model="ir.config_parameter">
+            <field name="key">tw.accounting.default_branch_grading_account</field>
+            <field name="value">["11210202", "11210203", "11319902", "11319904", "11319912", "11319914"]</field>
+        </record>
+
+    </data>
+</odoo>

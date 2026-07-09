@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="tw_vehicle_document_approval_form_view" model="ir.ui.view">
+      <field name="name">tw.vehicle.document.approval.form</field>
+      <field name="model">tw.vehicle.document.request</field>
+      <field name="inherit_id" ref="tw_vehicle_document.tw_vehicle_document_request_view_form" />
+      <field name="arch" type="xml">
+        <button name="action_confirm" position="replace">
+          <button name="action_request_approval"
+            invisible="state != 'draft' or not is_exception_faktur" string="RFA" type="object"
+            class="oe_highlight" groups="tw_vehicle_document.group_vehicle_document_request_button_post"/>
+          <button name="action_approval" invisible="state != 'waiting_for_approval'"
+            string="Approve" type="object" class="oe_highlight"/>
+          <button name="action_reject_or_cancel" invisible="state != 'waiting_for_approval'"
+            string="Reject" type="object"
+            context="{'window_title': 'Reject'}" groups="tw_vehicle_document_approval.group_vehicle_document_reject_button"/>
+          <button name="action_confirm" invisible="(is_exception_faktur and state != 'approved') or (not is_exception_faktur and state != 'draft')"
+            data-hotkey="q" string="Confirm" type="object" class="oe_highlight"
+            context="{'validate_analytic': True}" />
+          <button name="action_reject_or_cancel" invisible="state not in ('waiting_for_approval', 'approved')"
+            string="Cancel Approval" type="object" context="{'window_title': 'Cancel'}" groups="tw_vehicle_document_approval.group_vehicle_document_cancel_button"/>
+        </button>
+
+        <xpath expr="//page[@name='engine_line']" position="after">
+          <page string="Approval" invisible="not is_exception_faktur">
+            <field name="approval_ids" readonly="True" />
+          </page>
+        </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_nrfs_vendor_approval_form_view" model="ir.ui.view">
+            <field name="name">tw.nrfs.vendor.approval.form</field>
+            <field name="model">tw.nrfs</field>
+            <field name="inherit_id" ref="tw_nrfs.tw_nrfs_vendor_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='detail']" position="after">
+					<page string="Approval">
+						<field name="approval_ids" readonly="True"/>
+					</page>
+				</xpath>
+            </field>
+        </record>
+
+        <record id="tw_nrfs_approval_form_view" model="ir.ui.view">
+            <field name="name">tw.nrfs.approval.form</field>
+            <field name="model">tw.nrfs</field>
+            <field name="inherit_id" ref="tw_nrfs.tw_nrfs_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_confirm']" position="replace">
+                </xpath>
+                <xpath expr="//button[@name='action_cancel']" position="before">
+					<button name="action_rfa" string="RFA" type="object" class="oe_highlight" invisible="state != 'draft'" groups="tw_nrfs_approval.group_tw_nrfs_approval_rfa"/>
+					<button name="action_approve" string="Approve" type="object" class="oe_highlight" invisible="state != 'waiting_for_approval'"/>
+					<button name="action_reject_or_cancel" string="Reject" type="object" invisible="state != 'waiting_for_approval'"/>
+					<button name="action_reject_or_cancel" string="Cancel Approval" type="object" invisible="state != 'waiting_for_approval'" groups="tw_nrfs_approval.group_tw_nrfs_approval_cancel"/>
+				</xpath>
+                <field name="state" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,confirmed,in_progress,done" readonly="1" />
+                </field>
+                
+                <xpath expr="//page[@name='detail']" position="after">
+					<page string="Approval">
+						<field name="approval_ids" readonly="1"/>
+					</page>
+				</xpath>
+            </field>
+        </record>
+
+        <record id="tw_nrfs_po_urgent_approval_form_view" model="ir.ui.view">
+            <field name="name">tw.nrfs.po.urgent.approval.form</field>
+            <field name="model">tw.nrfs</field>
+            <field name="inherit_id" ref="tw_nrfs.tw_nrfs_po_urgent_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='detail']" position="after">
+					<page string="Approval">
+						<field name="approval_ids" readonly="1"/>
+					</page>
+				</xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

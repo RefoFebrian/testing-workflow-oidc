@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <record id="tw_stock_picking_batch_extras_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.picking.batch.extras.inherit.form.view</field>
+            <field name="model">stock.picking.batch</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_picking_batch_inherit_form_view" />
+            <field name="arch" type="xml">
+                <field name="source_picking_ids" position="after">
+                    <field name="is_only_extras" invisible="1"/>
+                </field>
+                <field name="batch_line_ids" position="after">
+                    <label for="batch_extras_line_ids" string="Extras" invisible="division != 'Unit'"/>
+                    <div>
+                        <button name="action_generate_extras" invisible="state != 'draft' or division != 'Unit'" string="Generate Extras" type="object" class="oe_highlight" groups="tw_stock_extras.group_tw_stock_picking_batch_button_generate_extras_read"/>
+                    </div>
+                    <field name="batch_extras_line_ids" readonly="state != 'draft'" invisible="division != 'Unit'">
+                        <list string="Batch Extras Lines" editable="bottom">
+                            <field name="categ_tracking" column_invisible="1"/>
+                            <field name="lot_ids" column_invisible="1"/>
+                            <field name="product_extras_domain_ids" column_invisible="1"/>
+                            <field name="product_id" required="parent.division == 'Unit'" options="{'no_open': True, 'no_create': True}" domain="[('id', 'in', product_extras_domain_ids)]"/>
+                            <field name="lot_id" required="categ_tracking == 'serial'" options="{'no_open': True, 'no_create': True}" domain="[('id','in',lot_ids)]"/>
+                            <field name="quantity" required="parent.division == 'Unit'" sum="Total Quantity" force_save="1"/>
+                        </list>
+                    </field>
+                </field>
+            </field>
+        </record>
+
+        <record id="tw_stock_picking_batch_retail_extras_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.picking.batch.retail.extras.inherit.form.view</field>
+            <field name="model">stock.picking.batch</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_picking_batch_retail_form" />
+            <field name="arch" type="xml">
+                <field name="batch_line_ids" position="after">
+                    <label for="batch_extras_line_ids" string="Extras" invisible="division != 'Unit'"/>
+                    <div>
+                        <button name="action_generate_extras" invisible="state != 'draft' or division != 'Unit'" string="Generate Extras" type="object" class="oe_highlight" groups="tw_stock_extras.group_tw_stock_picking_batch_button_generate_extras_read"/>
+                    </div>
+                    <field name="batch_extras_line_ids" readonly="state != 'draft'" invisible="division != 'Unit'">
+                        <list string="Batch Extras Lines" editable="bottom">
+                            <field name="categ_tracking" column_invisible="1"/>
+                            <field name="lot_ids" column_invisible="1"/>
+                            <field name="product_extras_domain_ids" column_invisible="1"/>
+                            <field name="product_id" required="parent.division == 'Unit'" options="{'no_open': True, 'no_create': True}" domain="[('id', 'in', product_extras_domain_ids)]"/>
+                            <field name="lot_id" required="categ_tracking == 'serial'" options="{'no_open': True, 'no_create': True}" domain="[('id','in',lot_ids)]"/>
+                            <field name="quantity" required="parent.division == 'Unit'" sum="Total Quantity" force_save="1"/>
+                        </list>
+                    </field>
+                </field>
+            </field>
+        </record>
+
+        <record id="tw_stock_picking_batch_inbound_extras_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.picking.batch.inbound.extras.inherit.form.view</field>
+            <field name="model">stock.picking.batch</field>
+            <field name="inherit_id" ref="tw_stock_inbound.tw_stock_picking_batch_inbound_form_view" />
+            <field name="arch" type="xml">
+                <field name="stock_inbound_id" position="before">
+                    <field name="is_only_extras" invisible="1"/>
+                    <field name="branch_type" invisible="1"/>
+                </field>
+                <field name="stock_inbound_id" position="attributes">
+                    <attribute name="required">(picking_type_code=='incoming' and branch_type=='MD' and division in ('Unit','Sparepart','Umum')) or not is_only_extras</attribute>
+                </field>
+            </field>
+        </record>
+        
+    </data>
+</odoo>

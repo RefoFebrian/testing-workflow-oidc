@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="print_checklist_tool_id">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page" style="font-family: Arial, sans-serif; font-size: 12px;">
+                        <style type="text/css">
+                            .header-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+                            .header-table td { vertical-align: top; padding: 5px; }
+                            
+                            .main-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 1px solid black; table-layout: fixed; }
+                            .main-table th, .main-table td { border: 1px solid black; padding: 5px; vertical-align: middle; word-wrap: break-word; }
+                            .main-table th { background-color: #f2f2f2; text-align: center; font-weight: bold; font-size: 11px; }
+                            .main-table td { font-size: 11px; }
+                            
+                            .footer-table { width: 100%; border-collapse: collapse; border: 1px solid black; }
+                            .footer-table td { border: 0px solid black; padding: 8px; vertical-align: top; }
+                            
+                            .legend-table { width: 100%; font-size: 11px; }
+                            .legend-table td { padding: 2px; }
+                            .center-content { text-align: center; }
+                            .bold-text { font-weight: bold; }
+                        </style>
+
+                        <!-- Header Section -->
+                        <table class="header-table">
+                            <tr>
+                                <td style="width: 25%; vertical-align: middle;">
+                                    <t t-set="base_url" t-value="request.httprequest.host_url.rstrip('/')"/>
+                                    <img t-att-src="base_url + '/tw_checklist_tool/static/src/img/logo_tunasHonda.jpg'" style="max-width: 100%; height: auto; display: block;"/>
+                                </td>
+                                <td style="width: 50%; text-align: center; vertical-align: middle;">
+                                    <h3 style="margin: 0; padding-bottom: 5px; font-size: 18px; text-transform: uppercase;">
+                                        <t t-if="doc['category'] != 'Special Tools'">Checklist Tools</t>
+                                        <t t-else="">Checklist Special Tools</t>
+                                    </h3>
+                                    <p style="margin: 2px 0;">No. Doc: &#160;<span class="bold-text"><t t-out="doc['ct_number']"/></span></p>
+                                    <p style="margin: 2px 0;">PIC: &#160;<span class="bold-text"><t t-out="doc['pic_name']"/></span></p>
+                                </td>
+                                <td style="width: 25%;">
+                                    <p class="bold-text" style="margin: 0 0 5px 0; text-decoration: underline;">Ketentuan Checklist:</p>
+                                    <table class="legend-table">
+                                        <tr>
+                                            <td style="width: 20px; text-align: center;" class="bold-text">v</td>
+                                            <td>Tools ada dalam kondisi baik</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: center;" class="bold-text">R</td>
+                                            <td>Tools ada dalam kondisi rusak</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: center;" class="bold-text">H</td>
+                                            <td>Tools hilang</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: center;" class="bold-text">X</td>
+                                            <td>Tools tidak/belum ada</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Main Content Table -->
+                        <table class="main-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%;">No</th>
+                                    <th style="width: 12%;">Product Code</th>
+                                    <th style="width: 25%;">Description</th>
+                                    <th style="width: 10%;">Photo</th>
+                                    <th style="width: 12%;">Location</th>
+                                    
+                                    <!-- Dynamic Date/Week Headers -->
+                                    <t t-if="doc['category'] != 'Special Tools'">
+                                        <t t-set="dates_list" t-value="doc['dates'].split(', ')"/>
+                                        <t t-foreach="dates_list" t-as="date">
+                                            <th style="width: auto;"><t t-out="date" /></th>
+                                        </t>
+                                    </t>
+                                    <t t-if="doc['category'] == 'Special Tools'">
+                                        <t t-set="weeks_list" t-value="doc['weeks'].split(', ')"/>
+                                        <t t-foreach="weeks_list" t-as="week">
+                                            <th style="width: auto;">Week <t t-out="week" /></th>
+                                        </t>
+                                    </t>
+                                    
+                                    <th style="width: 10%;">Keterangan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc['detail_checklist_list']" t-as="item">
+                                    <tr>
+                                        <td class="center-content"><t t-out="item_index + 1" /></td>
+                                        <td class="center-content"><t t-out="item['product_code']"/></td>
+                                        <td><t t-out="item['description']"/></td>
+                                        <td class="center-content" style="padding: 2px;">
+                                            <t t-if="item.get('has_photo') and item.get('image_data')">
+                                                <img t-attf-src="data:{{ item.get('image_mime', 'image/jpeg') }};base64,{{ item['image_data'] }}"
+                                                     style="max-width: 60px; max-height: 60px; object-fit: contain;"
+                                                     t-att-alt="item['description']"/>
+                                            </t>
+                                            <t t-else="">
+                                                <span style="font-size: 9px; color: #000000;">-</span>
+                                            </t>
+                                        </td>
+                                        <td class="center-content"><t t-out="item['location_name']" /></td>
+                                        
+                                        <!-- Dynamic Date/Week Content -->
+                                        <t t-if="doc['category'] != 'Special Tools'">
+                                            <t t-set="state_dict" t-value="dict([state.split(': ') for state in item['states_by_date'].split(', ') if state.strip()])"/>
+                                            <t t-foreach="dates_list" t-as="date">
+                                                <td class="center-content">
+                                                    <t t-out="state_dict.get(date, '')" />
+                                                </td>
+                                            </t>
+                                        </t>
+                                        <t t-if="doc['category'] == 'Special Tools'">
+                                            <t t-set="weeks_dict" t-value="dict([week.split(': ') for week in item['states_by_week'].split(', ') if week.strip()])"/>
+                                            <t t-foreach="weeks_list" t-as="week">
+                                                <td class="center-content">
+                                                    <t t-out="weeks_dict.get(week, '')" />
+                                                </td>
+                                            </t>
+                                        </t>
+                                        
+                                        <td class="center-content">     </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- Footer / Policy Section -->
+                        <table class="footer-table">
+                            <tr>
+                                <td style="width: 40%; vertical-align: top;">
+                                    <p class="bold-text" style="margin: 0 0 5px 0;">Policy :</p>
+                                    <table class="legend-table">
+                                        <tr>
+                                            <td style="width: 15px; text-align: center;">-</td>
+                                            <td>Checklist dilakukan oleh PIC setiap hari sabtu setelah operasional bengkel selesai</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: center;">-</td>
+                                            <td>Pemeriksaan oleh Kamek/SA/Kabeng, ADH, dan Kacab dilakukan setiap akhir bulan setelah operasional bengkel selesai</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: center;">-</td>
+                                            <td>Jika ada tools yang rusak/hilang segera ajukan penggantian menggunakan form inisiatif</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="width: 15%; text-align: center; vertical-align: middle;" class="bold-text">
+                                    Checked By
+                                </td>
+                                <td style="width: 20%; vertical-align: top;">
+                                    <t t-set="checked_list" t-value="[(group.split(': ')[0], group.split(': ')[1]) for group in doc['checked_by'].split(', ') if group.strip()]"/>
+                                    <t t-foreach="checked_list" t-as="group_status">
+                                        <p style="margin: 0; padding: 5px 0; font-size: 12px;"><t t-out="group_status[0]" /></p>
+                                    </t>
+                                </td>
+                                <td style="width: 19%; text-align: center; vertical-align: top;">
+                                    <t t-foreach="checked_list" t-as="group_status">
+                                        <p style="margin: 0; padding: 5px 0;"><t t-out="group_status[1]" /></p>
+                                    </t>
+                                </td>
+                                <td style="vertical-align: top; text-align: center;">     </td>
+                            </tr>
+                        </table>
+                        <p></p><br/>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>
+

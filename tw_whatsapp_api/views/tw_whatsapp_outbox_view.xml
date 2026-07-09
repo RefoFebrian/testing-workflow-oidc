@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_whatsapp_message_outbox_list_view" model="ir.ui.view">
+            <field name="name">tw.whatsapp.message.tree</field>
+            <field name="model">tw.whatsapp.message</field>
+            <field name="type">list</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="WhatsApp Outbox">
+                    <field name="whatsapp_id" groups="tw_base.group_system_admin" />
+                    <field name="date" />
+                    <field name="company_id" />
+                    <field name="phone_number" />
+                    <field name="name" />
+                    <field name="state" />
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_whatsapp_message_outbox_form_view" model="ir.ui.view">
+            <field name="name">tw.whatsapp.message.form</field>
+            <field name="model">tw.whatsapp.message</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="WhatsApp Outbox">
+                    <header>
+                        <button string="Send" type="object" name="action_send" invisible="state != 'draft'" class="oe_highlight"/>
+                        <button string="Cancel" type="object" name="action_cancel_whatsapp" invisible="state != 'draft'" groups="tw_whatsapp_api.group_button_cancel_whatsapp"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,pending,sent,read" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1" readonly="state != 'draft'"/>
+                                <field name="company_id" required="1" options="{'no_open': True, 'no_create': True}" readonly="state != 'draft'"/>
+                                <field name="phone_number" required="1" readonly="state != 'draft'"/>
+                                <field name="whatsapp_id" readonly="1"/>
+                                <field name="template_id" options="{'no_create': True,'no_open':True}" readonly="state != 'draft'"/>
+                                <field name="is_official_whatsapp" readonly="state != 'draft'"/>
+                                <field name="note" readonly="1" invisible="state != 'failed'" />
+                                <field name="origin" readonly="state != 'draft'"/>
+                            </group>
+                            <group>
+                                <field name="date" readonly="1" />
+                                <field name="message" required="1" readonly="state != 'draft'" />
+                                <field name="scheduled_date" readonly="state != 'draft'" /> 
+                                <field name="filename" invisible="1" />
+                                <field name="file" filename="filename" readonly="state != 'draft'" />
+                                <div colspan="2" style="margin-top: 1px; margin-bottom: 3px;">
+                                    <span class="label label-success">Perhatian</span>
+                                    <span>
+                                        &#160;Tipe berkas yang diterima oleh sistem: JPG, JPEG, PNG, GIF, DOC, DOCX, PDF, ODT, CSV, PPT, PPTX, XLS, XLSX, MP3, OGG
+                                    </span>
+                                </div>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Detail">
+                                <field name="whatsapp_detail_ids" nolabel="1" readonly="1">
+                                    <list string="Member">
+                                        <field name="name" string="Name"/>
+                                    </list>
+                                    <form>
+                                        <group>
+                                            <field name="name" string="Name"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Audit Trail">
+                                <group style="margin-bottom: 8px;">
+                                    <group>
+                                        <field name="create_uid" readonly="1" />
+                                        <field name="create_date" readonly="1" />
+                                        <field name="cancel_uid" readonly="1" />
+                                        <field name="cancel_date" string="Cancelled on" readonly="1" />
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1" />
+                                        <field name="write_date" readonly="1" />
+                                    </group>
+                                </group>
+                                <group>
+                                    <group>
+                                        <field name="received_date" readonly="1"/>
+                                        <field name="sent_date" readonly="1" />
+                                    </group>
+                                    <group>
+                                        <field name="read_date" readonly="1" />
+                                        <field name="failed_date" readonly="1" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_whatsapp_message_outbox_view_search" model="ir.ui.view">
+            <field name="name">tw.whatsapp.message.outbox.search</field>
+            <field name="model">tw.whatsapp.message</field>
+            <field name="arch" type="xml">
+                <search string="Search for...">
+                    <field name="name" select="True"/>
+                    <field name="company_id" select="True"/>
+                    <field name="phone_number" select="True"/>
+                    <field name="message" select="True"/>
+                    <field name="origin" select="True"/>
+                    <filter name="state_draft" domain="[('state','=','draft')]" string="Draft"/>
+                    <filter name="state_pending" domain="[('state','=','pending')]" string="Pending"/>
+                    <filter name="state_cancel" domain="[('state','=','cancel')]" string="Cancelled"/>
+                    <filter name="state_reject" domain="[('state','=','reject')]" string="Rejected"/>
+                    <filter name="state_sent" domain="[('state','=','sent')]" string="Sent"/>
+                    <filter name="state_read" domain="[('state','=','read')]" string="Read"/>
+                    <group string="Group By..">
+                        <filter string="Status" domain="[]" name="group_by_state" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+
+        <record id="tw_whatsapp_message_outbox_action" model="ir.actions.act_window">
+            <field name="name">Outbox</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.whatsapp.message</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{"readonly_by_pass": 1}</field>
+            <field name="domain">[('message_type', '=', 'outbox')]</field>
+            <field name="search_view_id" ref="tw_whatsapp_message_outbox_view_search"/>
+        </record>
+
+        <record id="tw_whatsapp_message_outbox_action_list" model="ir.actions.act_window.view">
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_whatsapp_message_outbox_list_view"/>
+            <field name="act_window_id" ref="tw_whatsapp_message_outbox_action"/>
+            <field name="sequence" eval="1"/>
+        </record>
+
+        <record id="tw_whatsapp_message_outbox_action_form" model="ir.actions.act_window.view">
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_whatsapp_message_outbox_form_view"/>
+            <field name="act_window_id" ref="tw_whatsapp_message_outbox_action"/>
+            <field name="sequence" eval="2"/>
+        </record>
+
+    </data>
+</odoo>

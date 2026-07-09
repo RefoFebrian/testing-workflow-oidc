@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_boom_master_escalation_list" model="ir.ui.view">
+            <field name="name">tw.boom.master.escalation.list</field>
+            <field name="model">tw.boom.master.escalation</field>
+            <field name="arch" type="xml">
+                <list string="TW Boom Master Escalation" editable="bottom" delete="0">
+                    <field name="category_id" required="1" options="{'no_create': True, 'no_open': True}"/>
+                    <field name="unit" required="1"/>
+                    <field name="interval" required="1"/>
+                    <field name="job_id" required="1" options="{'no_create': True, 'no_open': True}"/>
+                    <field name="escalation_hour" required="is_send_message_scheduled" string="Jam"/>
+                    <field name="escalation_minute" required="is_send_message_scheduled" string="Menit"/>
+                    <field name="is_send_message_scheduled" />
+                </list>
+            </field>
+        </record>
+
+        <record id="view_tw_boom_master_escalation_filter" model="ir.ui.view">
+            <field name="name">tw.boom.master.escalation.filter</field>
+            <field name="model">tw.boom.master.escalation</field>
+            <field name="arch" type="xml">
+                <search string="TW Boom Master Escalation">
+                    <field name="category_id"/>
+                    <field name="unit"/>
+                    <field name="job_id"/>
+                    <group>
+                        <filter name="filter_by_category" string="Category" context="{'group_by':'category_id'}"/>
+                        <filter name="filter_by_unit" string="Unit" context="{'group_by':'unit'}"/>
+                        <filter name="filter_by_job_id" string="Job" context="{'group_by':'job_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_tw_boom_master_escalation" model="ir.actions.act_window">
+            <field name="name">Master Eskalasi</field>
+            <field name="path">master-boom-escalation</field>
+            <field name="res_model">tw.boom.master.escalation</field>
+            <field name="view_mode">list</field>
+            <field name="context">{'search_default_filter_by_category': True}</field>
+            <field name="domain">[]</field>
+            <field name="search_view_id" ref="view_tw_boom_master_escalation_filter"/>
+        </record>
+    </data>
+</odoo>

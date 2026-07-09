@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="tw_petty_cash_out_approval_form_view" model="ir.ui.view">
+      <field name="name">tw.petty.cash.out.approval.form</field>
+      <field name="model">tw.petty.cash.out</field>
+      <field name="inherit_id" ref="tw_petty_cash.tw_petty_cash_out_view_form" />
+      <field name="arch" type="xml">
+        <field name="state" position="replace">
+          <field name="state" widget="statusbar" statusbar_visible="draft,waiting_for_approval,approved,posted"/>
+        </field>  
+        <button name="action_post_petty_cash_out" position="replace">
+          <button name="action_request_approval"
+            invisible="state != 'draft'" string="RFA" type="object"
+            class="oe_highlight" groups="tw_petty_cash_approval.group_petty_cash_out_button_rfa"/>
+          <button name="action_approval" invisible="state != 'waiting_for_approval'"
+            string="Approve" type="object" class="oe_highlight"/>
+          <button name="action_reject_or_cancel" invisible="state != 'waiting_for_approval'"
+            string="Reject" type="object"
+            context="{'window_title': 'Reject'}"/>
+          <button name="action_post_petty_cash_out" invisible="state != 'approved'"
+            data-hotkey="q" string="Post" type="object" class="oe_highlight" context="{'validate_analytic': True}" groups="tw_petty_cash.group_petty_cash_out_button_confirm"/>
+          <button name="action_reject_or_cancel" invisible="state not in ('waiting_for_approval', 'approved')"
+            string="Cancel Approval" type="object" context="{'window_title': 'Cancel'}" groups="tw_petty_cash_approval.group_petty_cash_out_button_cancel_approval"/>
+        </button>
+
+        <xpath expr="//page[@name='audit_trail']" position="before">
+          <page string="Approval">
+            <field name="approval_ids" readonly="True" />
+          </page>
+        </xpath>
+      </field>
+    </record>
+
+    <record id="tw_petty_cash_out_approval_search_view" model="ir.ui.view">
+      <field name="name">tw.petty.cash.out.approval.search</field>
+      <field name="model">tw.petty.cash.out</field>
+      <field name="inherit_id" ref="tw_petty_cash.tw_petty_cash_out_view_search" />
+      <field name="arch" type="xml">
+        <xpath expr="//filter[@name='draft']" position="after">
+            <filter name="waiting_for_approval"
+                    string="Waiting For Approval"
+                    domain="[('state', '=', 'waiting_for_approval')]"/>
+        </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- STNK Handover Button Groups -->
+        <record id="group_vehicle_stnk_handover_button_post" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">Penyerahan STNK Post</field>
+            <field name="implied_ids" eval="[(4, ref('tw_vehicle_document_handover.group_vehicle_stnk_handover_read'))]"/>
+        </record>
+
+        <record id="group_vehicle_stnk_handover_button_cancel" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">Penyerahan STNK Cancel</field>
+            <field name="implied_ids" eval="[(4, ref('tw_vehicle_document_handover.group_vehicle_stnk_handover_read'))]"/>
+        </record>
+
+        <record id="group_vehicle_stnk_handover_button_print" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">Penyerahan STNK Print</field>
+            <field name="implied_ids" eval="[(4, ref('tw_vehicle_document_handover.group_vehicle_stnk_handover_read'))]"/>
+        </record>
+
+        <!-- BPKB Handover Button Groups -->
+        <record id="group_vehicle_ownership_handover_button_post" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">Penyerahan BPKB Post</field>
+            <field name="implied_ids" eval="[(4, ref('tw_vehicle_document_handover.group_vehicle_ownership_handover_read'))]"/>
+        </record>
+
+        <record id="group_vehicle_ownership_handover_button_cancel" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">Penyerahan BPKB Cancel</field>
+            <field name="implied_ids" eval="[(4, ref('tw_vehicle_document_handover.group_vehicle_ownership_handover_read'))]"/>
+        </record>
+
+        <record id="group_vehicle_ownership_handover_button_print_customer" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">Penyerahan BPKB Print Customer</field>
+            <field name="implied_ids" eval="[(4, ref('tw_vehicle_document_handover.group_vehicle_ownership_handover_read'))]"/>
+        </record>
+
+        <record id="group_vehicle_ownership_handover_button_print_company" model="res.groups">
+            <field name="category_id" ref="tw_vehicle_document.tw_document_handling"/>
+            <field name="name">Penyerahan BPKB Print Company</field>
+            <field name="implied_ids" eval="[(4, ref('tw_vehicle_document_handover.group_vehicle_ownership_handover_read'))]"/>
+        </record>
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+            (4,ref('group_vehicle_stnk_handover_button_post')),
+            (4,ref('group_vehicle_stnk_handover_button_cancel')),
+            (4,ref('group_vehicle_stnk_handover_button_print')),
+            (4,ref('group_vehicle_ownership_handover_button_post')),
+            (4,ref('group_vehicle_ownership_handover_button_cancel')),
+            (4,ref('group_vehicle_ownership_handover_button_print_customer')),
+            (4,ref('group_vehicle_ownership_handover_button_print_company')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

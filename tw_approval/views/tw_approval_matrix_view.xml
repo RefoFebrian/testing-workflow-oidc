@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="tw_approval_matrix_list_view" model="ir.ui.view">
+			<field name="name">tw.approval.matrix.tree</field>
+			<field name="model">tw.approval.matrix</field>
+			<field name="arch" type="xml">
+				<list string="Approval Matrix">
+					<field name="company_id"/>
+					<field name="form_id"/>
+					<field name="division"/>
+					<field name="product_tmpl_id"/>
+					<field name="product_id" optional="hide"/>
+					<field name="department_id"/>
+				</list>
+			</field>
+		</record>
+
+
+		<record id="tw_approval_matrix_form_view" model="ir.ui.view">
+			<field name="name">tw.approval.matrix.form</field>
+			<field name="model">tw.approval.matrix</field>
+			<field name="priority" eval="30"/>
+			<field name="arch" type="xml">
+				<form string="Form Approval Matrix">
+					<sheet>
+						<group>
+							<group>
+								<field name="company_id" required="1" options="{'no_create': True,'no_open': True}"/>
+								<field name="form_id" required="1" options="{'no_create': True,'no_open': True}"/>
+								<field name="applied_on" invisible="config_type != 'discount'" widget="radio"/>
+								<field name="product_tmpl_id" invisible="config_type != 'discount' or applied_on != 'product'" required="applied_on == 'product'"/>
+								<field name="product_id" invisible="config_type != 'discount' or applied_on != 'product' or division != 'Unit'" domain="[('division','=','Unit'), ('product_tmpl_id','=',product_tmpl_id)]"/>
+								<field name="categ_id" invisible="config_type != 'discount' or applied_on != 'product_category' or division != 'Unit'" required="applied_on == 'product_category'"/>
+								<field name="config_type" readonly="1" force_save="1"/>
+							</group>
+							<group>
+								<field name="division" required="1"/>
+								<field name="approval_type" required="1"/>
+								<field name="department_id"/>
+							</group>
+						</group>
+						<notebook>
+							<page string="Approval Lines">
+								<field name="approval_line" nolabel="1" widget="one2many_list">
+									<list string="Approval Lines" default_order="limit asc" editable="bottom">
+										<field name="group_id" width="450" required="1" options="{'no_create': True,'no_open': True}"/>
+										<field name="limit" required="1"/>
+										<field name="is_mandatory_approve" column_invisible="parent.approval_type == 'sequential'"/>
+										<field name="is_retain_approval"/>
+									</list>
+								</field>
+							</page>
+							<page string="Audit Trail">
+								<group>
+									<group>
+										<field name="create_uid" readonly="1"></field>
+										<field name="create_date" readonly="1"></field>
+									</group>
+									<group>
+										<field name="write_uid" readonly="1"></field>
+										<field name="write_date" readonly="1"></field>
+									</group>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+					<chatter>
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="message_ids" widget="mail_thread"/>
+					</chatter>
+				</form>
+			</field>
+		</record>
+
+
+		<record id="tw_approval_matrix_filter" model="ir.ui.view">
+			<field name="name">tw.approval.matrix.filter</field>
+			<field name="model">tw.approval.matrix</field>
+			<field name="arch" type="xml">
+				<search string="Search Approval">
+					<field name="form_id" string="Form"/>
+					<field name="company_id" />
+					<field name="product_tmpl_id" string="Product"/>
+					<field name="product_id" string="Product Variant"/>
+					<field name="categ_id" string="Product Category"/>
+					<field name="department_id" string="Department"/>
+					<field name="approval_line" string="Group" filter_domain="[('approval_line.group_id','ilike',self)]"/>
+					<group expand="1" string="Group By">
+						<filter string="Branch" name="group_by_branch" context="{'group_by':'company_id'}"/>
+						<filter string="Form" name="group_by_form" context="{'group_by':'form_id'}"/>
+						<filter string="Form Code" name="group_by_form_code" context="{'group_by':'config_type'}"/>
+						<filter string="Division" name="group_by_division" context="{'group_by':'division'}"/>
+						<filter string="Approval Type" name="group_by_approval_type" context="{'group_by':'approval_type'}"/>
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record id="tw_approval_matrix_action" model="ir.actions.act_window">
+			<field name="name">Approval Matrix</field>
+			<field name="res_model">tw.approval.matrix</field>
+			<field name="view_mode">list,form</field>
+			<field name="search_view_id" ref="tw_approval_matrix_filter"/>
+		</record>
+
+
+	</data>
+</odoo>
+       		
+       		
+	

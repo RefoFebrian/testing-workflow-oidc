@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_pelunasan_leasing_dso" model="report.paperformat">
+            <field name="name">Print Pelunasan Leasing</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="css_margins" eval="True"/>
+            <field name="header_spacing">3</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="pelunasan_leasing_dso_report" model="ir.actions.report">
+            <field name="name">Print Pelunasan Leasing</field>
+            <field name="model">tw.dealer.sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tw_dealer_sale_order.pelunasan_leasing_dso_template</field>
+            <field name="print_report_name">'Print_Pelunasan_Leasing_%s.pdf' % (object._get_report_base_filename())</field>
+            <field name="paperformat_id" ref="paperformat_pelunasan_leasing_dso"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

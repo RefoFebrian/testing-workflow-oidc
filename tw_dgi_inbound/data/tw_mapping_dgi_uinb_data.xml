@@ -1,0 +1,1110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--
+        =============================================================
+        DGI UINB Response Mappings
+
+        Response mappings untuk relational lookups pada endpoint dgi_uinb
+        Mappings ini digunakan oleh DGI Engine untuk lookup relational fields
+
+        Actual Response:
+        {
+            "noShippingList": "15537-SLU-2600085",
+            "tanggalTerima": "18/04/2026",
+            "dealerId": "15537",
+            "noInvoice": "3064059489",
+            "statusShippingList": "1",
+            "unit": [{
+                "kodeTipeUnit": "MF1D",
+                "kodeWarna": "BK",
+                "kuantitasTerkirim": 1,
+                "kuantitasDiterima": 1,
+                "noMesin": "...",
+                "noRangka": "..."
+            }]
+        }
+        =============================================================
+        -->
+
+        <!--
+        ==================== HSO Response Mappings ====================
+        -->
+
+        <record id="mapping_uinb_hso_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_hso"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_uinb_hso_no_invoice" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_hso"/>
+            <field name="json_path">noInvoice</field>
+            <field name="target_field">md_reference_po</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">No Invoice MD → md_reference_po</field>
+        </record>
+
+        <record id="mapping_uinb_hso_no_sl" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_hso"/>
+            <field name="json_path">noShippingList</field>
+            <field name="target_field">md_reference_sl</field>
+            <field name="field_type">direct</field>
+            <field name="notes">No Shipping List → md_reference_sl</field>
+        </record>
+
+        <record id="mapping_uinb_hso_division" model="tw.mapping.response">
+            <field name="sequence">31</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_hso"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">division</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">Unit</field>
+            <field name="notes">Static default division → Unit</field>
+        </record>
+
+        <record id="mapping_uinb_hso_state" model="tw.mapping.response">
+            <field name="sequence">32</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_hso"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">state</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">draft</field>
+            <field name="notes">Static default state → draft</field>
+        </record>
+
+        <record id="mapping_uinb_hso_blank_po" model="tw.mapping.response">
+            <field name="sequence">33</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_hso"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">is_blank_po</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">false</field>
+            <field name="notes">Static default is_blank_po → false</field>
+        </record>
+
+        <record id="mapping_uinb_hso_partner_id" model="tw.mapping.response">
+            <field name="sequence">34</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_hso"/>
+            <field name="json_path">company_id.default_supplier_id</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">derived</field>
+            <field name="derived_value_type">m2o</field>
+            <field name="notes">Derived partner_id from company_id.default_supplier_id</field>
+        </record>
+
+        <record id="mapping_uinb_hso_status_sl" model="tw.mapping.response">
+            <field name="sequence">35</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_hso"/>
+            <field name="json_path">statusShippingList</field>
+            <field name="field_type">validation</field>
+            <field name="validation_operator">=</field>
+            <field name="expected_value">1</field>
+            <field name="notes">Filter: only statusShippingList = 1</field>
+        </record>
+
+        <record id="mapping_uinb_hso_product" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_hso"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="line_group">order_line</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('product_template_variant_value_ids.code', '=', kodeWarna)]</field>
+            <field name="notes">Kode Tipe Unit → product_id (lookup by default_code)</field>
+        </record>
+
+        <record id="mapping_uinb_hso_qty" model="tw.mapping.response">
+            <field name="sequence">41</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_hso"/>
+            <field name="json_path">unit.kuantitasDiterima</field>
+            <field name="target_field">product_qty</field>
+            <field name="line_group">order_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Kuantitas Diterima → product_qty</field>
+        </record>
+
+        <record id="mapping_uinb_hso_serial_product" model="tw.mapping.response">
+            <field name="sequence">42</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_hso"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('product_template_variant_value_ids.code', '=', kodeWarna)]</field>
+            <field name="notes">Kode Tipe Unit → serial_line.product_id</field>
+        </record>
+
+        <record id="mapping_uinb_hso_no_mesin" model="tw.mapping.response">
+            <field name="sequence">43</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_hso"/>
+            <field name="json_path">unit.noMesin</field>
+            <field name="target_field">lot_name</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Nomor Mesin → serial_line.lot_name</field>
+        </record>
+
+        <record id="mapping_uinb_hso_no_rangka" model="tw.mapping.response">
+            <field name="sequence">44</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_hso"/>
+            <field name="json_path">unit.noRangka</field>
+            <field name="target_field">chassis_number</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Nomor Rangka → serial_line.chassis_number</field>
+        </record>
+
+        <record id="mapping_uinb_hso_status_rfs" model="tw.mapping.response">
+            <field name="sequence">45</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_hso"/>
+            <field name="json_path">unit.statusRFS</field>
+            <field name="target_field">is_rfs</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Status RFS → serial_line.is_rfs</field>
+        </record>
+
+        <!--
+        ==================== ASP Response Mappings ====================
+        -->
+
+        <record id="mapping_uinb_asp_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_asp"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_uinb_asp_no_invoice" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_asp"/>
+            <field name="json_path">noInvoice</field>
+            <field name="target_field">md_reference_po</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">No Invoice MD → md_reference_po</field>
+        </record>
+
+        <record id="mapping_uinb_asp_no_sl" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_asp"/>
+            <field name="json_path">noShippingList</field>
+            <field name="target_field">md_reference_sl</field>
+            <field name="field_type">direct</field>
+            <field name="notes">No Shipping List → md_reference_sl</field>
+        </record>
+
+        <record id="mapping_uinb_asp_division" model="tw.mapping.response">
+            <field name="sequence">31</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_asp"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">division</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">Unit</field>
+            <field name="notes">Static default division → Unit</field>
+        </record>
+
+        <record id="mapping_uinb_asp_state" model="tw.mapping.response">
+            <field name="sequence">32</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_asp"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">state</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">draft</field>
+            <field name="notes">Static default state → draft</field>
+        </record>
+
+        <record id="mapping_uinb_asp_blank_po" model="tw.mapping.response">
+            <field name="sequence">33</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_asp"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">is_blank_po</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">false</field>
+            <field name="notes">Static default is_blank_po → false</field>
+        </record>
+
+        <record id="mapping_uinb_asp_partner_id" model="tw.mapping.response">
+            <field name="sequence">34</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_asp"/>
+            <field name="json_path">company_id.default_supplier_id</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">derived</field>
+            <field name="derived_value_type">m2o</field>
+            <field name="notes">Derived partner_id from company_id.default_supplier_id</field>
+        </record>
+
+        <record id="mapping_uinb_asp_status_sl" model="tw.mapping.response">
+            <field name="sequence">35</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_asp"/>
+            <field name="json_path">statusShippingList</field>
+            <field name="field_type">validation</field>
+            <field name="validation_operator">=</field>
+            <field name="expected_value">1</field>
+            <field name="notes">Filter: only statusShippingList = 1</field>
+        </record>
+
+        <record id="mapping_uinb_asp_product" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_asp"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="line_group">order_line</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('product_template_variant_value_ids.code', '=', kodeWarna)]</field>
+            <field name="notes">Kode Tipe Unit → product_id</field>
+        </record>
+
+        <record id="mapping_uinb_asp_qty" model="tw.mapping.response">
+            <field name="sequence">41</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_asp"/>
+            <field name="json_path">unit.kuantitasDiterima</field>
+            <field name="target_field">product_qty</field>
+            <field name="line_group">order_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Kuantitas Diterima → product_qty</field>
+        </record>
+
+        <record id="mapping_uinb_asp_serial_product" model="tw.mapping.response">
+            <field name="sequence">42</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_asp"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('product_template_variant_value_ids.code', '=', kodeWarna)]</field>
+            <field name="notes">Kode Tipe Unit → serial_line.product_id</field>
+        </record>
+
+        <record id="mapping_uinb_asp_no_mesin" model="tw.mapping.response">
+            <field name="sequence">43</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_asp"/>
+            <field name="json_path">unit.noMesin</field>
+            <field name="target_field">lot_name</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Nomor Mesin → serial_line.lot_name</field>
+        </record>
+
+        <record id="mapping_uinb_asp_no_rangka" model="tw.mapping.response">
+            <field name="sequence">44</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_asp"/>
+            <field name="json_path">unit.noRangka</field>
+            <field name="target_field">chassis_number</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Nomor Rangka → serial_line.chassis_number</field>
+        </record>
+
+        <record id="mapping_uinb_asp_status_rfs" model="tw.mapping.response">
+            <field name="sequence">45</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_asp"/>
+            <field name="json_path">unit.statusRFS</field>
+            <field name="target_field">is_rfs</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Status RFS → serial_line.is_rfs</field>
+        </record>
+
+        <!--
+        ==================== DAM Response Mappings ====================
+        -->
+
+        <record id="mapping_uinb_dam_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_dam"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_uinb_dam_no_invoice" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_dam"/>
+            <field name="json_path">noInvoice</field>
+            <field name="target_field">md_reference_po</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">No Invoice MD → md_reference_po</field>
+        </record>
+
+        <record id="mapping_uinb_dam_no_sl" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_dam"/>
+            <field name="json_path">noShippingList</field>
+            <field name="target_field">md_reference_sl</field>
+            <field name="field_type">direct</field>
+            <field name="notes">No Shipping List → md_reference_sl</field>
+        </record>
+
+        <record id="mapping_uinb_dam_division" model="tw.mapping.response">
+            <field name="sequence">31</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_dam"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">division</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">Unit</field>
+            <field name="notes">Static default division → Unit</field>
+        </record>
+
+        <record id="mapping_uinb_dam_state" model="tw.mapping.response">
+            <field name="sequence">32</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_dam"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">state</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">draft</field>
+            <field name="notes">Static default state → draft</field>
+        </record>
+
+        <record id="mapping_uinb_dam_blank_po" model="tw.mapping.response">
+            <field name="sequence">33</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_dam"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">is_blank_po</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">false</field>
+            <field name="notes">Static default is_blank_po → false</field>
+        </record>
+
+        <record id="mapping_uinb_dam_partner_id" model="tw.mapping.response">
+            <field name="sequence">34</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_dam"/>
+            <field name="json_path">company_id.default_supplier_id</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">derived</field>
+            <field name="derived_value_type">m2o</field>
+            <field name="notes">Derived partner_id from company_id.default_supplier_id</field>
+        </record>
+
+        <record id="mapping_uinb_dam_status_sl" model="tw.mapping.response">
+            <field name="sequence">35</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_dam"/>
+            <field name="json_path">statusShippingList</field>
+            <field name="field_type">validation</field>
+            <field name="validation_operator">=</field>
+            <field name="expected_value">1</field>
+            <field name="notes">Filter: only statusShippingList = 1</field>
+        </record>
+
+        <record id="mapping_uinb_dam_product" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_dam"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="line_group">order_line</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('product_template_variant_value_ids.code', '=', kodeWarna)]</field>
+            <field name="notes">Kode Tipe Unit → product_id</field>
+        </record>
+
+        <record id="mapping_uinb_dam_qty" model="tw.mapping.response">
+            <field name="sequence">41</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_dam"/>
+            <field name="json_path">unit.kuantitasDiterima</field>
+            <field name="target_field">product_qty</field>
+            <field name="line_group">order_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Kuantitas Diterima → product_qty</field>
+        </record>
+
+        <record id="mapping_uinb_dam_serial_product" model="tw.mapping.response">
+            <field name="sequence">42</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_dam"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('product_template_variant_value_ids.code', '=', kodeWarna)]</field>
+            <field name="notes">Kode Tipe Unit → serial_line.product_id</field>
+        </record>
+
+        <record id="mapping_uinb_dam_no_mesin" model="tw.mapping.response">
+            <field name="sequence">43</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_dam"/>
+            <field name="json_path">unit.noMesin</field>
+            <field name="target_field">lot_name</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Nomor Mesin → serial_line.lot_name</field>
+        </record>
+
+        <record id="mapping_uinb_dam_no_rangka" model="tw.mapping.response">
+            <field name="sequence">44</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_dam"/>
+            <field name="json_path">unit.noRangka</field>
+            <field name="target_field">chassis_number</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Nomor Rangka → serial_line.chassis_number</field>
+        </record>
+
+        <record id="mapping_uinb_dam_status_rfs" model="tw.mapping.response">
+            <field name="sequence">45</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_dam"/>
+            <field name="json_path">unit.statusRFS</field>
+            <field name="target_field">is_rfs</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Status RFS → serial_line.is_rfs</field>
+        </record>
+
+        <!--
+        ==================== DAW Response Mappings ====================
+        -->
+
+        <record id="mapping_uinb_daw_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_daw"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_uinb_daw_no_invoice" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_daw"/>
+            <field name="json_path">noInvoice</field>
+            <field name="target_field">md_reference_po</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">No Invoice MD → md_reference_po</field>
+        </record>
+
+        <record id="mapping_uinb_daw_no_sl" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_daw"/>
+            <field name="json_path">noShippingList</field>
+            <field name="target_field">md_reference_sl</field>
+            <field name="field_type">direct</field>
+            <field name="notes">No Shipping List → md_reference_sl</field>
+        </record>
+
+        <record id="mapping_uinb_daw_division" model="tw.mapping.response">
+            <field name="sequence">31</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_daw"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">division</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">Unit</field>
+            <field name="notes">Static default division → Unit</field>
+        </record>
+
+        <record id="mapping_uinb_daw_state" model="tw.mapping.response">
+            <field name="sequence">32</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_daw"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">state</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">draft</field>
+            <field name="notes">Static default state → draft</field>
+        </record>
+
+        <record id="mapping_uinb_daw_blank_po" model="tw.mapping.response">
+            <field name="sequence">33</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_daw"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">is_blank_po</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">false</field>
+            <field name="notes">Static default is_blank_po → false</field>
+        </record>
+
+        <record id="mapping_uinb_daw_partner_id" model="tw.mapping.response">
+            <field name="sequence">34</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_daw"/>
+            <field name="json_path">company_id.default_supplier_id</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">derived</field>
+            <field name="derived_value_type">m2o</field>
+            <field name="notes">Derived partner_id from company_id.default_supplier_id</field>
+        </record>
+
+        <record id="mapping_uinb_daw_status_sl" model="tw.mapping.response">
+            <field name="sequence">35</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_daw"/>
+            <field name="json_path">statusShippingList</field>
+            <field name="field_type">validation</field>
+            <field name="validation_operator">=</field>
+            <field name="expected_value">1</field>
+            <field name="notes">Filter: only statusShippingList = 1</field>
+        </record>
+
+        <record id="mapping_uinb_daw_product" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_daw"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="line_group">order_line</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('product_template_variant_value_ids.code', '=', kodeWarna)]</field>
+            <field name="notes">Kode Tipe Unit → product_id</field>
+        </record>
+
+        <record id="mapping_uinb_daw_qty" model="tw.mapping.response">
+            <field name="sequence">41</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_daw"/>
+            <field name="json_path">unit.kuantitasDiterima</field>
+            <field name="target_field">product_qty</field>
+            <field name="line_group">order_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Kuantitas Diterima → product_qty</field>
+        </record>
+
+        <record id="mapping_uinb_daw_serial_product" model="tw.mapping.response">
+            <field name="sequence">42</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_daw"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('product_template_variant_value_ids.code', '=', kodeWarna)]</field>
+            <field name="notes">Kode Tipe Unit → serial_line.product_id</field>
+        </record>
+
+        <record id="mapping_uinb_daw_no_mesin" model="tw.mapping.response">
+            <field name="sequence">43</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_daw"/>
+            <field name="json_path">unit.noMesin</field>
+            <field name="target_field">lot_name</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Nomor Mesin → serial_line.lot_name</field>
+        </record>
+
+        <record id="mapping_uinb_daw_no_rangka" model="tw.mapping.response">
+            <field name="sequence">44</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_daw"/>
+            <field name="json_path">unit.noRangka</field>
+            <field name="target_field">chassis_number</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Nomor Rangka → serial_line.chassis_number</field>
+        </record>
+
+        <record id="mapping_uinb_daw_status_rfs" model="tw.mapping.response">
+            <field name="sequence">45</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_daw"/>
+            <field name="json_path">unit.statusRFS</field>
+            <field name="target_field">is_rfs</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Status RFS → serial_line.is_rfs</field>
+        </record>
+
+        <!--
+        ==================== NPM Response Mappings ====================
+        -->
+
+        <record id="mapping_uinb_npm_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_npm"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_uinb_npm_no_invoice" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_npm"/>
+            <field name="json_path">noInvoice</field>
+            <field name="target_field">md_reference_po</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">No Invoice MD → md_reference_po</field>
+        </record>
+
+        <record id="mapping_uinb_npm_no_sl" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_npm"/>
+            <field name="json_path">noShippingList</field>
+            <field name="target_field">md_reference_sl</field>
+            <field name="field_type">direct</field>
+            <field name="notes">No Shipping List → md_reference_sl</field>
+        </record>
+
+        <record id="mapping_uinb_npm_division" model="tw.mapping.response">
+            <field name="sequence">31</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_npm"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">division</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">Unit</field>
+            <field name="notes">Static default division → Unit</field>
+        </record>
+
+        <record id="mapping_uinb_npm_state" model="tw.mapping.response">
+            <field name="sequence">32</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_npm"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">state</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">draft</field>
+            <field name="notes">Static default state → draft</field>
+        </record>
+
+        <record id="mapping_uinb_npm_blank_po" model="tw.mapping.response">
+            <field name="sequence">33</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_npm"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">is_blank_po</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">false</field>
+            <field name="notes">Static default is_blank_po → false</field>
+        </record>
+
+        <record id="mapping_uinb_npm_partner_id" model="tw.mapping.response">
+            <field name="sequence">34</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_npm"/>
+            <field name="json_path">company_id.default_supplier_id</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">derived</field>
+            <field name="derived_value_type">m2o</field>
+            <field name="notes">Derived partner_id from company_id.default_supplier_id</field>
+        </record>
+
+        <record id="mapping_uinb_npm_status_sl" model="tw.mapping.response">
+            <field name="sequence">35</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_npm"/>
+            <field name="json_path">statusShippingList</field>
+            <field name="field_type">validation</field>
+            <field name="validation_operator">=</field>
+            <field name="expected_value">1</field>
+            <field name="notes">Filter: only statusShippingList = 1</field>
+        </record>
+
+        <record id="mapping_uinb_npm_product" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_npm"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="line_group">order_line</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('product_template_variant_value_ids.code', '=', kodeWarna)]</field>
+            <field name="notes">Kode Tipe Unit → product_id</field>
+        </record>
+
+        <record id="mapping_uinb_npm_qty" model="tw.mapping.response">
+            <field name="sequence">41</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_npm"/>
+            <field name="json_path">unit.kuantitasDiterima</field>
+            <field name="target_field">product_qty</field>
+            <field name="line_group">order_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Kuantitas Diterima → product_qty</field>
+        </record>
+
+        <record id="mapping_uinb_npm_serial_product" model="tw.mapping.response">
+            <field name="sequence">42</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_npm"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('product_template_variant_value_ids.code', '=', kodeWarna)]</field>
+            <field name="notes">Kode Tipe Unit → serial_line.product_id</field>
+        </record>
+
+        <record id="mapping_uinb_npm_no_mesin" model="tw.mapping.response">
+            <field name="sequence">43</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_npm"/>
+            <field name="json_path">unit.noMesin</field>
+            <field name="target_field">lot_name</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Nomor Mesin → serial_line.lot_name</field>
+        </record>
+
+        <record id="mapping_uinb_npm_no_rangka" model="tw.mapping.response">
+            <field name="sequence">44</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_npm"/>
+            <field name="json_path">unit.noRangka</field>
+            <field name="target_field">chassis_number</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Nomor Rangka → serial_line.chassis_number</field>
+        </record>
+
+        <record id="mapping_uinb_npm_status_rfs" model="tw.mapping.response">
+            <field name="sequence">45</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_npm"/>
+            <field name="json_path">unit.statusRFS</field>
+            <field name="target_field">is_rfs</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Status RFS → serial_line.is_rfs</field>
+        </record>
+
+        <!--
+        ==================== SINSEN Response Mappings ====================
+        -->
+
+        <record id="mapping_uinb_sinsen_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_sinsen"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_uinb_sinsen_no_invoice" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_sinsen"/>
+            <field name="json_path">noInvoice</field>
+            <field name="target_field">md_reference_po</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">No Invoice MD → md_reference_po</field>
+        </record>
+
+        <record id="mapping_uinb_sinsen_no_sl" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_sinsen"/>
+            <field name="json_path">noShippingList</field>
+            <field name="target_field">md_reference_sl</field>
+            <field name="field_type">direct</field>
+            <field name="notes">No Shipping List → md_reference_sl</field>
+        </record>
+
+        <record id="mapping_uinb_sinsen_division" model="tw.mapping.response">
+            <field name="sequence">31</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_sinsen"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">division</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">Unit</field>
+            <field name="notes">Static default division → Unit</field>
+        </record>
+
+        <record id="mapping_uinb_sinsen_state" model="tw.mapping.response">
+            <field name="sequence">32</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_sinsen"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">state</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">draft</field>
+            <field name="notes">Static default state → draft</field>
+        </record>
+
+        <record id="mapping_uinb_sinsen_blank_po" model="tw.mapping.response">
+            <field name="sequence">33</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_sinsen"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">is_blank_po</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">false</field>
+            <field name="notes">Static default is_blank_po → false</field>
+        </record>
+
+        <record id="mapping_uinb_sinsen_partner_id" model="tw.mapping.response">
+            <field name="sequence">34</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_sinsen"/>
+            <field name="json_path">company_id.default_supplier_id</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">derived</field>
+            <field name="derived_value_type">m2o</field>
+            <field name="notes">Derived partner_id from company_id.default_supplier_id</field>
+        </record>
+
+        <record id="mapping_uinb_sinsen_status_sl" model="tw.mapping.response">
+            <field name="sequence">35</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_sinsen"/>
+            <field name="json_path">statusShippingList</field>
+            <field name="field_type">validation</field>
+            <field name="validation_operator">=</field>
+            <field name="expected_value">1</field>
+            <field name="notes">Filter: only statusShippingList = 1</field>
+        </record>
+
+        <record id="mapping_uinb_sinsen_product" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_sinsen"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="line_group">order_line</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('product_template_variant_value_ids.code', '=', kodeWarna)]</field>
+            <field name="notes">Kode Tipe Unit → product_id</field>
+        </record>
+
+        <record id="mapping_uinb_sinsen_qty" model="tw.mapping.response">
+            <field name="sequence">41</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_sinsen"/>
+            <field name="json_path">unit.kuantitasDiterima</field>
+            <field name="target_field">product_qty</field>
+            <field name="line_group">order_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Kuantitas Diterima → product_qty</field>
+        </record>
+
+        <record id="mapping_uinb_sinsen_serial_product" model="tw.mapping.response">
+            <field name="sequence">42</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_sinsen"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('product_template_variant_value_ids.code', '=', kodeWarna)]</field>
+            <field name="notes">Kode Tipe Unit → serial_line.product_id</field>
+        </record>
+
+        <record id="mapping_uinb_sinsen_no_mesin" model="tw.mapping.response">
+            <field name="sequence">43</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_sinsen"/>
+            <field name="json_path">unit.noMesin</field>
+            <field name="target_field">lot_name</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Nomor Mesin → serial_line.lot_name</field>
+        </record>
+
+        <record id="mapping_uinb_sinsen_no_rangka" model="tw.mapping.response">
+            <field name="sequence">44</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_sinsen"/>
+            <field name="json_path">unit.noRangka</field>
+            <field name="target_field">chassis_number</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Nomor Rangka → serial_line.chassis_number</field>
+        </record>
+
+        <record id="mapping_uinb_sinsen_status_rfs" model="tw.mapping.response">
+            <field name="sequence">45</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_sinsen"/>
+            <field name="json_path">unit.statusRFS</field>
+            <field name="target_field">is_rfs</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Status RFS → serial_line.is_rfs</field>
+        </record>
+
+    
+<!--
+        ==================== WAHANA Response Mappings ====================
+        -->
+
+        <record id="mapping_uinb_wahana_dealer_id" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_wahana"/>
+            <field name="json_path">dealerId</field>
+            <field name="target_field">company_id</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="base.model_res_company"/>
+            <field name="relation_lookup_field">atpm_code</field>
+            <field name="relation_search_domain">[('parent_id', '!=', False)]</field>
+            <field name="notes">Dealer ID → company_id</field>
+        </record>
+
+        <record id="mapping_uinb_wahana_no_invoice" model="tw.mapping.response">
+            <field name="sequence">20</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_wahana"/>
+            <field name="json_path">noInvoice</field>
+            <field name="target_field">md_reference_po</field>
+            <field name="field_type">direct</field>
+            <field name="is_required">1</field>
+            <field name="notes">No Invoice MD → md_reference_po</field>
+        </record>
+
+        <record id="mapping_uinb_wahana_no_sl" model="tw.mapping.response">
+            <field name="sequence">30</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_wahana"/>
+            <field name="json_path">noShippingList</field>
+            <field name="target_field">md_reference_sl</field>
+            <field name="field_type">direct</field>
+            <field name="notes">No Shipping List → md_reference_sl</field>
+        </record>
+
+        <record id="mapping_uinb_wahana_division" model="tw.mapping.response">
+            <field name="sequence">31</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_wahana"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">division</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">Unit</field>
+            <field name="notes">Static default division → Unit</field>
+        </record>
+
+        <record id="mapping_uinb_wahana_state" model="tw.mapping.response">
+            <field name="sequence">32</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_wahana"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">state</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">draft</field>
+            <field name="notes">Static default state → draft</field>
+        </record>
+
+        <record id="mapping_uinb_wahana_blank_po" model="tw.mapping.response">
+            <field name="sequence">33</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_wahana"/>
+            <field name="json_path">__default__</field>
+            <field name="target_field">is_blank_po</field>
+            <field name="field_type">direct</field>
+            <field name="default_value">false</field>
+            <field name="notes">Static default is_blank_po → false</field>
+        </record>
+
+        <record id="mapping_uinb_wahana_partner_id" model="tw.mapping.response">
+            <field name="sequence">34</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_wahana"/>
+            <field name="json_path">company_id.default_supplier_id</field>
+            <field name="target_field">partner_id</field>
+            <field name="field_type">derived</field>
+            <field name="derived_value_type">m2o</field>
+            <field name="notes">Derived partner_id from company_id.default_supplier_id</field>
+        </record>
+
+        <record id="mapping_uinb_wahana_status_sl" model="tw.mapping.response">
+            <field name="sequence">35</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_wahana"/>
+            <field name="json_path">statusShippingList</field>
+            <field name="field_type">validation</field>
+            <field name="validation_operator">=</field>
+            <field name="expected_value">1</field>
+            <field name="notes">Filter: only statusShippingList = 1</field>
+        </record>
+
+        <record id="mapping_uinb_wahana_product" model="tw.mapping.response">
+            <field name="sequence">40</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_wahana"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="line_group">order_line</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('product_template_variant_value_ids.code', '=', kodeWarna)]</field>
+            <field name="notes">Kode Tipe Unit → product_id</field>
+        </record>
+
+        <record id="mapping_uinb_wahana_qty" model="tw.mapping.response">
+            <field name="sequence">41</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_wahana"/>
+            <field name="json_path">unit.kuantitasDiterima</field>
+            <field name="target_field">product_qty</field>
+            <field name="line_group">order_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Kuantitas Diterima → product_qty</field>
+        </record>
+
+        <record id="mapping_uinb_wahana_serial_product" model="tw.mapping.response">
+            <field name="sequence">42</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_wahana"/>
+            <field name="json_path">unit.kodeTipeUnit</field>
+            <field name="target_field">product_id</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">relation</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="product.model_product_product"/>
+            <field name="relation_lookup_field">default_code</field>
+            <field name="relation_search_domain">[('product_template_variant_value_ids.code', '=', kodeWarna)]</field>
+            <field name="notes">Kode Tipe Unit → serial_line.product_id</field>
+        </record>
+
+        <record id="mapping_uinb_wahana_no_mesin" model="tw.mapping.response">
+            <field name="sequence">43</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_wahana"/>
+            <field name="json_path">unit.noMesin</field>
+            <field name="target_field">lot_name</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Nomor Mesin → serial_line.lot_name</field>
+        </record>
+
+        <record id="mapping_uinb_wahana_no_rangka" model="tw.mapping.response">
+            <field name="sequence">44</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_wahana"/>
+            <field name="json_path">unit.noRangka</field>
+            <field name="target_field">chassis_number</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Nomor Rangka → serial_line.chassis_number</field>
+        </record>
+
+        <record id="mapping_uinb_wahana_status_rfs" model="tw.mapping.response">
+            <field name="sequence">45</field>
+            <field name="endpoint_id" ref="tw_dgi_inbound.tw_endpoint_dgi_uinb_wahana"/>
+            <field name="json_path">unit.statusRFS</field>
+            <field name="target_field">is_rfs</field>
+            <field name="line_group">serial_line</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Status RFS → serial_line.is_rfs</field>
+        </record>
+
+    </data>
+</odoo>

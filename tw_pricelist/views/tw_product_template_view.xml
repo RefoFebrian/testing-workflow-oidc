@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="tw_product_template_inherit_form_view" model="ir.ui.view">
+        <field name="name">product.template.inherit.form.view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <field name="categ_id" position="after">
+                <field name="is_unit" invisible="1"/>
+                <field name="service_category_id" required="is_unit == True" options="{'no_open': True, 'no_create': True}" invisible="not is_unit"/>
+            </field>
+        </field>
+    </record>
+</odoo>

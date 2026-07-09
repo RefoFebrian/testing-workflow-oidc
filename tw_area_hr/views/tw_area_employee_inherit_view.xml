@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="tw_area_employee_form_view" model="ir.ui.view">
+            <field name="name">tw.area.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="tw_hr.tw_hr_employee_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id'][2]" position="after">
+                    <field name="available_area_ids" invisible="1"/>
+                    <field name="area_id" required="1" options="{'no_open':True, 'no_create':True}" string="Area" domain="[('id', 'in', available_area_ids)]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

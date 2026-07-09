@@ -1,0 +1,116 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+        <!-- list view -->
+        <record id="tw_account_setting_list_view" model="ir.ui.view">
+            <field name="name">tw.account.setting.list</field>
+            <field name="model">tw.account.setting</field>
+            <field name="type">list</field>
+            <field eval="10" name="priority"/>
+            <field name="arch" type="xml">
+                <list string="">
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_account_setting_form_view" model="ir.ui.view">
+            <field name="name">tw.account.setting.form</field>
+            <field name="model">tw.account.setting</field>
+            <field name="priority">0</field>
+            <field name="arch" type="xml">
+                <form string="Account Setting">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" required="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="account_rounding_id" required="1" options='{"no_create": True}'/>
+                            <field name="rounding_amount" required="1"/>
+                        </group>
+                        <notebook>
+                            <page string="Backoffice" name="account_backoffice">
+                                <group>
+                                    <group string="Bank Transfer" name="backoffice_bank_transfer"/>
+                                    <group string="Payment request" name="backoffice_payment_request"/>
+                                </group>
+                                <group>
+                                    <group string="Advance Payment" name="backoffice_advance_payment"/>
+                                    <group string="Disbursement" name="backoffice_disbursement"/>
+                                </group>
+                                <group>
+                                    <group string="Other Receivable" name="backoffice_other_receivable"/>
+                                    <group string="Journal Memorial" name="backoffice_journal_memorial"/>
+                                </group>
+                                <group>
+                                    <group string="Collecting" name="backoffice_collecting"/>
+                                    <group string="Cancelation" name="backoffice_journal_cancel"/>
+                                </group>
+                                <group>
+                                    <group string="Journal Voucher" name="backoffice_journal_voucher" invisible="1"/>
+                                </group>
+                            </page>
+                            <page string="Page 1" name="page_1" invisible="1"/>
+                            <page string="Sales" name="page_2">
+                                <group name="sales_order_container" string="Sales Order"/>
+                                <group name="dealer_sales_order_container" string="Dealer Sales Order"/>
+                                <group name="work_order_container" string="Work Order"/>
+                                <group name="part_sales_container" string="Part Sales"/>
+                            </page>
+                            <page string="Page 3" name="page_3" invisible="1"/>
+                            <page string="Page 4" name="page_4" invisible="1"/>
+                            <page string="Assets" name="account_assets">
+                                <group>
+                                    <group string="Account Assets" name="assets_account"/>
+                                    <group string="Disposal Assets" name="assets_disposal"/>
+                                </group>
+                                <group>
+                                    <group string="Good Receive" name="assets_good_receive"/>
+                                    <group string="Journal Assets" name="assets_group"/>
+                                </group>
+                            </page>
+                            <page string="Audit Trail" name="audit_trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" options="{'no_open':True,'no_create':True}" readonly="1"/>
+                                        <field name="write_uid" options="{'no_open':True,'no_create':True}" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="create_date" readonly="1"/>
+                                        <field name="write_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- action window -->
+        <record id="tw_account_setting_action" model="ir.actions.act_window">
+            <field name="name">Account Settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.account.setting</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Account Setting
+                </p>
+                <p>
+                Click the Create button to add a new Account Setting
+                </p>
+            </field>
+        </record>
+
+        <record id="tw_account_setting_action_list" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_account_setting_list_view"/>
+            <field name="act_window_id" ref="tw_account_setting_action"/>
+        </record>
+    </data>
+</odoo>

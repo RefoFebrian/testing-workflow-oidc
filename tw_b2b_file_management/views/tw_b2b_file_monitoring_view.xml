@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_b2b_file_monitoring_view_form" model="ir.ui.view">
+            <field name="name">tw.b2b.file.monitoring.form</field>
+            <field name="model">tw.b2b.file.monitoring</field>
+            <field name="arch" type="xml">
+                <form string="Monitoring MFT File" create="0" delete="0">
+                    <sheet>
+                        <header>
+                            <h1>Monitoring MFT File</h1>
+                        </header>
+                        <group>
+                            <group>
+                                <field name="config_options_id" string="Ambil Dari" options="{'no_create': True,'no_open':True}" required="1"/>
+                                <field name="name" placeholder="e.g. H2Z000001.INV"/>
+                                <field name="extension" string="Format File" required="1"/>
+                                <field name="is_report" invisible="1"/>
+                                <field name="create_date" invisible="1"/>
+                                <label for="start_date" string="Date Period"/>
+                                <div>
+                                    <field name="start_date" class="oe_inline" required="1" placeholder="Start Date"/> - <field name="end_date" class="oe_inline" required="1" placeholder="End Date"/>
+                                </div>
+                            </group>
+                        </group>
+                        <button name="action_search" type="object" string="Search" class="oe_highlight" icon="fa-search"/>
+                        <div invisible="create_date == False or is_report != False">
+                            <h3 style="padding-top: 20px;"><p>Data not found!</p></h3>
+                        </div>
+                        <notebook invisible="is_report == False">
+                            <page name="b2b_file_monitoring_ids" string="Detail">
+                                <field name="b2b_file_monitoring_ids" nolabel="1" widget="one2many_list" readonly="1" string="Detail" force_save="1">
+                                    <list editable="bottom">
+                                        <field name="config_options_id" column_invisible="1"/>
+                                        <field name="filename" readonly="1"/>
+                                        <field name="upload_date" readonly="1"/>
+                                        <field name="upload_time" readonly="1"/>
+                                        <field name="file" column_invisible="1"/>
+                                        <button name="action_dowload" type="object" string="Download" class="btn btn-default oe_highlight"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_b2b_file_monitoring_action" model="ir.actions.act_window">
+			<field name="name">Monitoring MFT File</field>
+			<field name="res_model">tw.b2b.file.monitoring</field>
+			<field name="view_mode">form</field>
+            <field name="target">inline</field>
+		</record>
+    </data>
+</odoo>

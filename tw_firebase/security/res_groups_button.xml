@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+		<!-- Confirm Firebase message -->
+
+		<record id="tw_firebase_message_group_button_confirm" model="res.groups">
+			<field name="category_id" ref="tw_firebase.tw_module_category_firebase"/>
+			<field name="name">TW Button Confirm Firebase message</field>
+		</record>
+
+		<record id="tw_firebase_message_access_button_confirm_read" model="ir.model.access">
+			<field name="model_id" ref="model_tw_firebase_message"/>
+			<field name="name">button_confirm_tw_firebase_message read"</field>
+			<field name="group_id" ref="tw_firebase_message_group_button_confirm" />
+			<field name="perm_write"> 1 </field>
+		</record>
+
+		<!-- Done Firebase message -->
+
+		<record id="tw_firebase_message_group_button_done" model="res.groups">
+			<field name="category_id" ref="tw_firebase.tw_module_category_firebase"/>
+			<field name="name">TW Button Done Firebase message</field>
+		</record>
+
+		<record id="tw_firebase_message_access_button_done_read" model="ir.model.access">
+			<field name="model_id" ref="model_tw_firebase_message"/>
+			<field name="name">button_done_tw_firebase_message read"</field>
+			<field name="group_id" ref="tw_firebase_message_group_button_done" />
+			<field name="perm_write"> 1 </field>
+		</record>
+
+		<!-- Draft Firebase message -->
+
+		<record id="tw_firebase_message_group_button_draft" model="res.groups">
+			<field name="category_id" ref="tw_firebase.tw_module_category_firebase"/>
+			<field name="name">TW Button Draft Firebase message</field>
+		</record>
+
+		<record id="tw_firebase_message_access_button_draft_read" model="ir.model.access">
+			<field name="model_id" ref="model_tw_firebase_message"/>
+			<field name="name">button_draft_tw_firebase_message read"</field>
+			<field name="group_id" ref="tw_firebase_message_group_button_draft" />
+			<field name="perm_write"> 1 </field>
+		</record>
+
+		<!-- Confirm Firebase message line -->
+
+		<record id="tw_firebase_message_line_group_button_confirm" model="res.groups">
+			<field name="category_id" ref="tw_firebase.tw_module_category_firebase"/>
+			<field name="name">TW Button Confirm Firebase message line</field>
+		</record>
+
+		<record id="tw_firebase_message_line_access_button_confirm_read" model="ir.model.access">
+			<field name="model_id" ref="model_tw_firebase_message_line"/>
+			<field name="name">button_confirm_tw_firebase_message_line read"</field>
+			<field name="group_id" ref="tw_firebase_message_line_group_button_confirm" />
+			<field name="perm_write"> 1 </field>
+		</record>
+
+		<!-- Done Firebase message line -->
+
+		<record id="tw_firebase_message_line_group_button_done" model="res.groups">
+			<field name="category_id" ref="tw_firebase.tw_module_category_firebase"/>
+			<field name="name">TW Button Done Firebase message line</field>
+		</record>
+
+		<record id="tw_firebase_message_line_access_button_done_read" model="ir.model.access">
+			<field name="model_id" ref="model_tw_firebase_message_line"/>
+			<field name="name">button_done_tw_firebase_message_line read"</field>
+			<field name="group_id" ref="tw_firebase_message_line_group_button_done" />
+			<field name="perm_write"> 1 </field>
+		</record>
+
+		<!-- Draft Firebase message line -->
+
+		<record id="tw_firebase_message_line_group_button_draft" model="res.groups">
+			<field name="category_id" ref="tw_firebase.tw_module_category_firebase"/>
+			<field name="name">TW Button Draft Firebase message line</field>
+		</record>
+
+		<record id="tw_firebase_message_line_access_button_draft_read" model="ir.model.access">
+			<field name="model_id" ref="model_tw_firebase_message_line"/>
+			<field name="name">button_draft_tw_firebase_message_line read"</field>
+			<field name="group_id" ref="tw_firebase_message_line_group_button_draft" />
+			<field name="perm_write"> 1 </field>
+		</record>
+
+		<!-- Confirm Firebase notification -->
+
+		<record id="tw_firebase_notification_group_button_confirm" model="res.groups">
+			<field name="category_id" ref="tw_firebase.tw_module_category_firebase"/>
+			<field name="name">TW Button Confirm Firebase notification</field>
+		</record>
+
+		<record id="tw_firebase_notification_access_button_confirm_read" model="ir.model.access">
+			<field name="model_id" ref="model_tw_firebase_notification"/>
+			<field name="name">button_confirm_tw_firebase_notification read"</field>
+			<field name="group_id" ref="tw_firebase_notification_group_button_confirm" />
+			<field name="perm_write"> 1 </field>
+		</record>
+
+		<!-- Done Firebase notification -->
+
+		<record id="tw_firebase_notification_group_button_done" model="res.groups">
+			<field name="category_id" ref="tw_firebase.tw_module_category_firebase"/>
+			<field name="name">TW Button Done Firebase notification</field>
+		</record>
+
+		<record id="tw_firebase_notification_access_button_done_read" model="ir.model.access">
+			<field name="model_id" ref="model_tw_firebase_notification"/>
+			<field name="name">button_done_tw_firebase_notification read"</field>
+			<field name="group_id" ref="tw_firebase_notification_group_button_done" />
+			<field name="perm_write"> 1 </field>
+		</record>
+
+		<!-- Draft Firebase notification -->
+
+		<record id="tw_firebase_notification_group_button_draft" model="res.groups">
+			<field name="category_id" ref="tw_firebase.tw_module_category_firebase"/>
+			<field name="name">TW Button Draft Firebase notification</field>
+		</record>
+
+		<record id="tw_firebase_notification_access_button_draft_read" model="ir.model.access">
+			<field name="model_id" ref="model_tw_firebase_notification"/>
+			<field name="name">button_draft_tw_firebase_notification read"</field>
+			<field name="group_id" ref="tw_firebase_notification_group_button_draft" />
+			<field name="perm_write"> 1 </field>
+		</record>
+
+		<record id="tw_base.group_system_admin" model="res.groups">
+			<field name="implied_ids" eval="[
+				(4,ref('tw_firebase_message_group_button_confirm')),
+				(4,ref('tw_firebase_message_group_button_done')),
+				(4,ref('tw_firebase_message_group_button_draft')),
+				(4,ref('tw_firebase_message_line_group_button_confirm')),
+				(4,ref('tw_firebase_message_line_group_button_done')),
+				(4,ref('tw_firebase_message_line_group_button_draft')),
+				(4,ref('tw_firebase_notification_group_button_confirm')),
+				(4,ref('tw_firebase_notification_group_button_done')),
+				(4,ref('tw_firebase_notification_group_button_draft')),
+				]" />
+		</record>
+	</data>
+</odoo>

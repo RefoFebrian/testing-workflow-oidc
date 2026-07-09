@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Default limits for location photo in tw.activity.atl.btl.line (in KB) -->
+        <record id="max_photo_size_kb" model="ir.config_parameter">
+            <field name="key">tw_activity_atl_btl.max_photo_size_kb</field>
+            <field name="value">300</field>
+        </record>
+        <record id="min_photo_size_kb" model="ir.config_parameter">
+            <field name="key">tw_activity_atl_btl.min_photo_size_kb</field>
+            <field name="value">50</field>
+        </record>
+    </data>
+</odoo>

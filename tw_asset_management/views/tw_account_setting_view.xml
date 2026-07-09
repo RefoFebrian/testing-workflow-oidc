@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+      <record id="tw_account_setting_inherit_form_view" model="ir.ui.view">
+          <field name="name">tw.asset.management.account.setting.inherit.view.form</field>
+          <field name="model">tw.account.setting</field>
+          <field name="inherit_id" ref="tw_account_setting.tw_account_setting_form_view"/>
+          <field name="arch" type="xml">
+              <xpath expr="//group[@name='assets_good_receive']" position="inside">
+                  <field name="journal_good_receive_asset_id" options="{'no_create': True}"/>
+                  <field name="journal_good_receive_prepaid_id" options="{'no_create': True}"/>
+                  <field name="journal_good_receive_cip_id" options="{'no_create': True}"/>
+                  <field name="journal_good_receive_asset_collecting_id" options="{'no_create': True}"/>
+                  <field name="journal_acquisition_asset_id" options="{'no_create': True}"/>
+              </xpath>
+          </field>
+      </record>
+    </data>
+  </odoo>
+  

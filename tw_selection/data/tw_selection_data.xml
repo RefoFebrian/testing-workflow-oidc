@@ -1,0 +1,1007 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="selection_cash" model="tw.selection">
+            <field name="name">Cash</field>
+            <field name="value">Cash</field>
+            <field name="type">PaymentType</field>
+        </record>
+
+        <record id="selection_credit" model="tw.selection">
+            <field name="name">Credit</field>
+            <field name="value">Credit</field>
+            <field name="type">PaymentType</field>
+        </record>
+
+        <record id="selection_customer_type_pribadi" model="tw.selection">
+            <field name="name">Pribadi</field>
+            <field name="value">Pribadi</field>
+            <field name="type">CustomerType</field>
+        </record>
+
+        <record id="selection_customer_type_perusahaan" model="tw.selection">
+            <field name="name">Perusahaan</field>
+            <field name="value">Perusahaan</field>
+            <field name="type">CustomerType</field>
+        </record>
+
+        <record id="selection_kc_gc" model="tw.selection">
+            <field name="name">Group Customer</field>
+            <field name="value">G</field>
+            <field name="type">CustomerCode</field>
+        </record>
+
+        <record id="selection_kc_r" model="tw.selection">
+            <field name="name">Individual Customer (Regular)</field>
+            <field name="value">I</field>
+            <field name="type">CustomerCode</field>
+        </record>
+
+        <record id="selection_kc_jp" model="tw.selection">
+            <field name="name">Individual Customer (Joint Promo)</field>
+            <field name="value">J</field>
+            <field name="type">CustomerCode</field>
+        </record>
+
+        <record id="selection_kc_koleg" model="tw.selection">
+            <field name="name">Individual Customer (Kolektif)</field>
+            <field name="value">C</field>
+            <field name="type">CustomerCode</field>
+        </record>
+
+        <record id="selection_jk_laki2" model="tw.selection">
+            <field name="name">Laki-laki</field>
+            <field name="value">1</field>
+            <field name="type">Gender</field>
+        </record>
+
+        <record id="selection_jk_perempuan" model="tw.selection">
+            <field name="name">Perempuan</field>
+            <field name="value">2</field>
+            <field name="type">Gender</field>
+        </record>
+
+        <record id="selection_agama_i" model="tw.selection">
+            <field name="name">Islam</field>
+            <field name="value">1</field>
+            <field name="type">Religion</field>
+        </record>
+
+        <record id="selection_agama_ks" model="tw.selection">
+            <field name="name">Kristen</field>
+            <field name="value">2</field>
+            <field name="type">Religion</field>
+        </record>
+
+        <record id="selection_agama_kh" model="tw.selection">
+            <field name="name">Katolik</field>
+            <field name="value">3</field>
+            <field name="type">Religion</field>
+        </record>
+
+        <record id="selection_agama_h" model="tw.selection">
+            <field name="name">Hindu</field>
+            <field name="value">4</field>
+            <field name="type">Religion</field>
+        </record>
+
+        <record id="selection_agama_b" model="tw.selection">
+            <field name="name">Budha</field>
+            <field name="value">5</field>
+            <field name="type">Religion</field>
+        </record>
+
+        <record id="selection_agama_l" model="tw.selection">
+            <field name="name">Lain-lain</field>
+            <field name="value">6</field>
+            <field name="type">Religion</field>
+        </record>
+
+        <record id="selection_occupation_pns" model="tw.selection">
+            <field name="name">Pegawai Negeri</field>
+            <field name="value">1</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_nlyn" model="tw.selection">
+            <field name="name">Nelayan</field>
+            <field name="value">16</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_ojk" model="tw.selection">
+            <field name="name">Ojek</field>
+            <field name="value">3</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_sw" model="tw.selection">
+            <field name="name">Pegawai Swasta</field>
+            <field name="value">2</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_m" model="tw.selection">
+            <field name="name">Mahasiswa/Pelajar</field>
+            <field name="value">5</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_g" model="tw.selection">
+            <field name="name">Guru/Dosen</field>
+            <field name="value">6</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_tni" model="tw.selection">
+            <field name="name">TNI/Polri</field>
+            <field name="value">7</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_irt" model="tw.selection">
+            <field name="name">Ibu Rumah Tangga</field>
+            <field name="value">8</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_dok" model="tw.selection">
+            <field name="name">Dokter</field>
+            <field name="value">10</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_l" model="tw.selection">
+            <field name="name">Lain-lain</field>
+            <field name="value">11</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_pnggeluaran_1" model="tw.selection">
+            <field name="name">&lt; Rp 900.000,-</field>
+            <field name="value">1</field>
+            <field name="type">Expense</field>
+        </record>
+
+        <record id="selection_pnggeluaran_2" model="tw.selection">
+            <field name="name">Rp 900.001- s/d Rp 1.250.000,-</field>
+            <field name="value">2</field>
+            <field name="type">Expense</field>
+        </record>
+
+        <record id="selection_pnggeluaran_3" model="tw.selection">
+            <field name="name">Rp 1.250.001- s/d Rp1.750.000,-</field>
+            <field name="value">3</field>
+            <field name="type">Expense</field>
+        </record>
+
+        <record id="selection_pnggeluaran_4" model="tw.selection">
+            <field name="name">Rp 1.750.001- s/d Rp 2.500.000,-</field>
+            <field name="value">4</field>
+            <field name="type">Expense</field>
+        </record>
+
+        <record id="selection_pnggeluaran_5" model="tw.selection">
+            <field name="name">Rp 2.500.001- s/d Rp 4.000.000,-</field>
+            <field name="value">5</field>
+            <field name="type">Expense</field>
+        </record>
+
+        <record id="selection_pnggeluaran_6" model="tw.selection">
+            <field name="name">Rp 4.000.001- s/d Rp 6.000.000,-</field>
+            <field name="value">6</field>
+            <field name="type">Expense</field>
+        </record>
+
+        <record id="selection_pnggeluaran_7" model="tw.selection">
+            <field name="name">&gt; Rp 6.000.000,-</field>
+            <field name="value">7</field>
+            <field name="type">Expense</field>
+        </record>
+
+        <record id="selection_pendapatan_1" model="tw.selection">
+            <field name="name">&lt; Rp 900.000,-</field>
+            <field name="value">1</field>
+            <field name="type">Income</field>
+        </record>
+
+        <record id="selection_pendapatan_2" model="tw.selection">
+            <field name="name">Rp 900.001- s/d Rp 1.250.000,-</field>
+            <field name="value">2</field>
+            <field name="type">Income</field>
+        </record>
+
+        <record id="selection_pendapatan_3" model="tw.selection">
+            <field name="name">Rp 1.250.001- s/d Rp1.750.000,-</field>
+            <field name="value">3</field>
+            <field name="type">Income</field>
+        </record>
+
+        <record id="selection_pendapatan_4" model="tw.selection">
+            <field name="name">Rp 1.750.001- s/d Rp 2.500.000,-</field>
+            <field name="value">4</field>
+            <field name="type">Income</field>
+        </record>
+
+        <record id="selection_pendapatan_5" model="tw.selection">
+            <field name="name">Rp 2.500.001- s/d Rp 4.000.000,-</field>
+            <field name="value">5</field>
+            <field name="type">Income</field>
+        </record>
+
+        <record id="selection_pendapatan_6" model="tw.selection">
+            <field name="name">Rp 4.000.001- s/d Rp 6.000.000,-</field>
+            <field name="value">6</field>
+            <field name="type">Income</field>
+        </record>
+
+        <record id="selection_pendapatan_7" model="tw.selection">
+            <field name="name">&gt; Rp 6.000.000,-</field>
+            <field name="value">7</field>
+            <field name="type">Income</field>
+        </record>
+
+        <record id="selection_pndidikan_ttsd" model="tw.selection">
+            <field name="name">Tidak Tamat SD</field>
+            <field name="value">1</field>
+            <field name="type">Education</field>
+        </record>
+
+        <record id="selection_pndidikan_sd" model="tw.selection">
+            <field name="name">SD</field>
+            <field name="value">2</field>
+            <field name="type">Education</field>
+        </record>
+
+        <record id="selection_pndidikan_sltp" model="tw.selection">
+            <field name="name">SLTP/SMP</field>
+            <field name="value">3</field>
+            <field name="type">Education</field>
+        </record>
+
+        <record id="selection_pndidikan_slta" model="tw.selection">
+            <field name="name">SLTA/SMU</field>
+            <field name="value">4</field>
+            <field name="type">Education</field>
+        </record>
+
+        <record id="selection_pndidikan_dip" model="tw.selection">
+            <field name="name">Akademi/Diploma</field>
+            <field name="value">5</field>
+            <field name="type">Education</field>
+        </record>
+
+        <record id="selection_pndidikan_s" model="tw.selection">
+            <field name="name">Sarjana</field>
+            <field name="value">6</field>
+            <field name="type">Education</field>
+        </record>
+
+        <record id="selection_pndidikan_ps" model="tw.selection">
+            <field name="name">Pasca Sarjana</field>
+            <field name="value">7</field>
+            <field name="type">Education</field>
+        </record>
+
+        <record id="selection_merk_mtr_h" model="tw.selection">
+            <field name="name">Honda</field>
+            <field name="value">1</field>
+            <field name="type">MotorBrand</field>
+        </record>
+
+        <record id="selection_merk_mtr_y" model="tw.selection">
+            <field name="name">Yamaha</field>
+            <field name="value">2</field>
+            <field name="type">MotorBrand</field>
+        </record>
+
+        <record id="selection_merk_mtr_s" model="tw.selection">
+            <field name="name">Suzuki</field>
+            <field name="value">3</field>
+            <field name="type">MotorBrand</field>
+        </record>
+
+        <record id="selection_merk_mtr_k" model="tw.selection">
+            <field name="name">Kawasaki</field>
+            <field name="value">4</field>
+            <field name="type">MotorBrand</field>
+        </record>
+
+        <record id="selection_merk_mtr_l" model="tw.selection">
+            <field name="name">Motor lain</field>
+            <field name="value">5</field>
+            <field name="type">MotorBrand</field>
+        </record>
+
+        <record id="selection_merk_mtr_blm" model="tw.selection">
+            <field name="name">Belum pernah memiliki</field>
+            <field name="value">6</field>
+            <field name="type">MotorBrand</field>
+        </record>
+
+        <record id="selection_jns_mtr_s" model="tw.selection">
+            <field name="name">Sport</field>
+            <field name="value">1</field>
+            <field name="type">MotorType</field>
+        </record>
+
+        <record id="selection_jns_mtr_c" model="tw.selection">
+            <field name="name">Cub (Bebek)</field>
+            <field name="value">2</field>
+            <field name="type">MotorType</field>
+        </record>
+
+        <record id="selection_jns_mtr_sk" model="tw.selection">
+            <field name="name">AT (Automatic)</field>
+            <field name="value">3</field>
+            <field name="type">MotorType</field>
+        </record>
+
+        <record id="selection_jns_mtr_blm" model="tw.selection">
+            <field name="name">Belum pernah memiliki</field>
+            <field name="value">4</field>
+            <field name="type">MotorType</field>
+        </record>
+
+        <record id="selection_penggunaan_b" model="tw.selection">
+            <field name="name">Berdagang</field>
+            <field name="value">1</field>
+            <field name="type">MotorUtilization</field>
+        </record>
+
+        <record id="selection_penggunaan_p" model="tw.selection">
+            <field name="name">Pemakaian jarak dekat</field>
+            <field name="value">2</field>
+            <field name="type">MotorUtilization</field>
+        </record>
+
+        <record id="selection_penggunaan_k" model="tw.selection">
+            <field name="name">Ke sekolah/kampus</field>
+            <field name="value">3</field>
+            <field name="type">MotorUtilization</field>
+        </record>
+
+        <record id="selection_penggunaan_r" model="tw.selection">
+            <field name="name">Rekreasi/Olah raga</field>
+            <field name="value">4</field>
+            <field name="type">MotorUtilization</field>
+        </record>
+
+        <record id="selection_penggunaan_kk" model="tw.selection">
+            <field name="name">Kebutuhan keluarga</field>
+            <field name="value">5</field>
+            <field name="type">MotorUtilization</field>
+        </record>
+
+        <record id="selection_penggunaan_l" model="tw.selection">
+            <field name="name">Lain-lain</field>
+            <field name="value">6</field>
+            <field name="type">MotorUtilization</field>
+        </record>
+
+        <record id="selection_penggunaan_bkrja" model="tw.selection">
+            <field name="name">Bekerja</field>
+            <field name="value">7</field>
+            <field name="type">MotorUtilization</field>
+        </record>
+
+        <record id="selection_pengguna_ss" model="tw.selection">
+            <field name="name">Saya sendiri</field>
+            <field name="value">1</field>
+            <field name="type">MotorUser</field>
+        </record>
+
+        <record id="selection_pengguna_ank" model="tw.selection">
+            <field name="name">Anak</field>
+            <field name="value">2</field>
+            <field name="type">MotorUser</field>
+        </record>
+
+        <record id="selection_pengguna_ps" model="tw.selection">
+            <field name="name">Pasangan (suami/istri)</field>
+            <field name="value">3</field>
+            <field name="type">MotorUser</field>
+        </record>
+
+        <record id="selection_pengguna_l" model="tw.selection">
+            <field name="name">Lain-lain</field>
+            <field name="value">4</field>
+            <field name="type">MotorUser</field>
+        </record>
+
+        <record id="selection_hobi_mnbca" model="tw.selection">
+            <field name="name">Membaca</field>
+            <field name="value">A15</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_mmncing" model="tw.selection">
+            <field name="name">Memancing</field>
+            <field name="value">A13</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_bdminton" model="tw.selection">
+            <field name="name">Badminton</field>
+            <field name="value">B1</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_brnyanyi" model="tw.selection">
+            <field name="name">Bernyayi</field>
+            <field name="value">A27</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_mnri" model="tw.selection">
+            <field name="name">Menari</field>
+            <field name="value">A19</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_occupation_pngcra" model="tw.selection">
+            <field name="name">Pengacara</field>
+            <field name="value">13</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_wrtawan" model="tw.selection">
+            <field name="name">Wartawan</field>
+            <field name="value">14</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_stts_rmh_1" model="tw.selection">
+            <field name="name">Rumah Sendiri</field>
+            <field name="value">1</field>
+            <field name="type">HousingTenure</field>
+        </record>
+
+        <record id="selection_stts_rmh_2" model="tw.selection">
+            <field name="name">Rumah Orang Tua</field>
+            <field name="value">2</field>
+            <field name="type">HousingTenure</field>
+        </record>
+
+        <record id="selection_stts_rmh_3" model="tw.selection">
+            <field name="name">Rumah Sewa</field>
+            <field name="value">3</field>
+            <field name="type">HousingTenure</field>
+        </record>
+
+        <record id="selection_ssts_hp_1" model="tw.selection">
+            <field name="name">Prabayar</field>
+            <field name="value">1</field>
+            <field name="type">StatusMobilePhone</field>
+        </record>
+
+        <record id="selection_ssts_hp_2" model="tw.selection">
+            <field name="name">Pascabayar</field>
+            <field name="value">2</field>
+            <field name="type">StatusMobilePhone</field>
+        </record>
+
+        <record id="selection_gol_a" model="tw.selection">
+            <field name="name">A</field>
+            <field name="value">2</field>
+            <field name="type">BloodType</field>
+        </record>
+
+        <record id="selection_gol_b" model="tw.selection">
+            <field name="name">B</field>
+            <field name="value">4</field>
+            <field name="type">BloodType</field>
+        </record>
+
+        <record id="selection_gol_o" model="tw.selection">
+            <field name="name">O</field>
+            <field name="value">3</field>
+            <field name="type">BloodType</field>
+        </record>
+
+        <record id="selection_gol_ab" model="tw.selection">
+            <field name="name">AB</field>
+            <field name="value">1</field>
+            <field name="type">BloodType</field>
+        </record>
+
+        <record id="selection_hobi_av" model="tw.selection">
+            <field name="name">Adventure(Petualangan)</field>
+            <field name="value">A1</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_aero" model="tw.selection">
+            <field name="name">Aeromodeling</field>
+            <field name="value">A2</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_ctnam" model="tw.selection">
+            <field name="name">Bercocok Tanam</field>
+            <field name="value">A3</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_karoke" model="tw.selection">
+            <field name="name">Berkaraoke</field>
+            <field name="value">A4</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_drma" model="tw.selection">
+            <field name="name">Bermain Drama</field>
+            <field name="value">A5</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_supal" model="tw.selection">
+            <field name="name">Bermain Sulap</field>
+            <field name="value">A6</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_ftograp" model="tw.selection">
+            <field name="name">Fotografi</field>
+            <field name="value">A7</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_kaligraf" model="tw.selection">
+            <field name="name">Kaligrafi</field>
+            <field name="value">A8</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_kprangko" model="tw.selection">
+            <field name="name">Koleksi Prangko (Fillateli)</field>
+            <field name="value">A9</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_mkn" model="tw.selection">
+            <field name="name">Makan</field>
+            <field name="value">A10</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_msge" model="tw.selection">
+            <field name="name">Massage</field>
+            <field name="value">A11</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_mlukis" model="tw.selection">
+            <field name="name">Melukis</field>
+            <field name="value">A12</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_msak" model="tw.selection">
+            <field name="name">Memasak</field>
+            <field name="value">A14</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_puisi" model="tw.selection">
+            <field name="name">Membaca Puisi</field>
+            <field name="value">A16</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_bplihra" model="tw.selection">
+            <field name="name">Memelihara Binatang Peliharaan</field>
+            <field name="value">A17</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_mbunga" model="tw.selection">
+            <field name="name">Menanam Bunga</field>
+            <field name="value">A18</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_dongeng" model="tw.selection">
+            <field name="name">Mendongeng</field>
+            <field name="value">A20</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_mgaji" model="tw.selection">
+            <field name="name">Mengaji</field>
+            <field name="value">A21</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_mcrita" model="tw.selection">
+            <field name="name">Mengarang Cerita</field>
+            <field name="value">A22</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_mgambar" model="tw.selection">
+            <field name="name">Mengambar</field>
+            <field name="value">A23</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_mbrgantik" model="tw.selection">
+            <field name="name">Mengkoleksi Barang Antik</field>
+            <field name="value">A24</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_mjhit" model="tw.selection">
+            <field name="name">Menjahit</field>
+            <field name="value">A25</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_mnlisbuku" model="tw.selection">
+            <field name="name">Menulis Buku</field>
+            <field name="value">A26</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_origami" model="tw.selection">
+            <field name="name">Origami</field>
+            <field name="value">A28</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_otomtis" model="tw.selection">
+            <field name="name">Otomotif</field>
+            <field name="value">A29</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_pntonim" model="tw.selection">
+            <field name="name">Pantonim</field>
+            <field name="value">A30</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_shping" model="tw.selection">
+            <field name="name">Shopping</field>
+            <field name="value">A31</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_srtmyurat" model="tw.selection">
+            <field name="name">Surat Menyurat</field>
+            <field name="value">A32</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_trvling" model="tw.selection">
+            <field name="name">Travelling</field>
+            <field name="value">A33</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_bsket" model="tw.selection">
+            <field name="name">Basket</field>
+            <field name="value">B2</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_spda" model="tw.selection">
+            <field name="name">Bersepeda</field>
+            <field name="value">B3</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_bwling" model="tw.selection">
+            <field name="name">Bowling</field>
+            <field name="value">B4</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_ftnes" model="tw.selection">
+            <field name="name">Fitness</field>
+            <field name="value">B5</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_golf" model="tw.selection">
+            <field name="name">Golf</field>
+            <field name="value">B6</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_hiking" model="tw.selection">
+            <field name="name">Hiking</field>
+            <field name="value">B7</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_jgging" model="tw.selection">
+            <field name="name">Jogging</field>
+            <field name="value">B8</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_rnang" model="tw.selection">
+            <field name="name">Renang</field>
+            <field name="value">B9</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_snam" model="tw.selection">
+            <field name="name">Senam</field>
+            <field name="value">B10</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_sbola" model="tw.selection">
+            <field name="name">Sepak Bola</field>
+            <field name="value">B11</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_tnis" model="tw.selection">
+            <field name="name">Tennis</field>
+            <field name="value">B14</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_surfing" model="tw.selection">
+            <field name="name">Surfing</field>
+            <field name="value">B13</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_vley" model="tw.selection">
+            <field name="name">Volley</field>
+            <field name="value">B15</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_yoga" model="tw.selection">
+            <field name="name">Yoga</field>
+            <field name="value">B16</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_game" model="tw.selection">
+            <field name="name">Bermain Game</field>
+            <field name="value">C1</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_kmptr" model="tw.selection">
+            <field name="name">Bermain Komputer</field>
+            <field name="value">C2</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_msik" model="tw.selection">
+            <field name="name">Bermain Musik</field>
+            <field name="value">C3</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_bintrnet" model="tw.selection">
+            <field name="name">Browsing Internet</field>
+            <field name="value">C4</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_chttng" model="tw.selection">
+            <field name="name">Chatting</field>
+            <field name="value">C5</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_musik" model="tw.selection">
+            <field name="name">Mendengarkan Musik</field>
+            <field name="value">C6</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_radio" model="tw.selection">
+            <field name="name">Mendengarkan Radio</field>
+            <field name="value">C7</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_bioskop" model="tw.selection">
+            <field name="name">Menonton Bioskop</field>
+            <field name="value">C8</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_film" model="tw.selection">
+            <field name="name">Menonton Film</field>
+            <field name="value">C9</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_hobi_tv" model="tw.selection">
+            <field name="name">Menonton TV</field>
+            <field name="value">C10</field>
+            <field name="type">Hobby</field>
+        </record>
+
+        <record id="selection_warganegara_wni" model="tw.selection">
+            <field name="name">WNI</field>
+            <field name="value">1</field>
+            <field name="type">Kewarganegaraan</field>
+        </record>
+
+        <record id="selection_warganegara_wna" model="tw.selection">
+            <field name="name">WNA</field>
+            <field name="value">2</field>
+            <field name="type">Kewarganegaraan</field>
+        </record>
+
+        <record id="selection_occupation_prtanian_ps" model="tw.selection">
+            <field name="name">Pertanian/Perkebunan/Kehutanan/Perikanan/Peternakan - Pegawai Swasta</field>
+            <field name="value">2a</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_indstri_ps" model="tw.selection">
+            <field name="name">Industri - Pegawai Swasta</field>
+            <field name="value">2b</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_kntruksi_ps" model="tw.selection">
+            <field name="name">Konstruksi - Pegawai Swasta</field>
+            <field name="value">2c</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_prtmbngan_ps" model="tw.selection">
+            <field name="name">Pertambangan - Pegawai Swasta</field>
+            <field name="value">2d</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_jsa_ps" model="tw.selection">
+            <field name="name">Jasa - Pegawai Swasta</field>
+            <field name="value">2e</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_dgang_ps" model="tw.selection">
+            <field name="name">Perdagangan (Retail) - Pegawai Swasta</field>
+            <field name="value">2f</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_prtmbngan_ps" model="tw.selection">
+            <field name="name">Pertanian/Perkebunan/Kehutanan/Perikanan/Peternakan - Wiraswasta / Pedagang</field>
+            <field name="value">4a</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_indstri_wp" model="tw.selection">
+            <field name="name">Industri - Wiraswasta / Pedagang</field>
+            <field name="value">4b</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_kntruksi_wp" model="tw.selection">
+            <field name="name">Konstruksi - Wiraswasta / Pedagang</field>
+            <field name="value">4c</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_prtmbngan_wp" model="tw.selection">
+            <field name="name">Pertambangan - Wiraswasta / Pedagang</field>
+            <field name="value">4d</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_jsa_wp" model="tw.selection">
+            <field name="name">Jasa - Wiraswasta / Pedagang</field>
+            <field name="value">4e</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_dgang_wp" model="tw.selection">
+            <field name="name">Perdagangan (Retail) - Wiraswasta / Pedagang</field>
+            <field name="value">4f</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_pdgang" model="tw.selection">
+            <field name="name">Wiraswasta / Pedagang</field>
+            <field name="value">4</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_occupation_ptani" model="tw.selection">
+            <field name="name">Petani</field>
+            <field name="value">15</field>
+            <field name="type">Occupation</field>
+        </record>
+
+        <record id="selection_document_lain_npwp" model="tw.selection">
+            <field name="name">NPWP</field>
+            <field name="value">NPWP</field>
+            <field name="type">DocumentType</field>
+        </record>
+
+        <record id="selection_document_lain_kartu_kredit" model="tw.selection">
+            <field name="name">Kartu Kredit</field>
+            <field name="value">Kartu Kredit</field>
+            <field name="type">DocumentType</field>
+        </record>
+
+        <record id="selection_unit_division" model="tw.selection">
+            <field name="name">Unit</field>
+            <field name="value">Unit</field>
+            <field name="type">Division</field>
+        </record>
+
+        <record id="selection_sparepart_division" model="tw.selection">
+            <field name="name">Sparepart</field>
+            <field name="value">Sparepart</field>
+            <field name="type">Division</field>
+        </record>
+
+        <record id="selection_service_division" model="tw.selection">
+            <field name="name">Service</field>
+            <field name="value">Service</field>
+            <field name="type">Division</field>
+        </record>
+
+        <record id="selection_umum_division" model="tw.selection">
+            <field name="name">Umum</field>
+            <field name="value">Umum</field>
+            <field name="type">Division</field>
+        </record>
+
+        <record id="selection_extras_division" model="tw.selection">
+            <field name="name">Extras</field>
+            <field name="value">Extras</field>
+            <field name="type">Division</field>
+        </record>
+
+        <record id="selection_finance_division" model="tw.selection">
+            <field name="name">Finance</field>
+            <field name="value">Finance</field>
+            <field name="type">Division</field>
+        </record>
+
+        <record id="selection_relation_husband" model="tw.selection">
+            <field name="name">Suami</field>
+            <field name="value">Suami</field>
+            <field name="type">FamilyRelation</field>
+        </record>
+
+        <record id="selection_relation_wife" model="tw.selection">
+            <field name="name">Istri</field>
+            <field name="value">Istri</field>
+            <field name="type">FamilyRelation</field>
+        </record>
+
+        <record id="selection_relation_child" model="tw.selection">
+            <field name="name">Anak</field>
+            <field name="value">Anak</field>
+            <field name="type">FamilyRelation</field>
+        </record>
+
+        <record id="selection_relation_brother_sister" model="tw.selection">
+            <field name="name">Saudara</field>
+            <field name="value">Saudara</field>
+            <field name="type">FamilyRelation</field>
+        </record>
+
+        <record id="selection_relation_father" model="tw.selection">
+            <field name="name">Ayah</field>
+            <field name="value">Ayah</field>
+            <field name="type">FamilyRelation</field>
+        </record>
+
+        <record id="selection_relation_mother" model="tw.selection">
+            <field name="name">Ibu</field>
+            <field name="value">Ibu</field>
+            <field name="type">FamilyRelation</field>
+        </record>
+
+    </data>
+</odoo>

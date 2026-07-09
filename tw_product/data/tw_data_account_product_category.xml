@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+
+		<!-- Account -->
+		<record id="tw_account_categ_interim_stock" model="account.account">
+			<field name="code">29900000</field>
+			<field name="name">Interim Stock</field>
+			<field name="account_type">liability_current</field>
+			<field name="reconcile">False</field>
+		</record>
+		<record id="tw_account_categ_other_inventory" model="account.account">
+			<field name="code">11330180</field>
+			<field name="name">Other Inventory</field>
+			<field name="account_type">asset_current</field>
+			<field name="reconcile">False</field>
+		</record>
+
+	</data>
+</odoo>

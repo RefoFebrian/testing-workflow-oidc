@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- List View -->
+        <record id="tw_faktur_pajak_other_view_list" model="ir.ui.view">
+            <field name="name">tw.faktur.pajak.other.list</field>
+            <field name="model">tw.faktur.pajak.other</field>
+            <field name="arch" type="xml">
+                <list string="Faktur Pajak Other" decoration-info="state=='draft'" decoration-muted="state=='cancel'">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="faktur_pajak_out_id" string="No. Faktur Pajak"/>
+                    <field name="partner_id"/>
+                    <field name="tgl_terbit" optional="hide"/>
+                    <field name="thn_penggunaan" optional="hide"/>
+                    <field name="pajak_gabungan"/>
+                    <field name="untaxed_amount" sum="Total DPP" optional="hide"/>
+                    <field name="tax_amount" sum="Total PPN"/>
+                    <field name="total_amount" sum="Total"/>
+                    <field name="is_coretax" optional="hide"/>
+                    <field name="kode_barang" optional="hide"/>
+                    <field name="uom" optional="hide"/>
+                    <field name="state" widget="badge" decoration-success="state=='posted'" decoration-warning="state=='draft'"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="tw_faktur_pajak_other_view_form" model="ir.ui.view">
+            <field name="name">tw.faktur.pajak.other.form</field>
+            <field name="model">tw.faktur.pajak.other</field>
+            <field name="arch" type="xml">
+                <form string="Faktur Pajak Other">
+                    <header>
+                        <button name="action_post" 
+                            string="Post" 
+                            type="object" 
+                            class="oe_highlight" 
+                            invisible="state != 'draft'"
+                            groups="tw_faktur_pajak_other.group_fpo_post"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,posted"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="%(tw_faktur_pajak.tw_faktur_pajak_out_action)d"
+                                type="action"
+                                class="oe_stat_button"
+                                icon="fa-pencil-square-o"
+                                invisible="not faktur_pajak_out_id"
+                                context="{'default_id': faktur_pajak_out_id}">
+                                <div class="o_stat_info">
+                                    <field name="faktur_pajak_out_id" readonly="1" class="o_stat_value"/>
+                                    <span class="o_stat_text">Faktur Pajak</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1><field name="name" readonly="1"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="faktur_pajak_out_id" 
+                                    required="1" 
+                                    options="{'no_create': True, 'no_open': True}" 
+                                    readonly="state != 'draft'"/>
+                                <field name="partner_id" 
+                                    required="1" 
+                                    options="{'no_create': True, 'no_open': True}" 
+                                    readonly="state != 'draft'"/>
+                                <field name="pajak_gabungan" readonly="state != 'draft'"/>
+                                <field name="tgl_terbit" required="1" readonly="state != 'draft'"/>
+                                <field name="kwitansi_no" readonly="state != 'draft'"/>
+                            </group>
+                            <group>
+                                <field name="date" readonly="1"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="thn_penggunaan" 
+                                    placeholder="2025" 
+                                    required="1" 
+                                    readonly="state != 'draft'"/>
+                                <field name="untaxed_amount" required="1" readonly="state != 'draft'"/>
+                                <field name="tax_amount" required="1" readonly="state != 'draft'"/>
+                                <field name="total_amount" readonly="1"/>
+                                <field name="memo" readonly="state != 'draft'"/>
+                                <field name="is_coretax" readonly="state != 'draft'"/>
+                                <field name="kode_barang" placeholder="B"
+                                    invisible="not is_coretax"
+                                    readonly="state != 'draft'"/>
+                                <field name="uom" placeholder="UM.0033"
+                                    invisible="not is_coretax"
+                                    readonly="state != 'draft'"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Audit Trail" name="audit_trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"/>
+                                        <field name="create_date" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="confirm_uid" readonly="1"/>
+                                        <field name="confirm_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="tw_faktur_pajak_other_view_search" model="ir.ui.view">
+            <field name="name">tw.faktur.pajak.other.search</field>
+            <field name="model">tw.faktur.pajak.other</field>
+            <field name="arch" type="xml">
+                <search string="Cari Faktur Pajak Other">
+                    <field name="name" string="No. Dokumen"/>
+                    <field name="faktur_pajak_out_id" string="No. Faktur Pajak"/>
+                    <field name="partner_id" string="Partner"/>
+                    <field name="kwitansi_no" string="No. Kwitansi"/>
+                    <filter name="state_draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                    <filter name="state_posted" string="Posted" domain="[('state', '=', 'posted')]"/>
+                    <separator/>
+                    <filter name="pajak_gabungan" string="Pajak Gabungan" domain="[('pajak_gabungan', '=', True)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Partner" name="group_by_partner" context="{'group_by': 'partner_id'}"/>
+                        <filter string="Tanggal Terbit" name="group_by_tgl_terbit" context="{'group_by': 'tgl_terbit'}"/>
+                        <filter string="Status" name="group_by_state" context="{'group_by': 'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="tw_faktur_pajak_other_action" model="ir.actions.act_window">
+            <field name="name">Faktur Pajak Other</field>
+            <field name="res_model">tw.faktur.pajak.other</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="tw_faktur_pajak_other_view_search"/>
+            <field name="context">{'search_default_state_draft': 1}</field>
+        </record>
+    </data>
+</odoo>

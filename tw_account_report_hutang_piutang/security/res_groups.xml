@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Account Report Hutang -->
+        <record id="group_account_laporan_hutang" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Hutang</field>
+        </record>
+
+        <record id="access_account_laporan_hutang" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_report_hutang"/>
+            <field name="name">tw.account.laporan.hutang access</field>
+            <field name="group_id" ref="group_account_laporan_hutang"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Account Report Piutang -->
+        <record id="group_account_laporan_piutang" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Piutang</field>
+        </record>
+
+        <record id="access_account_laporan_piutang" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_report_piutang"/>
+            <field name="name">tw.account.laporan.piutang access</field>
+            <field name="group_id" ref="group_account_laporan_piutang"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Account Report Piutang Showroom -->
+        <record id="group_account_laporan_piutang_showroom" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Piutang Showroom</field>
+        </record>
+
+        <record id="access_account_laporan_piutang_showroom" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_report_piutang"/>
+            <field name="name">tw.account.laporan.piutang.showroom access</field>
+            <field name="group_id" ref="group_account_laporan_piutang_showroom"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Account Report Piutang Workshop -->
+        <record id="group_account_laporan_piutang_workshop" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Laporan Piutang Workshop</field>
+        </record>
+
+        <record id="access_account_laporan_piutang_workshop" model="ir.model.access">
+            <field name="model_id" ref="model_tw_account_report_piutang"/>
+            <field name="name">tw.account.laporan.piutang.workshop access</field>
+            <field name="group_id" ref="group_account_laporan_piutang_workshop"/>
+            <field name="perm_read">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+    </data>
+
+    <data>
+        <!-- Add to System Admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_account_laporan_hutang')),
+                (4, ref('group_account_laporan_piutang')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Part Sales Print Thermal-->
+        <record id="group_tw_part_sales_thermal_print" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Part Sales Thermal Print</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_part_sales_read'))]"/>
+        </record>
+    
+        <record id="access_tw_part_sales_thermal_print" model="ir.model.access">
+            <field name="model_id" ref="tw_part_sales.model_tw_part_sales"/>
+            <field name="name">tw_part_sales thermal print</field>
+            <field name="group_id" ref="group_tw_part_sales_thermal_print"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+    
+        <record id="access_tw_part_sales_line_thermal_print" model="ir.model.access">
+            <field name="model_id" ref="tw_part_sales.model_tw_part_sales_line"/>
+            <field name="name">tw_part_sales_line thermal print</field>
+            <field name="group_id" ref="group_tw_part_sales_thermal_print"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <!-- Part Sales Picking Print Thermal-->
+        <record id="group_tw_part_sales_picking_thermal_print" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Part Sales Picking Thermal Print</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_part_sales_read'))]"/>
+        </record>
+    
+        <record id="access_tw_part_sales_thermal_print" model="ir.model.access">
+            <field name="model_id" ref="tw_part_sales.model_tw_part_sales"/>
+            <field name="name">tw_part_sales thermal print</field>
+            <field name="group_id" ref="group_tw_part_sales_picking_thermal_print"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+    
+        <record id="access_tw_part_sales_line_thermal_print" model="ir.model.access">
+            <field name="model_id" ref="tw_part_sales.model_tw_part_sales_line"/>
+            <field name="name">tw_part_sales_line thermal print</field>
+            <field name="group_id" ref="group_tw_part_sales_picking_thermal_print"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+    </data>
+
+</odoo>

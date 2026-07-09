@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Prepaid Asset Form View -->
+    <record id="view_account_asset_asset_prepaid_form" model="ir.ui.view">
+        <field name="name">account.asset.asset.prepaid.form</field>
+        <field name="model">account.asset.asset</field>
+        <field name="arch" type="xml">
+            <form string="Prepaid Asset" create="0">
+                <header>
+                    <button name="validate" string="Confirm" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button type="object" name="compute_depreciation_board" string="Compute Depreciation"
+                            invisible="state != 'draft'"/>
+                    <button name="set_to_close" invisible="state != 'open'" string="Sell or Dispose" type="object"
+                            class="oe_highlight"/>
+                    <button name="set_to_draft" string="Set to Draft" type="object"
+                            invisible="entry_count != 0 or state != 'open'"/>
+                    <button name="%(om_account_asset.action_asset_modify)d" invisible="state != 'open'" string="Modify Depreciation" type="action"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,open"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="open_entries" type="object" icon="fa-pencil">
+                            <field string="Items" name="entry_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Laptop iBook" readonly="state != 'draft'"/>
+                        </h1>
+                    </div>
+                    <div class="d-flex">
+                        <div class="oe_title me-5">
+                            <label for="company_id" class="oe_edit_only"/>
+                            <h2><field name="company_id" options="{'no_open': True, 'no_create': True}" required="1" readonly="state != 'draft'" /></h2>
+                        </div>
+                        <div class="oe_title">
+                            <label for="product_id" class="oe_edit_only"/>
+                            <h2><field name="product_id" options="{'no_open': True, 'no_create': True}" required="1" readonly="state != 'draft'" /></h2>
+                        </div>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="category_id" string="Asset Category"
+                                   domain="[('type', '=', 'purchase')]"
+                                   readonly="state != 'draft'"
+                                   context="{'default_type': 'purchase'}" help="Category of asset"/>
+                            <field name="code" readonly="state != 'draft'"/>
+                            <field name="date" help="Date of asset" readonly="state != 'draft'"/>
+                            <field name="date_first_depreciation" readonly="state != 'draft'"/>
+                            <field name="first_depreciation_manual_date"
+                                   readonly="state != 'draft'"
+                                   invisible="date_first_depreciation != 'manual'"
+                                   required="date_first_depreciation == 'manual'"/>
+                            <field name="type" invisible="1"/>
+                            <field name="account_analytic_id" groups="analytic.group_analytic_accounting"/>
+                        </group>
+                        <group>
+                            <field name="currency_id" groups="base.group_multi_currency"
+                                   readonly="state != 'draft'"/>
+                            <field name="company_id" options="{'no_create': True}"
+                                   readonly="state != 'draft'"
+                                   groups="base.group_multi_company"/>
+                            <field name="value" widget="monetary"
+                                   readonly="state != 'draft'" help="Gross value of asset"/>
+                            <field name="salvage_value" widget="monetary"
+                                   readonly="state != 'draft'"
+                                   invisible="type == 'sale'"/>
+                            <field name="value_residual" widget="monetary"/>
+                            <field name="partner_id" string="Vendor" widget="res_partner_many2one"
+                                   readonly="state != 'draft'"
+                                   context="{'res_partner_search_mode': 'supplier'}"/>
+                            <field name="invoice_id" string="Invoice" options="{'no_create': True}"/>
+                            <field name="analytic_distribution" widget="analytic_distribution"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Amortisation Board">
+                            <field name="depreciation_line_ids" mode="list"
+                                   readonly="state not in ('draft', 'open')"
+                                   options="{'reload_whole_on_button': true}">
+                                <list string="Amortisation Lines" decoration-info="(move_check == False)"
+                                      create="false">
+                                    <field name="depreciation_date"/>
+                                    <field name="amount" widget="monetary" string="Depreciation"/>
+                                    <field name="depreciated_value" readonly="1"/>
+                                    <field name="remaining_value" readonly="1" widget="monetary" string="Residual"/>
+                                    <field name="move_check" widget="deprec_lines_toggler"
+                                           invisible="parent_state != 'open'"/>
+                                    <field name="move_posted_check" invisible="1"/>
+                                    <field name="parent_state" invisible="1"/>
+                                </list>
+                                <form string="Depreciation Lines" create="false">
+                                    <group>
+                                        <group>
+                                            <field name="parent_state" invisible="1"/>
+                                            <field name="name"/>
+                                            <field name="sequence"/>
+                                            <field name="move_id"/>
+                                            <field name="move_check"/>
+                                            <field name="parent_state" invisible="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="amount" widget="monetary"/>
+                                            <field name="depreciation_date"/>
+                                            <field name="depreciated_value"/>
+                                            <field name="remaining_value"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Amortisation Information">
+                            <group>
+                                <field name="method" widget="radio"
+                                       invisible="type == 'sale'" readonly="state != 'draft'"/>
+                                <field name="method_progress_factor"
+                                       readonly="state != 'draft'"
+                                       invisible="method == 'linear'"
+                                       required="method == 'degressive'"/>
+                                <field name="method_time" string="Time Method Based On"
+                                       widget="radio"
+                                       readonly="state != 'draft'"
+                                       invisible="type != 'purchase'"/>
+                                <field name="prorata"
+                                       invisible="method_time == 'end'"
+                                       readonly="state != 'draft'"/>
+                            </group>
+                            <group>
+                                <field name="method_number"
+                                       readonly="state != 'draft'"
+                                       invisible="method_time == 'end'"
+                                       required="method_time == 'number'"/>
+                                <field name="method_period" readonly="state != 'draft'"/>
+                                <field name="method_end"
+                                       readonly="state != 'draft'"
+                                       invisible="method_time == 'end'"
+                                       required="method_time == 'number'"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Prepaid Asset Tree View -->
+    <record id="view_account_asset_prepaid_tree" model="ir.ui.view">
+        <field name="name">account.asset.prepaid.tree</field>
+        <field name="model">account.asset.asset</field>
+        <field name="arch" type="xml">
+            <list string="Prepaid Assets" decoration-info="state == 'draft'" decoration-muted="state == 'close'" create="0">
+                <field name="name" string="Prepaid Name"/>
+                <field name="category_id" string="Prepaid Category"/>
+                <field name="date" string="Effective Date"/>
+                <field name="value" string="Amount" widget="monetary"/>
+                <field name="partner_id" string="Vendor"/>
+                <field name="state"/>
+                <field name="currency_id" groups="base.group_multi_currency" invisible="1"/>
+                <field name="company_id" groups="base.group_multi_company" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Prepaid Asset Search View -->
+    <record id="view_prepaid_asset_search" model="ir.ui.view">
+        <field name="name">account.asset.prepaid.search</field>
+        <field name="model">account.asset.asset</field>
+        <field name="arch" type="xml">
+            <search string="Prepaid Assets">
+                <field name="name" string="Name"/>
+                <field name="category_id" string="Category"/>
+                <field name="partner_id" string="Vendor"/>
+                <field name="state" string="Status"/>
+                <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Running" name="open" domain="[('state', '=', 'open')]"/>
+                <filter string="Closed" name="close" domain="[('state', '=', 'close')]"/>
+                <separator/>
+                <filter string="Group By" name="group_by" context="{'group_by': 'category_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action for Prepaid Assets -->
+    <record id="action_account_asset_prepaid" model="ir.actions.server">
+        <field name="name">Prepaid Assets</field>
+        <field name="path">prepaid-asset</field>
+        <field name="model_id" ref="model_account_asset_asset"/>
+        <field name="binding_view_types">form,list</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = env['account.asset.asset'].action_prepaid_asset_view()
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+    	 <record id="view_tw_settlement_list" model="ir.ui.view">
+            <field name="name">tw.settlement.list</field>
+            <field name="model">tw.settlement</field>
+            <field name="arch" type="xml">
+                <list string="Settlement">
+					<field name="company_id"/>
+                	<field name="name"/>
+	                <field name="advance_payment_id"/>
+	                <field name="employee_id"/>
+	                <field name="date"/>
+	                <field name="state" widget="badge"
+	                    decoration-info="state == 'draft'"
+	                    decoration-success="state == 'done'"
+	                    decoration-danger="state == 'cancel'"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_tw_settlement_form" model="ir.ui.view">
+            <field name="name">tw.settlement.form</field>
+            <field name="model">tw.settlement</field>
+            <field name="arch" type="xml">
+                <form string="Settlement">
+                	<header>
+                		<button name="action_confirm" invisible="state not in ['approved']" type="object" string="Confirm" class="oe_highlight" groups="tw_settlement.group_tw_settlement_confirm_button"/>
+                		<button name="action_print_settlement"
+								type="object"
+								string="Print Draft STL"
+								context="{'print_state': 'draft'}"
+								groups="tw_settlement.group_tw_settlement_button_print_settlement_advance_payment" />
+                		<button name="action_print_settlement"
+								invisible="state != 'done'"
+								type="object"
+								string="Print Done STL"
+								class="oe_highlight"
+								context="{'print_state': 'done'}"
+								groups="tw_settlement.group_tw_settlement_button_print_settlement_advance_payment" />
+                		<field name="state"
+						widget="statusbar" statusbar_visible="draft,approved,done"/>
+                	</header>
+        			<sheet>
+						<div name="button_box" class="oe_button_box">
+							<button class="oe_stat_button" type="object" name="action_view_entries" icon="fa-book" invisible="count_moves == 0">
+								<div class="o_stat_info">
+									<span class="o_stat_text">Journal Entries</span>
+								</div>
+								<field name="count_moves" widget="statinfo" string="Journal Entries" invisible="2"/>
+							</button>
+						</div>
+						<div class="oe_title">
+                            <h1 invisible="name"><span>Draft</span></h1>
+                            <h1 invisible="not name"><field name="name" readonly="1"/></h1>
+                        </div>
+						<field name="available_account_ids" invisible="1"/>
+						<group>
+							<group>
+								<field name="advance_payment_id"  options="{'no_create': True,'no_open':True}" domain="[('state','=','confirm')]" readonly="state not in 'draft'"/>
+								<field name="type" readonly="state not in 'draft'"/>
+								<field name="company_id" options="{'no_create': True,'no_open':True}" readonly="1" force_save="1"/>
+								<field name="employee_id" options="{'no_create': True,'no_open':True}" readonly="1" force_save="1" />
+								<field name="account_avp_id" invisible="1"/>
+								<field name="journal_id" readonly="1" domain="[('type','in',['bank', 'cash'])]" options="{'no_create': True,'no_open':True}" invisible="type == 'kembali'"/>
+							 	<field name="return_journal_id" readonly="state not in ('draft', 'waiting_for_approval')" required="type == 'kembali'" invisible="type != 'kembali'" options="{'no_open':True,'no_create':True}"/>
+								<field name="amount_avp" readonly="1" force_save="1"/>
+								<field name="email" readonly="state not in 'draft'"/>
+							</group>
+							<group>
+								<field name="division" readonly="state not in 'draft'" required="1"/>		                   		
+								<field name="date" readonly="1"/>
+								<field name="description" coslpan="2" readonly="state != 'draft'"/>
+							</group>
+						</group>
+		                 <notebook>
+		                 	<page string="Settlement Detail">
+		                 		<field name="settlement_line_ids" readonly="state not in 'draft'">
+		                 			<list editable="top">
+                                        <field name="company_id" options="{'no_create': True,'no_open':True}"/>
+                                        <field name="supplier_id" options="{'no_create': True,'no_open':True}"/>
+		                 				<field name="account_id" required="1" options="{'no_create': True,'no_open':True}" domain="[('id', 'in', parent.available_account_ids)]"/>
+		                 				<field name="amount" on_change="onchange_amount(amount,parent.type,parent.amount_avp)"/>
+										<field name="tax_id" widget="many2many_tags" options="{'no_create': True,'no_open':True}" domain="[('active', '=', True),('price_include','=',False)]"/>
+										<!-- <field name="tax_amount" readonly="1"/>       -->
+										<field name="price_tax" readonly="1" column_invisible="0"/>      
+										<field name="price_subtotal"/>
+										<field name="price_total"/>
+		                 			</list>
+		                 		</field>
+		                		<group class="oe_subtotal_footer oe_right" colspan="2" name="Total">
+                           			<field name="amount_total" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                           			<!-- <label for="amount_tax"/> -->
+                           			<!-- <field name="amount_tax" nolabel="1" widget="monetary" options="{'currency_field': 'currency_id'}"/> -->
+                           			<label for="amount_gap"/>
+                           			<field name="amount_gap" nolabel="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+									<field name="tax_totals" widget="account-tax-totals-field" nolabel="1" readonly="1"/>
+                         		</group>
+		                 	</page>
+							<page name='settlement_docs' string='Lampiran'>
+								<field name="attachment_ids" nolabel="1" required="1"/>
+							</page>
+							<page name='move_ids' string='Journal Entries'>
+								<field name="move_ids" nolabel="1" readonly="1"/>
+							</page>
+                             <page name="audit_trail" string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_date" readonly="1"/>
+                                        <field name="create_uid" readonly="1"/>
+                                        <field name="confirm_uid" readonly="1"/>
+                                        <field name="confirm_date" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="write_date" readonly="1"/>
+                                        <field name="write_uid" readonly="1"/>
+                                        <field name="cancel_uid" readonly="1"/>
+                                        <field name="cancel_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+		                 </notebook>
+                         <div class="oe_clear"/>
+	            	</sheet>
+        		</form>
+     		</field>
+    	</record>
+
+		  <!-- Search View -->
+		  <record id="tw_settlement_filter" model="ir.ui.view">
+            <field name="name">tw.settlement.filter</field>
+            <field name="model">tw.settlement</field>
+            <field name="arch" type="xml">
+                <search string="Settlement">
+                    <field name="name" filter_domain="[('name', 'ilike', self)]"/>
+                    <field name="advance_payment_id" filter_domain="[('advance_payment_id', '=', self)]"/>
+					<field name="employee_id" string="Employee" filter_domain="[('employee_id', '=', self)]"/>
+					<field name="journal_id" string="Journal" filter_domain="[('journal_id', '=', self)]"/>
+					<field name="type" string="Type" filter_domain="[('type', '=', self)]"/>
+                    <field name="company_id" string="Branch" filter_domain="[('company_id', '=', self)]" groups="base.group_multi_company"/>
+                    <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                        <filter string="Date" name="group_date" context="{'group_by': 'date'}"/>
+                        <filter string="Branch" name="group_branch" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    	
+    	<record id="tw_settlement_action" model="ir.actions.act_window">
+		    <field name="name">Settlement Advance Payment</field>
+		    <field name="res_model">tw.settlement</field>
+		    <field name="view_mode">list,form</field>
+		</record>
+	
+    </data>
+</odoo>

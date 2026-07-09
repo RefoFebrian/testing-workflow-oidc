@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Menu -->
+    <menuitem id="menu_birojasa_billing_cancel_root"
+              name="Tagihan Birojasa"
+              parent="tw_vehicle_document_cancel.tw_vehicle_document_cancel_menu_sub"
+              sequence="40"/>
+    
+    <!-- Cancellation Menu -->
+    <menuitem id="menu_birojasa_billing_cancel"
+              name="Cancel Tagihan Birojasa"
+              parent="menu_birojasa_billing_cancel_root"
+              action="birojasa_billing_cancel_unit_action"
+              groups="tw_birojasa_billing_cancel.group_birojasa_billing_cancel_read"
+              sequence="10"/>
+
+</odoo>

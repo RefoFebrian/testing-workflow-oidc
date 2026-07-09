@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tw_listing_cetak_kwitansi_b2b_emeterai_inherit_list_view" model="ir.ui.view">
+        <field name="name">tw.listing.cetak.kwitansi.b2b.emeterai.inherit.list</field>
+        <field name="model">tw.listing.cetak.kwitansi</field>
+        <field name="inherit_id" ref="tw_listing_cetak_kwitansi.tw_listing_cetak_kwitansi_list_view"/>
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <field name="emeterai_id"/>
+            </field>
+        </field>
+    </record>
+    
+    <record id="tw_listing_cetak_kwitansi_b2b_emeterai_inherit_form_view" model="ir.ui.view">
+        <field name="name">tw.listing.cetak.kwitansi.b2b.emeterai.inherit.form</field>
+        <field name="model">tw.listing.cetak.kwitansi</field>
+        <field name="inherit_id" ref="tw_listing_cetak_kwitansi.tw_listing_cetak_kwitansi_form_view"/>
+        <field name="arch" type="xml">
+            <button name="action_print_listing_cetak_kwitansi_pdf" position="after">
+                <button name="action_process_stamp" string="Stamp e-Meterai" type="object" invisible="state != 'posted' or emeterai_id != False" groups="tw_b2b_emeterai_list_ctk_kwt.group_tw_listing_cetak_kwitansi_button_stamp"/>
+            </button>
+
+            <div class="oe_title" position="after">
+                <div class="oe_button_box" name="button_box">
+                    <button name="action_open_emeterai" string="e-Meterai" type="object" class="oe_stat_button" icon="fa-certificate" invisible="emeterai_id == False"/>
+                </div>
+            </div>
+        </field>
+    </record>
+    
+    <record id="tw_listing_cetak_kwitansi_b2b_emeterai_inherit_search_view" model="ir.ui.view">
+        <field name="name">tw.listing.cetak.kwitansi.b2b.emeterai.inherit.search</field>
+        <field name="model">tw.listing.cetak.kwitansi</field>
+        <field name="inherit_id" ref="tw_listing_cetak_kwitansi.tw_listing_cetak_kwitansi_search_view"/>
+        <field name="arch" type="xml">
+            <filter name="cancelled_state" position="after">
+                <filter name="is_using_stamp" string="Stamp e-Meterai" domain="[('emeterai_id','!=',False)]"/>
+            </filter>
+        </field>
+    </record>
+
+</odoo>

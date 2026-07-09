@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Read Access -->
+        <record id="group_tw_upload_payment_button_read" model="res.groups">
+            <field name="category_id" ref="tw_payment_request.tw_module_category_payment_request"/>
+            <field name="name">TW Button Payment Upload Button Read</field>
+        </record>
+    </data>
+
+    <data>
+        <!-- Add to System Admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_upload_payment_button_read')),
+            ]" />
+        </record>
+    </data>
+</odoo>

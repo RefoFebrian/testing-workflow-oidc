@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="quality_checking_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <!-- Set base URL for static files -->
+                    <t t-set="base_url" t-value="request.httprequest.host_url.rstrip('/')"/>
+                    
+                    <!-- Hidden print counter tracker -->
+                    <span style="display:none;" t-esc="print_counter()"/>
+                    
+                    <div class="thermal-label" style="font-family: Arial, sans-serif; padding: 5px; border: 2px solid #000; width: 100%; box-sizing: border-box;">
+                        
+                        <!-- Header Section -->
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #000; padding-bottom: 5px; margin-bottom: 5px;">
+                            <div style="font-size: 18px; font-weight: bold;">
+                                <span t-field="o.company_id.name"/>
+                            </div>
+                            <div style="text-align: right; font-size: 12px;">
+                                <div style="font-weight: bold; font-size: 14px;">
+                                    KARDUS <span t-esc="o.number_of_boxes or 1"/> of <span t-esc="o.number_of_boxes or 0"/>
+                                </div>
+                                <div>
+                                    <span t-field="o.name"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Main Content -->
+                        <div style="border: 2px solid #000; margin-bottom: 5px;">
+                            
+                            <!-- Picking Info with QR - Side by Side -->
+                            <table style="width: 100%; border-bottom: 2px solid #000;">
+                                <tr>
+                                    <td style="padding: 5px; vertical-align: top; width: 60%;">
+                                        <table style="font-size: 11px; width: 100%;">
+                                            <tr>
+                                                <td style="width: 100px; vertical-align: top;"><strong>Nomor Picking</strong></td>
+                                                <td style="vertical-align: top;">
+                                                    <t t-foreach="o.stockcard_ids" t-as="picking">
+                                                        <div style="font-size: 12px; font-weight: bold;">
+                                                            : &#160;<span t-field="picking.name"/>
+                                                        </div>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td style="padding: 5px; text-align: center; vertical-align: top; width: 40%;">
+                                        <t t-set="qr_code_url" t-value="o._generate_qr_code()"/>
+                                        <img t-att-src="qr_code_url" style="width: 100px; height: 100px;"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Item Details and Checklist Point - Side by Side -->
+                            <table style="width: 100%;">
+                                <tr>
+                                    <!-- Left: Item Details -->
+                                    <td style="padding: 5px; vertical-align: top; width: 55%; border-right: 2px solid #000;">
+                                        <table style="width: 100%; font-size: 10px;">
+                                            <tr>
+                                                <td style="width: 70px;"><strong>Item Part</strong></td>
+                                                <td class="text-end">: &#160;<span t-esc="len(o.quality_checking_ids)"/></td>
+                                                <td style="width: 70px;"><strong>Created By</strong></td>
+                                                <td>: &#160;<span t-field="o.create_uid.name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Qty Part</strong></td>
+                                                <td>: &#160;<span t-esc="sum(o.quality_checking_ids.mapped('quantity'))"/>Pcs</td>
+                                                <td><strong>Created On</strong></td>
+                                                <td>: &#160;<span t-field="o.create_date" t-options="{'widget': 'datetime', 'format': 'dd-MM-yyyy HH:mm'}"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Berat</strong></td>
+                                                <td>: &#160;<span t-esc="'%.1f' % o.weight_box"/>Kg</td>
+                                                <td><strong>Confirm By</strong></td>
+                                                <td>: &#160;<t t-if="o.confirm_uid"><span t-field="o.confirm_uid.name"/></t><t t-else="">-</t></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Dimensi</strong></td>
+                                                <td>: &#160;<span t-field="o.cardboard_id.name"/></td>
+                                                <td><strong>Confirm On</strong></td>
+                                                <td>: &#160;<t t-if="o.confirm_date"><span t-field="o.confirm_date" t-options="{'widget': 'datetime', 'format': 'dd-MM-yyyy HH:mm'}"/></t><t t-else="">-</t></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    
+                                    <!-- Right: Checklist Point -->
+                                    <td style="padding: 5px; vertical-align: top; width: 45%; text-align: center;">
+                                        <div style="font-weight: bold; font-size: 11px; margin-bottom: 3px;">CHECKLIST POINT</div>
+                                        <div style="font-size: 9px; margin-bottom: 3px;">
+                                            <span t-esc="time_date(o.date)"/>
+                                        </div>
+                                        
+                                        <!-- Small QR Code -->
+                                        <div style="margin: 3px 0;">
+                                            <t t-set="simple_qr_code" t-value="o._generate_simple_qr_code()"/>
+                                            <img t-att-src="simple_qr_code" style="width: 60px; height: 60px;"/>
+                                        </div>
+                                        
+                                        <!-- Checkpoint Labels and Checkboxes -->
+                                        <table style="width: 100%; font-size: 8px; margin-top: 3px;">
+                                            <tr>
+                                                <td style="width: 25%; text-align: center; font-weight: bold;">Packing</td>
+                                                <td style="width: 25%; text-align: center; font-weight: bold;">Loading</td>
+                                                <td style="width: 25%; text-align: center; font-weight: bold;">Security</td>
+                                                <td style="width: 25%; text-align: center; font-weight: bold;">Driver</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; padding-top: 3px;">
+                                                    <div style="width: 20px; height: 20px; border: 2px solid #000; margin: 0 auto; text-align: center; line-height: 18px; font-size: 14px; font-weight: bold;">V</div>
+                                                </td>
+                                                <td style="text-align: center; padding-top: 3px;">
+                                                    <div style="width: 20px; height: 20px; border: 2px solid #000; margin: 0 auto;"></div>
+                                                </td>
+                                                <td style="text-align: center; padding-top: 3px;">
+                                                    <div style="width: 20px; height: 20px; border: 2px solid #000; margin: 0 auto;"></div>
+                                                </td>
+                                                <td style="text-align: center; padding-top: 3px;">
+                                                    <div style="width: 20px; height: 20px; border: 2px solid #000; margin: 0 auto;"></div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <!-- Logo and Disclaimer - Bottom -->
+                        <div style="text-align: center; padding: 5px;">
+                            <div>
+                                <img t-att-src="base_url + '/tw_quality_checking/static/src/img/logo_tunasHonda.jpg'" 
+                                     style="max-width: 80px; max-height: 30px;"/>
+                            </div>
+                            <div style="font-size: 7px; font-weight: bold; margin-top: 3px; text-transform: uppercase;">
+                                TANPA VIDEO UNBOXING, KOMPLAIN SALAH KIRIM, RUSAK DAN<br/>
+                                KURANG BARANG TIDAK DAPAT DI PROSES
+                            </div>
+                        </div>
+                        
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

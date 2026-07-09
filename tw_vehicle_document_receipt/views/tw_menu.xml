@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <menuitem id="tw_vehicle_document_receipt_menu_sub" name="Document Receipt" parent="tw_vehicle_registration_process.tw_vehicle_registration_process_menu_sub" sequence="20"/>
+    <menuitem id="tw_vehicle_registration_receipt_menu" name="Penerimaan STNK" parent="tw_vehicle_document_receipt_menu_sub" action="tw_vehicle_registration_receipt_action" sequence="10" groups="tw_vehicle_document_receipt.group_tw_vehicle_registration_receipt_read"/>
+    <menuitem id="tw_vehicle_ownership_receipt_menu" name="Penerimaan BPKB" parent="tw_vehicle_document_receipt_menu_sub" action="tw_vehicle_ownership_receipt_action" sequence="20" groups="tw_vehicle_document_receipt.group_vehicle_ownership_receipt_read"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_lead_crm_lead_spk_form_view" model="ir.ui.view">
+            <field name="name">tw.lead.crm.lead.spk.form.view</field>
+            <field name="model">tw.lead</field>
+            <field name="inherit_id" ref="tw_lead.tw_lead_crm_lead_form_view" />
+            <field name="arch" type="xml">
+                
+                <button name="action_show_deal_form" position="before">
+                    <button name="action_create_spk"
+                            type="object"
+                            invisible="state != 'approved'"
+                            string="Create SPK"
+                            class="btn-info"
+                            groups="tw_lead_spk.group_tw_button_create_spk" />
+                </button>
+
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_view_spk" type="object" class="oe_stat_button" icon="fa-motorcycle" invisible="spk_count == 0">
+                        <field name="spk_count" widget="statinfo" string="SPK"/>
+                    </button>
+                </xpath>
+                <xpath expr="//div[hasclass('oe_title')]" position="before">
+                    <field name="spk_count" invisible="1" />
+                </xpath>
+            
+            </field>
+
+        </record>
+    </data>
+</odoo>

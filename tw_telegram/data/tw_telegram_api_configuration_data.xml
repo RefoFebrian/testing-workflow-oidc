@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_selection_type_api_telegram_configuration" model="tw.selection">
+	    	<field name="name">Telegram</field>
+            <field name="value">Telegram</field> 
+	    	<field name="type">ApiType</field> 
+        </record>
+
+        <record id="tw_api_configuration_telegram_data" model="tw.api.configuration">
+            <field name="name">Apolon Bot</field>
+            <field name="api_type_id" ref="tw_telegram.tw_selection_type_api_telegram_configuration"/>
+            <field name="base_url">-</field>
+            <field name="client_id">tdm_apolon_bot</field>
+        </record>
+
+    </data>
+</odoo>

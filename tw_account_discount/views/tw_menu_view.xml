@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="tw_account_discount_menuitem"
+                  name="Account Discount"
+                  parent="tw_menu.submenu_tw_accounting"
+                  groups="group_tw_account_discount_read"
+                  action="tw_account_discount.tw_account_discount_master_act_window"
+                  active="True"
+                  sequence="3" />
+
+    </data>
+</odoo>

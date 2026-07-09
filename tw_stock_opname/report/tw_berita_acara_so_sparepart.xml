@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="paperformat_baso_sparepart" model="report.paperformat">
+            <field name="name">Berita Acara Stock Opname Sparepart</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">15</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">15</field>
+            <field name="margin_right">15</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">3</field>
+            <field name="dpi">80</field>
+        </record>
+    </data>
+
+    <data>
+        <template id="baso_sparepart_pdf">
+            <t t-call="web.html_container">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <style type="text/css">
+                                body {
+                                    margin: 0;
+                                    padding: 0;
+                                }
+                                
+                                div {
+                                    min-height: 10px;
+                                }
+
+                                table,
+                                td {
+                                    padding-left:2px;
+                                    font-size: 13px;
+                                    min-height:10px;
+                                    border-collapse: collapse; 
+                                    font-family: Times;
+                                }
+                                tr {
+                                    min-height:10px;
+                                    border-collapse: collapse;
+                                }
+                                * {
+                                    line-height: inherit;
+                                } a[x-apple-data-detectors=true] {
+                                    color: inherit !important;
+                                    text-decoration: none !important;
+                                }
+                    </style>
+                    <div style="border: 1px solid black;">
+                        <table width="100%" style="text-align: left;padding-top:10px;" height="20px" cellpadding="10">
+                            <tbody>
+                                <tr style="text-align: center;padding-top:10px;" height="20px">
+                                    <!-- <td width="33%"></td> -->
+                                    <td width="20%" style="font-family: Times;" colspan="3">
+                                        <b>
+                                            <u style="font-size: 20px; text-align: center;">
+                                            BERITA ACARA STOCK OPNAME SPAREPART
+                                            </u>
+                                        </b>
+                                    </td>
+                                </tr>
+                                <tr style="text-align: left; border-bottom: double;padding:20px;" width="100%">
+                                    <b>
+                                        <td width="100%" colspan="2" style="font-family: Times;font-size: 18px;font-weight: bold;padding:15x;">No Refrensi:
+                                            <u style="font-size: 16px; text-align: center;font-weight: bold;">
+                                                <t t-esc="opname_obj.name"></t>
+                                            </u>
+                                        </td>
+                                    </b>
+                                </tr>
+                                <tr style="padding-top:10px;">
+                                    <td>
+                                        <table width="100%" style="font-family: Times;font-size: 18px;font-weight: bold;border-collapse: collapse; border: 1px solid white;padding:15x;">
+                                            <tr style="padding:8px;">
+                                                <td width="20%" style="padding:8px;font-family: Times;font-size: 15px;font-weight: bold;">Branch</td>
+                                                <td width="30%" style="padding:8px;font-family: Times;font-size: 15px;font-weight: bold;">: &#160;<t t-esc="opname_obj.company_id.name"/>
+                                                </td>
+                                                <td width="20%" style="padding:8px;font-family: Times;font-size: 15px;font-weight: bold;">Periode Mulai</td>
+                                                <td width="30%" style="padding:8px;font-family: Times;font-size: 15px;font-weight: bold;">: &#160;<t t-esc="opname_obj.periode_awal"/>
+                                                </td>
+                                            </tr>
+                                            <tr style="padding:8px;">
+                                                <td width="20%" style="padding:8px;font-family: Times;font-size: 15px;font-weight: bold;">Division</td>
+                                                <td width="30%" style="padding:8px;font-family: Times;font-size: 15px;font-weight: bold;">: Sparepart
+                                                                                                    <!-- <t t-esc="opname_obj.company_id.name"/> -->
+                                                </td>
+                                                <td width="20%" style="padding:8px;font-family: Times;font-size: 15px;font-weight: bold;">Periode Selesai</td>
+                                                <td width="30%" style="padding:8px;font-family: Times;font-size: 15px;font-weight: bold;">: &#160;<t t-esc="opname_obj.periode_akhir"/>
+                                                </td>
+                                            </tr>
+                                            <tr style="padding:8px;">
+                                                <td width="20%" style="padding:8px;font-family: Times;font-size: 15px;font-weight: bold;">Tanggal SO</td>
+                                                <td width="30%" style="padding:8px;font-family: Times;font-size: 15px;font-weight: bold;">: &#160;<t t-esc="opname_obj.date.strftime('%d-%m-%Y') if opname_obj.date else ''"/>
+                                                </td>
+                                                <td width="20%" style="padding:8px;font-family: Times;font-size: 15px;"></td>
+                                                <td width="30%" style="padding:8px;font-family: Times;font-size: 15px;">
+                                                    <!-- <t t-esc="opname_obj.date.strftime('%d-%m-%Y') if opname_obj.date else ''"/> -->
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table width="100%">
+                                            <tr>
+                                                <th style="font-family: Times;font-size: 15px;font-weight: bold;text-align: left;">Hasil Stock Opname hari ini sebagai berikut:</th>
+                                            </tr>
+                                            <tr width="100%">
+                                                <table width="100%" class="table table-bordered" style="padding:10px;border-collapse: collapse; border: 1px solid black;font-size:16;font-family: Times;border-radius: 5px">
+                                                    <tr>
+                                                        <td width="50%" style="padding:8px; font-family: Times;font-size: 15px;border-collapse: collapse; border: 1px solid black;"></td>
+                                                        <th width="25%" style="padding:8px; font-family: Times;font-size: 15px;font-weight: bold;border-collapse: collapse; border: 1px solid black;">Qty</th>
+                                                        <th width="25%" style="padding:8px; font-family: Times;font-size: 15px;font-weight: bold;border-collapse: collapse; border: 1px solid black;">Amount</th>
+                                                    </tr>
+                                                    <t t-if="data['qty_system'] != 0">
+                                                        <tr style="border-collapse: collapse; border: 1px solid black;text-align: left;">
+                                                            <th width="50%" style="padding:10px; font-family: Times;font-size: 15px;font-weight: bold;border-collapse: collapse; border: 1px solid black;">1. Total Secara Sistem</th>
+                                                            <td width="25%" style="padding:8px; font-family: Times;font-size: 15px;border-collapse: collapse; border: 1px solid black;font-weight: normal">
+                                                                <t t-esc="data['qty_system']"/>
+                                                            </td>
+                                                            <td width="25%" style="padding:8px; font-family: Times;font-size: 15px;border-collapse: collapse; border: 1px solid black;font-weight: normal">
+                                                                <t t-esc="data['amount_system']"/>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                    <t t-if="data['qty_fisik'] != 0">
+                                                        <tr style="border-collapse: collapse; border: 1px solid black;text-align: left;">
+                                                            <th width="50%" style="padding:8px; font-family: Times;font-size: 15px;font-weight: bold;border-collapse: collapse; border: 1px solid black;font-weight: normal">Saldo Fisik (hasil hitungan)</th>
+                                                            <td width="25%" style="padding:8px; font-family: Times;font-size: 15px;border-collapse: collapse; border: 1px solid black;font-weight: normal">
+                                                                <t t-esc="data['qty_fisik']"/>
+                                                            </td>
+                                                            <td width="25%" style="padding:8px; font-family: Times;font-size: 15px;border-collapse: collapse; border: 1px solid black;font-weight: normal">
+                                                                <t t-esc="data['amount_fisik']"/>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                    <t>
+                                                        <tr style="border-collapse: collapse; border: 1px solid black;text-align: left;">
+                                                            <th width="50%" style="padding:8px; font-family: Times;font-size: 15px;font-weight: bold;border-collapse: collapse; border: 1px solid black;font-weight: normal">Fisik Baik</th>
+                                                            <td width="25%" style="padding:8px; font-family: Times;font-size: 15px;border-collapse: collapse; border: 1px solid black;">
+                                                                <t t-esc="data['fisik_baik']"/>
+                                                            </td>
+                                                            <td width="25%" style="padding:8px; font-family: Times;font-size: 15px;border-collapse: collapse; border: 1px solid black;">0
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                    <t>
+                                                        <tr style="border-collapse: collapse; border: 1px solid black;text-align: left;">
+                                                            <th width="50%" style="padding:8px; font-family: Times;font-size: 15px;font-weight: bold;border-collapse: collapse; border: 1px solid black;font-weight: normal">Fisik Rusak</th>
+                                                            <td width="25%" style="padding:8px; font-family: Times;font-size: 15px;border-collapse: collapse; border: 1px solid black;">
+                                                                <t t-esc="data['fisik_rusak']"/>
+                                                            </td>
+                                                            <td width="25%" style="padding:8px; font-family: Times;font-size: 15px;border-collapse: collapse; border: 1px solid black;">0
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                    <t t-if="data['selisih'] != 0">
+                                                        <tr style="border-collapse: collapse; border: 1px solid black;text-align: left;">
+                                                            <th width="50%" style="padding:8px; font-family: Times;font-size: 15px;font-weight: bold;border-collapse: collapse; border: 1px solid black;font-weight: normal">Selisih</th>
+                                                            <td width="25%" style="padding:8px; font-family: Times;font-size: 15px;border-collapse: collapse; border: 1px solid black;">
+                                                                <t t-esc="data['selisih']"/>
+                                                            </td>
+                                                            <td width="25%" style="padding:8px; font-family: Times;font-size: 15px;border-collapse: collapse; border: 1px solid black;">
+                                                                <t t-esc="data['amount_selisih']"/>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                    <t t-if="data['qty_anomali'] != 0">
+                                                        <tr style="border-collapse: collapse; border: 1px solid black;text-align: left;">
+                                                            <th width="50%" style="padding:10px; font-family: Times;font-size: 15px;font-weight: bold;border-collapse: collapse; border: 1px solid black;">2. Total Tidak Tercatat di Sistem (Anomali)</th>
+                                                            <td width="25%" style="padding:8px; font-family: Times;font-size: 15px;border-collapse: collapse; border: 1px solid black;">
+                                                                <t t-esc="data['qty_anomali']"/>
+                                                            </td>
+                                                            <td width="25%" style="padding:8px; font-family: Times;font-size: 15px;border-collapse: collapse; border: 1px solid black;">0</td>
+                                                        </tr>
+                                                    </t>
+                                                    <t t-if="data['qty_anomali'] != 0">
+                                                        <tr style="border-collapse: collapse; border: 1px solid black;text-align: left;">
+                                                            <th width="50%" style="padding:8px; font-family: Times;font-size: 15px;border-collapse: collapse; border: 1px solid black;font-weight: normal">Fisik Baik</th>
+                                                            <td width="25%" style="padding:8px; font-family: Times;font-size: 15px;border-collapse: collapse; border: 1px solid black;">
+                                                                <t t-esc="data['anomali_baik']"/>
+                                                            </td>
+                                                            <td width="25%" style="padding:8px; font-family: Times;font-size: 15px;border-collapse: collapse; border: 1px solid black;">0</td>
+                                                        </tr>
+                                                    </t>
+                                                    <t t-if="data['qty_anomali'] != 0">
+                                                        <tr style="border-collapse: collapse; border: 1px solid black;text-align: left;">
+                                                            <th width="50%" style="padding:8px; font-family: Times;font-size: 15px;border-collapse: collapse; border: 1px solid black;font-weight: normal">Fisik Rusak</th>
+                                                            <td width="25%" style="padding:8px; font-family: Times;font-size: 15px;border-collapse: collapse; border: 1px solid black;">
+                                                                <t t-esc="data['anomali_rusak']"/>
+                                                            </td>
+                                                            <td width="25%" style="padding:8px; font-family: Times;font-size: 15px;border-collapse: collapse; border: 1px solid black;">0</td>
+                                                        </tr>
+                                                    </t>
+                                                </table>
+                                            </tr>
+                                            <tr height="5px">
+                                                <th style="text-align: left;">
+                                                    <u>PERNYATAAN</u>
+                                                </th>
+                                            </tr>
+                                            <tr height="10px">
+                                                <td>                                            
+                                                Proses stock opname ini telah berjalan dengan baik dan hasil ini telah dinyatakan sah untuk diakui dan telah didukung oleh dokumen yang seharusnya dilampirkan.
+                                                </td>
+                                            </tr>
+                                            <tr height="20px">
+                                                <td>
+                                                    <table width="100%" style="border-bottom: double;">
+                                                        <tr>
+                                                            <td style="padding:8px;">
+                                                                <span t-esc="note"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center">
+                                                    <table width="100%" style="text-align: left;border-collapse: collapse; border: 1px solid black;padding-top:10px;" height="20px">
+                                                        <tr style="padding:8px;border-collapse: collapse; border: 1px solid black;">
+                                                            <td colspan="3" align="center">
+                                                                <b>PERSON IN CHARGE YANG BERTUGAS</b>
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="padding:8px;border-collapse: collapse; border: 1px solid black;">
+                                                            <td style="padding:8px;border-collapse: collapse; border: 1px solid black;" align="center">PIC SO</td>
+                                                            <td style="padding:8px;border-collapse: collapse; border: 1px solid black;" colspan="2" align="center">MENGETAHUI</td>
+                                                        </tr>
+                                                        <tr height="80px">
+                                                            <td style="padding:8px;border-collapse: collapse; border: 1px solid black;"></td>
+                                                            <td style="padding:8px;border-collapse: collapse; border: 1px solid black;"></td>
+                                                            <td style="padding:8px;border-collapse: collapse; border: 1px solid black;"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th style="padding:8px;border-collapse: collapse; border: 1px solid black;">
+                                                                <span t-esc="adh"/>
+                                                            </th>
+                                                            <th style="padding:8px;border-collapse: collapse; border: 1px solid black;"></th>
+                                                            <th style="padding:8px;border-collapse: collapse; border: 1px solid black;"></th>
+                                                        </tr>
+                                                        <tr style="padding:8px;border-collapse: collapse; border: 1px solid black;">
+                                                            <td style="padding:8px;border-collapse: collapse; border: 1px solid black;">ADH</td>
+                                                            <td style="padding:8px;border-collapse: collapse; border: 1px solid black;">PDI</td>
+                                                            <td style="padding:8px;border-collapse: collapse; border: 1px solid black;">SOH</td>
+                                                        </tr>
+                                                        <tr style="padding:8px;border-collapse: collapse; border: 1px solid black;">
+                                                            <td colspan="3">
+                                                                <span t-esc="employee_obj.name"/>, <span t-esc="date.strftime('%d-%m-%Y') if date else ''"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+
+</odoo>

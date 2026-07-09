@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="view_tw_profit_before_tax_approval_form" model="ir.ui.view">
+            <field name="name">view.tw.profit.before.tax.approval.form</field>
+            <field name="model">tw.profit.before.tax</field>
+            <field name="inherit_id" ref="tw_profit_before_tax.view_tw_profit_before_tax_form" />
+            <field name="arch" type="xml">
+                
+                <button name="action_confirm" position="attributes">
+                    <attribute name="invisible">state != 'approved'</attribute>
+                </button>
+
+                <button name="action_reject" position="after">
+
+                    <button name="action_request_approval" string="RFA" type="object" class="oe_highlight" invisible="state != 'draft'" groups="tw_profit_before_tax_approval.group_tw_profit_before_tax_approval_rfa"/>
+					<button name="action_approval" string="Approve" type="object" class="oe_highlight" invisible="state != 'waiting_for_approval'" groups="tw_profit_before_tax_approval.group_tw_profit_before_tax_approval_rfa"/>
+					<button name="action_reject_or_cancel" string="Reject" type="object" invisible="state != 'waiting_for_approval'" groups="tw_profit_before_tax_approval.group_tw_profit_before_tax_approval_cancel" context="{'window_title': 'Reject'}"/>
+					<button name="action_reject_or_cancel" string="Cancel Approval" type="object" invisible="state not in ('waiting_for_approval', 'approved')" groups="tw_profit_before_tax_approval.group_tw_profit_before_tax_approval_cancel" context="{'window_title': 'Cancel'}"/>
+                </button>
+
+                <field name="state" position="attributes">
+                    <attribute name="statusbar_visible">draft,waiting_for_approval,approved,confirmed</attribute>
+                </field>
+
+                <field name="total_amount_net_margin_sco" position="after">
+                    <field name="amount_total" groups="tw_profit_before_tax_approval.group_tw_profit_before_tax_approval_rfa" />
+                </field>
+
+
+
+                <page name="audit_trail_page" position="before">
+                    <page string="Approval">
+						<field name="approval_ids" readonly="True"/>
+					</page>
+                </page>
+
+
+            </field>
+        </record>
+        
+        
+
+    </data>
+</odoo>

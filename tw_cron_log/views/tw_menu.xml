@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <!-- Menu: Settings -> Technical -> Cron Error Logs (below Scheduled Actions Triggers) -->
+        <menuitem 
+            id="tw_cron_log_menu" 
+            name="Cron Error Logs"
+            parent="base.menu_automation"
+            action="tw_cron_log_action"
+            sequence="30"/>
+
+    </data>
+
+</odoo>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		<!-- views and menus -->
+        <!-- Tree View -->
+
+        <!-- Form View -->
+        <record id="tw_collecting_ar_ap_form_view" model="ir.ui.view">
+            <field name="name">tw.collecting.ar.ap.form_view</field>
+            <field name="model">tw.collecting</field>
+            <field name="arch" type="xml">
+                <form string="Collecting Entries">
+                    <header>
+                        <button name="action_confirm" type="object" string="Confirm" class="oe_highlight" invisible="amount == 0 or state != 'draft'" groups="tw_collecting.group_tw_collecting_confirm"/>
+                        <button name="action_get_detail" type="object" string="Get Detail" class="oe_highlight" invisible="amount != 0 or state != 'draft'"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm"/>
+                    </header>
+                    <sheet>
+                        
+                        <div class="oe_title">
+                            <h1 invisible="name"><span>Draft</span></h1>
+                            <h1 invisible="not name"><field name="name" readonly="1"/></h1>
+                        </div>
+                        
+                        <field name="available_account_ids" invisible="1"/>
+                        <field name="is_branch_menu" invisible="1"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="collected_move_id" invisible="1"/>
+                        <field name="currency_id" invisible="1"/>
+
+                        <group>
+                            <group>
+                                <field name="company_id" string="Branch" required="1" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft' or name"/>
+                                <field name="partner_id" required="1" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'" context="{'show_vat': True}"/>
+                                <field name="type" required="1" readonly="state != 'draft'"/>
+                                <field name="amount_type" required="1" readonly="state != 'draft'"/>
+                                <field name="account_id" required="1" domain="[('account_type','=',type),('id', 'in', available_account_ids)]" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'"/>
+                                <field name="journal_id" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'" domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]"/>
+                                <field name="description" readonly="state != 'draft'" placeholder="Enter description here..."/>
+                            </group>
+                            
+                            <group>
+                                <field name="division" required="1" readonly="state != 'draft'"/>
+                                <field name="date" readonly="1"/>
+                                <label for="date_start" string="Filter Date"/>
+                                <div class="o_row">
+                                    <field name="date_start" widget="date" readonly="state not in ('draft')"/>
+                                    <span><strong>to</strong></span>
+                                    <field name="date_end" widget="date" readonly="state not in ('draft')"/>
+                                </div>
+                                <field name="date_maturity" readonly="state != 'draft'"/>
+                                <field name="amount" readonly="1" groups="account.group_account_manager"/>
+                            </group>
+                        </group>
+                        <!-- Notebook Section -->
+                        <notebook>
+                            <!-- Move Lines Page -->
+                            <page string="Move Lines" name="move_lines_tab">
+                                <field name="move_line_ids" nolabel="1" colspan="4" readonly="1" force_save="1">
+                                    <list string="Move Lines" editable="bottom" create="false" delete="false">
+                                        <field name="move_id" string="Entries" options="{'no_create': True}" readonly="1"/>
+                                        <field name="currency_id" column_invisible="1"/>
+                                        <field name="name" string="Label"/>
+                                        <field name="ref" string="Reference"/>
+                                        <field name="journal_id"/>
+                                        <field name="date" />
+                                        <field name="debit" sum="Total Debit" />
+                                        <field name="credit" sum="Total Credit" />
+                                        <field name="matching_number" string="Reconcile ID" column_invisible="parent.state != 'confirm'"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Result Journal Items" invisible="not collected_move_line_ids">
+                                <field name="collected_move_line_ids" readonly="1" force_save="1"/>
+                            </page>
+                            <!-- Audit Trail Page -->
+                            <page string="Audit Trail" name="audit_trail">
+                                <group string="Creation">
+                                    <label for="create_uid" string="Created by"/>
+                                    <div>
+                                        <field name="create_uid" readonly="1" class="oe_inline"/>
+                                        <field name="create_date" string="on" readonly="1" class="oe_inline" style="margin-left: 5px;"/>
+                                    </div>
+                                </group>
+                                
+                                <group string="Last Updated" groups="base.group_no_one">
+                                    <label for="write_uid" string="Last Updated by"/>
+                                    <div>
+                                        <field name="write_uid" readonly="1" class="oe_inline"/>
+                                        <field name="write_date" string="on" readonly="1" class="oe_inline" style="margin-left: 5px;"/>
+                                    </div>
+                                </group>
+                                
+                                <group string="Confirmation" invisible="not confirm_uid">
+                                    <label for="confirm_uid" string="Confirmed by"/>
+                                    <div>
+                                        <field name="confirm_uid" readonly="1" class="oe_inline"/>
+                                        <field name="confirm_date" string="on" readonly="1" class="oe_inline" style="margin-left: 5px;"/>
+                                    </div>
+                                </group>
+                            </page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+					</div>
+				</form>
+			</field>
+		</record>
+
+        <!-- Action -->
+        <record id="tw_collecting_ar_ap_action" model="ir.actions.act_window">
+            <field name="name">Collecting AR/AP</field>
+            <field name="res_model">tw.collecting</field>
+            <field name="view_mode">list,form</field>
+            <field name="context" eval="{'search_default_outstanding': '1'}" />
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first collecting AR/AP
+                </p>
+            </field>
+        </record>
+
+        <record id="action_tw_collecting_ar_ap_list" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_collecting_list_view"/>
+            <field name="act_window_id" ref="tw_collecting_ar_ap_action"/>
+        </record>
+
+        <record id="action_tw_collecting_ar_ap_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tw_collecting_ar_ap_form_view"/>
+            <field name="act_window_id" ref="tw_collecting_ar_ap_action"/>
+        </record>
+
+	</data>
+</odoo>

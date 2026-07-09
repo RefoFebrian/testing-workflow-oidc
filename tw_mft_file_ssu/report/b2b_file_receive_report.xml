@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_b2b_file_receive_report_wizard" model="ir.ui.view">
+            <field name="name">tw.b2b.file.ssu.receive.report.wizard.form</field>
+            <field name="model">tw.b2b.file.ssu.receive.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Laporan Receive">
+                    <group>
+                        <group>
+                            <label for="start_date" string="Periode"/> 
+                            <div class="o_row">
+                                <field name="start_date" class="oe_inline" required="1"/>
+                                <span class="o_form_label oe_inline"> s/d </span>
+                                <field name="end_date" class="oe_inline" required="1"/>
+                            </div>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="generate_report" string="Export Data" type="object" class="oe_highlight"/>
+                        <button string="Cancel" special="cancel" class="btn btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_b2b_file_receive_report_wizard" model="ir.actions.act_window">
+            <field name="name">Laporan SSU Receive</field> 
+            <field name="res_model">tw.b2b.file.ssu.receive.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="tw_mft_file_ssu_receive_report_menuitem" 
+                  parent="tw_menu.submenu_tw_showroom_report" 
+                  action="action_b2b_file_receive_report_wizard" 
+                  sequence="105"
+                  groups="group_tw_b2b_file_ssu_receive_report_read"/>
+    </data>
+</odoo>

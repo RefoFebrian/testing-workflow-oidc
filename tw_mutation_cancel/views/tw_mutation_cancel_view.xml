@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+    
+    <!-- PO Cancellation -->
+    	
+    	<record model="ir.ui.view" id="mutation_order_cancel_list_view">
+            <field name="name">tw.mutation.order.cancel.list</field>
+            <field name="model">tw.mutation.order.cancel</field>
+            <field name="arch" type="xml">
+                <list string="mutation Order Cancel">
+                	<field name="name"/>
+                    <field name="company_id"/>
+                    <field name="division"/>
+                	<field name="mutation_order_id"/>
+                    <field name="date"/>
+                    <field name="state"/>
+				</list>
+			</field>
+        </record>
+        
+        <record id="view_mutation_order_cancel_search" model="ir.ui.view">
+            <field name="name">tw.mutation.order.cancel.search</field>
+            <field name="model">tw.mutation.order.cancel</field>
+            <field name="arch" type="xml">
+                <search string="Search mutation Order Cancel">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="mutation_order_id"/>
+                </search>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="inherit_mutation_order_cancel_form_view">
+            <field name="name">tw.mutation.order.cancel.form</field>
+            <field name="model">tw.mutation.order.cancel</field>
+            <field name="inherit_id" ref="tw_cancellation.tw_cancellation_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_view_mutation_order" type="object"
+                            class="oe_stat_button" icon="fa-exchange"
+                            invisible="not mutation_order_id">
+                        <field name="mutation_order_id" widget="statinfo" string="Mutation Order"/>
+                    </button>
+                </xpath>
+                <field name="transaction_name" position="after">
+                    <field name="mutation_order_id" required="1" readonly="state != 'draft'" options="{'no_create':True,'no_open':True}" domain="[('company_id','=',company_id),('division','=',division),('state','=','confirm')]"/>
+                </field>
+                <xpath expr="//button[@name='action_request_approval']" position="attributes">
+                    <attribute name="groups">tw_mutation_cancel.group_tw_mutation_cancel_rfa_approve</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_reject_or_cancel' and contains(@context, 'Cancel')]" position="attributes">
+                    <attribute name="groups">tw_mutation_cancel.group_tw_mutation_cancel_approval_cancel</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_confirm']" position="attributes">
+                    <attribute name="groups">tw_mutation_cancel.group_tw_mutation_cancel_approval_confirm</attribute>
+                </xpath>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="mutation_order_cancel_action">
+            <field name="name">Mutation Order Cancel</field>
+            <field name="res_model">tw.mutation.order.cancel</field>
+            <field name="search_view_id" ref="view_mutation_order_cancel_search"/>
+            <field name="context" eval="
+            {
+            'default_model_id': ref('tw_mutation.model_tw_mutation_order'),
+            'default_model_type': 'tw.mutation.order',
+            }
+            "/>
+            <field name="domain">['|',('mutation_order_id','!=',False),('model_id.model','=','tw.mutation.order')]</field>
+        </record>
+        
+        <record id="mutation_order_cancel_action_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="mutation_order_cancel_list_view"/>
+            <field name="act_window_id" ref="mutation_order_cancel_action"/>
+        </record>
+        
+        <record id="mutation_order_cancel_action_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="inherit_mutation_order_cancel_form_view"/>
+            <field name="act_window_id" ref="mutation_order_cancel_action"/>
+        </record>
+        
+	</data>
+</odoo>

@@ -1,0 +1,721 @@
+<odoo>
+    <data noupdate="1">
+    <!-- Form Access -->
+        <record id="group_tw_partner_bank_account_form_read" model="res.groups">
+           <field name="name">TW Bank Accounts Read</field>
+           <field name="category_id" ref="tw_base.tw_role"/>
+        </record> 
+
+    <!-- Menu Access -->
+
+        <record id="group_tw_partner_menu_access" model="res.groups">
+            <field name="name">TW Partner Menu Access</field>
+            <field name="category_id" ref="tw_base.tw_role"/>
+        </record>
+
+        <record id="access_tw_partner_menu_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">TW Partner Menu Access</field>
+            <field name="group_id" ref="group_tw_partner_menu_access"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_partner_edit_telegram_menu_access" model="res.groups">
+            <field name="name">TW Partner Edit Telegram Menu Access</field>
+            <field name="category_id" ref="tw_base.tw_role"/>
+        </record>
+
+        <record id="access_tw_partner_edit_telegram_menu_read" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">TW Partner Edit Telegram Menu Access</field>
+            <field name="group_id" ref="group_tw_partner_edit_telegram_menu_access"/>
+            <field name="perm_read">1</field>
+        </record>
+
+
+        <record id="group_tw_partner_read" model="res.groups">
+            <field name="name">TW Partner Read</field>
+            <field name="category_id" ref="tw_base.tw_role"/>
+        </record>
+
+        <record id="access_tw_partner_read" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">TW Partner Read Access</field>
+            <field name="group_id" ref="group_tw_partner_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+
+        <record id="group_tw_partner_update" model="res.groups">
+            <field name="name">TW Partner Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_partner_read'))]"/>
+            <field name="category_id" ref="tw_base.tw_role"/>
+        </record>
+
+        <record id="access_tw_partner_update" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">TW Partner Update Access</field>
+            <field name="group_id" ref="group_tw_partner_update"/>
+            <field name="perm_write">1</field>
+        </record>
+
+
+        <record id="group_tw_partner_create" model="res.groups">
+            <field name="name">TW Partner Create</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_partner_read'))]"/>
+            <field name="category_id" ref="tw_base.tw_role"/>
+        </record>
+
+        <record id="access_tw_partner_create" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">TW Partner Create Access</field>
+            <field name="group_id" ref="group_tw_partner_create"/>
+            <field name="perm_create">1</field>
+        </record>
+
+
+        <record id="group_tw_partner_delete" model="res.groups">
+            <field name="name">TW Partner Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_partner_read'))]"/>
+            <field name="category_id" ref="tw_base.tw_role"/>
+        </record>
+
+        <record id="access_tw_partner_delete" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">TW Partner Delete Access</field>
+            <field name="group_id" ref="group_tw_partner_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    <!-- Customer -->   
+        <record id="group_res_partner_customer_read" model="res.groups">
+           <field name="category_id" ref="tw_base.tw_role"/>
+           <field name="name">TW Customers Read</field>
+           <field name="implied_ids" eval="[(4, ref('group_tw_partner_read'))]"/>
+        </record> 
+        
+        <record id="access_res_partner_read" model="ir.model.access">
+           <field name="model_id" ref="model_res_partner"/>
+           <field name="name">res_partner_customer read</field> 
+           <field name="group_id" ref="group_res_partner_customer_read"/>  
+           <field name="perm_read">1</field> 
+        </record>
+
+        <record id="access_tw_partner_contact_read" model="ir.model.access">
+           <field name="model_id" ref="model_tw_partner_contact"/>
+           <field name="name">tw_partner_contact read</field> 
+           <field name="group_id" ref="group_res_partner_customer_read"/>  
+           <field name="perm_read">1</field> 
+        </record>
+
+        <record id="access_tw_partner_address_read" model="ir.model.access">
+           <field name="model_id" ref="model_tw_partner_address"/>
+           <field name="name">tw_partner_address read</field> 
+           <field name="group_id" ref="group_res_partner_customer_read"/>  
+           <field name="perm_read">1</field> 
+        </record>
+
+        <record id="group_res_partner_customer_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Customers Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_res_partner_customer_read'))]"/>                             
+        </record>
+                        
+        <record id="access_res_partner_customer_update" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">res_partner_customer update</field> 
+            <field name="group_id" ref="group_res_partner_customer_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="access_tw_partner_contact_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_partner_contact"/>
+            <field name="name">tw_partner_contact update</field> 
+            <field name="group_id" ref="group_res_partner_customer_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="access_tw_partner_address_update" model="ir.model.access">
+           <field name="model_id" ref="model_tw_partner_address"/>
+           <field name="name">tw_partner_address update</field> 
+           <field name="group_id" ref="group_res_partner_customer_update"/>  
+           <field name="perm_create">1</field> 
+           <field name="perm_write">1</field> 
+        </record> 
+
+        <record id="group_res_partner_customer_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Customers Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_res_partner_customer_read'))]"/>                             
+        </record>
+                        
+        <record id="access_res_partner_customer_delete" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">res_partner_customer delete</field> 
+            <field name="group_id" ref="group_res_partner_customer_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>      
+       
+        <record id="access_tw_partner_contact_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_partner_contact"/>
+            <field name="name">tw_partner_contact delete</field> 
+            <field name="group_id" ref="group_res_partner_customer_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+        <record id="access_tw_partner_address_delete" model="ir.model.access">
+           <field name="model_id" ref="model_tw_partner_address"/>
+           <field name="name">tw_partner_address delete</field> 
+           <field name="group_id" ref="group_res_partner_customer_delete"/>  
+           <field name="perm_unlink">1</field> 
+        </record>
+
+        <!-- Birojasa -->
+
+        <record id="group_tw_res_partner_birojasa_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Birojasa Read</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_partner_read'))]"/>
+        </record> 
+        
+        <record id="access_tw_res_partner_birojasa_read" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">tw_res_partner_birojasa read</field> 
+            <field name="group_id" ref="group_tw_res_partner_birojasa_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_res_partner_birojasa_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Birojasa Update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_partner_birojasa_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_res_partner_birojasa_update" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">tw_res_partner_birojasa update</field> 
+            <field name="group_id" ref="group_tw_res_partner_birojasa_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_res_partner_birojasa_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Birojasa Delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_partner_birojasa_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_res_partner_birojasa_delete" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">tw_res_partner_birojasa delete</field> 
+            <field name="group_id" ref="group_tw_res_partner_birojasa_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>          
+
+    <!-- Finco -->
+
+        <record id="group_tw_res_partner_finco_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Finance Company Read</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_partner_read'))]"/>
+        </record> 
+        
+        <record id="access_tw_res_partner_finco_read" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">tw_res_partner_finco read</field> 
+            <field name="group_id" ref="group_tw_res_partner_finco_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_res_partner_finco_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Finance Company Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_partner_finco_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_res_partner_finco_update" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">tw_res_partner_finco update</field> 
+            <field name="group_id" ref="group_tw_res_partner_finco_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_res_partner_finco_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Finance Company Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_partner_finco_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_res_partner_finco_delete" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">tw_res_partner_finco delete</field> 
+            <field name="group_id" ref="group_tw_res_partner_finco_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+    <!-- Dealer Group -->
+
+        <record id="group_tw_res_partner_dealer_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Dealer Group Read</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_partner_read'))]"/>
+        </record> 
+        
+        <record id="access_tw_res_partner_dealer_read" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">tw_res_partner_dealer read</field> 
+            <field name="group_id" ref="group_tw_res_partner_dealer_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_res_partner_dealer_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Dealer Group Update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_partner_dealer_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_res_partner_dealer_update" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">tw_res_partner_dealer update</field> 
+            <field name="group_id" ref="group_tw_res_partner_dealer_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_res_partner_dealer_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Dealer Group Delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_partner_dealer_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_res_partner_dealer_delete" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">tw_res_partner_dealer delete</field> 
+            <field name="group_id" ref="group_tw_res_partner_dealer_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- Vendor -->
+
+        <record id="group_tw_res_partner_vendor_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Vendor Read</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_partner_read'))]"/>
+        </record> 
+        
+        <record id="access_tw_res_partner_vendor_read" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">tw_res_partner_vendor read</field> 
+            <field name="group_id" ref="group_tw_res_partner_vendor_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_res_partner_vendor_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Vendor Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_partner_vendor_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_res_partner_vendor_update" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">tw_res_partner_vendor update</field> 
+            <field name="group_id" ref="group_tw_res_partner_vendor_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_res_partner_vendor_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Vendor Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_partner_vendor_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_res_partner_vendor_delete" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">tw_res_partner_vendor delete</field> 
+            <field name="group_id" ref="group_tw_res_partner_vendor_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- contact type -->
+        <record id="group_tw_contact_type_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Contact Type Read</field> 
+        </record> 
+        
+        <record id="access_tw_contact_type_read" model="ir.model.access">
+            <field name="model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="name">tw_contact_type read</field> 
+            <field name="group_id" ref="group_tw_contact_type_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_contact_type_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Contact Type Update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_contact_type_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_contact_type_update" model="ir.model.access">
+            <field name="model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="name">tw_contact_type update</field> 
+            <field name="group_id" ref="group_tw_contact_type_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_contact_type_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Contact Type Delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_contact_type_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_contact_type_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_selection.model_tw_selection"/>
+            <field name="name">tw_contact_type delete</field> 
+            <field name="group_id" ref="group_tw_contact_type_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- Customer Workshop -->
+        <record id="group_res_partner_customer_workshop_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Customer Workshop Read</field> 
+            <field name="implied_ids" eval="[(4, ref('group_res_partner_customer_read'))]"/>
+        </record> 
+        
+        <record id="access_res_partner_customer_workshop_read" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">res_partner_customer_workshop read</field> 
+            <field name="group_id" ref="group_res_partner_customer_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_res_partner_customer_workshop_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Customer Workshop Update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_res_partner_customer_workshop_read'))]"/>                             
+        </record>
+                        
+        <record id="access_res_partner_customer_workshop_update" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">res_partner_customer_workshop update</field> 
+            <field name="group_id" ref="group_res_partner_customer_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_res_partner_customer_workshop_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Customer Workshop Delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_res_partner_customer_workshop_read'))]"/>                             
+        </record>
+                        
+        <record id="access_res_partner_customer_workshop_delete" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">res_partner_customer_workshop delete</field> 
+            <field name="group_id" ref="group_res_partner_customer_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- Laporan Customer -->
+        <record id="group_tw_laporan_data_customer_showroom_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Laporan Data Customer Showroom Read</field>
+        </record>
+
+        <record id="group_tw_laporan_data_customer_workshop_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Laporan Data Customer Workshop Read</field>
+        </record>
+
+    <!-- TW Res MD Group Read -->
+
+        <record id="tw_res_md_group_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Res MD Read</field>
+        </record>
+
+        <record id="tw_res_md_access_read" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner" />
+            <field name="name">tw_res_md read</field>
+            <field name="group_id" ref="tw_res_md_group_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+
+
+    <!-- TW Res MD Group Update -->
+
+        <record id="tw_res_md_group_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Res MD Update</field>
+            <field name="implied_ids" eval="[(4, ref('tw_res_md_group_read'))]" />
+        </record>
+
+        <record id="tw_res_md_access_update" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner" />
+            <field name="name">tw_res_md update</field>
+            <field name="group_id" ref="tw_res_md_group_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        
+
+    <!-- TW Res MD Group Delete -->
+
+        <record id="tw_res_md_group_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role" />
+            <field name="name">TW Res MD Delete</field>
+            <field name="implied_ids" eval="[(4, ref('tw_res_md_group_read'))]" />
+        </record>
+
+        <record id="tw_res_md_access_delete" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner" />
+            <field name="name">tw_res_md delete</field>
+            <field name="group_id" ref="tw_res_md_group_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- ALl Partners -->
+
+        <record id="group_tw_res_partner_all_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW All Partners Read</field> 
+        </record> 
+        
+        <record id="access_tw_res_partner_all_read" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">tw_res_partner_all read</field> 
+            <field name="group_id" ref="group_tw_res_partner_all_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_res_partner_all_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW All Partners Update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_partner_all_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_res_partner_all_update" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">tw_res_partner_all update</field> 
+            <field name="group_id" ref="group_tw_res_partner_all_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_res_partner_all_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW All Partners Delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_partner_all_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_res_partner_all_delete" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">tw_res_partner_all delete</field> 
+            <field name="group_id" ref="group_tw_res_partner_all_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+        <!-- Partner History -->
+        <record id="group_tw_res_partner_history_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Partner History Read</field> 
+        </record> 
+        
+        <record id="access_tw_res_partner_history_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_partner_history"/>
+            <field name="name">tw_res_partner_history read</field> 
+            <field name="group_id" ref="group_tw_res_partner_history_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_res_partner_history_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Partner History Update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_partner_history_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_res_partner_history_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_partner_history"/>
+            <field name="name">tw_res_partner_history update</field> 
+            <field name="group_id" ref="group_tw_res_partner_history_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_res_partner_history_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Partner History Delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_partner_history_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_res_partner_history_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_partner_history"/>
+            <field name="name">tw_res_partner_history delete</field> 
+            <field name="group_id" ref="group_tw_res_partner_history_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+        <!-- Principle Group -->
+
+        <record id="group_tw_res_partner_principle_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Principle Read</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_partner_read'))]"/>
+        </record> 
+        
+        <record id="access_tw_res_partner_principle_read" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">tw_res_partner_principle read</field> 
+            <field name="group_id" ref="group_tw_res_partner_principle_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_res_partner_principle_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Principle Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_partner_principle_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_res_partner_principle_update" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">tw_res_partner_principle update</field> 
+            <field name="group_id" ref="group_tw_res_partner_principle_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_res_partner_principle_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Principle Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_partner_principle_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_res_partner_principle_delete" model="ir.model.access">
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="name">tw_res_partner_principle delete</field> 
+            <field name="group_id" ref="group_tw_res_partner_principle_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+        <!-- Contact Tags / Partner Category -->
+        <record id="group_tw_res_partner_category_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Tags Read</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_partner_read'))]"/>
+        </record> 
+        
+        <record id="access_tw_res_partner_category_read" model="ir.model.access">
+            <field name="model_id" ref="base.model_res_partner_category"/>
+            <field name="name">tw_res_partner_category read</field> 
+            <field name="group_id" ref="group_tw_res_partner_category_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_res_partner_category_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Tags Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_partner_category_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_res_partner_category_update" model="ir.model.access">
+            <field name="model_id" ref="base.model_res_partner_category"/>
+            <field name="name">tw_res_partner_category update</field> 
+            <field name="group_id" ref="group_tw_res_partner_category_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_res_partner_category_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Tags Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_res_partner_category_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_res_partner_category_delete" model="ir.model.access">
+            <field name="model_id" ref="base.model_res_partner_category"/>
+            <field name="name">tw_res_partner_category delete</field> 
+            <field name="group_id" ref="group_tw_res_partner_category_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+
+        <!-- TW Selection -->
+        <record id="group_tw_selection_contact_type" model="res.groups">
+            <field name="category_id" ref="tw_selection.tw_module_category_selection" />
+            <field name="name">TW Selection Contact Type</field>
+            <field name="implied_ids" eval="[(4,ref('tw_selection.group_tw_selection_update'))]" />
+        </record>
+
+
+        <record id="group_tw_partner_admin" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Partner Admin</field>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_partner_menu_access')),
+                (4, ref('group_tw_partner_edit_telegram_menu_access')),
+                (4, ref('group_tw_partner_read')),
+                (4, ref('group_tw_partner_update')),
+                (4, ref('group_tw_partner_create')),
+                (4, ref('group_tw_partner_delete')),
+                (4, ref('group_tw_res_partner_history_read')),
+                (4, ref('group_tw_res_partner_history_update')),
+                (4, ref('group_tw_res_partner_history_delete'))]"/>
+        </record>
+
+    </data>
+    <data>
+
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_tw_partner_admin')),
+                (4,ref('group_res_partner_customer_read')),
+                (4,ref('group_res_partner_customer_update')),
+                (4,ref('group_res_partner_customer_delete')),
+                (4,ref('group_tw_res_partner_birojasa_read')),
+                (4,ref('group_tw_res_partner_birojasa_update')),
+                (4,ref('group_tw_res_partner_birojasa_delete')),
+                (4,ref('group_tw_res_partner_finco_read')),
+                (4,ref('group_tw_res_partner_finco_update')),
+                (4,ref('group_tw_res_partner_finco_delete')),
+                (4,ref('group_tw_contact_type_read')),
+                (4,ref('group_tw_contact_type_update')),
+                (4,ref('group_tw_contact_type_delete')),
+                (4,ref('group_tw_res_partner_vendor_read')),
+                (4,ref('group_tw_res_partner_vendor_update')),
+                (4,ref('group_tw_res_partner_vendor_delete')),
+                (4,ref('group_tw_laporan_data_customer_showroom_read')),
+                (4,ref('group_tw_laporan_data_customer_workshop_read')),
+                (4,ref('group_res_partner_customer_workshop_read')),
+                (4,ref('group_res_partner_customer_workshop_update')),
+                (4,ref('group_res_partner_customer_workshop_delete')),
+                (4,ref('group_tw_res_partner_all_read')),
+                (4,ref('group_tw_res_partner_all_update')),
+                (4,ref('group_tw_res_partner_all_delete')),
+                (4,ref('group_tw_res_partner_history_read')),
+                (4,ref('group_tw_res_partner_history_update')),
+                (4,ref('group_tw_res_partner_history_delete')),
+                (4,ref('group_tw_partner_bank_account_form_read')),
+                (4,ref('tw_res_md_group_read')),
+                (4,ref('tw_res_md_group_update')),
+                (4,ref('tw_res_md_group_delete')),
+                (4,ref('group_tw_res_partner_dealer_read')),
+                (4,ref('group_tw_res_partner_dealer_update')),
+                (4,ref('group_tw_res_partner_dealer_delete')),
+                (4,ref('group_tw_res_partner_principle_read')),
+                (4,ref('group_tw_res_partner_principle_update')),
+                (4,ref('group_tw_res_partner_principle_delete')),
+                (4,ref('group_tw_res_partner_category_read')),
+                (4,ref('group_tw_res_partner_category_update')),
+                (4,ref('group_tw_res_partner_category_delete')),
+                (4,ref('group_tw_selection_contact_type')),
+            ]"/>
+        </record>
+
+    </data>
+</odoo>

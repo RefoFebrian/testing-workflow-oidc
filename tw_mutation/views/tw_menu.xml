@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <!-- MENU -->
+        <menuitem id="tw_mutation_order_menu_showroom_menuitem" action="tw_mutation.tw_mutation_order_unit_action" parent="tw_menu.submenu_tw_showroom_mutation" sequence="30" groups="tw_mutation.group_tw_mutation_order_showroom_read"/>
+        <menuitem id="tw_mutation_order_menu_workshop_menuitem" action="tw_mutation.tw_mutation_order_sparepart_action" parent="tw_menu.submenu_tw_workshop_mutation" sequence="30" groups="tw_mutation.group_tw_mutation_order_workshop_read"/>
+		
+	</data>
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="tw_document_handling_menu_root" name="STNK BPKB" sequence="25"/>
+
+        <!-- Misc -->
+        <menuitem id="tw_vehicle_document_misc_menu_sub" name="Misc" parent="tw_document_handling_menu_root" sequence="100"/>
+        
+        <!-- Vehicle Document -->
+        <menuitem id="tw_vehicle_document_request_menu_sub" name="Vehicle Document" parent="tw_document_handling_menu_root" sequence="10"/>
+        <menuitem id="tw_vehicle_document_outstanding_menu" parent="tw_vehicle_document_request_menu_sub" action="tw_vehicle_document_outstanding_action" sequence="10" groups="tw_vehicle_document.group_tw_vehicle_document_outstanding"/>
+        <menuitem id="tw_vehicle_document_request_menu" name="Permohonan Faktur" parent="tw_vehicle_document_request_menu_sub" action="tw_vehicle_document_request_action" sequence="20" groups="tw_vehicle_document.group_vehicle_document_request_read"/>
+        <menuitem id="tw_vehicle_document_receive_menu" name="Penerimaan Faktur" parent="tw_vehicle_document_request_menu_sub" action="tw_vehicle_document_receive_action" sequence="40" groups="tw_vehicle_document.group_vehicle_document_receive_read"/>
+
+       
+    </data>
+</odoo>

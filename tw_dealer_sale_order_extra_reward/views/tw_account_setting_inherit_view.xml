@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_account_settings_dso_extra_reward_inherit_view" model="ir.ui.view">
+            <field name="name">tw.account.settings.dso.extra.reward.inherit.view</field>
+            <field name="model">tw.account.setting</field>
+            <field name="inherit_id" ref="tw_dealer_sale_order.tw_account_settings_dso_inherit_view" />
+            <field name="arch" type="xml">
+                <group name="account_discounts" position="after">
+                    <group name="journal_extra_reward">
+                        <h3 class="o_stat_info" colspan="2" style="margin-top:0px;">
+                            <span class="text-success">Journal Extra Reward</span>
+                        </h3>
+                        <field name="journal_dso_extra_reward_id" options="{'no_create': True}"/>
+                    </group>
+                </group>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_ir_cron_mft_file_ppo_urgent" model="ir.cron">
+            <field name="name">Generate MFT PPO Urgent</field>
+            <field name="model_id" ref="tw_config_files.model_tw_config_files" />
+            <field name="state">code</field>
+            <field name="code">model.mft_generate_ppo_urgent()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+
+        <record id="tw_ir_cron_mft_file_nrfs" model="ir.cron">
+            <field name="name">Generate MFT NRFS</field>
+            <field name="model_id" ref="tw_config_files.model_tw_config_files" />
+            <field name="state">code</field>
+            <field name="code">model.mft_generate_nrfs()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+
+		<!-- Approved Input Net Margin -->
+		<record id="tw_profit_before_tax_group_button_approved" model="res.groups">
+			<field name="category_id" ref="tw_profit_before_tax.tw_module_category_profit_before_tax"/>
+			<field name="name">TW Button Approved Input Net Margin</field>
+		</record>
+
+		<record id="tw_profit_before_tax_access_button_approved_read" model="ir.model.access">
+			<field name="model_id" ref="model_tw_profit_before_tax"/>
+			<field name="name">button_approved_tw_profit_before_tax read"</field>
+			<field name="group_id" ref="tw_profit_before_tax_group_button_approved"/>
+			<field name="perm_write">1</field>
+		</record>
+
+		<!-- Rejected Input Net Margin -->
+		<record id="tw_profit_before_tax_group_button_rejected" model="res.groups">
+			<field name="category_id" ref="tw_profit_before_tax.tw_module_category_profit_before_tax"/>
+			<field name="name">TW Button Rejected Input Net Margin</field>
+		</record>
+
+		<record id="tw_profit_before_tax_access_button_rejected_read" model="ir.model.access">
+			<field name="model_id" ref="model_tw_profit_before_tax"/>
+			<field name="name">button_rejected_tw_profit_before_tax read"</field>
+			<field name="group_id" ref="tw_profit_before_tax_group_button_rejected"/>
+			<field name="perm_write">1</field>
+		</record>
+		
+		<!-- Confirmed Input Net Margin -->
+		<record id="tw_profit_before_tax_group_button_confirmed" model="res.groups">
+			<field name="category_id" ref="tw_profit_before_tax.tw_module_category_profit_before_tax"/>
+			<field name="name">TW Button Confirmed Input Net Margin</field>
+		</record>
+
+		<record id="tw_profit_before_tax_access_button_confirmed_update" model="ir.model.access">
+			<field name="model_id" ref="model_tw_profit_before_tax"/>
+			<field name="name">button_confirmed_tw_profit_before_tax update"</field>
+			<field name="group_id" ref="tw_profit_before_tax_group_button_confirmed"/>
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+		<record id="tw_master_target_margin_access_button_confirmed_update" model="ir.model.access">
+			<field name="model_id" ref="tw_incentive.model_tw_master_target_margin"/>
+			<field name="name">button_confirmed_tw_master_target_margin update"</field>
+			<field name="group_id" ref="tw_profit_before_tax_group_button_confirmed"/>
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+		
+		<record id="tw_master_target_margin_line_access_button_confirmed_update" model="ir.model.access">
+			<field name="model_id" ref="tw_incentive.model_tw_master_target_margin_line"/>
+			<field name="name">button_confirmed_tw_master_target_margin_line update"</field>
+			<field name="group_id" ref="tw_profit_before_tax_group_button_confirmed"/>
+			<field name="perm_create">1</field>
+			<field name="perm_write">1</field>
+		</record>
+
+		<!-- Approved Input Net Margin Line -->
+		<record id="tw_profit_before_tax_line_group_button_approved" model="res.groups">
+			<field name="category_id" ref="tw_profit_before_tax.tw_module_category_profit_before_tax"/>
+			<field name="name">TW Button Approved Input Net Margin Line</field>
+		</record>
+
+		<record id="tw_profit_before_tax_line_access_button_approved_read" model="ir.model.access">
+			<field name="model_id" ref="model_tw_profit_before_tax_line"/>
+			<field name="name">button_approved_tw_profit_before_tax_line read"</field>
+			<field name="group_id" ref="tw_profit_before_tax_line_group_button_approved"/>
+			<field name="perm_write">1</field>
+		</record>
+
+		<!-- Rejected Input Net Margin Line -->
+		<record id="tw_profit_before_tax_line_group_button_rejected" model="res.groups">
+			<field name="category_id" ref="tw_profit_before_tax.tw_module_category_profit_before_tax"/>
+			<field name="name">TW Button Rejected Input Net Margin Line</field>
+		</record>
+
+		<record id="tw_profit_before_tax_line_access_button_rejected_read" model="ir.model.access">
+			<field name="model_id" ref="model_tw_profit_before_tax_line"/>
+			<field name="name">button_rejected_tw_profit_before_tax_line read"</field>
+			<field name="group_id" ref="tw_profit_before_tax_line_group_button_rejected"/>
+			<field name="perm_write">1</field>
+		</record>
+    </data>
+	
+	<data>
+ 		<record id="tw_base.group_system_admin" model="res.groups">
+			<field name="implied_ids" eval="[
+				(4,ref('tw_profit_before_tax_group_button_approved')),
+				(4,ref('tw_profit_before_tax_group_button_rejected')),
+				(4,ref('tw_profit_before_tax_line_group_button_approved')),
+				(4,ref('tw_profit_before_tax_line_group_button_rejected')),
+				]" />
+		</record>
+	</data>
+</odoo>

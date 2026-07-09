@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<odoo>
+    <data noupdate="1">
+        <record id="group_tw_activity_atl_btl_settlement_read" model="res.groups">
+            <field name="category_id" ref="tw_activity_atl_btl.tw_role_activity_atl_btl" />
+            <field name="name">TW Activity ATL &amp; BTL Settlement Read</field>
+        </record>
+
+        <record id="access_tw_activity_atl_btl_settlement_read" model="ir.model.access">
+            <field name="model_id" ref="tw_activity_atl_btl.model_tw_activity_atl_btl_line" />
+            <field name="name">access_tw_activity_atl_btl_settlement read</field>
+            <field name="group_id" ref="group_tw_activity_atl_btl_settlement_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="access_tw_activity_atl_btl_settlement_attachment_read" model="ir.model.access">
+            <field name="model_id" ref="tw_attachment.model_tw_attachment"/>
+            <field name="name">tw_activity_atl_btl_settlement_attachment read</field>
+            <field name="group_id" ref="group_tw_activity_atl_btl_settlement_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_activity_atl_btl_settlement_update" model="res.groups">
+            <field name="category_id" ref="tw_activity_atl_btl.tw_role_activity_atl_btl" />
+            <field name="name">TW Activity ATL &amp; BTL Settlement Update</field>
+        </record>
+
+        <record id="access_tw_activity_atl_btl_settlement_update" model="ir.model.access">
+            <field name="model_id" ref="tw_activity_atl_btl.model_tw_activity_atl_btl_line" />
+            <field name="name">access_tw_activity_atl_btl_settlement update</field>
+            <field name="group_id" ref="group_tw_activity_atl_btl_settlement_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="access_tw_activity_atl_btl_settlement_attachment_update" model="ir.model.access">
+            <field name="model_id" ref="tw_attachment.model_tw_attachment"/>
+            <field name="name">tw_activity_atl_btl_settlement_attachment update</field>
+            <field name="group_id" ref="group_tw_activity_atl_btl_settlement_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_activity_atl_btl_settlement_delete" model="res.groups">
+            <field name="category_id" ref="tw_activity_atl_btl.tw_role_activity_atl_btl" />
+            <field name="name">TW Activity ATL &amp; BTL Settlement Delete</field>
+        </record>
+
+        <record id="access_tw_activity_atl_btl_settlement_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_activity_atl_btl.model_tw_activity_atl_btl_line" />
+            <field name="name">access_tw_activity_atl_btl_settlement delete</field>
+            <field name="group_id" ref="group_tw_activity_atl_btl_settlement_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="access_tw_activity_atl_btl_settlement_attachment_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_attachment.model_tw_attachment"/>
+            <field name="name">tw_activity_atl_btl_settlement_attachment delete</field>
+            <field name="group_id" ref="group_tw_activity_atl_btl_settlement_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="group_tw_activity_atl_btl_master_expense_source_read" model="res.groups">
+            <field name="category_id" ref="tw_activity_atl_btl.tw_role_activity_atl_btl" />
+            <field name="name">TW Activity ATL &amp; BTL Master Expense Source Read</field>
+        </record>
+
+        <record id="access_tw_activity_atl_btl_master_expense_source_read" model="ir.model.access">
+            <field name="model_id" ref="tw_activity_atl_btl_payment.model_tw_master_expense_source" />
+            <field name="name">access_tw_activity_atl_btl_master_expense_source read</field>
+            <field name="group_id" ref="group_tw_activity_atl_btl_master_expense_source_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_activity_atl_btl_master_expense_source_update" model="res.groups">
+            <field name="category_id" ref="tw_activity_atl_btl.tw_role_activity_atl_btl" />
+            <field name="name">TW Activity ATL &amp; BTL Master Expense Source Update</field>
+        </record>
+
+        <record id="access_tw_activity_atl_btl_master_expense_source_update" model="ir.model.access">
+            <field name="model_id" ref="tw_activity_atl_btl_payment.model_tw_master_expense_source" />
+            <field name="name">access_tw_activity_atl_btl_master_expense_source update</field>
+            <field name="group_id" ref="group_tw_activity_atl_btl_master_expense_source_update" />
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <record id="group_tw_activity_atl_btl_master_expense_source_delete" model="res.groups">
+            <field name="category_id" ref="tw_activity_atl_btl.tw_role_activity_atl_btl" />
+            <field name="name">TW Activity ATL &amp; BTL Master Expense Source Delete</field>
+        </record>
+
+        <record id="access_tw_activity_atl_btl_master_expense_source_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_activity_atl_btl_payment.model_tw_master_expense_source" />
+            <field name="name">access_tw_activity_atl_btl_master_expense_source delete</field>
+            <field name="group_id" ref="group_tw_activity_atl_btl_master_expense_source_delete" />
+            <field name="perm_unlink">1</field>
+        </record>
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_activity_atl_btl_settlement_read')),
+                (4, ref('group_tw_activity_atl_btl_settlement_update')),
+                (4, ref('group_tw_activity_atl_btl_settlement_delete')),
+                (4, ref('group_tw_activity_atl_btl_master_expense_source_read')),
+                (4, ref('group_tw_activity_atl_btl_master_expense_source_update')),
+                (4, ref('group_tw_activity_atl_btl_master_expense_source_delete')),
+            ]" />
+        </record>
+    </data>
+</odoo>

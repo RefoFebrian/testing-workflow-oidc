@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>      
+        
+        <!-- Dealer Sale Order Cancel - Unit (Showroom) -->
+        <menuitem action="dealer_sale_order_cancel_unit_action" id="dealer_sale_order_cancel_unit_menu" 
+            parent="tw_cancellation.submenu_showroom_tw_cancellation" 
+            groups="tw_dealer_sale_order_cancel.group_tw_dealer_sale_order_cancel_read" 
+            sequence="1"/>
+        
+        <!-- Dealer Sale Order Cancel - Sparepart (Workshop) -->
+        <menuitem action="dealer_sale_order_cancel_sparepart_action" id="dealer_sale_order_cancel_sparepart_menu" 
+            parent="tw_cancellation.submenu_workshop_tw_cancellation" 
+            groups="tw_dealer_sale_order_cancel.group_tw_dealer_sale_order_cancel_read" 
+            sequence="1"/>
+            
+    </data>
+</odoo>

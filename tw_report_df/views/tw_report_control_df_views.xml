@@ -1,0 +1,29 @@
+<odoo>
+  <data>
+    <record id="tw_report_control_df_view" model="ir.ui.view">
+      <field name="name">Report Control DF</field>
+      <field name="model">tw.report.control.df</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+         <form string="Surat Jalan">
+          <group>
+          	<field name="per_date" required="1"/>
+          </group>               
+        <footer>
+            <button name="action_generate_report" string="Export Report" type="object" class="oe_highlight"/> Or
+            <button string="Cancel" class="oe_link" special="cancel" />
+        </footer>
+        </form>
+      </field>
+    </record>
+
+    <record id="tw_report_control_df_action" model="ir.actions.act_window">
+      <field name="name">Laporan Control DF</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">tw.report.control.df</field>
+      <field name="view_mode">form</field>
+      <field name="target">new</field>
+    </record>
+	 <menuitem id="tw_report_control_df_menuitem"  parent="tw_menu.submenu_tw_showroom_report" sequence="10"  action="tw_report_control_df_action" groups="tw_report_df.group_tw_report_control_df_read"/>	
+  </data>
+</odoo>

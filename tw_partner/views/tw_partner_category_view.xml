@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_tw_partner_category_list" model="ir.ui.view">
+            <field name="name">res.partner.category.list.tw</field>
+            <field name="model">res.partner.category</field>
+            <field name="arch" type="xml">
+                <list string="Contact Tags" editable="top">
+                    <field name="name"/>
+                    <field name="color" widget="color_picker"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_tw_master_tags" model="ir.actions.act_window">
+            <field name="name">Master Tags</field>
+            <field name="res_model">res.partner.category</field>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="view_tw_partner_category_list"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new contact tag
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

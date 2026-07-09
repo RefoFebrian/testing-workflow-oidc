@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_all_tw_nrfs,access_all_tw_nrfs,model_tw_nrfs,base.group_user,1,0,0,0
+access_all_tw_nrfs_line,access_all_tw_nrfs_line,model_tw_nrfs_line,base.group_user,1,0,0,0
+access_all_tw_nrfs_line_stock,access_all_tw_nrfs_line_stock,model_tw_nrfs_line_stock,base.group_user,1,0,0,0

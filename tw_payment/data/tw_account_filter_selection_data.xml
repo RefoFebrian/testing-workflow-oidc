@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">  
+        <!-- Account Filter Transaction Type Selections -->
+
+        <record id="selection_account_filter_receive_payment" model="tw.selection">
+            <field name="type">AccountFilterTransactionType</field>
+            <field name="value">receive_payment</field>
+            <field name="name">Receive Payment</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="selection_account_filter_customer_payment" model="tw.selection">
+            <field name="type">AccountFilterTransactionType</field>
+            <field name="value">customer_payment</field>
+            <field name="name">Customer Payment</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="selection_account_filter_supplier_payment" model="tw.selection">
+            <field name="type">AccountFilterTransactionType</field>
+            <field name="value">supplier_payment</field>
+            <field name="name">Supplier Payment</field>
+            <field name="active" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

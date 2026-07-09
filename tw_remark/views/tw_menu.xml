@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<menuitem id="tw_remark_menuitem" 
+			name="Remark" 
+			parent="tw_faktur_pajak.tw_backoffice_tax_submenu" 
+			action="tw_remark.tw_remark_action" 
+			sequence="301" 
+			groups="tw_remark.group_tw_remark_read"/>
+	</data>
+</odoo>

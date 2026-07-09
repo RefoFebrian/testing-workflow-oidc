@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+        <!-- Showroom -->
+        <menuitem id='submenu_showroom_tw_mrp_bundling' name='Bundling' sequence="10" parent="tw_mrp.submenu_showroom_tw_manufacture_bom" action="tw_mrp_bundling.tw_mrp_inherit_bundling_action" groups="tw_mrp_bundling.group_tw_mrp_bom_bundling_read"/>
+        <menuitem id='submenu_showroom_tw_mrp_bundling_order' name='Bundling Order' sequence="12" parent="tw_mrp.submenu_showroom_tw_manufacture" action="tw_mrp_bundling.tw_mrp_production_action" groups="tw_mrp_bundling.group_tw_mrp_bundling_order_read"/>
+        <menuitem id='submenu_showroom_tw_mrp_unbuild_order' name='Unbuild Order' sequence="14" parent="tw_mrp.submenu_showroom_tw_manufacture" action="tw_mrp_bundling.tw_mrp_unbuild_action" groups="tw_mrp_bundling.group_tw_mrp_unbuild_bundling_read"/>
+        <menuitem id='submenu_showroom_tw_mrp_bundling_report' name='Laporan Bundling' sequence="16" parent="tw_menu.submenu_tw_showroom_report" action="tw_mrp_bundling.action_tw_bundling_production_report" groups="tw_mrp_bundling.group_tw_mrp_bundling_report_read"/>
+        	    
+        <!-- Warehouse -->
+        <menuitem id='submenu_warehouse_tw_mrp_bundling' name='Bundling' sequence="10" parent="tw_mrp.submenu_warehouse_tw_manufacture_bom" action="tw_mrp_bundling.tw_mrp_inherit_bundling_action" groups="tw_mrp_bundling.group_tw_mrp_bom_bundling_read"/>
+        <menuitem id='submenu_warehouse_tw_mrp_bundling_order' name='Bundling Order' sequence="10" parent="tw_mrp.submenu_warehouse_tw_manufacture" action="tw_mrp_bundling.tw_mrp_production_action" groups="tw_mrp_bundling.group_tw_mrp_bundling_order_read"/>
+        <menuitem id='submenu_warehouse_tw_mrp_unbuild_order' name='Unbuild Order' sequence="14" parent="tw_mrp.submenu_warehouse_tw_manufacture" action="tw_mrp_bundling.tw_mrp_unbuild_action" groups="tw_mrp_bundling.group_tw_mrp_unbuild_bundling_read"/>
+        <menuitem id='submenu_warehouse_tw_mrp_bundling_report' name='Laporan Bundling' sequence="16" parent="tw_menu.submenu_tw_warehouse_report" action="tw_mrp_bundling.action_tw_bundling_production_report" groups="tw_mrp_bundling.group_tw_mrp_bundling_report_read"/>
+    </data>
+</odoo>

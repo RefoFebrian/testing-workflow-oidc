@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- RFA Payment -->
+		
+        <record id="group_tw_collecting_cancel_rfa" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Collecting Cancel - RFA</field>
+        </record>
+        
+        <!-- Cancel Payment -->
+		
+        <record id="group_tw_collecting_cancel_cancel_approval" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Collecting Cancel - Cancel Approval</field>
+        </record>
+          
+		
+        <record id="group_tw_collecting_cancel_confirm" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Collecting Cancel - Confirm</field>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_collecting_cancel_rfa')),
+                (4, ref('group_tw_collecting_cancel_cancel_approval')),
+                (4, ref('group_tw_collecting_cancel_confirm')),
+            ]"/>
+        </record>
+    </data>
+
+</odoo>

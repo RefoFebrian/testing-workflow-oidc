@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <record model='ir.ui.view' id='tw_report_mutasi_detil_view_wizard'>
+        <field name='name'>Report Mutasi Detil</field>
+        <field name='model'>tw.mutation.detail.report</field>
+        <field name='type'>form</field>
+        <field name='arch' type='xml'>
+            <form string="Laporan Mutasi Detail">
+                <group>
+                    <group>
+                        <field name="options" required='1' string='Options'/>
+                        <label for="start_date" string="Tanggal"/>  
+                        <div>
+                            <field name="start_date" class="oe_inline" required="1"/> - <field name="end_date" class="oe_inline" required="1"/>
+                        </div>
+                        <field name="type_file" required="1"/>
+                    </group>
+                    <group>
+                        <field name="division_showroom" string="Division" required="context.get('is_showroom',False)"
+                            invisible="not context.get('is_showroom',False)" />
+                        <field name="division_workshop" string="Division" required="context.get('is_workshop',False)"
+                            invisible="not context.get('is_workshop',False)" />
+                        <field name='state' required='1' string="State"/> 
+                    </group>
+                </group>
+                <notebook> 
+                    <page string="Branches">
+                        <field name="company_ids" colspan="4" nolabel="1" options="{'no_open':True,'no_create':True}"/>
+                    </page>
+                    <page string="Product">
+                        <field name="division" invisible="1"/>
+                        <field name="product_ids"
+                         colspan="4" 
+                         nolabel="1" 
+                         options="{'no_open':True,'no_create':True}"
+                         domain="[('division', '=', division)]"
+                        />
+                    </page>
+                </notebook> 
+                <footer>
+                    <button name="excel_report" string="Export Report" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+                
+            </form>
+        </field>
+    </record>
+
+    <!-- Showroom -->
+    <record id="action_tw_mutation_detail_report_showroom_wizard" model="ir.actions.act_window">
+      <field name="name">Laporan Mutation Detail Showroom</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">tw.mutation.detail.report</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="tw_report_mutasi_detil_view_wizard" />
+      <field name="target">new</field>
+      <field name="context">
+        {'is_showroom':True}
+      </field>
+    </record>
+
+    <!-- Workshop -->
+    <record id="action_tw_mutation_detail_report_workshop_wizard" model="ir.actions.act_window">
+      <field name="name">Laporan Mutation Detail Workshop</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">tw.mutation.detail.report</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="tw_report_mutasi_detil_view_wizard" />
+      <field name="target">new</field>
+      <field name="context">
+        {'is_workshop':True}
+      </field>
+    </record>
+
+    </data>
+</odoo>

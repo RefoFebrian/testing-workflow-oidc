@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="selection_category_master_tool_st" model="tw.selection">
+            <field name="name">Special Tools</field>
+            <field name="value">SpecialTools</field>
+            <field name="type">MasterToolCategory</field>
+        </record>
+        <record id="selection_category_master_tool_spt" model="tw.selection">
+            <field name="name">Service PIT Tools</field>
+            <field name="value">ServicePitTools</field>
+            <field name="type">MasterToolCategory</field>
+        </record>
+        <record id="selection_category_master_tool_fit" model="tw.selection">
+            <field name="name">Final Inspection Tools</field>
+            <field name="value">FinalInspectionTools</field>
+            <field name="type">MasterToolCategory</field>
+        </record>
+    </data>
+</odoo>

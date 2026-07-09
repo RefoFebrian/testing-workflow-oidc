@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tw_branch_hho" model="res.company">
+            <field name="name">Head Office</field>
+            <field name="code">HHO</field>
+            <field name="atpm_code">HHO</field>
+            <field name="parent_id" ref="base.main_company" />
+            <field name="dealer_class_id" ref="tw_branch.tw_selection_dealer_class_a" />
+            <field name="branch_category_id" ref="tw_branch.tw_selection_branch_category_h123" />
+            <field name="branch_type_id" ref="tw_branch.tw_selection_branch_type_ho" />
+            <field name="street">Jakarta City</field>
+        </record>
+
+        <record id="tw_branch_md" model="res.company">
+            <field name="name">Main Dealer</field>
+            <field name="code">MML</field>
+            <field name="atpm_code">MML</field>
+            <field name="parent_id" ref="base.main_company" />
+            <field name="dealer_class_id" ref="tw_branch.tw_selection_dealer_class_a" />
+            <field name="branch_category_id" ref="tw_branch.tw_selection_branch_category_h123" />
+            <field name="branch_type_id" ref="tw_branch.tw_selection_branch_type_md" />
+            <field name="street">Jl. Pramuka No. 01</field>
+        </record>
+        
+    </data>
+</odoo>

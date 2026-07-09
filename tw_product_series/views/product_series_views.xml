@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- List View -->
+        <record id="view_product_series_list" model="ir.ui.view">
+            <field name="name">product.series.list</field>
+            <field name="model">product.series</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="product_count" widget="statinfo" string=" Products"/>
+                    <field name="active"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_product_series_form" model="ir.ui.view">
+            <field name="name">product.series.form</field>
+            <field name="model">product.series</field>
+            <field name="arch" type="xml">
+                <form string="Product Series">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_products" type="object"
+                                    class="oe_stat_button" icon="fa-cubes">
+                                <field name="product_count" widget="statinfo" string="Products"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="description" placeholder="Enter a description..."/>
+                            </group>
+                            <group>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="view_product_series_search" model="ir.ui.view">
+            <field name="name">product.series.search</field>
+            <field name="model">product.series</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_product_series" model="ir.actions.act_window">
+            <field name="name">Product Series</field>
+            <field name="res_model">product.series</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first product series
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

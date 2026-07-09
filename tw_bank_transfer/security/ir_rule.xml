@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_bank_transfer_rule" model="ir.rule">
+            <field name="name">tw.bank.transfer rule</field>
+            <field name="model_id" ref="model_tw_bank_transfer"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+    </data>
+</odoo>

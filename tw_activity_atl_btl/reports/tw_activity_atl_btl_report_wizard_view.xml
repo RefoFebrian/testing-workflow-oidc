@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tw_act_plan_report_wizard_form_view" model="ir.ui.view">
+            <field name="name">tw.activity.atl.btl.plan.report.form</field>
+            <field name="model">tw.activity.atl.btl.plan.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report Activity Plan" create="false" delete="false" edit="false">
+                    <group col="2" colspan="2">
+                        <group>
+                            <label for="month" string="Periode"/> 
+                            <div>
+                                <field name="month" required="1" class="oe_inline" placeholder="Bulan"/> - 
+                                <field name="year" required="1" class="oe_inline" placeholder="Tahun"/>
+                            </div>
+                        </group>
+                        <group>
+						    <field name="options" required="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Branches">
+							<field name="company_ids">
+								<list>
+									<field name="code"/>
+									<field name="name"/>
+								</list>
+							</field>
+						</page>
+                    </notebook>
+                    <footer>
+                        <button name="action_generate_report" string="Export Report" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+	  	<record id="tw_act_plan_report_wizard_action" model="ir.actions.act_window">
+            <field name="name">Laporan Activity Plan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.activity.atl.btl.plan.report</field>
+            <field name="view_id" ref="tw_act_plan_report_wizard_form_view"/>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

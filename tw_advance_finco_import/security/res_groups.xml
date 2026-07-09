@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+    <!-- TW Advance Finco Import Group Read -->
+        <record id="group_tw_advance_finco_import_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Advance Finco Import Read</field>
+        </record>
+        <record id="access_tw_advance_finco_import_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_advance_finco_import"/>
+            <field name="name">tw_advance_finco_import read</field>
+            <field name="group_id" ref="group_tw_advance_finco_import_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- TW Advance Finco Import Group Update -->
+        <record id="group_tw_advance_finco_import_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Advance Finco Import Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_advance_finco_import_read'))]"/>
+        </record>
+        <record id="access_tw_advance_finco_import_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_advance_finco_import"/>
+            <field name="name">tw_advance_finco_import update</field>
+            <field name="group_id" ref="group_tw_advance_finco_import_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- TW Advance Finco Import Group Delete -->
+        <record id="group_tw_advance_finco_import_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Advance Finco Import Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_advance_finco_import_read'))]"/>
+        </record>
+        <record id="access_tw_advance_finco_import_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_advance_finco_import"/>
+            <field name="name">tw_advance_finco_import delete</field>
+            <field name="group_id" ref="group_tw_advance_finco_import_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_tw_advance_finco_import_read')),
+                (4,ref('group_tw_advance_finco_import_update')),
+                (4,ref('group_tw_advance_finco_import_delete')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

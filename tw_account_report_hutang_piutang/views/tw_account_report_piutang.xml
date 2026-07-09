@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_account_report_piutang_view" model="ir.ui.view">
+			<field name="name">tw.account.report.piutang.view</field>
+			<field name="model">tw.account.report.piutang</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Laporan Piutang">
+					<group>
+					    <group>
+						    <field name="option" required="1"/>
+						    <field name="date" invisible="option == 'current'"/>
+                            <label for="start_date" string="Tanggal JTP" invisible="option == 'current'"/>
+                            <div invisible="option == 'current'">
+                                <field name="start_date" class="oe_inline"/>&#160;-&#160;
+                                <field name="end_date" class="oe_inline"/>
+                            </div>
+                        </group>
+					    <group>
+						    <field name="division" readonly="option == 'unit'" force_save="1"/>
+						    <field name="status" invisible="option == 'current'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Branch">
+                            <field name="company_ids">
+                                <list editable="top">
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Partner">
+                            <field name="partner_ids">
+                                <list editable="top">
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Account">
+                            <field name="account_ids">
+                                <list editable="top">
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Journal">
+                            <field name="journal_ids">
+                                <list editable="top">
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button name="action_download" type="object" string="Download" icon="fa-download" class="oe_highlight"/>
+                        <button special="cancel" string="Cancel" class="oe_link"/>
+                    </footer>
+                </form>
+			</field>
+		</record>
+
+		<record id="action_tw_account_report_piutang" model="ir.actions.act_window">
+			<field name="name">Laporan Piutang</field> 
+			<field name="res_model">tw.account.report.piutang</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="tw_account_report_piutang_view"/>
+			<field name="target">new</field>
+		</record>
+
+        <record id="action_tw_account_report_piutang_showroom" model="ir.actions.act_window">
+			<field name="name">Laporan Piutang</field> 
+			<field name="res_model">tw.account.report.piutang</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="tw_account_report_piutang_view"/>
+			<field name="target">new</field>
+            <field name="context">{'default_division': 'Unit'}</field>
+		</record>
+
+        <record id="action_tw_account_report_piutang_workshop" model="ir.actions.act_window">
+			<field name="name">Laporan Piutang</field> 
+			<field name="res_model">tw.account.report.piutang</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="tw_account_report_piutang_view"/>
+			<field name="target">new</field>
+            <field name="context">{'default_division': 'Sparepart'}</field>
+		</record>
+    </data>
+</odoo>

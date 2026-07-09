@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record model="ir.ui.view" id="view_tw_auth_totp_form">
+            <field name="name">user form: TW add totp status</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="auth_totp.view_totp_form"/>
+            <field name="arch" type="xml">
+                    <field name="totp_enabled" position="after">                        
+                        <div>
+                            <span class="text-muted">
+                                Mandatory MFA for this user, if enabled, user will be forced to enable MFA
+                            </span>
+                            <field name="is_mandatory_mfa" widget="boolean_toggle"></field>
+                        </div>
+                    </field>
+            </field>
+        </record>
+    
+        <record model="ir.ui.view" id="view_tw_auth_totp_field">
+            <field name="name">users preference: TW totp</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="auth_totp.view_totp_field"/>
+            <field name="arch" type="xml">
+                <field name="totp_enabled" position="after">      
+                    <div>
+                        <span class="text-muted">
+                            Mandatory MFA for this user, if enabled, user will be forced to enable MFA
+                        </span>
+                        <field name="is_mandatory_mfa" widget="boolean_toggle"></field>
+                    </div>
+                </field>
+            </field>
+        </record>
+
+    </data>
+
+</odoo>

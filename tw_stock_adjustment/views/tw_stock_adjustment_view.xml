@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Stock Adjustment Form View -->
+    <record id="view_tw_stock_adjustment_form" model="ir.ui.view">
+        <field name="name">tw.stock.adjustment.form</field>
+        <field name="model">tw.stock.adjustment</field>
+        <field name="arch" type="xml">
+            <form string="Stock Adjustment">
+                <header>
+                    <!-- Draft State Buttons -->
+                    <button name="action_confirm" string="Confirm" type="object" class="btn-primary" invisible="state != 'draft'" groups="tw_stock_adjustment.group_tw_stock_adjustment_confirm"/>
+
+                    <!-- Confirm State Buttons -->
+                    <button name="action_done" string="Validate" type="object" class="btn-primary" invisible="state not in ('confirm', 'approved')" groups="tw_stock_adjustment.group_tw_stock_adjustment_validate"/>
+
+                    <!-- Cancel Button -->
+                    <button name="action_cancel" string="Cancel" type="object" class="btn-secondary" invisible="state in ('done', 'cancelled')" groups="tw_stock_adjustment.group_tw_stock_adjustment_cancel"/>
+
+                    <!-- Set to Draft Button -->
+                    <button name="action_set_to_draft" string="Set to Draft" type="object" invisible="state != 'cancelled'" groups="tw_stock_adjustment.group_tw_stock_adjustment_set_to_draft"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_stock_moves" type="object" class="oe_stat_button" icon="fa-exchange" invisible="stock_move_count == 0">
+                            <field name="stock_move_count" widget="statinfo" string="Stock Moves"/>
+                        </button>
+                        <button name="action_view_journal_entries" type="object" class="oe_stat_button" icon="fa-book" invisible="journal_entry_count == 0">
+                            <field name="journal_entry_count" widget="statinfo" string="Journal Entries"/>
+                        </button>
+                        <button name="action_view_valuation_layers" type="object" class="oe_stat_button" icon="fa-database" invisible="valuation_layer_count == 0">
+                            <field name="valuation_layer_count" widget="statinfo" string="Valuation Layers"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1" placeholder="New"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="company_id" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'"/>
+                            <field name="location_id" options="{'no_create': True}" readonly="state != 'draft'"/>
+                            <field name="is_all_product" readonly="state != 'draft'"/>
+                        </group>
+                        <group>
+                            <field name="division" readonly="state != 'draft'"/>
+                            <field name="date" readonly="state != 'draft'"/>
+                            <field name="total_lines" readonly="1"/>
+                            <field name="total_difference_qty" readonly="1"/>
+                            <field name="total_difference_value" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Adjustment Lines" name="lines">
+                            <field name="line_ids" readonly="state != 'draft'" context="{'default_location_id': location_id}">
+                                <list editable="bottom" decoration-warning="difference != 0" decoration-success="state == 'validated'">
+                                    <field name="product_id" domain="[('division', '=', parent.division)]" options="{'no_create': True}"/>
+                                    <field name="lot_id" domain="[('product_id', '=', product_id)]" options="{'no_create': True}" required="parent.division == 'Unit'"/>
+                                    <field name="location_id" options="{'no_create': True}" column_invisible="1"/>
+                                    <field name="product_uom_id" optional="hide"/>
+                                    <field name="qty_system" readonly="1" force_save="1"/>
+                                    <field name="qty_counted" required="1"/>
+                                    <field name="difference" readonly="1"/>
+                                    <field name="system_cost" readonly="1" optional="show" string="System Cost"/>
+                                    <field name="adjustment_cost" required="1" optional="show" force_save="1" string="Adjustment Cost"/>
+                                    <field name="value_difference" readonly="1" optional="show"/>
+                                    <field name="state" optional="hide"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes" placeholder="Add any notes or comments about this adjustment..."/>
+                        </page>
+                        <page string="Audit Trail" name="audit">
+                            <group>
+                                <group string="Confirmation">
+                                    <field name="confirm_uid" readonly="1"/>
+                                    <field name="confirm_date" readonly="1"/>
+                                </group>
+                                <group string="Validation">
+                                    <field name="done_uid" readonly="1"/>
+                                    <field name="done_date" readonly="1"/>
+                                </group>
+                                <group string="Cancellation">
+                                    <field name="cancel_uid" readonly="1"/>
+                                    <field name="cancel_date" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Stock Adjustment Tree View -->
+    <record id="view_tw_stock_adjustment_list" model="ir.ui.view">
+        <field name="name">tw.stock.adjustment.list</field>
+        <field name="model">tw.stock.adjustment</field>
+        <field name="arch" type="xml">
+            <list string="Stock Adjustments" decoration-info="state == 'draft'" decoration-warning="state == 'confirm'" decoration-success="state == 'done'" decoration-muted="state == 'cancelled'">
+                <header>
+                    <button name="action_download_import_template" string="Download Template" type="object" class="btn-secondary" icon="fa-download" display="always"/>
+                </header>
+                <field name="name"/>
+                <field name="date"/>
+                <field name="company_id"/>
+                <field name="division"/>
+                <field name="location_id"/>
+                <field name="total_lines"/>
+                <field name="total_difference_qty"/>
+                <field name="total_difference_value"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'confirm'" decoration-success="state == 'done'" decoration-danger="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Stock Adjustment Search View -->
+    <record id="view_tw_stock_adjustment_search" model="ir.ui.view">
+        <field name="name">tw.stock.adjustment.search</field>
+        <field name="model">tw.stock.adjustment</field>
+        <field name="arch" type="xml">
+            <search string="Search Stock Adjustments">
+                <field name="name"/>
+                <field name="company_id"/>
+                <field name="location_id"/>
+                <field name="division"/>
+                <separator/>
+                <filter string="Draft" name="filter_draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Confirmed" name="filter_confirm" domain="[('state', '=', 'confirm')]"/>
+                <filter string="Done" name="filter_done" domain="[('state', '=', 'done')]"/>
+                <filter string="Cancelled" name="filter_cancelled" domain="[('state', '=', 'cancelled')]"/>
+                <separator/>
+                <filter string="Has Differences" name="filter_has_diff" domain="[('total_difference_qty', '!=', 0)]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Status" name="groupby_state" context="{'group_by': 'state'}"/>
+                    <filter string="Branch" name="groupby_company" context="{'group_by': 'company_id'}"/>
+                    <filter string="Division" name="groupby_division" context="{'group_by': 'division'}"/>
+                    <filter string="Date" name="groupby_date" context="{'group_by': 'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Stock Adjustment Action -->
+    <record id="action_tw_stock_adjustment" model="ir.actions.act_window">
+        <field name="name">Stock Adjustments</field>
+        <field name="res_model">tw.stock.adjustment</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_tw_stock_adjustment_search"/>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Stock Adjustment
+            </p>
+            <p>
+                Stock Adjustments allow you to correct inventory quantities to match physical counts.
+            </p>
+        </field>
+    </record>
+</odoo>

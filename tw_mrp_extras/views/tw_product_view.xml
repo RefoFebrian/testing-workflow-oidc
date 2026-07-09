@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_product_template_mrp_inherit_form_view" model="ir.ui.view">
+            <field name="name">product.template.mrp.inherit.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <page name="purchase" position="after">
+					<page name="extras" string="Extras" invisible="context.get('action_name') != 'Unit'">
+                        <div style="color:red;" invisible="extras_bom_id">
+                            <bold>Silahkan setting Extras pada menu Extras -&gt; <button name="open_extras_tree_menu" type="object" string="Setting Extras" class="oe_link"/></bold>
+                        </div>
+                        <field name="extras_bom_id" invisible="1"/>
+                        <field name="default_extras_id" invisible="1"/>
+						<field name="extras_ids" readonly="1" context="{'default_bom_id':default_extras_id}">
+                        <list string="Extra Lines" create="false" delete="false">
+                            <field name="product_id" string="Components"/>
+                            <field name="product_qty" string="Quantity"/>                                    
+                        </list>
+                        <form>
+                            <group>
+                                <group>
+                                    <field name="bom_id" required="1" readonly="1"/>
+                                    <field name="product_id" required="1" string="Components" />
+                                    <field name="product_qty" required="1" string="Quantity"/>
+                                    <field name="categ_id" readonly="1"/>
+                                </group>
+                            </group>
+                        </form>
+                        </field>
+					</page>
+				</page>
+            </field>
+        </record>  
+    </data>
+</odoo>

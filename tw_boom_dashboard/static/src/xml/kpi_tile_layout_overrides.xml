@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <!-- ========================================== -->
+    <!-- KPI LAYOUT OVERRIDES (1-5)                 -->
+    <!-- ========================================== -->
+
+    <t t-inherit="synconics_bi_dashboard.KpiLayoutOne" t-inherit-mode="extension" owl="1">
+        <xpath expr="//span[contains(@class, 'oe_name')]" position="attributes">
+            <attribute name="t-att-style">
+                'font-size:' + (state.data.header_font_size || 22) + 'px; ' + 
+                'color:' + (state.data.header_font_color || state.data.font_color) + ';'
+            </attribute>
+        </xpath>
+        <xpath expr="//div[@class='h5 mb-1 text-gray-800']/span" position="attributes">
+            <attribute name="t-att-style">
+                'font-size:' + state.data.font_size + 'px; ' + 
+                'color:' + state.data.font_color + ';' + 
+                'font-weight:' + (state.data.font_weight_bold || 700) + ';' +
+                'font-style:' + (state.data.font_style || 'normal') + ';'
+            </attribute>
+        </xpath>
+    </t>
+
+    <t t-inherit="synconics_bi_dashboard.KpiLayoutTwo" t-inherit-mode="extension" owl="1">
+        <xpath expr="//span[contains(@class, 'oe_name')]" position="attributes">
+            <attribute name="t-att-style">
+                'font-size:' + (state.data.header_font_size || 22) + 'px; ' + 
+                'color:' + (state.data.header_font_color || state.data.font_color) + ';'
+            </attribute>
+        </xpath>
+        <xpath expr="//div[@class='h5 mb-1 text-gray-800']/span[@t-if]" position="attributes">
+            <attribute name="t-att-style">
+                'font-size:' + state.data.font_size + 'px; ' + 
+                'color:' + state.data.font_color + ';' + 
+                'font-weight:' + (state.data.font_weight_bold || 700) + ';' +
+                'font-style:' + (state.data.font_style || 'normal') + ';'
+            </attribute>
+        </xpath>
+    </t>
+
+    <t t-inherit="synconics_bi_dashboard.KpiLayoutThree" t-inherit-mode="extension" owl="1">
+        <xpath expr="//span[contains(@class, 'oe_name')]" position="attributes">
+            <attribute name="t-att-style">
+                'font-size:' + (state.data.header_font_size || 22) + 'px; ' + 
+                'color:' + (state.data.header_font_color || state.data.font_color) + ';'
+            </attribute>
+        </xpath>
+        <xpath expr="//div[@class='h5 mb-1 text-gray-800']/div[@class='d-flex align-items-center justify-content-center']" position="attributes">
+            <attribute name="t-att-style">
+                'font-size:' + state.data.font_size + 'px; ' + 
+                'color:' + state.data.font_color + ';' + 
+                'font-weight:' + (state.data.font_weight_bold || 700) + ';' +
+                'font-style:' + (state.data.font_style || 'normal') + ';'
+            </attribute>
+        </xpath>
+    </t>
+
+    <t t-inherit="synconics_bi_dashboard.KpiLayoutFour" t-inherit-mode="extension" owl="1">
+        <xpath expr="//span[contains(@class, 'oe_name')]" position="attributes">
+            <attribute name="t-att-style">
+                'font-size:' + (state.data.header_font_size || 22) + 'px; ' + 
+                'color:' + (state.data.header_font_color || state.data.font_color) + ';'
+            </attribute>
+        </xpath>
+        <xpath expr="//div[@class='oe_content col-9']/span" position="attributes">
+            <attribute name="t-att-style">
+                'font-size:' + state.data.font_size + 'px; ' + 
+                'color:' + state.data.font_color + ';' + 
+                'font-weight:' + (state.data.font_weight_bold || 700) + ';' +
+                'font-style:' + (state.data.font_style || 'normal') + ';'
+            </attribute>
+        </xpath>
+    </t>
+
+    <t t-inherit="synconics_bi_dashboard.KpiLayoutFive" t-inherit-mode="extension" owl="1">
+        <xpath expr="//span[contains(@class, 'oe_name')]" position="attributes">
+            <attribute name="t-att-style">
+                'font-size:' + (state.data.header_font_size || 22) + 'px; ' + 
+                'color:' + (state.data.header_font_color || state.data.font_color) + ';'
+            </attribute>
+        </xpath>
+        <xpath expr="//div[@class='oe_content']/span" position="attributes">
+            <attribute name="t-att-style">
+                'font-size:' + state.data.font_size + 'px; ' + 
+                'color:' + state.data.font_color + ';' + 
+                'font-weight:' + (state.data.font_weight_bold || 700) + ';' +
+                'font-style:' + (state.data.font_style || 'normal') + ';'
+            </attribute>
+        </xpath>
+    </t>
+
+    <!-- ========================================== -->
+    <!-- TILE LAYOUT OVERRIDES (1-4)                -->
+    <!-- ========================================== -->
+
+    <t t-inherit="synconics_bi_dashboard.TileLayoutOne" t-inherit-mode="extension" owl="1">
+        <xpath expr="//span[contains(@class, 'oe_name')]" position="attributes">
+            <attribute name="t-att-style">
+                'font-size:' + (state.data.header_font_size || 22) + 'px; ' + 
+                'color:' + (state.data.header_font_color || state.data.font_color) + ';'
+            </attribute>
+        </xpath>
+        <xpath expr="//div[@class='h5 mb-1 text-gray-800']/span" position="attributes">
+            <attribute name="t-att-style">
+                'font-size:' + state.data.font_size + 'px; ' + 
+                'color:' + state.data.font_color + ';' + 
+                'font-weight:' + (state.data.font_weight_bold || 700) + ';' +
+                'font-style:' + (state.data.font_style || 'normal') + ';'
+            </attribute>
+        </xpath>
+    </t>
+
+    <t t-inherit="synconics_bi_dashboard.TileLayoutTwo" t-inherit-mode="extension" owl="1">
+        <xpath expr="//span[contains(@class, 'oe_name')]" position="attributes">
+            <attribute name="t-att-style">
+                'font-size:' + (state.data.header_font_size || 22) + 'px; ' + 
+                'color:' + (state.data.header_font_color || state.data.font_color) + ';'
+            </attribute>
+        </xpath>
+        <xpath expr="//div[@class='h5 mb-1 text-gray-800']/span" position="attributes">
+            <attribute name="t-att-style">
+                'font-size:' + state.data.font_size + 'px; ' + 
+                'color:' + state.data.font_color + ';' + 
+                'font-weight:' + (state.data.font_weight_bold || 700) + ';' +
+                'font-style:' + (state.data.font_style || 'normal') + ';'
+            </attribute>
+        </xpath>
+    </t>
+
+    <t t-inherit="synconics_bi_dashboard.TileLayoutThree" t-inherit-mode="extension" owl="1">
+        <xpath expr="//span[contains(@class, 'oe_name')]" position="attributes">
+            <attribute name="t-att-style">
+                'font-size:' + (state.data.header_font_size || 22) + 'px; ' + 
+                'color:' + (state.data.header_font_color || state.data.font_color) + ';'
+            </attribute>
+        </xpath>
+        <xpath expr="//div[@class='h5 mb-1 text-gray-800']/span" position="attributes">
+            <attribute name="t-att-style">
+                'font-size:' + state.data.font_size + 'px; ' + 
+                'color:' + state.data.font_color + ';' + 
+                'font-weight:' + (state.data.font_weight_bold || 700) + ';' +
+                'font-style:' + (state.data.font_style || 'normal') + ';'
+            </attribute>
+        </xpath>
+    </t>
+
+    <t t-inherit="synconics_bi_dashboard.TileLayoutFour" t-inherit-mode="extension" owl="1">
+        <xpath expr="//span[contains(@class, 'oe_name')]" position="attributes">
+            <attribute name="t-att-style">
+                'font-size:' + (state.data.header_font_size || 22) + 'px; ' + 
+                'color:' + (state.data.header_font_color || state.data.font_color) + ';'
+            </attribute>
+        </xpath>
+        <xpath expr="//div[@class='h5 mb-1 text-gray-800']/span" position="attributes">
+            <attribute name="t-att-style">
+                'font-size:' + state.data.font_size + 'px; ' + 
+                'color:' + state.data.font_color + ';' + 
+                'font-weight:' + (state.data.font_weight_bold || 700) + ';' +
+                'font-style:' + (state.data.font_style || 'normal') + ';'
+            </attribute>
+        </xpath>
+    </t>
+
+</templates>

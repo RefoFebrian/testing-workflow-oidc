@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tw_whatsapp_content_template_list_view" model="ir.ui.view">
+            <field name="name">tw.whatsapp.content.template.tree</field>
+            <field name="model">tw.whatsapp.content.template</field>
+            <field name="type">list</field>
+            <field name="arch" type="xml">
+                <list string="Whatsapp Content Template">
+                    <field name="name" />
+                    <field name="template_type_id" />
+                </list>
+            </field>
+        </record>
+
+        <record id="tw_whatsapp_content_template_form_view" model="ir.ui.view">
+            <field name="name">tw.whatsapp.content.template.form</field>
+            <field name="model">tw.whatsapp.content.template</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Whatsapp Content Template">
+                    <header>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/> 
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="subject" required="1"/>
+                                <field name="template_type_id" required="1" options="{'no_open': True, 'no_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="is_official"/>
+                            </group>
+                        </group>
+                        <div>
+                            <field name="content" required="1"/>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tw_whatsapp_content_template_view_search" model="ir.ui.view">
+            <field name="name">tw.whatsapp.content.template.search</field>
+            <field name="model">tw.whatsapp.content.template</field>
+            <field name="arch" type="xml">
+                <search string="Whatsapp Content Template">
+                    <filter string="Name" name="filter_by_name" domain="[('name','=','')]" />
+                    <filter string="Content" name="filter_by_content" domain="[('content','=','')]" />
+                    <field name="name" select="True"/>
+                    <field name="content" select="True"/>
+                    <group string="Group By..">
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="tw_whatsapp_content_template_action" model="ir.actions.act_window">
+            <field name="name">Whatsapp Content Template</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.whatsapp.content.template</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{"search_default_fieldname":1}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a new Whatsapp Content Template
+                    </p><p>
+                    Click the Create button to add a new Whatsapp Content Template
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

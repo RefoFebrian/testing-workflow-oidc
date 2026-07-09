@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_vehicle_document_location_inherit_view_form" model="ir.ui.view">
+            <field name="name">tw.vehicle.document.location.inherit.form</field>
+            <field name="model">tw.vehicle.document.location</field>
+            <field name="inherit_id" ref="tw_vehicle_document_location.tw_vehicle_document_location_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='audit_trail']" position="before">
+                    <page name="engine_numbers" string="Engine Numbers" invisible="document_type != 'vehicle_registration'">
+                        <field name="lot_registration_ids" readonly="1">
+                            <list>
+                                <field name="name" string="Engine No"/>
+                                <field name="chassis_number" string="Chassis No"/>
+                                <field name="customer_stnk_id" string="Customer"/>
+                                <field name="finco_id" string="Finco"/>
+                                <field name="vehicle_registration_number" string="STNK No"/>
+                                <field name="vehicle_registration_receipt_date" string="Receipt Date"/>
+                            </list>
+                        </field>
+                    </page>
+                    <page name="bpkb_engine_numbers" string="BPKB Engine Numbers" invisible="document_type != 'vehicle_ownership'">
+                        <field name="lot_ownership_ids" readonly="1">
+                            <list>
+                                <field name="name" string="Engine No"/>
+                                <field name="chassis_number" string="Chassis No"/>
+                                <field name="customer_stnk_id" string="Customer"/>
+                                <field name="finco_id" string="Finco"/>
+                                <field name="vehicle_ownership_number" string="BPKB No"/>
+                                <field name="vehicle_ownership_receipt_date" string="Receipt Date"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_vehicle_document_location_inherit_view_search" model="ir.ui.view">
+            <field name="name">tw.vehicle.document.location.inherit.search</field>
+            <field name="model">tw.vehicle.document.location</field>
+            <field name="inherit_id" ref="tw_vehicle_document_location.tw_vehicle_document_location_view_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search/field[@name='address']" position="after">
+                    <field name="lot_registration_ids" string="Engine Number" filter_domain="['|', ('lot_registration_ids.name', 'ilike', self), ('lot_ownership_ids.name', 'ilike', self)]"/>
+                    <field name="lot_registration_ids" string="Customer STNK" filter_domain="['|', ('lot_registration_ids.customer_stnk_id', 'ilike', self), ('lot_ownership_ids.customer_stnk_id', 'ilike', self)]"/>
+                    <field name="lot_registration_ids" string="Chassis Number" filter_domain="['|', ('lot_registration_ids.chassis_number', 'ilike', self), ('lot_ownership_ids.chassis_number', 'ilike', self)]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

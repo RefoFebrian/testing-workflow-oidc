@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+    <record model='ir.ui.view' id='tw_hr_attendance_report_view'>
+    	<field name='name'>TW HR Attendance Report</field>
+    	<field name='model'>tw.hr.attendance.report</field>
+    	<field name='type'>form</field>
+    	<field name='arch' type='xml'>
+    		<form string="Laporan Absensi">
+                	<sheet>
+                		<group invisible="state_x == 'get'">
+            				<label for="start_date" string="Date"/>
+                            <div>                               
+                                <field name="start_date" required="1" class="oe_inline"/>-<field name="end_date" required="1" class="oe_inline"/>
+                            </div>
+                            <field name="employee_id" options="{'no_open':True,'no_create_edit':True}" style="width:46%%"/>
+                		</group>
+                		<notebook invisible="state_x == 'get'">
+                			<page string="Department">
+                				<field name="department_ids" colspan="4" nolabel="1" options="{'no_create': True, 'no_open': True}">
+                					<list create="1" delete="1" editable="bottom" edit="0">
+                						<field name="name"/>
+                					</list>
+                				</field>
+                			</page>
+                		</notebook>
+                		<field invisible="1" name="state_x"/>                
+		                <newline/>    
+		                <group col="4" fill="0" invisible="state_x != 'get'">
+		                    <separator colspan="4" string="Excel Report Generated. Click link below to download ..." invisible="state_x == 'choose'"/>
+		                    <field name="name" invisible="1" width="100"/>
+		                    <field name="data_x" nolabel="1" readonly="0" width="100" filename="name" invisible="state_x == 'choose'"/>
+		                </group>
+                		<footer>
+			                <button name="action_export" invisible="state_x == 'get'" string="Export Report" type="object" class="oe_highlight"/>
+			                <!-- <label string=" or "/> -->
+			                <button string="Cancel" invisible="state_x == 'get'" class="oe_link" special="cancel" />
+			            </footer>
+                	</sheet>
+                </form>
+    	</field>
+    </record>
+    
+    <record model='ir.actions.act_window' id='action_employee_attendance_report'>
+    	<field name='name'>Laporan Absensi</field>
+    	<field name='res_model'>tw.hr.attendance.report</field>
+    	<field name='view_mode'>form</field>
+    	<field name='target'>new</field>
+    </record>
+        
+    </data>
+</odoo>

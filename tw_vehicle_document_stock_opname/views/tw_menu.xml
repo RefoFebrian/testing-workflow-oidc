@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!-- Stock Opname Menu -->
+        <menuitem id="tw_vehicle_document_stock_opname_menu_sub" name="Stock Opname" parent="tw_vehicle_document.tw_vehicle_document_misc_menu_sub" sequence="10"/>
+        <menuitem id="tw_vehicle_document_registration_menu" name="Stock Opname STNK" parent="tw_vehicle_document_stock_opname_menu_sub" action="action_tw_stock_opname_stnk" groups="group_vehicle_document_stock_opname_read"/>
+        <menuitem id="tw_vehicle_document_ownership_menu" name="Stock Opname BPKB" parent="tw_vehicle_document_stock_opname_menu_sub" action="action_tw_stock_opname_bpkb" groups="group_vehicle_document_stock_opname_read"/>
+
+        <!-- Configuration Menu -->
+        <menuitem id="tw_master_stnk_group" name="Master SO STNK" parent="tw_vehicle_document_location.tw_vehicle_configuration_menu_sub" sequence="30"/>
+        <menuitem id="tw_ceklis_fisik_stnk" name="Ceklis Fisik STNK" parent="tw_master_stnk_group" action="action_tw_ceklis_fisik_stnk" groups="group_tw_vehicle_document_selection_read" sequence="1"/>
+        <menuitem id="tw_validasi_nama_stnk" name="Validasi Nama STNK" parent="tw_master_stnk_group" action="action_tw_validasi_nama_stnk" groups="group_tw_vehicle_document_selection_read" sequence="2"/>
+        <menuitem id="tw_validasi_no_engine_stnk" name="Validasi No Engine STNK" parent="tw_master_stnk_group" action="action_tw_validasi_no_engine_stnk" groups="group_tw_vehicle_document_selection_read" sequence="3"/>
+        <menuitem id="tw_validasi_no_polisi" name="Validasi No Polisi" parent="tw_master_stnk_group" action="action_tw_validasi_no_polisi" groups="group_tw_vehicle_document_selection_read" sequence="4"/>
+
+        <menuitem id="tw_master_bpkb_group" name="Master SO BPKB" parent="tw_vehicle_document_location.tw_vehicle_configuration_menu_sub" sequence="40"/>
+        <menuitem id="tw_ceklis_fisik_bpkb" name="Ceklis Fisik BPKB" parent="tw_master_bpkb_group" action="action_tw_ceklis_fisik_bpkb" groups="group_tw_vehicle_document_selection_read" sequence="5"/>
+        <menuitem id="tw_validasi_nama_bpkb" name="Validasi Nama BPKB" parent="tw_master_bpkb_group" action="action_tw_validasi_nama_bpkb" groups="group_tw_vehicle_document_selection_read" sequence="6"/>
+        <menuitem id="tw_validasi_no_engine_bpkb" name="Validasi No Engine BPKB" parent="tw_master_bpkb_group" action="action_tw_validasi_no_engine_bpkb" groups="group_tw_vehicle_document_selection_read" sequence="7"/>
+        <menuitem id="tw_validasi_no_bpkb" name="Validasi No BPKB" parent="tw_master_bpkb_group" action="action_tw_validasi_no_bpkb" groups="group_tw_vehicle_document_selection_read" sequence="8"/>
+
+    </data>
+</odoo>

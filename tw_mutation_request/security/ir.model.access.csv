@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_all_tw_mutation_request,access_all_tw_mutation_request,model_tw_mutation_request,base.group_user,1,0,0,0
+access_all_tw_mutation_request_line,access_all_tw_mutation_request_line,model_tw_mutation_request_line,base.group_user,1,0,0,0

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="tw_b2b_file_psl_report_workshop_menuitem" action="tw_b2b_file_psl_report_action" parent="tw_menu.submenu_tw_workshop_report" sequence="10" groups="tw_b2b_file_report.tw_b2b_file_psl_report_group_read"/> 
+        <menuitem id="tw_b2b_file_psl_report_warehouse_menuitem" action="tw_b2b_file_psl_report_action" parent="tw_menu.submenu_tw_warehouse_report" sequence="20" groups="tw_b2b_file_report.tw_b2b_file_psl_report_group_read"/> 
+        
+        <menuitem id="tw_b2b_file_ps_report_workshop_menuitem" action="tw_b2b_file_ps_report_action" parent="tw_menu.submenu_tw_workshop_report" sequence="20" groups="tw_b2b_file_report.tw_b2b_file_ps_report_group_read"/> 
+        <menuitem id="tw_b2b_file_ps_report_warehouse_menuitem" action="tw_b2b_file_ps_report_action" parent="tw_menu.submenu_tw_warehouse_report" sequence="30" groups="tw_b2b_file_report.tw_b2b_file_ps_report_group_read"/> 
+    </data>
+</odoo>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- list view -->
+        <record id="tw_lead_activity_result_view_list" model="ir.ui.view">
+            <field name="name">tw.lead.activity.result.list</field>
+            <field name="model">tw.lead.activity.result</field>
+            <field name="type">list</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <list string="Lead activity result">
+                    <field name="name" />
+                    <field name="description" />
+                    <field name="sequence" />
+                    <field name="is_end_of_process" />
+                    <field name="interest_id" />
+                </list>
+            </field>
+        </record>
+        <!-- form view -->
+        <record id="tw_lead_activity_result_view_form" model="ir.ui.view">
+            <field name="name">tw.lead.activity.result.form</field>
+            <field name="model">tw.lead.activity.result</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <form string="Lead activity result">
+                    <header>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <!--button type="object" name="action_view_detail" class="oe_stat_button" icon="fa-pencil-square-o"-->
+                            <!--field name="detail_count" widget="statinfo" string="Detail(s)"/-->
+                            <!--field name="detail_ids" invisible="1"/-->
+                            <!--/button-->
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" string="Lead activity result Name" />
+                            <h1>
+                                <field name="name" />
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="description" />
+                                <field name="sequence" />
+                                <field name="is_end_of_process" />
+                                <field name="interest_id" options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <notebook>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- search -->
+        <record id="tw_lead_activity_result_view_search" model="ir.ui.view">
+            <field name="name">tw.lead.activity.result.search</field>
+            <field name="model">tw.lead.activity.result</field>
+            <field name="arch" type="xml">
+                <search string="Lead activity result">
+                    <filter string="Is end of process" name="filter_by_is_end_of_process" domain="[('is_end_of_process','=',True)]" />
+                    <filter string="Interest Cold" name="filter_by_interest_cold" domain="[('interest_id.name','=','Cold')]" />
+                    <filter string="Interest Hot" name="filter_by_interest_hot" domain="[('interest_id.name','=','Hot')]" />
+                    <filter string="Interest Medium" name="filter_by_interest_medium" domain="[('interest_id.name','=','Medium')]" />
+                    <field name="name" select="True" />
+                    <field name="description" select="True" />
+                    <field name="sequence" select="True" />
+                    <field name="is_end_of_process" select="True" />
+                    <field name="interest_id" select="True" />
+                    <group string="Group By..">
+                        <filter string="name" name="group_by_name" icon="terp-go-month" domain="[]"
+							context="{'group_by':'name'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- action window -->
+        <record id="tw_lead_activity_result_action" model="ir.actions.act_window">
+            <field name="name">Lead activity result</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tw.lead.activity.result</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{"search_default_fieldname":1}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Lead activity result
+                </p>
+                <p>
+                Click the Create button to add a new Lead activity result
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

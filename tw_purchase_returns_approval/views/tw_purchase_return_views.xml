@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_purchase_return_form_approval" model="ir.ui.view">
+        <field name="name">tw.purchase.return.form.approval</field>
+        <field name="model">tw.purchase.return</field>
+        <field name="inherit_id" ref="tw_purchase_return.view_tw_purchase_return_form"/>
+        <field name="arch" type="xml">
+            <field name="state" position="attributes">
+                <attribute name="statusbar_visible">draft,waiting_for_approval,approved,sale,done</attribute>
+            </field>
+            <button name="action_confirm" position="replace">
+                <button name="action_request_approval" invisible="state != 'draft'" string="RFA" type="object" class="oe_highlight" groups="tw_purchase_returns_approval.group_tw_purchase_return_approval_rfa"/>
+                <button name="action_approval" invisible="state != 'waiting_for_approval'" string="Approve" type="object" class="oe_highlight" groups="tw_purchase_returns_approval.group_tw_purchase_return_approval_rfa"/>
+                <button name="action_reject_or_cancel" invisible="state != 'waiting_for_approval'" string="Reject" type="object"  context="{'window_title': 'Reject'}" groups="tw_purchase_returns_approval.group_tw_purchase_return_approval_reject"/>
+                <button name="action_confirm" invisible="state != 'approved'" data-hotkey="q" string="Confirm" type="object" class="oe_highlight" context="{'validate_analytic': True}" groups="tw_purchase_returns_approval.group_tw_purchase_return_approval_confirm"/>
+                <button name="action_reject_or_cancel" invisible="state not in ('waiting_for_approval', 'approved')" string="Cancel Approval" type="object" groups="tw_purchase_returns_approval.group_tw_purchase_return_approval_cancel" context="{'window_title': 'Cancel'}"/>
+            </button>
+
+            <xpath expr="//page[@name='other_information']" position="after">
+                <page string="Approval">
+                    <field name="approval_ids" readonly="True">
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_purchase_return_search_approval" model="ir.ui.view">
+        <field name="name">tw.purchase.return.search.approval</field>
+        <field name="model">tw.purchase.return</field>
+        <field name="inherit_id" ref="tw_purchase_return.view_tw_purchase_return_search"/>
+        <field name="arch" type="xml">
+            <!-- Add state filter -->
+            <xpath expr="//filter[@name='draft']" position="after">
+                <filter string="Waiting Approval" name="waiting_for_approval" domain="[('state','=','waiting_for_approval')]"/>
+                <filter string="Approved" name="approved" domain="[('state','=','approved')]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+        
+      <menuitem id="ma_approval_menu" parent="tw_menu.menu_tw_master" name="Approval" sequence="10"></menuitem>
+      
+        <menuitem id="master_approval_config_menu" name="Approval Form" sequence="1" parent="ma_approval_menu"  action="tw_approval_config_action" groups="tw_approval.group_approval_configuration_read"/> 
+        <menuitem id="menu_tw_copy_approval" parent="ma_approval_menu" sequence="400" action="action_tw_copy_approval" groups="tw_approval.group_copy_approval_read"/>
+        <menuitem id="tw_approval_matrix_menu" name="Approval Matrix" sequence="2" parent="ma_approval_menu" action="tw_approval_matrix_action" groups="tw_approval.group_approval_matrix_read"/>
+	    <menuitem id="approval_portal" name="Approval Portal" parent="mail.menu_root_discuss"  action="tw_approval_portal_action" sequence="50" groups="tw_approval.group_approval_portal_read"/>
+
+	    
+    </data>
+</odoo>

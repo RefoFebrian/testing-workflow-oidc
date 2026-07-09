@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Net Off Upload Wizard Form View -->
+    <record id="view_tw_net_off_upload_wizard_form" model="ir.ui.view">
+        <field name="name">tw.net.off.upload.wizard.form</field>
+        <field name="model">tw.net.off.upload.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Upload Net Off">
+                <sheet>
+                    <div class="alert alert-info" role="alert">
+                        <h4><i class="fa fa-info-circle" title="Info"/> Format File Excel</h4>
+                        <p>
+                            Baris pertama adalah header kolom. Baris data mulai dari baris ke-2.
+                            <strong>Branch Code, Partner Code, dan Description</strong> hanya diisi
+                            pada baris pertama dari setiap grup Net Off. Baris berikutnya dalam
+                            grup yang sama biarkan kosong.
+                        </p>
+                        <table class="table table-bordered" style="width: 95%; margin: 8px 0 16px 8px;">
+                            <tr style="background-color: #f8f9fa;">
+                                <th style="padding: 6px 10px; border: 1px solid #dee2e6;">Branch Code</th>
+                                <th style="padding: 6px 10px; border: 1px solid #dee2e6;">Partner Code</th>
+                                <th style="padding: 6px 10px; border: 1px solid #dee2e6;">Description</th>
+                                <th style="padding: 6px 10px; border: 1px solid #dee2e6;">Account Code</th>
+                                <th style="padding: 6px 10px; border: 1px solid #dee2e6;">Account Move Line</th>
+                                <th style="padding: 6px 10px; border: 1px solid #dee2e6;">Debit</th>
+                                <th style="padding: 6px 10px; border: 1px solid #dee2e6;">Credit</th>
+                            </tr>
+                            <tr>
+                                <td style="padding: 6px 10px; border: 1px solid #dee2e6;">AY</td>
+                                <td style="padding: 6px 10px; border: 1px solid #dee2e6;">DAV0003002</td>
+                                <td style="padding: 6px 10px; border: 1px solid #dee2e6;">Net off JM/HO/24/08/00006</td>
+                                <td style="padding: 6px 10px; border: 1px solid #dee2e6;">212102</td>
+                                <td style="padding: 6px 10px; border: 1px solid #dee2e6;">JM/HO/24/08/00006</td>
+                                <td style="padding: 6px 10px; border: 1px solid #dee2e6; text-align: right;">37425595.83</td>
+                                <td style="padding: 6px 10px; border: 1px solid #dee2e6; text-align: right;">0</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 6px 10px; border: 1px solid #dee2e6;"></td>
+                                <td style="padding: 6px 10px; border: 1px solid #dee2e6;"></td>
+                                <td style="padding: 6px 10px; border: 1px solid #dee2e6;"></td>
+                                <td style="padding: 6px 10px; border: 1px solid #dee2e6;">212102</td>
+                                <td style="padding: 6px 10px; border: 1px solid #dee2e6;">IC/23/05/00066</td>
+                                <td style="padding: 6px 10px; border: 1px solid #dee2e6; text-align: right;">0</td>
+                                <td style="padding: 6px 10px; border: 1px solid #dee2e6; text-align: right;">37425595.83</td>
+                            </tr>
+                        </table>
+                        <p class="mb-0">
+                            <strong>Catatan:</strong>
+                            <em>Account Move Line</em> adalah nama journal item yang belum direkonsiliasi.
+                            Total Debit harus sama dengan Total Credit per grup.
+                        </p>
+                    </div>
+                    <group>
+                        <group>
+                            <div class="mt-2">
+                                <p class="text-muted">
+                                    <i class="fa fa-info-circle" title="Info"/> Unduh template untuk format yang benar
+                                </p>
+                                <button name="action_download_format_file"
+                                        type="object"
+                                        class="btn btn-outline-secondary">
+                                    <i class="fa fa-download me-2" title="Download"/>
+                                    Download Template Excel
+                                </button>
+                            </div>
+                            <field name="upload_file" filename="filename" string="Pilih File Excel"/>
+                            <field name="filename" invisible="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_import" string="Import" type="object" class="btn-primary"/>
+                    <button string="Batal" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Net Off Upload Wizard -->
+    <record id="action_tw_net_off_upload_wizard" model="ir.actions.act_window">
+        <field name="name">Upload Net Off</field>
+        <field name="res_model">tw.net.off.upload.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

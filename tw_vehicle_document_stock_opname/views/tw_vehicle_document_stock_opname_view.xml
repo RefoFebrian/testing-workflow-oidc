@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <record id="view_tw_stock_opname_stnk_bpkb_list" model="ir.ui.view">
+            <field name="name">tw.vehicle.document.stock.opname.list</field>
+            <field name="model">tw.vehicle.document.stock.opname</field>
+            <field name="arch" type="xml">
+                <list string="Stock Opname">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="date"/>
+                    <field name="generate_date"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_tw_stock_opname_stnk_bpkb_form" model="ir.ui.view">
+            <field name="name">tw.vehicle.document.stock.opname.form</field>
+            <field name="model">tw.vehicle.document.stock.opname</field>
+            <field name="arch" type="xml">
+                <form string="Stock Opname STNK BPKB">
+                    <header>
+                        <button name="action_generate_stock_document" type="object" string="Generate Stock"
+                                class="btn btn-primary"
+                                groups="tw_vehicle_document_stock_opname.group_so_generate_stock"
+                                invisible="create_date == False or generate_date != False or document_type != 'bpkb'"/>
+
+                        <button name="action_generate_stock_document" type="object" string="Generate Stock"
+                                class="btn btn-primary"
+                                groups="tw_vehicle_document_stock_opname.group_so_reg_generate_stock"
+                                invisible="create_date == False or generate_date != False or document_type != 'stnk'"/>
+
+                        <button name="action_post" type="object" string="Post" class="btn btn-primary"
+                                invisible="state != 'open' or generate_date == False or document_type != 'bpkb'"
+                                groups="tw_vehicle_document_stock_opname.group_so_posted"/>
+
+                        <button name="action_post" type="object" string="Post" class="btn btn-primary"
+                                invisible="state != 'open' or generate_date == False or document_type != 'stnk'"
+                                groups="tw_vehicle_document_stock_opname.group_so_reg_posted"/>
+
+                        <button name="action_print_validasi" type="object" string="Print Validasi"
+                                class="btn btn-primary"
+                                groups="tw_vehicle_document_stock_opname.group_so_print_validasi"
+                                invisible="state != 'posted' or document_type != 'bpkb'"/>
+
+                        <button name="action_print_validasi" type="object" string="Print Validasi"
+                                class="btn btn-primary"
+                                groups="tw_vehicle_document_stock_opname.group_so_reg_print_validasi"
+                                invisible="state != 'posted' or document_type != 'stnk'"/>
+
+                        <button name="action_bakso" type="object" string="Berita Acara SO"
+                                class="btn btn-secondary"
+                                groups="tw_vehicle_document_stock_opname.group_so_print_bakso"
+                                invisible="state != 'posted' or document_type != 'bpkb'"/>
+
+                        <button name="action_bakso" type="object" string="Berita Acara SO"
+                                class="btn btn-secondary"
+                                groups="tw_vehicle_document_stock_opname.group_so_reg_print_bakso"
+                                invisible="state != 'posted' or document_type != 'stnk'"/>
+
+                        <button name="action_download_excel_bpkb" type="object" string="Download Excel"
+                                class="btn btn-secondary"
+                                groups="tw_vehicle_document_stock_opname.group_so_download_excel"
+                                invisible="state != 'posted' or document_type != 'bpkb'"/>
+
+                        <button name="action_download_excel_stnk" type="object" string="Download Excel"
+                                class="btn btn-secondary"
+                                groups="tw_vehicle_document_stock_opname.group_so_reg_download_excel"
+                                invisible="state != 'posted' or document_type != 'stnk'"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,open,posted"/>
+                    </header>
+
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="company_id" options="{'no_open': True, 'no_create': True}"
+                                       readonly="state != 'draft'" required="1"/>
+                                <field name="create_date" invisible="1"/>
+                                <field name="staff_bbn_id" required="1" readonly="state == 'posted'" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="adh_id" required="1" readonly="state == 'posted'" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="soh_id" required="1" readonly="state == 'posted'" options="{'no_open': True, 'no_create': True,}"/>
+                            </group>
+                            <group>
+                                <field name="date" readonly="1"/>
+                                <field name="is_pilot" invisible="1" readonly="1"/>
+                                <field name="division" required="1" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Data Stock BPKB" invisible="document_type != 'bpkb'">
+                                <field name="detail_bpkb_ids" nolabel="1" readonly="state == 'posted'">
+                                    <list create="false" delete="false" editable="top">
+                                        <field name="customer_ownership_id" readonly="1" options="{'no_open':True,'no_create':True}" width="120"/>
+                                        <field name="validation_check_physical_ownership" required="1" width="120"/>
+                                        <field name="validation_name_ownership" readonly="validation_check_physical_ownership == False or validation_check_physical_ownership != 'Fisik Ada'" required="validation_check_physical_ownership != False" width="140"/>
+                                        <field name="date_receipt" readonly="1" width="140"/>
+                                        <field name="location_ownership" readonly="1" width="100"/>
+                                        <field name="lot_id" readonly="1" options="{'no_open':True,'no_create':True}" width="80"/>
+                                        <field name="validation_no_engine_ownership" readonly="validation_check_physical_ownership == False or validation_check_physical_ownership != 'Fisik Ada'" required="validation_check_physical_ownership != False" width="140"/>
+                                        <field name="ownership_number" readonly="1" width="80"/>
+                                        <field name="validation_no_ownership" readonly="validation_check_physical_ownership == False or validation_check_physical_ownership != 'Fisik Ada'" required="validation_check_physical_ownership != False" width="140"/>
+                                        <field name="finco_id" readonly="1" options="{'no_open':True,'no_create':True}" width="120"/>
+                                        <field name="description" required="validation_check_physical_ownership in ('Fisik di HO', 'Fisik di GA', 'Fisik di MD', 'Revisi Biro Jasa', 'Sudah Penyerahan ke Konsumen', 'Sudah Penyerahan ke Leasing', 'Hilang / Fisik tidak diketahui')" width="80"/>
+                                        <field name="age" readonly="1" width="80"/>
+                                        <field name="over_due" readonly="1" width="120"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Data Stock STNK" invisible="document_type != 'stnk'">
+                                <field name="detail_stnk_ids" nolabel="1" readonly="state == 'posted'">
+                                    <list create="false" delete="false" editable="top">
+                                        <field name="customer_registration_id" readonly="1" options="{'no_open':True,'no_create':True}" width="120"/>
+                                        <field name="validation_check_physical_registration" required="1" width="120"/>
+                                        <field name="validation_name_registration" readonly="validation_check_physical_registration == False or validation_check_physical_registration != 'Fisik Ada'" required="validation_check_physical_registration != False" width="140"/>
+                                        <field name="date_receipt" readonly="1" width="140"/>
+                                        <field name="location_registration" readonly="1" width="100"/>
+                                        <field name="lot_id" readonly="1" options="{'no_open':True,'no_create':True}" width="100"/>
+                                        <field name="validation_no_engine_registration" string="Validasi No Engine" readonly="validation_check_physical_registration == False or validation_check_physical_registration != 'Fisik Ada'" required="validation_check_physical_registration != False" width="140"/>
+                                        <field name="plate_number" readonly="1" width="80"/>
+                                        <field name="validation_plate_number" readonly="validation_check_physical_registration == False or validation_check_physical_registration != 'Fisik Ada'" required="validation_check_physical_registration != False" width="130"/>
+                                        <field name="description" required="validation_check_physical_registration in ('Fisik di HO', 'Fisik di MD', 'Revisi Biro Jasa', 'Sudah Penyerahan ke Konsumen', 'Hilang / Fisik tidak diketahui')"/>
+                                        <field name="age" readonly="1"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="BPKB Tidak Tercatat Sistem"
+                                  invisible="generate_date == False or document_type != 'bpkb'">
+                                <field name="other_bpkb_ids" nolabel="1" readonly="state == 'posted'">
+                                    <list editable="top">
+                                        <field name="name_ownership" required="1"/>
+                                        <field name="no_engine" required="1"/>
+                                        <field name="description"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="STNK Tidak Tercatat Sistem"
+                                  invisible="generate_date == False or document_type != 'stnk'">
+                                <field name="other_stnk_ids" nolabel="1" readonly="state == 'posted'">
+                                    <list editable="top">
+                                        <field name="name_registration" required="1"/>
+                                        <field name="no_engine" required="1"/>
+                                        <field name="description"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                            <page string="Lampiran" invisible="is_pilot == False" >
+                                <field name="attachment_ids" nolabel="1" readonly="state != 'draft'"/>
+                            </page>
+
+                            <page string="Audit Trail">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" readonly="1"/>
+                                        <field name="create_date" readonly="1"/>
+                                        <field name="post_uid" readonly="1" invisible="post_uid == False"/>
+                                        <field name="post_date" readonly="1" invisible="post_date == False"/>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1"></field>
+                                        <field name="write_date" readonly="1"></field>
+                                        <field name="generate_date" readonly="1" invisible="generate_date == False"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_tw_stock_opname_stnk_bpkb_search" model="ir.ui.view">
+            <field name="name">tw.vehicle.document.stock.opname.search</field>
+            <field name="model">tw.vehicle.document.stock.opname</field>
+            <field name="arch" type="xml">
+                <search string="Stock Opname Vehicle Document">
+                    <field name="name"/>
+                    <field name="company_id" string="Branch"/>
+                    <field name="date"/>
+                    <field name="state"/>
+                    <field name="staff_bbn_id" />
+                    <field name="adh_id" />
+                    <field name="soh_id" />
+                    <field name="detail_bpkb_ids" string="Costumer STNK" filter_domain="[('detail_bpkb_ids.customer_registration_id', 'ilike', self)]"/>
+                    <field name="detail_bpkb_ids" string="Engine No" filter_domain="[('detail_bpkb_ids.lot_id', 'ilike', self)]"/>
+                    <field name="detail_bpkb_ids" string="No Polisi" filter_domain="[('detail_bpkb_ids.plate_number', 'ilike', self)]"/>
+                    <separator/>
+                    <filter name="state_draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                    <filter name="state_open" string="Open" domain="[('state', '=', 'open')]"/>
+                    <filter name="state_posted" string="Posted" domain="[('state', '=', 'posted')]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_company" string="Branch" context="{'group_by': 'company_id'}"/>
+                        <filter name="group_by_date" string="Tanggal SO" context="{'group_by': 'date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_tw_stock_opname_stnk" model="ir.actions.act_window">
+            <field name="name">Stock Opname STNK</field>
+            <field name="res_model">tw.vehicle.document.stock.opname</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_tw_stock_opname_stnk_bpkb_search"/>
+            <field name="domain">[('document_type', '=', 'stnk')]</field>
+            <field name="context">{'default_document_type': 'stnk', 'default_sequence_code':'SOST','search_default_state_draft': True,'seach_default_state_open': True}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first Stock Opname
+                </p>
+            </field>
+        </record>
+
+        <record id="action_tw_stock_opname_bpkb" model="ir.actions.act_window">
+            <field name="name">Stock Opname BPKB</field>
+            <field name="res_model">tw.vehicle.document.stock.opname</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_tw_stock_opname_stnk_bpkb_search"/>
+            <field name="domain">[('document_type', '=', 'bpkb')]</field>
+            <field name="context">{'default_document_type': 'bpkb', 'default_sequence_code':'SOBP','search_default_state_draft': True,'seach_default_state_open': True}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first Stock Opname
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

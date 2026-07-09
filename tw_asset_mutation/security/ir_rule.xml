@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tw_asset_mutation_rule" model="ir.rule">
+            <field name="name">tw.asset.mutation rule</field>
+            <field name="model_id" ref="model_tw_asset_mutation"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        
+        <record id="tw_asset_distribution_rule" model="ir.rule">
+            <field name="name">tw.asset.distribution rule</field>
+            <field name="model_id" ref="model_tw_asset_distribution"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+    </data>
+</odoo>

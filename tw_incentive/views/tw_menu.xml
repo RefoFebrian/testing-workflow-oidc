@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<menuitem id="tw_incentive_top_menu"
+				  name="Incentive Salesman"
+				  sequence="250"
+				  web_icon="tw_incentive,static/description/icon.png" />
+		
+			<menuitem id="tw_incentive_sub_menu"
+					  name="Incentive"
+					  sequence="10"
+					  parent="tw_incentive_top_menu" />
+
+				<menuitem id="tw_employee_incentive_menu"
+						  name="Incentive Salesman"
+						  parent="tw_incentive_sub_menu"
+						  action="tw_employee_incentive_action"
+						  sequence="1"
+						  groups="tw_incentive.group_tw_employee_incentive_read" />
+
+				<menuitem id="tw_employee_incentive_history_menu"
+						  name="Incentive History"
+						  parent="tw_incentive_sub_menu"
+						  action="tw_employee_incentive_history_action"
+						  sequence="2"
+						  groups="tw_incentive.group_tw_employee_incentive_read" />
+				
+				<menuitem id="tw_recalculate_incentive_menu"
+						  name="Recalculate Incentive"
+						  parent="tw_incentive_sub_menu"
+						  action="tw_recalculate_incentive_action"
+						  sequence="3"
+						  groups="tw_incentive.group_tw_recalculate_incentive_read" />
+			
+			<menuitem id="tw_incentive_report_sub_menu"
+					  name="Laporan"
+					  sequence="20"
+					  parent="tw_incentive_top_menu" />
+				
+				<menuitem id="tw_report_incentive_wizard_menuitem"
+						  parent="tw_incentive_report_sub_menu"
+						  action="action_report_incentive_wizard"
+						  sequence="1"
+						  groups="tw_incentive.group_tw_laporan_incentive_read" />
+				
+				<menuitem id="tw_report_sisa_margin_dso_wizard_menuitem"
+						  parent="tw_incentive_report_sub_menu"
+						  action="action_report_sisa_margin_dso_wizard"
+						  sequence="2"
+						  groups="tw_incentive.group_tw_laporan_sisa_margin_dso_read" />
+				
+				<menuitem id="tw_report_team_leader_incentive_wizard_menuitem"
+						  parent="tw_incentive.tw_incentive_report_sub_menu"
+						  action="action_report_team_leader_wizard"
+						  sequence="3"
+						  groups="tw_incentive.group_tw_laporan_team_leader_read" />
+			
+			<menuitem id="tw_incentive_configuration_sub_menu"
+					  name="Configuration"
+					  sequence="30"
+					  parent="tw_incentive_top_menu" />
+
+				<menuitem id="tw_master_incentive_incentive_menuitem"
+						  parent="tw_incentive_configuration_sub_menu"
+						  action="tw_master_incentive_action"
+						  sequence="1"
+						  groups="tw_incentive.group_tw_master_incentive_read"/>
+
+				<menuitem id="tw_master_target_margin_incentive_menuitem"
+						  parent="tw_incentive_configuration_sub_menu"
+						  action="tw_master_target_margin_action"
+						  sequence="2"
+						  groups="tw_incentive.group_tw_master_target_margin_read"/> 
+
+				<menuitem id="tw_upload_incentive_wizard_menuitem"
+						  parent="tw_incentive_configuration_sub_menu"
+						  sequence="3"
+						  name="Upload"/>
+					
+					<menuitem id="tw_upload_incentive_wizard_incentive_menuitem"
+							  parent="tw_upload_incentive_wizard_menuitem"
+							  action="action_upload_master_incentive_wizard"
+							  sequence="1"
+							  groups="tw_incentive.group_tw_master_target_margin_update" />
+					
+					<menuitem id="tw_upload_margin_wizard_incentive_menuitem"
+							  parent="tw_upload_incentive_wizard_menuitem"
+							  action="action_upload_master_margin_wizard"
+							  sequence="2"
+							  groups="tw_incentive.group_tw_master_target_margin_update" />
+					
+					<menuitem id="tw_upload_minimum_wage_wizard_menuitem"
+							  parent="tw_upload_incentive_wizard_menuitem"
+							  action="action_upload_minimum_wage_wizard"
+							  sequence="3"
+							  groups="tw_incentive.group_tw_upload_minimum_wage" />
+	</data>
+</odoo>

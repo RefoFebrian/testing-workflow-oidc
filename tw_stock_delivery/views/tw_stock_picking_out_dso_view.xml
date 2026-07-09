@@ -1,0 +1,61 @@
+<odoo>
+    <record id="tw_stock_delivery_tree_view" model="ir.ui.view">
+        <field name="name">tw.stock.delivery.tree.view</field>
+        <field name="model">stock.picking</field>
+        <field name="arch" type="xml">
+            <list create="false" edit="false" delete="false">
+                <field name="name"/>
+                <field name="origin" />
+                <field name="partner_id" string="Customer"/>
+                <field name="kabupaten"/>
+                <field name="kecamatan"/>
+                <field name="kelurahan"/>
+                <field name="street"/>
+                <field name="customer_phone_html" string="Phone" widget="html"/>
+                <button name="action_open_map"
+                        type="object"
+                        icon="fa-globe"
+                        string="Map"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="tw_stock_delivery_search_view" model="ir.ui.view">
+            <field name="name">tw.stock.delivery.search.view</field>
+            <field name="model">stock.picking</field>
+            <field name="arch" type="xml">
+                <search string="Search Outstanding Delivery">
+                    <field name="name" string="No. Reference"/>
+                    <field name="origin" string="No. SO"/>
+                    <field name="partner_id" string="Customer"/>
+                    <field name="street" />
+                    <field name="kecamatan" string="Kecamatan"/>
+                    <field name="kelurahan" string="Kelurahan"/>
+                    <field name="kabupaten" string="Kabupaten"/>
+                    <field name="customer_phone_html" string="Phone"/>
+
+                     <group expand="0" string="Group By">
+                        <filter name="group_city" string="Kabupaten" context="{'group_by':'kabupaten'}"/>
+                        <filter name="group_district" string="Kecamatan" context="{'group_by':'kecamatan'}"/>
+                        <filter name="group_sub_district" string="Kelurahan" context="{'group_by':'kelurahan'}"/>
+                        <filter name="group_customer" string="Customer" context="{'group_by':'partner_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+    <record id="action_outstanding_delivery" model="ir.actions.act_window">
+            <field name="name">Outstanding Delivery SO</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="tw_stock_delivery.tw_stock_delivery_tree_view"/>
+            <field name="search_view_id" ref="tw_stock_delivery.tw_stock_delivery_search_view"/>
+            <field name="domain">[
+                ('picking_type_code', '=', 'outgoing'),
+                ('origin', 'ilike', 'SO')
+            ]</field>
+        </record>
+
+    <menuitem id="tw_stock_delivery_outstanding_delivery_menuitem" name="Outstanding Delivery" parent="tw_menu.submenu_tw_dealers_sale_showroom" action="action_outstanding_delivery" groups="group_tw_stock_outstanding_delivery_read"/>
+ 
+</odoo>

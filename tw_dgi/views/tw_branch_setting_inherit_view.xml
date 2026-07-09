@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Branch Setting View -->
+    <record id="view_branch_setting_form_inherit_dgi_config" model="ir.ui.view">
+        <field name="name">tw.branch.setting.form.inherit.dgi.config</field>
+        <field name="model">tw.branch.setting</field>
+        <field name="inherit_id" ref="tw_branch_setting.tw_branch_setting_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='page_4']" position="after">
+                <page string="DGI Config" name="dgi_config_page">
+                    <group>
+                        <field name="dgi_config_id" string="DGI Config"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

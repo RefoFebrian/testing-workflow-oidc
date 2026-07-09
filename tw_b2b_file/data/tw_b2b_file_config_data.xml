@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <record id="tw_b2b_file_config_pmp" model="tw.b2b.file.config">
+            <field name="name">PMP</field>
+            <field name="limit">5000</field>
+            <field name="is_process_by_header">1</field>
+            <field name="headers">sparepart_code,sparepart_description,het,hpp,supplier,sparepart_category,sparepart_description_2,kolom_8,kolom_9,kolom_10,kolom_11,kolom_12,kolom_13,kolom_14,kolom_15,kolom_16,kolom_17,kolom_18,kolom_19,kolom_20</field>
+            <field name="separator_id" ref="tw_b2b_file.tw_selection_separator_semicolon" />
+        </record>
+        
+        <record id="tw_b2b_file_config_ptm" model="tw.b2b.file.config">
+            <field name="name">PTM</field>
+            <field name="headers">unit_parts,product_template</field>
+            <field name="separator_id" ref="tw_b2b_file.tw_selection_separator_semicolon" />
+        </record>
+        
+        <record id="tw_b2b_file_config_pvtm" model="tw.b2b.file.config">
+            <field name="name">PVTM</field>
+            <field name="headers">product_template,unit_parts</field>
+            <field name="separator_id" ref="tw_b2b_file.tw_selection_separator_semicolon" />
+        </record>
+        
+        <record id="tw_b2b_file_config_utc" model="tw.b2b.file.config">
+            <field name="name">UTC</field>
+            <field name="headers">kode_warna,kode,kode_marketing,warna,keterangan_warna,desksripsi_type,cc,line7,tgl,tgl2,kelas,line11,kode_marketing2,des_warna</field>
+            <field name="separator_id" ref="tw_b2b_file.tw_selection_separator_semicolon" />
+        </record>
+
+        <record id="tw_b2b_file_config_sl" model="tw.b2b.file.config">
+            <field name="name">SL</field>
+            <field name="headers">engine_number,frame_number,type_code,color_code,md_code,sipb_number,ship_list_number,ship_list_date,expedition_number,md_code_qq,md_code_pembuka_po,serial_number,frame_initial_code,expedition_name</field>
+            <field name="separator_id" ref="tw_b2b_file.tw_selection_separator_semicolon" />
+        </record>
+
+        <record id="tw_b2b_file_config_sipb" model="tw.b2b.file.config">
+            <field name="name">SIPB</field>
+            <field name="headers">sipb_number,sipb_date,spes_number,so_date,type_code,color_code,count,price,discount,quotation_flag,no_po_md,dealer_qq,amount_total,ppn_total,pph_total</field>
+            <field name="separator_id" ref="tw_b2b_file.tw_selection_separator_semicolon" />
+        </record>
+
+        <record id="tw_b2b_file_config_fm" model="tw.b2b.file.config">
+            <field name="name">FM</field>
+            <field name="headers">engine_number,frame_number,type_code,color_code,md_code,factur_number,production_year,stnk_invoice_price,ppud_number,expedition_ship,sipb_number,ship_list_number,ship_list_date,expedition_number</field>
+            <field name="separator_id" ref="tw_b2b_file.tw_selection_separator_semicolon" />
+        </record>
+
+        <record id="tw_b2b_file_config_inv" model="tw.b2b.file.config">
+            <field name="name">INV</field>
+            <field name="is_process_by_header">1</field>
+            <field name="headers">factur_number,factur_date,top,top_ppn,top_pph,ship_list_number,sipb_number,type_code,color_code,qty,amount,ppn,pph,discount_quotation,discount_type_cash,discount_other,total_invoice,ppn_total,pph_total</field>
+            <field name="separator_id" ref="tw_b2b_file.tw_selection_separator_semicolon" />
+        </record>
+
+        <record id="tw_b2b_file_config_ps" model="tw.b2b.file.config">
+            <field name="name">PS</field>
+            <field name="is_process_by_header">1</field>
+            <field name="headers">kode,kode_md,tanggal_ps,kode_ps,kode_po_md,type_po,tgl_po,no_urut,kode_dus,kode_sparepart,desc_sparepart,qty_ps,qty_po,remaining_qty</field>
+            <field name="index_mapping">[0:1],[1:4],[6:14],[14:29],[29:59],[59:62],[62:70],[70:75],[75:90],[90:115],[115:145],[145:155],[155:165],[165:175]</field>
+            <field name="separator_id" ref="tw_b2b_file.tw_selection_separator_index" />
+        </record>
+
+        <record id="tw_b2b_file_config_fdo" model="tw.b2b.file.config">
+            <field name="name">FDO</field>
+            <field name="is_process_by_header">1</field>
+            <field name="headers">no_invoice,tanggal_invoice,kode_md,kode_ps,kode_sparepart,desc_sparepart,qty,price,discount_satu,discount_dua,discount_tiga,dpp,top,ppn,top_ppn,discount_empat,invoice_jml,zz,seq</field>
+            <field name="index_mapping">[0:25],[25:33],[33:38],[38:53],[53:78],[78:108],[108:118],[118:138],[138:158],[158:178],[178:198],[198:218],[218:226],[226:246],[246:254],[254:274],[274:294],[294:300],[300:310]</field>
+            <field name="separator_id" ref="tw_b2b_file.tw_selection_separator_index" />
+        </record>
+        
+        <record id="tw_b2b_file_config_psl" model="tw.b2b.file.config">
+            <field name="name">PSL</field>
+            <field name="headers">kode,kode_md,tanggal_psl,kode_psl,kode_po_md,type_po,tanggal_po,no_urut,kode_dus,kode_sparepart,desc_sparepart,qty_psl,qty_po,remaining_qty</field>
+            <field name="index_mapping">[0:1],[1:4],[6:14],[14:29],[29:59],[59:62],[62:70],[70:75],[75:90],[90:115],[115:145],[145:155],[155:165],[165:175]</field>
+            <field name="separator_id" ref="tw_b2b_file.tw_selection_separator_index" />
+        </record>
+
+        <record id="tw_b2b_file_config_upo" model="tw.b2b.file.config">
+            <field name="name">UPO</field>
+            <field name="headers">data</field>
+        </record>
+    </data>
+</odoo>

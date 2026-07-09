@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="tw_res_country_list_view" model="ir.ui.view">
+			<field name="name">tw.res.country.tree</field>
+            <field name="model">res.country</field>
+            <field name="arch" type="xml">
+                <list string="Countries">
+                    <field name="name"/>
+                    <field name="code"/>
+                    
+                </list>
+            </field>
+		</record>
+
+        <record id="tw_localization_tw_res_country_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.res.country.form.inherited</field>            
+            <field name="model">res.country</field>            
+            <field name="inherit_id" ref="base.view_country_form"/>
+            <field name="arch" type="xml">
+                <field name="state_ids" position="replace">
+                    <notebook>
+                        <page string="States">
+                            <field name="state_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Audit Trail">
+                          <group>
+                            <group>
+                              <field name="create_uid" readonly="1"></field>
+                              <field name="create_date" readonly="1"></field>
+                            </group>
+                            <group>							
+                              <field name="write_uid" readonly="1"></field>
+                              <field name="write_date" readonly="1"></field>
+                            </group>
+                          </group>
+                      </page>
+                    </notebook>
+                </field>
+            </field>
+        </record>
+
+        <record id="tw_res_country_search_view" model="ir.ui.view">
+            <field name="name">tw.res.country.search</field>
+            <field name="model">res.country</field>
+            <field name="priority">0</field>
+            <field name="arch" type="xml">
+                <search string="Country Search">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="currency_id"/>
+                    <field name="state_ids" string="State Name" filter_domain="[('state_ids.name','ilike',self)]"/>
+                </search>
+            </field>
+        </record>
+
+		<record id="tw_res_country_action_tree" model="ir.actions.act_window">
+            <field name="name">Negara</field>
+            <field name="res_model">res.country</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="tw_res_country_search_view"></field>
+        </record>
+		
+    </data>
+</odoo>

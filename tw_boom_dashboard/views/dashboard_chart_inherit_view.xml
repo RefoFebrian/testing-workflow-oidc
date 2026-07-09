@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="dashboard_chart_inherit_form_view" model="ir.ui.view">
+        <field name="name">dashboard.chart.inherit.form.view</field>
+        <field name="model">dashboard.chart</field>
+        <field name="inherit_id" ref="synconics_bi_dashboard.dashboard_chart_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='list_measure_ids']/list/field[@name='list_measure_id']" position="attributes">
+                <attribute name="domain">[
+                    ('model_id', '=', context.get('default_model_id')), 
+                    ('store', '=', True), 
+                    ('name', 'not in', ['sequence']), 
+                    ('ttype', 'in', ['integer', 'float', 'monetary', 'selection'])
+                ]</attribute>
+            </xpath>
+            <xpath expr="//field[@name='list_measure_ids']/list/field[@name='value_type']" position="after">
+                <field name="label_name" optional="show"/>
+                <field name="measure_domain" optional="show"/>
+                <field name="measure_color" widget="color" optional="show"/>
+            </xpath>
+
+            <!-- Add company_id and employee_id filter fields -->
+            <!-- <xpath expr="//field[@name='company_id']" position="after">
+                <field name="employee_id" options="{'no_create': True, 'no_open': True}"/>
+            </xpath> -->
+
+            <!-- Hide Model ID for new chart types to prevent standard data fields from showing -->
+            <xpath expr="//field[@name='model_id']" position="attributes">
+                <attribute name="invisible">chart_type in ['to_do', 'greeting', 'quote', 'birthday', 'label'] and todo_layout != 'activity'</attribute>
+            </xpath>
+
+            <!-- Force Layout Tab to be visible for Greeting, Quote, Birthday, Label -->
+            <xpath expr="//page[@name='layout']" position="attributes">
+                <attribute name="invisible">not model_id and chart_type not in ['greeting', 'quote', 'birthday', 'label', 'progress_bar', 'filter', 'stacked_progress'] or chart_type in ['list', 'map_chart', 'to_do', 'meter_chart']</attribute>
+            </xpath>
+
+            <!-- Make styling group visible for Greeting, Quote, Birthday, Label -->
+            <xpath expr="//page[@name='layout']/group[@invisible=&quot;chart_type not in ['tile', 'kpi', 'to_do']&quot;]" position="attributes">
+                <attribute name="invisible">chart_type not in ['tile', 'kpi', 'to_do', 'greeting', 'quote', 'birthday', 'label', 'progress_bar', 'filter', 'stacked_progress']</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='font_weight']" position="after">
+                <field name="font_weight_bold" placeholder="100-900" class="oe_inline" style="width: 80px !important;"/>
+                <field name="font_style" widget="radio" options="{'horizontal': true}"/>
+                <field name="font_family_id" options="{'no_create': True, 'no_open': True}"/>
+            </xpath>
+
+            <!-- Add Header Styling Fields to a new tab -->
+            <xpath expr="//page[@name='layout']" position="after">
+                <page string="Header Layout" name="header_layout">
+                    <group>
+                        <group>
+                            <field name="header_font_weight" placeholder="100-900" class="oe_inline" style="width: 80px !important;"/>
+                            <field name="header_font_style" widget="radio" options="{'horizontal': true}"/>
+                            <field name="header_font_family_id" options="{'no_create': True, 'no_open': True}"/>
+                            <label for="header_font_size" string="Header Style"/>
+                            <div class="o_row">
+                                <field name="header_font_size" placeholder="Size (px)" class="oe_inline" style="width: 80px !important;"/>
+ px
+                                <span class="mx-2">|</span>
+                                <field name="header_font_color" widget="color" placeholder="Color" class="oe_inline"/>
+                            </div>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+            <!-- Hide old Font Weight in Layout tab and add Chart Font Styling -->
+            <xpath expr="//field[@name='font_weight']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- Add color_palette to Layout page -->
+            <xpath expr="//page[@name='layout']/group/group/field[@name='theme']" position="after">
+                <field name="color_palette" invisible="chart_type in ['list', 'to_do', 'meter_chart', 'map_chart', 'greeting', 'quote', 'birthday', 'label', 'kpi']" placeholder="e.g. #FF4560, #775DD0, #00E396"/>
+                <field name="chart_orientation" widget="radio" options="{'horizontal': true}" invisible="chart_type not in ['stackedcolumn_chart', 'bar_chart']"/>
+                <field name="show_legend" widget="boolean_toggle" invisible="chart_type not in ['stackedcolumn_chart', 'bar_chart', 'line_chart', 'area_chart', 'column_chart', 'pie_chart', 'doughnut_chart', 'radial_chart']"/>
+            </xpath>
+
+            <!-- KPI Data Colors - using separate xpath to target layout page -->
+            <xpath expr="//page[@name='layout']" position="inside">
+                <group string="KPI Color Configuration" invisible="chart_type != 'kpi'">
+                    <group>
+                        <field name="kpi_data1_color" widget="color"/>
+                        <field name="kpi_data2_color" widget="color"/>
+                    </group>
+                    <group invisible="layout_type != 'layout6'">
+                        <field name="kpi_label1" placeholder="e.g. Open"/>
+                        <field name="kpi_label2" placeholder="e.g. Overdue"/>
+                    </group>
+                </group>
+            </xpath>
+
+            <!-- Show Sub-Group fields for List charts -->
+            <xpath expr="//field[@name='sub_group_by_id']" position="attributes">
+                <attribute name="invisible">chart_type not in ['area_chart', 'bar_chart', 'column_chart', 'doughnut_chart', 'line_chart', 'stackedcolumn_chart', 'radial_chart', 'scatter_chart', 'list']</attribute>
+            </xpath>
+            <xpath expr="//field[@name='sub_group_by_type']" position="attributes">
+                <attribute name="invisible">chart_type not in ['area_chart', 'bar_chart', 'column_chart', 'doughnut_chart', 'line_chart', 'stackedcolumn_chart', 'radial_chart', 'scatter_chart', 'list']</attribute>
+            </xpath>
+            <xpath expr="//field[@name='sub_time_range']" position="attributes">
+                <attribute name="invisible">sub_group_by_type not in ['date', 'datetime']</attribute>
+            </xpath>
+
+            <!-- Add Configuration Group for Greeting/Quote/Birthday/Label in Data tab -->
+            <xpath expr="//page[@name='data']" position="inside">
+                <!-- User Filter Configuration -->
+                <group string="User Filter Configuration" invisible="chart_type in ['to_do', 'greeting', 'quote', 'birthday', 'label', 'filter']">
+                    <group>
+                        <field name="is_user_filter" widget="boolean_toggle"/>
+                        <field name="chart_user_field_id" options="{'no_create': True, 'no_open': True}" invisible="not is_user_filter" required="is_user_filter"/>
+                    </group>
+                </group>
+
+                <group string="Content Configuration" invisible="chart_type not in ['greeting', 'quote', 'birthday', 'label']">
+                    <group>
+                        <field name="content_source" widget="radio" options="{'horizontal': true}" invisible="chart_type == 'label'"/>
+                        <!-- Custom Content: Label changes based on type -->
+                        <field name="custom_content" invisible="(content_source == 'dynamic' or chart_type != 'greeting') and chart_type != 'label'" string="Greeting Message" placeholder="e.g. Selamat Datang!" required="chart_type == 'label'"/>
+                        <field name="custom_content" invisible="content_source == 'dynamic' or chart_type != 'quote'" string="Quote Text"/>
+
+                        <field name="custom_author" invisible="chart_type != 'quote' or content_source == 'dynamic'"/>
+                    </group>
+                </group>
+
+                <!-- Progress Bar Configuration -->
+                <group string="Progress Bar Configuration" invisible="chart_type != 'progress_bar'">
+                    <group>
+                        <field name="progress_source_type" widget="radio" options="{'horizontal': true}"/>
+                    </group>
+                </group>
+
+                <!-- Field-based Configuration -->
+                <group string="Field Configuration" invisible="chart_type != 'progress_bar' or progress_source_type != 'field'">
+                    <group>
+                        <field name="progress_value_field_id" options="{'no_create': True, 'no_open': True}" required="chart_type == 'progress_bar' and progress_source_type == 'field'"/>
+                        <field name="progress_target_field_id" options="{'no_create': True, 'no_open': True}"/>
+                    </group>
+                </group>
+
+                <!-- Domain-based Configuration -->
+                <group string="Domain Configuration" invisible="chart_type != 'progress_bar' or progress_source_type != 'domain'">
+                    <group>
+                        <field name="progress_value_domain" placeholder="[('state', '=', 'done')]" required="chart_type == 'progress_bar' and progress_source_type == 'domain'"/>
+                        <field name="progress_target_domain" placeholder="[('state', 'in', ['draft', 'confirm', 'done'])]"/>
+                    </group>
+                </group>
+
+                <!-- Query-based Configuration -->
+                <group string="Query Configuration" invisible="chart_type != 'progress_bar' or progress_source_type != 'query'">
+                    <group colspan="2">
+                        <field name="progress_value_query" placeholder="SELECT COUNT(*) FROM table WHERE state = 'done'" required="chart_type == 'progress_bar' and progress_source_type == 'query'"/>
+                        <field name="progress_target_query" placeholder="SELECT COUNT(*) FROM table"/>
+                    </group>
+                </group>
+
+                <!-- Manual Target & Styling -->
+                <group string="Progress Styling" invisible="chart_type != 'progress_bar'">
+                    <group>
+                        <field name="progress_target_manual"/>
+                        <field name="progress_color" widget="color"/>
+                        <field name="progress_bg_color" widget="color"/>
+                    </group>
+                    <group>
+                        <field name="progress_label_format" widget="radio" options="{'horizontal': true}"/>
+                        <field name="progress_show_label"/>
+                    </group>
+                </group>
+
+                <!-- Preview Results -->
+                <group string="📊 Preview Results" invisible="chart_type != 'progress_bar'">
+                    <group>
+                        <field name="progress_preview_value" readonly="1"/>
+                        <field name="progress_preview_target" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="progress_preview_percentage" readonly="1"/>
+                    </group>
+                </group>
+
+                <!-- Stacked Progress Bar Configuration -->
+                <group string="Stacked Progress Configuration" invisible="chart_type != 'stacked_progress'">
+                    <group string="Smart Filters">
+                        <field name="smart_filter_area" widget="boolean_toggle"/>
+                        <field name="smart_filter_branch" widget="boolean_toggle"/>
+                    </group>
+                    <group string="Display Options">
+                        <field name="stacked_show_legend" widget="boolean_toggle"/>
+                        <field name="stacked_show_percentage" widget="boolean_toggle"/>
+                    </group>
+                </group>
+
+                <group string="Progress Segments" invisible="chart_type != 'stacked_progress'">
+                    <field name="stacked_segment_ids" nolabel="1" colspan="2">
+                        <list editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name" placeholder="e.g. Overdue H+1"/>
+                            <field name="color" widget="color"/>
+                            <field name="domain" placeholder="[('task_status', '=', 'overdue_1')]"/>
+                        </list>
+                    </field>
+                </group>
+
+                <!-- Filter Layout Configuration -->
+                <group string="Filter Configuration" invisible="chart_type != 'filter'">
+                    <group>
+                        <field name="filter_type" widget="radio" options="{'horizontal': true}"/>
+                        <field name="filter_label"/>
+                        <field name="filter_placeholder"/>
+                        <field name="filter_technical_name" placeholder="e.g. area_manager, spv, admin_manager"/>
+                    </group>
+                    <group>
+                        <field name="filter_model_id" options="{'no_create': True, 'no_open': True}" invisible="filter_type not in ['many2one']"/>
+                        <field name="filter_backend_model_id" invisible="1"/>
+                        <field name="filter_field_id" options="{'no_create': True, 'no_open': True}" invisible="filter_type not in ['many2one', 'selection']" domain="[('model_id', '=', filter_backend_model_id)]"/>
+                        <field name="filter_domain" invisible="filter_type != 'many2one'" placeholder="e.g. [('company_type', '=', 'company')]"/>
+                        <field name="filter_date_field_id" options="{'no_create': True, 'no_open': True}" invisible="filter_type != 'date_range'" domain="[('model_id', '=', model_id), ('ttype', 'in', ['date', 'datetime'])]"/>
+                        <field name="filter_date_start_default" invisible="filter_type != 'date_range'" placeholder="e.g. start_last_month"/>
+                        <field name="filter_date_end_default" invisible="filter_type != 'date_range'" placeholder="e.g. end_last_month"/>
+                    </group>
+                </group>
+
+                <!-- Dashboard Filter Mappings - for linking charts to global filters -->
+                <group string="Dashboard Filter Mappings" invisible="chart_type in ['filter', 'greeting', 'quote', 'birthday', 'label']">
+                    <p class="text-muted" colspan="2">
+                        Configure how this chart responds to dashboard Filter layouts. Each mapping links a filter type to a field on your model.
+                    </p>
+                    <field name="filter_mapping_ids" nolabel="1" colspan="2">
+                        <list editable="bottom">
+                            <field name="filter_type"/>
+                            <field name="filter_technical_name" placeholder="e.g. area_manager"/>
+                            <field name="target_field_id" options="{'no_create': True, 'no_open': True}" domain="[('model_id', '=', parent.model_id)]"/>
+                        </list>
+                    </field>
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

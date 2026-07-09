@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_kwitansi_other_receivable">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+            <div class="page">
+                    <table width="100%" class="table table-borderless">
+                        <tr>
+                            <td width="70%"></td>
+                            <td width="30%" style="text-align:right;">
+                                <b><span t-field="doc.company_id"/></b><br/>
+                                <span t-field="doc.company_id.street"/><br/>
+                                <span t-field="doc.company_id.state_id.name"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table table-borderless" width="100%" style="font-size:14px;">
+                        <tr>
+                            <td style="width: 20%; padding: 0px; margin: 0px;">No Transaksi</td>
+                            <td style="width: 2%; padding: 0px; margin: 0px;">:</td>
+                            <td style="width: 78%; padding: 0px; margin: 0px;"><span t-esc="doc.name"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0px; margin: 0px;">No Kwitansi</td>
+                            <td style="padding: 0px; margin: 0px;">:</td>
+                            <td style="padding: 0px; margin: 0px;"><span t-esc="doc.register_kwitansi_line_id.name"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0px; margin: 0px;">Sudah terima dari</td>
+                            <td style="padding: 0px; margin: 0px;">:</td>
+                            <td style="padding: 0px; margin: 0px;"><span t-esc="doc.partner_id.name"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0px; margin: 0px;">Banyaknya uang</td>
+                            <td style="padding: 0px; margin: 0px;">:</td>
+                            <td style="padding: 0px; margin: 0px;" class="text-end">
+                                Rp <span t-esc="'{:,.2f}'.format(doc.amount_total)"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0px; margin: 0px;">Terbilang</td>
+                            <td style="padding: 0px; margin: 0px;">:</td>
+                            <td style="padding: 0px; margin: 0px;" class="text-end">## <span t-esc="terbilang(doc.amount_total)"/> ##</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0px; margin: 0px;">Untuk pembayaran</td>
+                            <td style="padding: 0px; margin: 0px;">:</td>
+                            <td style="padding: 0px; margin: 0px;"><span t-esc="doc.memo"/></td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <t t-set="lokasi" t-value="doc.company_id.state_id.name or 'LAMPUNG'"/>
+                    <p>
+                        <t t-esc="lokasi"/><br/>
+                        <span t-esc="doc.date.strftime('%d-%m-%Y')"/>
+                    </p>
+                    <br/><br/><br/>
+                    <p>
+                        <span t-esc="print_employee(doc.create_uid.id)"/>,
+                        <span t-esc="get_local_time()"/>
+                    </p>
+                    <p style="padding: 0px; margin: 0px;">
+                        Putih:Konsumen; Kuning:Finance; Hijau:Accounting; Biru:Finance Company (Leasing); Merah:Kasir
+                    </p>
+                    <p style="padding: 0px; margin: 0px;">
+                        <td class="no-border">Cetakan ke: &#160;<span t-esc="print_counter()"/></td>
+                    </p>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="paperformat_other_receivable" model="report.paperformat">
+            <field name="name">Other Receivable Report</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="css_margins" eval="True"/>
+            <field name="header_spacing">3</field>
+            <field name="dpi">90</field>
+        </record>
+
+    <record id="action_report_tw_other_receivable_report" model="ir.actions.report">
+        <field name="name">Other Receivable Report</field>
+        <field name="model">tw.other.receivable</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tw_other_receivable.report_kwitansi_other_receivable</field>
+        <field name="report_file">tw_other_receivable.report_kwitansi_other_receivable</field>
+        <field name="print_report_name">'Other Receivable - %s' % object.name</field>
+        <field name="paperformat_id" ref="paperformat_other_receivable"/>
+    </record>
+
+</odoo>

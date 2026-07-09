@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_stock_distribution_showroom,tw_stock_distribution_showroom,model_tw_stock_distribution,base.group_user,1,0,0,0
+access_tw_stock_distribution_showroom_line,tw_stock_distribution_showroom_line,model_tw_stock_distribution_line,base.group_user,1,0,0,0
+access_tw_stock_distribution_workshop,tw_stock_distribution_workshop,model_tw_stock_distribution,base.group_user,1,0,0,0
+access_tw_stock_distribution_workshop_line,tw_stock_distribution_workshop_line,model_tw_stock_distribution_line,base.group_user,1,0,0,0

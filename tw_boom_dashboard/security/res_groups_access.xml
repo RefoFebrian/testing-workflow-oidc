@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- ACCESS MENU BI DASHBOARD (Parent Module untuk dashboard BOOM, BI Dashboard, dll) -->
+        <record id="group_tw_boom_access_bi_dashboard_menu" model="res.groups">
+            <field name="category_id" ref="tw_boom.tw_module_category_boom"/>
+            <field name="name">TW BOOM Access BI Dashboard Menu</field>
+        </record>
+    </data>
+
+     <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('tw_boom_dashboard.group_tw_boom_access_bi_dashboard_menu')),
+            ]"/>
+        </record>
+     </data>
+</odoo>

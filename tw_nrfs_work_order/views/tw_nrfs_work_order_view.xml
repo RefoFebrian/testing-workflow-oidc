@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_nrfs_vendor_work_order_form_view" model="ir.ui.view" >
+            <field name="name">tw.nrfs.work.order.form</field>
+            <field name="model">tw.nrfs</field>
+            <field name="inherit_id" ref="tw_nrfs.tw_nrfs_vendor_form_view"/>
+            <field name="arch" type="xml">
+                <button name="action_confirm" position="after">
+                    <button name="action_create_wo" string="Create / View WO" type="object" class="oe_highlight" invisible="state in ['confirmed','in_progress'] and is_order_sparepart == True and is_fulfilled_sparepart == False" groups="tw_nrfs.tw_nrfs_confirm_group_button_read,tw_nrfs.tw_nrfs_admin_confirm_group_button_read"/>
+                </button>
+        		<xpath expr="//page[@name='audit_trail']" position="before">
+                    <page name="history_wo" string="History WO">
+                        <field name="work_order_ids" readonly="1">
+                            <list>
+                                <field name="name" />
+                                <field name="date" />
+                                <field name="open_date" />
+                            </list>
+                            <form>
+                                <sheet>
+                                    <group>
+                                        <group>
+                                            <field name="name" readonly="1" />
+                                        </group>
+                                        <group>
+                                            <field name="date" readonly="1" />
+                                            <field name="open_date" readonly="1" />
+                                        </group>
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tw_nrfs_work_order_form_view" model="ir.ui.view" >
+            <field name="name">tw.nrfs.work.order.form</field>
+            <field name="model">tw.nrfs</field>
+            <field name="inherit_id" ref="tw_nrfs.tw_nrfs_form_view"/>
+            <field name="arch" type="xml">
+        		<xpath expr="//page[@name='detail']" position="after">
+                    <page name="history_wo" string="History WO">
+                        <field name="work_order_ids" readonly="1">
+                            <list>
+                                <field name="name" />
+                                <field name="date" />
+                                <field name="open_date" />
+                            </list>
+                            <form>
+                                <sheet>
+                                    <group>
+                                        <group>
+                                            <field name="name" readonly="1" />
+                                        </group>
+                                        <group>
+                                            <field name="date" readonly="1" />
+                                            <field name="open_date" readonly="1" />
+                                        </group>
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

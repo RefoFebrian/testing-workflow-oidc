@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_other_receivable_print">
+        <t t-set="scale" t-value="1.1"/>
+        <t t-set="size_26" t-value="26 * scale"/>
+        <t t-set="size_24" t-value="24 * scale"/>
+        <t t-set="size_22" t-value="22 * scale"/>
+        <t t-set="size_20" t-value="20 * scale"/>
+        <t t-set="size_18" t-value="18 * scale"/>
+        <t t-set="size_16" t-value="16 * scale"/>
+        <t t-set="size_15" t-value="15 * scale"/>
+        <t t-set="size_14" t-value="14 * scale"/>
+        <t t-set="size_13" t-value="13 * scale"/>
+        <t t-set="size_12" t-value="12 * scale"/>
+        <t t-set="size_11" t-value="11 * scale"/>
+        <t t-set="size_10" t-value="10 * scale"/>
+        <t t-set="size_9" t-value="9 * scale"/>
+        <t t-set="size_8" t-value="8 * scale"/>
+        <t t-set="size_7" t-value="7 * scale"/>
+        <t t-set="size_6" t-value="6 * scale"/>
+        <t t-set="size_5" t-value="5 * scale"/>
+        <t t-set="size_4" t-value="4 * scale"/>
+        <t t-set="size_3" t-value="3 * scale"/>
+        <t t-set="size_2" t-value="2 * scale"/>
+        <t t-set="size_1" t-value="1 * scale"/>
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page" t-attf-style="font-size: {{size_15}}px;">
+
+                    <!-- Header: Company Info + Title -->
+                    <table width="100%" style="border: 1px solid #000; border-collapse: collapse;">
+                        <tr>
+                            <td width="62%" style="border: 1px solid #000; vertical-align: top;">
+                                <b t-attf-style="font-size: {{size_16}}px;">
+                                    <span t-field="doc.company_id"/>
+                                </b>
+                                <br/>
+                                <table width="100%" t-attf-style="font-size: {{size_15}}px; border: none;">
+                                    <tr>
+                                        <td>
+                                            <span t-field="doc.company_id.street"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span t-field="doc.company_id.state_id.name"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td width="38%" style="border: 1px solid #000; vertical-align: top;">
+                                <b t-attf-style="font-size: {{size_16}}px;">PIUTANG LAIN-LAIN</b>
+                                <br/>
+                                <table width="100%" t-attf-style="font-size: {{size_15}}px; border: none;">
+                                    <tr>
+                                        <td width="30%">No</td>
+                                        <td width="5%">:</td>
+                                        <td>
+                                            <span t-field="doc.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tanggal</td>
+                                        <td>:</td>
+                                        <td>
+                                            <span t-field="doc.date" t-options='{"widget": "date", "format": "dd-MM-yyyy"}'/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <!-- Detail Info: Customer -->
+                    <table width="100%" style="border: 1px solid #000; border-collapse: collapse;">
+                        <tr>
+                            <td style="border: 1px solid #000;">
+                                <table width="100%" t-attf-style="font-size: {{size_15}}px; border: none;">
+                                    <tr>
+                                        <td width="15%">Tanggal</td>
+                                        <td width="3%">:</td>
+                                        <td>
+                                            <span t-field="doc.date" t-options='{"widget": "date", "format": "dd-MM-yyyy"}'/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tanggal Jtp</td>
+                                        <td>:</td>
+                                        <td>
+                                            <span t-field="doc.due_date" t-options='{"widget": "date", "format": "dd-MM-yyyy"}'/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pelanggan</td>
+                                        <td>:</td>
+                                        <td>
+                                            <span t-field="doc.partner_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <span t-field="doc.partner_id.street"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <span t-field="doc.partner_id.state_id.name"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- Line Items Table -->
+                    <table width="100%" t-attf-style="border: 1px solid #000; border-collapse: collapse; font-size: {{size_15}}px;">
+                        <tr>
+                            <td width="5%" style="border: 1px solid #000; text-align: center;">No.</td>
+                            <td width="33%" style="border: 1px solid #000;">No Rekening</td>
+                            <td width="35%" style="border: 1px solid #000;">Keterangan</td>
+                            <td width="27%" style="border: 1px solid #000; text-align: left;">Jumlah Harga</td>
+                        </tr>
+                        <t t-set="no" t-value="0"/>
+                        <t t-foreach="doc.line_cr_ids" t-as="line">
+                            <t t-set="no" t-value="no + 1"/>
+                            <tr>
+                                <td style="border: 1px solid #000; text-align: right;">
+                                    <t t-esc="no"/>
+                                </td>
+                                <td style="border: 1px solid #000;">
+                                    <span t-field="line.account_id.name"/>
+                                </td>
+                                <td style="border: 1px solid #000;">
+                                    <span t-field="line.name"/>
+                                </td>
+                                <td style="border: 1px solid #000; text-align: right;" class="text-end">
+                                    <span t-esc="'{0:,.0f}'.format(line.amount).replace(',', '.')"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+
+                    <!-- Footer: Totals -->
+                    <table width="100%" t-attf-style="border: 1px solid #000; border-collapse: collapse; font-size: {{size_15}}px;">
+                        <tr>
+                            <td width="38%" style="border: 1px solid #000; vertical-align: top;">
+                                <br/>
+                                <br/>
+                                <br/>
+                                <span t-esc="doc.create_uid.name"/>
+,                                <span t-esc="get_local_time()"/>
+                            </td>
+                            <td width="35%" style="border: 1px solid #000; vertical-align: top;">
+                                <table width="100%" style="border: none;">
+                                    <tr>
+                                        <td>Untaxed Amount</td>
+                                    </tr>
+                                    <tr>
+                                        <td>DPP</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PPN</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PPh</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td width="27%" style="border: 1px solid #000; text-align: right; vertical-align: top;" class="text-end">
+                                <table width="100%" style="border: none;">
+                                    <tr>
+                                        <td style="text-align: right;">
+                                            <span t-esc="'{0:,.0f}'.format(doc.amount_untaxed).replace(',', '.')"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right;" class="text-end">
+                                            <span t-esc="'{0:,.0f}'.format(doc.amount_untaxed).replace(',', '.')"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right;" class="text-end">
+                                            <span t-esc="'{0:,.0f}'.format(doc.amount_tax).replace(',', '.')"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right;">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right;" class="text-end">
+                                            <span t-esc="'{0:,.0f}'.format(doc.amount_total).replace(',', '.')"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- Terbilang -->
+                    <p t-attf-style="margin-top: 5px; font-size: {{size_15}}px;">
+                        ##                        <span t-esc="terbilang(doc.amount_total)"/>
+ ##
+                    </p>
+
+                    <!-- Print Counter -->
+                    <p t-attf-style="font-size: {{size_12}}px; padding: 0; margin: 0;">
+                        Cetakan ke: &#160;<span t-esc="print_counter(doc.id)"/>
+                    </p>
+
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <!-- Paper Format -->
+    <record id="paperformat_other_receivable_print" model="report.paperformat">
+        <field name="name">Other Receivable Print</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">297</field>
+        <field name="page_width">200</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">6</field>
+        <field name="margin_bottom">6</field>
+        <field name="margin_left">6</field>
+        <field name="margin_right">6</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">3</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <!-- Report Action -->
+    <record id="action_report_other_receivable_print" model="ir.actions.report">
+        <field name="name">Piutang Lain-Lain</field>
+        <field name="model">tw.other.receivable</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tw_other_receivable.report_other_receivable_print</field>
+        <field name="report_file">tw_other_receivable.report_other_receivable_print</field>
+        <field name="print_report_name">'Piutang Lain-Lain - %s' % object.name</field>
+        <field name="paperformat_id" ref="paperformat_other_receivable_print"/>
+    </record>
+
+</odoo>

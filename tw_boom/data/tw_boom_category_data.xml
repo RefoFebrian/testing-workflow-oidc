@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    <!-- AR -->
+        <record id="tw_boom_category_ar_unit_pelunasan_uang_muka_dp" model="tw.boom.category">
+            <field name="name">Pelunasan Uang Muka (DP)</field>
+            <field name="periode">daily</field>
+            <field name="escalation_periode">hour</field>
+            <field name="due_date_day">1</field>
+            <field name="due_date_hour">1</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_ar"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_unit"/>
+        </record>
+
+        <record id="tw_boom_category_ar_unit_pelunasan_uang_muka_sl" model="tw.boom.category">
+            <field name="name">Pelunasan Unit (SL)</field>
+            <field name="periode">weekly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">7</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_ar"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_unit"/>
+        </record>
+
+        <record id="tw_boom_category_ar_unit_pelunasan_subsidi_finco_sf" model="tw.boom.category">
+            <field name="name">Pelunasan Subsidi Finco (SF)</field>
+            <field name="periode">weekly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">9</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_ar"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_unit"/>
+        </record>
+
+        <record id="tw_boom_category_ar_unit_pelunasan_other_receiveable_dn" model="tw.boom.category">
+            <field name="name">Pelunasan Other Receiveable (DN)</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">30</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_ar"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_unit"/>
+        </record>
+
+        <record id="tw_boom_category_ar_unit_pelunasan_subsidi_barang_md_dg" model="tw.boom.category">
+            <field name="name">Pelunasan Subsidi Barang MD (DG)</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">120</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_ar"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_unit"/>
+        </record>
+
+        <record id="tw_boom_category_ar_unit_pelunasan_subsidi_program_md_scp" model="tw.boom.category">
+            <field name="name">Pelunasan Subsidi Program MD (SCP)</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">120</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_ar"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_unit"/>
+        </record>
+
+        <record id="tw_boom_category_ar_part_pelunasan_wo_reguler" model="tw.boom.category">
+            <field name="name">Pelunasan WO Reguler</field>
+            <field name="periode">daily</field>
+            <field name="escalation_periode">hour</field>
+            <field name="due_date_day">1</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H23</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_ar"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_part"/>
+        </record>
+
+        <record id="tw_boom_category_ar_part_pelunasan_collecting_kpb" model="tw.boom.category">
+            <field name="name">Pelunasan Collecting KPB</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">90</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H23</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_ar"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_part"/>
+        </record>
+
+        <record id="tw_boom_category_ar_part_pelunasan_wo_claim" model="tw.boom.category">
+            <field name="name">Pelunasan WO Claim</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">60</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H23</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_ar"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_part"/>
+        </record>
+
+    <!-- Cash -->
+    <!-- Cashcount -->
+        <record id="tw_boom_category_cash_cashcount_cashcount" model="tw.boom.category">
+            <field name="name">Cashcount</field>
+            <field name="periode">daily</field>
+            <field name="escalation_periode">hour</field>
+            <field name="due_date_day">1</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_cash"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_cashcount"/>
+        </record>
+
+        <record id="tw_boom_category_cash_cashcount_saldo_petty_cash_showroom" model="tw.boom.category">
+            <field name="name">Saldo Petty Cash Showroom</field>
+            <field name="periode">daily</field>
+            <field name="escalation_periode">hour</field>
+            <field name="due_date_day">1</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_cash"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_cashcount"/>
+        </record>
+
+        <record id="tw_boom_category_cash_cashcount_pust_harian_showroom" model="tw.boom.category">
+            <field name="name">PUST Harian Showroom</field>
+            <field name="periode">daily</field>
+            <field name="escalation_periode">hour</field>
+            <field name="due_date_day">1</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_cash"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_cashcount"/>
+        </record>
+
+        <record id="tw_boom_category_cash_cashcount_pust_harian_workshop" model="tw.boom.category">
+            <field name="name">PUST Harian Workshop</field>
+            <field name="periode">daily</field>
+            <field name="escalation_periode">hour</field>
+            <field name="due_date_day">1</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H23</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_cash"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_cashcount"/>
+        </record>
+
+    <!-- Petty Cash -->
+        <record id="tw_boom_category_cash_petty_cash_reimburse_petty_cash" model="tw.boom.category">
+            <field name="name">Reimburse Petty Cash</field>
+            <field name="periode">weekly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">7</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_cash"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_cash_petty_cash"/>
+        </record>
+
+    <!-- Reconcile Bank -->
+        <record id="tw_boom_category_cash_reconcile_bank_bank_in" model="tw.boom.category">
+            <field name="name">Bank In</field>
+            <field name="periode">daily</field>
+            <field name="escalation_periode">hour</field>
+            <field name="due_date_day">2</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_cash"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_reconcile_bank"/>
+        </record>
+
+        <record id="tw_boom_category_cash_reconcile_bank_bank_out" model="tw.boom.category">
+            <field name="name">Bank Out</field>
+            <field name="periode">daily</field>
+            <field name="escalation_periode">hour</field>
+            <field name="due_date_day">2</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_cash"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_reconcile_bank"/>
+        </record>
+        
+    <!-- Stock -->
+        <record id="tw_boom_category_stock_unit_intransit_unit_penerima" model="tw.boom.category">
+            <field name="name">Intransit Unit (Penerima)</field>
+            <field name="periode">daily</field>
+            <field name="escalation_periode">hour</field>
+            <field name="due_date_day">1</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_stock"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_stock_unit"/>
+        </record>
+        
+        <record id="tw_boom_category_stock_unit_unit_undelivered" model="tw.boom.category">
+            <field name="name">Unit Undelivered</field>
+            <field name="periode">daily</field>
+            <field name="escalation_periode">hour</field>
+            <field name="due_date_day">1</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_stock"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_stock_unit"/>
+        </record>
+
+        <record id="tw_boom_category_stock_unit_movement_aging_pameran" model="tw.boom.category">
+            <field name="name">Movement Aging Pameran</field>
+            <field name="periode">weekly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">14</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_stock"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_stock_unit"/>
+        </record>
+
+        <record id="tw_boom_category_stock_unit_movement_aging_pos" model="tw.boom.category">
+            <field name="name">Movement Aging POS</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">30</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_stock"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_stock_unit"/>
+        </record>
+
+        <record id="tw_boom_category_stock_unit_unit_nfrs" model="tw.boom.category">
+            <field name="name">Unit NFRS</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">14</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_stock"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_stock_unit"/>
+        </record>
+
+        <record id="tw_boom_category_stock_part_intransit_part_penerima" model="tw.boom.category">
+            <field name="name">Intransit Part (Penerima)</field>
+            <field name="periode">daily</field>
+            <field name="escalation_periode">hour</field>
+            <field name="due_date_day">1</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H23</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_stock"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_stock_part"/>
+        </record>
+
+        <record id="tw_boom_category_stock_part_part_not_good" model="tw.boom.category">
+            <field name="name">Part Not Good</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">30</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H23</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_stock"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_stock_part"/>
+        </record>
+
+        <record id="tw_boom_category_stock_stnk_bpkb_aging_stock_bpkb_cash_current" model="tw.boom.category">
+            <field name="name">Aging Stock BPKB Cash - Perorangan (Current)</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">90</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_stock"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_stock_stnk_bpkb"/>
+        </record>
+
+        <record id="tw_boom_category_stock_stnk_bpkb_aging_stock_bpkb_cash_instansi_current" model="tw.boom.category">
+            <field name="name">Aging Stock BPKB Cash - Perusahaan/Instansi (Current)</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">90</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_stock"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_stock_stnk_bpkb"/>
+        </record>
+
+        <record id="tw_boom_category_stock_stnk_bpkb_aging_stock_bpkb_current_credit" model="tw.boom.category">
+            <field name="name">Aging Stock BPKB Credit (Current)</field>
+            <field name="periode">weekly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">7</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H123</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_stock"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_stock_stnk_bpkb"/>
+        </record>
+
+        <record id="tw_boom_category_stock_stnk_bpkb_aging_stock_stnk_current" model="tw.boom.category">
+            <field name="name">Aging Stock STNK (Current)</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">180</field>
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_stock"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_stock_stnk_bpkb"/>
+        </record>
+
+        <record id="tw_boom_category_stock_stnk_bpkb_aging_stock_bpkb_overdue" model="tw.boom.category">
+            <field name="name">Aging Stock BPKB (Overdue)</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">90</field>  
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H123</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_stock"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_stock_stnk_bpkb"/>
+        </record>
+
+        <record id="tw_boom_category_stock_stnk_bpkb_aging_stock_stnk_overdue" model="tw.boom.category">
+            <field name="name">Aging Stock STNK (Overdue)</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">180</field>  
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H123</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_stock"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_stock_stnk_bpkb"/>
+        </record>
+
+        <record id="tw_boom_category_stock_stnk_bpkb_revisi_stnk" model="tw.boom.category">
+            <field name="name">Revisi STNK</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">30</field>  
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_stock"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_stock_stnk_bpkb"/>
+        </record>
+
+        <record id="tw_boom_category_stock_stnk_bpkb_revisi_bpkb" model="tw.boom.category">
+            <field name="name">Revisi BPKB</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">30</field>  
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_stock"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_stock_stnk_bpkb"/>
+        </record>
+        
+        <record id="tw_boom_category_stock_stnk_bpkb_outstanding_stnk" model="tw.boom.category">
+            <field name="name">Outstanding STNK (Belum Terima)</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">30</field>  
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H123</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_stock"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_stock_stnk_bpkb"/>
+        </record>
+
+        <record id="tw_boom_category_stock_stnk_bpkb_outstanding_bpkb" model="tw.boom.category">
+            <field name="name">Outstanding BPKB (Belum Terima)</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">120</field>  
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H123</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_stock"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_stock_stnk_bpkb"/>
+        </record>
+
+        <record id="tw_boom_category_others_faktur_faktur_not_ok_dms" model="tw.boom.category">
+            <field name="name">Faktur Not OK (DMS)</field>
+            <field name="periode">daily</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">1</field>  
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_others"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_faktur"/>
+        </record>
+
+        <record id="tw_boom_category_others_work_order_wip_harian" model="tw.boom.category">
+            <field name="name">WIP Harian</field>
+            <field name="periode">weekly</field>
+            <field name="escalation_periode">hour</field>
+            <field name="due_date_day">7</field>  
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H23</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_others"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_work_order"/>
+        </record>
+
+        <record id="tw_boom_category_others_calendar_activity_stock_opname_unit_ksu" model="tw.boom.category">
+            <field name="name">Stock Opname Unit dan KSU</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">7</field>  
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_others"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_calender_activity"/>
+        </record>
+
+        <record id="tw_boom_category_others_calendar_activity_stock_opname_bpkb" model="tw.boom.category">
+            <field name="name">Stock Opname BPKB</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">1</field>  
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_others"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_calender_activity"/>
+        </record>
+
+        <record id="tw_boom_category_others_calendar_activity_stock_opname_stnk" model="tw.boom.category">
+            <field name="name">Stock Opname STNK</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">1</field>  
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_others"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_calender_activity"/>
+        </record>
+
+        <record id="tw_boom_category_others_calendar_activity_stock_opname_direct_gift" model="tw.boom.category">
+            <field name="name">Stock Opname Direct Gift</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">1</field>  
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_others"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_calender_activity"/>
+        </record>
+
+        <record id="tw_boom_category_others_calendar_activity_stock_opname_sparepart" model="tw.boom.category">
+            <field name="name">Stock Opname Sparepart</field>
+            <field name="periode">monthly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">7</field>  
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H23</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_others"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_calender_activity"/>
+        </record>
+
+        <record id="tw_boom_category_others_calendar_activity_review_skc" model="tw.boom.category">
+            <field name="name">Review SKC</field>
+            <field name="periode">weekly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">6</field>  
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H1</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_others"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_calender_activity"/>
+        </record>
+
+        <record id="tw_boom_category_others_calendar_review_ceklis_tools" model="tw.boom.category">
+            <field name="name">Review Checklist Tools</field>
+            <field name="periode">weekly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">6</field>  
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H23</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_others"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_calender_activity"/>
+        </record>
+
+        <record id="tw_boom_category_others_calendar_review_wip" model="tw.boom.category">
+            <field name="name">Review WIP</field>
+            <field name="periode">weekly</field>
+            <field name="escalation_periode">day</field>
+            <field name="due_date_day">6</field>  
+            <field name="classification">resiko</field>
+            <field name="dealer_category">H23</field>
+            <field name="main_category_id" ref="tw_boom.tw_boom_main_kategori_others"/>
+            <field name="sub_category_id" ref="tw_boom.tw_boom_sub_kategori_calender_activity"/>
+        </record>
+
+    </data>
+</odoo>

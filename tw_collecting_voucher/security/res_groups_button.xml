@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Button Groups -->
+        <record id="group_tw_collecting_voucher_confirm" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Button Collecting Voucher Confirm</field>
+        </record>
+        
+        
+    </data>
+    <data>
+        <!-- Add all button groups to System Admin -->
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('group_tw_collecting_voucher_confirm')),
+            ]" />
+        </record>
+    </data>
+</odoo>

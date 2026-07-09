@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="paperformat_baso_unit" model="report.paperformat">
+            <field name="name">Berita Acara Stock Opname Unit</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">15</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">15</field>
+            <field name="margin_right">15</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">3</field>
+            <field name="dpi">80</field>
+        </record>
+    </data>
+
+    <data>
+        <template id="berita_acara_stock_opname">
+            <t t-call="web.html_container">
+                <t t-call="tw_web.teto_report_layout">
+                    <t t-call="tw_web.teto_report_styles_base" />
+                    <div class="page">
+                        <div class="oe_structure"/>
+                            <div class="row">
+                                <div class="col-12 border">
+                                    <div class="row">
+                                        <div class="col-12 text-center bolder border-bottom">
+                                            BERITA ACARA STOCK OPNAME <t t-esc="'AKSESORIS' if division == 'Extras' else (division.upper() if division else 'UNIT')" />
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-12 p-2 text-start">
+                                            <p class="bolder" style="margin-bottom:5px;">Nomor Referensi: <t t-esc="opname_obj.name" /></p>
+                                            <table class="teto-row-border">
+                                                <tr>
+                                                    <th width="20%">Branch</th>
+                                                    <th width="3%">:</th>
+                                                    <th width="27%"><t t-esc="opname_obj.company_id.name" /></th>
+                                                    <th width="20%">Jam Mulai</th>
+                                                    <th width="3%">:</th>
+                                                    <th width="27%"><t t-esc="opname_obj.periode_awal" /></th>
+                                                </tr>
+                                                <tr>
+                                                    <th>Division</th>
+                                                    <th>:</th>
+                                                    <th><t t-esc="division" /></th>
+                                                    <th>Jam Selesai</th>
+                                                    <th>:</th>
+                                                    <th><t t-esc="opname_obj.periode_akhir" /></th>
+                                                </tr>
+                                                <tr>
+                                                    <th>Tanggal SO</th>
+                                                    <th>:</th>
+                                                    <th colspan="4"><t t-esc="opname_obj.date.strftime('%d-%m-%Y') if opname_obj.date else ''"/></th>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col p-2">Hasil Stock Opname hari ini sebagai berikut:</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <t t-if="division == 'Unit'">
+                                            <t t-foreach="range(cols)" t-as="col">
+                                                <div class="col-4 px-2">
+                                                    <table class="teto-table-content">
+                                                        <thead>
+                                                            <tr>
+                                                                <th rowspan="2">Type</th>
+                                                                <th colspan="2">Jumlah</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>System</th>
+                                                                <th>Fisik</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr t-foreach="rows[col]" t-as="cell">
+                                                                <td><t t-esc="cell['type_prod']" /></td>
+                                                                <td class="text-center"><t t-esc="cell['total_system']" /></td>
+                                                                <td class="text-center"><t t-esc="cell['total_fisik']" /></td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <th class="text-start">Total</th>
+                                                                <th><t t-esc="col_totals[col]['total_system']" /></th>
+                                                                <th><t t-esc="col_totals[col]['total_fisik']" /></th>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </t>
+                                        </t>
+                                        <t t-if="division == 'Extras'">
+                                            <div class="col-12 px-2">
+                                                <table class="teto-table-content">
+                                                    <thead>
+                                                        <tr>
+                                                            <td colspan="4" class="text-start">Total Secara Sistem: <span style="float:right;"><t t-esc="sum(ress['total_sistem'] for ress in results)" /></span></td>
+                                                            <td colspan="4" class="text-start">Total Secara Fisik: <span style="float:right;"><t t-esc="sum(ress['total_fisik'] for ress in results)" /></span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Product Aksesoris</th>
+                                                            <th>Good</th>
+                                                            <th>Not Good</th>
+                                                            <th>Total Fisik</th>
+                                                            <th>Total Sistem</th>
+                                                            <th>(+/- NG dr SO lalu)</th>
+                                                            <th>Selisih</th>
+                                                            <th>Selisih SO lalu</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr t-foreach="results" t-as="ress">
+                                                            <td><t t-esc="ress.get('categ')" /></td>
+                                                            <td><t t-esc="ress.get('qty_good')" /></td>
+                                                            <td><t t-esc="ress.get('qty_not_good')" /></td>
+                                                            <td><t t-esc="ress.get('total_fisik')" /></td>
+                                                            <td><t t-esc="ress.get('total_sistem')" /></td>
+                                                            <td><t t-esc="ress.get('ng_prev')" /></td>
+                                                            <td><t t-esc="ress.get('selisih')" /></td>
+                                                            <td><t t-esc="ress.get('selisih_prev')" /></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </t>
+                                    </div>
+
+                                    <t t-if="division == 'Unit'">
+                                        <div class="row mt-3">
+                                            <div class="col-12 px-2">
+                                                <table class="teto-table-content">
+                                                    <thead>
+                                                        <tr>
+                                                            <th colspan="2">Rekapitulasi</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="text-start">Total Secara Sistem</th>
+                                                            <th><t t-esc="sum(sistem['total_system'] for sistem in data)" /></th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="text-start">Total Secara Fisik</th>
+                                                            <th><t t-esc="sum(sistem['total_fisik'] for sistem in data)" /></th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </t>
+
+                                    <div class="row">
+                                        <div class="col-12 p-2">
+                                            <strong><u>PERNYATAAN</u></strong><br />
+                                            Proses stock opname ini telah berjalan dengan baik dan hasil ini telah dinyatakan sah untuk diakui dan telah didukung oleh dokumen yang seharusnya dilampirkan.
+                                            <table width="100%">
+                                                <tr><td class="p-3"><t t-esc="note" /></td></tr>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-12 px-2">
+                                            <table class="teto-table-footer">
+                                                <tr>
+                                                    <th colspan="3"><strong>PERSON IN CHARGE YANG BERTUGAS</strong></th>
+                                                </tr>
+                                                <tr>
+                                                    <th>PIC SO</th>
+                                                    <th colspan="2">Mengetahui</th>
+                                                </tr>
+                                                <tr>
+                                                    <td><br/><br/><br/></td>
+                                                    <td><br/><br/><br/></td>
+                                                    <td><br/><br/><br/></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-start"><t t-esc="opname_obj.adh_id.name" /><br /><strong>ADH</strong></th>
+                                                    <th class="text-start"><t t-esc="opname_obj.pdi_id.name" /><br /><strong>PDI</strong></th>
+                                                    <th class="text-start"><t t-esc="opname_obj.soh_id.name" /><br /><strong>SOH</strong></th>
+                                                </tr>
+                                            </table>
+                                            <span t-esc="employee_obj.name"/>, <span t-esc="date.strftime('%d-%m-%Y') if date else ''"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <div class="oe_structure"/>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

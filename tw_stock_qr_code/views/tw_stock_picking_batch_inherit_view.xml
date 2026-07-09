@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="tw_stock_picking_batch_qr_code_inherit_form_view" model="ir.ui.view">
+            <field name="name">tw.stock.picking.batch.qr.code.inherit.form</field>
+            <field name="model">stock.picking.batch</field>
+            <field name="inherit_id" ref="tw_stock.tw_stock_picking_batch_inherit_form_view" />
+            <field name="arch" type="xml">
+                <field name="lot_id" position="after">
+                    <field name="qr_code" required="division == 'Unit' and parent.picking_type_code == 'incoming'" column_invisible="parent.division != 'Unit' or parent.picking_type_code != 'incoming'"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

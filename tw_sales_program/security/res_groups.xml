@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+    <!-- Master Sales Program Subsidi Barang Group Read -->
+        <record id="group_tw_sales_program_subsidi_barang_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Sales Program Subsidi Barang Read</field>
+        </record>
+        <record id="access_tw_sales_program_subsidi_barang_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sales_program"/>
+            <field name="name">tw_sales_program_subsidi_barang read</field>
+            <field name="group_id" ref="group_tw_sales_program_subsidi_barang_read"/>
+            <field name="perm_read">1</field>
+        </record>
+        <record id="access_tw_sales_program_line_subsidi_barang_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sales_program_line"/>
+            <field name="name">tw_sales_program_line_subsidi_barang read</field>
+            <field name="group_id" ref="group_tw_sales_program_subsidi_barang_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Master Sales Program Subsidi Barang Group Update -->
+        <record id="group_tw_sales_program_subsidi_barang_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Sales Program Subsidi Barang Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_sales_program_subsidi_barang_read'))]"/>
+        </record>
+        <record id="access_tw_sales_program_subsidi_barang_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sales_program"/>
+            <field name="name">tw_sales_program_subsidi_barang update</field>
+            <field name="group_id" ref="group_tw_sales_program_subsidi_barang_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        <record id="access_tw_sales_program_line_subsidi_barang_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sales_program_line"/>
+            <field name="name">tw_sales_program_line_subsidi_barang update</field>
+            <field name="group_id" ref="group_tw_sales_program_subsidi_barang_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Master Sales Program Subsidi Barang Group Delete -->
+        <record id="group_tw_sales_program_subsidi_barang_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Sales Program Subsidi Barang Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_sales_program_subsidi_barang_read'))]"/>
+        </record>
+        <record id="access_tw_sales_program_subsidi_barang_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sales_program"/>
+            <field name="name">tw_sales_program_subsidi_barang delete</field>
+            <field name="group_id" ref="group_tw_sales_program_subsidi_barang_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+        <record id="access_tw_sales_program_line_subsidi_barang_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sales_program_line"/>
+            <field name="name">tw_sales_program_line_subsidi_barang delete</field>
+            <field name="group_id" ref="group_tw_sales_program_subsidi_barang_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+        
+    <!-- Master Sales Program Program Subsidi Group Read -->
+        <record id="group_tw_sales_program_program_subsidi_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Sales Program Program Subsidi Read</field>
+        </record>
+        <record id="access_tw_sales_program_program_subsidi_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sales_program"/>
+            <field name="name">tw_sales_program_program_subsidi read</field>
+            <field name="group_id" ref="group_tw_sales_program_program_subsidi_read"/>
+            <field name="perm_read">1</field>
+        </record>
+        <record id="access_tw_sales_program_line_program_subsidi_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sales_program_line"/>
+            <field name="name">tw_sales_program_line_program_subsidi read</field>
+            <field name="group_id" ref="group_tw_sales_program_program_subsidi_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Master Sales Program Program Subsidi Group Update -->
+        <record id="group_tw_sales_program_program_subsidi_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Sales Program Program Subsidi Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_sales_program_program_subsidi_read'))]"/>
+        </record>
+        <record id="access_tw_sales_program_program_subsidi_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sales_program"/>
+            <field name="name">tw_sales_program_program_subsidi update</field>
+            <field name="group_id" ref="group_tw_sales_program_program_subsidi_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        <record id="access_tw_sales_program_line_program_subsidi_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sales_program_line"/>
+            <field name="name">tw_sales_program_line_program_subsidi update</field>
+            <field name="group_id" ref="group_tw_sales_program_program_subsidi_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Master Sales Program Program Subsidi Group Delete -->
+        <record id="group_tw_sales_program_program_subsidi_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Sales Program Program Subsidi Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_sales_program_program_subsidi_read'))]"/>
+        </record>
+        <record id="access_tw_sales_program_program_subsidi_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sales_program"/>
+            <field name="name">tw_sales_program_program_subsidi delete</field>
+            <field name="group_id" ref="group_tw_sales_program_program_subsidi_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+        <record id="access_tw_sales_program_line_program_subsidi_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sales_program_line"/>
+            <field name="name">tw_sales_program_line_program_subsidi delete</field>
+            <field name="group_id" ref="group_tw_sales_program_program_subsidi_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+    
+    <!-- Master Sales Program Program Voucher Group Read -->
+        <record id="group_tw_sales_program_program_voucher_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Sales Program Program Voucher Read</field>
+        </record>
+        <record id="access_tw_sales_program_program_voucher_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sales_program"/>
+            <field name="name">tw_sales_program_program_voucher read</field>
+            <field name="group_id" ref="group_tw_sales_program_program_voucher_read"/>
+            <field name="perm_read">1</field>
+        </record>
+        <record id="access_tw_sales_program_line_program_voucher_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sales_program_line"/>
+            <field name="name">tw_sales_program_line_program_voucher read</field>
+            <field name="group_id" ref="group_tw_sales_program_program_voucher_read"/>
+            <field name="perm_read">1</field>
+        </record>
+
+        <!-- Master Sales Program Program Voucher Group Update -->
+        <record id="group_tw_sales_program_program_voucher_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Sales Program Program Voucher Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_sales_program_program_voucher_read'))]"/>
+        </record>
+        <record id="access_tw_sales_program_program_voucher_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sales_program"/>
+            <field name="name">tw_sales_program_program_voucher update</field>
+            <field name="group_id" ref="group_tw_sales_program_program_voucher_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+        <record id="access_tw_sales_program_line_program_voucher_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sales_program_line"/>
+            <field name="name">tw_sales_program_line_program_voucher update</field>
+            <field name="group_id" ref="group_tw_sales_program_program_voucher_update"/>
+            <field name="perm_create">1</field>
+            <field name="perm_write">1</field>
+        </record>
+
+        <!-- Master Sales Program Program Voucher Group Delete -->
+        <record id="group_tw_sales_program_program_voucher_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Master Sales Program Program Voucher Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_sales_program_program_voucher_read'))]"/>
+        </record>
+        <record id="access_tw_sales_program_program_voucher_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sales_program"/>
+            <field name="name">tw_sales_program_program_voucher delete</field>
+            <field name="group_id" ref="group_tw_sales_program_program_voucher_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+        <record id="access_tw_sales_program_line_program_voucher_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_sales_program_line"/>
+            <field name="name">tw_sales_program_line_program_voucher delete</field>
+            <field name="group_id" ref="group_tw_sales_program_program_voucher_delete"/>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- TW Selection -->
+        <record id="group_tw_selection_master_sales_program" model="res.groups">
+            <field name="category_id" ref="tw_selection.tw_module_category_selection"/>
+            <field name="name">TW Selection Master Sales Program</field>
+            <field name="implied_ids" eval="[(4, ref('tw_selection.group_tw_selection_update'))]"/>
+        </record>
+
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_tw_sales_program_subsidi_barang_read')),
+                (4,ref('group_tw_sales_program_subsidi_barang_update')),
+                (4,ref('group_tw_sales_program_subsidi_barang_delete')),
+                (4,ref('group_tw_sales_program_program_subsidi_read')),
+                (4,ref('group_tw_sales_program_program_subsidi_update')),
+                (4,ref('group_tw_sales_program_program_subsidi_delete')),
+                (4,ref('group_tw_sales_program_program_voucher_read')),
+                (4,ref('group_tw_sales_program_program_voucher_update')),
+                (4,ref('group_tw_sales_program_program_voucher_delete')),
+                (4,ref('group_tw_selection_master_sales_program')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

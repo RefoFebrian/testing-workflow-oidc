@@ -1,0 +1,5 @@
+<odoo>
+  <data>
+    <menuitem action="tw_part_sales_cancel_action" id="tw_part_sales_cancel_menu" parent="tw_cancellation.submenu_workshop_tw_cancellation" groups="tw_part_sales_cancel.group_tw_part_sales_cancel_read" sequence="3"/>
+  </data>
+</odoo>

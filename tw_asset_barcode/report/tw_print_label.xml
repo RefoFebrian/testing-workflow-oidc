@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="print_barcode_label_asset">
+            <style type="text/css">
+                .parent { padding: 0.5rem }
+                .tbl {
+                    border-collapse: collapse;
+                    border: 1px solid black !important;
+                    font-family: Arial;
+                    margin: 11.33px;
+                    height: 132.28px !important;
+                    width: 264.56px !important;
+                }
+                .tbl td {
+                    text-align: center;
+                    font-size: 16px;
+                    white-space: normal !important;
+                    word-wrap: break-word !important;
+                    padding: 3.77px;
+                }
+                .img { width: 79.37px }
+            </style>
+            <t t-call="web.html_container">
+                <div class="page">
+                    <table t-foreach="looping(data)" t-as="rows">
+                        <t t-foreach="looping(rows)" t-as="cols">
+                            <tr>
+                                <t t-foreach="looping(cols)" t-as="cell">
+                                    <td class="parent">
+                                        <table class="tbl" style="border: 1px solid black !important;">
+                                            <tr>
+                                                <td rowspan="2">
+                                                    <img t-if="logo_base64" style="width: 60px; height: 60px; margin-left: 10px; margin-right: 10px; margin-top: 5px" class="img" t-att-src="'data:image/png;base64,' + logo_base64"/>
+                                                </td>
+                                                <td class="text-end"/>
+                                                <td style="font-size: 1.5rem;font-weight: bolder;vertical-align: bottom;">
+                                                    <span t-esc="cell['number']"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td/>
+                                                <td rowspan="2" style="font-size: 0.9rem; font-weight: bold; vertical-align: middle; text-align: center;">
+                                                    <span t-esc="cell['name']"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="2">
+                                                    <img  style="width: 80px; height: 80px;" class="img" t-att-src="'data:image/png;base64,' + cell['qr_code_base64']"/>
+                                                </td>
+                                                <td/>
+                                            </tr>
+                                            <tr>
+                                                <td/>
+                                                <td style="font-size: 0.7rem; text-align: center; vertical-align: middle;">
+                                                    Property of <span t-esc="company_id.name"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </t>
+                            </tr>
+                        </t>
+                        <p style="page-break-before:always;"/>
+                    </table>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

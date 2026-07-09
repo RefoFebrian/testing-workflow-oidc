@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--
+        =============================================================
+        DGI SPK Endpoint Configurations
+        
+        Endpoint untuk sync SPK dari DGI API
+        Satu endpoint per API Config (HSO, ASP, DAM, DAW, NPM, SINSEN)
+        
+        Note: Struktur parse dibangun dari response_mapping_ids.
+        =============================================================
+        -->
+
+        <!-- ==================== HSO ==================== -->
+        <record id="tw_endpoint_dgi_spk_hso" model="tw.endpoint.configuration">
+            <field name="code">dgi_spk</field>
+            <field name="version">1</field>
+            <field name="url_path">spk/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_hso"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_spk.model_tw_dealer_spk"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+
+        <!-- ==================== ASP ==================== -->
+        <record id="tw_endpoint_dgi_spk_asp" model="tw.endpoint.configuration">
+            <field name="code">dgi_spk</field>
+            <field name="version">1</field>
+            <field name="url_path">spk/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_asp"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_spk.model_tw_dealer_spk"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+
+        <!-- ==================== DAM ==================== -->
+        <record id="tw_endpoint_dgi_spk_dam" model="tw.endpoint.configuration">
+            <field name="code">dgi_spk</field>
+            <field name="version">1</field>
+            <field name="url_path">spk/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_dam"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_spk.model_tw_dealer_spk"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+
+        <!-- ==================== DAW ==================== -->
+        <record id="tw_endpoint_dgi_spk_daw" model="tw.endpoint.configuration">
+            <field name="code">dgi_spk</field>
+            <field name="version">1</field>
+            <field name="url_path">spk/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_daw"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_spk.model_tw_dealer_spk"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+
+        <!-- ==================== NPM ==================== -->
+        <record id="tw_endpoint_dgi_spk_npm" model="tw.endpoint.configuration">
+            <field name="code">dgi_spk</field>
+            <field name="version">1</field>
+            <field name="url_path">spk/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_npm"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_spk.model_tw_dealer_spk"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+
+        <!-- ==================== SINSEN ==================== -->
+        <record id="tw_endpoint_dgi_spk_sinsen" model="tw.endpoint.configuration">
+            <field name="code">dgi_spk</field>
+            <field name="version">1</field>
+            <field name="url_path">spk/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_sinsen"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_spk.model_tw_dealer_spk"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+
+    
+<!-- ==================== WAHANA ==================== -->
+        <record id="tw_endpoint_dgi_spk_wahana" model="tw.endpoint.configuration">
+            <field name="code">dgi_spk</field>
+            <field name="version">1</field>
+            <field name="url_path">spk/read</field>
+            <field name="method">post</field>
+            <field name="config_id" ref="tw_dgi.tw_api_config_dgi_wahana"/>
+            <field name="mode">read</field>
+            <field name="target_model_id" ref="tw_spk.model_tw_dealer_spk"/>
+            <field name="dgi_division_id" ref="tw_dgi.tw_selection_division_dgi_h1"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,2668 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">  
+        <record id="tw_module_category_outgoing_showroom" model="ir.module.category">
+            <field name="name">TW Outgoing Showroom</field>
+        </record>
+        <record id="tw_module_category_incoming_showroom" model="ir.module.category">
+            <field name="name">TW Incoming Showroom</field>
+        </record>
+        <record id="tw_module_category_outgoing_workshop" model="ir.module.category">
+            <field name="name">TW Outgoing Workshop</field>
+        </record>
+        <record id="tw_module_category_incoming_workshop" model="ir.module.category">
+            <field name="name">TW Incoming Workshop</field>
+        </record>
+        
+    <!-- Form Groups -->
+		
+        <record id="group_tw_stock_lot_form_read" model="res.groups">
+			<field name="category_id" ref="tw_base.tw_role" />
+			<field name="name">TW Stock Lot Form Read</field>
+		</record>
+
+        <record id="group_tw_stock_picking_form_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Stock Picking Form Read</field> 
+        </record> 
+
+        <record id="group_tw_stock_move_form_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Stock Move Form Read</field> 
+        </record> 
+
+        <!-- on_incoming_shipment -->
+        <record id="group_tw_stock_picking_showroom_on_incoming_shipment_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Stock Picking Showroom On Incoming Shipment Read</field> 
+        </record> 
+        <record id="access_tw_stock_picking_showroom_on_incoming_shipment_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_showroom_on_incoming_shipment_read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_on_incoming_shipment_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+        <record id="access_tw_stock_lot_showroom_on_incoming_shipment_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_lot"/>
+            <field name="name">tw_stock_lot_showroom_on_incoming_shipment_read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_on_incoming_shipment_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+        <record id="access_tw_stock_move_showroom_on_incoming_shipment_read" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_move" />
+            <field name="name">tw_stock_move_showroom_on_incoming_shipment_read</field>
+            <field name="group_id" ref="group_tw_stock_picking_showroom_on_incoming_shipment_read" />
+            <field name="perm_read">1</field>
+        </record>
+        <record id="group_tw_stock_picking_showroom_on_incoming_shipment_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Stock Picking Showroom On Incoming Shipment update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_showroom_on_incoming_shipment_read'))]"/>
+        </record> 
+        <record id="access_tw_stock_picking_showroom_on_incoming_shipment_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_showroom_on_incoming_shipment_update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_on_incoming_shipment_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>  
+        <record id="group_tw_stock_picking_showroom_on_incoming_shipment_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Stock Picking Showroom On Incoming Shipment delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_showroom_on_incoming_shipment_read'))]"/>
+        </record> 
+        <record id="access_tw_stock_picking_showroom_on_incoming_shipment_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_showroom_on_incoming_shipment_delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_on_incoming_shipment_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>  
+
+        <!-- on_outgoing_shipment -->
+        <record id="group_tw_stock_picking_showroom_on_outgoing_shipment_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_showroom"/>
+            <field name="name">TW Stock Picking Showroom On Outgoing Shipment Read</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_showroom_on_outgoing_shipment_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_showroom_on_outgoing_shipment_read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_on_outgoing_shipment_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_lot_showroom_on_outgoing_shipment_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_lot"/>
+            <field name="name">tw_stock_lot_showroom_on_outgoing_shipment_read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_on_outgoing_shipment_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_move_showroom_on_outgoing_shipment_read" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_move" />
+            <field name="name">tw_stock_move_showroom_on_outgoing_shipment_read</field>
+            <field name="group_id" ref="group_tw_stock_picking_showroom_on_outgoing_shipment_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_stock_picking_showroom_on_outgoing_shipment_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_showroom"/>
+            <field name="name">TW Stock Picking Showroom On Outgoing Shipment update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_showroom_on_outgoing_shipment_read'))]"/>
+        </record> 
+
+        <record id="access_tw_stock_picking_showroom_on_outgoing_shipment_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_showroom_on_outgoing_shipment_update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_on_outgoing_shipment_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record> 
+        <record id="group_tw_stock_picking_showroom_on_outgoing_shipment_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_showroom"/>
+            <field name="name">TW Stock Picking Showroom On Outgoing Shipment delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_showroom_on_outgoing_shipment_read'))]"/>
+        </record> 
+        <record id="access_tw_stock_picking_showroom_on_outgoing_shipment_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_showroom_on_outgoing_shipment_delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_on_outgoing_shipment_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record> 
+
+        <!-- Quality Control Transfer -->
+        <record id="group_tw_stock_picking_showroom_quality_control_transfer_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Stock Picking Showroom Quality Control Transfer Read</field> 
+        </record> 
+        <record id="access_tw_stock_picking_showroom_quality_control_transfer_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_showroom_quality_control_transfer_read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_quality_control_transfer_read"/>  
+            <field name="perm_read">1</field> 
+        </record>
+
+        <record id="access_tw_stock_lot_showroom_quality_control_transfer_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_lot"/>
+            <field name="name">tw_stock_lot_showroom_quality_control_transfer_read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_quality_control_transfer_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_move_showroom_quality_control_transfer_read" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_move" />
+            <field name="name">tw_stock_move_showroom_quality_control_transfer_read</field>
+            <field name="group_id" ref="group_tw_stock_picking_showroom_quality_control_transfer_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_stock_picking_showroom_quality_control_transfer_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Stock Picking Showroom Quality Control Transfer Update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_showroom_quality_control_transfer_read'))]"/>
+        </record> 
+        <record id="access_tw_stock_picking_showroom_quality_control_transfer_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_showroom_quality_control_transfer_update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_quality_control_transfer_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record> 
+        <record id="group_tw_stock_picking_showroom_quality_control_transfer_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Stock Picking Showroom Quality Control Transfer Delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_showroom_quality_control_transfer_read'))]"/>
+        </record> 
+
+        <record id="access_tw_stock_picking_showroom_quality_control_transfer_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_showroom_quality_control_transfer_delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_quality_control_transfer_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+        <!-- Storage Transfer -->
+        <record id="group_tw_stock_picking_showroom_storage_transfer_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Stock Picking Showroom Storage Transfer Read</field> 
+        </record> 
+        <record id="access_tw_stock_picking_showroom_storage_transfer_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_showroom_storage_transfer_read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_storage_transfer_read"/>  
+            <field name="perm_read">1</field> 
+        </record>
+
+        <record id="access_tw_stock_lot_showroom_storage_transfer_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_lot"/>
+            <field name="name">tw_stock_lot_showroom_storage_transfer_read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_storage_transfer_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_move_showroom_storage_transfer_read" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_move" />
+            <field name="name">tw_stock_move_showroom_storage_transfer_read</field>
+            <field name="group_id" ref="group_tw_stock_picking_showroom_storage_transfer_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_stock_picking_showroom_storage_transfer_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Stock Picking Showroom Storage Transfer update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_showroom_storage_transfer_read'))]"/>
+        </record> 
+
+        <record id="access_tw_stock_picking_showroom_storage_transfer_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_showroom_storage_transfer_update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_storage_transfer_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>
+        <record id="group_tw_stock_picking_showroom_storage_transfer_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Stock Picking Showroom Storage Transfer delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_showroom_storage_transfer_read'))]"/>
+        </record> 
+
+        <record id="access_tw_stock_picking_showroom_storage_transfer_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_showroom_storage_transfer_delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_storage_transfer_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+        <!-- Picking Transfer -->
+        <record id="group_tw_stock_picking_showroom_picking_transfer_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_showroom"/>
+            <field name="name">TW Stock Picking Showroom Picking Transfer Read</field> 
+        </record> 
+        <record id="access_tw_stock_picking_showroom_picking_transfer_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_showroom_picking_transfer_read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_picking_transfer_read"/>  
+            <field name="perm_read">1</field> 
+        </record>
+
+        <record id="access_tw_stock_lot_showroom_picking_transfer_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_lot"/>
+            <field name="name">tw_stock_lot_showroom_picking_transfer_read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_picking_transfer_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_move_showroom_picking_transfer_read" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_move" />
+            <field name="name">tw_stock_move_showroom_on_outgoing_shipment_read</field>
+            <field name="group_id" ref="group_tw_stock_picking_showroom_on_outgoing_shipment_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_stock_picking_showroom_picking_transfer_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_showroom"/>
+            <field name="name">TW Stock Picking Showroom Picking Transfer update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_showroom_picking_transfer_read'))]"/>
+        </record> 
+        <record id="access_tw_stock_picking_showroom_picking_transfer_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_showroom_picking_transfer_update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_picking_transfer_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>
+        <record id="group_tw_stock_picking_showroom_picking_transfer_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_showroom"/>
+            <field name="name">TW Stock Picking Showroom Picking Transfer delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_showroom_picking_transfer_read'))]"/>
+        </record> 
+        <record id="access_tw_stock_picking_showroom_picking_transfer_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_showroom_picking_transfer_delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_picking_transfer_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+        
+        <!-- Packing Transfer -->
+        <record id="group_tw_stock_picking_showroom_packing_transfer_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_showroom"/>
+            <field name="name">TW Stock Picking Showroom Packing Transfer Read</field> 
+        </record>
+        <record id="access_tw_stock_picking_showroom_packing_transfer_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_showroom_packing_transfer_read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_packing_transfer_read"/>  
+            <field name="perm_read">1</field> 
+        </record>
+
+        <record id="access_tw_stock_lot_showroom_packing_transfer_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_lot"/>
+            <field name="name">tw_stock_lot_showroom_packing_transfer_read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_packing_transfer_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_move_showroom_packing_transfer_read" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_move" />
+            <field name="name">tw_stock_move_showroom_packing_transfer_read</field>
+            <field name="group_id" ref="group_tw_stock_picking_showroom_packing_transfer_read" />
+            <field name="perm_read">1</field>
+        </record>
+
+        <record id="group_tw_stock_picking_showroom_packing_transfer_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_showroom"/>
+            <field name="name">TW Stock Picking Showroom Packing Transfer Update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_showroom_packing_transfer_read'))]"/>
+        </record>
+
+        <record id="access_tw_stock_picking_showroom_packing_transfer_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_showroom_packing_transfer_update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_packing_transfer_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>
+
+        <record id="group_tw_stock_picking_showroom_packing_transfer_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_showroom"/>
+            <field name="name">TW Stock Picking Showroom Packing Transfer delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_showroom_packing_transfer_read'))]"/>
+        </record>
+
+        <record id="access_tw_stock_picking_showroom_packing_transfer_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_showroom_packing_transfer_delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_showroom_packing_transfer_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+        <!-- Workshop- on incoming shipment -->
+        <record id="group_tw_stock_picking_workshop_on_incoming_shipment_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Stock Picking Workshop Incoming Shipment Read</field> 
+        </record> 
+        <record id="access_tw_stock_picking_workshop_on_incoming_shipment_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_workshop_on_incoming_shipment_read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_workshop_on_incoming_shipment_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+        <record id="access_tw_stock_lot_stock_picking_workshop_on_incoming_shipment_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_lot"/>
+            <field name="name">tw_stock_lot_stock_picking_workshop_on_incoming_shipment_read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_workshop_on_incoming_shipment_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+        <record id="group_tw_stock_picking_workshop_on_incoming_shipment_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Stock Picking Workshop Incoming Shipment update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_workshop_on_incoming_shipment_read'))]"/>
+        </record> 
+        <record id="access_tw_stock_picking_workshop_on_incoming_shipment_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_workshop_on_incoming_shipment_update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_workshop_on_incoming_shipment_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record> 
+        <record id="group_tw_stock_picking_workshop_on_incoming_shipment_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Stock Picking Workshop Incoming Shipment delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_workshop_on_incoming_shipment_read'))]"/>
+        </record> 
+        <record id="access_tw_stock_picking_workshop_on_incoming_shipment_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_workshop_on_incoming_shipment_delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_workshop_on_incoming_shipment_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+        <!-- Workshop - Quality Control Transfer -->
+         <record id="group_tw_stock_picking_workshop_quality_control_transfer_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Stock Picking Workshop Quality Control Transfer Read</field> 
+        </record> 
+        <record id="access_tw_stock_picking_workshop_quality_control_transfer_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_workshop_quality_control_transfer_read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_workshop_quality_control_transfer_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+        <record id="group_tw_stock_picking_workshop_quality_control_transfer_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Stock Picking Workshop Quality Control Transfer Update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_workshop_quality_control_transfer_read'))]"/>
+        </record> 
+
+        <record id="access_tw_stock_picking_workshop_quality_control_transfer_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_workshop_quality_control_transfer_update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_workshop_quality_control_transfer_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>
+        <record id="group_tw_stock_picking_workshop_quality_control_transfer_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Stock Picking Workshop Quality Control Transfer delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_workshop_quality_control_transfer_read'))]"/>
+        </record> 
+
+        <record id="access_tw_stock_picking_workshop_quality_control_transfer_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_workshop_quality_control_transfer_delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_workshop_quality_control_transfer_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+        <!-- Workshop - Storage Transfer -->
+         <record id="group_tw_stock_picking_workshop_storage_transfer_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Stock Picking Workshop Storage Transfer Read</field> 
+        </record> 
+        <record id="access_tw_stock_picking_workshop_storage_transfer_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_workshop_storage_transfer_read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_workshop_storage_transfer_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+        <record id="group_tw_stock_picking_workshop_storage_transfer_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Stock Picking Workshop Storage Transfer update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_workshop_storage_transfer_read'))]"/>
+        </record>
+        
+        <record id="access_tw_stock_picking_workshop_storage_transfer_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_workshop_storage_transfer_update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_workshop_storage_transfer_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>
+        <record id="group_tw_stock_picking_workshop_storage_transfer_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Stock Picking Workshop Storage Transfer delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_workshop_storage_transfer_read'))]"/>
+        </record>
+        <record id="access_tw_stock_picking_workshop_storage_transfer_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_workshop_storage_transfer_delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_workshop_storage_transfer_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+        
+        <!-- Workshop - Picking Transfer -->
+        <record id="group_tw_stock_picking_workshop_picking_transfer_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_workshop"/>
+            <field name="name">TW Stock Picking Workshop Picking Transfer Read</field>                            
+        </record>
+        <record id="access_tw_stock_picking_workshop_picking_transfer_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_workshop_picking_transfer_read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_workshop_picking_transfer_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+        <record id="group_tw_stock_picking_workshop_picking_transfer_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_workshop"/>
+            <field name="name">TW Stock Picking Workshop Picking Transfer update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_workshop_picking_transfer_read'))]"/>                             
+        </record>
+        <record id="access_tw_stock_picking_workshop_picking_transfer_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_workshop_picking_transfer_update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_workshop_picking_transfer_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>
+        <record id="group_tw_stock_picking_workshop_picking_transfer_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_workshop"/>
+            <field name="name">TW Stock Picking Workshop Picking Transfer delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_workshop_picking_transfer_read'))]"/>                             
+        </record>
+        <record id="access_tw_stock_picking_workshop_picking_transfer_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_workshop_picking_transfer_delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_workshop_picking_transfer_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+        
+        <!-- Workshop - Packing Transfer -->
+        <record id="group_tw_stock_picking_workshop_packing_transfer_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_workshop"/>
+            <field name="name">TW Stock Picking Workshop Packing Transfer Read</field> 
+        </record> 
+        <record id="access_tw_stock_picking_workshop_packing_transfer_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_workshop_packing_transfer_read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_workshop_packing_transfer_read"/>  
+            <field name="perm_read">1</field> 
+        </record>
+        <record id="group_tw_stock_picking_workshop_packing_transfer_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_workshop"/>
+            <field name="name">TW Stock Picking Workshop Packing Transfer update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_workshop_packing_transfer_read'))]"/>                             
+        </record> 
+        <record id="access_tw_stock_picking_workshop_packing_transfer_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_workshop_packing_transfer_update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_workshop_packing_transfer_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>
+        <record id="group_tw_stock_picking_workshop_packing_transfer_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_workshop"/>
+            <field name="name">TW Stock Picking Workshop Packing Transfer delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_workshop_packing_transfer_read'))]"/>                             
+        </record> 
+        <record id="access_tw_stock_picking_workshop_packing_transfer_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_workshop_packing_transfer_delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_workshop_packing_transfer_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+        
+        <!-- Workshop - On Outgoing Shipment -->
+        <record id="group_tw_stock_picking_workshop_on_outgoing_shipment_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_workshop"/>
+            <field name="name">TW Stock Picking Workshop On Outgoing Shipment Read</field> 
+        </record>  
+        <record id="access_tw_stock_picking_workshop_on_outgoing_shipment_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_workshop_on_outgoing_shipment_read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_workshop_on_outgoing_shipment_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+        <record id="group_tw_stock_picking_workshop_on_outgoing_shipment_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_workshop"/>
+            <field name="name">TW Stock Picking Workshop On Outgoing Shipment update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_workshop_on_outgoing_shipment_read'))]"/>                             
+        </record> 
+        <record id="access_tw_stock_picking_workshop_on_outgoing_shipment_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_workshop_on_outgoing_shipment_update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_workshop_on_outgoing_shipment_update"/>  
+            <field name="perm_write">1</field> 
+            <field name="perm_create">1</field>
+        </record> 
+        <record id="group_tw_stock_picking_workshop_on_outgoing_shipment_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_workshop"/>
+            <field name="name">TW Stock Picking Workshop On Outgoing Shipment delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_workshop_on_outgoing_shipment_read'))]"/>                             
+        </record> 
+        <record id="access_tw_stock_picking_workshop_on_outgoing_shipment_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_stock_picking_workshop_on_outgoing_shipment_delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_workshop_on_outgoing_shipment_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record> 
+
+    
+    <!-- TW Stock Picking Batch MD Receipt Showroom -->
+        <record id="group_tw_stock_picking_batch_md_receipt_showroom_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Batch Transfer MD Receipt Showroom Read</field> 
+        </record> 
+        
+        <record id="access_tw_stock_picking_batch_md_receipt_showroom_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_batch_transfer_md_receipt_showroom read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_receipt_showroom_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+        
+        <record id="access_tw_stock_picking_batch_md_receipt_showroom_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_batch_transfer_md_receipt_showroom_line read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_receipt_showroom_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_stock_picking_batch_md_receipt_showroom_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Batch Transfer MD Receipt Showroom Update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_md_receipt_showroom_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_stock_picking_batch_md_receipt_showroom_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_batch_transfer_md_receipt_showroom update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_receipt_showroom_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>   
+
+        <record id="access_tw_stock_picking_batch_md_receipt_showroom_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_batch_transfer_md_receipt_showroom_line update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_receipt_showroom_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_stock_picking_batch_md_receipt_showroom_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Batch Transfer MD Receipt Showroom Delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_md_receipt_showroom_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_stock_picking_batch_md_receipt_showroom_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_batch_transfer_md_receipt_showroom delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_receipt_showroom_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+        
+        <record id="access_tw_stock_picking_batch_md_receipt_showroom_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_batch_transfer_md_receipt_showroom_line delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_receipt_showroom_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Stock Picking Batch MD QC Showroom -->
+        <record id="group_tw_stock_picking_batch_md_qc_showroom_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Batch Transfer MD QC Showroom Read</field> 
+        </record> 
+        
+        <record id="access_tw_stock_picking_batch_md_qc_showroom_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_batch_transfer_md_qc_showroom read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_qc_showroom_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+        
+        <record id="access_tw_stock_picking_batch_md_qc_showroom_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_batch_transfer_md_qc_showroom_line read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_qc_showroom_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_stock_picking_batch_md_qc_showroom_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Batch Transfer MD QC Showroom Update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_md_qc_showroom_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_stock_picking_batch_md_qc_showroom_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_batch_transfer_md_qc_showroom update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_qc_showroom_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>   
+
+        <record id="access_tw_stock_picking_batch_md_qc_showroom_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_batch_transfer_md_qc_showroom_line update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_qc_showroom_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_stock_picking_batch_md_qc_showroom_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Batch Transfer MD QC Showroom Delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_md_qc_showroom_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_stock_picking_batch_md_qc_showroom_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_batch_transfer_md_qc_showroom delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_qc_showroom_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+        
+        <record id="access_tw_stock_picking_batch_md_qc_showroom_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_batch_transfer_md_qc_showroom_line delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_qc_showroom_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+    
+    <!-- TW Stock Picking Batch MD Store Showroom -->
+        <record id="group_tw_stock_picking_batch_md_store_showroom_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Batch Transfer MD Store Showroom Read</field> 
+        </record> 
+        
+        <record id="access_tw_stock_picking_batch_md_store_showroom_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_batch_transfer_md_store_showroom read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_store_showroom_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+        
+        <record id="access_tw_stock_picking_batch_md_store_showroom_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_batch_transfer_md_store_showroom_line read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_store_showroom_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_stock_picking_batch_md_store_showroom_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Batch Transfer MD Store Showroom Update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_md_store_showroom_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_stock_picking_batch_md_store_showroom_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_batch_transfer_md_store_showroom update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_store_showroom_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>   
+
+        <record id="access_tw_stock_picking_batch_md_store_showroom_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_batch_transfer_md_store_showroom_line update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_store_showroom_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_stock_picking_batch_md_store_showroom_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Batch Transfer MD Store Showroom Delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_md_store_showroom_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_stock_picking_batch_md_store_showroom_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_batch_transfer_md_store_showroom delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_store_showroom_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+        
+        <record id="access_tw_stock_picking_batch_md_store_showroom_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_batch_transfer_md_store_showroom_line delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_store_showroom_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Stock Picking Batch MD Receipt Workshop -->
+        <record id="group_tw_stock_picking_batch_md_receipt_workshop_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Batch Transfer MD Receipt Workshop Read</field> 
+        </record> 
+        
+        <record id="access_tw_stock_picking_batch_md_receipt_workshop_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_batch_transfer_md_receipt_workshop read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_receipt_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+        
+        <record id="access_tw_stock_picking_batch_md_receipt_workshop_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_batch_transfer_md_receipt_workshop_line read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_receipt_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record>
+                
+        <record id="group_tw_stock_picking_batch_md_receipt_workshop_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Batch Transfer MD Receipt Workshop Update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_md_receipt_workshop_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_stock_picking_batch_md_receipt_workshop_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_batch_transfer_md_receipt_workshop update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_receipt_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>   
+
+        <record id="access_tw_stock_picking_batch_md_receipt_workshop_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_batch_transfer_md_receipt_workshop_line update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_receipt_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>    
+
+        <record id="group_tw_stock_picking_batch_md_receipt_workshop_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Batch Transfer MD Receipt Workshop Delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_md_receipt_workshop_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_stock_picking_batch_md_receipt_workshop_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_batch_transfer_md_receipt_workshop delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_receipt_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+        
+        <record id="access_tw_stock_picking_batch_md_receipt_workshop_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_batch_transfer_md_receipt_workshop_line delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_receipt_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+    
+    <!-- TW Stock Picking Batch MD QC Workshop -->
+        <record id="group_tw_stock_picking_batch_md_qc_workshop_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Batch Transfer MD QC Workshop Read</field> 
+        </record> 
+        
+        <record id="access_tw_stock_picking_batch_md_qc_workshop_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_batch_transfer_md_qc_workshop read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_qc_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+        
+        <record id="access_tw_stock_picking_batch_md_qc_workshop_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_batch_transfer_md_qc_workshop_line read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_qc_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_quality_check_incoming_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_quality_check_incoming"/>
+            <field name="name">tw_stock_quality_check_incoming read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_qc_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_stock_picking_batch_md_qc_workshop_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Batch Transfer MD QC Workshop Update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_md_qc_workshop_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_stock_picking_batch_md_qc_workshop_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_batch_transfer_md_qc_workshop update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_qc_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>   
+
+        <record id="access_tw_stock_picking_batch_md_qc_workshop_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_batch_transfer_md_qc_workshop_line update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_qc_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>    
+
+        <record id="access_tw_stock_quality_check_incoming_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_quality_check_incoming"/>
+            <field name="name">tw_stock_quality_check_incoming update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_qc_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_stock_picking_batch_md_qc_workshop_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Batch Transfer MD QC Workshop Delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_md_qc_workshop_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_stock_picking_batch_md_qc_workshop_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_batch_transfer_md_qc_workshop delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_qc_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+        
+        <record id="access_tw_stock_picking_batch_md_qc_workshop_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_batch_transfer_md_qc_workshop_line delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_qc_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+        <record id="access_tw_stock_quality_check_incoming_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_quality_check_incoming"/>
+            <field name="name">tw_stock_quality_check_incoming delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_qc_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+    
+    <!-- TW Stock Picking Batch MD Store Workshop -->
+        <record id="group_tw_stock_picking_batch_md_store_workshop_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Batch Transfer MD Store Workshop Read</field> 
+        </record> 
+        
+        <record id="access_tw_stock_picking_batch_md_store_workshop_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_batch_transfer_md_store_workshop read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_store_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+        
+        <record id="access_tw_stock_picking_batch_md_store_workshop_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_batch_transfer_md_store_workshop_line read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_store_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_quality_check_incoming_store_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_quality_check_incoming"/>
+            <field name="name">tw_stock_quality_check_incoming_store read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_store_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_stock_picking_batch_md_store_workshop_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Batch Transfer MD Store Workshop Update</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_md_store_workshop_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_stock_picking_batch_md_store_workshop_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_batch_transfer_md_store_workshop update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_store_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>   
+
+        <record id="access_tw_stock_picking_batch_md_store_workshop_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_batch_transfer_md_store_workshop_line update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_store_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>    
+
+        <record id="access_tw_stock_quality_check_incoming_store_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_quality_check_incoming"/>
+            <field name="name">tw_stock_quality_check_incoming_store update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_store_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_stock_picking_batch_md_store_workshop_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Batch Transfer MD Store Workshop Delete</field> 
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_md_store_workshop_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_stock_picking_batch_md_store_workshop_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_batch_transfer_md_store_workshop delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_store_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+        
+        <record id="access_tw_stock_picking_batch_md_store_workshop_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_batch_transfer_md_store_workshop_line delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_store_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+        <record id="access_tw_stock_quality_check_incoming_store_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_quality_check_incoming"/>
+            <field name="name">tw_stock_quality_check_incoming_store delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_md_store_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Stock Picking Batch Retail Receipt Showroom -->
+        <record id="group_tw_stock_picking_batch_retail_receipt_showroom_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Stock Picking Batch Retail Receipt Showroom Read</field>
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_receipt_showroom_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_receipt_showroom read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_receipt_showroom_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_receipt_showroom_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_receipt_showroom_line read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_receipt_showroom_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="group_tw_stock_picking_batch_retail_receipt_showroom_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Stock Picking Batch Retail Receipt Showroom Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_receipt_showroom_read'))]"/>
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_receipt_showroom_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_receipt_showroom update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_receipt_showroom_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>   
+
+        <record id="access_tw_stock_picking_batch_retail_receipt_showroom_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_receipt_showroom_line update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_receipt_showroom_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>  
+
+        <record id="group_tw_stock_picking_batch_retail_receipt_showroom_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Stock Picking Batch Retail Receipt Showroom Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_receipt_showroom_read'))]"/>
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_receipt_showroom_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_receipt_showroom delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_receipt_showroom_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+        
+        <record id="access_tw_stock_picking_batch_retail_receipt_showroom_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_receipt_showroom_line delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_receipt_showroom_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Stock Picking Batch Retail QC Showroom -->
+        <record id="group_tw_stock_picking_batch_retail_qc_showroom_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Stock Picking Batch Retail QC Showroom Read</field>
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_qc_showroom_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_qc_showroom read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_qc_showroom_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_qc_showroom_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_qc_showroom_line read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_qc_showroom_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="group_tw_stock_picking_batch_retail_qc_showroom_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Stock Picking Batch Retail QC Showroom Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_qc_showroom_read'))]"/>
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_qc_showroom_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_qc_showroom update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_qc_showroom_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>   
+
+        <record id="access_tw_stock_picking_batch_retail_qc_showroom_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_qc_showroom_line update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_qc_showroom_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>  
+
+        <record id="group_tw_stock_picking_batch_retail_qc_showroom_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Stock Picking Batch Retail QC Showroom Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_qc_showroom_read'))]"/>
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_qc_showroom_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_qc_showroom delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_qc_showroom_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+        
+        <record id="access_tw_stock_picking_batch_retail_qc_showroom_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_qc_showroom_line delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_qc_showroom_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+    
+    <!-- TW Stock Picking Batch Retail Store Showroom -->
+        <record id="group_tw_stock_picking_batch_retail_store_showroom_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Stock Picking Batch Retail Store Showroom Read</field>
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_store_showroom_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_store_showroom read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_store_showroom_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_store_showroom_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_store_showroom_line read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_store_showroom_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="group_tw_stock_picking_batch_retail_store_showroom_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Stock Picking Batch Retail Store Showroom Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_store_showroom_read'))]"/>
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_store_showroom_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_store_showroom update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_store_showroom_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>   
+
+        <record id="access_tw_stock_picking_batch_retail_store_showroom_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_store_showroom_line update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_store_showroom_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>  
+
+        <record id="group_tw_stock_picking_batch_retail_store_showroom_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_showroom"/>
+            <field name="name">TW Stock Picking Batch Retail Store Showroom Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_store_showroom_read'))]"/>
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_store_showroom_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_store_showroom delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_store_showroom_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+        
+        <record id="access_tw_stock_picking_batch_retail_store_showroom_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_store_showroom_line delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_store_showroom_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Stock Picking Batch Retail Pick Showroom -->
+        <record id="group_tw_stock_picking_batch_retail_pick_showroom_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_showroom"/>
+            <field name="name">TW Stock Picking Batch Retail Pick Showroom Read</field>
+        </record>
+
+        <record id="access_tw_stock_picking_batch_retail_pick_showroom_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_pick_showroom read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pick_showroom_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_pick_showroom_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_pick_showroom_line read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pick_showroom_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="group_tw_stock_picking_batch_retail_pick_showroom_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_showroom"/>
+            <field name="name">TW Stock Picking Batch Retail Pick Showroom Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_pick_showroom_read'))]"/>
+        </record>
+
+        <record id="access_tw_stock_picking_batch_retail_pick_showroom_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_pick_showroom update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pick_showroom_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_pick_showroom_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_pick_showroom_line update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pick_showroom_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record> 
+
+        <record id="group_tw_stock_picking_batch_retail_pick_showroom_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_showroom"/>
+            <field name="name">TW Stock Picking Batch Retail Pick Showroom delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_pick_showroom_read'))]"/>
+        </record>
+
+        <record id="access_tw_stock_picking_batch_retail_pick_showroom_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_pick_showroom delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pick_showroom_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+        
+        <record id="access_tw_stock_picking_batch_retail_pick_showroom_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_pick_showroom_line delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pick_showroom_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+    
+    <!-- TW Stock Picking Batch Retail Pack Showroom -->
+        <record id="group_tw_stock_picking_batch_retail_pack_showroom_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_showroom"/>
+            <field name="name">TW Stock Picking Batch Retail Pack Showroom Read</field>
+        </record>
+        
+        <record id="access_tw_stock_picking_batch_retail_pack_showroom_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_pack_showroom read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pack_showroom_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_pack_showroom_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_pack_showroom_line read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pack_showroom_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="group_tw_stock_picking_batch_retail_pack_showroom_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_showroom"/>
+            <field name="name">TW Stock Picking Batch Retail Pack Showroom Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_pack_showroom_read'))]"/>
+        </record>
+
+        <record id="access_tw_stock_picking_batch_retail_pack_showroom_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_pack_showroom update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pack_showroom_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_pack_showroom_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_pack_showroom_line update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pack_showroom_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record> 
+
+        <record id="group_tw_stock_picking_batch_retail_pack_showroom_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_showroom"/>
+            <field name="name">TW Stock Picking Batch Retail Pack Showroom delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_pack_showroom_read'))]"/>
+        </record>
+
+        <record id="access_tw_stock_picking_batch_retail_pack_showroom_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_pack_showroom delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pack_showroom_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+        
+        <record id="access_tw_stock_picking_batch_retail_pack_showroom_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_pack_showroom_line delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pack_showroom_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+    
+    <!-- TW Stock Picking Batch Retail Out Showroom -->
+        <record id="group_tw_stock_picking_batch_retail_out_showroom_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_showroom"/>
+            <field name="name">TW Stock Picking Batch Retail Out Showroom Read</field>
+        </record>
+        
+        <record id="access_tw_stock_picking_batch_retail_out_showroom_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_out_showroom read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_out_showroom_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_out_showroom_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_out_showroom_line read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_out_showroom_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="group_tw_stock_picking_batch_retail_out_showroom_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_showroom"/>
+            <field name="name">TW Stock Picking Batch Retail Out Showroom Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_out_showroom_read'))]"/>
+        </record>
+
+        <record id="access_tw_stock_picking_batch_retail_out_showroom_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_out_showroom update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_out_showroom_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_out_showroom_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_out_showroom_line update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_out_showroom_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record> 
+
+        <record id="group_tw_stock_picking_batch_retail_out_showroom_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_showroom"/>
+            <field name="name">TW Stock Picking Batch Retail Out Showroom delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_out_showroom_read'))]"/>
+        </record>
+
+        <record id="access_tw_stock_picking_batch_retail_out_showroom_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_out_showroom delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_out_showroom_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+        
+        <record id="access_tw_stock_picking_batch_retail_out_showroom_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_out_showroom_line delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_out_showroom_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Stock Picking Batch Retail Receipt Workshop -->
+        <record id="group_tw_stock_picking_batch_retail_receipt_workshop_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Batch Transfer Retail Receipt Workshop Read</field>
+        </record> 
+        
+        <record id="access_tw_stock_picking_batch_retail_receipt_workshop_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_receipt_workshop read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_receipt_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_receipt_workshop_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_receipt_workshop_line read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_receipt_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_stock_picking_batch_retail_receipt_workshop_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Batch Transfer Retail Receipt Workshop Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_receipt_workshop_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_stock_picking_batch_retail_receipt_workshop_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_receipt_workshop update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_receipt_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_receipt_workshop_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_receipt_workshop_line update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_receipt_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_stock_picking_batch_retail_receipt_workshop_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Batch Transfer Retail Receipt Workshop Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_receipt_workshop_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_stock_picking_batch_retail_receipt_workshop_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_receipt_workshop delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_receipt_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+        <record id="access_tw_stock_picking_batch_retail_receipt_workshop_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_receipt_workshop_line delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_receipt_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Stock Picking Batch Retail QC Workshop -->
+        <record id="group_tw_stock_picking_batch_retail_qc_workshop_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Batch Transfer Retail QC Workshop Read</field>
+        </record> 
+        
+        <record id="access_tw_stock_picking_batch_retail_qc_workshop_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_qc_workshop read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_qc_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_qc_workshop_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_qc_workshop_line read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_qc_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_stock_picking_batch_retail_qc_workshop_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Batch Transfer Retail QC Workshop Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_qc_workshop_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_stock_picking_batch_retail_qc_workshop_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_qc_workshop update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_qc_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_qc_workshop_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_qc_workshop_line update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_qc_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_stock_picking_batch_retail_qc_workshop_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Batch Transfer Retail QC Workshop Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_qc_workshop_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_stock_picking_batch_retail_qc_workshop_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_qc_workshop delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_qc_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+        <record id="access_tw_stock_picking_batch_retail_qc_workshop_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_qc_workshop_line delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_qc_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Stock Picking Batch Retail Store Workshop -->
+        <record id="group_tw_stock_picking_batch_retail_store_workshop_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Batch Transfer Retail Store Workshop Read</field>
+        </record> 
+        
+        <record id="access_tw_stock_picking_batch_retail_store_workshop_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_store_workshop read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_store_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_store_workshop_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_store_workshop_line read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_store_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_stock_picking_batch_retail_store_workshop_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Batch Transfer Retail Store Workshop Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_store_workshop_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_stock_picking_batch_retail_store_workshop_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_store_workshop update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_store_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_store_workshop_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_store_workshop_line update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_store_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_stock_picking_batch_retail_store_workshop_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_incoming_workshop"/>
+            <field name="name">TW Batch Transfer Retail Store Workshop Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_store_workshop_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_stock_picking_batch_retail_store_workshop_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_store_workshop delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_store_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+        <record id="access_tw_stock_picking_batch_retail_store_workshop_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_store_workshop_line delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_store_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Stock Picking Batch Retail Pick Workshop -->
+        <record id="group_tw_stock_picking_batch_retail_pick_workshop_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_workshop"/>
+            <field name="name">TW Stock Picking Batch Retail Pick Workshop Read</field>
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_pick_workshop_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_pick_workshop read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pick_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_pick_workshop_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_pick_workshop_line read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pick_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record>
+
+        <record id="group_tw_stock_picking_batch_retail_pick_workshop_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_workshop"/>
+            <field name="name">TW Stock Picking Batch Retail Pick Workshop Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_pick_workshop_read'))]"/>
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_pick_workshop_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_pick_workshop update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pick_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_pick_workshop_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_pick_workshop_line update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pick_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>
+
+        <record id="group_tw_stock_picking_batch_retail_pick_workshop_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_workshop"/>
+            <field name="name">TW Stock Picking Batch Retail Pick Workshop Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_pick_workshop_read'))]"/>
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_pick_workshop_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_pick_workshop delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pick_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+        <record id="access_tw_stock_picking_batch_retail_pick_workshop_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_pick_workshop_line delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pick_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Stock Picking Batch Retail Pack Workshop -->
+        <record id="group_tw_stock_picking_batch_retail_pack_workshop_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_workshop"/>
+            <field name="name">TW Stock Picking Batch Retail Pack Workshop Read</field>
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_pack_workshop_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_pack_workshop read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pack_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_pack_workshop_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_pack_workshop_line read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pack_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record>
+
+        <record id="group_tw_stock_picking_batch_retail_pack_workshop_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_workshop"/>
+            <field name="name">TW Stock Picking Batch Retail Pack Workshop Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_pack_workshop_read'))]"/>
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_pack_workshop_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_pack_workshop update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pack_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_pack_workshop_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_pack_workshop_line update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pack_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>
+
+        <record id="group_tw_stock_picking_batch_retail_pack_workshop_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_workshop"/>
+            <field name="name">TW Stock Picking Batch Retail Pack Workshop Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_pack_workshop_read'))]"/>
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_pack_workshop_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_pack_workshop delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pack_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+        <record id="access_tw_stock_picking_batch_retail_pack_workshop_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_pack_workshop_line delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_pack_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Stock Picking Batch Retail Out Workshop -->
+        <record id="group_tw_stock_picking_batch_retail_out_workshop_read" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_workshop"/>
+            <field name="name">TW Stock Picking Batch Retail Out Workshop Read</field>
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_out_workshop_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_out_workshop read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_out_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_out_workshop_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_out_workshop_line read</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_out_workshop_read"/>  
+            <field name="perm_read">1</field> 
+        </record>
+
+        <record id="group_tw_stock_picking_batch_retail_out_workshop_update" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_workshop"/>
+            <field name="name">TW Stock Picking Batch Retail Out Workshop Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_out_workshop_read'))]"/>
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_out_workshop_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_out_workshop update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_out_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_out_workshop_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_out_workshop_line update</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_out_workshop_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>
+
+        <record id="group_tw_stock_picking_batch_retail_out_workshop_delete" model="res.groups">
+            <field name="category_id" ref="tw_module_category_outgoing_workshop"/>
+            <field name="name">TW Stock Picking Batch Retail Out Workshop Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_stock_picking_batch_retail_out_workshop_read'))]"/>
+        </record> 
+
+        <record id="access_tw_stock_picking_batch_retail_out_workshop_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_stock_picking_batch_retail_out_workshop delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_out_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+        <record id="access_tw_stock_picking_batch_retail_out_workshop_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_stock_picking_batch_retail_out_workshop_line delete</field> 
+            <field name="group_id" ref="group_tw_stock_picking_batch_retail_out_workshop_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+    
+    <!-- TW Warehouse Operations Incoming Shipment -->
+        <record id="group_tw_warehouse_operation_incoming_shipment_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Operations Incoming Shipment Read</field>
+        </record> 
+        
+        <record id="access_tw_warehouse_operation_incoming_shipment_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_warehouse_operation_incoming_shipment read</field> 
+            <field name="group_id" ref="group_tw_warehouse_operation_incoming_shipment_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_warehouse_operation_incoming_shipment_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Operations Incoming Shipment Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_operation_incoming_shipment_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_operation_incoming_shipment_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_warehouse_operation_incoming_shipment update</field> 
+            <field name="group_id" ref="group_tw_warehouse_operation_incoming_shipment_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_warehouse_operation_incoming_shipment_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Operations Incoming Shipment Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_operation_incoming_shipment_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_operation_incoming_shipment_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_warehouse_operation_incoming_shipment delete</field> 
+            <field name="group_id" ref="group_tw_warehouse_operation_incoming_shipment_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+        
+    <!-- TW Warehouse Operations Outgoing Shipment -->
+        <record id="group_tw_warehouse_operation_outgoing_shipment_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Operations Outgoing Shipment Read</field>
+        </record> 
+        
+        <record id="access_tw_warehouse_operation_outgoing_shipment_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_warehouse_operation_outgoing_shipment read</field> 
+            <field name="group_id" ref="group_tw_warehouse_operation_outgoing_shipment_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_warehouse_operation_outgoing_shipment_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Operations Outgoing Shipment Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_operation_outgoing_shipment_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_operation_outgoing_shipment_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_warehouse_operation_outgoing_shipment update</field> 
+            <field name="group_id" ref="group_tw_warehouse_operation_outgoing_shipment_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_warehouse_operation_outgoing_shipment_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Operations Outgoing Shipment Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_operation_outgoing_shipment_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_operation_outgoing_shipment_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="name">tw_warehouse_operation_outgoing_shipment delete</field> 
+            <field name="group_id" ref="group_tw_warehouse_operation_outgoing_shipment_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Warehouse Operations Batch Transfer -->
+        <record id="group_tw_warehouse_operation_batch_transfer_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Operations Batch Transfer Read</field>
+        </record> 
+        
+        <record id="access_tw_warehouse_operation_batch_transfer_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_warehouse_operation_batch_transfer read</field> 
+            <field name="group_id" ref="group_tw_warehouse_operation_batch_transfer_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+        
+        <record id="access_tw_warehouse_operation_batch_transfer_line_read" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_warehouse_operation_batch_transfer_line read</field> 
+            <field name="group_id" ref="group_tw_warehouse_operation_batch_transfer_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_warehouse_operation_batch_transfer_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Operations Batch Transfer Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_operation_batch_transfer_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_operation_batch_transfer_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_warehouse_operation_batch_transfer update</field> 
+            <field name="group_id" ref="group_tw_warehouse_operation_batch_transfer_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>     
+
+        <record id="access_tw_warehouse_operation_batch_transfer_line_update" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_warehouse_operation_batch_transfer_line update</field> 
+            <field name="group_id" ref="group_tw_warehouse_operation_batch_transfer_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_warehouse_operation_batch_transfer_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Operations Batch Transfer Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_operation_batch_transfer_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_operation_batch_transfer_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_picking_batch"/>
+            <field name="name">tw_warehouse_operation_batch_transfer delete</field> 
+            <field name="group_id" ref="group_tw_warehouse_operation_batch_transfer_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+        
+        <record id="access_tw_warehouse_operation_batch_transfer_line_delete" model="ir.model.access">
+            <field name="model_id" ref="model_tw_stock_picking_batch_line"/>
+            <field name="name">tw_warehouse_operation_batch_transfer_line delete</field> 
+            <field name="group_id" ref="group_tw_warehouse_operation_batch_transfer_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Warehouse Products Product -->
+        <record id="group_tw_warehouse_products_product_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Products Product Read</field>
+        </record> 
+        
+        <record id="access_tw_warehouse_products_product_read" model="ir.model.access">
+            <field name="model_id" ref="tw_product.model_product_template"/>
+            <field name="name">tw_warehouse_products_product read</field> 
+            <field name="group_id" ref="group_tw_warehouse_products_product_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_warehouse_products_product_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Products Product Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_products_product_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_products_product_update" model="ir.model.access">
+            <field name="model_id" ref="tw_product.model_product_template"/>
+            <field name="name">tw_warehouse_products_product update</field> 
+            <field name="group_id" ref="group_tw_warehouse_products_product_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_warehouse_products_product_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Products Product Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_products_product_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_products_product_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_product.model_product_template"/>
+            <field name="name">tw_warehouse_products_product delete</field> 
+            <field name="group_id" ref="group_tw_warehouse_products_product_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Warehouse Products Product Variant -->
+        <record id="group_tw_warehouse_products_product_variant_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Products Product Variant Read</field>
+        </record> 
+        
+        <record id="access_tw_warehouse_products_product_variant_read" model="ir.model.access">
+            <field name="model_id" ref="tw_product.model_product_product"/>
+            <field name="name">tw_warehouse_products_product_variant read</field> 
+            <field name="group_id" ref="group_tw_warehouse_products_product_variant_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_warehouse_products_product_variant_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Products Product Variant Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_products_product_variant_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_products_product_variant_update" model="ir.model.access">
+            <field name="model_id" ref="tw_product.model_product_product"/>
+            <field name="name">tw_warehouse_products_product_variant update</field> 
+            <field name="group_id" ref="group_tw_warehouse_products_product_variant_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_warehouse_products_product_variant_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Products Product Variant Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_products_product_variant_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_products_product_variant_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_product.model_product_product"/>
+            <field name="name">tw_warehouse_products_product_variant delete</field> 
+            <field name="group_id" ref="group_tw_warehouse_products_product_variant_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Warehouse Products Product Category -->
+        <record id="group_tw_warehouse_products_product_category_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Products Product Category Read</field>
+        </record> 
+        
+        <record id="access_tw_warehouse_products_product_category_read" model="ir.model.access">
+            <field name="model_id" ref="tw_product.model_product_category"/>
+            <field name="name">tw_warehouse_products_product_category read</field> 
+            <field name="group_id" ref="group_tw_warehouse_products_product_category_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_warehouse_products_product_category_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Products Product Category Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_products_product_category_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_products_product_category_update" model="ir.model.access">
+            <field name="model_id" ref="tw_product.model_product_category"/>
+            <field name="name">tw_warehouse_products_product_category update</field> 
+            <field name="group_id" ref="group_tw_warehouse_products_product_category_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_warehouse_products_product_category_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Products Product Category Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_products_product_category_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_products_product_category_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_product.model_product_category"/>
+            <field name="name">tw_warehouse_products_product_category delete</field> 
+            <field name="group_id" ref="group_tw_warehouse_products_product_category_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Warehouse Products Packages -->
+        <record id="group_tw_warehouse_products_packages_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Products Packages Read</field>
+        </record> 
+        
+        <record id="access_tw_warehouse_products_packages_read" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_quant_package"/>
+            <field name="name">tw_warehouse_products_packages read</field> 
+            <field name="group_id" ref="group_tw_warehouse_products_packages_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_warehouse_products_packages_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Products Packages Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_products_packages_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_products_packages_update" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_quant_package"/>
+            <field name="name">tw_warehouse_products_packages update</field> 
+            <field name="group_id" ref="group_tw_warehouse_products_packages_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_warehouse_products_packages_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Products Packages Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_products_packages_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_products_packages_delete" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_quant_package"/>
+            <field name="name">tw_warehouse_products_packages delete</field> 
+            <field name="group_id" ref="group_tw_warehouse_products_packages_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Warehouse Traceability Serial Number -->
+        <record id="group_tw_warehouse_traceability_serial_number_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Traceability Serial Number Read</field>
+        </record> 
+        
+        <record id="access_tw_warehouse_traceability_serial_number_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_lot"/>
+            <field name="name">tw_warehouse_traceability_serial_number read</field> 
+            <field name="group_id" ref="group_tw_warehouse_traceability_serial_number_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_warehouse_traceability_serial_number_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Traceability Serial Number Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_traceability_serial_number_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_traceability_serial_number_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_lot"/>
+            <field name="name">tw_warehouse_traceability_serial_number update</field> 
+            <field name="group_id" ref="group_tw_warehouse_traceability_serial_number_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_warehouse_traceability_serial_number_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Traceability Serial Number Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_traceability_serial_number_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_traceability_serial_number_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_lot"/>
+            <field name="name">tw_warehouse_traceability_serial_number delete</field> 
+            <field name="group_id" ref="group_tw_warehouse_traceability_serial_number_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+    
+    <!-- TW Warehouse Traceability Stock Menu -->
+        <record id="group_tw_warehouse_traceability_stock_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Traceability Stock Read</field>
+        </record> 
+        
+        <record id="access_tw_warehouse_traceability_stock_read" model="ir.model.access">
+            <field name="model_id" ref="tw_product.model_product_product"/>
+            <field name="name">tw_warehouse_traceability_stock read</field> 
+            <field name="group_id" ref="group_tw_warehouse_traceability_stock_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_warehouse_traceability_stock_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Traceability Stock Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_traceability_stock_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_traceability_stock_update" model="ir.model.access">
+            <field name="model_id" ref="tw_product.model_product_product"/>
+            <field name="name">tw_warehouse_traceability_stock update</field> 
+            <field name="group_id" ref="group_tw_warehouse_traceability_stock_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_warehouse_traceability_stock_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Traceability Stock Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_traceability_stock_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_traceability_stock_delete" model="ir.model.access">
+            <field name="model_id" ref="tw_product.model_product_product"/>
+            <field name="name">tw_warehouse_traceability_stock delete</field> 
+            <field name="group_id" ref="group_tw_warehouse_traceability_stock_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Warehouse Traceability Moves History Menu -->
+        <record id="group_tw_warehouse_traceability_moves_history_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Traceability Moves History Read</field>
+        </record> 
+        
+        <record id="access_tw_warehouse_traceability_moves_history_read" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_move_line"/>
+            <field name="name">tw_warehouse_traceability_moves_history read</field> 
+            <field name="group_id" ref="group_tw_warehouse_traceability_moves_history_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_warehouse_traceability_moves_history_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Traceability Moves History Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_traceability_moves_history_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_traceability_moves_history_update" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_move_line"/>
+            <field name="name">tw_warehouse_traceability_moves_history update</field> 
+            <field name="group_id" ref="group_tw_warehouse_traceability_moves_history_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_warehouse_traceability_moves_history_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Traceability Moves History Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_traceability_moves_history_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_traceability_moves_history_delete" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_move_line"/>
+            <field name="name">tw_warehouse_traceability_moves_history delete</field> 
+            <field name="group_id" ref="group_tw_warehouse_traceability_moves_history_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Warehouse Traceability Stock Valuation Menu -->
+        <record id="group_tw_warehouse_traceability_stock_valuation_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Traceability Stock Valuation Read</field>
+        </record> 
+        
+        <record id="access_tw_warehouse_traceability_stock_valuation_read" model="ir.model.access">
+            <field name="model_id" ref="stock_account.model_stock_valuation_layer"/>
+            <field name="name">tw_warehouse_traceability_stock_valuation read</field> 
+            <field name="group_id" ref="group_tw_warehouse_traceability_stock_valuation_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_warehouse_traceability_stock_valuation_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Traceability Stock Valuation Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_traceability_stock_valuation_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_traceability_stock_valuation_update" model="ir.model.access">
+            <field name="model_id" ref="stock_account.model_stock_valuation_layer"/>
+            <field name="name">tw_warehouse_traceability_stock_valuation update</field> 
+            <field name="group_id" ref="group_tw_warehouse_traceability_stock_valuation_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_warehouse_traceability_stock_valuation_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Traceability Stock Valuation Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_traceability_stock_valuation_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_traceability_stock_valuation_delete" model="ir.model.access">
+            <field name="model_id" ref="stock_account.model_stock_valuation_layer"/>
+            <field name="name">tw_warehouse_traceability_stock_valuation delete</field> 
+            <field name="group_id" ref="group_tw_warehouse_traceability_stock_valuation_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Warehouse Traceability Stock Quant Menu -->
+        <record id="group_tw_warehouse_traceability_stock_quant_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Traceability Stock Quant Read</field>
+        </record> 
+        
+        <record id="access_tw_warehouse_traceability_stock_quant_read" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_quant"/>
+            <field name="name">tw_warehouse_traceability_stock_quant read</field> 
+            <field name="group_id" ref="group_tw_warehouse_traceability_stock_quant_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_warehouse_traceability_stock_quant_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Traceability Stock Quant Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_traceability_stock_quant_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_traceability_stock_quant_update" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_quant"/>
+            <field name="name">tw_warehouse_traceability_stock_quant update</field> 
+            <field name="group_id" ref="group_tw_warehouse_traceability_stock_quant_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_warehouse_traceability_stock_quant_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Traceability Stock Quant Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_traceability_stock_quant_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_traceability_stock_quant_delete" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_quant"/>
+            <field name="name">tw_warehouse_traceability_stock_quant delete</field> 
+            <field name="group_id" ref="group_tw_warehouse_traceability_stock_quant_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Warehouse Traceability Stock Quant Menu -->
+        <record id="group_tw_warehouse_traceability_stock_quant_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Traceability Stock Quant Read</field>
+        </record> 
+        
+        <record id="access_tw_warehouse_traceability_stock_quant_read" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_quant"/>
+            <field name="name">tw_warehouse_traceability_stock_quant read</field> 
+            <field name="group_id" ref="group_tw_warehouse_traceability_stock_quant_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_warehouse_traceability_stock_quant_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Traceability Stock Quant Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_traceability_stock_quant_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_traceability_stock_quant_update" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_quant"/>
+            <field name="name">tw_warehouse_traceability_stock_quant update</field> 
+            <field name="group_id" ref="group_tw_warehouse_traceability_stock_quant_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_warehouse_traceability_stock_quant_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Traceability Stock Quant Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_traceability_stock_quant_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_traceability_stock_quant_delete" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_quant"/>
+            <field name="name">tw_warehouse_traceability_stock_quant delete</field> 
+            <field name="group_id" ref="group_tw_warehouse_traceability_stock_quant_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Warehouse Configuration Warehouse Menu -->
+        <record id="group_tw_warehouse_configuration_warehouse_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Configuration Warehouse Read</field>
+        </record> 
+        
+        <record id="access_tw_warehouse_configuration_warehouse_read" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_warehouse"/>
+            <field name="name">tw_warehouse_configuration_warehouse read</field> 
+            <field name="group_id" ref="group_tw_warehouse_configuration_warehouse_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_warehouse_configuration_warehouse_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Configuration Warehouse Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_configuration_warehouse_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_configuration_warehouse_update" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_warehouse"/>
+            <field name="name">tw_warehouse_configuration_warehouse update</field> 
+            <field name="group_id" ref="group_tw_warehouse_configuration_warehouse_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_warehouse_configuration_warehouse_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Configuration Warehouse Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_configuration_warehouse_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_configuration_warehouse_delete" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_warehouse"/>
+            <field name="name">tw_warehouse_configuration_warehouse delete</field> 
+            <field name="group_id" ref="group_tw_warehouse_configuration_warehouse_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Warehouse Configuration Locations -->
+        <record id="group_tw_warehouse_configuration_location_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Configuration Locations Read</field>
+        </record> 
+        
+        <record id="access_tw_warehouse_configuration_location_read" model="ir.model.access">
+            <field name="model_id" ref="model_stock_location"/>
+            <field name="name">tw_warehouse_configuration_location read</field> 
+            <field name="group_id" ref="group_tw_warehouse_configuration_location_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_warehouse_configuration_location_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Configuration Locations Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_configuration_location_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_configuration_location_update" model="ir.model.access">
+            <field name="model_id" ref="model_stock_location"/>
+            <field name="name">tw_warehouse_configuration_location update</field> 
+            <field name="group_id" ref="group_tw_warehouse_configuration_location_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_warehouse_configuration_location_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Configuration Locations Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_configuration_location_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_configuration_location_delete" model="ir.model.access">
+            <field name="model_id" ref="model_stock_location"/>
+            <field name="name">tw_warehouse_configuration_location delete</field> 
+            <field name="group_id" ref="group_tw_warehouse_configuration_location_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Warehouse Configuration Operation Types Menu -->
+        <record id="group_tw_warehouse_configuration_operation_types_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Configuration Operation Types Read</field>
+        </record> 
+        
+        <record id="access_tw_warehouse_configuration_operation_types_read" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_picking_type"/>
+            <field name="name">tw_warehouse_configuration_operation_types read</field> 
+            <field name="group_id" ref="group_tw_warehouse_configuration_operation_types_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_warehouse_configuration_operation_types_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Configuration Operation Types Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_configuration_operation_types_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_configuration_operation_types_update" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_picking_type"/>
+            <field name="name">tw_warehouse_configuration_operation_types update</field> 
+            <field name="group_id" ref="group_tw_warehouse_configuration_operation_types_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_warehouse_configuration_operation_types_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Configuration Operation Types Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_configuration_operation_types_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_configuration_operation_types_delete" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_picking_type"/>
+            <field name="name">tw_warehouse_configuration_operation_types delete</field> 
+            <field name="group_id" ref="group_tw_warehouse_configuration_operation_types_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Warehouse Configuration Routes Menu -->
+        <record id="group_tw_warehouse_configuration_routes_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Configuration Routes Read</field>
+        </record> 
+        
+        <record id="access_tw_warehouse_configuration_routes_read" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_route"/>
+            <field name="name">tw_warehouse_configuration_routes read</field> 
+            <field name="group_id" ref="group_tw_warehouse_configuration_routes_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_warehouse_configuration_routes_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Configuration Routes Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_configuration_routes_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_configuration_routes_update" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_route"/>
+            <field name="name">tw_warehouse_configuration_routes update</field> 
+            <field name="group_id" ref="group_tw_warehouse_configuration_routes_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_warehouse_configuration_routes_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Configuration Routes Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_configuration_routes_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_configuration_routes_delete" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_route"/>
+            <field name="name">tw_warehouse_configuration_routes delete</field> 
+            <field name="group_id" ref="group_tw_warehouse_configuration_routes_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+    <!-- TW Warehouse Configuration Rules Menu -->
+        <record id="group_tw_warehouse_configuration_rules_read" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Configuration Rules Read</field>
+        </record> 
+        
+        <record id="access_tw_warehouse_configuration_rules_read" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_rule"/>
+            <field name="name">tw_warehouse_configuration_rules read</field> 
+            <field name="group_id" ref="group_tw_warehouse_configuration_rules_read"/>  
+            <field name="perm_read">1</field> 
+        </record> 
+                
+        <record id="group_tw_warehouse_configuration_rules_update" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Configuration Rules Update</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_configuration_rules_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_configuration_rules_update" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_rule"/>
+            <field name="name">tw_warehouse_configuration_rules update</field> 
+            <field name="group_id" ref="group_tw_warehouse_configuration_rules_update"/>  
+            <field name="perm_create">1</field> 
+            <field name="perm_write">1</field> 
+        </record>      
+
+        <record id="group_tw_warehouse_configuration_rules_delete" model="res.groups">
+            <field name="category_id" ref="tw_base.tw_role"/>
+            <field name="name">TW Warehouse Configuration Rules Delete</field>
+            <field name="implied_ids" eval="[(4, ref('group_tw_warehouse_configuration_rules_read'))]"/>                             
+        </record>
+                        
+        <record id="access_tw_warehouse_configuration_rules_delete" model="ir.model.access">
+            <field name="model_id" ref="stock.model_stock_rule"/>
+            <field name="name">tw_warehouse_configuration_rules delete</field> 
+            <field name="group_id" ref="group_tw_warehouse_configuration_rules_delete"/>  
+            <field name="perm_unlink">1</field> 
+        </record>
+
+        <!-- TW Selection -->
+        <record id="group_tw_selection_stock_location" model="res.groups">
+            <field name="category_id" ref="tw_selection.tw_module_category_selection"/>
+            <field name="name">TW Selection Stock Location</field>
+            <field name="implied_ids" eval="[(4, ref('tw_selection.group_tw_selection_update'))]"/>
+        </record>
+    </data>
+
+    <data>
+        <record id="tw_base.group_system_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4,ref('group_tw_stock_lot_form_read')),
+                (4,ref('group_tw_stock_picking_form_read')),
+                (4,ref('group_tw_stock_move_form_read')),
+
+                (4,ref('group_tw_stock_picking_batch_md_receipt_showroom_read')),
+                (4,ref('group_tw_stock_picking_batch_md_receipt_showroom_update')),
+                (4,ref('group_tw_stock_picking_batch_md_receipt_showroom_delete')),
+
+                (4,ref('group_tw_stock_picking_batch_md_qc_showroom_read')),
+                (4,ref('group_tw_stock_picking_batch_md_qc_showroom_update')),
+                (4,ref('group_tw_stock_picking_batch_md_qc_showroom_delete')),
+
+                (4,ref('group_tw_stock_picking_batch_md_store_showroom_read')),
+                (4,ref('group_tw_stock_picking_batch_md_store_showroom_update')),
+                (4,ref('group_tw_stock_picking_batch_md_store_showroom_delete')),
+
+                (4,ref('group_tw_stock_picking_batch_md_receipt_workshop_read')),
+                (4,ref('group_tw_stock_picking_batch_md_receipt_workshop_update')),
+                (4,ref('group_tw_stock_picking_batch_md_receipt_workshop_delete')),
+
+                (4,ref('group_tw_stock_picking_batch_md_qc_workshop_read')),
+                (4,ref('group_tw_stock_picking_batch_md_qc_workshop_update')),
+                (4,ref('group_tw_stock_picking_batch_md_qc_workshop_delete')),
+
+                (4,ref('group_tw_stock_picking_batch_md_store_workshop_read')),
+                (4,ref('group_tw_stock_picking_batch_md_store_workshop_update')),
+                (4,ref('group_tw_stock_picking_batch_md_store_workshop_delete')),
+
+                (4,ref('group_tw_stock_picking_batch_retail_receipt_showroom_read')),
+                (4,ref('group_tw_stock_picking_batch_retail_receipt_showroom_update')),
+                (4,ref('group_tw_stock_picking_batch_retail_receipt_showroom_delete')),
+
+                (4,ref('group_tw_stock_picking_batch_retail_qc_showroom_read')),
+                (4,ref('group_tw_stock_picking_batch_retail_qc_showroom_update')),
+                (4,ref('group_tw_stock_picking_batch_retail_qc_showroom_delete')),
+
+                (4,ref('group_tw_stock_picking_batch_retail_store_showroom_read')),
+                (4,ref('group_tw_stock_picking_batch_retail_store_showroom_update')),
+                (4,ref('group_tw_stock_picking_batch_retail_store_showroom_delete')),
+
+                (4,ref('group_tw_stock_picking_batch_retail_receipt_workshop_read')),
+                (4,ref('group_tw_stock_picking_batch_retail_receipt_workshop_update')),
+                (4,ref('group_tw_stock_picking_batch_retail_receipt_workshop_delete')),
+
+                (4,ref('group_tw_stock_picking_batch_retail_qc_workshop_read')),
+                (4,ref('group_tw_stock_picking_batch_retail_qc_workshop_update')),
+                (4,ref('group_tw_stock_picking_batch_retail_qc_workshop_delete')),
+
+                (4,ref('group_tw_stock_picking_batch_retail_store_workshop_read')),
+                (4,ref('group_tw_stock_picking_batch_retail_store_workshop_update')),
+                (4,ref('group_tw_stock_picking_batch_retail_store_workshop_delete')),
+
+                (4,ref('group_tw_stock_picking_batch_retail_pick_showroom_read')),
+                (4,ref('group_tw_stock_picking_batch_retail_pick_showroom_update')),
+                (4,ref('group_tw_stock_picking_batch_retail_pick_showroom_delete')),
+
+                (4,ref('group_tw_stock_picking_batch_retail_pack_showroom_read')),
+                (4,ref('group_tw_stock_picking_batch_retail_pack_showroom_update')),
+                (4,ref('group_tw_stock_picking_batch_retail_pack_showroom_delete')),
+
+                (4,ref('group_tw_stock_picking_batch_retail_out_showroom_read')),
+                (4,ref('group_tw_stock_picking_batch_retail_out_showroom_update')),
+                (4,ref('group_tw_stock_picking_batch_retail_out_showroom_delete')),
+
+                (4,ref('group_tw_stock_picking_batch_retail_pick_workshop_read')),
+                (4,ref('group_tw_stock_picking_batch_retail_pick_workshop_update')),
+                (4,ref('group_tw_stock_picking_batch_retail_pick_workshop_delete')),
+
+                (4,ref('group_tw_stock_picking_batch_retail_pack_workshop_read')),
+                (4,ref('group_tw_stock_picking_batch_retail_pack_workshop_update')),
+                (4,ref('group_tw_stock_picking_batch_retail_pack_workshop_delete')),
+
+                (4,ref('group_tw_stock_picking_batch_retail_out_workshop_read')),
+                (4,ref('group_tw_stock_picking_batch_retail_out_workshop_update')),
+                (4,ref('group_tw_stock_picking_batch_retail_out_workshop_delete')),
+
+                (4,ref('group_tw_warehouse_operation_incoming_shipment_read')),
+                (4,ref('group_tw_warehouse_operation_incoming_shipment_update')),
+                (4,ref('group_tw_warehouse_operation_incoming_shipment_delete')),
+
+                (4,ref('group_tw_warehouse_operation_outgoing_shipment_read')),
+                (4,ref('group_tw_warehouse_operation_outgoing_shipment_update')),
+                (4,ref('group_tw_warehouse_operation_outgoing_shipment_delete')),
+
+                (4,ref('group_tw_warehouse_operation_batch_transfer_read')),
+                (4,ref('group_tw_warehouse_operation_batch_transfer_update')),
+                (4,ref('group_tw_warehouse_operation_batch_transfer_delete')),
+
+                (4,ref('group_tw_warehouse_products_product_read')),
+                (4,ref('group_tw_warehouse_products_product_update')),
+                (4,ref('group_tw_warehouse_products_product_delete')),
+
+                (4,ref('group_tw_warehouse_products_product_variant_read')),
+                (4,ref('group_tw_warehouse_products_product_variant_update')),
+                (4,ref('group_tw_warehouse_products_product_variant_delete')),
+
+                (4,ref('group_tw_warehouse_products_product_category_read')),
+                (4,ref('group_tw_warehouse_products_product_category_update')),
+                (4,ref('group_tw_warehouse_products_product_category_delete')),
+
+                (4,ref('group_tw_warehouse_products_packages_read')),
+                (4,ref('group_tw_warehouse_products_packages_update')),
+                (4,ref('group_tw_warehouse_products_packages_delete')),
+
+                (4,ref('group_tw_warehouse_traceability_serial_number_read')),
+                (4,ref('group_tw_warehouse_traceability_serial_number_update')),
+                (4,ref('group_tw_warehouse_traceability_serial_number_delete')),
+
+                (4,ref('group_tw_warehouse_traceability_stock_read')),
+                (4,ref('group_tw_warehouse_traceability_stock_update')),
+                (4,ref('group_tw_warehouse_traceability_stock_delete')),
+
+                (4,ref('group_tw_warehouse_traceability_moves_history_read')),
+                (4,ref('group_tw_warehouse_traceability_moves_history_update')),
+                (4,ref('group_tw_warehouse_traceability_moves_history_delete')),
+
+                (4,ref('group_tw_warehouse_traceability_stock_valuation_read')),
+                (4,ref('group_tw_warehouse_traceability_stock_valuation_update')),
+                (4,ref('group_tw_warehouse_traceability_stock_valuation_delete')),
+
+                (4,ref('group_tw_warehouse_traceability_stock_quant_read')),
+                (4,ref('group_tw_warehouse_traceability_stock_quant_update')),
+                (4,ref('group_tw_warehouse_traceability_stock_quant_delete')),
+
+                (4,ref('group_tw_warehouse_configuration_warehouse_read')),
+                (4,ref('group_tw_warehouse_configuration_warehouse_update')),
+                (4,ref('group_tw_warehouse_configuration_warehouse_delete')),
+
+                (4,ref('group_tw_warehouse_configuration_location_read')),
+                (4,ref('group_tw_warehouse_configuration_location_update')),
+                (4,ref('group_tw_warehouse_configuration_location_delete')),
+
+                (4,ref('group_tw_warehouse_configuration_operation_types_read')),
+                (4,ref('group_tw_warehouse_configuration_operation_types_update')),
+                (4,ref('group_tw_warehouse_configuration_operation_types_delete')),
+
+                (4,ref('group_tw_warehouse_configuration_routes_read')),
+                (4,ref('group_tw_warehouse_configuration_routes_update')),
+                (4,ref('group_tw_warehouse_configuration_routes_delete')),
+
+                (4,ref('group_tw_warehouse_configuration_rules_read')),
+                (4,ref('group_tw_warehouse_configuration_rules_update')),
+                (4,ref('group_tw_warehouse_configuration_rules_delete')),
+                
+                (4,ref('group_tw_stock_picking_showroom_storage_transfer_read')),
+                (4,ref('group_tw_stock_picking_showroom_storage_transfer_update')),
+                (4,ref('group_tw_stock_picking_showroom_storage_transfer_delete')),
+
+                (4,ref('group_tw_stock_picking_showroom_quality_control_transfer_read')),
+                (4,ref('group_tw_stock_picking_showroom_quality_control_transfer_update')),
+                (4,ref('group_tw_stock_picking_showroom_quality_control_transfer_delete')),
+
+                (4,ref('group_tw_stock_picking_showroom_on_incoming_shipment_read')),
+                (4,ref('group_tw_stock_picking_showroom_on_incoming_shipment_update')),
+                (4,ref('group_tw_stock_picking_showroom_on_incoming_shipment_delete')),
+
+                (4,ref('group_tw_stock_picking_showroom_picking_transfer_read')),
+                (4,ref('group_tw_stock_picking_showroom_picking_transfer_update')),
+                (4,ref('group_tw_stock_picking_showroom_picking_transfer_delete')),
+
+                (4,ref('group_tw_stock_picking_showroom_packing_transfer_read')),
+                (4,ref('group_tw_stock_picking_showroom_packing_transfer_update')),
+                (4,ref('group_tw_stock_picking_showroom_packing_transfer_delete')),
+
+                (4,ref('group_tw_stock_picking_showroom_on_outgoing_shipment_read')),
+                (4,ref('group_tw_stock_picking_showroom_on_outgoing_shipment_update')),
+                (4,ref('group_tw_stock_picking_showroom_on_outgoing_shipment_delete')),
+
+                (4,ref('group_tw_stock_picking_workshop_storage_transfer_read')),
+                (4,ref('group_tw_stock_picking_workshop_storage_transfer_update')),
+                (4,ref('group_tw_stock_picking_workshop_storage_transfer_delete')),
+
+                (4,ref('group_tw_stock_picking_workshop_quality_control_transfer_read')),
+                (4,ref('group_tw_stock_picking_workshop_quality_control_transfer_update')),
+                (4,ref('group_tw_stock_picking_workshop_quality_control_transfer_delete')),
+                
+                (4,ref('group_tw_stock_picking_workshop_on_outgoing_shipment_read')),
+                (4,ref('group_tw_stock_picking_workshop_on_outgoing_shipment_update')),
+                (4,ref('group_tw_stock_picking_workshop_on_outgoing_shipment_delete')),
+
+                (4,ref('group_tw_stock_picking_workshop_on_incoming_shipment_read')),
+                (4,ref('group_tw_stock_picking_workshop_on_incoming_shipment_update')),
+                (4,ref('group_tw_stock_picking_workshop_on_incoming_shipment_delete')),
+
+                (4,ref('group_tw_stock_picking_workshop_picking_transfer_read')),
+                (4,ref('group_tw_stock_picking_workshop_picking_transfer_update')),
+                (4,ref('group_tw_stock_picking_workshop_picking_transfer_delete')),
+                
+                (4,ref('group_tw_stock_picking_workshop_packing_transfer_read')),
+                (4,ref('group_tw_stock_picking_workshop_packing_transfer_update')),
+                (4,ref('group_tw_stock_picking_workshop_packing_transfer_delete')),
+
+                (4,ref('group_tw_selection_stock_location')),
+                ]" />
+        </record>         
+    </data>
+</odoo>

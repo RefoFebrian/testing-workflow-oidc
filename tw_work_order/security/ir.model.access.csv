@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_work_order_tw_work_order_all,tw_work_order all,model_tw_work_order,base.group_user,1,0,0,0
+access_tw_work_order_all,tw_work_order all,model_tw_work_order,base.group_user,1,0,0,0
+access_tw_work_order_line_all,tw_work_order_line all,model_tw_work_order_line,base.group_user,1,0,0,0
+access_tw_work_order_print_wizard,tw_work_order_print_wizard,model_tw_work_order_print_wizard,base.group_user,1,1,1,1

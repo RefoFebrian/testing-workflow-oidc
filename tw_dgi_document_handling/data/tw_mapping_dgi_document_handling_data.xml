@@ -1,0 +1,1392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!--
+        =============================================================
+        DGI Document Handling Response Mappings
+
+        Setiap mapping record di-link ke endpoint spesifik per dealer
+        menggunakan ref= (bukan search=) agar semua dealer mendapatkan
+        mapping records yang benar.
+
+        Filtering Logic:
+        - statusFakturSTNK determines which record is valid for which process.
+        - idSPK + nomorRangka used for strict Lot identification.
+        =============================================================
+        -->
+
+        <!-- ==================== PROSES STNK ==================== -->
+        <!-- Filter: statusFakturSTNK in (1,2) -->
+        <!-- Mappings: filter + lot_id + faktur_stnk_number -->
+
+        <!-- HSO -->
+        <record id="mapping_doch_proses_stnk_filter_hso" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_hso"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">1,2</field>
+            <field name="validation_operator">in</field>
+            <field name="notes">Ambil unit dengan status Mohon Faktur (1) atau Sudah diserahkan ke Birojasa (2)</field>
+        </record>
+        <record id="mapping_doch_proses_stnk_lot_id_hso" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_hso"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">registration_process_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+            <field name="notes">Lookup Lot by Chassis Number AND DGI SPK Number</field>
+        </record>
+        <record id="mapping_doch_process_stnk_faktur_hso" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_hso"/>
+            <field name="json_path">unit.nomorFakturSTNK</field>
+            <field name="target_field">faktur_stnk_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">registration_process_line_ids</field>
+        </record>
+        <record id="mapping_doch_proses_stnk_faktur_no_hso" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_hso"/>
+            <field name="json_path">unit.nomorFakturSTNK</field>
+            <field name="target_field">faktur_stnk_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">registration_process_line_ids</field>
+            <field name="notes">Nomor Faktur STNK dari MD</field>
+        </record>
+
+        <!-- ASP -->
+        <record id="mapping_doch_proses_stnk_filter_asp" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_asp"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">1,2</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_proses_stnk_lot_id_asp" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_asp"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">registration_process_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_process_stnk_faktur_asp" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_asp"/>
+            <field name="json_path">unit.nomorFakturSTNK</field>
+            <field name="target_field">faktur_stnk_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">registration_process_line_ids</field>
+        </record>
+        <record id="mapping_doch_proses_stnk_faktur_no_asp" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_asp"/>
+            <field name="json_path">unit.nomorFakturSTNK</field>
+            <field name="target_field">faktur_stnk_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">registration_process_line_ids</field>
+        </record>
+
+        <!-- DAM -->
+        <record id="mapping_doch_proses_stnk_filter_dam" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_dam"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">1,2</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_proses_stnk_lot_id_dam" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_dam"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">registration_process_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_process_stnk_faktur_dam" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_dam"/>
+            <field name="json_path">unit.nomorFakturSTNK</field>
+            <field name="target_field">faktur_stnk_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">registration_process_line_ids</field>
+        </record>
+        <record id="mapping_doch_proses_stnk_faktur_no_dam" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_dam"/>
+            <field name="json_path">unit.nomorFakturSTNK</field>
+            <field name="target_field">faktur_stnk_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">registration_process_line_ids</field>
+        </record>
+
+        <!-- DAW -->
+        <record id="mapping_doch_proses_stnk_filter_daw" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_daw"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">1,2</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_proses_stnk_lot_id_daw" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_daw"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">registration_process_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_process_stnk_faktur_daw" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_daw"/>
+            <field name="json_path">unit.nomorFakturSTNK</field>
+            <field name="target_field">faktur_stnk_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">registration_process_line_ids</field>
+        </record>
+        <record id="mapping_doch_proses_stnk_faktur_no_daw" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_daw"/>
+            <field name="json_path">unit.nomorFakturSTNK</field>
+            <field name="target_field">faktur_stnk_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">registration_process_line_ids</field>
+        </record>
+
+        <!-- NPM -->
+        <record id="mapping_doch_proses_stnk_filter_npm" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_npm"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">1,2</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_proses_stnk_lot_id_npm" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_npm"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">registration_process_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_process_stnk_faktur_npm" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_npm"/>
+            <field name="json_path">unit.nomorFakturSTNK</field>
+            <field name="target_field">faktur_stnk_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">registration_process_line_ids</field>
+        </record>
+        <record id="mapping_doch_proses_stnk_faktur_no_npm" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_npm"/>
+            <field name="json_path">unit.nomorFakturSTNK</field>
+            <field name="target_field">faktur_stnk_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">registration_process_line_ids</field>
+        </record>
+
+        <!-- SINSEN -->
+        <record id="mapping_doch_proses_stnk_filter_sinsen" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_sinsen"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">1,2</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_proses_stnk_lot_id_sinsen" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_sinsen"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">registration_process_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_process_stnk_faktur_sinsen" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_sinsen"/>
+            <field name="json_path">unit.nomorFakturSTNK</field>
+            <field name="target_field">faktur_stnk_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">registration_process_line_ids</field>
+        </record>
+        <record id="mapping_doch_proses_stnk_faktur_no_sinsen" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_sinsen"/>
+            <field name="json_path">unit.nomorFakturSTNK</field>
+            <field name="target_field">faktur_stnk_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">registration_process_line_ids</field>
+        </record>
+
+        <!-- WAHANA -->
+        <!-- Wahana: statusFakturSTNK adalah text ("Process", "Selesai", dll) bukan angka -->
+        <record id="mapping_doch_proses_stnk_filter_wahana" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_wahana"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">1,2,Process,Proses,Pengajuan</field>
+            <field name="validation_operator">in</field>
+            <field name="notes">Wahana pakai text enum. Map: Process/Proses/Pengajuan = proses STNK</field>
+        </record>
+        <!-- Wahana: nomorRangka tidak ada, tapi idSPK selalu ada → lookup lot by dgi_spk_number -->
+        <record id="mapping_doch_proses_stnk_lot_id_wahana" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_wahana"/>
+            <field name="json_path">idSPK</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">registration_process_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">dgi_spk_number</field>
+            <field name="notes">Wahana tidak kirim nomorRangka. Lookup lot via idSPK → dgi_spk_number</field>
+        </record>
+        <record id="mapping_doch_process_stnk_faktur_wahana" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_wahana"/>
+            <field name="json_path">unit.nomorFakturSTNK</field>
+            <field name="target_field">faktur_stnk_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">registration_process_line_ids</field>
+        </record>
+        <record id="mapping_doch_proses_stnk_faktur_no_wahana" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_proses_stnk_wahana"/>
+            <field name="json_path">unit.nomorFakturSTNK</field>
+            <field name="target_field">faktur_stnk_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">registration_process_line_ids</field>
+        </record>
+
+        <!-- ==================== RECEIPT STNK ==================== -->
+        <!-- Filter: statusFakturSTNK in (3,7) -->
+        <!-- Mappings: filter + lot_id -->
+
+        <!-- HSO -->
+        <record id="mapping_doch_receipt_stnk_filter_hso" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_hso"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">3,7</field>
+            <field name="validation_operator">in</field>
+            <field name="notes">Hanya ambil unit yang STNK-nya sudah selesai (3) atau Plat selesai (7)</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_lot_id_hso" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_hso"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_plate_hso" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_hso"/>
+            <field name="json_path">unit.platNomor</field>
+            <field name="target_field">plate_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_no_stnk_hso" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_hso"/>
+            <field name="json_path">unit.nomorSTNK</field>
+            <field name="target_field">vehicle_registration_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+        </record>
+
+        <!-- ASP -->
+        <record id="mapping_doch_receipt_stnk_filter_asp" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_asp"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">3,7</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_lot_id_asp" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_asp"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_plate_asp" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_asp"/>
+            <field name="json_path">unit.platNomor</field>
+            <field name="target_field">plate_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_no_stnk_asp" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_asp"/>
+            <field name="json_path">unit.nomorSTNK</field>
+            <field name="target_field">vehicle_registration_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+        </record>
+
+        <!-- DAM -->
+        <record id="mapping_doch_receipt_stnk_filter_dam" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_dam"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">3,7</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_lot_id_dam" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_dam"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_plate_dam" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_dam"/>
+            <field name="json_path">unit.platNomor</field>
+            <field name="target_field">plate_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_no_stnk_dam" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_dam"/>
+            <field name="json_path">unit.nomorSTNK</field>
+            <field name="target_field">vehicle_registration_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+        </record>
+
+        <!-- DAW -->
+        <record id="mapping_doch_receipt_stnk_filter_daw" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_daw"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">3,7</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_lot_id_daw" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_daw"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_plate_daw" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_daw"/>
+            <field name="json_path">unit.platNomor</field>
+            <field name="target_field">plate_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_no_stnk_daw" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_daw"/>
+            <field name="json_path">unit.nomorSTNK</field>
+            <field name="target_field">vehicle_registration_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+        </record>
+
+        <!-- NPM -->
+        <record id="mapping_doch_receipt_stnk_filter_npm" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_npm"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">3,7</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_lot_id_npm" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_npm"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_plate_npm" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_npm"/>
+            <field name="json_path">unit.platNomor</field>
+            <field name="target_field">plate_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_no_stnk_npm" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_npm"/>
+            <field name="json_path">unit.nomorSTNK</field>
+            <field name="target_field">vehicle_registration_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+        </record>
+
+        <!-- SINSEN -->
+        <record id="mapping_doch_receipt_stnk_filter_sinsen" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_sinsen"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">3,7</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_lot_id_sinsen" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_sinsen"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_plate_sinsen" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_sinsen"/>
+            <field name="json_path">unit.platNomor</field>
+            <field name="target_field">plate_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_no_stnk_sinsen" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_sinsen"/>
+            <field name="json_path">unit.nomorSTNK</field>
+            <field name="target_field">vehicle_registration_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+        </record>
+
+        <!-- WAHANA -->
+        <!-- Wahana: statusFakturSTNK adalah text enum -->
+        <record id="mapping_doch_receipt_stnk_filter_wahana" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_wahana"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">3,7,Selesai,STNK Selesai,Terima STNK</field>
+            <field name="validation_operator">in</field>
+            <field name="notes">Wahana pakai text enum. Map: Selesai/STNK Selesai/Terima STNK = penerimaan STNK</field>
+        </record>
+        <!-- Wahana: nomorRangka tidak ada, tapi idSPK selalu ada → lookup lot by dgi_spk_number -->
+        <record id="mapping_doch_receipt_stnk_lot_id_wahana" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_wahana"/>
+            <field name="json_path">idSPK</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">dgi_spk_number</field>
+            <field name="notes">Wahana tidak kirim nomorRangka. Lookup lot via idSPK → dgi_spk_number</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_plate_wahana" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_wahana"/>
+            <field name="json_path">unit.platNomor</field>
+            <field name="target_field">plate_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_no_stnk_wahana" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_wahana"/>
+            <field name="json_path">unit.nomorSTNK</field>
+            <field name="target_field">vehicle_registration_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_notice_number_wahana" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_wahana"/>
+            <field name="json_path">unit.nomorFakturSTNK</field>
+            <field name="target_field">notice_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_notice_date_wahana" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_wahana"/>
+            <field name="json_path">unit.tanggalPengajuanSTNKKeBiro</field>
+            <field name="target_field">notice_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+        </record>
+        <record id="mapping_doch_receipt_stnk_stnk_date_wahana" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_stnk_wahana"/>
+            <field name="json_path">unit.tanggalPenerimaanSTNKDariBiro</field>
+            <field name="target_field">stnk_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_registration_receipt_line_ids</field>
+        </record>
+
+        <!-- ==================== RECEIPT BPKB ==================== -->
+        <!-- Filter: statusFakturSTNK = 5 -->
+        <!-- Mappings: filter + lot_id -->
+
+        <!-- HSO -->
+        <record id="mapping_doch_receipt_bpkb_filter_hso" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_hso"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">5</field>
+            <field name="validation_operator">in</field>
+            <field name="notes">Hanya ambil unit yang BPKB-nya sudah selesai</field>
+        </record>
+        <record id="mapping_doch_receipt_bpkb_lot_id_hso" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_hso"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_receipt_bpkb_nomor_hso" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_hso"/>
+            <field name="json_path">unit.nomorBPKB</field>
+            <field name="target_field">vehicle_ownership_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+        </record>
+        <record id="mapping_doch_receipt_bpkb_date_hso" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_hso"/>
+            <field name="json_path">unit.tanggalPenerimaanBPKBDariBiro</field>
+            <field name="target_field">vehicle_ownership_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+        </record>
+
+        <!-- ASP -->
+        <record id="mapping_doch_receipt_bpkb_filter_asp" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_asp"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">5</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_receipt_bpkb_lot_id_asp" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_asp"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_receipt_bpkb_nomor_asp" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_asp"/>
+            <field name="json_path">unit.nomorBPKB</field>
+            <field name="target_field">vehicle_ownership_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+        </record>
+        <record id="mapping_doch_receipt_bpkb_date_asp" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_asp"/>
+            <field name="json_path">unit.tanggalPenerimaanBPKBDariBiro</field>
+            <field name="target_field">vehicle_ownership_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+        </record>
+
+        <!-- DAM -->
+        <record id="mapping_doch_receipt_bpkb_filter_dam" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_dam"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">5</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_receipt_bpkb_lot_id_dam" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_dam"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_receipt_bpkb_nomor_dam" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_dam"/>
+            <field name="json_path">unit.nomorBPKB</field>
+            <field name="target_field">vehicle_ownership_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+        </record>
+        <record id="mapping_doch_receipt_bpkb_date_dam" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_dam"/>
+            <field name="json_path">unit.tanggalPenerimaanBPKBDariBiro</field>
+            <field name="target_field">vehicle_ownership_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+        </record>
+
+        <!-- DAW -->
+        <record id="mapping_doch_receipt_bpkb_filter_daw" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_daw"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">5</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_receipt_bpkb_lot_id_daw" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_daw"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_receipt_bpkb_nomor_daw" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_daw"/>
+            <field name="json_path">unit.nomorBPKB</field>
+            <field name="target_field">vehicle_ownership_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+        </record>
+        <record id="mapping_doch_receipt_bpkb_date_daw" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_daw"/>
+            <field name="json_path">unit.tanggalPenerimaanBPKBDariBiro</field>
+            <field name="target_field">vehicle_ownership_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+        </record>
+
+        <!-- NPM -->
+        <record id="mapping_doch_receipt_bpkb_filter_npm" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_npm"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">5</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_receipt_bpkb_lot_id_npm" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_npm"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_receipt_bpkb_nomor_npm" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_npm"/>
+            <field name="json_path">unit.nomorBPKB</field>
+            <field name="target_field">vehicle_ownership_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+        </record>
+        <record id="mapping_doch_receipt_bpkb_date_npm" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_npm"/>
+            <field name="json_path">unit.tanggalPenerimaanBPKBDariBiro</field>
+            <field name="target_field">vehicle_ownership_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+        </record>
+
+        <!-- SINSEN -->
+        <record id="mapping_doch_receipt_bpkb_filter_sinsen" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_sinsen"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">5</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_receipt_bpkb_lot_id_sinsen" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_sinsen"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_receipt_bpkb_nomor_sinsen" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_sinsen"/>
+            <field name="json_path">unit.nomorBPKB</field>
+            <field name="target_field">vehicle_ownership_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+        </record>
+        <record id="mapping_doch_receipt_bpkb_date_sinsen" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_sinsen"/>
+            <field name="json_path">unit.tanggalPenerimaanBPKBDariBiro</field>
+            <field name="target_field">vehicle_ownership_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+        </record>
+
+        <!-- WAHANA -->
+        <!-- Wahana: statusFakturSTNK adalah text enum -->
+        <record id="mapping_doch_receipt_bpkb_filter_wahana" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_wahana"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">5,BPKB Selesai,Terima BPKB,Selesai BPKB</field>
+            <field name="validation_operator">in</field>
+            <field name="notes">Wahana pakai text enum untuk BPKB receipt</field>
+        </record>
+        <!-- Wahana: nomorRangka tidak ada, tapi idSPK selalu ada → lookup lot by dgi_spk_number -->
+        <record id="mapping_doch_receipt_bpkb_lot_id_wahana" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_wahana"/>
+            <field name="json_path">idSPK</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">dgi_spk_number</field>
+            <field name="notes">Wahana tidak kirim nomorRangka. Lookup lot via idSPK → dgi_spk_number</field>
+        </record>
+        <record id="mapping_doch_receipt_bpkb_nomor_wahana" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_wahana"/>
+            <field name="json_path">unit.nomorBPKB</field>
+            <field name="target_field">vehicle_ownership_number</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+        </record>
+        <record id="mapping_doch_receipt_bpkb_date_wahana" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_receipt_bpkb_wahana"/>
+            <field name="json_path">unit.tanggalPenerimaanBPKBDariBiro</field>
+            <field name="target_field">vehicle_ownership_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_receipt_line_ids</field>
+        </record>
+
+        <!-- ==================== HANDOVER STNK ==================== -->
+        <!-- Filter: statusFakturSTNK in (4,8) -->
+        <!-- Mappings: filter + lot_id + receiver -->
+
+        <!-- HSO -->
+        <record id="mapping_doch_handover_stnk_filter_hso" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_hso"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">4,8</field>
+            <field name="validation_operator">in</field>
+            <field name="notes">Hanya ambil unit yang STNK-nya sudah diserahkan (4) atau Plat diserahkan (8)</field>
+        </record>
+        <record id="mapping_doch_handover_stnk_lot_id_hso" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_hso"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">registration_handover_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_handover_stnk_tgl_hso" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_hso"/>
+            <field name="json_path">unit.tanggalTerimaSTNKOlehKonsumen</field>
+            <field name="target_field">stnk_handover_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_handover_line_ids</field>
+        </record>
+        <record id="mapping_doch_handover_stnk_receiver_hso" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_hso"/>
+            <field name="json_path">namaPenerima</field>
+            <field name="target_field">receiver</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Nama penerima dari MD</field>
+        </record>
+
+        <!-- ASP -->
+        <record id="mapping_doch_handover_stnk_filter_asp" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_asp"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">4,8</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_handover_stnk_lot_id_asp" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_asp"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">registration_handover_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_handover_stnk_tgl_asp" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_asp"/>
+            <field name="json_path">unit.tanggalTerimaSTNKOlehKonsumen</field>
+            <field name="target_field">stnk_handover_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_handover_line_ids</field>
+        </record>
+        <record id="mapping_doch_handover_stnk_receiver_asp" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_asp"/>
+            <field name="json_path">namaPenerima</field>
+            <field name="target_field">receiver</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <!-- DAM -->
+        <record id="mapping_doch_handover_stnk_filter_dam" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_dam"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">4,8</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_handover_stnk_lot_id_dam" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_dam"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">registration_handover_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_handover_stnk_tgl_dam" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_dam"/>
+            <field name="json_path">unit.tanggalTerimaSTNKOlehKonsumen</field>
+            <field name="target_field">stnk_handover_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_handover_line_ids</field>
+        </record>
+        <record id="mapping_doch_handover_stnk_receiver_dam" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_dam"/>
+            <field name="json_path">namaPenerima</field>
+            <field name="target_field">receiver</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <!-- DAW -->
+        <record id="mapping_doch_handover_stnk_filter_daw" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_daw"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">4,8</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_handover_stnk_lot_id_daw" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_daw"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">registration_handover_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_handover_stnk_tgl_daw" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_daw"/>
+            <field name="json_path">unit.tanggalTerimaSTNKOlehKonsumen</field>
+            <field name="target_field">stnk_handover_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_handover_line_ids</field>
+        </record>
+        <record id="mapping_doch_handover_stnk_receiver_daw" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_daw"/>
+            <field name="json_path">namaPenerima</field>
+            <field name="target_field">receiver</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <!-- NPM -->
+        <record id="mapping_doch_handover_stnk_filter_npm" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_npm"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">4,8</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_handover_stnk_lot_id_npm" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_npm"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">registration_handover_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_handover_stnk_tgl_npm" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_npm"/>
+            <field name="json_path">unit.tanggalTerimaSTNKOlehKonsumen</field>
+            <field name="target_field">stnk_handover_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_handover_line_ids</field>
+        </record>
+        <record id="mapping_doch_handover_stnk_receiver_npm" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_npm"/>
+            <field name="json_path">namaPenerima</field>
+            <field name="target_field">receiver</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <!-- SINSEN -->
+        <record id="mapping_doch_handover_stnk_filter_sinsen" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_sinsen"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">4,8</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_handover_stnk_lot_id_sinsen" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_sinsen"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">registration_handover_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_handover_stnk_tgl_sinsen" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_sinsen"/>
+            <field name="json_path">unit.tanggalTerimaSTNKOlehKonsumen</field>
+            <field name="target_field">stnk_handover_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_handover_line_ids</field>
+        </record>
+        <record id="mapping_doch_handover_stnk_receiver_sinsen" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_sinsen"/>
+            <field name="json_path">namaPenerima</field>
+            <field name="target_field">receiver</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <!-- WAHANA -->
+        <!-- Wahana: statusFakturSTNK adalah text enum -->
+        <record id="mapping_doch_handover_stnk_filter_wahana" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_wahana"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">4,8,Serah STNK,Serahkan STNK,Selesai Serah STNK</field>
+            <field name="validation_operator">in</field>
+            <field name="notes">Wahana pakai text enum untuk handover STNK</field>
+        </record>
+        <!-- Wahana: nomorRangka tidak ada, tapi idSPK selalu ada → lookup lot by dgi_spk_number -->
+        <record id="mapping_doch_handover_stnk_lot_id_wahana" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_wahana"/>
+            <field name="json_path">idSPK</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">registration_handover_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">dgi_spk_number</field>
+            <field name="notes">Wahana tidak kirim nomorRangka. Lookup lot via idSPK → dgi_spk_number</field>
+        </record>
+        <record id="mapping_doch_handover_stnk_tgl_wahana" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_wahana"/>
+            <field name="json_path">unit.tanggalTerimaSTNKOlehKonsumen</field>
+            <field name="target_field">stnk_handover_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_handover_line_ids</field>
+        </record>
+        <!-- Wahana: namaPenerima (satu field, bukan split STNK/BPKB) -->
+        <record id="mapping_doch_handover_stnk_receiver_wahana" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_stnk_wahana"/>
+            <field name="json_path">unit.namaPenerima</field>
+            <field name="target_field">receiver</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">registration_handover_line_ids</field>
+            <field name="notes">Wahana pakai namaPenerima di dalam unit (bukan di root)</field>
+        </record>
+
+        <!-- ==================== HANDOVER BPKB ==================== -->
+        <!-- Filter: statusFakturSTNK = 6 -->
+        <!-- Mappings: filter + lot_id + receiver -->
+
+        <!-- HSO -->
+        <record id="mapping_doch_handover_bpkb_filter_hso" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_hso"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">6</field>
+            <field name="validation_operator">in</field>
+            <field name="notes">Hanya ambil unit yang BPKB-nya sudah diserahkan</field>
+        </record>
+        <record id="mapping_doch_handover_bpkb_lot_id_hso" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_hso"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">ownership_handover_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_handover_bpkb_tgl_hso" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_hso"/>
+            <field name="json_path">unit.tanggalTerimaBPKBOlehKonsumen</field>
+            <field name="target_field">bpkb_handover_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_handover_line_ids</field>
+        </record>
+        <record id="mapping_doch_handover_bpkb_receiver_hso" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_hso"/>
+            <field name="json_path">namaPenerima</field>
+            <field name="target_field">receiver</field>
+            <field name="field_type">direct</field>
+            <field name="notes">Nama penerima dari MD</field>
+        </record>
+
+        <!-- ASP -->
+        <record id="mapping_doch_handover_bpkb_filter_asp" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_asp"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">6</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_handover_bpkb_lot_id_asp" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_asp"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">ownership_handover_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_handover_bpkb_tgl_asp" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_asp"/>
+            <field name="json_path">unit.tanggalTerimaBPKBOlehKonsumen</field>
+            <field name="target_field">bpkb_handover_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_handover_line_ids</field>
+        </record>
+        <record id="mapping_doch_handover_bpkb_receiver_asp" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_asp"/>
+            <field name="json_path">namaPenerima</field>
+            <field name="target_field">receiver</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <!-- DAM -->
+        <record id="mapping_doch_handover_bpkb_filter_dam" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_dam"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">6</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_handover_bpkb_lot_id_dam" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_dam"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">ownership_handover_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_handover_bpkb_tgl_dam" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_dam"/>
+            <field name="json_path">unit.tanggalTerimaBPKBOlehKonsumen</field>
+            <field name="target_field">bpkb_handover_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_handover_line_ids</field>
+        </record>
+        <record id="mapping_doch_handover_bpkb_receiver_dam" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_dam"/>
+            <field name="json_path">namaPenerima</field>
+            <field name="target_field">receiver</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <!-- DAW -->
+        <record id="mapping_doch_handover_bpkb_filter_daw" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_daw"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">6</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_handover_bpkb_lot_id_daw" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_daw"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">ownership_handover_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_handover_bpkb_tgl_daw" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_daw"/>
+            <field name="json_path">unit.tanggalTerimaBPKBOlehKonsumen</field>
+            <field name="target_field">bpkb_handover_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_handover_line_ids</field>
+        </record>
+        <record id="mapping_doch_handover_bpkb_receiver_daw" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_daw"/>
+            <field name="json_path">namaPenerima</field>
+            <field name="target_field">receiver</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <!-- NPM -->
+        <record id="mapping_doch_handover_bpkb_filter_npm" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_npm"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">6</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_handover_bpkb_lot_id_npm" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_npm"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">ownership_handover_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_handover_bpkb_tgl_npm" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_npm"/>
+            <field name="json_path">unit.tanggalTerimaBPKBOlehKonsumen</field>
+            <field name="target_field">bpkb_handover_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_handover_line_ids</field>
+        </record>
+        <record id="mapping_doch_handover_bpkb_receiver_npm" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_npm"/>
+            <field name="json_path">namaPenerima</field>
+            <field name="target_field">receiver</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <!-- SINSEN -->
+        <record id="mapping_doch_handover_bpkb_filter_sinsen" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_sinsen"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">6</field>
+            <field name="validation_operator">in</field>
+        </record>
+        <record id="mapping_doch_handover_bpkb_lot_id_sinsen" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_sinsen"/>
+            <field name="json_path">unit.nomorRangka</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">ownership_handover_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">chassis_number</field>
+            <field name="relation_search_domain">[('dgi_spk_number', '=', idSPK)]</field>
+        </record>
+        <record id="mapping_doch_handover_bpkb_tgl_sinsen" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_sinsen"/>
+            <field name="json_path">unit.tanggalTerimaBPKBOlehKonsumen</field>
+            <field name="target_field">bpkb_handover_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_handover_line_ids</field>
+        </record>
+        <record id="mapping_doch_handover_bpkb_receiver_sinsen" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_sinsen"/>
+            <field name="json_path">namaPenerima</field>
+            <field name="target_field">receiver</field>
+            <field name="field_type">direct</field>
+        </record>
+
+        <!-- WAHANA -->
+        <!-- Wahana: statusFakturSTNK adalah text enum -->
+        <record id="mapping_doch_handover_bpkb_filter_wahana" model="tw.mapping.response">
+            <field name="sequence">1</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_wahana"/>
+            <field name="json_path">unit.statusFakturSTNK</field>
+            <field name="field_type">validation</field>
+            <field name="is_required">1</field>
+            <field name="expected_value">6,Serah BPKB,Serahkan BPKB,Selesai Serah BPKB</field>
+            <field name="validation_operator">in</field>
+            <field name="notes">Wahana pakai text enum untuk handover BPKB</field>
+        </record>
+        <!-- Wahana: nomorRangka tidak ada, tapi idSPK selalu ada → lookup lot by dgi_spk_number -->
+        <record id="mapping_doch_handover_bpkb_lot_id_wahana" model="tw.mapping.response">
+            <field name="sequence">5</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_wahana"/>
+            <field name="json_path">idSPK</field>
+            <field name="target_field">lot_id</field>
+            <field name="field_type">relation</field>
+            <field name="line_group">ownership_handover_line_ids</field>
+            <field name="is_required">1</field>
+            <field name="relation_model_id" ref="stock.model_stock_lot"/>
+            <field name="relation_lookup_field">dgi_spk_number</field>
+            <field name="notes">Wahana tidak kirim nomorRangka. Lookup lot via idSPK → dgi_spk_number</field>
+        </record>
+        <record id="mapping_doch_handover_bpkb_tgl_wahana" model="tw.mapping.response">
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_wahana"/>
+            <field name="json_path">unit.tanggalTerimaBPKBOlehKonsumen</field>
+            <field name="target_field">bpkb_handover_date</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">vehicle_ownership_handover_line_ids</field>
+        </record>
+        <!-- Wahana: namaPenerima di dalam unit, bukan di root -->
+        <record id="mapping_doch_handover_bpkb_receiver_wahana" model="tw.mapping.response">
+            <field name="sequence">10</field>
+            <field name="endpoint_id" ref="tw_dgi_document_handling.tw_endpoint_dgi_doch_handover_bpkb_wahana"/>
+            <field name="json_path">unit.namaPenerima</field>
+            <field name="target_field">receiver</field>
+            <field name="field_type">direct</field>
+            <field name="line_group">ownership_handover_line_ids</field>
+            <field name="notes">Wahana pakai namaPenerima di dalam unit (bukan di root)</field>
+        </record>
+
+    </data>
+</odoo>

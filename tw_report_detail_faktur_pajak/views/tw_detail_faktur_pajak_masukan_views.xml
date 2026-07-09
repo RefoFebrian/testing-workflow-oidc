@@ -1,0 +1,38 @@
+<odoo>
+  <data>
+    <record id="tw_detail_faktur_pajak_masukan_wizard" model="ir.ui.view">
+		<field name="name">Generate Detail Faktur Pajak Masukan</field>
+		<field name="model">tw.detail.faktur.pajak.masukan</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+	        <form string="Generate Detail Faktur Pajak Masukan">
+	        	<group>
+					<group>
+						<field name="company_id"/>
+					</group>
+					<group>
+						<label for="start_date" string="Periode"/>	
+						<div>
+							<field name="start_date" class="oe_inline"/> - <field name="end_date" class="oe_inline"/>
+						</div>
+						<field name="partner_id"/>
+					</group>
+	        	</group>                
+		        <footer>
+		            <button name="action_generate_report" string="Export Report" type="object" class="oe_highlight"/> Or
+		            <button string="Cancel" class="oe_link" special="cancel" />
+		        </footer>
+	        </form>
+	    </field>
+	</record>
+
+	<record id="tw_report_detail_faktur_pajak_masukan_action" model="ir.actions.act_window">
+		<field name="name">Generate Detail Faktur Pajak Masukan</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">tw.detail.faktur.pajak.masukan</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+    </record>
+
+  </data>
+</odoo>

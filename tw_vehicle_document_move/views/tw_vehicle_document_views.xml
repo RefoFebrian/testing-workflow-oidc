@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- list View -->
+    <record id="view_vehicle_document_move_list" model="ir.ui.view">
+        <field name="name">tw.vehicle.document.move.list</field>
+        <field name="model">tw.vehicle.document.move</field>
+        <field name="arch" type="xml">
+            <list string="Document Mutations" decoration-muted="state == 'cancel'" decoration-success="state == 'done'">
+                <field name="number_document"/>
+                <field name="reference" string="Reference"/>
+                <field name="company_id" string="Branch"/>
+            </list>
+        </field>
+    </record>
+    
+    <!-- Form View -->
+    <record id="view_vehicle_document_move_form" model="ir.ui.view">
+        <field name="name">tw.vehicle.document.move.form</field>
+        <field name="model">tw.vehicle.document.move</field>
+        <field name="arch" type="xml">
+            <form string="Document Mutation">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" invisible="state != 'draft'" groups="tw_vehicle_document_mutation.group_document_mutation_outgoing_confirm_button"/>
+                    <button name="action_print_registration_mutation" string="Print" type="object" class="oe_highlight" invisible="document_type != 'stnk' or state != 'done'" groups="tw_vehicle_document_mutation.group_document_mutation_stnk_button_report"/>
+                    <button name="action_print_ownership_mutation" string="Print" type="object" class="oe_highlight" invisible="document_type != 'bpkb' or state != 'done'" groups="tw_vehicle_document_mutation.group_document_mutation_bpkb_button_report"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" nolabel="1" class="mb0" placeholder="Draft"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="document_type" invisible="1"/>
+                            <field name="company_id" required="1" options="{'no_create': True,'no_open': True}" readonly="state != 'draft'"/>
+                            <field name="stnk_source_location_id" required="document_type == 'stnk'" options="{'no_create': True,'no_open': True}" readonly="state != 'draft'" invisible="document_type != 'stnk'"/>
+                            <field name="stnk_dest_location_id" required="document_type == 'stnk'" options="{'no_create': True,'no_open': True}" readonly="state != 'draft'" invisible="document_type != 'stnk'"/>
+                            <field name="bpkb_source_location_id" required="document_type == 'bpkb'" options="{'no_create': True,'no_open': True}" readonly="state != 'draft'" invisible="document_type != 'bpkb'"/>
+                            <field name="bpkb_dest_location_id" required="document_type == 'bpkb'" options="{'no_create': True,'no_open': True}" readonly="state != 'draft'" invisible="document_type != 'bpkb'"/>
+                            <field name="domain_lot_ids" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="date" readonly="state != 'draft'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Detail">
+                            <field name="document_mutation_line_ids" readonly="state != 'draft'">
+                                <list editable="bottom" string="Documents">
+                                    <field name="lot_id" string="Engine Number" options="{'no_create': True,'no_open': True}" required="1" domain="[('id', 'in', parent.domain_lot_ids)]"/>
+                                    <field name="chassis_number" readonly="1" string="Chassis Number"/>
+                                    <field name="document_number" readonly="1" string="No STNK" column_invisible="parent.document_type != 'stnk'"/>
+                                    <field name="document_number" readonly="1" string="No BPKB" column_invisible="parent.document_type != 'bpkb'"/>
+                                    <field name="stnk_current_location_id" readonly="1" column_invisible="parent.document_type != 'stnk'" string="STNK Current Location"/>
+                                    <field name="bpkb_current_location_id" readonly="1" column_invisible="parent.document_type != 'bpkb'" string="BPKB Current Location"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Audit Trail">
+                            <div class="o_group">
+                                <group>
+                                    <group>
+                                        <field name="create_uid" string="Created by" readonly="1"/>
+                                        <field name="create_date" string="Created on" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="done_uid" string="Done by" readonly="1"/>
+                                        <field name="done_date" string="Done on" readonly="1"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <group>
+                                        <field name="write_uid" string="Last Updated by" readonly="1"/>
+                                        <field name="write_date" string="Last Updated on" readonly="1"/>
+                                    </group>
+                                </group>
+                            </div>
+                        </page>
+                        <page string="Notes">
+                            <field name="note" placeholder="Add internal notes..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Search View -->
+    <record id="view_document_mutation_search" model="ir.ui.view">
+        <field name="name">tw.document.mutation.search</field>
+        <field name="model">tw.document.mutation</field>
+        <field name="arch" type="xml">
+            <search string="Document Mutations">
+                <field name="name" string="Reference"/>
+                <field name="document_type"/>
+                <field name="company_id"/>
+                <field name="state"/>
+                <field name="document_mutation_line_ids" string="Engine Number" filter_domain="[('document_mutation_line_ids.lot_id', 'ilike', self)]"/>
+                <field name="document_mutation_line_ids" string="Chassis Number" filter_domain="[('document_mutation_line_ids.chassis_number', 'ilike', self)]"/>
+                <field name="document_mutation_line_ids" string="No STNK" filter_domain="[('document_mutation_line_ids.document_number', 'ilike', self)]"/>
+                <field name="document_mutation_line_ids" string="STNK Current Location" filter_domain="[('document_mutation_line_ids.stnk_current_location_id', 'ilike', self)]"/>
+                <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Done" name="done" domain="[('state', '=', 'done')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Document Type" name="group_by_type" context="{'group_by':'document_type'}"/>
+                    <filter string="Branch" name="group_by_company" context="{'group_by':'company_id'}"/>
+                    <filter string="State" name="group_by_state" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    
+    <!-- Action -->
+    <record id="action_tw_document_mutation" model="ir.actions.act_window">
+        <field name="name">Mutasi STNK</field>
+        <field name="res_model">tw.document.mutation</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('document_type', '=', 'stnk')]</field>
+        <field name="context">{'default_document_type': 'stnk','search_default_draft': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first document mutation STNK
+            </p>
+        </field>
+    </record>
+    
+ 
+</odoo>

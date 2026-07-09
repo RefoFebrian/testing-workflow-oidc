@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tw_vehicle_document_move,tw_vehicle_document_move,model_tw_vehicle_document_move,base.group_user,1,0,0,0
+
