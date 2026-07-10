@@ -3,7 +3,7 @@ _build/
 *__pycache__
 
 # dotfiles
-.*
+.env*
 *.bak
 !.gitignore
 !.mailmap

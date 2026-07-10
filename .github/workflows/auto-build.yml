@@ -1,0 +1,32 @@
+name: 1. CI - Auto Pull & Build Image
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Request AWS Access via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::160358212080:role/Role-GitHubActions-Testing
+          aws-region: ap-southeast-1
+
+      - name: Execute Build Command via AWS SSM
+        run: |
+          aws ssm send-command \
+            --document-name "AWS-RunShellScript" \
+            --targets "Key=InstanceIds,Values=mi-0f202d984b13ab8e4" \
+            --parameters 'commands=["cd /home/serverusus/testing-workflow-oidc", "sudo -u serverusus git pull origin main", "docker compose build"]' \
+            --region ap-southeast-1 \
+            --comment "Auto Build Docker Image on Push"
