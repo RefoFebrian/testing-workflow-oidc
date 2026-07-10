@@ -16,3 +16,9 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d
     depends_on:
       - app
+
+# Tambahkan blok ini di baris paling bawah
+networks:
+  default:
+    name: database-server_default
+    external: true
